@@ -7,19 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using MySql.Data;
 using AutoItX3Lib;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
 using System.Diagnostics;
-
+using PixelAimbot.Classes.Misc;
+using System.Net;
+using System.IO;
 
 namespace PixelAimbot
 {
     public partial class frmLogin : Form
     {
+
+        private readonly string versionId = "1.2.8r";
+        private string currentLauncherVersion = "";
+
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -29,6 +33,11 @@ namespace PixelAimbot
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
+        public static string hwid;
+
+        private string currentFilename;
+
+        private static readonly Random random = new Random();
 
         static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
 
@@ -58,20 +67,37 @@ namespace PixelAimbot
             int nHeightEllipse // width of ellipse
         );
 
-        MySqlConnection con;
-        MySqlCommand cmd;
-        MySqlDataReader dr;
+
 
         public frmLogin()
         {
             InitializeComponent();
-            con = new MySqlConnection("Server=sql4.freemysqlhosting.net;Database=sql4481891;user=sql4481891;Pwd=iKPWHYwrz5;SslMode=none");
-            //Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;
+            WebRequest.DefaultWebProxy = null;
+            hwid = HWID.Get();
+
+            currentFilename = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+
+            // Rename Application to a Custom Exe name for EAC Prevention / Security
+            // Disable for Debug!
+            /*
+            if(currentFilename.Contains("Chaos-Bot"))
+            {
+                string newFilename = RandomString(15);
+                System.IO.File.Move(currentFilename, newFilename + ".exe");
+                Process.Start(newFilename + ".exe");
+                Application.Exit();
+            }*/
+            CheckForUpdate();
 
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
-
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
 
         //Exit Button
@@ -97,22 +123,18 @@ namespace PixelAimbot
             }
             string user = tbUser.Text;
             string pass = tbPass.Text;
-            cmd = new MySqlCommand();
-            con.Open();
-            cmd.Connection = con;
-            cmd.CommandText = "SELECT * FROM users where username='" + tbUser.Text + "' AND password='" + tbPass.Text + "'";
-            dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
+
+           // if (dr.Read())
+           // {
                 ChaosBot Form = new ChaosBot();
                 Form.Show();
                 this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Invalid Login please check username and password");
-            }
-            con.Close();
+           // }
+           // else
+            //{
+            //    MessageBox.Show("Invalid Login please check username and password");
+           // }
+          
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -168,6 +190,77 @@ namespace PixelAimbot
 
         private void label15_Click(object sender, EventArgs e)
         {
+
+        }
+
+        public void CheckForUpdate()
+        {
+
+            try
+            {
+                currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version.php");
+                // Search old Shit
+                string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory(), "*.bin");
+
+                foreach (string file in files)
+                {
+                    try
+                    {
+                        File.Delete(file);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+
+                if (currentLauncherVersion != versionId)
+                {
+                    btnLogin.Enabled = false;
+                    progressBar1.Visible = true;
+                    using (WebClient wc = new WebClient())
+                    {
+                        if (File.Exists(Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe"))
+                        {
+                            File.Delete(Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe");
+                        }
+                        wc.Proxy = null;
+                        wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
+                        wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+
+                        wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-bot.exe"), Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot check for Application Update. Please contact Developer");
+            }
+        }
+        private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            progressBar1.Value = 0;
+
+            if (e.Cancelled)
+            {
+                MessageBox.Show("The download has been cancelled");
+                return;
+            }
+
+            if (e.Error != null) // We have an error! Retry a few times, then abort.
+            {
+                MessageBox.Show("An error ocurred while trying to download file");
+                return;
+            }
+
+            Process.Start("Chaos-bot_" + currentLauncherVersion + ".exe");
+            System.IO.File.Move(currentFilename, currentFilename + ".bin");
+            Application.Exit();
 
         }
     }

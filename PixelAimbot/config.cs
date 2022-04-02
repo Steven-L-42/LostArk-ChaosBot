@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
 //add this for MessageBox
 using System.Windows.Forms;
 // add data function classes
@@ -13,7 +13,7 @@ namespace PixelAimbot
     public class Config
     {
         string ConectionString = "";  // save connection string
-        public MySqlConnection connection = null;
+     //   public MySqlConnection connection = null;
         public string server = "sql11.freemysqlhosting.net";// MySQL host / ip of the computer
         public string user = "sql11480313";// MySQL user
         public string password = "6d9bdeU7UK";// MySQL password 
@@ -31,8 +31,8 @@ namespace PixelAimbot
         {
             try
             {
-                ConectionString = "SERVER=" + server + ";" + "DATABASE=" + database_name + ";" + "UID=" + user + ";" + "PASSWORD=" + password + ";";
-                connection = new MySqlConnection(ConectionString);
+         //       ConectionString = "SERVER=" + server + ";" + "DATABASE=" + database_name + ";" + "UID=" + user + ";" + "PASSWORD=" + password + ";";
+         //       connection = new MySqlConnection(ConectionString);
             }
             catch (Exception E)
             {
@@ -49,11 +49,11 @@ namespace PixelAimbot
         {
             try
             {
-                MySqlConnection cs = new MySqlConnection(ConectionString);
-                cs.Open();
-                MySqlCommand myc = new MySqlCommand(sql_comm, cs);
-                myc.ExecuteNonQuery();
-                cs.Close();
+          //      MySqlConnection cs = new MySqlConnection(ConectionString);
+          //      cs.Open();
+          //      MySqlCommand myc = new MySqlCommand(sql_comm, cs);
+           //     myc.ExecuteNonQuery();
+           //     cs.Close();
             }
             catch (Exception err)
             {
@@ -68,12 +68,12 @@ namespace PixelAimbot
             dt = new DataTable(ConnectionType);
             try
             {
-                string command = RecordSource.ToUpper();
+             //   string command = RecordSource.ToUpper();
                 //======================if sql contains select==========================================
-                MySqlDataAdapter da2 = new MySqlDataAdapter(RecordSource, connection);
-                DataSet tempds = new DataSet();
-                da2.Fill(tempds, ConnectionType);
-                da2.Fill(tempds);
+            //    MySqlDataAdapter da2 = new MySqlDataAdapter(RecordSource, connection);
+            //    DataSet tempds = new DataSet();
+            //    da2.Fill(tempds, ConnectionType);
+            //    da2.Fill(tempds);
                 //======================================================================================
             }
             catch (Exception err) { MessageBox.Show(err.Message); }
@@ -113,11 +113,11 @@ namespace PixelAimbot
             try
             {
                 string command = RecordSource.ToUpper();
-                MySqlDataAdapter da = new MySqlDataAdapter(RecordSource, connection);
-                ds = new DataSet();
-                da.Fill(ds, ConnectionType);
-                da.Fill(dt);
-                tempdata = new DataGridView();
+        //        MySqlDataAdapter da = new MySqlDataAdapter(RecordSource, connection);
+        //        ds = new DataSet();
+       //         da.Fill(ds, ConnectionType);
+       //         da.Fill(dt);
+       //         tempdata = new DataGridView();
             }
             catch (Exception err)
             {

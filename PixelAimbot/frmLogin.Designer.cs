@@ -44,6 +44,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // lbClose
@@ -222,12 +223,21 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Release-Version";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(24, 223);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(216, 10);
+            this.progressBar1.TabIndex = 15;
+            this.progressBar1.Visible = false;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.ClientSize = new System.Drawing.Size(265, 350);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chBoxRemember);
             this.Controls.Add(this.label15);
@@ -262,8 +272,6 @@
 
         private System.Windows.Forms.Label lbClose;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbUser;
-        private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnLogin;
@@ -275,5 +283,8 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox chBoxRemember;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TextBox tbUser;
+        private System.Windows.Forms.TextBox tbPass;
     }
 }
