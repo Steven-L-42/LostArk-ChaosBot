@@ -22,7 +22,7 @@ namespace PixelAimbot
     public partial class frmLogin : Form
     {
 
-        private readonly string versionId = "1.2.8r";
+        private readonly string versionId = Properties.Settings.Default.version;
         private string currentLauncherVersion = "";
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -49,55 +49,27 @@ namespace PixelAimbot
 
         private static readonly Random random = new Random();
 
-        static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
-
-        static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
-
-        static readonly IntPtr HWND_TOP = new IntPtr(0);
-
-        static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
-
-        const UInt32 SWP_NOSIZE = 0x0001;
-
-        const UInt32 SWP_NOMOVE = 0x0002;
-
-        const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-        );
-
-
-
         public frmLogin()
         {
             InitializeComponent();
+            this.Text = RandomString(15);
             WebRequest.DefaultWebProxy = null;
             hwid = HWID.Get();
 
             currentFilename = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-
+            label15.Text = Properties.Settings.Default.version;
             // Rename Application to a Custom Exe name for EAC Prevention / Security
             // Disable for Debug!
-            /*
-            if(currentFilename.Contains("Chaos-Bot"))
-            {
-                string newFilename = RandomString(15);
-                System.IO.File.Move(currentFilename, newFilename + ".exe");
-                Process.Start(newFilename + ".exe");
-                Application.Exit();
-            }*/
-
+            if (!Debugger.IsAttached) {
+                if (currentFilename.Contains("Chaos-Bot"))
+                {
+                    string newFilename = RandomString(15);
+                    System.IO.File.Move(currentFilename, newFilename + ".exe");
+                    Process.Start(newFilename + ".exe");
+                    Environment.Exit(0);
+                    Application.Exit();
+                }
+            }
             // Try Generate Configuration
             try
             {
@@ -111,7 +83,6 @@ namespace PixelAimbot
             CheckForUpdate();
 
             this.FormBorderStyle = FormBorderStyle.None;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
         public static string RandomString(int length)
         {
@@ -146,19 +117,6 @@ namespace PixelAimbot
             password = tbPass.Text;
 
             PixelAimbot.Classes.Auth.Access.CheckAccessAsyncCall();
-            /*{
-
-                // if (dr.Read())
-                // {
-                ChaosBot Form = new ChaosBot();
-                Form.Show();
-                this.Hide();
-                // }
-                // else
-                //{
-                //    MessageBox.Show("Invalid Login please check username and password");
-                // }
-            }*/
           
         }
 
@@ -241,6 +199,7 @@ namespace PixelAimbot
 
                 if (currentLauncherVersion != versionId)
                 {
+                    MessageBox.Show("New Version found. Process is Updating now. Please press Ok");
                     btnLogin.Enabled = false;
                     progressBar1.Visible = true;
                     using (WebClient wc = new WebClient())

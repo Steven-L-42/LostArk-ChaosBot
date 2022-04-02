@@ -80,5 +80,8 @@
     <Setting Name="chBoxSaveAll" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1.2.8r</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
