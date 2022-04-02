@@ -7,11 +7,14 @@ using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace PixelAimbot.Classes.Auth
 {
     public static class Access
     {
+
+
         public static void CheckAccessAsyncCall()
         {
             try
@@ -19,22 +22,24 @@ namespace PixelAimbot.Classes.Auth
                 HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
                 var webClient = new WebClient();
                 webClient.CachePolicy = noCachePolicy;
-
+                
                 var values = new NameValueCollection
                 {
-              //      ["username"] = PixelAimbot.frmLogin.tbUser.Text,
-               //     ["password"] = PixelAimbot.frmLogin.tbPass.Text,
+                    ["username"] = PixelAimbot.frmLogin.username,
+                    ["password"] = PixelAimbot.frmLogin.password,
                     ["hwid"] = PixelAimbot.frmLogin.hwid
                 };
+                
                 webClient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/checkUser"), values);
                 webClient.UploadValuesCompleted += (s, e) =>
                 {
                     try
                     {
-                        //CheckAccess(e.Result);
+                        CheckAccess(e.Result);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        MessageBox.Show(ex.Message);
                         MessageBox.Show("Webserver currently not Available! Try Again later.");
                     }
                 };
@@ -42,57 +47,51 @@ namespace PixelAimbot.Classes.Auth
             catch (Exception)
             {
                 MessageBox.Show("Webserver currently not Available! Try Again later.");
-                //MessageBox.Show(ex.Message);
             }
         }
-        /*
+        
         public static bool CheckAccess(byte[] response)
         {
             try
             {
 
                 var values = new NameValueCollection();
-                values["username"] = Gui.MainForm.textBoxUsername.Text;
-                values["password"] = Gui.MainForm.textBoxPassword.Text;
+                values["username"] = PixelAimbot.frmLogin.username;
+                values["password"] = PixelAimbot.frmLogin.password;
                 values["hwid"] = Misc.HWID.Get();
                 Misc.Config config = new Misc.Config();
-                config.username = Gui.MainForm.blow1.Encrypt_CTR(Gui.MainForm.textBoxUsername.Text);
-                config.password = Gui.MainForm.blow1.Encrypt_CTR(Gui.MainForm.textBoxPassword.Text);
-                config.hwid = Gui.MainForm.blow1.Encrypt_CTR(Gui.MainForm.hwid);
+                config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
+                config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
+                config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
 
-
-                if (Gui.MainForm.checkBoxAutoLogin.Checked)
-                {
-                    config.autologin = true;
-                }
                 config.Save();
-                Gui.MainForm.RegistryHandler();
+               
 
                 var responseString = Encoding.Default.GetString(response);
-                Gui.MainForm.LicenceInformations = JObject.Parse(responseString);
-                if (Gui.MainForm.LicenceInformations["message"].ToString() == "false")
+                PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
+                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "false")
                 {
                     MessageBox.Show("Licence is not active. Please contact an Administrator.");
                     return false;
                 }
-                if (Gui.MainForm.LicenceInformations["message"].ToString() == "hwid")
+                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "wrong_login")
+                {
+                    MessageBox.Show("Username or Password not known. Please contact an Administrator.");
+                    return false;
+                }
+                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "hwid")
                 {
                     MessageBox.Show("Your HWID seems changed, please reset it or contact an Administrator.");
                     return false;
                 }
-                Gui.MainForm.LicenceInformations["username"] = Gui.MainForm.textBoxUsername.Text;
-                Gui.MainForm.LicenceInformations["password"] = Gui.MainForm.textBoxPassword.Text;
 
-                if (Application.OpenForms.OfType<Gui.GamesForm>().Count() == 1)
-                    Application.OpenForms.OfType<Gui.GamesForm>().First().Close();
+                if (Application.OpenForms.OfType<PixelAimbot.ChaosBot>().Count() == 1)
+                    Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
 
-                Gui.MainForm.GamesForm = new Gui.GamesForm
-                {
-                    StartPosition = FormStartPosition.Manual,
-                    Location = Application.OpenForms[0].Location
-                };
-                Gui.MainForm.GamesForm.Show();
-                Application.OpenForms[0].Hide();
+                ChaosBot Form = new ChaosBot();
+                Form.Show();
+                Application.OpenForms.OfType<PixelAimbot.frmLogin>().First().Hide();
+
                 return true;
             }
             catch (WebException)
@@ -100,12 +99,12 @@ namespace PixelAimbot.Classes.Auth
                 MessageBox.Show("Server is not reachable, please try again later.");
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Please control username and password");
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
-        */
+        
     }
 }

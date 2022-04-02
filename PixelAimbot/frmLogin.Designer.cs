@@ -137,7 +137,7 @@
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Location = new System.Drawing.Point(24, 238);
+            this.btnClear.Location = new System.Drawing.Point(24, 222);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(216, 25);
             this.btnClear.TabIndex = 4;
@@ -225,9 +225,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(24, 223);
+            this.progressBar1.Location = new System.Drawing.Point(24, 253);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(216, 10);
+            this.progressBar1.Size = new System.Drawing.Size(216, 22);
             this.progressBar1.TabIndex = 15;
             this.progressBar1.Visible = false;
             // 

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using PixelAimbot.Classes.Misc;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace PixelAimbot
 {
@@ -33,7 +34,16 @@ namespace PixelAimbot
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
+        public static BlowFish blow1 = new BlowFish("1238150549789312");
+
         public static string hwid;
+
+        public static JObject licenceInformations;
+
+        public static JObject LicenceInformations { get => licenceInformations; set => licenceInformations = value; }
+        public static string username;
+        public static string password;
+        
 
         private string currentFilename;
 
@@ -87,6 +97,17 @@ namespace PixelAimbot
                 Process.Start(newFilename + ".exe");
                 Application.Exit();
             }*/
+
+            // Try Generate Configuration
+            try
+            {
+                Classes.Misc.ConfigurationHandler.init();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cannot create Configuration file");
+            }
+            //Check for a Update
             CheckForUpdate();
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -121,19 +142,23 @@ namespace PixelAimbot
                 Properties.Settings.Default.password = "";
                 Properties.Settings.Default.Save();
             }
-            string user = tbUser.Text;
-            string pass = tbPass.Text;
+            username = tbUser.Text;
+            password = tbPass.Text;
 
-           // if (dr.Read())
-           // {
+            PixelAimbot.Classes.Auth.Access.CheckAccessAsyncCall();
+            /*{
+
+                // if (dr.Read())
+                // {
                 ChaosBot Form = new ChaosBot();
                 Form.Show();
                 this.Hide();
-           // }
-           // else
-            //{
-            //    MessageBox.Show("Invalid Login please check username and password");
-           // }
+                // }
+                // else
+                //{
+                //    MessageBox.Show("Invalid Login please check username and password");
+                // }
+            }*/
           
         }
 
@@ -220,15 +245,15 @@ namespace PixelAimbot
                     progressBar1.Visible = true;
                     using (WebClient wc = new WebClient())
                     {
-                        if (File.Exists(Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe"))
+                        if (File.Exists(Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe"))
                         {
-                            File.Delete(Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe");
+                            File.Delete(Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
                         }
                         wc.Proxy = null;
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
 
-                        wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-bot.exe"), Directory.GetCurrentDirectory() + "\\Chaos-bot_" + currentLauncherVersion + ".exe");
+                        wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot.exe"), Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
                     }
                 }
             }
