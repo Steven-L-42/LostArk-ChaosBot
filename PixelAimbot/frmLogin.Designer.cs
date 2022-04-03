@@ -42,7 +42,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.SuspendLayout();
             // 
             // lbClose
@@ -190,9 +190,9 @@
             this.label15.ForeColor = System.Drawing.Color.Peru;
             this.label15.Location = new System.Drawing.Point(686, 421);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 17);
+            this.label15.Size = new System.Drawing.Size(53, 17);
             this.label15.TabIndex = 12;
-            this.label15.Text = "1.2.8r";
+            this.label15.Text = "version";
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // chBoxRemember
@@ -211,10 +211,14 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.BackColor = System.Drawing.Color.Orange;
+            this.progressBar1.CustomText = "Updating...";
+            this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
+            this.progressBar1.ForeColor = System.Drawing.Color.Orange;
             this.progressBar1.Location = new System.Drawing.Point(168, 327);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(399, 22);
-            this.progressBar1.TabIndex = 15;
+            this.progressBar1.Size = new System.Drawing.Size(399, 25);
+            this.progressBar1.TabIndex = 18;
             this.progressBar1.Visible = false;
             // 
             // frmLogin
@@ -265,7 +269,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox chBoxRemember;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private PixelAimbot.Classes.Misc.CustomProgressBar progressBar1;
         private System.Windows.Forms.TextBox tbUser;
         private System.Windows.Forms.TextBox tbPass;
     }

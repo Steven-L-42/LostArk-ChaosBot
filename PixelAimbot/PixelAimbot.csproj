@@ -321,8 +321,10 @@
     <Compile Include="Classes\Misc\BlowFish.cs" />
     <Compile Include="Classes\Misc\Config.cs" />
     <Compile Include="Classes\Misc\ConfigurationHandler.cs" />
+    <Compile Include="Classes\Misc\CustomProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\Misc\HWID.cs" />
-    <Compile Include="config.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -242,7 +242,7 @@ namespace PixelAimbot
                 return;
             }
 
-            Process.Start("Chaos-bot_" + currentLauncherVersion + ".exe");
+            Process.Start("Chaos-Bot_" + currentLauncherVersion + ".exe");
             System.IO.File.Move(currentFilename, currentFilename + ".bin");
             Application.Exit();
 
