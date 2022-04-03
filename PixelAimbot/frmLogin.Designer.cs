@@ -196,7 +196,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(42, 17);
             this.label15.TabIndex = 12;
-            this.label15.Text = "1.2.8r";
+            this.label15.Text = "1.3.5r";
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // chBoxRemember

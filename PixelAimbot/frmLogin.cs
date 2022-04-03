@@ -65,7 +65,7 @@ namespace PixelAimbot
         public frmLogin()
         {
             InitializeComponent();
-            con = new MySqlConnection("Server=sql4.freemysqlhosting.net;Database=sql4481891;user=sql4481891;Pwd=iKPWHYwrz5;SslMode=none");
+            con = new MySqlConnection("Server=sql4.freemysqlhosting.net;Database=sql4481891;user=sql4481891;Pwd=gFZF04yjcDsIzWB5;SslMode=none");
             //Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;
 
             this.FormBorderStyle = FormBorderStyle.None;

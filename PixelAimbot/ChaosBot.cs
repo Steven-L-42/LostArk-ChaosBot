@@ -1,86 +1,133 @@
-﻿    using System;
-    using System.Windows.Forms;
-    using AutoItX3Lib;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Timers;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-    using System.Drawing;
+﻿using System;
+using System.Windows.Forms;
+using AutoItX3Lib;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Timers;
+using System.Threading.Tasks;
+using System.Drawing;
 using System.Collections.Generic;
-using IronPython.Hosting;
-using System.IO;
-using System.Text;
+using WindowsInput;
+using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
+using Emgu.CV.Util;
+using System.Drawing.Imaging;
+using System.Linq;
 
 namespace PixelAimbot
     {
     public partial class ChaosBot : Form
     {
-        [DllImport("ImageSearchDLL.dll")]
-        public static extern IntPtr ImageSearch(int x, int y, int right, int bottom, [MarshalAs(UnmanagedType.LPStr)] string imagePath);
-        public static string[] UseImageSearch(string imgPath, string tolerance)
-        {
-            imgPath = "*" + tolerance + " " + imgPath;
 
-            IntPtr result = ImageSearch(1593, 40, 1889, 295, imgPath);
 
-            string res = Marshal.PtrToStringAnsi(result);
-            if (res[0] == '0') return null;
+        /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
 
-            string[] data = res.Split('|');
 
-            int.TryParse(data[1], out int x);
-            int.TryParse(data[2], out int y);
-            return data;
-        }
-        public static string[] RectangleObenLinks(string imgPath, string tolerance)
+        (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
         {
-            imgPath = "*" + tolerance + " " + imgPath;
-            IntPtr result = ImageSearch(1606, 53, 1741, 163, imgPath);
-            string res = Marshal.PtrToStringAnsi(result);
-            if (res[0] == '0') return null;
-            string[] data = res.Split('|');
-            int.TryParse(data[1], out int x);
-            int.TryParse(data[2], out int y);
-            return data;
-        }
-        public static string[] RectangleObenRechts(string imgPath, string tolerance)
-        {
-            imgPath = "*" + tolerance + " " + imgPath;
-            IntPtr result = ImageSearch(1741, 53, 1884, 163, imgPath);
-            string res = Marshal.PtrToStringAnsi(result);
-            if (res[0] == '0') return null;
-            string[] data = res.Split('|');
-            int.TryParse(data[1], out int x);
-            int.TryParse(data[2], out int y);
-            return data;
-        }
-        public static string[] RectangleUntenLinks(string imgPath, string tolerance)
-        {
-            imgPath = "*" + tolerance + " " + imgPath;
-            IntPtr result = ImageSearch(1606, 165, 1741, 289, imgPath);
-            string res = Marshal.PtrToStringAnsi(result);
-            if (res[0] == '0') return null;
-            string[] data = res.Split('|');
-            int.TryParse(data[1], out int x);
-            int.TryParse(data[2], out int y);
-            return data;
-        }
-        public static string[] RectangleUntenRechts(string imgPath, string tolerance)
-        {
-            imgPath = "*" + tolerance + " " + imgPath;
-            IntPtr result = ImageSearch(1741, 165, 1881, 289, imgPath);
-            string res = Marshal.PtrToStringAnsi(result);
-            if (res[0] == '0') return null;
-            string[] data = res.Split('|');
-            int.TryParse(data[1], out int x);
-            int.TryParse(data[2], out int y);
-            return data;
+            int newX = (int)(x / screenResolution.X * 65535);
+            int newY = (int)(y / screenResolution.Y * 65535);
+            return (newX, newY);
         }
 
 
 
+        /// <summary>
+        /// Class that detects the enemies given the enemy template, mask and threshold.
+        /// Has one public function GetClosestEnemy, which returns the point of the closest enemy on the minimap.
+        /// </summary>
+        class EnemyDetector
+        {
+            private Image<Bgr, byte> _enemyTemplate;
+            private Image<Bgr, byte> _enemyMask;
+            private float _threshold;
+            private readonly Point _myPosition = new Point(150, 128);
+
+            public EnemyDetector(Image<Bgr, byte> enemyTemplate,
+                Image<Bgr, byte> enemyMask, float threshold)
+            {
+                this._enemyMask = enemyMask;
+                this._enemyTemplate = enemyTemplate;
+                this._threshold = threshold;
+            }
+
+            private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
+            {
+                List<Point> enemies = new List<Point>();
+                screenCapture.ROI = new Rectangle(1593, 40, 296, 255);
+                var minimap = screenCapture.Copy();
+                var res = new Mat();
+                double minVal = 0, maxVal = 0;
+                Point minPoint = new Point();
+                Point maxPoint = new Point();
+                CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, TemplateMatchingType.SqdiffNormed, this._enemyMask);
+
+                int h = this._enemyTemplate.Size.Height;
+                int w = this._enemyTemplate.Size.Width;
+
+                while (1 - minVal > this._threshold)
+                {
+                    CvInvoke.MinMaxLoc(res, ref minVal, ref maxVal, ref minPoint, ref maxPoint);
+                    if (1 - minVal > this._threshold)
+                    {
+                        var lowerLeft = new Point(minPoint.X - w / 4, minPoint.Y - h / 4);
+                        var upperLeft = new Point(minPoint.X - w / 4, minPoint.Y + h / 4);
+                        var lowerRight = new Point(minPoint.X + w / 4, minPoint.Y - h / 4);
+                        var upperRight = new Point(minPoint.X + w / 4, minPoint.Y + h / 4);
+                        var points = new Point[]
+                        {
+                                lowerLeft,
+                                lowerRight,
+                                upperRight,
+                                upperLeft
+                        };
+                        var vector = new VectorOfPoint(points);
+
+                        CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
+                        enemies.Add(minPoint);
+                    }
+                }
+
+                return enemies;
+            }
+
+            private double Distance(Point enemy)
+            {
+                return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
+            }
+            public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture)
+            {
+                var enemies = DetectEnemies(screenCapture);
+                var enemyAndPosition = enemies.Select(x => (x, Distance(x)));
+                if (enemyAndPosition.Any())
+                {
+                    double minDist = Double.MaxValue;
+                    Point closestEnemy = default;
+                    foreach (var (enemy, distance) in enemyAndPosition)
+                    {
+                        if (distance < minDist)
+                        {
+                            minDist = distance;
+                            closestEnemy = enemy;
+                        }
+                    }
+
+                    return closestEnemy;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+  
+        /// OPENCV STOP /// OPENCV STOP /// OPENCV STOP /// OPENCV STOP /// OPENCV STOP /// OPENCV STOP
+
+
+        /////
+        ///
         // 2. Import the RegisterHotKey Method
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
@@ -199,6 +246,7 @@ namespace PixelAimbot
             _start = false;
             cts.Cancel();
             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
+        
         }
         bool _start = false;
         bool _REPAIR = false;
@@ -214,7 +262,6 @@ namespace PixelAimbot
 
             if (chBoxSaveAll.Checked == true)
             {
-                Properties.Settings.Default.chboxdungeontimer = chBoxDungeon.Checked;
                 Properties.Settings.Default.dungeontimer = txtDungeon.Text;
                 Properties.Settings.Default.left = txtLEFT.Text;
                 Properties.Settings.Default.right = txtRIGHT.Text;
@@ -235,18 +282,19 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxShadowhunter = chBoxY.Checked;
                 Properties.Settings.Default.chBoxBerserker = chBoxBerserker.Checked;
                 Properties.Settings.Default.chboxPaladin = chBoxPaladin.Checked;
-                Properties.Settings.Default.chBoxRestartTimer = chBoxRestartTimer.Checked;
                 Properties.Settings.Default.RestartTimer = txtRestartTimer.Text;
                 Properties.Settings.Default.chBoxSaveAll = chBoxSaveAll.Checked;
+                Properties.Settings.Default.chBoxActivateF2 = chBoxActivateF2.Checked;
+                Properties.Settings.Default.txtDungeon2 = txtDungeon2.Text;
+                Properties.Settings.Default.txtDungeon2search = txtDungeon2search.Text;
 
 
                 Properties.Settings.Default.Save();
             }
             else
             {
-                Properties.Settings.Default.chboxdungeontimer = false;
 
-                Properties.Settings.Default.dungeontimer = "60";
+                Properties.Settings.Default.dungeontimer = "70";
                 Properties.Settings.Default.left = "LEFT";
                 Properties.Settings.Default.right = "RIGHT";
                 Properties.Settings.Default.q = "Q";
@@ -266,9 +314,11 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxShadowhunter = false;
                 Properties.Settings.Default.chBoxBerserker = false;
                 Properties.Settings.Default.chboxPaladin = false;
-                Properties.Settings.Default.chBoxRestartTimer = false;
                 Properties.Settings.Default.RestartTimer = "25";
                 Properties.Settings.Default.chBoxSaveAll = false;
+                Properties.Settings.Default.chBoxActivateF2 = false;
+                Properties.Settings.Default.txtDungeon2 = "21";
+                Properties.Settings.Default.txtDungeon2search = "9";
                 Properties.Settings.Default.Save();
 
             }
@@ -410,7 +460,7 @@ namespace PixelAimbot
                         au3.Send("{G}");
                         au3.Send("{G}");
                         Thread.Sleep(500);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is Running..."));
+                        
                     }
                 }
                 catch (AggregateException)
@@ -486,9 +536,10 @@ namespace PixelAimbot
 
         async Task MOVE(CancellationToken token)
         {
+            
 
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
 
 
@@ -496,12 +547,12 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is Running..."));
 
                     object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
 
                     if (move1.ToString() != "1")
                     {
-                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                         au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                         au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                         Thread.Sleep(1000);
@@ -526,6 +577,7 @@ namespace PixelAimbot
 
                     if (move1.ToString() != "1")
                     {
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                         au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
 
                     }
@@ -569,9 +621,6 @@ namespace PixelAimbot
 
         }
 
-
-
-
         async Task FIGHT(CancellationToken token)
         {
             _Shadowhunter = true;
@@ -593,9 +642,7 @@ namespace PixelAimbot
                         object[] fight1Coord = (object[])fight1;
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+
 
 
                     }
@@ -609,31 +656,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                try
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    object stayhere = au3.PixelSearch(750, 400, 1169, 697, 0x7DCCDE, 2);
-
-                    if (stayhere.ToString() != "1")
-                    {
-                        object[] stayhereCoord = (object[])stayhere;
-                        au3.MouseClick("" + txtLEFT.Text + "", (int)stayhereCoord[0], (int)stayhereCoord[1], 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-
-                    }
-                }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
+               
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -644,9 +667,7 @@ namespace PixelAimbot
                         object[] fight2Coord = (object[])fight2;
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+          
 
                     }
                 }
@@ -734,7 +755,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (ds.ToString() != "1")
                     {
@@ -745,10 +766,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-
+             
 
                     }
                 }
@@ -766,7 +784,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -776,9 +794,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+               
 
 
                     }
@@ -806,9 +822,7 @@ namespace PixelAimbot
                         au3.Send("{" + txtHeal.Text + "}");
                         au3.Send("{" + txtHeal.Text + "}");
                         au3.Send("{" + txtHeal.Text + "}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+        
                     }
                 }
                 catch (AggregateException)
@@ -832,9 +846,7 @@ namespace PixelAimbot
                         au3.Send(txtInstant.Text);
                         au3.Send(txtInstant.Text);
                         au3.Send(txtInstant.Text);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+          
                     }
                 }
                 catch (AggregateException)
@@ -851,7 +863,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (s.ToString() != "1")
                     {
@@ -862,9 +874,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+       
 
 
                     }
@@ -883,7 +893,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (f.ToString() != "1")
                     {
@@ -893,9 +903,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+             
 
 
                     }
@@ -921,9 +929,7 @@ namespace PixelAimbot
                         object[] fight11Coord = (object[])fight11;
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+        
                     }
                 }
                 catch (AggregateException)
@@ -945,9 +951,7 @@ namespace PixelAimbot
                         object[] fight22Coord = (object[])fight22;
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+         
                     }
                 }
                 catch (AggregateException)
@@ -964,7 +968,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (e.ToString() != "1")
                     {
@@ -974,9 +978,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+         
 
 
                     }
@@ -995,7 +997,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (q.ToString() != "1")
                     {
@@ -1005,9 +1007,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+         
 
                     }
                 }
@@ -1025,7 +1025,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (w.ToString() != "1")
                     {
@@ -1035,9 +1035,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+            
                     }
                 }
                 catch (AggregateException)
@@ -1054,7 +1052,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
 
                     if (r.ToString() != "1")
                     {
@@ -1064,9 +1062,7 @@ namespace PixelAimbot
 
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+      
 
 
                     }
@@ -1162,9 +1158,7 @@ namespace PixelAimbot
                         au3.Send("{" + txtHeal.Text + "}");
                         au3.Send("{" + txtHeal.Text + "}");
                         au3.Send("{" + txtHeal.Text + "}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+           
                     }
                 }
                 catch (AggregateException)
@@ -1188,9 +1182,7 @@ namespace PixelAimbot
                         au3.Send(txtInstant.Text);
                         au3.Send(txtInstant.Text);
                         au3.Send(txtInstant.Text);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+            
                     }
                 }
                 catch (AggregateException)
@@ -1204,13 +1196,3703 @@ namespace PixelAimbot
                 catch { }
 
             }
-            var t12 = Task.Run(() => Exit1(token));
+            
+            if (chBoxActivateF2.Checked)
+            {
+                var t7 = Task.Run(() => SEARCHPORTAL(token));
+                await Task.WhenAny(new[] { t7 });
+                
+            }
+            else 
+            if (!chBoxActivateF2.Checked)
+            {
+                var t12 = Task.Run(() => Exit1(token));
+                await Task.WhenAny(new[] { t12 });
+            }
+        }
+
+
+        async Task SEARCHPORTAL(CancellationToken token)
+        {
+
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < 20; i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("portal.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("portalmask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                    
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                    if (enemy.HasValue)
+                    {
+                        CvInvoke.Rectangle(screenCapture,
+                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                            new MCvScalar(255));
+                        var inputSimulator = new InputSimulator();
+                        double x1 = 963f / myPosition.X;
+                        double y1 = 551f / myPosition.Y;
+
+                        var x2 = x1 * enemy.Value.X;
+                        var y2 = y1 * enemy.Value.Y;
+                        if (x2 <= 963)
+                            x2 = x2 * 0.9f;
+                        else
+                            x2 = x2 * 1.1f;
+                        if (y2 <= 551)
+                            y2 = y2 * 0.9;
+                        else
+                            y2 = y2 * 1.1;
+                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                        inputSimulator.Mouse.LeftButtonClick();
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                    }
+                    else
+                    {
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.MouseClick("" + txtLEFT.Text + "", 1574, 526, 1);
+                        Thread.Sleep(1000);
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.MouseClick("" + txtLEFT.Text + "", 42, 538, 1);
+                        Thread.Sleep(1000);
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(350, 555);
+                    Thread.Sleep(sleepTime);
+
+
+
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            Thread.Sleep(4000);
+            var t12 = Task.Run(() => SearchBoss(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+
+        async Task SearchBoss(CancellationToken token)
+        {
+            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+         
+
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+                  
+                       
+                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                        var screenCapture = new Image<Bgr, byte>("screen.png");
+                        var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                        if (enemy.HasValue)
+                        {
+                            CvInvoke.Rectangle(screenCapture,
+                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                new MCvScalar(255));
+                            var inputSimulator = new InputSimulator();
+                            double x1 = 963f / myPosition.X;
+                            double y1 = 551f / myPosition.Y;
+
+                            var x2 = x1 * enemy.Value.X;
+                            var y2 = y1 * enemy.Value.Y;
+                            if (x2 <= 963)
+                                x2 = x2 * 0.9f;
+                            else
+                                x2 = x2 * 1.1f;
+                            if (y2 <= 551)
+                                y2 = y2 * 0.9;
+                            else
+                                y2 = y2 * 1.1;
+                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                            inputSimulator.Mouse.LeftButtonClick();
+                        }
+                        else
+                        {
+                        au3.MouseClick("" + txtLEFT.Text + "", 1574, 526, 1);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 255);
+                    Thread.Sleep(sleepTime);
+
+
+
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+               
+            }
+            var t12 = Task.Run(() => FIGHT2(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        
+        async Task FIGHT2(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2.Text) / 3; i++)
+            {
+                try
+                {
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+           
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight2.ToString() != "1")
+                    {
+                        object[] fight2Coord = (object[])fight2;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                 
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                ///////////////SPELLS
+                ///
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (ds.ToString() != "1")
+                    {
+                        object[] dsCoord = (object[])ds;
+                        au3.Send("{" + txtD.Text + "DOWN}");
+                        au3.Send("{" + txtD.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+               
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (a.ToString() != "1")
+                    {
+                        object[] aCoord = (object[])a;
+                        au3.Send("{" + txtA.Text + "DOWN}");
+                        au3.Send("{" + txtA.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                   
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                 
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                   
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                /////////POTION ENDE
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (s.ToString() != "1")
+                    {
+                        object[] sCoord = (object[])s;
+                        au3.Send("{" + txtS.Text + "DOWN}");
+                        au3.Send("{" + txtS.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (f.ToString() != "1")
+                    {
+                        object[] fCoord = (object[])f;
+                        au3.Send("{" + txtF.Text + "DOWN}");
+                        au3.Send("{" + txtF.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight11 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight11.ToString() != "1")
+                    {
+                        object[] fight11Coord = (object[])fight11;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight22.ToString() != "1")
+                    {
+                        object[] fight22Coord = (object[])fight22;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (e.ToString() != "1")
+                    {
+                        object[] eCoord = (object[])e;
+                        au3.Send("{" + txtE.Text + "DOWN}");
+                        au3.Send("{" + txtE.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (q.ToString() != "1")
+                    {
+                        object[] qCoord = (object[])q;
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (w.ToString() != "1")
+                    {
+                        object[] wCoord = (object[])w;
+                        au3.Send("{" + txtW.Text + "DOWN}");
+                        au3.Send("{" + txtW.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (r.ToString() != "1")
+                    {
+                        object[] rCoord = (object[])r;
+                        au3.Send("{" + txtR.Text + "DOWN}");
+                        au3.Send("{" + txtR.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            var t12 = Task.Run(() => SearchBoss2(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+
+        async Task SearchBoss2(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
+
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                   
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                    if (enemy.HasValue)
+                    {
+                        CvInvoke.Rectangle(screenCapture,
+                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                            new MCvScalar(255));
+                        var inputSimulator = new InputSimulator();
+                        double x1 = 963f / myPosition.X;
+                        double y1 = 551f / myPosition.Y;
+
+                        var x2 = x1 * enemy.Value.X;
+                        var y2 = y1 * enemy.Value.Y;
+                        if (x2 <= 963)
+                            x2 = x2 * 0.9f;
+                        else
+                            x2 = x2 * 1.1f;
+                        if (y2 <= 551)
+                            y2 = y2 * 0.9;
+                        else
+                            y2 = y2 * 1.1;
+                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                        inputSimulator.Mouse.LeftButtonClick();
+                        
+                    }
+                    else
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 42, 538, 1);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 255);
+                    Thread.Sleep(sleepTime);
+
+
+
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            var t12 = Task.Run(() => FIGHT3(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task FIGHT3(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2.Text) / 3; i++)
+            {
+                try
+                {
+                 
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight2.ToString() != "1")
+                    {
+                        object[] fight2Coord = (object[])fight2;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                ///////////////SPELLS
+                ///
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (ds.ToString() != "1")
+                    {
+                        object[] dsCoord = (object[])ds;
+                        au3.Send("{" + txtD.Text + "DOWN}");
+                        au3.Send("{" + txtD.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (a.ToString() != "1")
+                    {
+                        object[] aCoord = (object[])a;
+                        au3.Send("{" + txtA.Text + "DOWN}");
+                        au3.Send("{" + txtA.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                /////////POTION ENDE
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (s.ToString() != "1")
+                    {
+                        object[] sCoord = (object[])s;
+                        au3.Send("{" + txtS.Text + "DOWN}");
+                        au3.Send("{" + txtS.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (f.ToString() != "1")
+                    {
+                        object[] fCoord = (object[])f;
+                        au3.Send("{" + txtF.Text + "DOWN}");
+                        au3.Send("{" + txtF.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight11 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight11.ToString() != "1")
+                    {
+                        object[] fight11Coord = (object[])fight11;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight22.ToString() != "1")
+                    {
+                        object[] fight22Coord = (object[])fight22;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (e.ToString() != "1")
+                    {
+                        object[] eCoord = (object[])e;
+                        au3.Send("{" + txtE.Text + "DOWN}");
+                        au3.Send("{" + txtE.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (q.ToString() != "1")
+                    {
+                        object[] qCoord = (object[])q;
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (w.ToString() != "1")
+                    {
+                        object[] wCoord = (object[])w;
+                        au3.Send("{" + txtW.Text + "DOWN}");
+                        au3.Send("{" + txtW.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (r.ToString() != "1")
+                    {
+                        object[] rCoord = (object[])r;
+                        au3.Send("{" + txtR.Text + "DOWN}");
+                        au3.Send("{" + txtR.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            var t12 = Task.Run(() => SearchBoss3(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+
+        async Task SearchBoss3(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                    if (enemy.HasValue)
+                    {
+                        CvInvoke.Rectangle(screenCapture,
+                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                            new MCvScalar(255));
+                        var inputSimulator = new InputSimulator();
+                        double x1 = 963f / myPosition.X;
+                        double y1 = 551f / myPosition.Y;
+
+                        var x2 = x1 * enemy.Value.X;
+                        var y2 = y1 * enemy.Value.Y;
+                        if (x2 <= 963)
+                            x2 = x2 * 0.9f;
+                        else
+                            x2 = x2 * 1.1f;
+                        if (y2 <= 551)
+                            y2 = y2 * 0.9;
+                        else
+                            y2 = y2 * 1.1;
+                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                        inputSimulator.Mouse.LeftButtonClick();
+
+                    }
+                    else
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 1574, 526, 1);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 255);
+                    Thread.Sleep(sleepTime);
+
+
+
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            var t12 = Task.Run(() => FIGHT4(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task FIGHT4(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2.Text) / 3; i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                  
+                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight2.ToString() != "1")
+                    {
+                        object[] fight2Coord = (object[])fight2;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                ///////////////SPELLS
+                ///
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (ds.ToString() != "1")
+                    {
+                        object[] dsCoord = (object[])ds;
+                        au3.Send("{" + txtD.Text + "DOWN}");
+                        au3.Send("{" + txtD.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (a.ToString() != "1")
+                    {
+                        object[] aCoord = (object[])a;
+                        au3.Send("{" + txtA.Text + "DOWN}");
+                        au3.Send("{" + txtA.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                /////////POTION ENDE
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (s.ToString() != "1")
+                    {
+                        object[] sCoord = (object[])s;
+                        au3.Send("{" + txtS.Text + "DOWN}");
+                        au3.Send("{" + txtS.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (f.ToString() != "1")
+                    {
+                        object[] fCoord = (object[])f;
+                        au3.Send("{" + txtF.Text + "DOWN}");
+                        au3.Send("{" + txtF.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight11 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight11.ToString() != "1")
+                    {
+                        object[] fight11Coord = (object[])fight11;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight22.ToString() != "1")
+                    {
+                        object[] fight22Coord = (object[])fight22;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (e.ToString() != "1")
+                    {
+                        object[] eCoord = (object[])e;
+                        au3.Send("{" + txtE.Text + "DOWN}");
+                        au3.Send("{" + txtE.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (q.ToString() != "1")
+                    {
+                        object[] qCoord = (object[])q;
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (w.ToString() != "1")
+                    {
+                        object[] wCoord = (object[])w;
+                        au3.Send("{" + txtW.Text + "DOWN}");
+                        au3.Send("{" + txtW.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (r.ToString() != "1")
+                    {
+                        object[] rCoord = (object[])r;
+                        au3.Send("{" + txtR.Text + "DOWN}");
+                        au3.Send("{" + txtR.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            var t12 = Task.Run(() => SearchBoss4(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task SearchBoss4(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                 
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                    if (enemy.HasValue)
+                    {
+                        CvInvoke.Rectangle(screenCapture,
+                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                            new MCvScalar(255));
+                        var inputSimulator = new InputSimulator();
+                        double x1 = 963f / myPosition.X;
+                        double y1 = 551f / myPosition.Y;
+
+                        var x2 = x1 * enemy.Value.X;
+                        var y2 = y1 * enemy.Value.Y;
+                        if (x2 <= 963)
+                            x2 = x2 * 0.9f;
+                        else
+                            x2 = x2 * 1.1f;
+                        if (y2 <= 551)
+                            y2 = y2 * 0.9;
+                        else
+                            y2 = y2 * 1.1;
+                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                        inputSimulator.Mouse.LeftButtonClick();
+
+                    }
+                    else
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 42, 538, 1);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 255);
+                    Thread.Sleep(sleepTime);
+
+
+
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            var t12 = Task.Run(() => FIGHT5(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task FIGHT5(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+
+            for (int i = 0; i < int.Parse(txtDungeon2.Text) / 3; i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight2.ToString() != "1")
+                    {
+                        object[] fight2Coord = (object[])fight2;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                ///////////////SPELLS
+                ///
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (ds.ToString() != "1")
+                    {
+                        object[] dsCoord = (object[])ds;
+                        au3.Send("{" + txtD.Text + "DOWN}");
+                        au3.Send("{" + txtD.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (a.ToString() != "1")
+                    {
+                        object[] aCoord = (object[])a;
+                        au3.Send("{" + txtA.Text + "DOWN}");
+                        au3.Send("{" + txtA.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                /////////POTION ENDE
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (s.ToString() != "1")
+                    {
+                        object[] sCoord = (object[])s;
+                        au3.Send("{" + txtS.Text + "DOWN}");
+                        au3.Send("{" + txtS.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (f.ToString() != "1")
+                    {
+                        object[] fCoord = (object[])f;
+                        au3.Send("{" + txtF.Text + "DOWN}");
+                        au3.Send("{" + txtF.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight11 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight11.ToString() != "1")
+                    {
+                        object[] fight11Coord = (object[])fight11;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight22.ToString() != "1")
+                    {
+                        object[] fight22Coord = (object[])fight22;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (e.ToString() != "1")
+                    {
+                        object[] eCoord = (object[])e;
+                        au3.Send("{" + txtE.Text + "DOWN}");
+                        au3.Send("{" + txtE.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (q.ToString() != "1")
+                    {
+                        object[] qCoord = (object[])q;
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (w.ToString() != "1")
+                    {
+                        object[] wCoord = (object[])w;
+                        au3.Send("{" + txtW.Text + "DOWN}");
+                        au3.Send("{" + txtW.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (r.ToString() != "1")
+                    {
+                        object[] rCoord = (object[])r;
+                        au3.Send("{" + txtR.Text + "DOWN}");
+                        au3.Send("{" + txtR.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            var t12 = Task.Run(() => SearchBoss5(token));
             await Task.WhenAny(new[] { t12 });
         }
 
 
-   
+        async Task SearchBoss5(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
 
+           
+                for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
+                    // Tunable variables
+                    float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                    var enemyTemplate =
+                        new Image<Bgr, byte>("boss.png"); // icon of the enemy
+                    var enemyMask =
+                        new Image<Bgr, byte>("bossmask.png"); // make white what the important parts are, other parts should be black
+                                                                                                    //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                    Point myPosition = new Point(150, 128);
+                    Point screenResolution = new Point(1920, 1080);
+
+                    // Main program loop
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                    if (enemy.HasValue)
+                    {
+                        CvInvoke.Rectangle(screenCapture,
+                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                            new MCvScalar(255));
+                        var inputSimulator = new InputSimulator();
+                        double x1 = 963f / myPosition.X;
+                        double y1 = 551f / myPosition.Y;
+
+                        var x2 = x1 * enemy.Value.X;
+                        var y2 = y1 * enemy.Value.Y;
+                        if (x2 <= 963)
+                            x2 = x2 * 0.9f;
+                        else
+                            x2 = x2 * 1.1f;
+                        if (y2 <= 551)
+                            y2 = y2 * 0.9;
+                        else
+                            y2 = y2 * 1.1;
+                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                        inputSimulator.Mouse.LeftButtonClick();
+
+                    }
+                    else
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 1574, 526, 1);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 255);
+                    Thread.Sleep(sleepTime);
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            var t12 = Task.Run(() => FIGHT6(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task FIGHT6(CancellationToken token)
+        {
+            _Shadowhunter = true;
+            _Paladin = true;
+            _Berserker = true;
+           
+            for (int i = 0; i < int.Parse(txtDungeon2.Text) / 3; i++)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight1.ToString() != "1")
+                    {
+                        object[] fight1Coord = (object[])fight1;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight2.ToString() != "1")
+                    {
+                        object[] fight2Coord = (object[])fight2;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                ///////////////SPELLS
+                ///
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+
+                    if (ds.ToString() != "1")
+                    {
+                        object[] dsCoord = (object[])ds;
+                        au3.Send("{" + txtD.Text + "DOWN}");
+                        au3.Send("{" + txtD.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    if (a.ToString() != "1")
+                    {
+                        object[] aCoord = (object[])a;
+                        au3.Send("{" + txtA.Text + "DOWN}");
+                        au3.Send("{" + txtA.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                /////////POTION ENDE
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (s.ToString() != "1")
+                    {
+                        object[] sCoord = (object[])s;
+                        au3.Send("{" + txtS.Text + "DOWN}");
+                        au3.Send("{" + txtS.Text + "DOWN}");
+
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (f.ToString() != "1")
+                    {
+                        object[] fCoord = (object[])f;
+                        au3.Send("{" + txtF.Text + "DOWN}");
+                        au3.Send("{" + txtF.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight11 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                    if (fight11.ToString() != "1")
+                    {
+                        object[] fight11Coord = (object[])fight11;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
+                    if (fight22.ToString() != "1")
+                    {
+                        object[] fight22Coord = (object[])fight22;
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (e.ToString() != "1")
+                    {
+                        object[] eCoord = (object[])e;
+                        au3.Send("{" + txtE.Text + "DOWN}");
+                        au3.Send("{" + txtE.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+
+                    if (q.ToString() != "1")
+                    {
+                        object[] qCoord = (object[])q;
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+                        au3.Send("{" + txtQ.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (w.ToString() != "1")
+                    {
+                        object[] wCoord = (object[])w;
+                        au3.Send("{" + txtW.Text + "DOWN}");
+                        au3.Send("{" + txtW.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+
+                    if (r.ToString() != "1")
+                    {
+                        object[] rCoord = (object[])r;
+                        au3.Send("{" + txtR.Text + "DOWN}");
+                        au3.Send("{" + txtR.Text + "DOWN}");
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 1, 1);
+                       
+                       
+                       
+
+
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+                            au3.Send("{" + txtY.Text + "}");
+
+                            Thread.Sleep(500);
+                            _Shadowhunter = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                    if (chBoxPaladin.Checked == true && _Paladin == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+
+                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                        if (d.ToString() != "1")
+                        {
+                            object[] dCoord = (object[])d;
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            au3.Send("{" + txtPaladin.Text + "}");
+                            Thread.Sleep(500);
+                            _Paladin = false;
+
+
+
+                        }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                //////////POTION
+                ///
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
+
+                    if (health.ToString() != "1")
+                    {
+                        object[] healthCoord = (object[])health;
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                        au3.Send("{" + txtHeal.Text + "}");
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
+
+                    if (healthi.ToString() != "1")
+                    {
+                        object[] healthiCoord = (object[])healthi;
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                        au3.Send(txtInstant.Text);
+                       
+                       
+                       
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            var t12 = Task.Run(() => Exit1(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+ 
         async Task Exit1(CancellationToken token)
             {
             _Shadowhunter = true;
@@ -1343,10 +5025,14 @@ namespace PixelAimbot
 
 
             }
+
+            Thread.Sleep(2000);
             if (_REPAIR == true)
             {
+                Thread.Sleep(2000);
                 var t7 = Task.Run(() => REPAIR(token));
                 await Task.WhenAny(new[] { t7 });
+                
             }
             else
             if (_LOGOUT == true)
@@ -1600,7 +5286,6 @@ namespace PixelAimbot
             txtS.Text = Properties.Settings.Default.s;
             txtD.Text = Properties.Settings.Default.d;
             txtF.Text = Properties.Settings.Default.f;
-            chBoxDungeon.Checked = Properties.Settings.Default.chboxdungeontimer;
             txtInstant.Text = Properties.Settings.Default.instant;
             txtHeal.Text = Properties.Settings.Default.potion;
             checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
@@ -1611,8 +5296,10 @@ namespace PixelAimbot
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
             txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
-            chBoxRestartTimer.Checked = Properties.Settings.Default.chBoxRestartTimer;
             chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+            chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
+            txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
+            txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
 
 
         }
@@ -1698,28 +5385,6 @@ namespace PixelAimbot
             e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void chBoxDungeon_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chBoxDungeon.Checked)
-            {
-                txtDungeon.ReadOnly = false;
-            }
-            else
-           if (!chBoxDungeon.Checked)
-            {
-                txtDungeon.ReadOnly = true;
-
-
-            }
-        }
-
 
 
         private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
@@ -1736,20 +5401,7 @@ namespace PixelAimbot
                 _REPAIR = false;
             }
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chBoxRestartTimer.Checked)
-            {
-                txtRestartTimer.ReadOnly = false;
-
-            }
-            else
-               if (!chBoxRestartTimer.Checked)
-            {
-                txtRestartTimer.ReadOnly = true;
-                _REPAIR = false;
-            }
-        }
+  
 
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)
         {
@@ -1766,7 +5418,87 @@ namespace PixelAimbot
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
+                Properties.Settings.Default.dungeontimer = "70";
+                Properties.Settings.Default.instant = "";
+                Properties.Settings.Default.potion = "";
+                Properties.Settings.Default.chboxinstant = false;
+                Properties.Settings.Default.chboxheal = false;
+                Properties.Settings.Default.chBoxAutoRepair = false;
+                Properties.Settings.Default.autorepair = "10";
+                Properties.Settings.Default.chBoxShadowhunter = false;
+                Properties.Settings.Default.chBoxBerserker = false;
+                Properties.Settings.Default.chboxPaladin = false;
+                Properties.Settings.Default.RestartTimer = "25";
+                Properties.Settings.Default.chBoxSaveAll = false;
+                Properties.Settings.Default.chBoxActivateF2 = false;
+                Properties.Settings.Default.txtDungeon2 = "21";
+                Properties.Settings.Default.txtDungeon2search = "9";
+
+                Properties.Settings.Default.Save();
+
+                txtDungeon.Text = Properties.Settings.Default.dungeontimer;
+                txtInstant.Text = Properties.Settings.Default.instant;
+                txtHeal.Text = Properties.Settings.Default.potion;
+                checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
+                checkBoxHeal.Checked = Properties.Settings.Default.chboxheal;
+                chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
+                txtRepair.Text = Properties.Settings.Default.autorepair;
+                chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
+                chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
+                chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
+                txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
+                chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+                chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
+                txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
+                txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+            }
+            catch { }
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            
+                Properties.Settings.Default.left = "LEFT";
+                Properties.Settings.Default.right = "RIGHT";
+                Properties.Settings.Default.q = "Q";
+                Properties.Settings.Default.w = "W";
+                Properties.Settings.Default.e = "E";
+                Properties.Settings.Default.r = "R";
+                Properties.Settings.Default.a = "A";
+                Properties.Settings.Default.s = "S";
+                Properties.Settings.Default.d = "D";
+                Properties.Settings.Default.f = "F";
+               
+                Properties.Settings.Default.Save();
+              
+                txtLEFT.Text = Properties.Settings.Default.left;
+                txtRIGHT.Text = Properties.Settings.Default.right;
+                txtQ.Text = Properties.Settings.Default.q;
+                txtW.Text = Properties.Settings.Default.w;
+                txtE.Text = Properties.Settings.Default.e;
+                txtR.Text = Properties.Settings.Default.r;
+                txtA.Text = Properties.Settings.Default.a;
+                txtS.Text = Properties.Settings.Default.s;
+                txtD.Text = Properties.Settings.Default.d;
+                txtF.Text = Properties.Settings.Default.f;
+               
+            }
+            catch { }
+        }
+
+        private void label36_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
