@@ -82,6 +82,7 @@ namespace PixelAimbot
             //Check for a Update
             CheckForUpdate();
 
+
             this.FormBorderStyle = FormBorderStyle.None;
         }
         public static string RandomString(int length)

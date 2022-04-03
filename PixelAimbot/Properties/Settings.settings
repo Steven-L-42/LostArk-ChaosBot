@@ -74,12 +74,17 @@
     <Setting Name="RestartTimer" Type="System.String" Scope="User">
       <Value Profile="(Default)">25</Value>
     </Setting>
-    <Setting Name="chBoxRestartTimer" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="chBoxSaveAll" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="chBoxActivateF2" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="txtDungeon2search" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="txtDungeon2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">21</Value>
     <Setting Name="version" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.3.0r</Value>
     </Setting>

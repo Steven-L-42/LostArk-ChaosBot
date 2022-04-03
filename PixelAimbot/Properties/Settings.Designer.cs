@@ -314,24 +314,48 @@ namespace PixelAimbot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chBoxRestartTimer {
-            get {
-                return ((bool)(this["chBoxRestartTimer"]));
-            }
-            set {
-                this["chBoxRestartTimer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool chBoxSaveAll {
             get {
                 return ((bool)(this["chBoxSaveAll"]));
             }
             set {
                 this["chBoxSaveAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxActivateF2 {
+            get {
+                return ((bool)(this["chBoxActivateF2"]));
+            }
+            set {
+                this["chBoxActivateF2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public string txtDungeon2search {
+            get {
+                return ((string)(this["txtDungeon2search"]));
+            }
+            set {
+                this["txtDungeon2search"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("21")]
+        public string txtDungeon2 {
+            get {
+                return ((string)(this["txtDungeon2"]));
+            }
+            set {
+                this["txtDungeon2"] = value;
             }
         }
         
