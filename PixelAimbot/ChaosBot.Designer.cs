@@ -35,6 +35,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -52,6 +54,8 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -66,6 +70,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtDungeon = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
+            this.btnResetGS = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.txtQ = new System.Windows.Forms.TextBox();
             this.txtW = new System.Windows.Forms.TextBox();
@@ -111,11 +116,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label35 = new System.Windows.Forms.Label();
-            this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.btnResetGS = new System.Windows.Forms.Button();
-            this.label36 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -207,6 +207,35 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label36.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label36.Location = new System.Drawing.Point(6, 92);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(91, 17);
+            this.label36.TabIndex = 59;
+            this.label36.Text = "Restart-Timer";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label36.Click += new System.EventHandler(this.label36_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnReset.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnReset.Location = new System.Drawing.Point(70, 110);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(96, 24);
+            this.btnReset.TabIndex = 49;
+            this.btnReset.Text = "RESET ALL!";
+            this.toolTip1.SetToolTip(this.btnReset, "Thats resets everything except gamesettings.");
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.button1_Click);
             // 
             // label34
             // 
@@ -451,6 +480,36 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";
             // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.Orange;
+            this.label35.Location = new System.Drawing.Point(262, 57);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(108, 15);
+            this.label35.TabIndex = 66;
+            this.label35.Text = "Check to activate!";
+            // 
+            // chBoxActivateF2
+            // 
+            this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.chBoxActivateF2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxActivateF2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxActivateF2.FlatAppearance.BorderSize = 0;
+            this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxActivateF2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxActivateF2.ForeColor = System.Drawing.Color.Coral;
+            this.chBoxActivateF2.Location = new System.Drawing.Point(20, 51);
+            this.chBoxActivateF2.Name = "chBoxActivateF2";
+            this.chBoxActivateF2.Size = new System.Drawing.Size(211, 24);
+            this.chBoxActivateF2.TabIndex = 65;
+            this.chBoxActivateF2.Text = "ACTIVATE FLOOR 2 --->";
+            this.toolTip1.SetToolTip(this.chBoxActivateF2, "ALPHA VERSION. JUST TEST!");
+            this.chBoxActivateF2.UseMnemonic = false;
+            this.chBoxActivateF2.UseVisualStyleBackColor = false;
+            // 
             // label29
             // 
             this.label29.AutoSize = true;
@@ -625,6 +684,22 @@
             this.SETTINGS.Size = new System.Drawing.Size(418, 148);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
+            // 
+            // btnResetGS
+            // 
+            this.btnResetGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnResetGS.FlatAppearance.BorderSize = 0;
+            this.btnResetGS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetGS.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnResetGS.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnResetGS.Location = new System.Drawing.Point(129, 91);
+            this.btnResetGS.Name = "btnResetGS";
+            this.btnResetGS.Size = new System.Drawing.Size(84, 24);
+            this.btnResetGS.TabIndex = 50;
+            this.btnResetGS.Text = "RESET ALL!";
+            this.toolTip1.SetToolTip(this.btnResetGS, "Thats resets everything except gamesettings.");
+            this.btnResetGS.UseVisualStyleBackColor = false;
+            this.btnResetGS.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox7
             // 
@@ -1223,7 +1298,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(42, 17);
             this.label15.TabIndex = 11;
-            this.label15.Text = "1.3.5r";
+            this.label15.Text = "1.3.6r";
             // 
             // label3
             // 
@@ -1235,81 +1310,6 @@
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Release-Version";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.Orange;
-            this.label35.Location = new System.Drawing.Point(262, 57);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(108, 15);
-            this.label35.TabIndex = 66;
-            this.label35.Text = "Check to activate!";
-            // 
-            // chBoxActivateF2
-            // 
-            this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.chBoxActivateF2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxActivateF2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxActivateF2.FlatAppearance.BorderSize = 0;
-            this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxActivateF2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxActivateF2.ForeColor = System.Drawing.Color.Coral;
-            this.chBoxActivateF2.Location = new System.Drawing.Point(20, 51);
-            this.chBoxActivateF2.Name = "chBoxActivateF2";
-            this.chBoxActivateF2.Size = new System.Drawing.Size(211, 24);
-            this.chBoxActivateF2.TabIndex = 65;
-            this.chBoxActivateF2.Text = "ACTIVATE FLOOR 2 --->";
-            this.toolTip1.SetToolTip(this.chBoxActivateF2, "ALPHA VERSION. JUST TEST!");
-            this.chBoxActivateF2.UseMnemonic = false;
-            this.chBoxActivateF2.UseVisualStyleBackColor = false;
-            // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.btnReset.FlatAppearance.BorderSize = 0;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnReset.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnReset.Location = new System.Drawing.Point(70, 110);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(96, 24);
-            this.btnReset.TabIndex = 49;
-            this.btnReset.Text = "RESET ALL!";
-            this.toolTip1.SetToolTip(this.btnReset, "Thats resets everything except gamesettings.");
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnResetGS
-            // 
-            this.btnResetGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.btnResetGS.FlatAppearance.BorderSize = 0;
-            this.btnResetGS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResetGS.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnResetGS.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnResetGS.Location = new System.Drawing.Point(129, 91);
-            this.btnResetGS.Name = "btnResetGS";
-            this.btnResetGS.Size = new System.Drawing.Size(84, 24);
-            this.btnResetGS.TabIndex = 50;
-            this.btnResetGS.Text = "RESET ALL!";
-            this.toolTip1.SetToolTip(this.btnResetGS, "Thats resets everything except gamesettings.");
-            this.btnResetGS.UseVisualStyleBackColor = false;
-            this.btnResetGS.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label36.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label36.Location = new System.Drawing.Point(6, 92);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(91, 17);
-            this.label36.TabIndex = 59;
-            this.label36.Text = "Restart-Timer";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label36.Click += new System.EventHandler(this.label36_Click);
             // 
             // ChaosBot
             // 

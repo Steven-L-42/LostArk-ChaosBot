@@ -755,7 +755,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
                     if (ds.ToString() != "1")
                     {
@@ -784,7 +784,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -863,7 +863,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
                     if (s.ToString() != "1")
                     {
@@ -893,7 +893,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
                     if (f.ToString() != "1")
                     {
@@ -968,7 +968,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
                     if (e.ToString() != "1")
                     {
@@ -997,7 +997,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
                     if (q.ToString() != "1")
                     {
@@ -1025,7 +1025,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); 
 
                     if (w.ToString() != "1")
                     {
@@ -1052,7 +1052,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10); 
 
                     if (r.ToString() != "1")
                     {
@@ -1256,13 +1256,13 @@ namespace PixelAimbot
                         var x2 = x1 * enemy.Value.X;
                         var y2 = y1 * enemy.Value.Y;
                         if (x2 <= 963)
-                            x2 = x2 * 0.6f;
+                            x2 = x2 * 0.3f;
                         else
-                            x2 = x2 * 1.4f;
+                            x2 = x2 * 1.7f;
                         if (y2 <= 551)
-                            y2 = y2 * 0.6;
+                            y2 = y2 * 0.3;
                         else
-                            y2 = y2 * 1.4;
+                            y2 = y2 * 1.7;
                         var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                         inputSimulator.Mouse.LeftButtonClick();
@@ -1433,7 +1433,7 @@ namespace PixelAimbot
                     await Task.Delay(100, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object fight1 = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (fight1.ToString() != "1")
                     {
@@ -1608,7 +1608,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (ds.ToString() != "1")
                     {
@@ -1665,7 +1665,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -1777,7 +1777,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (s.ToString() != "1")
                     {
@@ -1839,7 +1839,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (f.ToString() != "1")
                     {
@@ -1950,7 +1950,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (e.ToString() != "1")
                     {
@@ -2009,7 +2009,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (q.ToString() != "1")
                     {
@@ -2067,7 +2067,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (w.ToString() != "1")
                     {
@@ -2126,7 +2126,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (r.ToString() != "1")
                     {
@@ -2377,7 +2377,7 @@ namespace PixelAimbot
                     await Task.Delay(100, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object fight1 = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (fight1.ToString() != "1")
                     {
@@ -2552,7 +2552,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (ds.ToString() != "1")
                     {
@@ -2609,7 +2609,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -2721,7 +2721,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (s.ToString() != "1")
                     {
@@ -2783,7 +2783,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (f.ToString() != "1")
                     {
@@ -2894,7 +2894,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (e.ToString() != "1")
                     {
@@ -2953,7 +2953,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (q.ToString() != "1")
                     {
@@ -3011,7 +3011,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (w.ToString() != "1")
                     {
@@ -3070,7 +3070,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (r.ToString() != "1")
                     {
@@ -3319,7 +3319,7 @@ namespace PixelAimbot
                     await Task.Delay(100, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object fight1 = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (fight1.ToString() != "1")
                     {
@@ -3494,7 +3494,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (ds.ToString() != "1")
                     {
@@ -3551,7 +3551,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -3663,7 +3663,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (s.ToString() != "1")
                     {
@@ -3725,7 +3725,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (f.ToString() != "1")
                     {
@@ -3836,7 +3836,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (e.ToString() != "1")
                     {
@@ -3895,7 +3895,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (q.ToString() != "1")
                     {
@@ -3953,7 +3953,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (w.ToString() != "1")
                     {
@@ -4012,7 +4012,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (r.ToString() != "1")
                     {
@@ -4261,7 +4261,7 @@ namespace PixelAimbot
                     await Task.Delay(100, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object fight1 = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (fight1.ToString() != "1")
                     {
@@ -4436,7 +4436,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (ds.ToString() != "1")
                     {
@@ -4493,7 +4493,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -4605,7 +4605,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (s.ToString() != "1")
                     {
@@ -4667,7 +4667,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (f.ToString() != "1")
                     {
@@ -4778,7 +4778,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (e.ToString() != "1")
                     {
@@ -4837,7 +4837,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (q.ToString() != "1")
                     {
@@ -4895,7 +4895,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (w.ToString() != "1")
                     {
@@ -4954,7 +4954,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (r.ToString() != "1")
                     {
@@ -5202,7 +5202,7 @@ namespace PixelAimbot
                     await Task.Delay(100, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Boss fight..."));
-                    object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object fight1 = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (fight1.ToString() != "1")
                     {
@@ -5377,7 +5377,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (ds.ToString() != "1")
                     {
@@ -5434,7 +5434,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object a = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
                     {
                         object[] aCoord = (object[])a;
@@ -5546,7 +5546,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object s = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (s.ToString() != "1")
                     {
@@ -5608,7 +5608,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object f = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (f.ToString() != "1")
                     {
@@ -5719,7 +5719,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object e = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (e.ToString() != "1")
                     {
@@ -5778,7 +5778,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object q = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (q.ToString() != "1")
                     {
@@ -5836,7 +5836,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (w.ToString() != "1")
                     {
@@ -5895,7 +5895,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xAD901C, 10);
+                    object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
                     if (r.ToString() != "1")
                     {
