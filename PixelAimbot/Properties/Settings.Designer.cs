@@ -361,7 +361,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.3.0r")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.4.0r")]
         public string version {
             get {
                 return ((string)(this["version"]));

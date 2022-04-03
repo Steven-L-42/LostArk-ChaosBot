@@ -85,8 +85,9 @@
     </Setting>
     <Setting Name="txtDungeon2" Type="System.String" Scope="User">
       <Value Profile="(Default)">21</Value>
+    </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.3.0r</Value>
+      <Value Profile="(Default)">1.4.0r</Value>
     </Setting>
   </Settings>
 </SettingsFile>
