@@ -91,6 +91,19 @@ namespace PixelAimbot
 
         public static void downloadResources()
         {
+            string[] picturesDownload =
+            {
+                "boss.png",
+                "bossmask.png",
+                "enemy.png",
+                "mask.png",
+                "portal.png",
+                "portalenter.png",
+                "portalentermask.png",
+                "portalmask.png",
+                "revive.png"
+            };
+
             if (!File.Exists("cvextern.dll"))
             {
                 using (var client = new WebClient())
@@ -98,6 +111,33 @@ namespace PixelAimbot
                     client.DownloadFile("https://files.symbiotic.link/resources/cvextern.dll", "cvextern.dll");
                 }
             }
+
+            foreach(string picture in picturesDownload)
+            {
+                // The folder for the roaming current user 
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                // Combine the base folder with your specific folder....
+                string applicationFolder = Path.Combine(folder, "cb_res");
+
+                // CreateDirectory will check if every folder in path exists and, if not, create them.
+                // If all folders exist then CreateDirectory will do nothing.
+                
+
+                if (!Directory.Exists(applicationFolder))
+                {
+                    Directory.CreateDirectory(applicationFolder);
+                }
+
+                if(!File.Exists(applicationFolder + "\\" + picture))
+                {
+                    using(WebClient client = new WebClient())
+                    {
+                        client.DownloadFile("https://files.symbiotic.link/resources/" + picture, applicationFolder + "\\" + picture);
+                    }
+                }
+            }
+            
         }
         public static string RandomString(int length)
         {
