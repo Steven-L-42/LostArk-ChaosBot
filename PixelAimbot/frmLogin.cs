@@ -53,6 +53,7 @@ namespace PixelAimbot
         {
             InitializeComponent();
             this.Text = RandomString(15);
+            downloadResources();
             WebRequest.DefaultWebProxy = null;
             hwid = HWID.Get();
 
@@ -86,6 +87,17 @@ namespace PixelAimbot
 
 
             this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        public static void downloadResources()
+        {
+            if (File.Exists("!cvextern.dll"))
+            {
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile("https://files.symbiotic.link/resources/cvextern.dll", "cvextern.dll");
+                }
+            }
         }
         public static string RandomString(int length)
         {
