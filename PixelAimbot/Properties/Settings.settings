@@ -87,7 +87,7 @@
       <Value Profile="(Default)">21</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.4.2r</Value>
+      <Value Profile="(Default)">1.4.3r</Value>
     </Setting>
   </Settings>
 </SettingsFile>
