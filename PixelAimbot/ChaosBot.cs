@@ -1332,9 +1332,9 @@ namespace PixelAimbot
                     // Tunable variables
                     float threshold = 0.9f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/portalenter.png"); // icon of the enemy
+                        new Image<Bgr, byte>("portalenter.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/portalentermask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("portalentermask.png"); // make white what the important parts are, other parts should be black
                  //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
                     Point myPosition = new Point(150, 128);
                     Point screenResolution = new Point(1920, 1080);
@@ -1509,9 +1509,9 @@ namespace PixelAimbot
                     // Tunable variables
                     float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/mask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
                  //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
                     Point myPosition = new Point(150, 128);
                     Point screenResolution = new Point(1920, 1080);
@@ -2485,9 +2485,9 @@ namespace PixelAimbot
                     // Tunable variables
                     float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/mask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
                  //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
                     Point myPosition = new Point(150, 128);
                     Point screenResolution = new Point(1920, 1080);
@@ -3462,9 +3462,9 @@ namespace PixelAimbot
                     // Tunable variables
                     float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/mask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
 
 
                     Point myPosition = new Point(150, 128);
@@ -4438,9 +4438,9 @@ namespace PixelAimbot
                     // Tunable variables
                     float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/mask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
                  //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
                     Point myPosition = new Point(150, 128);
                     Point screenResolution = new Point(1920, 1080);
@@ -5413,9 +5413,9 @@ namespace PixelAimbot
 										
                         float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                     var enemyTemplate =
-                        new Image<Bgr, byte>("Resources/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>("enemy.png"); // icon of the enemy
                     var enemyMask =
-                        new Image<Bgr, byte>("Resources/mask.png"); // make white what the important parts are, other parts should be black
+                        new Image<Bgr, byte>("mask.png"); // make white what the important parts are, other parts should be black
                  //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
                     Point myPosition = new Point(150, 128);
                     Point screenResolution = new Point(1920, 1080);
