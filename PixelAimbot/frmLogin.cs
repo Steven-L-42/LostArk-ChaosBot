@@ -91,7 +91,7 @@ namespace PixelAimbot
 
         public static void downloadResources()
         {
-            if (File.Exists("!cvextern.dll"))
+            if (!File.Exists("cvextern.dll"))
             {
                 using (var client = new WebClient())
                 {
