@@ -59,12 +59,12 @@ namespace PixelAimbot.Classes.Auth
                 values["username"] = PixelAimbot.frmLogin.username;
                 values["password"] = PixelAimbot.frmLogin.password;
                 values["hwid"] = Misc.HWID.Get();
-                Misc.Config config = new Misc.Config();
-                config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
-                config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
-                config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
+             //   Misc.Config config = new Misc.Config();
+             //   config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
+             //   config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
+             //   config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
 
-                config.Save();
+//                config.Save();
                
 
                 var responseString = Encoding.Default.GetString(response);

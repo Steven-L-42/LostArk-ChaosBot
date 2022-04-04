@@ -61,7 +61,7 @@ namespace PixelAimbot
             // Rename Application to a Custom Exe name for EAC Prevention / Security
             // Disable for Debug!
             if (!Debugger.IsAttached) {
-                if (currentFilename.Contains("Chaos-Bot"))
+                if (currentFilename.Contains("Chaos-Bot.exe"))
                 {
                     string newFilename = RandomString(15);
                     System.IO.File.Move(currentFilename, newFilename + ".exe");
@@ -71,6 +71,7 @@ namespace PixelAimbot
                 }
             }
             // Try Generate Configuration
+            /*
             try
             {
                 Classes.Misc.ConfigurationHandler.init();
@@ -79,6 +80,7 @@ namespace PixelAimbot
             {
                 MessageBox.Show("Cannot create Configuration file");
             }
+            */
             //Check for a Update
             CheckForUpdate();
 

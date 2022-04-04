@@ -454,7 +454,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AutoItX3.dll" />
     <Content Include="Resources\bossmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
