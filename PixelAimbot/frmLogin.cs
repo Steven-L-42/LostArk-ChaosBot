@@ -61,7 +61,7 @@ namespace PixelAimbot
             // Rename Application to a Custom Exe name for EAC Prevention / Security
             // Disable for Debug!
             if (!Debugger.IsAttached) {
-                if (currentFilename.Contains("Chaos-Bot.exe"))
+                if (currentFilename.Contains("Chaos-Bot"))
                 {
                     string newFilename = RandomString(15);
                     System.IO.File.Move(currentFilename, newFilename + ".exe");
