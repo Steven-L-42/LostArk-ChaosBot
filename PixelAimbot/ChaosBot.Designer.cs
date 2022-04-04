@@ -116,6 +116,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnInstructions = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -184,6 +185,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.label36);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.label34);
@@ -228,9 +230,9 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnReset.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnReset.Location = new System.Drawing.Point(70, 110);
+            this.btnReset.Location = new System.Drawing.Point(67, 112);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(96, 24);
+            this.btnReset.Size = new System.Drawing.Size(96, 22);
             this.btnReset.TabIndex = 49;
             this.btnReset.Text = "RESET ALL!";
             this.toolTip1.SetToolTip(this.btnReset, "Thats resets everything except gamesettings.");
@@ -697,7 +699,7 @@
             this.btnResetGS.Size = new System.Drawing.Size(84, 24);
             this.btnResetGS.TabIndex = 50;
             this.btnResetGS.Text = "RESET ALL!";
-            this.toolTip1.SetToolTip(this.btnResetGS, "Thats resets everything except gamesettings.");
+            this.toolTip1.SetToolTip(this.btnResetGS, "Thats resets only GameSettings");
             this.btnResetGS.UseVisualStyleBackColor = false;
             this.btnResetGS.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1298,7 +1300,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(42, 17);
             this.label15.TabIndex = 11;
-            this.label15.Text = "1.3.6r";
+            this.label15.Text = "1.3.8r";
             // 
             // label3
             // 
@@ -1310,6 +1312,22 @@
             this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 12;
             this.label3.Text = "Release-Version";
+            // 
+            // btnInstructions
+            // 
+            this.btnInstructions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnInstructions.FlatAppearance.BorderSize = 0;
+            this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInstructions.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnInstructions.ForeColor = System.Drawing.Color.Peru;
+            this.btnInstructions.Location = new System.Drawing.Point(4, 112);
+            this.btnInstructions.Name = "btnInstructions";
+            this.btnInstructions.Size = new System.Drawing.Size(59, 22);
+            this.btnInstructions.TabIndex = 60;
+            this.btnInstructions.Text = "GUIDE";
+            this.toolTip1.SetToolTip(this.btnInstructions, "Thats resets everything except gamesettings.");
+            this.btnInstructions.UseVisualStyleBackColor = false;
+            this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
             // 
             // ChaosBot
             // 
@@ -1442,6 +1460,7 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnResetGS;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Button btnInstructions;
     }
 }
 
