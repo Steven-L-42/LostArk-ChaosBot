@@ -1342,7 +1342,7 @@ namespace PixelAimbot
                         await Task.Delay(100, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
                         // Tunable variables
-                        float threshold = 0.6f; // set this higher for fewer false positives and lower for fewer false negatives
+                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                         var enemyTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/portalenter.png"); // icon of the enemy
                         var enemyMask =
@@ -1404,12 +1404,7 @@ namespace PixelAimbot
                         { 
                             /// HIER FOLGT STUCK DETECTION
 
-                            cts.Cancel();
-                            cts = new CancellationTokenSource();
-                            var token2 = cts.Token;
-                            var t100 = Task.Run(() => Exit2(token2));
-                            await Task.WhenAny(new[] { t100 });
-                            Thread.Sleep(2000);
+                           
                         }
                     }
                     catch (AggregateException)
