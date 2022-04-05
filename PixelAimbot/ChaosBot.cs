@@ -16,6 +16,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.IO;
 using System.Collections;
+using WindowsInput.Native;
 
 namespace PixelAimbot
     {
@@ -702,7 +703,7 @@ namespace PixelAimbot
 
                 for (int i = 0; i < int.Parse(txtDungeon.Text) / 3; i++)
                 {
-
+                    
 
                     try
                     {
@@ -773,10 +774,15 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                au3.Send("{" + txtY.Text + "}");
-                                au3.Send("{" + txtY.Text + "}");
-                                au3.Send("{" + txtY.Text + "}");
-                                au3.Send("{" + txtY.Text + "}");
+
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < 500; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
                                 Thread.Sleep(500);
                                 _Shadowhunter = false;
@@ -7110,6 +7116,26 @@ namespace PixelAimbot
             frmGuide Form = new frmGuide();
             Form.Show();
             
+        }
+
+        private void groupBox9_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label41_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -49,6 +49,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox3)).BeginInit();
@@ -82,6 +84,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.imageBox4);
             this.groupBox1.Controls.Add(this.imageBox3);
             this.groupBox1.Controls.Add(this.imageBox2);
@@ -174,7 +178,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label9.Location = new System.Drawing.Point(29, 190);
+            this.label9.Location = new System.Drawing.Point(29, 191);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(129, 17);
             this.label9.TabIndex = 69;
@@ -233,7 +237,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Coral;
-            this.label5.Location = new System.Drawing.Point(24, 480);
+            this.label5.Location = new System.Drawing.Point(27, 480);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(389, 25);
             this.label5.TabIndex = 64;
@@ -269,7 +273,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Coral;
-            this.label2.Location = new System.Drawing.Point(6, 184);
+            this.label2.Location = new System.Drawing.Point(6, 185);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 25);
             this.label2.TabIndex = 61;
@@ -287,6 +291,30 @@
             this.label36.TabIndex = 60;
             this.label36.Text = "1.";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label13.Location = new System.Drawing.Point(237, 391);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(202, 34);
+            this.label13.TabIndex = 76;
+            this.label13.Text = "Stand near the Dungeon Statue\r\nInteract \"G\" must be visible.";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Coral;
+            this.label14.Location = new System.Drawing.Point(215, 385);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(28, 25);
+            this.label14.TabIndex = 75;
+            this.label14.Text = "4.";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmGuide
             // 
@@ -336,5 +364,7 @@
         private Emgu.CV.UI.ImageBox imageBox2;
         private Emgu.CV.UI.ImageBox imageBox3;
         private Emgu.CV.UI.ImageBox imageBox4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
