@@ -97,10 +97,8 @@ namespace PixelAimbot
                 "bossmask.png",
                 "enemy.png",
                 "mask.png",
-                "portal.png",
-                "portalenter.png",
-                "portalentermask.png",
-                "portalmask.png",
+                "portalenter1.png",
+                "portalentermask1.png",
                 "revive.png"
             };
 
