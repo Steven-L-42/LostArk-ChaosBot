@@ -15,6 +15,7 @@ using Emgu.CV.Util;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.IO;
+using System.Collections;
 
 namespace PixelAimbot
     {
@@ -278,6 +279,7 @@ namespace PixelAimbot
         bool _LOGOUT = false;
 
         private System.Timers.Timer timer;
+        private object rect_vect;
 
         async void btnStart_Click(object sender, EventArgs e)
         {
@@ -1395,9 +1397,13 @@ namespace PixelAimbot
 
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
+
+                            
                         }
                         else
                         { 
+                            /// HIER FOLGT STUCK DETECTION
+
                             cts.Cancel();
                             cts = new CancellationTokenSource();
                             var token2 = cts.Token;
@@ -1423,9 +1429,6 @@ namespace PixelAimbot
                     au3.Send("{G}");
                     au3.Send("{G}");
 
-
-
-
                 }
             }
             catch (AggregateException)
@@ -1445,7 +1448,7 @@ namespace PixelAimbot
         }
 
 
-
+       
 
         async Task Exit2(CancellationToken token2)
         {
