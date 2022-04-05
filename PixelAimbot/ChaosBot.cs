@@ -1322,90 +1322,100 @@ namespace PixelAimbot
 
         async Task SEARCHPORTAL(CancellationToken token)
         {
+            au3.Send("{G}");
+            au3.Send("{G}");
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
 
-                au3.Send("{G}");
-                au3.Send("{G}");
+                
 
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
-
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i <= 10; i++)
                 {
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
-                        // Tunable variables
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
-                        var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
-                        var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
-                                                                                           //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
-                        Point myPosition = new Point(150, 128);
-                        Point screenResolution = new Point(1920, 1080);
-
-                        // Main program loop
-                        var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                        var screenPrinter = new PrintScreen();
-
-
-                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
-                        {
+                       
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.68f;
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
+                            // Tunable variables
+                            float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                            var enemyTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
+                            var enemyMask =
+                                new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
+                                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
+
+                            // Main program loop
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var screenPrinter = new PrintScreen();
+
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            if (enemy.HasValue)
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var x2 = x1 * enemy.Value.X;
+                                var y2 = y1 * enemy.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.68f;
+                                else
+                                    x2 = x2 * 1.38f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.68;
+                                else
+                                    y2 = y2 * 1.38;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                au3.Send("{G}");
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+                                au3.Send("{G}");
+                                au3.Send("{G}");
+                                Thread.Sleep(1000);
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+                                au3.Send("{G}");
+                                au3.Send("{G}");
+                                Thread.Sleep(1000);
+                            }
                             else
-                                x2 = x2 * 1.38f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.68;
-                            else
-                                y2 = y2 * 1.38;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            au3.Send("{G}");
-                            au3.Send("{G}");
-                            inputSimulator.Mouse.LeftButtonClick();
-                            au3.Send("{G}");
-                            au3.Send("{G}");
-                            Thread.Sleep(1000);
-                            inputSimulator.Mouse.LeftButtonClick();
-                            au3.Send("{G}");
-                            Thread.Sleep(1000);
-
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-
-                            
-                        }
-                        else
-                        { 
-                            /// HIER FOLGT STUCK DETECTION
-
-                           
-                        }
+                            {
+                            }
+                        
                     }
                     catch (AggregateException)
                     {
@@ -1416,10 +1426,12 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+               
+       
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     Random random = new Random();
-                    var sleepTime = random.Next(400, 500);
+                    var sleepTime = random.Next(300, 500);
                     Thread.Sleep(sleepTime);
                     au3.Send("{G}");
                     au3.Send("{G}");

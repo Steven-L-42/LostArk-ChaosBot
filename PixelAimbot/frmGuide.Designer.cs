@@ -131,7 +131,7 @@
             // 
             this.imageBox2.BackgroundImage = global::PixelAimbot.Properties.Resources.quest;
             this.imageBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imageBox2.Location = new System.Drawing.Point(217, 314);
+            this.imageBox2.Location = new System.Drawing.Point(220, 297);
             this.imageBox2.Name = "imageBox2";
             this.imageBox2.Size = new System.Drawing.Size(212, 80);
             this.imageBox2.TabIndex = 72;
@@ -186,7 +186,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label10.Location = new System.Drawing.Point(234, 292);
+            this.label10.Location = new System.Drawing.Point(237, 275);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(160, 17);
             this.label10.TabIndex = 68;
@@ -198,11 +198,11 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label11.Location = new System.Drawing.Point(29, 292);
+            this.label11.Location = new System.Drawing.Point(29, 275);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(185, 17);
+            this.label11.Size = new System.Drawing.Size(159, 34);
             this.label11.TabIndex = 67;
-            this.label11.Text = "Minimap, Zoom nearly Zero!";
+            this.label11.Text = "Minimap = Zoom and \r\nTransparent nearly Zero!";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label12
@@ -245,7 +245,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Coral;
-            this.label6.Location = new System.Drawing.Point(8, 286);
+            this.label6.Location = new System.Drawing.Point(8, 269);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(28, 25);
             this.label6.TabIndex = 63;
@@ -257,7 +257,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Coral;
-            this.label3.Location = new System.Drawing.Point(212, 286);
+            this.label3.Location = new System.Drawing.Point(215, 269);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 25);
             this.label3.TabIndex = 62;

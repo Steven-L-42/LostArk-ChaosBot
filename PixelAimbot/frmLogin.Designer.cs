@@ -61,6 +61,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.Color.Orange;
             this.label2.Location = new System.Drawing.Point(163, 182);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 17);
@@ -99,6 +100,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.Orange;
             this.label3.Location = new System.Drawing.Point(373, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 17);
@@ -110,9 +112,11 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.Color.Transparent;
             this.checkBox1.FlatAppearance.BorderSize = 0;
+            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox1.ForeColor = System.Drawing.Color.Orange;
             this.checkBox1.Location = new System.Drawing.Point(264, 229);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(122, 21);
+            this.checkBox1.Size = new System.Drawing.Size(119, 21);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Show Password";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -150,7 +154,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(165, 384);
+            this.label4.Location = new System.Drawing.Point(192, 384);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 17);
             this.label4.TabIndex = 9;
@@ -201,10 +205,11 @@
             this.chBoxRemember.AutoSize = true;
             this.chBoxRemember.BackColor = System.Drawing.Color.Transparent;
             this.chBoxRemember.FlatAppearance.BorderSize = 0;
-            this.chBoxRemember.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxRemember.ForeColor = System.Drawing.Color.Orange;
             this.chBoxRemember.Location = new System.Drawing.Point(168, 229);
             this.chBoxRemember.Name = "chBoxRemember";
-            this.chBoxRemember.Size = new System.Drawing.Size(93, 21);
+            this.chBoxRemember.Size = new System.Drawing.Size(90, 21);
             this.chBoxRemember.TabIndex = 13;
             this.chBoxRemember.Text = "Remember";
             this.chBoxRemember.UseVisualStyleBackColor = false;
