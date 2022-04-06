@@ -148,8 +148,8 @@
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.lb2Z = new System.Windows.Forms.Label();
             this.lb2Y = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.txCoolZ = new System.Windows.Forms.TextBox();
+            this.txCoolY = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
             this.lb2F = new System.Windows.Forms.Label();
             this.lb2D = new System.Windows.Forms.Label();
@@ -159,14 +159,14 @@
             this.lb2E = new System.Windows.Forms.Label();
             this.lb2W = new System.Windows.Forms.Label();
             this.lb2Q = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txCoolA = new System.Windows.Forms.TextBox();
+            this.txCoolS = new System.Windows.Forms.TextBox();
+            this.txCoolD = new System.Windows.Forms.TextBox();
+            this.txCoolF = new System.Windows.Forms.TextBox();
+            this.txCoolQ = new System.Windows.Forms.TextBox();
+            this.txCoolW = new System.Windows.Forms.TextBox();
+            this.txCoolE = new System.Windows.Forms.TextBox();
+            this.txCoolR = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -1785,14 +1785,14 @@
             this.groupBox8.Controls.Add(this.lb2E);
             this.groupBox8.Controls.Add(this.lb2W);
             this.groupBox8.Controls.Add(this.lb2Q);
-            this.groupBox8.Controls.Add(this.textBox1);
-            this.groupBox8.Controls.Add(this.textBox2);
-            this.groupBox8.Controls.Add(this.textBox3);
-            this.groupBox8.Controls.Add(this.textBox4);
-            this.groupBox8.Controls.Add(this.textBox5);
-            this.groupBox8.Controls.Add(this.textBox6);
-            this.groupBox8.Controls.Add(this.textBox7);
-            this.groupBox8.Controls.Add(this.textBox8);
+            this.groupBox8.Controls.Add(this.txCoolA);
+            this.groupBox8.Controls.Add(this.txCoolS);
+            this.groupBox8.Controls.Add(this.txCoolD);
+            this.groupBox8.Controls.Add(this.txCoolF);
+            this.groupBox8.Controls.Add(this.txCoolQ);
+            this.groupBox8.Controls.Add(this.txCoolW);
+            this.groupBox8.Controls.Add(this.txCoolE);
+            this.groupBox8.Controls.Add(this.txCoolR);
             this.groupBox8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox8.Location = new System.Drawing.Point(137, 0);
@@ -1807,8 +1807,8 @@
             // 
             this.groupBox11.Controls.Add(this.lb2Z);
             this.groupBox11.Controls.Add(this.lb2Y);
-            this.groupBox11.Controls.Add(this.textBox9);
-            this.groupBox11.Controls.Add(this.textBox10);
+            this.groupBox11.Controls.Add(this.txCoolZ);
+            this.groupBox11.Controls.Add(this.txCoolY);
             this.groupBox11.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox11.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox11.Location = new System.Drawing.Point(3, 41);
@@ -1843,35 +1843,35 @@
             this.lb2Y.Text = "Y";
             this.lb2Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox9
+            // txCoolZ
             // 
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox9.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox9.Location = new System.Drawing.Point(68, 46);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(56, 22);
-            this.textBox9.TabIndex = 28;
-            this.textBox9.Text = "1";
-            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox9.WordWrap = false;
+            this.txCoolZ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolZ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolZ.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolZ.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolZ.Location = new System.Drawing.Point(68, 46);
+            this.txCoolZ.Name = "txCoolZ";
+            this.txCoolZ.Size = new System.Drawing.Size(56, 22);
+            this.txCoolZ.TabIndex = 28;
+            this.txCoolZ.Text = "1";
+            this.txCoolZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolZ.WordWrap = false;
             // 
-            // textBox10
+            // txCoolY
             // 
-            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox10.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox10.Location = new System.Drawing.Point(8, 46);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(56, 22);
-            this.textBox10.TabIndex = 24;
-            this.textBox10.Text = "1";
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox10.WordWrap = false;
+            this.txCoolY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolY.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolY.Location = new System.Drawing.Point(8, 46);
+            this.txCoolY.Name = "txCoolY";
+            this.txCoolY.Size = new System.Drawing.Size(56, 22);
+            this.txCoolY.TabIndex = 24;
+            this.txCoolY.Text = "1";
+            this.txCoolY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolY.WordWrap = false;
             // 
             // label47
             // 
@@ -1979,125 +1979,125 @@
             this.lb2Q.Text = "Q";
             this.lb2Q.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txCoolA
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox1.Location = new System.Drawing.Point(13, 87);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(56, 22);
-            this.textBox1.TabIndex = 44;
-            this.textBox1.Text = "1";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.WordWrap = false;
+            this.txCoolA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolA.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolA.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolA.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolA.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolA.Location = new System.Drawing.Point(13, 87);
+            this.txCoolA.Name = "txCoolA";
+            this.txCoolA.Size = new System.Drawing.Size(56, 22);
+            this.txCoolA.TabIndex = 44;
+            this.txCoolA.Text = "1";
+            this.txCoolA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolA.WordWrap = false;
             // 
-            // textBox2
+            // txCoolS
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Location = new System.Drawing.Point(75, 87);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(56, 22);
-            this.textBox2.TabIndex = 45;
-            this.textBox2.Text = "1";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.WordWrap = false;
+            this.txCoolS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolS.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolS.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolS.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolS.Location = new System.Drawing.Point(75, 87);
+            this.txCoolS.Name = "txCoolS";
+            this.txCoolS.Size = new System.Drawing.Size(56, 22);
+            this.txCoolS.TabIndex = 45;
+            this.txCoolS.Text = "1";
+            this.txCoolS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolS.WordWrap = false;
             // 
-            // textBox3
+            // txCoolD
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox3.Location = new System.Drawing.Point(137, 87);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(56, 22);
-            this.textBox3.TabIndex = 46;
-            this.textBox3.Text = "1";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.WordWrap = false;
+            this.txCoolD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolD.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolD.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolD.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolD.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolD.Location = new System.Drawing.Point(137, 87);
+            this.txCoolD.Name = "txCoolD";
+            this.txCoolD.Size = new System.Drawing.Size(56, 22);
+            this.txCoolD.TabIndex = 46;
+            this.txCoolD.Text = "1";
+            this.txCoolD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolD.WordWrap = false;
             // 
-            // textBox4
+            // txCoolF
             // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox4.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox4.Location = new System.Drawing.Point(199, 87);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(56, 22);
-            this.textBox4.TabIndex = 47;
-            this.textBox4.Text = "1";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox4.WordWrap = false;
+            this.txCoolF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolF.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolF.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolF.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolF.Location = new System.Drawing.Point(199, 87);
+            this.txCoolF.Name = "txCoolF";
+            this.txCoolF.Size = new System.Drawing.Size(56, 22);
+            this.txCoolF.TabIndex = 47;
+            this.txCoolF.Text = "1";
+            this.txCoolF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolF.WordWrap = false;
             // 
-            // textBox5
+            // txCoolQ
             // 
-            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox5.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox5.Location = new System.Drawing.Point(13, 39);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(56, 22);
-            this.textBox5.TabIndex = 40;
-            this.textBox5.Text = "1";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox5.WordWrap = false;
+            this.txCoolQ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolQ.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolQ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolQ.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolQ.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolQ.Location = new System.Drawing.Point(13, 39);
+            this.txCoolQ.Name = "txCoolQ";
+            this.txCoolQ.Size = new System.Drawing.Size(56, 22);
+            this.txCoolQ.TabIndex = 40;
+            this.txCoolQ.Text = "1";
+            this.txCoolQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolQ.WordWrap = false;
             // 
-            // textBox6
+            // txCoolW
             // 
-            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox6.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox6.Location = new System.Drawing.Point(75, 39);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(56, 22);
-            this.textBox6.TabIndex = 41;
-            this.textBox6.Text = "1";
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox6.WordWrap = false;
+            this.txCoolW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolW.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolW.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolW.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolW.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolW.Location = new System.Drawing.Point(75, 39);
+            this.txCoolW.Name = "txCoolW";
+            this.txCoolW.Size = new System.Drawing.Size(56, 22);
+            this.txCoolW.TabIndex = 41;
+            this.txCoolW.Text = "1";
+            this.txCoolW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolW.WordWrap = false;
             // 
-            // textBox7
+            // txCoolE
             // 
-            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox7.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox7.Location = new System.Drawing.Point(137, 39);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(56, 22);
-            this.textBox7.TabIndex = 42;
-            this.textBox7.Text = "1";
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox7.WordWrap = false;
+            this.txCoolE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolE.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolE.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolE.Location = new System.Drawing.Point(137, 39);
+            this.txCoolE.Name = "txCoolE";
+            this.txCoolE.Size = new System.Drawing.Size(56, 22);
+            this.txCoolE.TabIndex = 42;
+            this.txCoolE.Text = "1";
+            this.txCoolE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolE.WordWrap = false;
             // 
-            // textBox8
+            // txCoolR
             // 
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox8.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox8.Location = new System.Drawing.Point(199, 39);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(56, 22);
-            this.textBox8.TabIndex = 43;
-            this.textBox8.Text = "1";
-            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox8.WordWrap = false;
+            this.txCoolR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txCoolR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txCoolR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txCoolR.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txCoolR.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txCoolR.Location = new System.Drawing.Point(199, 39);
+            this.txCoolR.Name = "txCoolR";
+            this.txCoolR.Size = new System.Drawing.Size(56, 22);
+            this.txCoolR.TabIndex = 43;
+            this.txCoolR.Text = "1";
+            this.txCoolR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txCoolR.WordWrap = false;
             // 
             // ChaosBot
             // 
@@ -2276,8 +2276,8 @@
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Label lb2Z;
         private System.Windows.Forms.Label lb2Y;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox txCoolZ;
+        private System.Windows.Forms.TextBox txCoolY;
         private System.Windows.Forms.Label lb2F;
         private System.Windows.Forms.Label lb2D;
         private System.Windows.Forms.Label lb2S;
@@ -2286,14 +2286,14 @@
         private System.Windows.Forms.Label lb2E;
         private System.Windows.Forms.Label lb2W;
         private System.Windows.Forms.Label lb2Q;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txCoolA;
+        private System.Windows.Forms.TextBox txCoolS;
+        private System.Windows.Forms.TextBox txCoolD;
+        private System.Windows.Forms.TextBox txCoolF;
+        private System.Windows.Forms.TextBox txCoolQ;
+        private System.Windows.Forms.TextBox txCoolW;
+        private System.Windows.Forms.TextBox txCoolE;
+        private System.Windows.Forms.TextBox txCoolR;
     }
 }
 

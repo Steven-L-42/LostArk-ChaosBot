@@ -292,6 +292,26 @@ namespace PixelAimbot
         bool _Paladin = true;
         bool _LOGOUT = false;
 
+        //SKILL AND COOLDOWN//
+        bool _Q = true;
+        bool _W = true;
+        bool _E = true;
+        bool _R = true;
+        bool _A = true;
+        bool _S = true;
+        bool _D = true;
+        bool _F = true;
+
+        bool _Y = true;
+        bool _Z = true;
+
+
+
+
+
+
+
+
         private System.Timers.Timer timer;
        
 
@@ -855,33 +875,36 @@ namespace PixelAimbot
                     }
                     catch { }
 
-                    try
+                    try 
+
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
-
-
+                          
                         }
+                       
                     }
                     catch (AggregateException)
                     {
@@ -895,28 +918,31 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
-
-
+                           
 
                         }
                     }
@@ -982,31 +1008,38 @@ namespace PixelAimbot
                     /////////POTION ENDE
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
 
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
-
-
-
+                         
                         }
+                       
                     }
                     catch (AggregateException)
                     {
@@ -1020,7 +1053,9 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
+                        if (_F == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         object f = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
@@ -1041,9 +1076,11 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
 
 
-
-
+                            _F = false;
+                            F_Cooldown();
                         }
+
+                    }
                     }
                     catch (AggregateException)
                     {
@@ -1107,7 +1144,9 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
+                        if (_E == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         object e = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
@@ -1128,6 +1167,9 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
 
 
+                                _E = false;
+                                E_Cooldown();
+                            }
 
 
                         }
@@ -1144,7 +1186,10 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
+                        if (_Q == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         object q = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
@@ -1164,9 +1209,11 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
-
-
+                            _Q = false;
+                            Q_Cooldown();
                         }
+
+                    }
                     }
                     catch (AggregateException)
                     {
@@ -1180,7 +1227,9 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         object w = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
@@ -1200,8 +1249,10 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
 
-
+                            _W = false;
+                            W_Cooldown();
                         }
+                    }
                     }
                     catch (AggregateException)
                     {
@@ -1215,7 +1266,9 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
+                        if (_R == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         object r = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
@@ -1235,10 +1288,12 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
 
-
-
-
+                            _R = false;
+                            R_Cooldown();
                         }
+
+
+                    }
                     }
                     catch (AggregateException)
                     {
@@ -1911,7 +1966,10 @@ namespace PixelAimbot
 
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_D == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
                     object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10); 
@@ -1930,8 +1988,11 @@ namespace PixelAimbot
 
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-               
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                            _D = false;
+                            D_Cooldown();
+                        }
+
 
 
                     }
@@ -1947,7 +2008,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_D == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
                     object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
@@ -1967,7 +2030,9 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
+                            _D = false;
+                            D_Cooldown();
+                        }
 
 
                     }
@@ -1983,7 +2048,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_A == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10); 
                     if (a.ToString() != "1")
@@ -2000,8 +2067,10 @@ namespace PixelAimbot
 
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                   
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                            _A = false;
+                            A_Cooldown();
+                        }
 
 
                     }
@@ -2017,7 +2086,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_A == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
                     if (a.ToString() != "1")
@@ -2035,7 +2106,9 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
+                            _A = false;
+                            A_Cooldown();
+                        }
 
 
                     }
@@ -2104,7 +2177,9 @@ namespace PixelAimbot
                 /////////POTION ENDE
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_S == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
 
@@ -2123,9 +2198,11 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                       
-                       
-                       
+                            _S = false;
+                            S_Cooldown();
+                        }
+
+
 
 
                     }
@@ -2141,7 +2218,10 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_S == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
@@ -2160,7 +2240,9 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
+                            _S = false;
+                            S_Cooldown();
+                        }
 
 
 
@@ -2179,7 +2261,10 @@ namespace PixelAimbot
 
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_F == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
 
@@ -2197,9 +2282,11 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                       
-                       
-                       
+                            _F = false;
+                            F_Cooldown();
+                        }
+
+
 
 
                     }
@@ -2215,7 +2302,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_F == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
@@ -2233,7 +2322,9 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
+                            _F = false;
+                            F_Cooldown();
+                        }
 
 
 
@@ -2302,7 +2393,9 @@ namespace PixelAimbot
 
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_E == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
 
@@ -2320,9 +2413,11 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                       
-                       
-                       
+                            _E = false;
+                            E_Cooldown();
+                        }
+
+
 
 
                     }
@@ -2338,30 +2433,34 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_E == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
-                    if (e.ToString() != "1")
-                    {
-                        object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
 
 
 
-
-
-                    }
+                        }
                 }
                 catch (AggregateException)
                 {
@@ -2375,7 +2474,9 @@ namespace PixelAimbot
 
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_Q == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
                     if (q.ToString() != "1")
@@ -2392,9 +2493,11 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                       
-                       
-                       
+                            _Q = false;
+                            Q_Cooldown();
+                        }
+
+
 
                     }
                 }
@@ -2409,7 +2512,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_Q == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
@@ -2428,45 +2533,12 @@ namespace PixelAimbot
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
-
-
-
-                    }
-                }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
-
-                try
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
-
-                    if (w.ToString() != "1")
-                    {
-                        object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                _Q = false;
+                                Q_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                       
-                       
-                       
-                    }
+                        }
                 }
                 catch (AggregateException)
                 {
@@ -2477,30 +2549,35 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
+
                 try
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
-                    if (w.ToString() != "1")
-                    {
-                        object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-
-
-
-                    }
+                        }
                 }
                 catch (AggregateException)
                 {
@@ -2511,33 +2588,76 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-
                 try
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02,10);
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
-                    if (r.ToString() != "1")
-                    {
-                        object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                        au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                       
-                       
-                       
+                        }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                try
+                {
+                        if (_R == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (r.ToString() != "1")
+                            {
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
+                            }
 
 
-                    }
+
+
+                        }
                 }
                 catch (AggregateException)
                 {
@@ -2550,7 +2670,9 @@ namespace PixelAimbot
                 catch { }
                 try
                 {
-                    token.ThrowIfCancellationRequested();
+                        if (_R == true)
+                        {
+                            token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
@@ -2568,7 +2690,9 @@ namespace PixelAimbot
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
                         au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-
+                            _R = false;
+                            R_Cooldown();
+                        }
 
 
 
@@ -2999,26 +3123,32 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
 
 
 
@@ -3035,27 +3165,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -3071,25 +3205,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -3105,25 +3243,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -3192,26 +3334,30 @@ namespace PixelAimbot
                     /////////POTION ENDE
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -3229,26 +3375,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -3267,25 +3418,30 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -3303,25 +3459,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -3390,25 +3550,29 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
 
 
 
@@ -3426,95 +3590,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
 
 
@@ -3533,24 +3631,28 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
 
 
 
@@ -3567,25 +3669,30 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -3602,25 +3709,107 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (r.ToString() != "1")
+                        if (_W == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
+                            if (w.ToString() != "1")
+                            {
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
+                            }
+
+
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_R == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (r.ToString() != "1")
+                            {
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
+                            }
 
 
 
@@ -3638,25 +3827,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (r.ToString() != "1")
+                        if (_R == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (r.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4031,6 +4224,7 @@ namespace PixelAimbot
                                 }
 
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                 _Shadowhunter = false;
 
 
@@ -4087,26 +4281,32 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
 
 
 
@@ -4123,27 +4323,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -4159,25 +4363,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -4193,25 +4401,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -4280,26 +4492,30 @@ namespace PixelAimbot
                     /////////POTION ENDE
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4317,26 +4533,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4355,25 +4576,30 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4391,25 +4617,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4478,25 +4708,29 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
 
 
 
@@ -4514,95 +4748,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
 
 
@@ -4621,24 +4789,28 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
 
 
 
@@ -4655,25 +4827,30 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -4690,25 +4867,107 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (r.ToString() != "1")
+                        if (_W == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
+                            if (w.ToString() != "1")
+                            {
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
+                            }
+
+
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_R == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (r.ToString() != "1")
+                            {
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
+                            }
 
 
 
@@ -4726,25 +4985,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (r.ToString() != "1")
+                        if (_R == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (r.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5115,6 +5378,7 @@ namespace PixelAimbot
                                 }
 
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                 _Shadowhunter = false;
 
 
@@ -5171,26 +5435,32 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
 
 
 
@@ -5207,27 +5477,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -5243,25 +5517,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -5277,25 +5555,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -5364,26 +5646,30 @@ namespace PixelAimbot
                     /////////POTION ENDE
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5401,26 +5687,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5439,25 +5730,30 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5475,25 +5771,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5562,25 +5862,29 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
 
 
 
@@ -5598,95 +5902,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
 
 
@@ -5705,24 +5943,28 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
 
 
 
@@ -5739,25 +5981,30 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -5774,25 +6021,107 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (r.ToString() != "1")
+                        if (_W == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
+                            if (w.ToString() != "1")
+                            {
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
+                            }
+
+
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_R == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (r.ToString() != "1")
+                            {
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
+                            }
 
 
 
@@ -5810,25 +6139,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (r.ToString() != "1")
+                        if (_R == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (r.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6199,6 +6532,7 @@ namespace PixelAimbot
                                 }
 
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                 _Shadowhunter = false;
 
 
@@ -6255,26 +6589,32 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
 
 
 
@@ -6291,27 +6631,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (ds.ToString() != "1")
+                        if (_D == true)
                         {
-                            object[] dsCoord = (object[])ds;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object ds = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (ds.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-                                Thread.Sleep(10);
+                                object[] dsCoord = (object[])ds;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_D);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+                                _D = false;
+                                D_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_D);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -6327,25 +6671,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -6361,25 +6709,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-                        if (a.ToString() != "1")
+                        if (_A == true)
                         {
-                            object[] aCoord = (object[])a;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object a = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+                            if (a.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-                                Thread.Sleep(10);
+                                object[] aCoord = (object[])a;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txA.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_A);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+                                _A = false;
+                                A_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_A);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -6448,26 +6800,30 @@ namespace PixelAimbot
                     /////////POTION ENDE
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6485,26 +6841,31 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (s.ToString() != "1")
+                        if (_S == true)
                         {
-                            object[] sCoord = (object[])s;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object s = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (s.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
-                                Thread.Sleep(10);
+                                object[] sCoord = (object[])s;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txS.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_S);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+                                _S = false;
+                                S_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_S);
-
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6523,25 +6884,30 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6559,25 +6925,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (f.ToString() != "1")
+                        if (_F == true)
                         {
-                            object[] fCoord = (object[])f;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object f = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (f.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
-                                Thread.Sleep(10);
+                                object[] fCoord = (object[])f;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txF.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_F);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+                                _F = false;
+                                F_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_F);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6646,25 +7016,29 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
 
 
 
@@ -6682,95 +7056,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (e.ToString() != "1")
+                        if (_E == true)
                         {
-                            object[] eCoord = (object[])e;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object e = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (e.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
-                                Thread.Sleep(10);
+                                object[] eCoord = (object[])e;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txE.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_E);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+                                _E = false;
+                                E_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_E);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-
-
-
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (q.ToString() != "1")
-                        {
-                            object[] qCoord = (object[])q;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
-                            {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
-                                Thread.Sleep(10);
-                            }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
 
 
 
@@ -6789,24 +7097,28 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
 
 
 
@@ -6823,25 +7135,30 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (w.ToString() != "1")
+                        if (_Q == true)
                         {
-                            object[] wCoord = (object[])w;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object q = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (q.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
-                                Thread.Sleep(10);
+                                object[] qCoord = (object[])q;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txQ.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Q);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Q);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+                                _Q = false;
+                                Q_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-
 
 
                         }
@@ -6858,25 +7175,107 @@ namespace PixelAimbot
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (r.ToString() != "1")
+                        if (_W == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (w.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
                             }
 
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
 
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        if (_W == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object w = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
 
+                            if (w.ToString() != "1")
+                            {
+                                object[] wCoord = (object[])w;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txW.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_W);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_W);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+                                _W = false;
+                                W_Cooldown();
+                            }
+
+
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (_R == true)
+                        {
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (r.ToString() != "1")
+                            {
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
+                            }
 
 
 
@@ -6894,25 +7293,29 @@ namespace PixelAimbot
                     catch { }
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
-
-                        if (r.ToString() != "1")
+                        if (_R == true)
                         {
-                            object[] rCoord = (object[])r;
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object r = au3.PixelSearch(320, 180, 1523, 911, 0xAD901C, 3);
+
+                            if (r.ToString() != "1")
                             {
-                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
-                                Thread.Sleep(10);
+                                object[] rCoord = (object[])r;
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txR.Text) * 100; t++)
+                                {
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_R);
+                                    Thread.Sleep(10);
+                                }
+
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+                                _R = false;
+                                R_Cooldown();
                             }
-
-                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_R);
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-
 
 
 
@@ -7825,7 +8228,129 @@ namespace PixelAimbot
 
         }
 
-       
+        public void Q_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolQ.Text) * 1000);
+
+            timer.Elapsed += Q_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void Q_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _Q = true;
+        }
+        public void W_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolW.Text) * 1000);
+
+            timer.Elapsed += W_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void W_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _W = true;
+        }
+        public void E_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolE.Text) * 1000);
+
+            timer.Elapsed += E_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void E_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _E = true;
+        }
+        public void R_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolR.Text) * 1000);
+
+            timer.Elapsed += R_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void R_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _R = true;
+        }
+        public void A_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolA.Text) * 1000);
+
+            timer.Elapsed += A_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void A_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _A = true;
+        }
+        public void S_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolS.Text) * 1000);
+
+            timer.Elapsed += S_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void S_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _S = true;
+        }
+        public void D_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolD.Text) * 1000);
+
+            timer.Elapsed += D_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void D_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _D = true;
+        }
+        public void F_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolF.Text) * 1000);
+
+            timer.Elapsed += F_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void F_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _F = true;
+        }
+
+
+        public void Y_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolY.Text) * 1000);
+
+            timer.Elapsed += Y_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void Y_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _Y = true;
+        }
+        public void Z_Cooldown()
+        {
+            timer = new System.Timers.Timer(int.Parse(txCoolZ.Text) * 1000);
+
+            timer.Elapsed += Z_CooldownEvent;
+            timer.AutoReset = false;
+            timer.Enabled = true;
+        }
+        private void Z_CooldownEvent(object source, ElapsedEventArgs e)
+        {
+            _Z = true;
+        }
+
     }
 
 }
