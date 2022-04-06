@@ -1512,11 +1512,6 @@ namespace PixelAimbot
             await Task.WhenAny(new[] { t12 });
         }
 
-
-
-
-       
-
         async Task SearchBoss(CancellationToken token)
         {
             try

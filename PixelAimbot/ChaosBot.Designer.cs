@@ -71,10 +71,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtDungeon = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtLEFT = new System.Windows.Forms.TextBox();
             this.txtRIGHT = new System.Windows.Forms.TextBox();
@@ -94,10 +90,8 @@
             this.Classes = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.Castduration = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.lbF = new System.Windows.Forms.Label();
             this.lbD = new System.Windows.Forms.Label();
             this.lbS = new System.Windows.Forms.Label();
@@ -114,27 +108,6 @@
             this.txW = new System.Windows.Forms.TextBox();
             this.txE = new System.Windows.Forms.TextBox();
             this.txR = new System.Windows.Forms.TextBox();
-            this.Cooldown = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.lb2F = new System.Windows.Forms.Label();
-            this.lb2D = new System.Windows.Forms.Label();
-            this.lb2S = new System.Windows.Forms.Label();
-            this.lb2A = new System.Windows.Forms.Label();
-            this.lb2R = new System.Windows.Forms.Label();
-            this.lb2E = new System.Windows.Forms.Label();
-            this.lb2W = new System.Windows.Forms.Label();
-            this.lb2Q = new System.Windows.Forms.Label();
-            this.txCoolA = new System.Windows.Forms.TextBox();
-            this.txCoolS = new System.Windows.Forms.TextBox();
-            this.txCoolD = new System.Windows.Forms.TextBox();
-            this.txCoolF = new System.Windows.Forms.TextBox();
-            this.txCoolQ = new System.Windows.Forms.TextBox();
-            this.txCoolW = new System.Windows.Forms.TextBox();
-            this.txCoolE = new System.Windows.Forms.TextBox();
-            this.txCoolR = new System.Windows.Forms.TextBox();
             this.Presets = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -151,6 +124,33 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Cooldown = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.lb2F = new System.Windows.Forms.Label();
+            this.lb2D = new System.Windows.Forms.Label();
+            this.lb2S = new System.Windows.Forms.Label();
+            this.lb2A = new System.Windows.Forms.Label();
+            this.lb2R = new System.Windows.Forms.Label();
+            this.lb2E = new System.Windows.Forms.Label();
+            this.lb2W = new System.Windows.Forms.Label();
+            this.lb2Q = new System.Windows.Forms.Label();
+            this.txCoolA = new System.Windows.Forms.TextBox();
+            this.txCoolS = new System.Windows.Forms.TextBox();
+            this.txCoolD = new System.Windows.Forms.TextBox();
+            this.txCoolF = new System.Windows.Forms.TextBox();
+            this.txCoolQ = new System.Windows.Forms.TextBox();
+            this.txCoolW = new System.Windows.Forms.TextBox();
+            this.txCoolE = new System.Windows.Forms.TextBox();
+            this.txCoolR = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -165,10 +165,10 @@
             this.tabControl2.SuspendLayout();
             this.Castduration.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.Cooldown.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.Presets.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.Cooldown.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -739,50 +739,6 @@
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
             // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ForeColor = System.Drawing.Color.Coral;
-            this.label40.Location = new System.Drawing.Point(161, 81);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(236, 42);
-            this.label40.TabIndex = 48;
-            this.label40.Text = "3. Set your Cooldown.\r\n    its necessary! 4 All Classes...";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.Coral;
-            this.label39.Location = new System.Drawing.Point(161, 57);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(196, 21);
-            this.label39.TabIndex = 47;
-            this.label39.Text = "3. Set your Castduration.";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Coral;
-            this.label11.Location = new System.Drawing.Point(161, 34);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(142, 21);
-            this.label11.TabIndex = 46;
-            this.label11.Text = "2. Go to \"Classes\"";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Coral;
-            this.label37.Location = new System.Drawing.Point(161, 11);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(127, 21);
-            this.label37.TabIndex = 45;
-            this.label37.Text = "1. READ GUIDE!";
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.txtLEFT);
@@ -1036,17 +992,6 @@
             this.Castduration.TabIndex = 0;
             this.Castduration.Text = "Castduration";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Orange;
-            this.label12.Location = new System.Drawing.Point(5, 49);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(127, 60);
-            this.label12.TabIndex = 37;
-            this.label12.Text = "Set your Castduration\r\nin seconds...\r\n\r\n1 second is minimum!";
-            // 
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -1089,17 +1034,6 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Keyboard";
             this.toolTip1.SetToolTip(this.groupBox9, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Orange;
-            this.label14.Location = new System.Drawing.Point(102, 3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(162, 15);
-            this.label14.TabIndex = 44;
-            this.label14.Text = "AT MOMENT ONLY QWERTZ";
             // 
             // lbF
             // 
@@ -1325,6 +1259,208 @@
             this.txR.WordWrap = false;
             this.txR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
+            // Presets
+            // 
+            this.Presets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Presets.Controls.Add(this.groupBox3);
+            this.Presets.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.Presets.Location = new System.Drawing.Point(4, 22);
+            this.Presets.Name = "Presets";
+            this.Presets.Padding = new System.Windows.Forms.Padding(3);
+            this.Presets.Size = new System.Drawing.Size(410, 122);
+            this.Presets.TabIndex = 1;
+            this.Presets.Text = "Ultimate";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label32);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.chBoxPaladin);
+            this.groupBox3.Controls.Add(this.txtPaladin);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.chBoxY);
+            this.groupBox3.Controls.Add(this.txtY);
+            this.groupBox3.Controls.Add(this.chBoxBerserker);
+            this.groupBox3.Controls.Add(this.txtBerserker);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(404, 116);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Ultimate";
+            this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label32.ForeColor = System.Drawing.Color.Coral;
+            this.label32.Location = new System.Drawing.Point(161, 14);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(239, 15);
+            this.label32.TabIndex = 52;
+            this.label32.Text = "To activate: you have to check this Boxes!";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.Location = new System.Drawing.Point(237, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 17);
+            this.label5.TabIndex = 51;
+            this.label5.Text = "Press Y if Full!";
+            // 
+            // chBoxPaladin
+            // 
+            this.chBoxPaladin.AutoSize = true;
+            this.chBoxPaladin.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxPaladin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chBoxPaladin.Location = new System.Drawing.Point(82, 28);
+            this.chBoxPaladin.Name = "chBoxPaladin";
+            this.chBoxPaladin.Size = new System.Drawing.Size(113, 24);
+            this.chBoxPaladin.TabIndex = 50;
+            this.chBoxPaladin.Text = "Paladin ( Y ):";
+            this.chBoxPaladin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxPaladin.UseVisualStyleBackColor = true;
+            // 
+            // txtPaladin
+            // 
+            this.txtPaladin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtPaladin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPaladin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtPaladin.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaladin.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPaladin.Location = new System.Drawing.Point(208, 30);
+            this.txtPaladin.Name = "txtPaladin";
+            this.txtPaladin.Size = new System.Drawing.Size(23, 22);
+            this.txtPaladin.TabIndex = 49;
+            this.txtPaladin.Text = "Y";
+            this.txtPaladin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPaladin.WordWrap = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Orange;
+            this.label9.Location = new System.Drawing.Point(237, 91);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(96, 17);
+            this.label9.TabIndex = 48;
+            this.label9.Text = "Press Y if Full!";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.Location = new System.Drawing.Point(237, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(104, 17);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "Press Z at start!";
+            // 
+            // chBoxY
+            // 
+            this.chBoxY.AutoSize = true;
+            this.chBoxY.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxY.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chBoxY.Location = new System.Drawing.Point(31, 88);
+            this.chBoxY.Name = "chBoxY";
+            this.chBoxY.Size = new System.Drawing.Size(164, 24);
+            this.chBoxY.TabIndex = 46;
+            this.chBoxY.Text = "Shadowhunter ( Y ):";
+            this.chBoxY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxY.UseVisualStyleBackColor = true;
+            // 
+            // txtY
+            // 
+            this.txtY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtY.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtY.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtY.Location = new System.Drawing.Point(208, 90);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(23, 22);
+            this.txtY.TabIndex = 45;
+            this.txtY.Text = "Y";
+            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtY.WordWrap = false;
+            // 
+            // chBoxBerserker
+            // 
+            this.chBoxBerserker.AutoSize = true;
+            this.chBoxBerserker.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxBerserker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chBoxBerserker.Location = new System.Drawing.Point(66, 58);
+            this.chBoxBerserker.Name = "chBoxBerserker";
+            this.chBoxBerserker.Size = new System.Drawing.Size(129, 24);
+            this.chBoxBerserker.TabIndex = 44;
+            this.chBoxBerserker.Text = "Berserker ( Z ):";
+            this.chBoxBerserker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxBerserker.UseVisualStyleBackColor = true;
+            // 
+            // txtBerserker
+            // 
+            this.txtBerserker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtBerserker.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBerserker.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtBerserker.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBerserker.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtBerserker.Location = new System.Drawing.Point(208, 60);
+            this.txtBerserker.Name = "txtBerserker";
+            this.txtBerserker.Size = new System.Drawing.Size(23, 22);
+            this.txtBerserker.TabIndex = 41;
+            this.txtBerserker.Text = "Z";
+            this.txtBerserker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBerserker.WordWrap = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Orange;
+            this.label1.Location = new System.Drawing.Point(27, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(185, 25);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "ChaosDungeon Bot";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Peru;
+            this.label15.Location = new System.Drawing.Point(396, 210);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 17);
+            this.label15.TabIndex = 11;
+            this.label15.Text = "1.3.8r";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Peru;
+            this.label3.Location = new System.Drawing.Point(206, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Release-Version";
+            // 
             // Cooldown
             // 
             this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
@@ -1337,27 +1473,6 @@
             this.Cooldown.Size = new System.Drawing.Size(410, 122);
             this.Cooldown.TabIndex = 2;
             this.Cooldown.Text = "Cooldown";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Orange;
-            this.label13.Location = new System.Drawing.Point(5, 49);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(127, 60);
-            this.label13.TabIndex = 48;
-            this.label13.Text = "Set your Cooldown \r\nin seconds...\r\n\r\n1 second is minimum!";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.Location = new System.Drawing.Point(10, 16);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(121, 17);
-            this.label47.TabIndex = 47;
-            this.label47.Text = "COOLDOWN TIME";
             // 
             // groupBox8
             // 
@@ -1388,16 +1503,15 @@
             this.groupBox8.Text = "Keyboard";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
             // 
-            // label38
+            // label47
             // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Orange;
-            this.label38.Location = new System.Drawing.Point(102, 3);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(162, 15);
-            this.label38.TabIndex = 56;
-            this.label38.Text = "AT MOMENT ONLY QWERTZ";
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.Location = new System.Drawing.Point(10, 16);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(121, 17);
+            this.label47.TabIndex = 47;
+            this.label47.Text = "COOLDOWN TIME";
             // 
             // lb2F
             // 
@@ -1623,207 +1737,93 @@
             this.txCoolR.WordWrap = false;
             this.txCoolR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // Presets
+            // label37
             // 
-            this.Presets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.Presets.Controls.Add(this.groupBox3);
-            this.Presets.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Presets.Location = new System.Drawing.Point(4, 22);
-            this.Presets.Name = "Presets";
-            this.Presets.Padding = new System.Windows.Forms.Padding(3);
-            this.Presets.Size = new System.Drawing.Size(410, 122);
-            this.Presets.TabIndex = 1;
-            this.Presets.Text = "Ultimate";
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Coral;
+            this.label37.Location = new System.Drawing.Point(161, 11);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(127, 21);
+            this.label37.TabIndex = 45;
+            this.label37.Text = "1. READ GUIDE!";
             // 
-            // groupBox3
+            // label11
             // 
-            this.groupBox3.Controls.Add(this.label32);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.chBoxPaladin);
-            this.groupBox3.Controls.Add(this.txtPaladin);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.chBoxY);
-            this.groupBox3.Controls.Add(this.txtY);
-            this.groupBox3.Controls.Add(this.chBoxBerserker);
-            this.groupBox3.Controls.Add(this.txtBerserker);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(404, 116);
-            this.groupBox3.TabIndex = 9;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Ultimate";
-            this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Coral;
+            this.label11.Location = new System.Drawing.Point(161, 34);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(142, 21);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "2. Go to \"Classes\"";
             // 
-            // label32
+            // label12
             // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label32.ForeColor = System.Drawing.Color.Coral;
-            this.label32.Location = new System.Drawing.Point(161, 14);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(239, 15);
-            this.label32.TabIndex = 52;
-            this.label32.Text = "To activate: you have to check this Boxes!";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Orange;
+            this.label12.Location = new System.Drawing.Point(5, 49);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(127, 60);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Set your Castduration\r\nin seconds...\r\n\r\n1 second is minimum!";
             // 
-            // label5
+            // label13
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
-            this.label5.Location = new System.Drawing.Point(237, 31);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 17);
-            this.label5.TabIndex = 51;
-            this.label5.Text = "Press Y if Full!";
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Orange;
+            this.label13.Location = new System.Drawing.Point(5, 49);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(127, 60);
+            this.label13.TabIndex = 48;
+            this.label13.Text = "Set your Cooldown \r\nin seconds...\r\n\r\n1 second is minimum!";
             // 
-            // chBoxPaladin
+            // label14
             // 
-            this.chBoxPaladin.AutoSize = true;
-            this.chBoxPaladin.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxPaladin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxPaladin.Location = new System.Drawing.Point(82, 28);
-            this.chBoxPaladin.Name = "chBoxPaladin";
-            this.chBoxPaladin.Size = new System.Drawing.Size(113, 24);
-            this.chBoxPaladin.TabIndex = 50;
-            this.chBoxPaladin.Text = "Paladin ( Y ):";
-            this.chBoxPaladin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxPaladin.UseVisualStyleBackColor = true;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Orange;
+            this.label14.Location = new System.Drawing.Point(102, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(162, 15);
+            this.label14.TabIndex = 44;
+            this.label14.Text = "AT MOMENT ONLY QWERTZ";
             // 
-            // txtPaladin
+            // label38
             // 
-            this.txtPaladin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtPaladin.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPaladin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPaladin.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaladin.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPaladin.Location = new System.Drawing.Point(208, 30);
-            this.txtPaladin.Name = "txtPaladin";
-            this.txtPaladin.Size = new System.Drawing.Size(23, 22);
-            this.txtPaladin.TabIndex = 49;
-            this.txtPaladin.Text = "Y";
-            this.txtPaladin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPaladin.WordWrap = false;
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Orange;
+            this.label38.Location = new System.Drawing.Point(102, 3);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(162, 15);
+            this.label38.TabIndex = 56;
+            this.label38.Text = "AT MOMENT ONLY QWERTZ";
             // 
-            // label9
+            // label39
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Orange;
-            this.label9.Location = new System.Drawing.Point(237, 91);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(96, 17);
-            this.label9.TabIndex = 48;
-            this.label9.Text = "Press Y if Full!";
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.Coral;
+            this.label39.Location = new System.Drawing.Point(161, 57);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(196, 21);
+            this.label39.TabIndex = 47;
+            this.label39.Text = "3. Set your Castduration.";
             // 
-            // label4
+            // label40
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Orange;
-            this.label4.Location = new System.Drawing.Point(237, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 17);
-            this.label4.TabIndex = 47;
-            this.label4.Text = "Press Z at start!";
-            // 
-            // chBoxY
-            // 
-            this.chBoxY.AutoSize = true;
-            this.chBoxY.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxY.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxY.Location = new System.Drawing.Point(31, 88);
-            this.chBoxY.Name = "chBoxY";
-            this.chBoxY.Size = new System.Drawing.Size(164, 24);
-            this.chBoxY.TabIndex = 46;
-            this.chBoxY.Text = "Shadowhunter ( Y ):";
-            this.chBoxY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxY.UseVisualStyleBackColor = true;
-            // 
-            // txtY
-            // 
-            this.txtY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtY.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtY.Location = new System.Drawing.Point(208, 90);
-            this.txtY.Name = "txtY";
-            this.txtY.Size = new System.Drawing.Size(23, 22);
-            this.txtY.TabIndex = 45;
-            this.txtY.Text = "Y";
-            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtY.WordWrap = false;
-            // 
-            // chBoxBerserker
-            // 
-            this.chBoxBerserker.AutoSize = true;
-            this.chBoxBerserker.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxBerserker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxBerserker.Location = new System.Drawing.Point(66, 58);
-            this.chBoxBerserker.Name = "chBoxBerserker";
-            this.chBoxBerserker.Size = new System.Drawing.Size(129, 24);
-            this.chBoxBerserker.TabIndex = 44;
-            this.chBoxBerserker.Text = "Berserker ( Z ):";
-            this.chBoxBerserker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxBerserker.UseVisualStyleBackColor = true;
-            // 
-            // txtBerserker
-            // 
-            this.txtBerserker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtBerserker.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBerserker.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBerserker.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBerserker.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtBerserker.Location = new System.Drawing.Point(208, 60);
-            this.txtBerserker.Name = "txtBerserker";
-            this.txtBerserker.Size = new System.Drawing.Size(23, 22);
-            this.txtBerserker.TabIndex = 41;
-            this.txtBerserker.Text = "Z";
-            this.txtBerserker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtBerserker.WordWrap = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Orange;
-            this.label1.Location = new System.Drawing.Point(27, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 25);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "ChaosDungeon Bot";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Peru;
-            this.label15.Location = new System.Drawing.Point(396, 210);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 17);
-            this.label15.TabIndex = 11;
-            this.label15.Text = "1.3.8r";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Peru;
-            this.label3.Location = new System.Drawing.Point(206, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Release-Version";
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.Coral;
+            this.label40.Location = new System.Drawing.Point(161, 81);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(236, 42);
+            this.label40.TabIndex = 48;
+            this.label40.Text = "3. Set your Cooldown.\r\n    its necessary! 4 All Classes...";
             // 
             // ChaosBot
             // 
@@ -1865,13 +1865,13 @@
             this.Castduration.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            this.Presets.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.Cooldown.ResumeLayout(false);
             this.Cooldown.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.Presets.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
