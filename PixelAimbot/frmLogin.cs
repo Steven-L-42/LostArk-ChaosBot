@@ -99,7 +99,9 @@ namespace PixelAimbot
                 "mask.png",
                 "portalenter1.png",
                 "portalentermask1.png",
-                "revive.png"
+                "revive.png",
+                "mob.png",
+                "mobmask.png"
             };
 
             if (!File.Exists("cvextern.dll"))
