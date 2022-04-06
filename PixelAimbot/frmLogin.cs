@@ -43,7 +43,16 @@ namespace PixelAimbot
         public static JObject LicenceInformations { get => licenceInformations; set => licenceInformations = value; }
         public static string username;
         public static string password;
-        
+        public static string[] picturesDownload =
+        {
+                "boss.png",
+                "bossmask.png",
+                "enemy.png",
+                "mask.png",
+                "portalenter1.png",
+                "portalentermask1.png",
+                "revive.png"
+        };
 
         private string currentFilename;
 
@@ -61,7 +70,8 @@ namespace PixelAimbot
             label15.Text = Properties.Settings.Default.version;
             // Rename Application to a Custom Exe name for EAC Prevention / Security
             // Disable for Debug!
-            if (!Debugger.IsAttached) {
+            if (!Debugger.IsAttached)
+            {
                 if (currentFilename.Contains("Chaos-Bot"))
                 {
                     string newFilename = RandomString(15);
@@ -91,16 +101,7 @@ namespace PixelAimbot
 
         public static void downloadResources()
         {
-            string[] picturesDownload =
-            {
-                "boss.png",
-                "bossmask.png",
-                "enemy.png",
-                "mask.png",
-                "portalenter1.png",
-                "portalentermask1.png",
-                "revive.png"
-            };
+
 
             if (!File.Exists("cvextern.dll"))
             {
@@ -110,7 +111,7 @@ namespace PixelAimbot
                 }
             }
 
-            foreach(string picture in picturesDownload)
+            foreach (string picture in picturesDownload)
             {
                 // The folder for the roaming current user 
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -120,22 +121,22 @@ namespace PixelAimbot
 
                 // CreateDirectory will check if every folder in path exists and, if not, create them.
                 // If all folders exist then CreateDirectory will do nothing.
-                
+
 
                 if (!Directory.Exists(applicationFolder))
                 {
                     Directory.CreateDirectory(applicationFolder);
                 }
 
-                if(!File.Exists(applicationFolder + "\\" + picture))
+                if (!File.Exists(applicationFolder + "\\" + picture))
                 {
-                    using(WebClient client = new WebClient())
+                    using (WebClient client = new WebClient())
                     {
                         client.DownloadFile("https://files.symbiotic.link/resources/" + picture, applicationFolder + "\\" + picture);
                     }
                 }
             }
-            
+
         }
         public static string RandomString(int length)
         {
@@ -147,7 +148,7 @@ namespace PixelAimbot
 
         //Exit Button
         private void button2_Click(object sender, EventArgs e)
-        {   
+        {
             Environment.Exit(0);
             Application.Exit();
         }
@@ -170,7 +171,7 @@ namespace PixelAimbot
             password = tbPass.Text;
 
             PixelAimbot.Classes.Auth.Access.CheckAccessAsyncCall();
-          
+
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -213,7 +214,7 @@ namespace PixelAimbot
         {
             tbUser.Text = Properties.Settings.Default.username;
             tbPass.Text = Properties.Settings.Default.password;
-            if (tbUser.Text !="")
+            if (tbUser.Text != "")
             {
                 chBoxRemember.Checked = true;
             }
@@ -255,6 +256,21 @@ namespace PixelAimbot
                     MessageBox.Show("New Version found. Process is Updating now. Please press Ok");
                     btnLogin.Enabled = false;
                     progressBar1.Visible = true;
+                    foreach (string picture in picturesDownload)
+                    {
+                        string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                        string applicationFolder = Path.Combine(folder, "cb_res");
+
+                        if (!Directory.Exists(applicationFolder))
+                        {
+                            Directory.CreateDirectory(applicationFolder);
+                        }
+                        using (WebClient client = new WebClient())
+                        {
+                            client.DownloadFile("https://files.symbiotic.link/resources/" + picture, applicationFolder + "\\" + picture);
+                        }
+
+                    }
                     using (WebClient wc = new WebClient())
                     {
                         if (File.Exists(Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe"))
@@ -302,8 +318,3 @@ namespace PixelAimbot
         }
     }
 }
-
-
-
-
-
