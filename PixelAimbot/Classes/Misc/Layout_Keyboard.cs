@@ -23,24 +23,18 @@ namespace PixelAimbot.Classes.Misc
         public VirtualKeyCode Y { get; set; }
         public VirtualKeyCode Z { get; set; }
 
-        public static void simulateHold(VirtualKeyCode key, int duration)
+        public void simulateHold(VirtualKeyCode key, int duration)
         {
             var sim = PixelAimbot.ChaosBot.inputSimulator;
-            for (int t = 0; t < duration; t++)
-            {
-                sim.Keyboard.KeyDown(key);
-                Thread.Sleep(10);
-            }
-
-            sim.Keyboard.KeyUp(key);
+            sim.Keyboard.KeyDown(key).Sleep(duration).KeyUp(key);
+            Thread.Sleep(10);
+            
         }
 
-        public static void simulateDoubleClick(VirtualKeyCode key)
+        public void simulateDoubleClick(VirtualKeyCode key)
         {
             var sim = PixelAimbot.ChaosBot.inputSimulator;
-            sim.Keyboard.KeyPress(key);
-            Thread.Sleep(20);
-            sim.Keyboard.KeyPress(key);
+            sim.Keyboard.KeyPress(key).Sleep(20).KeyPress(key);
         }
     }
 }

@@ -569,7 +569,7 @@ namespace PixelAimbot
 
                         if (chBoxBerserker.Checked == true && _Berserker == true)
                         {
-                            Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Z, 50);
+                            currentLayout.simulateHold(VirtualKeyCode.VK_Z, 50);
 
                             _Berserker = false;
                         }
@@ -651,7 +651,7 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
 
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
@@ -681,7 +681,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 _Paladin = false;
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
@@ -712,7 +712,7 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -765,7 +765,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -868,7 +868,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -922,7 +922,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -979,7 +979,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1033,7 +1033,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1087,7 +1087,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1141,7 +1141,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1195,7 +1195,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1226,7 +1226,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1387,7 +1387,7 @@ namespace PixelAimbot
 
                             var sim = inputSimulator;
 
-                            Layout_Keyboard.simulateHold(VirtualKeyCode.VK_G, 50);
+                            currentLayout.simulateHold(VirtualKeyCode.VK_G, 50);
                             au3.Send("{G}");
                             if (txtLEFT.Text == "LEFT")
                             {
@@ -1727,7 +1727,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Shadowhunter = false;
                             }
@@ -1755,7 +1755,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Paladin = false;
                             }
@@ -1784,7 +1784,7 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
 
-                                Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
                                 _D = false;
                                 D_Cooldown();
@@ -1814,7 +1814,7 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
 
-                                Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
                                 _D = false;
                                 D_Cooldown();
@@ -1865,7 +1865,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
                                 _A = false;
                                 A_Cooldown();
@@ -1892,7 +1892,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
                                 _A = false;
                                 A_Cooldown();
@@ -1993,7 +1993,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
                                 _S = false;
                                 S_Cooldown();
@@ -2021,7 +2021,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
                                 _S = false;
                                 S_Cooldown();
@@ -2073,7 +2073,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
                                 _F = false;
                                 F_Cooldown();
@@ -2101,7 +2101,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
                                 _F = false;
                                 F_Cooldown();
@@ -2156,7 +2156,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
                                 _E = false;
                                 E_Cooldown();
@@ -2184,7 +2184,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
                                 _E = false;
                                 E_Cooldown();
@@ -2235,7 +2235,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -2263,7 +2263,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
 
                                 _Q = false;
@@ -2316,7 +2316,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
                                 _W = false;
                                 W_Cooldown();
@@ -2344,7 +2344,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
                                 _W = false;
                                 W_Cooldown();
@@ -2396,7 +2396,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
                                 _R = false;
                                 R_Cooldown();
@@ -2424,7 +2424,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
                                
                                 _R = false;
@@ -2477,7 +2477,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Shadowhunter = false;
                             }
@@ -2505,7 +2505,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Paladin = false;
                             }
