@@ -335,7 +335,7 @@
             this.txtLOGOUT.TabIndex = 45;
             this.txtLOGOUT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLOGOUT.WordWrap = false;
-            this.txtLOGOUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txtLOGOUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // chBoxLOGOUT
             // 
@@ -379,7 +379,7 @@
             this.txtRestartTimer.TabIndex = 42;
             this.txtRestartTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRestartTimer.WordWrap = false;
-            this.txtRestartTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txtRestartTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // label28
             // 
@@ -404,7 +404,7 @@
             this.txtRepair.TabIndex = 37;
             this.txtRepair.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRepair.WordWrap = false;
-            this.txtRepair.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txtRepair.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // chBoxAutoRepair
             // 
@@ -809,7 +809,7 @@
             this.txtLEFT.TabIndex = 39;
             this.txtLEFT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLEFT.WordWrap = false;
-            this.txtLEFT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
+            this.txtLEFT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // txtRIGHT
             // 
@@ -824,7 +824,7 @@
             this.txtRIGHT.TabIndex = 40;
             this.txtRIGHT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRIGHT.WordWrap = false;
-            this.txtRIGHT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
+            this.txtRIGHT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // label16
             // 
@@ -1196,7 +1196,7 @@
             this.txA.TabIndex = 28;
             this.txA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txA.WordWrap = false;
-            this.txA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txS
             // 
@@ -1211,7 +1211,7 @@
             this.txS.TabIndex = 29;
             this.txS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txS.WordWrap = false;
-            this.txS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txD
             // 
@@ -1226,7 +1226,7 @@
             this.txD.TabIndex = 30;
             this.txD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txD.WordWrap = false;
-            this.txD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txF
             // 
@@ -1241,7 +1241,7 @@
             this.txF.TabIndex = 31;
             this.txF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txF.WordWrap = false;
-            this.txF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txQ
             // 
@@ -1256,7 +1256,7 @@
             this.txQ.TabIndex = 24;
             this.txQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txQ.WordWrap = false;
-            this.txQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txW
             // 
@@ -1271,7 +1271,7 @@
             this.txW.TabIndex = 25;
             this.txW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txW.WordWrap = false;
-            this.txW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txE
             // 
@@ -1286,7 +1286,7 @@
             this.txE.TabIndex = 26;
             this.txE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txE.WordWrap = false;
-            this.txE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txR
             // 
@@ -1301,7 +1301,7 @@
             this.txR.TabIndex = 27;
             this.txR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txR.WordWrap = false;
-            this.txR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // Cooldown
             // 
@@ -1474,7 +1474,7 @@
             this.txCoolA.TabIndex = 44;
             this.txCoolA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolA.WordWrap = false;
-            this.txCoolA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolS
             // 
@@ -1489,7 +1489,7 @@
             this.txCoolS.TabIndex = 45;
             this.txCoolS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolS.WordWrap = false;
-            this.txCoolS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolD
             // 
@@ -1504,7 +1504,7 @@
             this.txCoolD.TabIndex = 46;
             this.txCoolD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolD.WordWrap = false;
-            this.txCoolD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolF
             // 
@@ -1519,7 +1519,7 @@
             this.txCoolF.TabIndex = 47;
             this.txCoolF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolF.WordWrap = false;
-            this.txCoolF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolQ
             // 
@@ -1534,7 +1534,7 @@
             this.txCoolQ.TabIndex = 40;
             this.txCoolQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolQ.WordWrap = false;
-            this.txCoolQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolW
             // 
@@ -1549,7 +1549,7 @@
             this.txCoolW.TabIndex = 41;
             this.txCoolW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolW.WordWrap = false;
-            this.txCoolW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolE
             // 
@@ -1564,7 +1564,7 @@
             this.txCoolE.TabIndex = 42;
             this.txCoolE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolE.WordWrap = false;
-            this.txCoolE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txCoolR
             // 
@@ -1579,7 +1579,7 @@
             this.txCoolR.TabIndex = 43;
             this.txCoolR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolR.WordWrap = false;
-            this.txCoolR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txCoolR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // Presets
             // 
