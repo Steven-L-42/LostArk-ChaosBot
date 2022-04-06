@@ -147,7 +147,6 @@
             this.txtBerserker = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
@@ -172,6 +171,7 @@
             // lbClose
             // 
             this.lbClose.AutoSize = true;
+            this.lbClose.BackColor = System.Drawing.Color.Transparent;
             this.lbClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbClose.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbClose.ForeColor = System.Drawing.Color.White;
@@ -185,6 +185,7 @@
             // lbStatus
             // 
             this.lbStatus.AutoSize = true;
+            this.lbStatus.BackColor = System.Drawing.Color.Transparent;
             this.lbStatus.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStatus.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lbStatus.Location = new System.Drawing.Point(12, 210);
@@ -1753,9 +1754,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Orange;
-            this.label1.Location = new System.Drawing.Point(27, 5);
+            this.label1.Location = new System.Drawing.Point(67, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(185, 25);
             this.label1.TabIndex = 10;
@@ -1764,6 +1766,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Peru;
             this.label15.Location = new System.Drawing.Point(396, 210);
@@ -1772,24 +1775,13 @@
             this.label15.TabIndex = 11;
             this.label15.Text = "1.3.8r";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Peru;
-            this.label3.Location = new System.Drawing.Point(206, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Release-Version";
-            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(450, 237);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbStatus);
@@ -1862,7 +1854,6 @@
         private System.Windows.Forms.TextBox txtRIGHT;
         private System.Windows.Forms.TextBox txtLEFT;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label28;
