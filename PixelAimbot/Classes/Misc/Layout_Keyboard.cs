@@ -26,7 +26,7 @@ namespace PixelAimbot.Classes.Misc
         public static void simulateHold(VirtualKeyCode key, int duration)
         {
             var sim = new InputSimulator();
-            for (int t = 0; t < duration * 100; t++)
+            for (int t = 0; t < duration; t++)
             {
                 sim.Keyboard.KeyDown(key);
                 Thread.Sleep(10);

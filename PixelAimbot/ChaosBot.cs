@@ -254,7 +254,7 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 cts.Cancel();
             }
-
+            
         }
         public static string RandomString(int length)
         {
@@ -7096,7 +7096,7 @@ namespace PixelAimbot
 
             comboBox1.DataSource = LAYOUT;
             comboBox1.DisplayMember = "LAYOUTS";
-
+            currentLayout = comboBox1.SelectedItem as Layout_Keyboard;     
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
             txtDungeon.Text = Properties.Settings.Default.dungeontimer;
             txtLEFT.Text = Properties.Settings.Default.left;
