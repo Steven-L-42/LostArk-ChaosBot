@@ -642,29 +642,7 @@ namespace PixelAimbot
                     }
                     catch { }
 
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object fight2 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
-                        if (fight2.ToString() != "1")
-                        {
-                            object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
+                   
                     ///////////////SPELLS
                     ///
                     try
@@ -681,6 +659,9 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
 
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
                                 _Shadowhunter = false;
                             }
                         }
@@ -709,6 +690,9 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 _Paladin = false;
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
                             }
                         }
                     }
@@ -736,6 +720,9 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _D = false;
                                 D_Cooldown();
@@ -751,7 +738,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_A == true)
@@ -764,10 +773,36 @@ namespace PixelAimbot
                                 object[] aCoord = (object[])a;
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _A = false;
                                 A_Cooldown();
                             }
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
+
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -841,6 +876,9 @@ namespace PixelAimbot
                                 object[] sCoord = (object[])s;
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _S = false;
                                 S_Cooldown();
@@ -856,7 +894,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_F == true)
@@ -870,6 +930,9 @@ namespace PixelAimbot
                                 object[] fCoord = (object[])f;
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _F = false;
                                 F_Cooldown();
@@ -909,28 +972,7 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object fight22 = au3.PixelSearch(750, 400, 1169, 697, 0x955921, 1);
-                        if (fight22.ToString() != "1")
-                        {
-                            object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
+                   
 
                     try
                     {
@@ -945,6 +987,9 @@ namespace PixelAimbot
                                 object[] eCoord = (object[])e;
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _E = false;
                                 E_Cooldown();
@@ -960,7 +1005,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_Q == true)
@@ -974,6 +1041,9 @@ namespace PixelAimbot
                                 object[] qCoord = (object[])q;
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -989,7 +1059,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_W == true)
@@ -1003,6 +1095,9 @@ namespace PixelAimbot
                                 object[] wCoord = (object[])w;
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _W = false;
                                 W_Cooldown();
@@ -1018,7 +1113,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_R == true)
@@ -1032,6 +1149,9 @@ namespace PixelAimbot
                                 object[] rCoord = (object[])r;
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _R = false;
                                 R_Cooldown();
@@ -1047,7 +1167,29 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(750, 400, 1169, 697, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (chBoxY.Checked == true && _Shadowhunter == true)
@@ -1061,6 +1203,9 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Shadowhunter = false;
                             }
@@ -1089,6 +1234,9 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Paladin = false;
                             }
@@ -1185,6 +1333,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                
+
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
@@ -1241,6 +1390,7 @@ namespace PixelAimbot
                             await Task.Delay(100, token);
                             var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
 
                             var sim = new InputSimulator();
 
@@ -1278,6 +1428,7 @@ namespace PixelAimbot
 
                             sim.Keyboard.KeyUp(VirtualKeyCode.VK_G);
                             au3.Send("{G}");
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Enter Portal..."));
                         }
                         else
                         {
@@ -1322,7 +1473,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-
+               
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
@@ -1335,7 +1486,7 @@ namespace PixelAimbot
                         await Task.Delay(100, token);
                         if (searchbossSequence == 1)
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
                             au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                             searchbossSequence++;
                         }
@@ -1535,6 +1686,8 @@ namespace PixelAimbot
                             object[] fight1Coord = (object[])fight1;
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -1557,6 +1710,8 @@ namespace PixelAimbot
                             object[] fight1Coord = (object[])fight1;
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -1568,29 +1723,6 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object fight2 = au3.PixelSearch(650, 300, 1269, 797, 0x955921, 1);
-                        if (fight2.ToString() != "1")
-                        {
-                            object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-
                     ///////////////SPELLS
                     ///
                     try
@@ -1678,6 +1810,7 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+
                     try
                     {
                         if (_D == true)
@@ -1696,6 +1829,30 @@ namespace PixelAimbot
                                 _D = false;
                                 D_Cooldown();
                             }
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -1750,6 +1907,30 @@ namespace PixelAimbot
                                 _A = false;
                                 A_Cooldown();
                             }
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -1866,7 +2047,30 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_F == true)
@@ -1924,38 +2128,20 @@ namespace PixelAimbot
                     }
                     catch { }
 
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object fight11 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
-                        if (fight11.ToString() != "1")
-                        {
-                            object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
-                        object fight22 = au3.PixelSearch(650, 300, 1269, 797, 0x955921, 1);
-                        if (fight22.ToString() != "1")
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                        if (fight1.ToString() != "1")
                         {
-                            object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
                         }
                     }
                     catch (AggregateException)
@@ -2024,7 +2210,30 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_Q == true)
@@ -2081,7 +2290,30 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_W == true)
@@ -2138,7 +2370,30 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (_R == true)
@@ -2196,7 +2451,30 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        object fight1 = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
+                        if (fight1.ToString() != "1")
+                        {
+                            object[] fight1Coord = (object[])fight1;
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                     try
                     {
                         if (chBoxY.Checked == true && _Shadowhunter == true)
@@ -3118,7 +3396,7 @@ namespace PixelAimbot
 
         public void Q_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolQ.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolQ.Text));
 
             timer.Elapsed += Q_CooldownEvent;
             timer.AutoReset = false;
@@ -3132,7 +3410,7 @@ namespace PixelAimbot
 
         public void W_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolW.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolW.Text));
 
             timer.Elapsed += W_CooldownEvent;
             timer.AutoReset = false;
@@ -3146,7 +3424,7 @@ namespace PixelAimbot
 
         public void E_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolE.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolE.Text));
 
             timer.Elapsed += E_CooldownEvent;
             timer.AutoReset = false;
@@ -3160,7 +3438,7 @@ namespace PixelAimbot
 
         public void R_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolR.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolR.Text));
 
             timer.Elapsed += R_CooldownEvent;
             timer.AutoReset = false;
@@ -3174,7 +3452,7 @@ namespace PixelAimbot
 
         public void A_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolA.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolA.Text));
 
             timer.Elapsed += A_CooldownEvent;
             timer.AutoReset = false;
@@ -3188,7 +3466,7 @@ namespace PixelAimbot
 
         public void S_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolS.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolS.Text));
 
             timer.Elapsed += S_CooldownEvent;
             timer.AutoReset = false;
@@ -3202,7 +3480,7 @@ namespace PixelAimbot
 
         public void D_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolD.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolD.Text));
 
             timer.Elapsed += D_CooldownEvent;
             timer.AutoReset = false;
@@ -3216,7 +3494,7 @@ namespace PixelAimbot
 
         public void F_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolF.Text) * 2);
+            timer = new System.Timers.Timer(int.Parse(txCoolF.Text));
 
             timer.Elapsed += F_CooldownEvent;
             timer.AutoReset = false;
