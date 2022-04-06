@@ -480,6 +480,12 @@
     <Content Include="Resources\minimap.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\mobmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\mob.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\portalentermask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

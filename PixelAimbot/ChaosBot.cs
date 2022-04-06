@@ -19,11 +19,23 @@ using System.Collections;
 using WindowsInput.Native;
 using PixelAimbot.Classes.Misc;
 
+
 namespace PixelAimbot
 {
 
     public partial class ChaosBot : Form
     {
+
+
+
+
+
+
+
+
+
+
+
 
         /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
 
@@ -254,7 +266,7 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 cts.Cancel();
             }
-            
+
         }
         public static string RandomString(int length)
         {
@@ -265,6 +277,7 @@ namespace PixelAimbot
 
         CancellationTokenSource cts = new CancellationTokenSource();
         void btnPause_Click(object sender, EventArgs e)
+
         {
             if (_stop == true)
             {
@@ -294,6 +307,13 @@ namespace PixelAimbot
 
         bool _Y = true;
         bool _Z = true;
+
+
+
+
+
+
+
 
         private System.Timers.Timer timer;
 
@@ -522,6 +542,8 @@ namespace PixelAimbot
 
                         if (walk.ToString() != "1")
                         {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
 
                             object[] walkCoord = (object[])walk;
                             au3.Send("{G}");
@@ -691,7 +713,19 @@ namespace PixelAimbot
 
                         if (chBoxBerserker.Checked == true && _Berserker == true)
                         {
+
+
+
                             Layout_Keyboard.simulateHold(currentLayout.Z, 50);
+
+
+
+
+
+
+
+
+
                             _Berserker = false;
                         }
 
@@ -747,9 +781,9 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -774,9 +808,9 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
 
@@ -808,6 +842,18 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
 
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -838,6 +884,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -870,9 +928,21 @@ namespace PixelAimbot
                                 object[] dsCoord = (object[])ds;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -900,12 +970,25 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -986,11 +1069,25 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -1021,11 +1118,26 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+
+
+
+
 
 
                                 _F = false;
@@ -1053,9 +1165,9 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
                         }
@@ -1077,9 +1189,9 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
                         }
@@ -1105,11 +1217,26 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+
+
+
+
 
 
                                 _E = false;
@@ -1141,12 +1268,24 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -1175,12 +1314,24 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
 
                                 _W = false;
                                 W_Cooldown();
@@ -1208,11 +1359,24 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
 
                                 _R = false;
                                 R_Cooldown();
@@ -1245,6 +1409,19 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -1275,7 +1452,22 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
+
+
+
                             }
                         }
                     }
@@ -1385,6 +1577,8 @@ namespace PixelAimbot
                 {
                     try
                     {
+                        au3.Send("{G}");
+                        au3.Send("{G}");
 
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
@@ -1435,6 +1629,17 @@ namespace PixelAimbot
                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
 
                             var sim = new InputSimulator();
+
+
+
+
+
+
+
+
+
+
+
                             Layout_Keyboard.simulateHold(VirtualKeyCode.VK_G, 50);
                             au3.Send("{G}");
                             if (txtLEFT.Text == "LEFT")
@@ -1512,6 +1717,7 @@ namespace PixelAimbot
             await Task.WhenAny(new[] { t12 });
         }
 
+
         async Task SearchBoss(CancellationToken token)
         {
             try
@@ -1519,12 +1725,13 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
 
-                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+
 
 
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
+
 
                 for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                 {
@@ -1532,53 +1739,246 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
-                        // Tunable variables
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+
+
+
+
+                        float threshold = 0.8f;
                         var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                         var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/mask.png"); // make white what the important parts are, other parts should be black
-                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                        var BossTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                        var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                        var mobTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/mob.png");
+                        var mobMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mobmask.png");
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+
+
+
+
+
+
+
+
+
+
+
                         Point myPosition = new Point(150, 128);
                         Point screenResolution = new Point(1920, 1080);
 
-                        // Main program loop
+
                         var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                         var screenPrinter = new PrintScreen();
 
 
                         screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                         var screenCapture = new Image<Bgr, byte>("screen.png");
                         var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
-                        {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
 
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.9f;
-                            else
-                                x2 = x2 * 1.1f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.9;
-                            else
-                                y2 = y2 * 1.1;
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            inputSimulator.Mouse.LeftButtonClick();
+                        if (portal.HasValue)
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
+                            var t16 = Task.Run(() => PortalFloor2(token));
+                            await Task.WhenAny(new[] { t16 });
                         }
                         else
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 166, 1, 5);
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    var inputSimulator = new InputSimulator();
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+
+
+                                }
+                                else
+                                {
+
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        var inputSimulator = new InputSimulator();
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+
+                                    }
+
+                                }
+                            }
 
                         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                         Random random = new Random();
                         var sleepTime = random.Next(150, 255);
@@ -1613,6 +2013,7 @@ namespace PixelAimbot
             await Task.WhenAny(new[] { t12 });
         }
 
+
         async Task FIGHT2(CancellationToken token)
         {
             try
@@ -1639,8 +2040,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -1664,8 +2065,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -1689,8 +2090,8 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
                         }
@@ -1720,6 +2121,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 _Shadowhunter = false;
 
@@ -1751,6 +2164,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -1782,10 +2207,24 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -1815,11 +2254,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -1846,11 +2298,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -1877,11 +2342,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -1962,11 +2440,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -1997,11 +2488,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -2033,10 +2537,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -2066,10 +2583,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -2098,8 +2628,8 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
 
@@ -2122,8 +2652,8 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
 
@@ -2150,10 +2680,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -2183,10 +2726,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -2216,10 +2772,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -2248,10 +2817,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -2281,9 +2863,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -2311,10 +2907,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -2344,10 +2953,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -2377,9 +2999,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -2413,6 +3049,19 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -2443,6 +3092,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -2540,6 +3201,7 @@ namespace PixelAimbot
                 _Paladin = true;
                 _Berserker = true;
 
+
                 for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                 {
                     try
@@ -2548,51 +3210,234 @@ namespace PixelAimbot
                         await Task.Delay(100, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
 
-                        // Tunable variables
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+
+                        float threshold = 0.8f;
                         var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                         var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/mask.png"); // make white what the important parts are, other parts should be black
-                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                        var BossTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                        var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                        var mobTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/mob.png");
+                        var mobMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mobmask.png");
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+
+
+
+
+
+
+
+
+
+
+
                         Point myPosition = new Point(150, 128);
                         Point screenResolution = new Point(1920, 1080);
 
-                        // Main program loop
+
                         var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                         var screenPrinter = new PrintScreen();
 
 
                         screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                         var screenCapture = new Image<Bgr, byte>("screen.png");
                         var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                        if (portal.HasValue)
                         {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
-
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.9f;
-                            else
-                                x2 = x2 * 1.1f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.9;
-                            else
-                                y2 = y2 * 1.1;
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            inputSimulator.Mouse.LeftButtonClick();
-
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
+                            var t16 = Task.Run(() => PortalFloor2(token));
+                            await Task.WhenAny(new[] { t16 });
                         }
                         else
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 860, 1, 5);
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    var inputSimulator = new InputSimulator();
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        var inputSimulator = new InputSimulator();
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                         }
 
@@ -2654,8 +3499,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -2679,8 +3524,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -2704,8 +3549,8 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
                         }
@@ -2735,6 +3580,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 _Shadowhunter = false;
 
@@ -2766,6 +3623,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -2796,11 +3665,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -2830,10 +3712,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -2860,11 +3756,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -2891,11 +3800,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -2976,11 +3898,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -3011,11 +3946,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -3047,10 +3995,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -3080,9 +4041,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -3111,8 +4086,8 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
 
@@ -3135,8 +4110,8 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
 
@@ -3163,9 +4138,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -3195,10 +4184,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -3228,10 +4230,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -3260,10 +4275,24 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+
+
+
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -3293,10 +4322,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -3324,10 +4366,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -3357,10 +4412,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -3390,10 +4458,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -3427,6 +4508,18 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -3457,6 +4550,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -3555,6 +4660,7 @@ namespace PixelAimbot
                 _Paladin = true;
                 _Berserker = true;
 
+
                 for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                 {
                     try
@@ -3562,51 +4668,222 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
-                        // Tunable variables
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+
+                        float threshold = 0.8f;
                         var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                         var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/mask.png"); // make white what the important parts are, other parts should be black
-
-
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                        var BossTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                        var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                        var mobTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/mob.png");
+                        var mobMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mobmask.png");
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
                         Point myPosition = new Point(150, 128);
                         Point screenResolution = new Point(1920, 1080);
 
-                        // Main program loop
+
                         var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                         var screenPrinter = new PrintScreen();
 
                         screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                         var screenCapture = new Image<Bgr, byte>("screen.png");
                         var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                        if (portal.HasValue)
                         {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
-
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.9f;
-                            else
-                                x2 = x2 * 1.1f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.9;
-                            else
-                                y2 = y2 * 1.1;
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            inputSimulator.Mouse.LeftButtonClick();
-
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
+                            var t16 = Task.Run(() => PortalFloor2(token));
+                            await Task.WhenAny(new[] { t16 });
                         }
                         else
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 350, 529, 1, 5);
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    var inputSimulator = new InputSimulator();
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        var inputSimulator = new InputSimulator();
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                         }
@@ -3669,8 +4946,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -3694,8 +4971,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -3719,8 +4996,8 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
                         }
@@ -3750,6 +5027,19 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 _Shadowhunter = false;
 
@@ -3781,6 +5071,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -3811,11 +5113,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -3845,11 +5160,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -3876,10 +5204,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -3906,11 +5248,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -3991,11 +5346,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -4026,11 +5394,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -4062,10 +5443,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -4095,10 +5489,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -4127,8 +5534,8 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
 
@@ -4151,8 +5558,8 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
 
@@ -4179,10 +5586,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -4212,10 +5632,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -4245,10 +5678,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -4277,10 +5723,24 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+
+
+
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -4310,10 +5770,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -4341,9 +5814,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -4373,10 +5860,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -4406,10 +5906,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -4443,6 +5956,18 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -4473,6 +5998,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -4555,10 +6092,10 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
-            var t12 = Task.Run(() => SearchBoss5(token));
+            var t12 = Task.Run(() => SearchBoss4(token));
             await Task.WhenAny(new[] { t12 });
         }
-        async Task SearchBoss4(CancellationToken token) /// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT
+        async Task SearchBoss4(CancellationToken token) // BOSS?
         {
             try
             {
@@ -4569,6 +6106,7 @@ namespace PixelAimbot
                 _Paladin = true;
                 _Berserker = true;
 
+
                 for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                 {
                     try
@@ -4576,52 +6114,236 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
-                        // Tunable variables
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+
+                        float threshold = 0.8f;
                         var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                         var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/mask.png"); // make white what the important parts are, other parts should be black
-                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                        var BossTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                        var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                        var mobTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/mob.png");
+                        var mobMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mobmask.png");
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+
+
+
+
+
+
+
+
+
+
+
                         Point myPosition = new Point(150, 128);
                         Point screenResolution = new Point(1920, 1080);
 
-                        // Main program loop
+
                         var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                         var screenPrinter = new PrintScreen();
 
 
                         screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                         var screenCapture = new Image<Bgr, byte>("screen.png");
                         var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                        if (portal.HasValue)
                         {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
-
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.9f;
-                            else
-                                x2 = x2 * 1.1f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.9;
-                            else
-                                y2 = y2 * 1.1;
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            inputSimulator.Mouse.LeftButtonClick();
-
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
+                            var t16 = Task.Run(() => PortalFloor2(token));
+                            await Task.WhenAny(new[] { t16 });
                         }
                         else
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 42, 538, 1, 5);
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    var inputSimulator = new InputSimulator();
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        var inputSimulator = new InputSimulator();
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         }
+
+
+
+
+
 
                         Random random = new Random();
                         var sleepTime = random.Next(150, 255);
@@ -4655,7 +6377,7 @@ namespace PixelAimbot
             var t12 = Task.Run(() => FIGHT5(token));
             await Task.WhenAny(new[] { t12 });
         }
-        async Task FIGHT5(CancellationToken token) /// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT/// DEAKTIVIERT
+        async Task FIGHT5(CancellationToken token)
         {
             try
             {
@@ -4681,8 +6403,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -4706,8 +6428,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -4731,8 +6453,8 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
                         }
@@ -4762,6 +6484,19 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 _Shadowhunter = false;
 
@@ -4793,6 +6528,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -4823,11 +6570,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -4857,11 +6617,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -4888,10 +6661,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -4918,11 +6705,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -5003,11 +6803,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -5038,11 +6851,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -5074,10 +6900,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -5107,10 +6946,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -5139,8 +6991,8 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
 
@@ -5163,8 +7015,8 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
 
@@ -5191,10 +7043,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -5224,10 +7089,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -5257,10 +7135,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -5292,8 +7183,19 @@ namespace PixelAimbot
                                 var sim = new InputSimulator();
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -5323,10 +7225,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -5354,10 +7269,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -5387,10 +7315,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -5420,10 +7361,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -5457,6 +7411,19 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -5487,6 +7454,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -5574,6 +7553,7 @@ namespace PixelAimbot
         }
 
 
+
         async Task SearchBoss5(CancellationToken token)
         {
             try
@@ -5592,35 +7572,286 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));                    // Tunable variables
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search enemy..."));
 
-                        float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                        float threshold = 0.8f;
                         var enemyTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/enemy.png"); // icon of the enemy
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                         var enemyMask =
-                            new Image<Bgr, byte>(resourceFolder + "/mask.png"); // make white what the important parts are, other parts should be black
-                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                        var BossTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                        var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                        var mobTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/mob.png");
+                        var mobMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mobmask.png");
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+
+
+
+
+
+
+
+
+
+
+
                         Point myPosition = new Point(150, 128);
                         Point screenResolution = new Point(1920, 1080);
 
-                        // Main program loop
+
                         var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                         var screenPrinter = new PrintScreen();
 
                         screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                         var screenCapture = new Image<Bgr, byte>("screen.png");
                         var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        if (enemy.HasValue)
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                        if (portal.HasValue)
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
+                            var t16 = Task.Run(() => PortalFloor2(token));
+                            await Task.WhenAny(new[] { t16 });
+                        }
+                        else
+                        {
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                var inputSimulator = new InputSimulator();
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                            }
+                            else
+                            {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    var inputSimulator = new InputSimulator();
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        var inputSimulator = new InputSimulator();
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                        }
+                        Random random = new Random();
+                        var sleepTime = random.Next(150, 255);
+                        Thread.Sleep(sleepTime);
+
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+            var t12 = Task.Run(() => FIGHT6(token));
+            await Task.WhenAny(new[] { t12 });
+        }
+        async Task PortalFloor2(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+
+                _Shadowhunter = true;
+                _Paladin = true;
+                _Berserker = true;
+
+
+                for (int i = 0; i <= 15; i++)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Walk to Portal..."));
+
+                        float threshold = 0.7f;
+
+                        var portalTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                        var portalMask =
+                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+                        Point myPosition = new Point(150, 128);
+                        Point screenResolution = new Point(1920, 1080);
+
+
+                        var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
+                        var screenPrinter = new PrintScreen();
+
+                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                        var screenCapture = new Image<Bgr, byte>("screen.png");
+                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                        if (portal.HasValue)
                         {
                             CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
                                 new MCvScalar(255));
                             var inputSimulator = new InputSimulator();
                             double x1 = 963f / myPosition.X;
                             double y1 = 551f / myPosition.Y;
 
-                            var x2 = x1 * enemy.Value.X;
-                            var y2 = y1 * enemy.Value.Y;
+                            var x2 = x1 * portal.Value.X;
+                            var y2 = y1 * portal.Value.Y;
                             if (x2 <= 963)
                                 x2 = x2 * 0.9f;
                             else
@@ -5631,14 +7862,29 @@ namespace PixelAimbot
                                 y2 = y2 * 1.1;
                             var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            inputSimulator.Mouse.LeftButtonClick();
-
+                            if (txtLEFT.Text == "LEFT")
+                            {
+                                inputSimulator.Mouse.LeftButtonClick();
+                            }
+                            else
+                            {
+                                inputSimulator.Mouse.RightButtonClick();
+                            }
                         }
                         else
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 1545, 529, 1, 5);
+
+
+
+
+
+
 
                         }
+
+
+
+
 
                         Random random = new Random();
                         var sleepTime = random.Next(150, 255);
@@ -5669,6 +7915,7 @@ namespace PixelAimbot
             var t12 = Task.Run(() => FIGHT6(token));
             await Task.WhenAny(new[] { t12 });
         }
+
         async Task FIGHT6(CancellationToken token)
         {
             try
@@ -5695,8 +7942,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -5720,8 +7967,8 @@ namespace PixelAimbot
                         if (fight1.ToString() != "1")
                         {
                             object[] fight1Coord = (object[])fight1;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight1Coord[0], (int)fight1Coord[1] + 80, 3, 5);
 
 
 
@@ -5745,8 +7992,8 @@ namespace PixelAimbot
                         if (fight2.ToString() != "1")
                         {
                             object[] fight2Coord = (object[])fight2;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight2Coord[0], (int)fight2Coord[1] + 80, 3, 5);
 
 
                         }
@@ -5776,6 +8023,19 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 _Shadowhunter = false;
 
@@ -5807,6 +8067,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -5837,11 +8109,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -5871,11 +8156,24 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -5902,11 +8200,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -5933,11 +8244,24 @@ namespace PixelAimbot
                             if (a.ToString() != "1")
                             {
                                 object[] aCoord = (object[])a;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -6018,11 +8342,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -6053,11 +8390,24 @@ namespace PixelAimbot
                             if (s.ToString() != "1")
                             {
                                 object[] sCoord = (object[])s;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) * 100);
 
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -6089,10 +8439,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -6122,10 +8485,23 @@ namespace PixelAimbot
                             if (f.ToString() != "1")
                             {
                                 object[] fCoord = (object[])f;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -6154,8 +8530,8 @@ namespace PixelAimbot
                         if (fight11.ToString() != "1")
                         {
                             object[] fight11Coord = (object[])fight11;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight11Coord[0], (int)fight11Coord[1] + 80, 3, 5);
 
 
 
@@ -6178,8 +8554,8 @@ namespace PixelAimbot
                         if (fight22.ToString() != "1")
                         {
                             object[] fight22Coord = (object[])fight22;
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 70, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fight22Coord[0], (int)fight22Coord[1] + 80, 3, 5);
 
 
 
@@ -6206,10 +8582,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -6239,10 +8628,23 @@ namespace PixelAimbot
                             if (e.ToString() != "1")
                             {
                                 object[] eCoord = (object[])e;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -6272,10 +8674,23 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -6304,10 +8719,24 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 70, 3, 5);
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+
+
+
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -6337,10 +8766,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -6368,10 +8810,23 @@ namespace PixelAimbot
                             if (w.ToString() != "1")
                             {
                                 object[] wCoord = (object[])w;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -6401,10 +8856,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -6434,10 +8902,23 @@ namespace PixelAimbot
                             if (r.ToString() != "1")
                             {
                                 object[] rCoord = (object[])r;
+
+
+
+
+
+
+
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) * 100);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 70, 3, 5);
+
+
+
+
+
+
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -6471,6 +8952,19 @@ namespace PixelAimbot
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Shadowhunter = false;
 
 
@@ -6501,6 +8995,18 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+
+
+
+
+
+
+
+
+
+
+
+
                                 _Paladin = false;
 
 
@@ -6823,6 +9329,7 @@ namespace PixelAimbot
         }
 
         async Task REPAIR(CancellationToken token)
+
         {
             try
             {
@@ -7061,6 +9568,7 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_A,
                 S = VirtualKeyCode.VK_S,
+
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F,
             };
@@ -7075,6 +9583,7 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_A,
                 S = VirtualKeyCode.VK_S,
+
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F,
             };
@@ -7089,6 +9598,7 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_Q,
                 S = VirtualKeyCode.VK_S,
+
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F
             };
@@ -7096,7 +9606,7 @@ namespace PixelAimbot
 
             comboBox1.DataSource = LAYOUT;
             comboBox1.DisplayMember = "LAYOUTS";
-            currentLayout = comboBox1.SelectedItem as Layout_Keyboard;     
+            currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
             txtDungeon.Text = Properties.Settings.Default.dungeontimer;
             txtLEFT.Text = Properties.Settings.Default.left;
