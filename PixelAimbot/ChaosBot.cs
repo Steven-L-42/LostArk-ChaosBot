@@ -303,14 +303,14 @@ namespace PixelAimbot
                 Properties.Settings.Default.dungeontimer = txtDungeon.Text;
                 Properties.Settings.Default.left = txtLEFT.Text;
                 Properties.Settings.Default.right = txtRIGHT.Text;
-                Properties.Settings.Default.q = txtQ.Text;
-                Properties.Settings.Default.w = txtW.Text;
-                Properties.Settings.Default.e = txtE.Text;
-                Properties.Settings.Default.r = txtR.Text;
-                Properties.Settings.Default.a = txtA.Text;
-                Properties.Settings.Default.s = txtS.Text;
-                Properties.Settings.Default.d = txtD.Text;
-                Properties.Settings.Default.f = txtF.Text;
+                Properties.Settings.Default.q = txQ.Text;
+                Properties.Settings.Default.w = txW.Text;
+                Properties.Settings.Default.e = txE.Text;
+                Properties.Settings.Default.r = txR.Text;
+                Properties.Settings.Default.a = txA.Text;
+                Properties.Settings.Default.s = txS.Text;
+                Properties.Settings.Default.d = txD.Text;
+                Properties.Settings.Default.f = txF.Text;
                 Properties.Settings.Default.instant = txtInstant.Text;
                 Properties.Settings.Default.potion = txtHeal.Text;
                 Properties.Settings.Default.chboxinstant = checkBoxInstant.Checked;
@@ -335,14 +335,14 @@ namespace PixelAimbot
                 Properties.Settings.Default.dungeontimer = "60";
                 Properties.Settings.Default.left = "LEFT";
                 Properties.Settings.Default.right = "RIGHT";
-                Properties.Settings.Default.q = "Q";
-                Properties.Settings.Default.w = "W";
-                Properties.Settings.Default.e = "E";
-                Properties.Settings.Default.r = "R";
-                Properties.Settings.Default.a = "A";
-                Properties.Settings.Default.s = "S";
-                Properties.Settings.Default.d = "D";
-                Properties.Settings.Default.f = "F";
+                Properties.Settings.Default.q = "1";
+                Properties.Settings.Default.w = "1";
+                Properties.Settings.Default.e = "1";
+                Properties.Settings.Default.r = "1";
+                Properties.Settings.Default.a = "1";
+                Properties.Settings.Default.s = "1";
+                Properties.Settings.Default.d = "1";
+                Properties.Settings.Default.f = "1";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.chboxinstant = false;
@@ -7586,14 +7586,14 @@ namespace PixelAimbot
             txtDungeon.Text = Properties.Settings.Default.dungeontimer;
             txtLEFT.Text = Properties.Settings.Default.left;
             txtRIGHT.Text = Properties.Settings.Default.right;
-            txtQ.Text = Properties.Settings.Default.q;
-            txtW.Text = Properties.Settings.Default.w;
-            txtE.Text = Properties.Settings.Default.e;
-            txtR.Text = Properties.Settings.Default.r;
-            txtA.Text = Properties.Settings.Default.a;
-            txtS.Text = Properties.Settings.Default.s;
-            txtD.Text = Properties.Settings.Default.d;
-            txtF.Text = Properties.Settings.Default.f;
+            txQ.Text = Properties.Settings.Default.q;
+            txW.Text = Properties.Settings.Default.w;
+            txE.Text = Properties.Settings.Default.e;
+            txR.Text = Properties.Settings.Default.r;
+            txA.Text = Properties.Settings.Default.a;
+            txS.Text = Properties.Settings.Default.s;
+            txD.Text = Properties.Settings.Default.d;
+            txF.Text = Properties.Settings.Default.f;
             txtInstant.Text = Properties.Settings.Default.instant;
             txtHeal.Text = Properties.Settings.Default.potion;
             checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
@@ -7777,27 +7777,27 @@ namespace PixelAimbot
             
                 Properties.Settings.Default.left = "LEFT";
                 Properties.Settings.Default.right = "RIGHT";
-                Properties.Settings.Default.q = "Q";
-                Properties.Settings.Default.w = "W";
-                Properties.Settings.Default.e = "E";
-                Properties.Settings.Default.r = "R";
-                Properties.Settings.Default.a = "A";
-                Properties.Settings.Default.s = "S";
-                Properties.Settings.Default.d = "D";
-                Properties.Settings.Default.f = "F";
+                Properties.Settings.Default.q = "1";
+                Properties.Settings.Default.w = "1";
+                Properties.Settings.Default.e = "1";
+                Properties.Settings.Default.r = "1";
+                Properties.Settings.Default.a = "1";
+                Properties.Settings.Default.s = "1";
+                Properties.Settings.Default.d = "1";
+                Properties.Settings.Default.f = "1";
                
                 Properties.Settings.Default.Save();
               
                 txtLEFT.Text = Properties.Settings.Default.left;
                 txtRIGHT.Text = Properties.Settings.Default.right;
-                txtQ.Text = Properties.Settings.Default.q;
-                txtW.Text = Properties.Settings.Default.w;
-                txtE.Text = Properties.Settings.Default.e;
-                txtR.Text = Properties.Settings.Default.r;
-                txtA.Text = Properties.Settings.Default.a;
-                txtS.Text = Properties.Settings.Default.s;
-                txtD.Text = Properties.Settings.Default.d;
-                txtF.Text = Properties.Settings.Default.f;
+                txQ.Text = Properties.Settings.Default.q;
+                txW.Text = Properties.Settings.Default.w;
+                txE.Text = Properties.Settings.Default.e;
+                txR.Text = Properties.Settings.Default.r;
+                txA.Text = Properties.Settings.Default.a;
+                txS.Text = Properties.Settings.Default.s;
+                txD.Text = Properties.Settings.Default.d;
+                txF.Text = Properties.Settings.Default.f;
                
             }
             catch { }
@@ -7825,15 +7825,7 @@ namespace PixelAimbot
 
         }
 
-        private void comboBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void txtRepair_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 
 }

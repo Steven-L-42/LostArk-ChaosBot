@@ -398,7 +398,6 @@
             this.txtRepair.TabIndex = 37;
             this.txtRepair.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRepair.WordWrap = false;
-            this.txtRepair.TextChanged += new System.EventHandler(this.txtRepair_TextChanged);
             this.txtRepair.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // chBoxAutoRepair
@@ -1207,7 +1206,6 @@
             this.comboBox1.Size = new System.Drawing.Size(125, 29);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.comboBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBox1_MouseClick);
             // 
             // groupBox9
             // 
@@ -1347,6 +1345,7 @@
             this.txA.Text = "1";
             this.txA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txA.WordWrap = false;
+            this.txA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txS
             // 
@@ -1362,6 +1361,7 @@
             this.txS.Text = "1";
             this.txS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txS.WordWrap = false;
+            this.txS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txD
             // 
@@ -1377,6 +1377,7 @@
             this.txD.Text = "1";
             this.txD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txD.WordWrap = false;
+            this.txD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txF
             // 
@@ -1392,6 +1393,7 @@
             this.txF.Text = "1";
             this.txF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txF.WordWrap = false;
+            this.txF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txQ
             // 
@@ -1407,6 +1409,7 @@
             this.txQ.Text = "1";
             this.txQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txQ.WordWrap = false;
+            this.txQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txW
             // 
@@ -1422,6 +1425,7 @@
             this.txW.Text = "1";
             this.txW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txW.WordWrap = false;
+            this.txW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txE
             // 
@@ -1437,6 +1441,7 @@
             this.txE.Text = "1";
             this.txE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txE.WordWrap = false;
+            this.txE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txR
             // 
@@ -1452,6 +1457,7 @@
             this.txR.Text = "1";
             this.txR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txR.WordWrap = false;
+            this.txR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // groupBox10
             // 
@@ -1507,6 +1513,7 @@
             this.txZ.Text = "1";
             this.txZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txZ.WordWrap = false;
+            this.txZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txY
             // 
@@ -1522,6 +1529,7 @@
             this.txY.Text = "1";
             this.txY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txY.WordWrap = false;
+            this.txY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // Presets
             // 
