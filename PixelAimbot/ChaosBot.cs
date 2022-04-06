@@ -331,6 +331,16 @@ namespace PixelAimbot
                 Properties.Settings.Default.s = txS.Text;
                 Properties.Settings.Default.d = txD.Text;
                 Properties.Settings.Default.f = txF.Text;
+                Properties.Settings.Default.cQ = txCoolQ.Text;
+                Properties.Settings.Default.cW = txCoolW.Text;
+                Properties.Settings.Default.cE = txCoolE.Text;
+                Properties.Settings.Default.cR = txCoolR.Text;
+                Properties.Settings.Default.cA = txCoolA.Text;
+                Properties.Settings.Default.cS = txCoolS.Text;
+                Properties.Settings.Default.cD = txCoolD.Text;
+                Properties.Settings.Default.cF = txCoolF.Text;
+
+
                 Properties.Settings.Default.instant = txtInstant.Text;
                 Properties.Settings.Default.potion = txtHeal.Text;
                 Properties.Settings.Default.chboxinstant = checkBoxInstant.Checked;
@@ -363,6 +373,14 @@ namespace PixelAimbot
                 Properties.Settings.Default.s = "1";
                 Properties.Settings.Default.d = "1";
                 Properties.Settings.Default.f = "1";
+                Properties.Settings.Default.cQ = "1";
+                Properties.Settings.Default.cW = "1";
+                Properties.Settings.Default.cE = "1";
+                Properties.Settings.Default.cR = "1";
+                Properties.Settings.Default.cA = "1";
+                Properties.Settings.Default.cS = "1";
+                Properties.Settings.Default.cD = "1";
+                Properties.Settings.Default.cF = "1";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.chboxinstant = false;
@@ -1318,7 +1336,7 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 var sim = new InputSimulator();
-                                for (int t = 0; t < int.Parse(txY.Text) * 100; t++)
+                                for (int t = 0; t < 50; t++)
                                 {
                                     sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
                                     Thread.Sleep(10);
@@ -7997,6 +8015,14 @@ namespace PixelAimbot
             txS.Text = Properties.Settings.Default.s;
             txD.Text = Properties.Settings.Default.d;
             txF.Text = Properties.Settings.Default.f;
+            txCoolQ.Text = Properties.Settings.Default.cQ;
+            txCoolW.Text = Properties.Settings.Default.cW;
+            txCoolE.Text = Properties.Settings.Default.cE;
+            txCoolR.Text = Properties.Settings.Default.cR;
+            txCoolA.Text = Properties.Settings.Default.cA;
+            txCoolS.Text = Properties.Settings.Default.cS;
+            txCoolD.Text = Properties.Settings.Default.cD;
+            txCoolF.Text = Properties.Settings.Default.cF;
             txtInstant.Text = Properties.Settings.Default.instant;
             txtHeal.Text = Properties.Settings.Default.potion;
             checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
@@ -8011,6 +8037,7 @@ namespace PixelAimbot
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
             txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+
 
 
         }
@@ -8149,6 +8176,22 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxActivateF2 = false;
                 Properties.Settings.Default.txtDungeon2 = "15";
                 Properties.Settings.Default.txtDungeon2search = "9";
+                Properties.Settings.Default.cQ = "1";
+                Properties.Settings.Default.cW = "1";
+                Properties.Settings.Default.cE = "1";
+                Properties.Settings.Default.cR = "1";
+                Properties.Settings.Default.cA = "1";
+                Properties.Settings.Default.cS = "1";
+                Properties.Settings.Default.cD = "1";
+                Properties.Settings.Default.cF = "1";
+                Properties.Settings.Default.q = "1";
+                Properties.Settings.Default.w = "1";
+                Properties.Settings.Default.e = "1";
+                Properties.Settings.Default.r = "1";
+                Properties.Settings.Default.a = "1";
+                Properties.Settings.Default.s = "1";
+                Properties.Settings.Default.d = "1";
+                Properties.Settings.Default.f = "1";
 
                 Properties.Settings.Default.Save();
 
@@ -8167,44 +8210,29 @@ namespace PixelAimbot
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
                 txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
                 txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+                txCoolQ.Text = Properties.Settings.Default.cQ;
+                txCoolW.Text = Properties.Settings.Default.cW;
+                txCoolE.Text = Properties.Settings.Default.cE;
+                txCoolR.Text = Properties.Settings.Default.cR;
+                txCoolA.Text = Properties.Settings.Default.cA;
+                txCoolS.Text = Properties.Settings.Default.cS;
+                txCoolD.Text = Properties.Settings.Default.cD;
+                txCoolF.Text = Properties.Settings.Default.cF;
+
+                txQ.Text = Properties.Settings.Default.cQ;
+                txW.Text = Properties.Settings.Default.cW;
+                txE.Text = Properties.Settings.Default.cE;
+                txR.Text = Properties.Settings.Default.cR;
+                txA.Text = Properties.Settings.Default.cA;
+                txS.Text = Properties.Settings.Default.cS;
+                txD.Text = Properties.Settings.Default.cD;
+                txF.Text = Properties.Settings.Default.cF;
             }
             catch { }
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-            
-                Properties.Settings.Default.left = "LEFT";
-                Properties.Settings.Default.right = "RIGHT";
-                Properties.Settings.Default.q = "1";
-                Properties.Settings.Default.w = "1";
-                Properties.Settings.Default.e = "1";
-                Properties.Settings.Default.r = "1";
-                Properties.Settings.Default.a = "1";
-                Properties.Settings.Default.s = "1";
-                Properties.Settings.Default.d = "1";
-                Properties.Settings.Default.f = "1";
-               
-                Properties.Settings.Default.Save();
-              
-                txtLEFT.Text = Properties.Settings.Default.left;
-                txtRIGHT.Text = Properties.Settings.Default.right;
-                txQ.Text = Properties.Settings.Default.q;
-                txW.Text = Properties.Settings.Default.w;
-                txE.Text = Properties.Settings.Default.e;
-                txR.Text = Properties.Settings.Default.r;
-                txA.Text = Properties.Settings.Default.a;
-                txS.Text = Properties.Settings.Default.s;
-                txD.Text = Properties.Settings.Default.d;
-                txF.Text = Properties.Settings.Default.f;
-               
-            }
-            catch { }
-        }
+ 
 
 
         private void btnInstructions_Click(object sender, EventArgs e)
@@ -8326,31 +8354,7 @@ namespace PixelAimbot
         }
 
 
-        public void Y_Cooldown()
-        {
-            timer = new System.Timers.Timer(int.Parse(txCoolY.Text) * 1000);
-
-            timer.Elapsed += Y_CooldownEvent;
-            timer.AutoReset = false;
-            timer.Enabled = true;
-        }
-        private void Y_CooldownEvent(object source, ElapsedEventArgs e)
-        {
-            _Y = true;
-        }
-        public void Z_Cooldown()
-        {
-            timer = new System.Timers.Timer(int.Parse(txCoolZ.Text) * 1000);
-
-            timer.Elapsed += Z_CooldownEvent;
-            timer.AutoReset = false;
-            timer.Enabled = true;
-        }
-        private void Z_CooldownEvent(object source, ElapsedEventArgs e)
-        {
-            _Z = true;
-        }
-
+        
     }
 
 }

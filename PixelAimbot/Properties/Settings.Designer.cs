@@ -85,7 +85,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Q")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string q {
             get {
                 return ((string)(this["q"]));
@@ -97,7 +97,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("W")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string w {
             get {
                 return ((string)(this["w"]));
@@ -109,7 +109,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string e {
             get {
                 return ((string)(this["e"]));
@@ -121,7 +121,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("R")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string r {
             get {
                 return ((string)(this["r"]));
@@ -133,7 +133,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("A")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string a {
             get {
                 return ((string)(this["a"]));
@@ -145,7 +145,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("S")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string s {
             get {
                 return ((string)(this["s"]));
@@ -157,7 +157,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string d {
             get {
                 return ((string)(this["d"]));
@@ -169,7 +169,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string f {
             get {
                 return ((string)(this["f"]));
@@ -361,13 +361,109 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.4.9r")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.5.0r")]
         public string version {
             get {
                 return ((string)(this["version"]));
             }
             set {
                 this["version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cQ {
+            get {
+                return ((string)(this["cQ"]));
+            }
+            set {
+                this["cQ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cW {
+            get {
+                return ((string)(this["cW"]));
+            }
+            set {
+                this["cW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cE {
+            get {
+                return ((string)(this["cE"]));
+            }
+            set {
+                this["cE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cR {
+            get {
+                return ((string)(this["cR"]));
+            }
+            set {
+                this["cR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cA {
+            get {
+                return ((string)(this["cA"]));
+            }
+            set {
+                this["cA"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cS {
+            get {
+                return ((string)(this["cS"]));
+            }
+            set {
+                this["cS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cD {
+            get {
+                return ((string)(this["cD"]));
+            }
+            set {
+                this["cD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string cF {
+            get {
+                return ((string)(this["cF"]));
+            }
+            set {
+                this["cF"] = value;
             }
         }
     }

@@ -71,16 +71,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtDungeon = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
-            this.btnResetGS = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.txtQ = new System.Windows.Forms.TextBox();
-            this.txtW = new System.Windows.Forms.TextBox();
-            this.txtE = new System.Windows.Forms.TextBox();
-            this.txtR = new System.Windows.Forms.TextBox();
-            this.txtF = new System.Windows.Forms.TextBox();
-            this.txtA = new System.Windows.Forms.TextBox();
-            this.txtD = new System.Windows.Forms.TextBox();
-            this.txtS = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtLEFT = new System.Windows.Forms.TextBox();
             this.txtRIGHT = new System.Windows.Forms.TextBox();
@@ -88,10 +78,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.HEAL = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -122,11 +108,6 @@
             this.txW = new System.Windows.Forms.TextBox();
             this.txE = new System.Windows.Forms.TextBox();
             this.txR = new System.Windows.Forms.TextBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.txZ = new System.Windows.Forms.TextBox();
-            this.txY = new System.Windows.Forms.TextBox();
             this.Presets = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -145,11 +126,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.Cooldown = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.lb2Z = new System.Windows.Forms.Label();
-            this.lb2Y = new System.Windows.Forms.Label();
-            this.txCoolZ = new System.Windows.Forms.TextBox();
-            this.txCoolY = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
             this.lb2F = new System.Windows.Forms.Label();
             this.lb2D = new System.Windows.Forms.Label();
@@ -167,6 +143,14 @@
             this.txCoolW = new System.Windows.Forms.TextBox();
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -174,7 +158,6 @@
             this.Info.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SETTINGS.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.HEAL.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -182,12 +165,10 @@
             this.tabControl2.SuspendLayout();
             this.Castduration.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.Presets.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.Cooldown.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -745,175 +726,18 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.SETTINGS.Controls.Add(this.btnResetGS);
-            this.SETTINGS.Controls.Add(this.groupBox7);
+            this.SETTINGS.Controls.Add(this.label40);
+            this.SETTINGS.Controls.Add(this.label39);
+            this.SETTINGS.Controls.Add(this.label11);
+            this.SETTINGS.Controls.Add(this.label37);
             this.SETTINGS.Controls.Add(this.groupBox6);
             this.SETTINGS.Controls.Add(this.label2);
             this.SETTINGS.Controls.Add(this.label18);
-            this.SETTINGS.Controls.Add(this.label12);
-            this.SETTINGS.Controls.Add(this.label14);
-            this.SETTINGS.Controls.Add(this.label11);
-            this.SETTINGS.Controls.Add(this.label13);
             this.SETTINGS.Location = new System.Drawing.Point(4, 22);
             this.SETTINGS.Name = "SETTINGS";
             this.SETTINGS.Size = new System.Drawing.Size(418, 148);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
-            // 
-            // btnResetGS
-            // 
-            this.btnResetGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.btnResetGS.FlatAppearance.BorderSize = 0;
-            this.btnResetGS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResetGS.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnResetGS.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnResetGS.Location = new System.Drawing.Point(129, 91);
-            this.btnResetGS.Name = "btnResetGS";
-            this.btnResetGS.Size = new System.Drawing.Size(84, 24);
-            this.btnResetGS.TabIndex = 50;
-            this.btnResetGS.Text = "RESET ALL!";
-            this.toolTip1.SetToolTip(this.btnResetGS, "Thats resets only GameSettings");
-            this.btnResetGS.UseVisualStyleBackColor = false;
-            this.btnResetGS.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.txtQ);
-            this.groupBox7.Controls.Add(this.txtW);
-            this.groupBox7.Controls.Add(this.txtE);
-            this.groupBox7.Controls.Add(this.txtR);
-            this.groupBox7.Controls.Add(this.txtF);
-            this.groupBox7.Controls.Add(this.txtA);
-            this.groupBox7.Controls.Add(this.txtD);
-            this.groupBox7.Controls.Add(this.txtS);
-            this.groupBox7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox7.Location = new System.Drawing.Point(215, 36);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(200, 80);
-            this.groupBox7.TabIndex = 42;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Keyboard";
-            this.toolTip1.SetToolTip(this.groupBox7, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // txtQ
-            // 
-            this.txtQ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtQ.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtQ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtQ.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQ.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtQ.Location = new System.Drawing.Point(9, 21);
-            this.txtQ.Name = "txtQ";
-            this.txtQ.Size = new System.Drawing.Size(38, 22);
-            this.txtQ.TabIndex = 24;
-            this.txtQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtQ.WordWrap = false;
-            this.txtQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtW
-            // 
-            this.txtW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtW.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtW.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtW.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtW.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtW.Location = new System.Drawing.Point(53, 21);
-            this.txtW.Name = "txtW";
-            this.txtW.Size = new System.Drawing.Size(38, 22);
-            this.txtW.TabIndex = 25;
-            this.txtW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtW.WordWrap = false;
-            this.txtW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtE
-            // 
-            this.txtE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtE.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtE.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtE.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtE.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtE.Location = new System.Drawing.Point(97, 21);
-            this.txtE.Name = "txtE";
-            this.txtE.Size = new System.Drawing.Size(38, 22);
-            this.txtE.TabIndex = 26;
-            this.txtE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtE.WordWrap = false;
-            this.txtE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtR
-            // 
-            this.txtR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtR.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtR.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtR.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtR.Location = new System.Drawing.Point(141, 21);
-            this.txtR.Name = "txtR";
-            this.txtR.Size = new System.Drawing.Size(38, 22);
-            this.txtR.TabIndex = 27;
-            this.txtR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtR.WordWrap = false;
-            this.txtR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtF
-            // 
-            this.txtF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtF.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtF.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtF.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtF.Location = new System.Drawing.Point(153, 50);
-            this.txtF.Name = "txtF";
-            this.txtF.Size = new System.Drawing.Size(38, 22);
-            this.txtF.TabIndex = 31;
-            this.txtF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtF.WordWrap = false;
-            this.txtF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtA
-            // 
-            this.txtA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtA.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtA.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtA.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtA.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtA.Location = new System.Drawing.Point(21, 50);
-            this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(38, 22);
-            this.txtA.TabIndex = 28;
-            this.txtA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtA.WordWrap = false;
-            this.txtA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtD
-            // 
-            this.txtD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtD.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtD.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtD.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtD.Location = new System.Drawing.Point(109, 50);
-            this.txtD.Name = "txtD";
-            this.txtD.Size = new System.Drawing.Size(38, 22);
-            this.txtD.TabIndex = 30;
-            this.txtD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtD.WordWrap = false;
-            this.txtD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
-            // 
-            // txtS
-            // 
-            this.txtS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtS.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtS.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtS.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtS.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtS.Location = new System.Drawing.Point(65, 50);
-            this.txtS.Name = "txtS";
-            this.txtS.Size = new System.Drawing.Size(38, 22);
-            this.txtS.TabIndex = 29;
-            this.txtS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtS.WordWrap = false;
-            this.txtS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox9_KeyPress);
             // 
             // groupBox6
             // 
@@ -922,7 +746,7 @@
             this.groupBox6.Controls.Add(this.label16);
             this.groupBox6.Controls.Add(this.label17);
             this.groupBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox6.Location = new System.Drawing.Point(3, 35);
+            this.groupBox6.Location = new System.Drawing.Point(7, 35);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(124, 80);
             this.groupBox6.TabIndex = 41;
@@ -987,7 +811,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(10, 12);
+            this.label2.Location = new System.Drawing.Point(14, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 21);
             this.label2.TabIndex = 32;
@@ -1004,60 +828,6 @@
             this.label18.Size = new System.Drawing.Size(347, 15);
             this.label18.TabIndex = 22;
             this.label18.Text = "Stand near the Dungeon Statue. Interact \"G\" must be visible.";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Orange;
-            this.label12.Location = new System.Drawing.Point(260, 12);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(146, 21);
-            this.label12.TabIndex = 33;
-            this.label12.Text = "just change them.";
-            this.toolTip1.SetToolTip(this.label12, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Orange;
-            this.label14.Location = new System.Drawing.Point(133, 56);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 15);
-            this.label14.TabIndex = 21;
-            this.label14.Text = " 1920x1080";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label14, "If your primary windows resolution is higher than 1920x1080, \r\nthen you need to c" +
-        "hange it in your windows settings first.");
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Orange;
-            this.label11.Location = new System.Drawing.Point(130, 73);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 15);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "BORDERLESS";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label11, "If your primary windows resolution is higher than 1920x1080, \r\nthen you need to c" +
-        "hange it in your windows settings first.");
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label13.Location = new System.Drawing.Point(125, 36);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(92, 21);
-            this.label13.TabIndex = 43;
-            this.label13.Text = "Resolution";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label13, "If your primary windows resolution is higher than 1920x1080, \r\nthen you need to c" +
-        "hange it in your windows settings first.");
             // 
             // HEAL
             // 
@@ -1211,9 +981,9 @@
             // Castduration
             // 
             this.Castduration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Castduration.Controls.Add(this.label12);
             this.Castduration.Controls.Add(this.comboBox1);
             this.Castduration.Controls.Add(this.groupBox9);
-            this.Castduration.Controls.Add(this.groupBox10);
             this.Castduration.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.Castduration.Location = new System.Drawing.Point(4, 22);
             this.Castduration.Name = "Castduration";
@@ -1238,6 +1008,7 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.label14);
             this.groupBox9.Controls.Add(this.lbF);
             this.groupBox9.Controls.Add(this.lbD);
             this.groupBox9.Controls.Add(this.lbS);
@@ -1488,78 +1259,6 @@
             this.txR.WordWrap = false;
             this.txR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.label48);
-            this.groupBox10.Controls.Add(this.label52);
-            this.groupBox10.Controls.Add(this.txZ);
-            this.groupBox10.Controls.Add(this.txY);
-            this.groupBox10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox10.Location = new System.Drawing.Point(3, 41);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(143, 78);
-            this.groupBox10.TabIndex = 44;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Ultimate";
-            this.toolTip1.SetToolTip(this.groupBox10, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.ForeColor = System.Drawing.Color.Orange;
-            this.label48.Location = new System.Drawing.Point(88, 28);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(16, 17);
-            this.label48.TabIndex = 36;
-            this.label48.Text = "Z";
-            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.ForeColor = System.Drawing.Color.Orange;
-            this.label52.Location = new System.Drawing.Point(29, 29);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(16, 17);
-            this.label52.TabIndex = 32;
-            this.label52.Text = "Y";
-            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txZ
-            // 
-            this.txZ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txZ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txZ.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txZ.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txZ.Location = new System.Drawing.Point(68, 46);
-            this.txZ.Name = "txZ";
-            this.txZ.Size = new System.Drawing.Size(56, 22);
-            this.txZ.TabIndex = 28;
-            this.txZ.Text = "1";
-            this.txZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txZ.WordWrap = false;
-            this.txZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // txY
-            // 
-            this.txY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txY.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txY.Location = new System.Drawing.Point(8, 46);
-            this.txY.Name = "txY";
-            this.txY.Size = new System.Drawing.Size(56, 22);
-            this.txY.TabIndex = 24;
-            this.txY.Text = "1";
-            this.txY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txY.WordWrap = false;
-            this.txY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
             // Presets
             // 
             this.Presets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
@@ -1765,9 +1464,9 @@
             // Cooldown
             // 
             this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Cooldown.Controls.Add(this.label13);
             this.Cooldown.Controls.Add(this.label47);
             this.Cooldown.Controls.Add(this.groupBox8);
-            this.Cooldown.Controls.Add(this.groupBox11);
             this.Cooldown.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.Cooldown.Location = new System.Drawing.Point(4, 22);
             this.Cooldown.Name = "Cooldown";
@@ -1777,6 +1476,7 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.label38);
             this.groupBox8.Controls.Add(this.lb2F);
             this.groupBox8.Controls.Add(this.lb2D);
             this.groupBox8.Controls.Add(this.lb2S);
@@ -1802,78 +1502,6 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Keyboard";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.lb2Z);
-            this.groupBox11.Controls.Add(this.lb2Y);
-            this.groupBox11.Controls.Add(this.txCoolZ);
-            this.groupBox11.Controls.Add(this.txCoolY);
-            this.groupBox11.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox11.Location = new System.Drawing.Point(3, 41);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(143, 78);
-            this.groupBox11.TabIndex = 46;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Ultimate";
-            this.toolTip1.SetToolTip(this.groupBox11, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // lb2Z
-            // 
-            this.lb2Z.AutoSize = true;
-            this.lb2Z.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lb2Z.ForeColor = System.Drawing.Color.Orange;
-            this.lb2Z.Location = new System.Drawing.Point(88, 28);
-            this.lb2Z.Name = "lb2Z";
-            this.lb2Z.Size = new System.Drawing.Size(16, 17);
-            this.lb2Z.TabIndex = 36;
-            this.lb2Z.Text = "Z";
-            this.lb2Z.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lb2Y
-            // 
-            this.lb2Y.AutoSize = true;
-            this.lb2Y.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lb2Y.ForeColor = System.Drawing.Color.Orange;
-            this.lb2Y.Location = new System.Drawing.Point(29, 29);
-            this.lb2Y.Name = "lb2Y";
-            this.lb2Y.Size = new System.Drawing.Size(16, 17);
-            this.lb2Y.TabIndex = 32;
-            this.lb2Y.Text = "Y";
-            this.lb2Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txCoolZ
-            // 
-            this.txCoolZ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txCoolZ.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txCoolZ.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txCoolZ.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txCoolZ.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txCoolZ.Location = new System.Drawing.Point(68, 46);
-            this.txCoolZ.Name = "txCoolZ";
-            this.txCoolZ.Size = new System.Drawing.Size(56, 22);
-            this.txCoolZ.TabIndex = 28;
-            this.txCoolZ.Text = "1";
-            this.txCoolZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txCoolZ.WordWrap = false;
-            this.txCoolZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            // 
-            // txCoolY
-            // 
-            this.txCoolY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txCoolY.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txCoolY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txCoolY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txCoolY.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txCoolY.Location = new System.Drawing.Point(8, 46);
-            this.txCoolY.Name = "txCoolY";
-            this.txCoolY.Size = new System.Drawing.Size(56, 22);
-            this.txCoolY.TabIndex = 24;
-            this.txCoolY.Text = "1";
-            this.txCoolY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txCoolY.WordWrap = false;
-            this.txCoolY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label47
             // 
@@ -2109,6 +1737,94 @@
             this.txCoolR.WordWrap = false;
             this.txCoolR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Coral;
+            this.label37.Location = new System.Drawing.Point(161, 11);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(127, 21);
+            this.label37.TabIndex = 45;
+            this.label37.Text = "1. READ GUIDE!";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Coral;
+            this.label11.Location = new System.Drawing.Point(161, 34);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(142, 21);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "2. Go to \"Classes\"";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Orange;
+            this.label12.Location = new System.Drawing.Point(5, 49);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(127, 60);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Set your Castduration\r\nin seconds...\r\n\r\n1 second is minimum!";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Orange;
+            this.label13.Location = new System.Drawing.Point(5, 49);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(127, 60);
+            this.label13.TabIndex = 48;
+            this.label13.Text = "Set your Cooldown \r\nin seconds...\r\n\r\n1 second is minimum!";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Orange;
+            this.label14.Location = new System.Drawing.Point(102, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(162, 15);
+            this.label14.TabIndex = 44;
+            this.label14.Text = "AT MOMENT ONLY QWERTZ";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.Orange;
+            this.label38.Location = new System.Drawing.Point(102, 3);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(162, 15);
+            this.label38.TabIndex = 56;
+            this.label38.Text = "AT MOMENT ONLY QWERTZ";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.Coral;
+            this.label39.Location = new System.Drawing.Point(161, 57);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(196, 21);
+            this.label39.TabIndex = 47;
+            this.label39.Text = "3. Set your Castduration.";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.Coral;
+            this.label40.Location = new System.Drawing.Point(161, 81);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(236, 42);
+            this.label40.TabIndex = 48;
+            this.label40.Text = "3. Set your Cooldown.\r\n    its necessary! 4 All Classes...";
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2138,8 +1854,6 @@
             this.groupBox5.PerformLayout();
             this.SETTINGS.ResumeLayout(false);
             this.SETTINGS.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.HEAL.ResumeLayout(false);
@@ -2148,10 +1862,9 @@
             this.Classes.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.Castduration.ResumeLayout(false);
+            this.Castduration.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.Presets.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -2159,8 +1872,6 @@
             this.Cooldown.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2186,21 +1897,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage Info;
         private System.Windows.Forms.TabPage SETTINGS;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txtQ;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtF;
-        private System.Windows.Forms.TextBox txtD;
-        private System.Windows.Forms.TextBox txtS;
-        private System.Windows.Forms.TextBox txtA;
-        private System.Windows.Forms.TextBox txtR;
-        private System.Windows.Forms.TextBox txtE;
-        private System.Windows.Forms.TextBox txtW;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtRIGHT;
         private System.Windows.Forms.TextBox txtLEFT;
         private System.Windows.Forms.Label label15;
@@ -2230,9 +1930,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDungeon2;
         private System.Windows.Forms.Label label10;
@@ -2250,7 +1948,6 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.CheckBox chBoxActivateF2;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Button btnResetGS;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Button btnInstructions;
         private System.Windows.Forms.TabPage Classes;
@@ -2272,22 +1969,12 @@
         private System.Windows.Forms.Label lbR;
         private System.Windows.Forms.Label lbE;
         private System.Windows.Forms.Label lbW;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.TextBox txZ;
-        private System.Windows.Forms.TextBox txY;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage Castduration;
         private System.Windows.Forms.TabPage Presets;
         private System.Windows.Forms.TabPage Cooldown;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.Label lb2Z;
-        private System.Windows.Forms.Label lb2Y;
-        private System.Windows.Forms.TextBox txCoolZ;
-        private System.Windows.Forms.TextBox txCoolY;
         private System.Windows.Forms.Label lb2F;
         private System.Windows.Forms.Label lb2D;
         private System.Windows.Forms.Label lb2S;
@@ -2304,6 +1991,14 @@
         private System.Windows.Forms.TextBox txCoolW;
         private System.Windows.Forms.TextBox txCoolE;
         private System.Windows.Forms.TextBox txCoolR;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label40;
     }
 }
 
