@@ -341,22 +341,22 @@ namespace PixelAimbot
                 Properties.Settings.Default.dungeontimer = "60";
                 Properties.Settings.Default.left = "LEFT";
                 Properties.Settings.Default.right = "RIGHT";
-                Properties.Settings.Default.q = "1";
-                Properties.Settings.Default.w = "1";
-                Properties.Settings.Default.e = "1";
-                Properties.Settings.Default.r = "1";
-                Properties.Settings.Default.a = "1";
-                Properties.Settings.Default.s = "1";
-                Properties.Settings.Default.d = "1";
-                Properties.Settings.Default.f = "1";
-                Properties.Settings.Default.cQ = "1";
-                Properties.Settings.Default.cW = "1";
-                Properties.Settings.Default.cE = "1";
-                Properties.Settings.Default.cR = "1";
-                Properties.Settings.Default.cA = "1";
-                Properties.Settings.Default.cS = "1";
-                Properties.Settings.Default.cD = "1";
-                Properties.Settings.Default.cF = "1";
+                Properties.Settings.Default.q = "500";
+                Properties.Settings.Default.w = "500";
+                Properties.Settings.Default.e = "500";
+                Properties.Settings.Default.r = "500";
+                Properties.Settings.Default.a = "500";
+                Properties.Settings.Default.s = "500";
+                Properties.Settings.Default.d = "500";
+                Properties.Settings.Default.f = "500";
+                Properties.Settings.Default.cQ = "500";
+                Properties.Settings.Default.cW = "500";
+                Properties.Settings.Default.cE = "500";
+                Properties.Settings.Default.cR = "500";
+                Properties.Settings.Default.cA = "500";
+                Properties.Settings.Default.cS = "500";
+                Properties.Settings.Default.cD = "500";
+                Properties.Settings.Default.cF = "500";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.chboxinstant = false;
@@ -1267,13 +1267,12 @@ namespace PixelAimbot
 
         private async Task SEARCHPORTAL(CancellationToken token)
         {
-            au3.Send("{G}");
-            au3.Send("{G}");
+ 
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-
+               
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
@@ -2067,8 +2066,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -2097,8 +2094,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -2127,8 +2122,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -2157,8 +2150,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -2189,8 +2180,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -2219,8 +2208,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -2250,8 +2237,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -2280,8 +2265,7 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                               
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -2758,8 +2742,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -2789,8 +2771,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -2818,8 +2798,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -2847,8 +2825,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -2926,8 +2902,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -2956,8 +2930,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -2987,8 +2959,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -3017,8 +2987,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -3092,8 +3060,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -3122,8 +3088,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -3152,8 +3116,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -3182,8 +3144,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -3214,8 +3174,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -3244,8 +3202,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -3275,8 +3231,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -3305,8 +3259,7 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -3782,8 +3735,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -3813,8 +3764,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -3842,8 +3791,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -3871,8 +3818,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -3950,8 +3895,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -3980,8 +3923,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -4011,8 +3952,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -4041,8 +3980,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -4116,8 +4053,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -4146,8 +4081,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -4176,8 +4109,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -4206,8 +4137,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -4238,8 +4167,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -4268,8 +4195,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -4299,8 +4224,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -4329,8 +4252,7 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -4807,8 +4729,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -4838,8 +4758,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -4867,8 +4785,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -4896,8 +4812,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -4975,8 +4889,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -5005,8 +4917,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -5036,8 +4946,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -5066,8 +4974,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -5141,8 +5047,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -5171,8 +5075,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -5201,8 +5103,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -5228,11 +5128,9 @@ namespace PixelAimbot
                             if (q.ToString() != "1")
                             {
                                 object[] qCoord = (object[])q;
-                                var sim = new InputSimulator();
+
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -5263,8 +5161,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -5293,8 +5189,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -5324,8 +5218,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -5354,8 +5246,7 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -5928,8 +5819,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -5959,8 +5848,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
                                 _D = false;
                                 D_Cooldown();
                             }
@@ -5988,8 +5875,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -6017,8 +5902,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
                                 _A = false;
                                 A_Cooldown();
                             }
@@ -6096,8 +5979,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -6126,8 +6007,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
                                 _S = false;
                                 S_Cooldown();
                             }
@@ -6157,8 +6036,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -6187,8 +6064,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
                                 _F = false;
                                 F_Cooldown();
                             }
@@ -6262,8 +6137,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -6292,8 +6165,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
                                 _E = false;
                                 E_Cooldown();
                             }
@@ -6322,8 +6193,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
                                 _Q = false;
                                 Q_Cooldown();
                             }
@@ -6352,8 +6221,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -6384,8 +6251,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -6414,8 +6279,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
                                 _W = false;
                                 W_Cooldown();
                             }
@@ -6445,8 +6308,6 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -6475,8 +6336,7 @@ namespace PixelAimbot
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+
                                 _R = false;
                                 R_Cooldown();
                             }
@@ -7259,22 +7119,22 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxActivateF2 = false;
                 Properties.Settings.Default.txtDungeon2 = "15";
                 Properties.Settings.Default.txtDungeon2search = "9";
-                Properties.Settings.Default.cQ = "1";
-                Properties.Settings.Default.cW = "1";
-                Properties.Settings.Default.cE = "1";
-                Properties.Settings.Default.cR = "1";
-                Properties.Settings.Default.cA = "1";
-                Properties.Settings.Default.cS = "1";
-                Properties.Settings.Default.cD = "1";
-                Properties.Settings.Default.cF = "1";
-                Properties.Settings.Default.q = "1";
-                Properties.Settings.Default.w = "1";
-                Properties.Settings.Default.e = "1";
-                Properties.Settings.Default.r = "1";
-                Properties.Settings.Default.a = "1";
-                Properties.Settings.Default.s = "1";
-                Properties.Settings.Default.d = "1";
-                Properties.Settings.Default.f = "1";
+                Properties.Settings.Default.cQ = "500";
+                Properties.Settings.Default.cW = "500";
+                Properties.Settings.Default.cE = "500";
+                Properties.Settings.Default.cR = "500";
+                Properties.Settings.Default.cA = "500";
+                Properties.Settings.Default.cS = "500";
+                Properties.Settings.Default.cD = "500";
+                Properties.Settings.Default.cF = "500";
+                Properties.Settings.Default.q = "500";
+                Properties.Settings.Default.w = "500";
+                Properties.Settings.Default.e = "500";
+                Properties.Settings.Default.r = "500";
+                Properties.Settings.Default.a = "500";
+                Properties.Settings.Default.s = "500";
+                Properties.Settings.Default.d = "500";
+                Properties.Settings.Default.f = "500";
 
                 Properties.Settings.Default.Save();
 
@@ -7344,7 +7204,7 @@ namespace PixelAimbot
 
         public void Q_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolQ.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolQ.Text) * 2);
 
             timer.Elapsed += Q_CooldownEvent;
             timer.AutoReset = false;
@@ -7358,7 +7218,7 @@ namespace PixelAimbot
 
         public void W_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolW.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolW.Text) * 2);
 
             timer.Elapsed += W_CooldownEvent;
             timer.AutoReset = false;
@@ -7372,7 +7232,7 @@ namespace PixelAimbot
 
         public void E_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolE.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolE.Text) * 2);
 
             timer.Elapsed += E_CooldownEvent;
             timer.AutoReset = false;
@@ -7386,7 +7246,7 @@ namespace PixelAimbot
 
         public void R_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolR.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolR.Text) * 2);
 
             timer.Elapsed += R_CooldownEvent;
             timer.AutoReset = false;
@@ -7400,7 +7260,7 @@ namespace PixelAimbot
 
         public void A_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolA.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolA.Text) * 2);
 
             timer.Elapsed += A_CooldownEvent;
             timer.AutoReset = false;
@@ -7414,7 +7274,7 @@ namespace PixelAimbot
 
         public void S_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolS.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolS.Text) * 2);
 
             timer.Elapsed += S_CooldownEvent;
             timer.AutoReset = false;
@@ -7428,7 +7288,7 @@ namespace PixelAimbot
 
         public void D_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolD.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolD.Text) * 2);
 
             timer.Elapsed += D_CooldownEvent;
             timer.AutoReset = false;
@@ -7442,7 +7302,7 @@ namespace PixelAimbot
 
         public void F_Cooldown()
         {
-            timer = new System.Timers.Timer(int.Parse(txCoolF.Text) * 1000);
+            timer = new System.Timers.Timer(int.Parse(txCoolF.Text) * 2);
 
             timer.Elapsed += F_CooldownEvent;
             timer.AutoReset = false;

@@ -18,28 +18,28 @@
       <Value Profile="(Default)">RIGHT</Value>
     </Setting>
     <Setting Name="q" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="w" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="e" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="r" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="a" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="s" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="d" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="f" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="instant" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -87,31 +87,31 @@
       <Value Profile="(Default)">21</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.5.0r</Value>
+      <Value Profile="(Default)">1.5.1r</Value>
     </Setting>
     <Setting Name="cQ" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cW" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cE" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cR" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cA" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cS" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cD" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="cF" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">500</Value>
     </Setting>
   </Settings>
 </SettingsFile>
