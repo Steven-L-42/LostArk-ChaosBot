@@ -40,7 +40,7 @@ namespace PixelAimbot.Classes.Misc
         {
             var sim = PixelAimbot.ChaosBot.inputSimulator;
             sim.Keyboard.KeyPress(key);
-            Thread.Sleep(20)
+            Thread.Sleep(20);
             sim.Keyboard.KeyPress(key);
         }
     }
