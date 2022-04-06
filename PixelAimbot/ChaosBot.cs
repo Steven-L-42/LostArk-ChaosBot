@@ -18,10 +18,22 @@ using System.IO;
 using System.Collections;
 using WindowsInput.Native;
 
+
 namespace PixelAimbot
     {
+
     public partial class ChaosBot : Form
-    {
+        {
+        
+
+          
+                
+                
+
+     
+
+
+
 
 
         /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
@@ -205,6 +217,7 @@ namespace PixelAimbot
 
         public ChaosBot()
         {
+            
             InitializeComponent();
 
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -280,7 +293,7 @@ namespace PixelAimbot
         bool _LOGOUT = false;
 
         private System.Timers.Timer timer;
-        private object rect_vect;
+       
 
         async void btnStart_Click(object sender, EventArgs e)
         {
@@ -6828,7 +6841,8 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
-        
+
+            Thread.Sleep(2000);
         var t1 = Task.Run(() => START(token));
             await Task.WhenAny(new[] { t1 });
         }
@@ -6882,9 +6896,56 @@ namespace PixelAimbot
             Environment.Exit(0);
 
         }
-
-        private void ChaosBot_Load(object sender, EventArgs e)
+        
+        public void ChaosBot_Load(object sender, EventArgs e)
         {
+
+            List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
+            Layout_Keyboard QWERTZ = new Layout_Keyboard
+            {
+                LAYOUTS = "QWERTZ",
+                VK_Q = "Q",
+                VK_W = "W",
+                VK_E = "E",
+                VK_R = "R",
+                VK_A = "A",
+                VK_S = "S",
+                VK_D = "D",
+                VK_F = "F"
+            };
+            LAYOUT.Add(QWERTZ);
+
+            Layout_Keyboard QWERTY = new Layout_Keyboard
+            {
+                LAYOUTS = "QWERTY",
+                VK_Q = "Q",
+                VK_W = "W",
+                VK_E = "E",
+                VK_R = "R",
+                VK_A = "A",
+                VK_S = "S",
+                VK_D = "D",
+                VK_F = "F"
+            };
+            LAYOUT.Add(QWERTY);
+
+            Layout_Keyboard AZERTY = new Layout_Keyboard
+            {
+                LAYOUTS = "AZERTY",
+                VK_Q = "A",
+                VK_W = "Z",
+                VK_E = "E",
+                VK_R = "R",
+                VK_A = "Q",
+                VK_S = "S",
+                VK_D = "D",
+                VK_F = "F"
+            };
+            LAYOUT.Add(AZERTY);
+
+            comboBox1.DataSource = LAYOUT;
+            comboBox1.DisplayMember = "LAYOUTS";
+
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
             txtDungeon.Text = Properties.Settings.Default.dungeontimer;
             txtLEFT.Text = Properties.Settings.Default.left;
@@ -7106,10 +7167,6 @@ namespace PixelAimbot
             catch { }
         }
 
-        private void label36_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnInstructions_Click(object sender, EventArgs e)
         {
@@ -7118,22 +7175,21 @@ namespace PixelAimbot
             
         }
 
-        private void groupBox9_Enter(object sender, EventArgs e)
+        public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Layout_Keyboard currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
+            lbQ.Text = currentLayout.VK_Q;
+            lbW.Text = currentLayout.VK_W;
+            lbE.Text = currentLayout.VK_E;
+            lbR.Text = currentLayout.VK_R;
+            lbA.Text = currentLayout.VK_A;
+            lbS.Text = currentLayout.VK_S;
+            lbD.Text = currentLayout.VK_D;
+            lbF.Text = currentLayout.VK_F;
 
         }
 
-        private void label40_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label39_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label41_Click(object sender, EventArgs e)
+        private void comboBox1_MouseClick(object sender, MouseEventArgs e)
         {
 
         }
