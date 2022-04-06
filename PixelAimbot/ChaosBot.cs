@@ -94,6 +94,8 @@ namespace PixelAimbot
 
         private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
+        public static InputSimulator inputSimulator = new InputSimulator(); 
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -711,10 +713,9 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 3, 5);
-
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _D = false;
                                 D_Cooldown();
@@ -765,9 +766,9 @@ namespace PixelAimbot
                                 object[] aCoord = (object[])a;
 
                                 Layout_Keyboard.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)aCoord[0], (int)aCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _A = false;
                                 A_Cooldown();
@@ -868,9 +869,9 @@ namespace PixelAimbot
                                 object[] sCoord = (object[])s;
 
                                 Layout_Keyboard.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)sCoord[0], (int)sCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _S = false;
                                 S_Cooldown();
@@ -922,9 +923,9 @@ namespace PixelAimbot
                                 object[] fCoord = (object[])f;
 
                                 Layout_Keyboard.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fCoord[0], (int)fCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _F = false;
                                 F_Cooldown();
@@ -979,9 +980,9 @@ namespace PixelAimbot
                                 object[] eCoord = (object[])e;
 
                                 Layout_Keyboard.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)eCoord[0], (int)eCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _E = false;
                                 E_Cooldown();
@@ -1033,9 +1034,9 @@ namespace PixelAimbot
                                 object[] qCoord = (object[])q;
 
                                 Layout_Keyboard.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)qCoord[0], (int)qCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -1087,9 +1088,9 @@ namespace PixelAimbot
                                 object[] wCoord = (object[])w;
 
                                 Layout_Keyboard.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)wCoord[0], (int)wCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _W = false;
                                 W_Cooldown();
@@ -1141,9 +1142,9 @@ namespace PixelAimbot
                                 object[] rCoord = (object[])r;
 
                                 Layout_Keyboard.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)rCoord[0], (int)rCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _R = false;
                                 R_Cooldown();
@@ -1195,9 +1196,9 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Shadowhunter = false;
                             }
@@ -1226,9 +1227,9 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
                                 Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)dCoord[0], (int)dCoord[1] + 80, 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
+                                au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
 
                                 _Paladin = false;
                             }
@@ -1363,7 +1364,7 @@ namespace PixelAimbot
                             CvInvoke.Rectangle(screenCapture,
                                 new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                 new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
+                            
                             double x1 = 963f / myPosition.X;
                             double y1 = 551f / myPosition.Y;
                             token.ThrowIfCancellationRequested();
@@ -1384,7 +1385,7 @@ namespace PixelAimbot
                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal found..."));
 
-                            var sim = new InputSimulator();
+                            var sim = inputSimulator;
 
                             Layout_Keyboard.simulateHold(VirtualKeyCode.VK_G, 50);
                             au3.Send("{G}");
@@ -1531,7 +1532,6 @@ namespace PixelAimbot
                                 CvInvoke.Rectangle(screenCapture,
                                     new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
                                     new MCvScalar(255));
-                                var inputSimulator = new InputSimulator();
                                 double x1 = 963f / myPosition.X;
                                 double y1 = 551f / myPosition.Y;
 
@@ -1563,7 +1563,6 @@ namespace PixelAimbot
                                     CvInvoke.Rectangle(screenCapture,
                                         new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                         new MCvScalar(255));
-                                    var inputSimulator = new InputSimulator();
                                     double x1 = 963f / myPosition.X;
                                     double y1 = 551f / myPosition.Y;
 
@@ -1595,7 +1594,6 @@ namespace PixelAimbot
                                         CvInvoke.Rectangle(screenCapture,
                                             new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
                                             new MCvScalar(255));
-                                        var inputSimulator = new InputSimulator();
                                         double x1 = 963f / myPosition.X;
                                         double y1 = 551f / myPosition.Y;
 
@@ -2635,7 +2633,6 @@ namespace PixelAimbot
                             CvInvoke.Rectangle(screenCapture,
                                 new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
                                 new MCvScalar(255));
-                            var inputSimulator = new InputSimulator();
                             double x1 = 963f / myPosition.X;
                             double y1 = 551f / myPosition.Y;
 

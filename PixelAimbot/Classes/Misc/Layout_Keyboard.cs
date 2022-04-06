@@ -25,7 +25,7 @@ namespace PixelAimbot.Classes.Misc
 
         public static void simulateHold(VirtualKeyCode key, int duration)
         {
-            var sim = new InputSimulator();
+            var sim = PixelAimbot.ChaosBot.inputSimulator;
             for (int t = 0; t < duration; t++)
             {
                 sim.Keyboard.KeyDown(key);
@@ -33,6 +33,14 @@ namespace PixelAimbot.Classes.Misc
             }
 
             sim.Keyboard.KeyUp(key);
+        }
+
+        public static void simulateDoubleClick(VirtualKeyCode key)
+        {
+            var sim = PixelAimbot.ChaosBot.inputSimulator;
+            sim.Keyboard.KeyPress(key);
+            Thread.Sleep(20);
+            sim.Keyboard.KeyPress(key);
         }
     }
 }
