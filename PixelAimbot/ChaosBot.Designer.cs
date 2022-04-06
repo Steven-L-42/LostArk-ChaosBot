@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChaosBot));
             this.lbClose = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new PixelAimbot.Classes.Misc.CustomTabs();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnInstructions = new System.Windows.Forms.Button();
@@ -92,7 +92,7 @@
             this.txtInstant = new System.Windows.Forms.TextBox();
             this.checkBoxInstant = new System.Windows.Forms.CheckBox();
             this.Classes = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabControl2 = new PixelAimbot.Classes.Misc.CustomTabs();
             this.Castduration = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -196,28 +196,41 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.ActiveColor = System.Drawing.Color.Orange;
+            this.tabControl1.AllowDrop = true;
+            this.tabControl1.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tabControl1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.tabControl1.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
+            this.tabControl1.ClosingMessage = null;
             this.tabControl1.Controls.Add(this.STARTEXIT);
             this.tabControl1.Controls.Add(this.Info);
             this.tabControl1.Controls.Add(this.SETTINGS);
             this.tabControl1.Controls.Add(this.HEAL);
             this.tabControl1.Controls.Add(this.Classes);
-            this.tabControl1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 33);
+            this.tabControl1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.tabControl1.HorizontalLineColor = System.Drawing.Color.Orange;
+            this.tabControl1.ItemSize = new System.Drawing.Size(240, 16);
+            this.tabControl1.Location = new System.Drawing.Point(12, 36);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(3, 6);
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SelectedTextColor = System.Drawing.Color.Black;
+            this.tabControl1.ShowClosingButton = false;
+            this.tabControl1.ShowClosingMessage = false;
             this.tabControl1.Size = new System.Drawing.Size(426, 174);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 9;
+            this.tabControl1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // STARTEXIT
             // 
-            this.STARTEXIT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.STARTEXIT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.STARTEXIT.Controls.Add(this.groupBox1);
             this.STARTEXIT.Controls.Add(this.groupBox2);
-            this.STARTEXIT.Location = new System.Drawing.Point(4, 22);
+            this.STARTEXIT.Location = new System.Drawing.Point(4, 20);
             this.STARTEXIT.Name = "STARTEXIT";
             this.STARTEXIT.Padding = new System.Windows.Forms.Padding(3);
-            this.STARTEXIT.Size = new System.Drawing.Size(418, 148);
+            this.STARTEXIT.Size = new System.Drawing.Size(418, 150);
             this.STARTEXIT.TabIndex = 0;
             this.STARTEXIT.Text = "Start/Exit";
             // 
@@ -501,11 +514,11 @@
             // 
             // Info
             // 
-            this.Info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.Info.Controls.Add(this.groupBox5);
-            this.Info.Location = new System.Drawing.Point(4, 22);
+            this.Info.Location = new System.Drawing.Point(4, 20);
             this.Info.Name = "Info";
-            this.Info.Size = new System.Drawing.Size(418, 148);
+            this.Info.Size = new System.Drawing.Size(418, 150);
             this.Info.TabIndex = 3;
             this.Info.Text = "StageSettings";
             // 
@@ -724,7 +737,7 @@
             // 
             // SETTINGS
             // 
-            this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.SETTINGS.Controls.Add(this.label40);
             this.SETTINGS.Controls.Add(this.label39);
             this.SETTINGS.Controls.Add(this.label11);
@@ -732,9 +745,9 @@
             this.SETTINGS.Controls.Add(this.groupBox6);
             this.SETTINGS.Controls.Add(this.label2);
             this.SETTINGS.Controls.Add(this.label18);
-            this.SETTINGS.Location = new System.Drawing.Point(4, 22);
+            this.SETTINGS.Location = new System.Drawing.Point(4, 20);
             this.SETTINGS.Name = "SETTINGS";
-            this.SETTINGS.Size = new System.Drawing.Size(418, 148);
+            this.SETTINGS.Size = new System.Drawing.Size(418, 150);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
             // 
@@ -876,9 +889,9 @@
             // 
             this.HEAL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.HEAL.Controls.Add(this.groupBox4);
-            this.HEAL.Location = new System.Drawing.Point(4, 22);
+            this.HEAL.Location = new System.Drawing.Point(4, 20);
             this.HEAL.Name = "HEAL";
-            this.HEAL.Size = new System.Drawing.Size(418, 148);
+            this.HEAL.Size = new System.Drawing.Size(418, 150);
             this.HEAL.TabIndex = 2;
             this.HEAL.Text = "Heal-Potions";
             // 
@@ -1000,38 +1013,51 @@
             // 
             // Classes
             // 
-            this.Classes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Classes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.Classes.Controls.Add(this.tabControl2);
-            this.Classes.Location = new System.Drawing.Point(4, 22);
+            this.Classes.Location = new System.Drawing.Point(4, 20);
             this.Classes.Name = "Classes";
-            this.Classes.Size = new System.Drawing.Size(418, 148);
+            this.Classes.Size = new System.Drawing.Size(418, 150);
             this.Classes.TabIndex = 5;
             this.Classes.Text = "Classes";
             // 
             // tabControl2
             // 
+            this.tabControl2.ActiveColor = System.Drawing.Color.Orange;
+            this.tabControl2.AllowDrop = true;
+            this.tabControl2.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tabControl2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.tabControl2.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
+            this.tabControl2.ClosingMessage = null;
             this.tabControl2.Controls.Add(this.Castduration);
             this.tabControl2.Controls.Add(this.Cooldown);
             this.tabControl2.Controls.Add(this.Presets);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.tabControl2.HorizontalLineColor = System.Drawing.Color.Orange;
+            this.tabControl2.ItemSize = new System.Drawing.Size(220, 16);
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(418, 148);
+            this.tabControl2.SelectedTextColor = System.Drawing.Color.Black;
+            this.tabControl2.ShowClosingButton = false;
+            this.tabControl2.ShowClosingMessage = false;
+            this.tabControl2.Size = new System.Drawing.Size(418, 150);
             this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl2.TabIndex = 13;
+            this.tabControl2.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // Castduration
             // 
-            this.Castduration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Castduration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.Castduration.Controls.Add(this.label12);
             this.Castduration.Controls.Add(this.comboBox1);
             this.Castduration.Controls.Add(this.groupBox9);
             this.Castduration.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Castduration.Location = new System.Drawing.Point(4, 22);
+            this.Castduration.Location = new System.Drawing.Point(4, 20);
             this.Castduration.Name = "Castduration";
             this.Castduration.Padding = new System.Windows.Forms.Padding(3);
-            this.Castduration.Size = new System.Drawing.Size(410, 122);
+            this.Castduration.Size = new System.Drawing.Size(410, 126);
             this.Castduration.TabIndex = 0;
             this.Castduration.Text = "Castduration";
             // 
@@ -1306,14 +1332,14 @@
             // 
             // Cooldown
             // 
-            this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.Cooldown.Controls.Add(this.label13);
             this.Cooldown.Controls.Add(this.label47);
             this.Cooldown.Controls.Add(this.groupBox8);
             this.Cooldown.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Cooldown.Location = new System.Drawing.Point(4, 22);
+            this.Cooldown.Location = new System.Drawing.Point(4, 20);
             this.Cooldown.Name = "Cooldown";
-            this.Cooldown.Size = new System.Drawing.Size(410, 122);
+            this.Cooldown.Size = new System.Drawing.Size(410, 126);
             this.Cooldown.TabIndex = 2;
             this.Cooldown.Text = "Cooldown";
             // 
@@ -1584,13 +1610,13 @@
             // 
             // Presets
             // 
-            this.Presets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.Presets.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.Presets.Controls.Add(this.groupBox3);
             this.Presets.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Presets.Location = new System.Drawing.Point(4, 22);
+            this.Presets.Location = new System.Drawing.Point(4, 20);
             this.Presets.Name = "Presets";
             this.Presets.Padding = new System.Windows.Forms.Padding(3);
-            this.Presets.Size = new System.Drawing.Size(410, 122);
+            this.Presets.Size = new System.Drawing.Size(410, 126);
             this.Presets.TabIndex = 1;
             this.Presets.Text = "Ultimate";
             // 
@@ -1611,7 +1637,7 @@
             this.groupBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(404, 116);
+            this.groupBox3.Size = new System.Drawing.Size(404, 120);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ultimate";
@@ -1781,12 +1807,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(450, 237);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.lbClose);
             this.Controls.Add(this.tabControl1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -1830,7 +1858,6 @@
         #endregion
         private System.Windows.Forms.Label lbClose;
         private System.Windows.Forms.Label lbStatus;
-        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage STARTEXIT;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnPause;
@@ -1918,7 +1945,6 @@
         private System.Windows.Forms.Label lbR;
         private System.Windows.Forms.Label lbE;
         private System.Windows.Forms.Label lbW;
-        private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage Castduration;
         private System.Windows.Forms.TabPage Presets;
         private System.Windows.Forms.TabPage Cooldown;
@@ -1946,6 +1972,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
+        private Classes.Misc.CustomTabs tabControl1;
+        private Classes.Misc.CustomTabs tabControl2;
     }
 }
 

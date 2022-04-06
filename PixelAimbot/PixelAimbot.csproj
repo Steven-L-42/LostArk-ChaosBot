@@ -365,6 +365,9 @@
     <Compile Include="Classes\Misc\CustomProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\Misc\CustomTabs.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>

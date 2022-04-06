@@ -87,7 +87,7 @@
       <Value Profile="(Default)">21</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.5.3r</Value>
+      <Value Profile="(Default)">1.5.2r</Value>
     </Setting>
     <Setting Name="cQ" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>
