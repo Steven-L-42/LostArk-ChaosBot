@@ -1857,6 +1857,7 @@
             this.txCoolZ.Text = "1";
             this.txCoolZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolZ.WordWrap = false;
+            this.txCoolZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolY
             // 
@@ -1872,6 +1873,7 @@
             this.txCoolY.Text = "1";
             this.txCoolY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolY.WordWrap = false;
+            this.txCoolY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label47
             // 
@@ -1993,6 +1995,7 @@
             this.txCoolA.Text = "1";
             this.txCoolA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolA.WordWrap = false;
+            this.txCoolA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolS
             // 
@@ -2008,6 +2011,7 @@
             this.txCoolS.Text = "1";
             this.txCoolS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolS.WordWrap = false;
+            this.txCoolS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolD
             // 
@@ -2023,6 +2027,7 @@
             this.txCoolD.Text = "1";
             this.txCoolD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolD.WordWrap = false;
+            this.txCoolD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolF
             // 
@@ -2038,6 +2043,7 @@
             this.txCoolF.Text = "1";
             this.txCoolF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolF.WordWrap = false;
+            this.txCoolF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolQ
             // 
@@ -2053,6 +2059,7 @@
             this.txCoolQ.Text = "1";
             this.txCoolQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolQ.WordWrap = false;
+            this.txCoolQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolW
             // 
@@ -2068,6 +2075,7 @@
             this.txCoolW.Text = "1";
             this.txCoolW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolW.WordWrap = false;
+            this.txCoolW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolE
             // 
@@ -2083,6 +2091,7 @@
             this.txCoolE.Text = "1";
             this.txCoolE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolE.WordWrap = false;
+            this.txCoolE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // txCoolR
             // 
@@ -2098,6 +2107,7 @@
             this.txCoolR.Text = "1";
             this.txCoolR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txCoolR.WordWrap = false;
+            this.txCoolR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // ChaosBot
             // 
