@@ -712,7 +712,7 @@ namespace PixelAimbot
                             if (ds.ToString() != "1")
                             {
                                 object[] dsCoord = (object[])ds;
-                                currentLayout.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(VirtualKeyCode.VK_D, int.Parse(txD.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -765,7 +765,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -868,7 +868,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -922,7 +922,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -979,7 +979,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1033,7 +1033,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1087,7 +1087,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1141,7 +1141,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text));
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
                                 au3.MouseClick("" + txtRIGHT.Text + "", 3, 5);
@@ -1784,7 +1784,7 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
 
-                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text) );
 
                                 _D = false;
                                 D_Cooldown();
@@ -1814,7 +1814,7 @@ namespace PixelAimbot
                             {
                                 object[] dsCoord = (object[])ds;
 
-                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.D, int.Parse(txD.Text));
 
                                 _D = false;
                                 D_Cooldown();
@@ -1865,7 +1865,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text));
 
                                 _A = false;
                                 A_Cooldown();
@@ -1892,7 +1892,7 @@ namespace PixelAimbot
                             {
                                 object[] aCoord = (object[])a;
 
-                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.A, int.Parse(txA.Text));
 
                                 _A = false;
                                 A_Cooldown();
@@ -1993,7 +1993,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text));
 
                                 _S = false;
                                 S_Cooldown();
@@ -2021,7 +2021,7 @@ namespace PixelAimbot
                             {
                                 object[] sCoord = (object[])s;
 
-                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.S, int.Parse(txS.Text));
 
                                 _S = false;
                                 S_Cooldown();
@@ -2073,7 +2073,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text));
 
                                 _F = false;
                                 F_Cooldown();
@@ -2101,7 +2101,7 @@ namespace PixelAimbot
                             {
                                 object[] fCoord = (object[])f;
 
-                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.F, int.Parse(txF.Text));
 
                                 _F = false;
                                 F_Cooldown();
@@ -2156,7 +2156,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text));
 
                                 _E = false;
                                 E_Cooldown();
@@ -2184,7 +2184,7 @@ namespace PixelAimbot
                             {
                                 object[] eCoord = (object[])e;
 
-                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.E, int.Parse(txE.Text));
 
                                 _E = false;
                                 E_Cooldown();
@@ -2235,7 +2235,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text));
 
                                 _Q = false;
                                 Q_Cooldown();
@@ -2263,7 +2263,7 @@ namespace PixelAimbot
                             {
                                 object[] qCoord = (object[])q;
 
-                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.Q, int.Parse(txQ.Text));
 
 
                                 _Q = false;
@@ -2316,7 +2316,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text));
 
                                 _W = false;
                                 W_Cooldown();
@@ -2344,7 +2344,7 @@ namespace PixelAimbot
                             {
                                 object[] wCoord = (object[])w;
 
-                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.W, int.Parse(txW.Text));
 
                                 _W = false;
                                 W_Cooldown();
@@ -2396,7 +2396,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text));
 
                                 _R = false;
                                 R_Cooldown();
@@ -2424,7 +2424,7 @@ namespace PixelAimbot
                             {
                                 object[] rCoord = (object[])r;
 
-                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text) / 10);
+                                currentLayout.simulateHold(currentLayout.R, int.Parse(txR.Text));
 
                                
                                 _R = false;
