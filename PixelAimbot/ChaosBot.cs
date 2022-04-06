@@ -576,7 +576,7 @@ namespace PixelAimbot
 
                         if (chBoxBerserker.Checked == true && _Berserker == true)
                         {
-                            Layout_Keyboard.simulateHold(currentLayout.Z, 50);
+                            Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Z, 50);
 
                             _Berserker = false;
                         }
@@ -680,7 +680,7 @@ namespace PixelAimbot
                             {
                                 object[] dCoord = (object[])d;
 
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 _Shadowhunter = false;
                             }
                         }
@@ -707,7 +707,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
                                 _Paladin = false;
                             }
                         }
@@ -1060,7 +1060,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Shadowhunter = false;
                             }
@@ -1088,7 +1088,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Paladin = false;
                             }
@@ -1605,7 +1605,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Shadowhunter = false;
                             }
@@ -1633,7 +1633,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Paladin = false;
                             }
@@ -2209,7 +2209,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Shadowhunter = false;
                             }
@@ -2237,7 +2237,7 @@ namespace PixelAimbot
                             if (d.ToString() != "1")
                             {
                                 object[] dCoord = (object[])d;
-                                Layout_Keyboard.simulateHold(currentLayout.Y, 50);
+                                Layout_Keyboard.simulateHold(VirtualKeyCode.VK_Y, 50);
 
                                 _Paladin = false;
                             }
@@ -2866,7 +2866,6 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_A,
                 S = VirtualKeyCode.VK_S,
-
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F,
             };
@@ -2881,7 +2880,6 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_A,
                 S = VirtualKeyCode.VK_S,
-
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F,
             };
@@ -2896,7 +2894,6 @@ namespace PixelAimbot
                 R = VirtualKeyCode.VK_R,
                 A = VirtualKeyCode.VK_Q,
                 S = VirtualKeyCode.VK_S,
-
                 D = VirtualKeyCode.VK_D,
                 F = VirtualKeyCode.VK_F
             };
