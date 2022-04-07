@@ -257,7 +257,7 @@ namespace PixelAimbot
             }
             else
             {
-                Properties.Settings.Default.dungeontimer = "60";
+                Properties.Settings.Default.dungeontimer = "65";
                 Properties.Settings.Default.left = "LEFT";
                 Properties.Settings.Default.right = "RIGHT";
                 Properties.Settings.Default.q = "500";
@@ -288,7 +288,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.RestartTimer = "25";
                 Properties.Settings.Default.chBoxSaveAll = false;
                 Properties.Settings.Default.chBoxActivateF2 = false;
-                Properties.Settings.Default.txtDungeon2 = "15";
+                Properties.Settings.Default.txtDungeon2 = "18";
                 Properties.Settings.Default.txtDungeon2search = "9";
                 Properties.Settings.Default.Save();
             }
@@ -4105,7 +4105,7 @@ namespace PixelAimbot
         {
             try
             {
-                Properties.Settings.Default.dungeontimer = "60";
+                Properties.Settings.Default.dungeontimer = "65";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.chboxinstant = false;
@@ -4118,7 +4118,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.RestartTimer = "25";
                 Properties.Settings.Default.chBoxSaveAll = false;
                 Properties.Settings.Default.chBoxActivateF2 = false;
-                Properties.Settings.Default.txtDungeon2 = "15";
+                Properties.Settings.Default.txtDungeon2 = "18";
                 Properties.Settings.Default.txtDungeon2search = "9";
                 Properties.Settings.Default.cQ = "500";
                 Properties.Settings.Default.cW = "500";

@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dungeontimer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">60</Value>
+      <Value Profile="(Default)">65</Value>
     </Setting>
     <Setting Name="left" Type="System.String" Scope="User">
       <Value Profile="(Default)">LEFT</Value>
@@ -84,10 +84,10 @@
       <Value Profile="(Default)">9</Value>
     </Setting>
     <Setting Name="txtDungeon2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">21</Value>
+      <Value Profile="(Default)">18</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.5.2r</Value>
+      <Value Profile="(Default)">1.5.4r</Value>
     </Setting>
     <Setting Name="cQ" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>

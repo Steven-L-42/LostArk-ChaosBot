@@ -1381,7 +1381,7 @@
             this.tabControl1.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.tabControl1.HorizontalLineColor = System.Drawing.Color.Orange;
             this.tabControl1.ItemSize = new System.Drawing.Size(240, 16);
-            this.tabControl1.Location = new System.Drawing.Point(12, 36);
+            this.tabControl1.Location = new System.Drawing.Point(12, 33);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(3, 6);
             this.tabControl1.SelectedIndex = 0;
@@ -1672,7 +1672,7 @@
             // 
             // HEAL
             // 
-            this.HEAL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.HEAL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.HEAL.Controls.Add(this.groupBox4);
             this.HEAL.Location = new System.Drawing.Point(4, 20);
             this.HEAL.Name = "HEAL";

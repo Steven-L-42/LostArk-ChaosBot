@@ -49,7 +49,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        [global::System.Configuration.DefaultSettingValueAttribute("65")]
         public string dungeontimer {
             get {
                 return ((string)(this["dungeontimer"]));
@@ -349,7 +349,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("21")]
+        [global::System.Configuration.DefaultSettingValueAttribute("18")]
         public string txtDungeon2 {
             get {
                 return ((string)(this["txtDungeon2"]));
@@ -361,7 +361,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.5.2r")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.5.4r")]
         public string version {
             get {
                 return ((string)(this["version"]));
