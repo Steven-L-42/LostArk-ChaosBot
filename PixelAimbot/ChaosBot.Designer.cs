@@ -148,6 +148,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Presets = new System.Windows.Forms.TabPage();
+            this.timerAccess = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1779,6 +1780,11 @@
             this.Presets.TabIndex = 1;
             this.Presets.Text = "Ultimate";
             // 
+            // timerAccess
+            // 
+            this.timerAccess.Interval = 1000;
+            this.timerAccess.Tick += new System.EventHandler(this.timerAccess_Tick);
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1952,6 +1958,7 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Timer timerAccess;
     }
 }
 

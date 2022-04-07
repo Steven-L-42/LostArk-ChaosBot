@@ -105,6 +105,27 @@ namespace PixelAimbot.Classes.Auth
                 return false;
             }
         }
+
+        public static string CheckAccessMainForm(byte[] response)
+        {
+            try
+            {
+                var responseString = Encoding.Default.GetString(response);
+                PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
+
+                return PixelAimbot.frmLogin.LicenceInformations["message"].ToString();
+            }
+            catch (WebException)
+            {
+                
+                return "false";
+            }
+            catch (Exception ex)
+            {
+                
+                return "false";
+            }
+        }
         
     }
 }

@@ -4455,5 +4455,10 @@ namespace PixelAimbot
         {
             _F = true;
         }
+
+        private void timerAccess_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
