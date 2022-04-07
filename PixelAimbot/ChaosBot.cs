@@ -2186,7 +2186,7 @@ namespace PixelAimbot
                 _F = true;
                 _Y = true;
                 _Z = true;
-                int fightSequence = 1;
+              
 
                 try
                 {
@@ -3303,7 +3303,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                
+               
                 fightSequence++;
             if (fightSequence == 6)
             {
