@@ -115,7 +115,7 @@
             this.txtY = new System.Windows.Forms.TextBox();
             this.chBoxBerserker = new System.Windows.Forms.CheckBox();
             this.txtBerserker = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new PixelAimbot.Classes.Misc.CustomTabs();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnPause = new System.Windows.Forms.Button();
@@ -140,7 +140,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.HEAL = new System.Windows.Forms.TabPage();
             this.Classes = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new PixelAimbot.Classes.Misc.CustomTabs();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.Castduration = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -1366,31 +1366,20 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.ActiveColor = System.Drawing.Color.Orange;
             this.tabControl1.AllowDrop = true;
-            this.tabControl1.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.tabControl1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.tabControl1.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
-            this.tabControl1.ClosingMessage = null;
             this.tabControl1.Controls.Add(this.STARTEXIT);
             this.tabControl1.Controls.Add(this.Info);
             this.tabControl1.Controls.Add(this.SETTINGS);
             this.tabControl1.Controls.Add(this.HEAL);
             this.tabControl1.Controls.Add(this.Classes);
             this.tabControl1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.tabControl1.HorizontalLineColor = System.Drawing.Color.Orange;
             this.tabControl1.ItemSize = new System.Drawing.Size(240, 16);
             this.tabControl1.Location = new System.Drawing.Point(12, 33);
             this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(3, 6);
+            this.tabControl1.Padding = new System.Drawing.Point(3, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.SelectedTextColor = System.Drawing.Color.Black;
-            this.tabControl1.ShowClosingButton = false;
-            this.tabControl1.ShowClosingMessage = false;
             this.tabControl1.Size = new System.Drawing.Size(426, 174);
             this.tabControl1.TabIndex = 9;
-            this.tabControl1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // STARTEXIT
             // 
@@ -1692,29 +1681,18 @@
             // 
             // tabControl2
             // 
-            this.tabControl2.ActiveColor = System.Drawing.Color.Orange;
             this.tabControl2.AllowDrop = true;
-            this.tabControl2.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.tabControl2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.tabControl2.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
-            this.tabControl2.ClosingMessage = null;
             this.tabControl2.Controls.Add(this.Castduration);
             this.tabControl2.Controls.Add(this.Cooldown);
             this.tabControl2.Controls.Add(this.Presets);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.tabControl2.HorizontalLineColor = System.Drawing.Color.Orange;
             this.tabControl2.ItemSize = new System.Drawing.Size(220, 16);
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.SelectedTextColor = System.Drawing.Color.Black;
-            this.tabControl2.ShowClosingButton = false;
-            this.tabControl2.ShowClosingMessage = false;
             this.tabControl2.Size = new System.Drawing.Size(418, 150);
             this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl2.TabIndex = 13;
-            this.tabControl2.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // Castduration
             // 
@@ -1972,8 +1950,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
-        private Classes.Misc.CustomTabs tabControl1;
-        private Classes.Misc.CustomTabs tabControl2;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
 

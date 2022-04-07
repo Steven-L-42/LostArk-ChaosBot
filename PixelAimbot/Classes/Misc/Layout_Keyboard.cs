@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using WindowsInput;
+﻿using System.Threading;
 using WindowsInput.Native;
 
 namespace PixelAimbot.Classes.Misc
@@ -25,17 +19,14 @@ namespace PixelAimbot.Classes.Misc
 
         public void simulateHold(VirtualKeyCode key, int duration)
         {
-           
-              
-                var sim = new InputSimulator();
-                for (int t = 0; t < duration; t++)
-                {
-                    sim.Keyboard.KeyDown(key);
-                    Thread.Sleep(1);
-                }
+            var sim = PixelAimbot.ChaosBot.inputSimulator;
+            for (int t = 0; t < duration; t++)
+            {
+                sim.Keyboard.KeyDown(key);
+                Thread.Sleep(1);
+            }
 
-                sim.Keyboard.KeyUp(key);    
-
+            sim.Keyboard.KeyUp(key);
         }
 
         public void simulateDoubleClick(VirtualKeyCode key)
