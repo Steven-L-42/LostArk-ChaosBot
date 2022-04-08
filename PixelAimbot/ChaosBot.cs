@@ -99,7 +99,7 @@ namespace PixelAimbot
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
 
-        //  public Priorized_Skills prioSkills;
+       
         public Layout_Keyboard currentLayout;
 
         protected override CreateParams CreateParams
@@ -3025,13 +3025,7 @@ namespace PixelAimbot
                 _FIGHT = true;
 
 
-
-
-
-
-
-
-                // prioSkills.Priorized(txPQ.Text.Key);
+               
 
                 var t4 = Task.Run(() => FIGHT(token));
                 await Task.WhenAny(new[] { t4 });
