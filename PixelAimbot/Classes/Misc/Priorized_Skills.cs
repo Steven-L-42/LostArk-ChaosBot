@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,16 +12,20 @@ namespace PixelAimbot.Classes.Misc
     internal class Priorized_Skills
     {
         private CancellationTokenSource cts = new CancellationTokenSource();
-        public Key A { get; set; }
-        public Key B { get; set; }
-        public Key C { get; set; }
-        public Key D { get; set; }
-        public Key E { get; set; }
-        public Key F { get; set; }
-        public Key G { get; set; }
-        public Key H { get; set; }
+
+        public List<KeyValuePair<VirtualKeyCode, int>> skillset { get; set; } = new Dictionary<VirtualKeyCode, int>()
+        {
+            {VirtualKeyCode.VK_A, 1},
+            {VirtualKeyCode.VK_S, 2},
+            {VirtualKeyCode.VK_D, 3},
+            {VirtualKeyCode.VK_F, 4},
+            {VirtualKeyCode.VK_Q, 5},
+            {VirtualKeyCode.VK_W, 6},
+            {VirtualKeyCode.VK_E, 7},
+            {VirtualKeyCode.VK_R, 8},
+        }.ToList();
         
-        public async void Priorized(Key Key, ChaosBot ChaosBot)
+        public async void Priorized(int Key, ChaosBot ChaosBot)
         {
             try
             {
@@ -38,10 +43,6 @@ namespace PixelAimbot.Classes.Misc
                 // Handle other exceptions
             }
             
-        }
-        public enum Key
-        {
-            A = 1, B = 2, C = 3, D = 4, E = 5, F = 6, G = 7, H = 8
         }
 
         internal void Priorized(System.Windows.Input.Key a)

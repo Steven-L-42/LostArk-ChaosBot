@@ -33,7 +33,7 @@ namespace PixelAimbot
         }
 
         private static readonly Random random = new Random();
-
+        public Rotations rotation = new Rotations();
         /////
         ///
         // 2. Import the RegisterHotKey Method
@@ -99,7 +99,7 @@ namespace PixelAimbot
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
 
-       
+
         public Layout_Keyboard currentLayout;
 
         protected override CreateParams CreateParams
@@ -111,10 +111,10 @@ namespace PixelAimbot
                 return cp;
             }
         }
+        public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
         public ChaosBot()
         {
             InitializeComponent();
-
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
@@ -123,7 +123,7 @@ namespace PixelAimbot
             resourceFolder = applicationFolder;
 
             this.FormBorderStyle = FormBorderStyle.None;
-
+            refreshRotationCombox();
             this.Text = RandomString(15);
             // 3. Register HotKeys
             label15.Text = Properties.Settings.Default.version;
@@ -159,6 +159,20 @@ namespace PixelAimbot
             }
         }
 
+        public void refreshRotationCombox()
+        {
+
+            string[] files = Directory.GetFiles(ConfigPath);
+            comboBoxRotations.Items.Clear();
+            foreach (string file in files)
+            {
+                if (Path.GetFileNameWithoutExtension(file) != "main")
+                {
+                    comboBoxRotations.Items.Add(Path.GetFileNameWithoutExtension(file));
+                }
+            }
+
+        }
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -227,7 +241,7 @@ namespace PixelAimbot
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
-            if (chBoxSaveAll.Checked == true)
+            /*if (chBoxSaveAll.Checked == true)
             {
                 Properties.Settings.Default.dungeontimer = txtDungeon.Text;
                 Properties.Settings.Default.left = txtLEFT.Text;
@@ -302,7 +316,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtDungeon2 = "18";
                 Properties.Settings.Default.txtDungeon2search = "7";
                 Properties.Settings.Default.Save();
-            }
+            }*/
 
             // await Task.Run(new Action(STARTKLICK));
             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
@@ -366,7 +380,6 @@ namespace PixelAimbot
         }
 
         private int fightSequence = 1;
-        private int searchbossSequence = 1;
 
         private void OnTimedEvent2(object source, ElapsedEventArgs e)
         {
@@ -2811,7 +2824,6 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    int searchbossSequence = 1;
 
                     _Shadowhunter = true;
                     _Paladin = true;
@@ -2823,12 +2835,11 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            if (searchbossSequence == 1)
-                            {
+                           
                                 au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
                                 au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                                searchbossSequence++;
-                            }
+                               
+                            
 
 
                             float threshold = 0.7f;
@@ -3025,7 +3036,7 @@ namespace PixelAimbot
                 _FIGHT = true;
 
 
-               
+
 
                 var t4 = Task.Run(() => FIGHT(token));
                 await Task.WhenAny(new[] { t4 });
@@ -3058,7 +3069,51 @@ namespace PixelAimbot
             }
             catch { }
         }
+        private async Task FIGHTNEW(CancellationToken token)
+        {
+            Priorized_Skills SKILLS = new Priorized_Skills();
 
+            foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                    if (ds.ToString() != "1" && _FIGHT == true)
+                    {
+                        object[] dsCoord = (object[])ds;
+
+                        var sim = new InputSimulator();
+                        for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
+                        {
+                            sim.Keyboard.KeyDown(skill.Key);
+                            await Task.Delay(1);
+                        }
+                        sim.Keyboard.KeyUp(skill.Key);
+
+
+                        var td = Task.Run(() => D_Cooldown(token));
+
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
+                        au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+
+        }
         private async Task FIGHT(CancellationToken token)
         {
             try
@@ -4608,6 +4663,7 @@ namespace PixelAimbot
 
                         if (_Q == true && _FIGHT == true)
                         {
+                            for(Priorized_Skills skill = new Priorized_Skills()) { 
                             try
                             {
                                 _Q = false;
@@ -5608,19 +5664,13 @@ namespace PixelAimbot
         {
 
             Priorized_Skills SKILLS = new Priorized_Skills();
+
+            // Todo: Implement this shit into rotation pls <3  
+            /*foreach(KeyValuePair<string, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
             {
-
-                SKILLS.A = Priorized_Skills.Key.A;
-                SKILLS.B = Priorized_Skills.Key.B;
-                SKILLS.C = Priorized_Skills.Key.C;
-                SKILLS.D = Priorized_Skills.Key.D;
-                SKILLS.E = Priorized_Skills.Key.E;
-                SKILLS.F = Priorized_Skills.Key.F;
-                SKILLS.G = Priorized_Skills.Key.G;
-                SKILLS.F = Priorized_Skills.Key.H;
-
-
-            };
+                MessageBox.Show(skill.Key + " " + skill.Value);
+            }
+            */
 
             List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
             Layout_Keyboard QWERTZ = new Layout_Keyboard
@@ -5669,6 +5719,7 @@ namespace PixelAimbot
             comboBox1.DisplayMember = "LAYOUTS";
             currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
+
             txtDungeon.Text = Properties.Settings.Default.dungeontimer;
             txtLEFT.Text = Properties.Settings.Default.left;
             txtRIGHT.Text = Properties.Settings.Default.right;
@@ -6127,64 +6178,56 @@ namespace PixelAimbot
             _F = true;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
+            if (comboBoxRotations.Text != "")
+            {
+                if (comboBoxRotations.Text != "main")
+                {
+                    rotation.dungeontimer = txtDungeon.Text;
+                    rotation.instant = txtInstant.Text;
+                    rotation.potion = txtHeal.Text;
+                    rotation.chboxinstant = checkBoxInstant.Checked;
+                    rotation.chboxheal = checkBoxHeal.Checked;
+                    rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
+                    rotation.autorepair = txtRepair.Text;
+                    rotation.chBoxShadowhunter = chBoxY.Checked;
+                    rotation.chboxPaladin = (bool)chBoxPaladin.Checked;
+                    rotation.chBoxBerserker = chBoxBerserker.Checked;
+                    rotation.RestartTimer = txtRestartTimer.Text;
+                    rotation.chBoxSaveAll = chBoxSaveAll.Checked;
+                    rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
+                    rotation.txtDungeon2search = txtDungeon2search.Text;
+                    rotation.txtDungeon2 = txtDungeon2.Text;
+                    rotation.cQ = txCoolQ.Text;
+                    rotation.cW = txCoolW.Text;
+                    rotation.cE = txCoolE.Text;
+                    rotation.cR = txCoolR.Text;
+                    rotation.cA = txCoolA.Text;
+                    rotation.cS = txCoolS.Text;
+                    rotation.cD = txCoolD.Text;
+                    rotation.cF = txCoolF.Text;
+                    rotation.cQ = txQ.Text;
+                    rotation.cW = txW.Text;
+                    rotation.cE = txE.Text;
+                    rotation.cR = txR.Text;
+                    rotation.cA = txA.Text;
+                    rotation.cS = txS.Text;
+                    rotation.cD = txD.Text;
+                    rotation.cF = txF.Text;
 
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            StreamWriter SA = new StreamWriter(@"config.cfg", false);
-            SA.WriteLine(txtDungeon.Text);
-            SA.WriteLine(txtDungeon2search.Text);
-            SA.WriteLine(txtDungeon2.Text);
-            SA.WriteLine(txtLEFT.Text);
-            SA.WriteLine(txtRIGHT.Text);
-            SA.WriteLine(txtInstant.Text);
-            SA.WriteLine(txtHeal.Text);
-
-            SA.WriteLine(txQ.Text);
-            SA.WriteLine(txW.Text);
-            SA.WriteLine(txE.Text);
-            SA.WriteLine(txR.Text);
-            SA.WriteLine(txA.Text);
-            SA.WriteLine(txS.Text);
-            SA.WriteLine(txD.Text);
-            SA.WriteLine(txF.Text);
-
-            SA.WriteLine(txCoolQ.Text);
-            SA.WriteLine(txCoolW.Text);
-            SA.WriteLine(txCoolE.Text);
-            SA.WriteLine(txCoolR.Text);
-            SA.WriteLine(txCoolA.Text);
-            SA.WriteLine(txCoolS.Text);
-            SA.WriteLine(txCoolD.Text);
-            SA.WriteLine(txCoolF.Text);
-
-            SA.WriteLine(txPQ.Text);
-            SA.WriteLine(txPW.Text);
-            SA.WriteLine(txPE.Text);
-            SA.WriteLine(txPR.Text);
-            SA.WriteLine(txPA.Text);
-            SA.WriteLine(txPS.Text);
-            SA.WriteLine(txPD.Text);
-            SA.WriteLine(txPF.Text);
-
-            SA.WriteLine(txtPaladin.Text);
-            SA.WriteLine(txtBerserker.Text);
-            SA.WriteLine(txtY.Text);
-            SA.Close();
-
+                    rotation.Save(comboBoxRotations.Text);
+                    MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
+                }
+                else
+                {
+                    MessageBox.Show("Rotation can not be named \"main\"");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a name for your Rotation Config!");
+            }
         }
         class READFILE
         {
@@ -6192,50 +6235,51 @@ namespace PixelAimbot
             private string _pathFile;
             private int _index = 0;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonLoadRotation_Click(object sender, EventArgs e)
         {
-            string fileName = @"config.cfg";
-            string[] data = File.ReadAllLines(fileName);
 
-            txtDungeon.Text = data[0];
-            txtDungeon2search.Text = data[1];
-            txtDungeon2.Text = data[2];
-            txtLEFT.Text = data[3];
-            txtRIGHT.Text = data[4];
-            txtInstant.Text = data[5];
-            txtHeal.Text = data[6];
+            rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
+            if (rotation != null)
+            {
 
-            txQ.Text = data[7];
-            txW.Text = data[8];
-            txE.Text = data[9];
-            txR.Text = data[10];
-            txA.Text = data[11];
-            txS.Text = data[12];
-            txD.Text = data[13];
-            txF.Text = data[14];
+                txtDungeon.Text = rotation.dungeontimer;
+                txtInstant.Text = rotation.instant;
+                txtHeal.Text = rotation.potion;
+                checkBoxInstant.Checked = rotation.chboxinstant;
+                checkBoxHeal.Checked = rotation.chboxheal;
+                chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
+                txtRepair.Text = rotation.autorepair;
+                chBoxY.Checked = rotation.chBoxShadowhunter;
+                chBoxPaladin.Checked = rotation.chboxPaladin;
+                chBoxBerserker.Checked = rotation.chBoxBerserker;
+                txtRestartTimer.Text = rotation.RestartTimer;
+                chBoxSaveAll.Checked = rotation.chBoxSaveAll;
+                chBoxActivateF2.Checked = rotation.chBoxActivateF2;
+                txtDungeon2search.Text = rotation.txtDungeon2search;
+                txtDungeon2.Text = rotation.txtDungeon2;
+                txCoolQ.Text = rotation.cQ;
+                txCoolW.Text = rotation.cW;
+                txCoolE.Text = rotation.cE;
+                txCoolR.Text = rotation.cR;
+                txCoolA.Text = rotation.cA;
+                txCoolS.Text = rotation.cS;
+                txCoolD.Text = rotation.cD;
+                txCoolF.Text = rotation.cF;
+                txQ.Text = rotation.cQ;
+                txW.Text = rotation.cW;
+                txE.Text = rotation.cE;
+                txR.Text = rotation.cR;
+                txA.Text = rotation.cA;
+                txS.Text = rotation.cS;
+                txD.Text = rotation.cD;
+                txF.Text = rotation.cF;
+                MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
+            }
+        }
 
-            txCoolQ.Text = data[15];
-            txCoolW.Text = data[16];
-            txCoolE.Text = data[17];
-            txCoolR.Text = data[18];
-            txCoolA.Text = data[19];
-            txCoolS.Text = data[20];
-            txCoolD.Text = data[21];
-            txCoolF.Text = data[22];
-
-            txPQ.Text = data[23];
-            txPW.Text = data[24];
-            txPE.Text = data[25];
-            txPR.Text = data[26];
-            txPA.Text = data[27];
-            txPS.Text = data[28];
-            txPD.Text = data[29];
-            txPF.Text = data[30];
-
-            txtPaladin.Text = data[31];
-            txtBerserker.Text = data[32];
-            txtY.Text = data[33];
-
+        private void comboBoxRotations_MouseClick(object sender, MouseEventArgs e)
+        {
+            refreshRotationCombox();
         }
     }
 }

@@ -358,10 +358,9 @@
       <DependentUpon>ChaosBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Auth\Access.cs" />
+    <Compile Include="Classes\Misc\Config.cs" />
     <Compile Include="Classes\EnemyDetector.cs" />
     <Compile Include="Classes\Misc\BlowFish.cs" />
-    <Compile Include="Classes\Misc\Config.cs" />
-    <Compile Include="Classes\Misc\ConfigurationHandler.cs" />
     <Compile Include="Classes\Misc\CustomProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -403,7 +402,7 @@
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Resources.Designer.cs">

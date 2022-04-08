@@ -36,7 +36,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnInstructions = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
@@ -52,6 +51,7 @@
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
             this.chBoxSaveAll = new System.Windows.Forms.CheckBox();
+            this.buttonSaveRotation = new System.Windows.Forms.Button();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -117,6 +117,15 @@
             this.chBoxBerserker = new System.Windows.Forms.CheckBox();
             this.txtBerserker = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
@@ -133,10 +142,12 @@
             this.txPQ = new System.Windows.Forms.TextBox();
             this.txPE = new System.Windows.Forms.TextBox();
             this.txPR = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonLoadRotation = new System.Windows.Forms.Button();
+            this.labelComboxRotation = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBoxRotations = new System.Windows.Forms.ComboBox();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
@@ -170,15 +181,6 @@
             this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.label49 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -277,22 +279,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.Peru;
-            this.button1.Location = new System.Drawing.Point(11, 111);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 22);
-            this.button1.TabIndex = 61;
-            this.button1.Text = "SAVE";
-            this.toolTip1.SetToolTip(this.button1, "Thats resets everything except gamesettings.");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnInstructions
             // 
@@ -483,6 +469,7 @@
             this.label27.Size = new System.Drawing.Size(87, 15);
             this.label27.TabIndex = 35;
             this.label27.Text = "Dont FORGET!";
+            this.label27.Visible = false;
             // 
             // chBoxSaveAll
             // 
@@ -501,6 +488,23 @@
             this.toolTip1.SetToolTip(this.chBoxSaveAll, "Check this to Save ALL and Click START(F9).\r\nAll saved data loads at start!");
             this.chBoxSaveAll.UseMnemonic = false;
             this.chBoxSaveAll.UseVisualStyleBackColor = false;
+            this.chBoxSaveAll.Visible = false;
+            // 
+            // buttonSaveRotation
+            // 
+            this.buttonSaveRotation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.buttonSaveRotation.FlatAppearance.BorderSize = 0;
+            this.buttonSaveRotation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSaveRotation.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.buttonSaveRotation.ForeColor = System.Drawing.Color.Peru;
+            this.buttonSaveRotation.Location = new System.Drawing.Point(9, 111);
+            this.buttonSaveRotation.Name = "buttonSaveRotation";
+            this.buttonSaveRotation.Size = new System.Drawing.Size(59, 22);
+            this.buttonSaveRotation.TabIndex = 61;
+            this.buttonSaveRotation.Text = "SAVE";
+            this.toolTip1.SetToolTip(this.buttonSaveRotation, "Thats resets everything except gamesettings.");
+            this.buttonSaveRotation.UseVisualStyleBackColor = false;
+            this.buttonSaveRotation.Click += new System.EventHandler(this.buttonSaveRotation_Click);
             // 
             // chBoxActivateF2
             // 
@@ -1451,6 +1455,89 @@
             this.groupBox7.Text = "Rotation";
             this.toolTip1.SetToolTip(this.groupBox7, "Only change if your ingame settings \r\nare different than those given here!");
             // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.ForeColor = System.Drawing.Color.Coral;
+            this.label49.Location = new System.Drawing.Point(32, 107);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(207, 15);
+            this.label49.TabIndex = 50;
+            this.label49.Text = " Activate Checkboxes = DoubleClick";
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(209, 86);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(15, 14);
+            this.checkBox8.TabIndex = 47;
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(147, 86);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(15, 14);
+            this.checkBox7.TabIndex = 46;
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(85, 86);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(15, 14);
+            this.checkBox6.TabIndex = 45;
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(23, 86);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(15, 14);
+            this.checkBox5.TabIndex = 44;
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(209, 41);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(15, 14);
+            this.checkBox4.TabIndex = 43;
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(147, 41);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(15, 14);
+            this.checkBox3.TabIndex = 42;
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(84, 42);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(15, 14);
+            this.checkBox2.TabIndex = 41;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(23, 42);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 40;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -1576,7 +1663,6 @@
             this.txPS.Text = "2";
             this.txPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPS.WordWrap = false;
-            this.txPS.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // txPD
             // 
@@ -1592,7 +1678,6 @@
             this.txPD.Text = "1";
             this.txPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPD.WordWrap = false;
-            this.txPD.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // txPF
             // 
@@ -1608,7 +1693,6 @@
             this.txPF.Text = "8";
             this.txPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPF.WordWrap = false;
-            this.txPF.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // txPW
             // 
@@ -1671,21 +1755,33 @@
             this.txPR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPR.WordWrap = false;
             // 
-            // button2
+            // buttonLoadRotation
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.Peru;
-            this.button2.Location = new System.Drawing.Point(90, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 22);
-            this.button2.TabIndex = 62;
-            this.button2.Text = "LOAD";
-            this.toolTip1.SetToolTip(this.button2, "Thats resets everything except gamesettings.");
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonLoadRotation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.buttonLoadRotation.FlatAppearance.BorderSize = 0;
+            this.buttonLoadRotation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLoadRotation.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.buttonLoadRotation.ForeColor = System.Drawing.Color.Peru;
+            this.buttonLoadRotation.Location = new System.Drawing.Point(94, 111);
+            this.buttonLoadRotation.Name = "buttonLoadRotation";
+            this.buttonLoadRotation.Size = new System.Drawing.Size(59, 22);
+            this.buttonLoadRotation.TabIndex = 62;
+            this.buttonLoadRotation.Text = "LOAD";
+            this.toolTip1.SetToolTip(this.buttonLoadRotation, "Thats resets everything except gamesettings.");
+            this.buttonLoadRotation.UseVisualStyleBackColor = false;
+            this.buttonLoadRotation.Click += new System.EventHandler(this.buttonLoadRotation_Click);
+            // 
+            // labelComboxRotation
+            // 
+            this.labelComboxRotation.AutoSize = true;
+            this.labelComboxRotation.BackColor = System.Drawing.Color.Transparent;
+            this.labelComboxRotation.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelComboxRotation.Location = new System.Drawing.Point(10, 65);
+            this.labelComboxRotation.Name = "labelComboxRotation";
+            this.labelComboxRotation.Size = new System.Drawing.Size(74, 13);
+            this.labelComboxRotation.TabIndex = 64;
+            this.labelComboxRotation.Text = "Rotation ( ? )";
+            this.toolTip1.SetToolTip(this.labelComboxRotation, "Select Config from list or write a Filename into Listbox and press Save!");
             // 
             // tabControl1
             // 
@@ -1718,8 +1814,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.labelComboxRotation);
+            this.groupBox2.Controls.Add(this.comboBoxRotations);
+            this.groupBox2.Controls.Add(this.buttonLoadRotation);
+            this.groupBox2.Controls.Add(this.buttonSaveRotation);
             this.groupBox2.Controls.Add(this.btnPause);
             this.groupBox2.Controls.Add(this.btnStart);
             this.groupBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1729,20 +1827,32 @@
             this.groupBox2.Size = new System.Drawing.Size(160, 139);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Start";
+            this.groupBox2.Text = "Main";
+            // 
+            // comboBoxRotations
+            // 
+            this.comboBoxRotations.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.comboBoxRotations.Font = new System.Drawing.Font("Nirmala UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.comboBoxRotations.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBoxRotations.FormattingEnabled = true;
+            this.comboBoxRotations.Location = new System.Drawing.Point(9, 83);
+            this.comboBoxRotations.Name = "comboBoxRotations";
+            this.comboBoxRotations.Size = new System.Drawing.Size(145, 23);
+            this.comboBoxRotations.TabIndex = 63;
+            this.comboBoxRotations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comboBoxRotations_MouseClick);
             // 
             // btnPause
             // 
             this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.btnPause.FlatAppearance.BorderSize = 0;
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPause.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btnPause.Font = new System.Drawing.Font("Nirmala UI", 7F, System.Drawing.FontStyle.Bold);
             this.btnPause.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnPause.Location = new System.Drawing.Point(11, 67);
+            this.btnPause.Location = new System.Drawing.Point(83, 21);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(138, 38);
+            this.btnPause.Size = new System.Drawing.Size(70, 23);
             this.btnPause.TabIndex = 10;
-            this.btnPause.Text = "STOP = F10";
+            this.btnPause.Text = "STOP (F10)";
             this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
@@ -1751,13 +1861,13 @@
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btnStart.Font = new System.Drawing.Font("Nirmala UI", 7F, System.Drawing.FontStyle.Bold);
             this.btnStart.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnStart.Location = new System.Drawing.Point(11, 24);
+            this.btnStart.Location = new System.Drawing.Point(9, 21);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(138, 38);
+            this.btnStart.Size = new System.Drawing.Size(70, 23);
             this.btnStart.TabIndex = 9;
-            this.btnStart.Text = "START = F9";
+            this.btnStart.Text = "START (F9)";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -2141,89 +2251,6 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(23, 42);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 40;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(84, 42);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 41;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(147, 41);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 42;
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(209, 41);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(15, 14);
-            this.checkBox4.TabIndex = 43;
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(23, 86);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(15, 14);
-            this.checkBox5.TabIndex = 44;
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(85, 86);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(15, 14);
-            this.checkBox6.TabIndex = 45;
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(147, 86);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(15, 14);
-            this.checkBox7.TabIndex = 46;
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(209, 86);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(15, 14);
-            this.checkBox8.TabIndex = 47;
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.Color.Coral;
-            this.label49.Location = new System.Drawing.Point(32, 107);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(207, 15);
-            this.label49.TabIndex = 50;
-            this.label49.Text = " Activate Checkboxes = DoubleClick";
-            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2262,6 +2289,7 @@
             this.tabControl1.ResumeLayout(false);
             this.STARTEXIT.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.Info.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -2421,8 +2449,8 @@
         private System.Windows.Forms.TextBox txPR;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSaveRotation;
+        private System.Windows.Forms.Button buttonLoadRotation;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox7;
@@ -2432,6 +2460,8 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.ComboBox comboBoxRotations;
+        private System.Windows.Forms.Label labelComboxRotation;
     }
 }
 
