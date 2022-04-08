@@ -337,7 +337,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
         public string txtDungeon2search {
             get {
                 return ((string)(this["txtDungeon2search"]));
@@ -361,7 +361,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.5.4r")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.5.7r")]
         public string version {
             get {
                 return ((string)(this["version"]));

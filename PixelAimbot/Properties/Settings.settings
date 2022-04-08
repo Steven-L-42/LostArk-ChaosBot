@@ -81,13 +81,13 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="txtDungeon2search" Type="System.String" Scope="User">
-      <Value Profile="(Default)">9</Value>
+      <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="txtDungeon2" Type="System.String" Scope="User">
       <Value Profile="(Default)">18</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.5.4r</Value>
+      <Value Profile="(Default)">1.5.7r</Value>
     </Setting>
     <Setting Name="cQ" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>

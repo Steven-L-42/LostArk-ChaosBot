@@ -365,9 +365,6 @@
     <Compile Include="Classes\Misc\CustomProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\Misc\CustomTabs.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
@@ -484,10 +481,10 @@
     <Content Include="Resources\minimap.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\mobmask.png">
+    <Content Include="Resources\mobmask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\mob.png">
+    <Content Include="Resources\mob1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\portalentermask1.png">
