@@ -2217,7 +2217,7 @@
             // 
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.Color.Orange;
+            this.label49.ForeColor = System.Drawing.Color.Coral;
             this.label49.Location = new System.Drawing.Point(32, 107);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(207, 15);
