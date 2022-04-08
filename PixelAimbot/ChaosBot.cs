@@ -1,13 +1,10 @@
 ﻿using AutoItX3Lib;
 using Emgu.CV;
-using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using Emgu.CV.Util;
 using PixelAimbot.Classes;
 using PixelAimbot.Classes.Misc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -102,8 +99,9 @@ namespace PixelAimbot
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
 
-
+        //  public Priorized_Skills prioSkills;
         public Layout_Keyboard currentLayout;
+
         protected override CreateParams CreateParams
         {
             get
@@ -2737,7 +2735,7 @@ namespace PixelAimbot
                                     inputSimulator.Mouse.RightButtonClick();
                                 }
                                 au3.Send("{G}");
-                              
+
 
 
                                 au3.Send("{G}");
@@ -2800,7 +2798,7 @@ namespace PixelAimbot
             }
             catch { }
 
-        }            
+        }
 
         private async Task SearchBoss(CancellationToken token)
         {
@@ -2810,62 +2808,62 @@ namespace PixelAimbot
                 await Task.Delay(100, token);
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: search enemy..."));
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
                     int searchbossSequence = 1;
 
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
 
-                for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
-                {
-                    try
+                    for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        if (searchbossSequence == 1)
+                        try
                         {
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                            searchbossSequence++;
-                        }
-                       
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            if (searchbossSequence == 1)
+                            {
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                                searchbossSequence++;
+                            }
 
-                        float threshold = 0.7f;
-                        var enemyTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
-                        var enemyMask =
-                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
-                        var BossTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/boss.png");
-                        var BossMask =
-                        new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
-                        var mobTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/mob1.png");
-                        var mobMask =
-                        new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
-                        var portalTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
-                        var portalMask =
-                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
 
-                        Point myPosition = new Point(150, 128);
-                        Point screenResolution = new Point(1920, 1080);
+                            float threshold = 0.7f;
+                            var enemyTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/enemy.png");
+                            var enemyMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                            var BossTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            var BossMask =
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            var mobTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/mob1.png");
+                            var mobMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
+                            var portalTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                            var portalMask =
+                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
 
-                        var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                        var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                        var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                        var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                        var screenPrinter = new PrintScreen();
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
 
-                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                        var Boss = BossDetector.GetClosestEnemy(screenCapture);
-                        var mob = mobDetector.GetClosestEnemy(screenCapture);
-                        var portal = portalDetector.GetClosestEnemy(screenCapture);
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var screenPrinter = new PrintScreen();
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                            var mob = mobDetector.GetClosestEnemy(screenCapture);
+                            var portal = portalDetector.GetClosestEnemy(screenCapture);
 
 
                             if (Boss.HasValue)
@@ -2965,34 +2963,34 @@ namespace PixelAimbot
                                     }
                                 }
                             }
-                                
-                            
-                        
 
-                        Random random = new Random();
-                        var sleepTime = random.Next(150, 255);
-                        Thread.Sleep(sleepTime);
+
+
+
+                            Random random = new Random();
+                            var sleepTime = random.Next(150, 255);
+                            Thread.Sleep(sleepTime);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
                 FIGHTTIMER(token);
             }
             catch (AggregateException)
@@ -3005,7 +3003,7 @@ namespace PixelAimbot
             }
             catch { }
         }
-       
+
         private async void FIGHTTIMER(CancellationToken token)
         {
             try
@@ -3025,8 +3023,20 @@ namespace PixelAimbot
                 _Y = true;
                 _Z = true;
                 _FIGHT = true;
+
+
+
+
+
+
+
+
+                // prioSkills.Priorized(txPQ.Text.Key);
+
                 var t4 = Task.Run(() => FIGHT(token));
-                await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+                await Task.WhenAny(new[] { t4 });
+
+
                 _FIGHT = false;
 
 
@@ -3036,11 +3046,13 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] { t12 });
                 }
                 else
+                if (fightSequence == 4)
                 {
+
                     var t13 = Task.Run(() => SearchBoss(token));
                     await Task.WhenAny(new[] { t13 });
                 }
-            
+
             }
             catch (AggregateException)
             {
@@ -4959,7 +4971,7 @@ namespace PixelAimbot
                         }
                         catch { }
 
-                       
+
 
                     }
                     catch (AggregateException)
@@ -4991,98 +5003,98 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-
-                for (int i = 0; i <= 15; i++)
                 {
-                    try
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+
+                    for (int i = 0; i <= 15; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Walk to Portal..."));
-
-                        float threshold = 0.7f;
-
-                        var portalTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
-                        var portalMask =
-                        new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
-                        Point myPosition = new Point(150, 128);
-                        Point screenResolution = new Point(1920, 1080);
-
-                        var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
-                        var screenPrinter = new PrintScreen();
-
-                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                        var portal = portalDetector.GetClosestEnemy(screenCapture);
-
-                        if (portal.HasValue)
+                        try
                         {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
-                                new MCvScalar(255));
-                            double x1 = 963f / myPosition.X;
-                            double y1 = 551f / myPosition.Y;
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Walk to Portal..."));
 
-                            var x2 = x1 * portal.Value.X;
-                            var y2 = y1 * portal.Value.Y;
-                            if (x2 <= 963)
-                                x2 = x2 * 0.9f;
-                            else
-                                x2 = x2 * 1.1f;
-                            if (y2 <= 551)
-                                y2 = y2 * 0.9;
-                            else
-                                y2 = y2 * 1.1;
-                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                            if (txtLEFT.Text == "LEFT")
+                            float threshold = 0.7f;
+
+                            var portalTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                            var portalMask =
+                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
+
+                            var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
+                            var screenPrinter = new PrintScreen();
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+                            if (portal.HasValue)
                             {
-                                inputSimulator.Mouse.LeftButtonClick();
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
+                                    new MCvScalar(255));
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * portal.Value.X;
+                                var y2 = y1 * portal.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
                             }
                             else
                             {
-                                inputSimulator.Mouse.RightButtonClick();
                             }
-                        }
-                        else
-                        {
-                        }
 
-                        Random random = new Random();
-                        var sleepTime = random.Next(150, 255);
-                        Thread.Sleep(sleepTime);
+                            Random random = new Random();
+                            var sleepTime = random.Next(150, 255);
+                            Thread.Sleep(sleepTime);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                var t12 = Task.Run(() => FIGHT(token));
+                await Task.WhenAny(new[] { t12 });
             }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-            var t12 = Task.Run(() => FIGHT(token));
-            await Task.WhenAny(new[] { t12 });
-        }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -5103,70 +5115,70 @@ namespace PixelAimbot
 
                 try
                 {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
 
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-                for (int i = 0; i < 1; i++)
-                {
-                    try
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    for (int i = 0; i < 1; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
-
-                        if (walk.ToString() != "1")
+                        try
                         {
-                            object[] walkCoord = (object[])walk;
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
 
-                        if (walk.ToString() != "1")
-                        {
-                            object[] walkCoord = (object[])walk;
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            }
                         }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
+
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                var t6 = Task.Run(() => Exitaccept(token));
+                await Task.WhenAny(new[] { t6 });
             }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-            var t6 = Task.Run(() => Exitaccept(token));
-            await Task.WhenAny(new[] { t6 });
-        }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -5185,106 +5197,106 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                for (int i = 0; i < 1; i++)
                 {
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
 
-                        if (walk.ToString() != "1")
-                        {
-                            object[] walkCoord = (object[])walk;
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                        }
-                    }
-                    catch { }
-                    try
+                    for (int i = 0; i < 1; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
 
-                        if (walk.ToString() != "1")
-                        {
-                            object[] walkCoord = (object[])walk;
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            }
                         }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                        catch { }
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
 
-                        if (walk.ToString() != "1")
-                        {
-                            object[] walkCoord = (object[])walk;
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                            au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            }
                         }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                Thread.Sleep(2000);
+                if (_REPAIR == true)
+                {
+                    Thread.Sleep(2000);
+                    var t7 = Task.Run(() => REPAIR(token));
+                    await Task.WhenAny(new[] { t7 });
+                }
+                else
+                if (_LOGOUT == true)
+                {
+                    var t11 = Task.Run(() => LOGOUT(token));
+                    await Task.WhenAny(new[] { t11 });
+                }
+                else
+                if (_REPAIR == false && _LOGOUT == false)
+                {
+                    await Task.Delay(2000);
+                    var t9 = Task.Run(() => RESTART(token));
+                    await Task.WhenAny(new[] { t9 });
                 }
             }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-
-            Thread.Sleep(2000);
-            if (_REPAIR == true)
-            {
-                Thread.Sleep(2000);
-                var t7 = Task.Run(() => REPAIR(token));
-                await Task.WhenAny(new[] { t7 });
-            }
-            else
-            if (_LOGOUT == true)
-            {
-                var t11 = Task.Run(() => LOGOUT(token));
-                await Task.WhenAny(new[] { t11 });
-            }
-            else
-            if (_REPAIR == false && _LOGOUT == false)
-            {
-                await Task.Delay(2000);
-                var t9 = Task.Run(() => RESTART(token));
-                await Task.WhenAny(new[] { t9 });
-            }
-        }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -5351,123 +5363,123 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                for (int i = 0; i < 1; i++)
                 {
-                    try
-                    {
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        await Task.Delay(25000);
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
 
-                    try
+                    for (int i = 0; i < 1; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                        try
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            await Task.Delay(25000);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
 
-                        au3.MouseClick("LEFT", 1741, 1040, 1, 5);
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    await Task.Delay(2000);
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
 
-                        await Task.Delay(1500);
-                        au3.MouseClick("LEFT", 1684, 823, 1, 5);
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
+                            au3.MouseClick("LEFT", 1741, 1040, 1, 5);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        await Task.Delay(2000);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
 
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                            await Task.Delay(1500);
+                            au3.MouseClick("LEFT", 1684, 823, 1, 5);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
 
-                        await Task.Delay(1500);
-                        au3.MouseClick("LEFT", 1256, 693, 1, 5);
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
 
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        await Task.Delay(1500);
-                        au3.MouseClick("LEFT", 1085, 429, 1, 5);
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        await Task.Delay(1500);
-                        au3.Send("{ESCAPE}");
-                        await Task.Delay(1000);
-                        au3.Send("{ESCAPE}");
+                            await Task.Delay(1500);
+                            au3.MouseClick("LEFT", 1256, 693, 1, 5);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
 
-                        _REPAIR = false;
-                        _REPAIR = false;
-                        REPAIRTIMER();
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            await Task.Delay(1500);
+                            au3.MouseClick("LEFT", 1085, 429, 1, 5);
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            await Task.Delay(1500);
+                            au3.Send("{ESCAPE}");
+                            await Task.Delay(1000);
+                            au3.Send("{ESCAPE}");
+
+                            _REPAIR = false;
+                            _REPAIR = false;
+                            REPAIRTIMER();
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                await Task.Delay(2000);
+                var t10 = Task.Run(() => RESTART2(token));
+                await Task.WhenAny(new[] { t10 });
             }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-            await Task.Delay(2000);
-            var t10 = Task.Run(() => RESTART2(token));
-            await Task.WhenAny(new[] { t10 });
-        }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -5486,44 +5498,44 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                for (int i = 0; i < 1; i++)
                 {
-                    try
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    for (int i = 0; i < 1; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot Paused: Resume in " + int.Parse(txtRestartTimer.Text) + " seconds."));
-                        Thread.Sleep(int.Parse(txtRestartTimer.Text) * 1000);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot Paused: Resume in " + int.Parse(txtRestartTimer.Text) + " seconds."));
+                            Thread.Sleep(int.Parse(txtRestartTimer.Text) * 1000);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
 
 
-            Thread.Sleep(2000);
-            var t1 = Task.Run(() => START(token));
-            await Task.WhenAny(new[] { t1 });
+                Thread.Sleep(2000);
+                var t1 = Task.Run(() => START(token));
+                await Task.WhenAny(new[] { t1 });
             }
             catch (AggregateException)
             {
@@ -5543,42 +5555,42 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                for (int i = 0; i < 1; i++)
                 {
-                    try
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+                    for (int i = 0; i < 1; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
-                        Thread.Sleep(4000);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
+                            Thread.Sleep(4000);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
                     }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                var t1 = Task.Run(() => START(token));
+                await Task.WhenAny(new[] { t1 });
             }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-            var t1 = Task.Run(() => START(token));
-            await Task.WhenAny(new[] { t1 });
-        }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -5600,6 +5612,22 @@ namespace PixelAimbot
 
         public void ChaosBot_Load(object sender, EventArgs e)
         {
+
+            Priorized_Skills SKILLS = new Priorized_Skills();
+            {
+
+                SKILLS.A = Priorized_Skills.Key.A;
+                SKILLS.B = Priorized_Skills.Key.B;
+                SKILLS.C = Priorized_Skills.Key.C;
+                SKILLS.D = Priorized_Skills.Key.D;
+                SKILLS.E = Priorized_Skills.Key.E;
+                SKILLS.F = Priorized_Skills.Key.F;
+                SKILLS.G = Priorized_Skills.Key.G;
+                SKILLS.F = Priorized_Skills.Key.H;
+
+
+            };
+
             List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
             Layout_Keyboard QWERTZ = new Layout_Keyboard
             {
@@ -5728,7 +5756,7 @@ namespace PixelAimbot
         {
             e.Handled = !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-            
+
 
         private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
         {
@@ -5859,10 +5887,10 @@ namespace PixelAimbot
             lb2D.Text = currentLayout.D.ToString().Replace("VK_", "");
             lb2F.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
-        
+
         public async void Q_Cooldown(CancellationToken token)
         {
-            
+
             try
             {
                 for (int i = 0; i <= 1; i++)
@@ -6056,7 +6084,7 @@ namespace PixelAimbot
                     timer.AutoReset = true;
                     timer.Enabled = true;
                 }
-        }
+            }
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -6105,6 +6133,58 @@ namespace PixelAimbot
             _F = true;
         }
 
-      
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            StreamWriter SA = new StreamWriter(@"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt", false);
+            SA.WriteLine(txPQ.Text);
+            SA.WriteLine(txPW.Text);
+            SA.WriteLine(txPE.Text);
+            SA.WriteLine(txPR.Text);
+            SA.WriteLine(txPA.Text);
+            SA.WriteLine(txPS.Text);
+            SA.WriteLine(txPD.Text);
+            SA.WriteLine(txPF.Text);
+            SA.Close();
+
+        }
+        class READFILE
+        {
+            private string[] _fileLines;
+            private string _pathFile;
+            private int _index = 0;
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StreamReader SA = new StreamReader(@"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt");
+            var data = SA.ReadToEnd();
+
+            txPQ.Text = data;
+            txPW.Text = data;      
+            txPE.Text = data;
+            txPR.Text = data; 
+            txPA.Text = data;
+            txPS.Text = data;
+            txPD.Text = data;
+            txPF.Text = data;
+            SA.Close();
+
+           
+
+        }
     }
 }
