@@ -6150,7 +6150,33 @@ namespace PixelAimbot
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            StreamWriter SA = new StreamWriter(@"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt", false);
+            StreamWriter SA = new StreamWriter(@"config.cfg", false);
+            SA.WriteLine(txtDungeon.Text);
+            SA.WriteLine(txtDungeon2search.Text);
+            SA.WriteLine(txtDungeon2.Text);
+            SA.WriteLine(txtLEFT.Text);
+            SA.WriteLine(txtRIGHT.Text);
+            SA.WriteLine(txtInstant.Text);
+            SA.WriteLine(txtHeal.Text);
+
+            SA.WriteLine(txQ.Text);
+            SA.WriteLine(txW.Text);
+            SA.WriteLine(txE.Text);
+            SA.WriteLine(txR.Text);
+            SA.WriteLine(txA.Text);
+            SA.WriteLine(txS.Text);
+            SA.WriteLine(txD.Text);
+            SA.WriteLine(txF.Text);
+
+            SA.WriteLine(txCoolQ.Text);
+            SA.WriteLine(txCoolW.Text);
+            SA.WriteLine(txCoolE.Text);
+            SA.WriteLine(txCoolR.Text);
+            SA.WriteLine(txCoolA.Text);
+            SA.WriteLine(txCoolS.Text);
+            SA.WriteLine(txCoolD.Text);
+            SA.WriteLine(txCoolF.Text);
+
             SA.WriteLine(txPQ.Text);
             SA.WriteLine(txPW.Text);
             SA.WriteLine(txPE.Text);
@@ -6159,6 +6185,10 @@ namespace PixelAimbot
             SA.WriteLine(txPS.Text);
             SA.WriteLine(txPD.Text);
             SA.WriteLine(txPF.Text);
+
+            SA.WriteLine(txtPaladin.Text);
+            SA.WriteLine(txtBerserker.Text);
+            SA.WriteLine(txtY.Text);
             SA.Close();
 
         }
@@ -6170,18 +6200,47 @@ namespace PixelAimbot
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            string fileName = @"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt";
+            string fileName = @"config.cfg";
             string[] data = File.ReadAllLines(fileName);
 
-            txPQ.Text = data[0];
-            txPW.Text = data[1];      
-            txPE.Text = data[2];
-            txPR.Text = data[3]; 
-            txPA.Text = data[4];
-            txPS.Text = data[5];
-            txPD.Text = data[6];
-            txPF.Text = data[7];
-           
+            txtDungeon.Text = data[0];
+            txtDungeon2search.Text = data[1];
+            txtDungeon2.Text = data[2];
+            txtLEFT.Text = data[3];
+            txtRIGHT.Text = data[4];
+            txtInstant.Text = data[5];
+            txtHeal.Text = data[6];
+
+            txQ.Text = data[7];
+            txW.Text = data[8];
+            txE.Text = data[9];
+            txR.Text = data[10];
+            txA.Text = data[11];
+            txS.Text = data[12];
+            txD.Text = data[13];
+            txF.Text = data[14];
+
+            txCoolQ.Text = data[15];
+            txCoolW.Text = data[16];
+            txCoolE.Text = data[17];
+            txCoolR.Text = data[18];
+            txCoolA.Text = data[19];
+            txCoolS.Text = data[20];
+            txCoolD.Text = data[21];
+            txCoolF.Text = data[22];
+
+            txPQ.Text = data[23];
+            txPW.Text = data[24];
+            txPE.Text = data[25];
+            txPR.Text = data[26];
+            txPA.Text = data[27];
+            txPS.Text = data[28];
+            txPD.Text = data[29];
+            txPF.Text = data[30];
+
+            txtPaladin.Text = data[31];
+            txtBerserker.Text = data[32];
+            txtY.Text = data[33];
 
         }
     }
