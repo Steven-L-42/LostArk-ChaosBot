@@ -166,7 +166,7 @@
             this.Cooldown = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.Priorized = new System.Windows.Forms.TabPage();
+            this.Rotation = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
@@ -188,7 +188,7 @@
             this.tabControl2.SuspendLayout();
             this.Casttime.SuspendLayout();
             this.Cooldown.SuspendLayout();
-            this.Priorized.SuspendLayout();
+            this.Rotation.SuspendLayout();
             this.Ultimate.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -784,7 +784,7 @@
             this.groupBox9.Size = new System.Drawing.Size(270, 119);
             this.groupBox9.TabIndex = 43;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Keyboard";
+            this.groupBox9.Text = "Cast-Time";
             this.toolTip1.SetToolTip(this.groupBox9, "Only change if your ingame settings \r\nare different than those given here!");
             // 
             // lbF
@@ -1028,7 +1028,7 @@
             this.groupBox8.Size = new System.Drawing.Size(270, 119);
             this.groupBox8.TabIndex = 45;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Keyboard";
+            this.groupBox8.Text = "Cooldown-Time";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
             // 
             // lb2F
@@ -1429,7 +1429,7 @@
             this.groupBox7.Size = new System.Drawing.Size(270, 119);
             this.groupBox7.TabIndex = 44;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Keyboard";
+            this.groupBox7.Text = "Rotation";
             this.toolTip1.SetToolTip(this.groupBox7, "Only change if your ingame settings \r\nare different than those given here!");
             // 
             // label3
@@ -1981,7 +1981,7 @@
             this.tabControl2.AllowDrop = true;
             this.tabControl2.Controls.Add(this.Casttime);
             this.tabControl2.Controls.Add(this.Cooldown);
-            this.tabControl2.Controls.Add(this.Priorized);
+            this.tabControl2.Controls.Add(this.Rotation);
             this.tabControl2.Controls.Add(this.Ultimate);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.ItemSize = new System.Drawing.Size(220, 16);
@@ -2004,18 +2004,19 @@
             this.Casttime.Padding = new System.Windows.Forms.Padding(3);
             this.Casttime.Size = new System.Drawing.Size(410, 126);
             this.Casttime.TabIndex = 0;
-            this.Casttime.Text = "Casttime";
+            this.Casttime.Text = "Cast-Time";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Orange;
-            this.label12.Location = new System.Drawing.Point(5, 49);
+            this.label12.Location = new System.Drawing.Point(5, 46);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(127, 60);
+            this.label12.Size = new System.Drawing.Size(124, 75);
             this.label12.TabIndex = 37;
-            this.label12.Text = "Set your Castduration\r\nin ms...\r\n\r\n500 ms is minimum!";
+            this.label12.Text = "How long should the \r\nbutton be pressed?\r\nType in milliseconds!\r\n\r\n500 ms is mini" +
+    "mum!";
             // 
             // comboBox1
             // 
@@ -2049,7 +2050,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Orange;
-            this.label13.Location = new System.Drawing.Point(5, 49);
+            this.label13.Location = new System.Drawing.Point(5, 46);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(118, 60);
             this.label13.TabIndex = 48;
@@ -2065,28 +2066,29 @@
             this.label47.TabIndex = 47;
             this.label47.Text = "COOLDOWN TIME";
             // 
-            // Priorized
+            // Rotation
             // 
-            this.Priorized.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.Priorized.Controls.Add(this.label48);
-            this.Priorized.Controls.Add(this.label46);
-            this.Priorized.Controls.Add(this.groupBox7);
-            this.Priorized.Location = new System.Drawing.Point(4, 20);
-            this.Priorized.Name = "Priorized";
-            this.Priorized.Size = new System.Drawing.Size(410, 126);
-            this.Priorized.TabIndex = 3;
-            this.Priorized.Text = "Priorized";
+            this.Rotation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Rotation.Controls.Add(this.label48);
+            this.Rotation.Controls.Add(this.label46);
+            this.Rotation.Controls.Add(this.groupBox7);
+            this.Rotation.Location = new System.Drawing.Point(4, 20);
+            this.Rotation.Name = "Rotation";
+            this.Rotation.Size = new System.Drawing.Size(410, 126);
+            this.Rotation.TabIndex = 3;
+            this.Rotation.Text = "Skill-Rotation";
             // 
             // label48
             // 
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label48.ForeColor = System.Drawing.Color.Orange;
-            this.label48.Location = new System.Drawing.Point(5, 50);
+            this.label48.Location = new System.Drawing.Point(5, 47);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(126, 60);
+            this.label48.Size = new System.Drawing.Size(126, 75);
             this.label48.TabIndex = 49;
-            this.label48.Text = "Set your Priorized\r\nSkills by Numbers...\r\n\r\n1 , 2 , 3 , 4 , 5 , 6 , 7 , 8";
+            this.label48.Text = "Set your own \r\nSkill Rotation!\r\nprioritize by Nr\'s...\r\n\r\n1 , 2 , 3 , 4 , 5 , 6 , " +
+    "7 , 8";
             // 
             // label46
             // 
@@ -2161,8 +2163,8 @@
             this.Casttime.PerformLayout();
             this.Cooldown.ResumeLayout(false);
             this.Cooldown.PerformLayout();
-            this.Priorized.ResumeLayout(false);
-            this.Priorized.PerformLayout();
+            this.Rotation.ResumeLayout(false);
+            this.Rotation.PerformLayout();
             this.Ultimate.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2288,7 +2290,7 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage Priorized;
+        private System.Windows.Forms.TabPage Rotation;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label14;
