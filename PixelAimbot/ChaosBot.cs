@@ -6170,19 +6170,17 @@ namespace PixelAimbot
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            StreamReader SA = new StreamReader(@"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt");
-            var data = SA.ReadToEnd();
+            string fileName = @"C:\Users\ShiiikK\Desktop\Neuer Ordner\test.txt";
+            string[] data = File.ReadAllLines(fileName);
 
-            txPQ.Text = data;
-            txPW.Text = data;      
-            txPE.Text = data;
-            txPR.Text = data; 
-            txPA.Text = data;
-            txPS.Text = data;
-            txPD.Text = data;
-            txPF.Text = data;
-            SA.Close();
-
+            txPQ.Text = data[0];
+            txPW.Text = data[1];      
+            txPE.Text = data[2];
+            txPR.Text = data[3]; 
+            txPA.Text = data[4];
+            txPS.Text = data[5];
+            txPD.Text = data[6];
+            txPF.Text = data[7];
            
 
         }
