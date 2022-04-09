@@ -54,7 +54,7 @@ namespace PixelAimbot
         /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
 
         public string resourceFolder = "";
-
+        Priorized_Skills SKILLS = new Priorized_Skills();
         private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
         {
             int newX = (int)(x / screenResolution.X * 65535);
@@ -243,8 +243,8 @@ namespace PixelAimbot
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
-           
-         
+
+
 
 
             /*if (chBoxSaveAll.Checked == true)
@@ -714,354 +714,354 @@ namespace PixelAimbot
 
 
         private async Task SEARCHPORTAL(CancellationToken token)
-             {
-                 try
-                 {
+        {
+            try
+            {
 
-                     token.ThrowIfCancellationRequested();
-                     await Task.Delay(100, token);
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
 
-                     try
-                     {
-                         token.ThrowIfCancellationRequested();
-                         await Task.Delay(100, token);
-
-
-                         _Shadowhunter = true;
-                         _Paladin = true;
-                         _Berserker = true;
-                         for (int i = 0; i <= 10; i++)
-                         {
-                             try
-                             {
-                                 au3.Send("{G}");
-                                 au3.Send("{G}");
-
-                                 token.ThrowIfCancellationRequested();
-                                 await Task.Delay(100, token);
-                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
-                                 // Tunable variables
-                                 float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
-                                 var enemyTemplate =
-                                     new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
-                                 var enemyMask =
-                                     new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
-                                                                                                     //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
-                                 Point myPosition = new Point(150, 128);
-                                 Point screenResolution = new Point(1920, 1080);
-
-                                 // Main program loop
-                                 var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                                 var screenPrinter = new PrintScreen();
-
-                                 screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                                 var screenCapture = new Image<Bgr, byte>("screen.png");
-                                 var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                                 if (enemy.HasValue)
-                                 {
-                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal found..."));
-                                     token.ThrowIfCancellationRequested();
-                                     await Task.Delay(100, token);
-                                     CvInvoke.Rectangle(screenCapture,
-                                         new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                         new MCvScalar(255));
-
-                                     double x1 = 963f / myPosition.X;
-                                     double y1 = 551f / myPosition.Y;
-                                     token.ThrowIfCancellationRequested();
-                                     await Task.Delay(100, token);
-                                     var x2 = x1 * enemy.Value.X;
-                                     var y2 = y1 * enemy.Value.Y;
-                                     if (x2 <= 963)
-                                         x2 = x2 * 0.68f;
-                                     else
-                                         x2 = x2 * 1.38f;
-                                     if (y2 <= 551)
-                                         y2 = y2 * 0.68;
-                                     else
-                                         y2 = y2 * 1.38;
-                                     token.ThrowIfCancellationRequested();
-                                     await Task.Delay(100, token);
-                                     var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
-
-                                     au3.Send("{G}");
-                                     if (txtLEFT.Text == "LEFT")
-                                     {
-                                         inputSimulator.Mouse.LeftButtonClick();
-                                     }
-                                     else
-                                     {
-                                         inputSimulator.Mouse.RightButtonClick();
-                                     }
-                                     au3.Send("{G}");
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
 
 
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    for (int i = 0; i <= 10; i++)
+                    {
+                        try
+                        {
+                            au3.Send("{G}");
+                            au3.Send("{G}");
 
-                                     au3.Send("{G}");
-                                     if (txtLEFT.Text == "LEFT")
-                                     {
-                                         inputSimulator.Mouse.LeftButtonClick();
-                                     }
-                                     else
-                                     {
-                                         inputSimulator.Mouse.RightButtonClick();
-                                     }
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
+                            // Tunable variables
+                            float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                            var enemyTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
+                            var enemyMask =
+                                new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
+                                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
 
-                                     au3.Send("{G}");
+                            // Main program loop
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var screenPrinter = new PrintScreen();
 
-                                     au3.Send("{G}");
-                                 }
-                                 else
-                                 {
-                                 }
-                             }
-                             catch (AggregateException)
-                             {
-                                 Console.WriteLine("Expected");
-                             }
-                             catch (ObjectDisposedException)
-                             {
-                                 Console.WriteLine("Bug");
-                             }
-                             catch { }
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            if (enemy.HasValue)
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal found..."));
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                    new MCvScalar(255));
 
-                             token.ThrowIfCancellationRequested();
-                             await Task.Delay(100, token);
-                             Random random = new Random();
-                             var sleepTime = random.Next(300, 500);
-                             Thread.Sleep(sleepTime);
-                             au3.Send("{G}");
-                             au3.Send("{G}");
-                         }
-                     }
-                     catch (AggregateException)
-                     {
-                         Console.WriteLine("Expected");
-                     }
-                     catch (ObjectDisposedException)
-                     {
-                         Console.WriteLine("Bug");
-                     }
-                     catch { }
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var x2 = x1 * enemy.Value.X;
+                                var y2 = y1 * enemy.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.68f;
+                                else
+                                    x2 = x2 * 1.38f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.68;
+                                else
+                                    y2 = y2 * 1.38;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
 
-                     var t12 = Task.Run(() => SEARCHBOSS(token));
-                     await Task.WhenAny(new[] { t12 });
-                 }
-                 catch (AggregateException)
-                 {
-                     Console.WriteLine("Expected");
-                 }
-                 catch (ObjectDisposedException)
-                 {
-                     Console.WriteLine("Bug");
-                 }
-                 catch { }
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+                                au3.Send("{G}");
 
-             }
+
+
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                                au3.Send("{G}");
+
+                                au3.Send("{G}");
+                            }
+                            else
+                            {
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        Random random = new Random();
+                        var sleepTime = random.Next(300, 500);
+                        Thread.Sleep(sleepTime);
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                var t12 = Task.Run(() => SEARCHBOSS(token));
+                await Task.WhenAny(new[] { t12 });
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+
+        }
 
         private async Task SEARCHBOSS(CancellationToken token)
-             {
-                 try
-                 {
-                     token.ThrowIfCancellationRequested();
-                     await Task.Delay(100, token);
-                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: search enemy..."));
-                     try
-                     {
-                         token.ThrowIfCancellationRequested();
-                         await Task.Delay(100, token);
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: search enemy..."));
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
 
-                         _Shadowhunter = true;
-                         _Paladin = true;
-                         _Berserker = true;
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
 
-                         for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
-                         {
-                             try
-                             {
-                                 token.ThrowIfCancellationRequested();
-                                 await Task.Delay(100, token);
+                    for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
+                    {
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
 
-                                     au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                                     au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-
-
-
-
-                                 float threshold = 0.7f;
-                                 var enemyTemplate =
-                                 new Image<Bgr, byte>(resourceFolder + "/enemy.png");
-                                 var enemyMask =
-                                 new Image<Bgr, byte>(resourceFolder + "/mask.png");
-                                 var BossTemplate =
-                                 new Image<Bgr, byte>(resourceFolder + "/boss.png");
-                                 var BossMask =
-                                 new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
-                                 var mobTemplate =
-                                 new Image<Bgr, byte>(resourceFolder + "/mob1.png");
-                                 var mobMask =
-                                 new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
-                                 var portalTemplate =
-                                 new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
-                                 var portalMask =
-                                 new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
-
-                                 Point myPosition = new Point(150, 128);
-                                 Point screenResolution = new Point(1920, 1080);
-
-                                 var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                                 var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                                 var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                                 var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                                 var screenPrinter = new PrintScreen();
-
-                                 screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                                 var screenCapture = new Image<Bgr, byte>("screen.png");
-                                 var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                                 var Boss = BossDetector.GetClosestEnemy(screenCapture);
-                                 var mob = mobDetector.GetClosestEnemy(screenCapture);
-                                 var portal = portalDetector.GetClosestEnemy(screenCapture);
-
-
-                                 if (Boss.HasValue)
-                                 {
-                                     CvInvoke.Rectangle(screenCapture,
-                                         new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
-                                         new MCvScalar(255));
-                                     double x1 = 963f / myPosition.X;
-                                     double y1 = 551f / myPosition.Y;
-
-                                     var x2 = x1 * Boss.Value.X;
-                                     var y2 = y1 * Boss.Value.Y;
-                                     if (x2 <= 963)
-                                         x2 = x2 * 0.9f;
-                                     else
-                                         x2 = x2 * 1.1f;
-                                     if (y2 <= 551)
-                                         y2 = y2 * 0.9;
-                                     else
-                                         y2 = y2 * 1.1;
-                                     var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
-                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                     if (txtLEFT.Text == "LEFT")
-                                     {
-                                         inputSimulator.Mouse.LeftButtonClick();
-                                     }
-                                     else
-                                     {
-                                         inputSimulator.Mouse.RightButtonClick();
-                                     }
-                                 }
-                                 else
-                                 {
-                                     if (enemy.HasValue)
-                                     {
-                                         CvInvoke.Rectangle(screenCapture,
-                                             new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                             new MCvScalar(255));
-                                         double x1 = 963f / myPosition.X;
-                                         double y1 = 551f / myPosition.Y;
-
-                                         var x2 = x1 * enemy.Value.X;
-                                         var y2 = y1 * enemy.Value.Y;
-                                         if (x2 <= 963)
-                                             x2 = x2 * 0.9f;
-                                         else
-                                             x2 = x2 * 1.1f;
-                                         if (y2 <= 551)
-                                             y2 = y2 * 0.9;
-                                         else
-                                             y2 = y2 * 1.1;
-                                         var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
-                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                         if (txtLEFT.Text == "LEFT")
-                                         {
-                                             inputSimulator.Mouse.LeftButtonClick();
-                                         }
-                                         else
-                                         {
-                                             inputSimulator.Mouse.RightButtonClick();
-                                         }
-                                     }
-                                     else
-                                     {
-                                         if (mob.HasValue)
-                                         {
-                                             CvInvoke.Rectangle(screenCapture,
-                                                 new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
-                                                 new MCvScalar(255));
-                                             double x1 = 963f / myPosition.X;
-                                             double y1 = 551f / myPosition.Y;
-
-                                             var x2 = x1 * mob.Value.X;
-                                             var y2 = y1 * mob.Value.Y;
-                                             if (x2 <= 963)
-                                                 x2 = x2 * 0.9f;
-                                             else
-                                                 x2 = x2 * 1.1f;
-                                             if (y2 <= 551)
-                                                 y2 = y2 * 0.9;
-                                             else
-                                                 y2 = y2 * 1.1;
-                                             var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
-
-                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                             if (txtLEFT.Text == "LEFT")
-                                             {
-                                                 inputSimulator.Mouse.LeftButtonClick();
-                                             }
-                                             else
-                                             {
-                                                 inputSimulator.Mouse.RightButtonClick();
-                                             }
-                                         }
-                                     }
-                                 }
+                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
 
 
 
 
-                                 Random random = new Random();
-                                 var sleepTime = random.Next(150, 255);
-                                 Thread.Sleep(sleepTime);
-                             }
-                             catch (AggregateException)
-                             {
-                                 Console.WriteLine("Expected");
-                             }
-                             catch (ObjectDisposedException)
-                             {
-                                 Console.WriteLine("Bug");
-                             }
-                             catch { }
-                         }
-                     }
-                     catch (AggregateException)
-                     {
-                         Console.WriteLine("Expected");
-                     }
-                     catch (ObjectDisposedException)
-                     {
-                         Console.WriteLine("Bug");
-                     }
-                     catch { }
+                            float threshold = 0.7f;
+                            var enemyTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/enemy.png");
+                            var enemyMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                            var BossTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            var BossMask =
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            var mobTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/mob1.png");
+                            var mobMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
+                            var portalTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
+                            var portalMask =
+                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
+
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
+
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var screenPrinter = new PrintScreen();
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                            var mob = mobDetector.GetClosestEnemy(screenCapture);
+                            var portal = portalDetector.GetClosestEnemy(screenCapture);
+
+
+                            if (Boss.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new MCvScalar(255));
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+
+                                var x2 = x1 * Boss.Value.X;
+                                var y2 = y1 * Boss.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.9f;
+                                else
+                                    x2 = x2 * 1.1f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.9;
+                                else
+                                    y2 = y2 * 1.1;
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+                            }
+                            else
+                            {
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+                                }
+                                else
+                                {
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
+
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+
+                            Random random = new Random();
+                            var sleepTime = random.Next(150, 255);
+                            Thread.Sleep(sleepTime);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
                 FLOOR2FIGHT_Timer(token);
-                 }
-                 catch (AggregateException)
-                 {
-                     Console.WriteLine("Expected");
-                 }
-                 catch (ObjectDisposedException)
-                 {
-                     Console.WriteLine("Bug");
-                 }
-                 catch { }
-             }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
 
         private async void FLOOR1FIGHT_Timer(CancellationToken token)
         {
@@ -1969,14 +1969,6 @@ namespace PixelAimbot
 
         public void ChaosBot_Load(object sender, EventArgs e)
         {
-
-            Priorized_Skills SKILLS = new Priorized_Skills();
-
-            foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-            {
-                MessageBox.Show(skill.Key + " " + skill.Value);
-            }
-
             List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
             Layout_Keyboard QWERTZ = new Layout_Keyboard
             {
@@ -2343,35 +2335,35 @@ namespace PixelAimbot
             _Q = true;
         }
 
-   
+
 
         private void W_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _W = true;
         }
 
-      
+
 
         private void E_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _E = true;
         }
 
-     
+
 
         private void R_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _R = true;
         }
 
-  
+
 
         private void A_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _A = true;
         }
 
-    
+
 
         private void S_CooldownEvent(object source, ElapsedEventArgs e)
         {
@@ -2393,6 +2385,11 @@ namespace PixelAimbot
 
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
+
+            foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+            {
+                MessageBox.Show(skill.Key + " " + skill.Value);
+            }
             if (comboBoxRotations.Text != "")
             {
                 if (comboBoxRotations.Text != "main")
@@ -2450,7 +2447,7 @@ namespace PixelAimbot
                 MessageBox.Show("Please enter a name for your Rotation Config!");
             }
         }
-        
+
         private void buttonLoadRotation_Click(object sender, EventArgs e)
         {
 
@@ -2511,5 +2508,21 @@ namespace PixelAimbot
         {
 
         }
+
+        private void changeSkillSet(object sender, EventArgs e)
+        {
+           SKILLS.skillset = new Dictionary<VirtualKeyCode, int>()
+            {
+                { VirtualKeyCode.VK_A, int.Parse(txPA.Text) },
+                { VirtualKeyCode.VK_S, int.Parse(txPS.Text)},
+                { VirtualKeyCode.VK_D, int.Parse(txPD.Text)},
+                { VirtualKeyCode.VK_F, int.Parse(txPF.Text)},
+                { VirtualKeyCode.VK_Q, int.Parse(txPQ.Text)},
+                { VirtualKeyCode.VK_W, int.Parse(txPW.Text)},
+                { VirtualKeyCode.VK_E, int.Parse(txPE.Text)},
+                { VirtualKeyCode.VK_R, int.Parse(txPR.Text)},
+            }.ToList();
+        }
+
     }
 }
