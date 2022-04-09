@@ -26,9 +26,10 @@ namespace PixelAimbot
         private bool _start = false;
         private bool _stop = false;
         private bool _REPAIR = false;
-        private bool _Shadowhunter = true;
-        private bool _Berserker = true;
-        private bool _Paladin = true;
+        private bool _Shadowhunter = false;
+        private bool _Berserker = false;
+        private bool _Paladin = false;
+        private bool _Deathblade = false;
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
@@ -238,10 +239,11 @@ namespace PixelAimbot
                 _REPAIR = false;
                 _LOGOUT = false;
 
-                _Shadowhunter = true;
-                _Berserker = true;
-                _Paladin = true;
-              
+                _Shadowhunter = false;
+                _Berserker = false;
+                _Paladin = false;
+                _Deathblade = false;
+
 
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -1079,6 +1081,7 @@ namespace PixelAimbot
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
+                    _Deathblade = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1141,6 +1144,7 @@ namespace PixelAimbot
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
+                    _Deathblade = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1246,11 +1250,7 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                           await Task.Delay(100, token);
-
-                            _Shadowhunter = true;
-                            _Paladin = true;
-                            _Berserker = true;
+                            await Task.Delay(100, token);
 
 
                             if (chBoxY.Checked == true && _Shadowhunter == true && _FIGHT == true)
@@ -1317,6 +1317,44 @@ namespace PixelAimbot
                                         _Paladin = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            else
+                            if (chBoxDeathblade.Checked == true && _Deathblade == true && _FIGHT == true)
+                            {
+                                try
+                                {
+
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+
+                                    object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                                    if (d.ToString() != "1")
+                                    {
+
+
+                                        object[] dCoord = (object[])d;
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Deathblade = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
 
                                     }
                                 }
