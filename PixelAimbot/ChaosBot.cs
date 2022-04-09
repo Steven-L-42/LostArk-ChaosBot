@@ -1223,7 +1223,7 @@ namespace PixelAimbot
 
                             object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
-                            if (fight.ToString() != "1" && _FIGHT == true)
+                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key))
                             {
                                 object[] fightCoord = (object[])fight;
 
@@ -1234,8 +1234,8 @@ namespace PixelAimbot
                                     await Task.Delay(1);
                                 }
                                 sim.Keyboard.KeyUp(skill.Key);
-
-                                //var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
+                                setKeyCooldown(skill.Key); // Set Cooldown
+                                var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
@@ -1526,7 +1526,68 @@ namespace PixelAimbot
             }
             catch { }
         }
-
+        private void setKeyCooldown(VirtualKeyCode key)
+        {
+            switch (key)
+            {
+                case VirtualKeyCode.VK_A:
+                    _A = false;
+                    break;
+                case VirtualKeyCode.VK_S:
+                    _S = false;
+                    break;
+                case VirtualKeyCode.VK_D:
+                    _D = false;
+                    break;
+                case VirtualKeyCode.VK_F:
+                    _F = false;
+                    break;
+                case VirtualKeyCode.VK_Q:
+                    _Q = false;
+                    break;
+                case VirtualKeyCode.VK_W:
+                    _W = false;
+                    break;
+                case VirtualKeyCode.VK_E:
+                    _E = false;
+                    break;
+                case VirtualKeyCode.VK_R:
+                    _R = false;
+                    break;
+            }
+        }
+        private bool isKeyOnCooldown(VirtualKeyCode key)
+        {
+            bool returnBoolean = false;
+            switch(key)
+            {
+                case VirtualKeyCode.VK_A:
+                    returnBoolean = _A;
+                    break;              
+                case VirtualKeyCode.VK_S:
+                    returnBoolean = _S;
+                    break;           
+                case VirtualKeyCode.VK_D:
+                    returnBoolean = _D;
+                    break;           
+                case VirtualKeyCode.VK_F:
+                    returnBoolean = _F;
+                    break;          
+                case VirtualKeyCode.VK_Q:
+                    returnBoolean = _Q;
+                    break;          
+                case VirtualKeyCode.VK_W:
+                    returnBoolean = _W;
+                    break;         
+                case VirtualKeyCode.VK_E:
+                    returnBoolean = _E;
+                    break;       
+                case VirtualKeyCode.VK_R:
+                    returnBoolean = _R;
+                    break;
+            }
+            return returnBoolean;
+        }
         private void ULTIMATES_AND_HEAL(CancellationToken token)
         {
             while(_ULTIMATE_HEAL ==true)
