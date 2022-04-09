@@ -497,7 +497,7 @@
             this.buttonSaveRotation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSaveRotation.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.buttonSaveRotation.ForeColor = System.Drawing.Color.Peru;
-            this.buttonSaveRotation.Location = new System.Drawing.Point(9, 111);
+            this.buttonSaveRotation.Location = new System.Drawing.Point(6, 111);
             this.buttonSaveRotation.Name = "buttonSaveRotation";
             this.buttonSaveRotation.Size = new System.Drawing.Size(59, 22);
             this.buttonSaveRotation.TabIndex = 61;
@@ -1843,7 +1843,7 @@
             this.comboBoxRotations.Font = new System.Drawing.Font("Nirmala UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.comboBoxRotations.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.comboBoxRotations.FormattingEnabled = true;
-            this.comboBoxRotations.Location = new System.Drawing.Point(9, 83);
+            this.comboBoxRotations.Location = new System.Drawing.Point(7, 83);
             this.comboBoxRotations.Name = "comboBoxRotations";
             this.comboBoxRotations.Size = new System.Drawing.Size(145, 23);
             this.comboBoxRotations.TabIndex = 63;
@@ -1854,11 +1854,11 @@
             this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.btnPause.FlatAppearance.BorderSize = 0;
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPause.Font = new System.Drawing.Font("Nirmala UI", 7F, System.Drawing.FontStyle.Bold);
+            this.btnPause.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPause.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnPause.Location = new System.Drawing.Point(83, 21);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(70, 23);
+            this.btnPause.Size = new System.Drawing.Size(70, 30);
             this.btnPause.TabIndex = 10;
             this.btnPause.Text = "STOP (F10)";
             this.btnPause.UseVisualStyleBackColor = false;
@@ -1869,11 +1869,11 @@
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Nirmala UI", 7F, System.Drawing.FontStyle.Bold);
+            this.btnStart.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnStart.Location = new System.Drawing.Point(9, 21);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(70, 23);
+            this.btnStart.Size = new System.Drawing.Size(70, 30);
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "START (F9)";
             this.btnStart.UseVisualStyleBackColor = false;
