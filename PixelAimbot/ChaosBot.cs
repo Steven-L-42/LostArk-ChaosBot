@@ -715,7 +715,7 @@ namespace PixelAimbot
                 _Y = true;
                 _Z = true;
                 _STARTFIGHT = true;
-                var t4 = Task.Run(() => FIGHTNEW(token));
+                var t4 = Task.Run(() => FLOOR1FIGHT(token));
                 await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
                 _STARTFIGHT = false;
                 if (chBoxActivateF2.Checked && _STARTFIGHT == false)
@@ -1270,14 +1270,11 @@ namespace PixelAimbot
                 _Z = true;
                 _FIGHT = true;
 
-
-                var t4 = Task.Run(() => FIGHTNEW(token));
+                var t4 = Task.Run(() => FLOOR2FIGHT(token));
                 await Task.WhenAny(new[] { t4 });
                 await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
 
-
                 _FIGHT = false;
-
 
                 if (fightSequence == 5)
                 {
@@ -1291,7 +1288,6 @@ namespace PixelAimbot
                     var t13 = Task.Run(() => SearchBoss(token));
                     await Task.WhenAny(new[] { t13 });
                 }
-
             }
             catch (AggregateException)
             {
@@ -1304,7 +1300,7 @@ namespace PixelAimbot
             catch { }
         }
 
-        private async Task FIGHTNEW(CancellationToken token)
+        private async Task FLOOR1FIGHT(CancellationToken token)
         {
             Priorized_Skills SKILLS = new Priorized_Skills();
             {
@@ -1315,11 +1311,11 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
 
-                        object ds = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                        object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
-                        if (ds.ToString() != "1" && _FIGHT == true)
+                        if (fight.ToString() != "1" && _FIGHT == true)
                         {
-                            object[] dsCoord = (object[])ds;
+                            object[] fightCoord = (object[])fight;
 
                             var sim = new InputSimulator();
                             for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
@@ -1329,12 +1325,11 @@ namespace PixelAimbot
                             }
                             sim.Keyboard.KeyUp(skill.Key);
 
+                            var td = Task.Run(() => D_Cooldown(token)); // Muss auch custom sein
 
-                            var td = Task.Run(() => D_Cooldown(token));
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)dsCoord[0], (int)dsCoord[1] + 80, 7, 4);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                         }
                     }
                     catch (AggregateException)
@@ -1347,7 +1342,50 @@ namespace PixelAimbot
                     }
                     catch { }
                 }
+            }
+        }
+        private async Task FLOOR2FIGHT(CancellationToken token)
+        {
+            Priorized_Skills SKILLS = new Priorized_Skills();
+            {
+                foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
 
+                        object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                        if (fight.ToString() != "1" && _FIGHT == true)
+                        {
+                            object[] fightCoord = (object[])fight;
+
+                            var sim = new InputSimulator();
+                            for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
+                            {
+                                sim.Keyboard.KeyDown(skill.Key);
+                                await Task.Delay(1);
+                            }
+                            sim.Keyboard.KeyUp(skill.Key);
+
+                            var td = Task.Run(() => D_Cooldown(token));  // Muss auch custom sein
+
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                }
             }
         }
 
@@ -2609,13 +2647,7 @@ namespace PixelAimbot
             refreshRotationCombox();
         }
 
-        private void SkillRota_OnlyDigit(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-
-          
-
-           
-        }
+       
+     
     }
 }
