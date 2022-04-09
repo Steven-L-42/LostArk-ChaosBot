@@ -84,12 +84,22 @@ namespace PixelAimbot.Classes.Misc
         public string potion { get; set; }
         public bool chboxinstant { get; set; } = false;
         public bool chboxheal { get; set; } = false;
+        public bool chboxheal10 { get; set; } = false;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";
+        public string autologout { get; set; } = "";
+        public bool chBoxautologout { get; set; } = false;
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxBerserker { get; set; } = false;
+        public string txtHeal10 { get; set; } = "";
+        public bool chBoxDeathblade { get; set; } = false;
+        public bool chBoxSorcerer { get; set; } = false;
+        public bool chBoxSharpshooter { get; set; } = false;
+
+
+
         public string RestartTimer { get; set; } = "25";
         public bool chBoxSaveAll { get; set; } = false;
         public bool chBoxActivateF2 { get; set; } = false;

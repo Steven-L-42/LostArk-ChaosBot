@@ -2517,12 +2517,16 @@ namespace PixelAimbot
         {
             try
             {
+                
                 Properties.Settings.Default.dungeontimer = "65";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
+                Properties.Settings.Default.heal10 = "";
                 Properties.Settings.Default.chboxinstant = false;
                 Properties.Settings.Default.chboxheal = false;
                 Properties.Settings.Default.chBoxAutoRepair = false;
+                Properties.Settings.Default.chBoxLOGOUT = false;
+                Properties.Settings.Default.txtLOGOUT = "";
                 Properties.Settings.Default.autorepair = "10";
                 Properties.Settings.Default.chBoxShadowhunter = false;
                 Properties.Settings.Default.chBoxBerserker = false;
@@ -2532,6 +2536,22 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxActivateF2 = false;
                 Properties.Settings.Default.txtDungeon2 = "18";
                 Properties.Settings.Default.txtDungeon2search = "7";
+
+                Properties.Settings.Default.chBoxSharpshooter = false;
+                Properties.Settings.Default.chBoxSorcerer = false;
+                Properties.Settings.Default.chBoxDeathblade = false;
+
+                Properties.Settings.Default.RQ = "1";
+                Properties.Settings.Default.RW = "2";
+                Properties.Settings.Default.RE = "3";
+                Properties.Settings.Default.RR = "4";
+                Properties.Settings.Default.RA = "5";
+                Properties.Settings.Default.RS = "6";
+                Properties.Settings.Default.RD = "7";
+                Properties.Settings.Default.RF = "8";
+                
+
+
                 Properties.Settings.Default.cQ = "500";
                 Properties.Settings.Default.cW = "500";
                 Properties.Settings.Default.cE = "500";
@@ -2552,15 +2572,21 @@ namespace PixelAimbot
                 Properties.Settings.Default.Save();
 
                 txtDungeon.Text = Properties.Settings.Default.dungeontimer;
+                txtHeal10.Text = Properties.Settings.Default.instant;
+                chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
                 txtHeal30.Text = Properties.Settings.Default.instant;
                 txtHeal70.Text = Properties.Settings.Default.potion;
                 checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
                 checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
+                checkBoxHeal10.Checked = Properties.Settings.Default.checkBoxHeal10;
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
                 txtRepair.Text = Properties.Settings.Default.autorepair;
                 chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
                 chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
                 chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
+                chBoxDeathblade.Checked = Properties.Settings.Default.chBoxDeathblade;
+                chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
+                chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
                 txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
                 chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
@@ -2574,15 +2600,29 @@ namespace PixelAimbot
                 txCoolS.Text = Properties.Settings.Default.cS;
                 txCoolD.Text = Properties.Settings.Default.cD;
                 txCoolF.Text = Properties.Settings.Default.cF;
+                txtLOGOUT.Text = Properties.Settings.Default.txtLOGOUT;
+                txQ.Text = Properties.Settings.Default.RQ;
+                txW.Text = Properties.Settings.Default.RW;
+                txE.Text = Properties.Settings.Default.RE;
+                txR.Text = Properties.Settings.Default.RR;
+                txA.Text = Properties.Settings.Default.RA;
+                txS.Text = Properties.Settings.Default.RS;
+                txD.Text = Properties.Settings.Default.RD;
+                txF.Text = Properties.Settings.Default.RF;
 
-                txQ.Text = Properties.Settings.Default.cQ;
-                txW.Text = Properties.Settings.Default.cW;
-                txE.Text = Properties.Settings.Default.cE;
-                txR.Text = Properties.Settings.Default.cR;
-                txA.Text = Properties.Settings.Default.cA;
-                txS.Text = Properties.Settings.Default.cS;
-                txD.Text = Properties.Settings.Default.cD;
-                txF.Text = Properties.Settings.Default.cF;
+
+                txPQ.Text = Properties.Settings.Default.cQ;
+                txPW.Text = Properties.Settings.Default.cW;
+                txPE.Text = Properties.Settings.Default.cE;
+                txPR.Text = Properties.Settings.Default.cR;
+                txPA.Text = Properties.Settings.Default.cA;
+                txPS.Text = Properties.Settings.Default.cS;
+                txPD.Text = Properties.Settings.Default.cD;
+                txPF.Text = Properties.Settings.Default.cF;
+
+
+
+
             }
             catch { }
         }
@@ -2779,13 +2819,23 @@ namespace PixelAimbot
                     rotation.dungeontimer = txtDungeon.Text;
                     rotation.instant = txtHeal30.Text;
                     rotation.potion = txtHeal70.Text;
-                    rotation.chboxinstant = checkBoxHeal30.Checked;
-                    rotation.chboxheal = checkBoxHeal70.Checked;
+                    rotation.txtHeal10 = txtHeal10.Text;
+                    rotation.chboxinstant = (bool)checkBoxHeal30.Checked;
+                    rotation.chboxheal = (bool)checkBoxHeal70.Checked;
+                    rotation.chboxheal10 = (bool)checkBoxHeal10.Checked;
                     rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
-                    rotation.chBoxShadowhunter = chBoxY.Checked;
+
+                    rotation.autologout = txtLOGOUT.Text;
+                    rotation.chBoxautologout = chBoxLOGOUT.Checked;
+
+                    rotation.autorepair = txtRepair.Text;
+                    rotation.chBoxShadowhunter = (bool)chBoxY.Checked;
                     rotation.chboxPaladin = (bool)chBoxPaladin.Checked;
-                    rotation.chBoxBerserker = chBoxBerserker.Checked;
+                    rotation.chBoxBerserker = (bool)chBoxBerserker.Checked;
+                    rotation.chBoxDeathblade = (bool)chBoxDeathblade.Checked;
+                    rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
+                    rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.RestartTimer = txtRestartTimer.Text;
                     rotation.chBoxSaveAll = chBoxSaveAll.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
@@ -2842,11 +2892,20 @@ namespace PixelAimbot
                 txtHeal70.Text = rotation.potion;
                 checkBoxHeal30.Checked = rotation.chboxinstant;
                 checkBoxHeal70.Checked = rotation.chboxheal;
+                checkBoxHeal10.Checked = rotation.chboxheal10;
                 chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
                 txtRepair.Text = rotation.autorepair;
                 chBoxY.Checked = rotation.chBoxShadowhunter;
                 chBoxPaladin.Checked = rotation.chboxPaladin;
                 chBoxBerserker.Checked = rotation.chBoxBerserker;
+                chBoxDeathblade.Checked = rotation.chBoxDeathblade;
+                chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
+
+                txtLOGOUT.Text = rotation.autologout;
+                chBoxLOGOUT.Checked = rotation.chBoxautologout;
+                txtHeal10.Text = rotation.txtHeal10;
+
+                chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 txtRestartTimer.Text = rotation.RestartTimer;
                 chBoxSaveAll.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;

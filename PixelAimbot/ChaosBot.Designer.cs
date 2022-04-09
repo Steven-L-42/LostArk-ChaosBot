@@ -695,11 +695,11 @@
             this.txtHeal10.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.txtHeal10.Location = new System.Drawing.Point(170, 36);
             this.txtHeal10.Name = "txtHeal10";
-            this.txtHeal10.ReadOnly = true;
             this.txtHeal10.Size = new System.Drawing.Size(35, 22);
             this.txtHeal10.TabIndex = 58;
             this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal10.WordWrap = false;
+            this.txtHeal10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // checkBoxHeal10
             // 
@@ -1361,6 +1361,7 @@
             this.textBox2.Text = "Y";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.WordWrap = false;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // chBoxSharpshooter
             // 
@@ -1392,6 +1393,7 @@
             this.textBox3.Text = "Y";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox3.WordWrap = false;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // label3
             // 
@@ -1434,6 +1436,7 @@
             this.textBox1.Text = "Y";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.WordWrap = false;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // label32
             // 
@@ -1476,6 +1479,7 @@
             this.txtPaladin.Text = "Y";
             this.txtPaladin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPaladin.WordWrap = false;
+            this.txtPaladin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // chBoxY
             // 
@@ -1507,6 +1511,7 @@
             this.txtY.Text = "Y";
             this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtY.WordWrap = false;
+            this.txtY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // chBoxBerserker
             // 
@@ -1538,6 +1543,7 @@
             this.txtBerserker.Text = "Y";
             this.txtBerserker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtBerserker.WordWrap = false;
+            this.txtBerserker.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsLetter);
             // 
             // groupBox7
             // 
@@ -2127,6 +2133,7 @@
             this.txtDungeon2search.TabIndex = 54;
             this.txtDungeon2search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon2search.WordWrap = false;
+            this.txtDungeon2search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // label19
             // 
@@ -2150,6 +2157,7 @@
             this.txtDungeon2.TabIndex = 50;
             this.txtDungeon2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon2.WordWrap = false;
+            this.txtDungeon2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // label10
             // 
@@ -2173,6 +2181,7 @@
             this.txtDungeon.TabIndex = 29;
             this.txtDungeon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon.WordWrap = false;
+            this.txtDungeon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // SETTINGS
             // 
