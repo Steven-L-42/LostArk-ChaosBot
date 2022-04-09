@@ -1128,7 +1128,7 @@ namespace PixelAimbot
                 _Z = true;
                 _FIGHT = true;
 
-                var t4 = Task.Run(() => FLOOR2FIGHT(token));
+                var t4 = Task.Run(() => FLOOR1FIGHT(token));
                 await Task.WhenAny(new[] { t4 });
                 await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
 
@@ -1183,52 +1183,7 @@ namespace PixelAimbot
                             }
                             sim.Keyboard.KeyUp(skill.Key);
 
-                            var td = Task.Run(() => D_Cooldown(token)); // Muss auch custom sein
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                }
-            }
-        }
-
-        private async Task FLOOR2FIGHT(CancellationToken token)
-        {
-            Priorized_Skills SKILLS = new Priorized_Skills();
-            {
-                foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-                {
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (fight.ToString() != "1" && _FIGHT == true)
-                        {
-                            object[] fightCoord = (object[])fight;
-
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
-                            {
-                                sim.Keyboard.KeyDown(skill.Key);
-                                await Task.Delay(1);
-                            }
-                            sim.Keyboard.KeyUp(skill.Key);
-
-                            var td = Task.Run(() => D_Cooldown(token));  // Muss auch custom sein
+                            var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
 
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                             au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
@@ -1496,7 +1451,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                var t12 = Task.Run(() => FLOOR2FIGHT(token));
+                var t12 = Task.Run(() => FLOOR1FIGHT(token));
                 await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
@@ -2292,18 +2247,82 @@ namespace PixelAimbot
             lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
 
-        public async void Q_Cooldown(CancellationToken token)
+        public async void SkillCooldown(CancellationToken token, VirtualKeyCode key)
         {
-
             try
             {
                 for (int i = 0; i <= 1; i++)
                 {
                     token.ThrowIfCancellationRequested();
+                    int cooldownDuration = 0;
                     await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolQ.Text));
+                    switch (key)
+                    {
+                        case VirtualKeyCode.VK_A:
+                            cooldownDuration = int.Parse(txCoolA.Text);
+                            break;
+                        case VirtualKeyCode.VK_S:
+                            cooldownDuration = int.Parse(txCoolS.Text);
 
-                    timer.Elapsed += Q_CooldownEvent;
+                            break;
+                        case VirtualKeyCode.VK_D:
+                            cooldownDuration = int.Parse(txCoolD.Text);
+
+                            break;
+                        case VirtualKeyCode.VK_F:
+                            cooldownDuration = int.Parse(txCoolF.Text);
+
+                            break;
+                        case VirtualKeyCode.VK_Q:
+                            cooldownDuration = int.Parse(txCoolQ.Text);
+
+                            break;
+                        case VirtualKeyCode.VK_W:
+                            cooldownDuration = int.Parse(txCoolW.Text);
+
+                            break;
+                        case VirtualKeyCode.VK_E:
+                            cooldownDuration = int.Parse(txCoolE.Text);
+
+                            break;
+                        case VirtualKeyCode.VK_R:
+                            cooldownDuration = int.Parse(txCoolR.Text);
+                            break;
+                    }
+                    timer = new System.Timers.Timer(cooldownDuration);
+                    switch (key)
+                    {
+                        case VirtualKeyCode.VK_A:
+                            timer.Elapsed += A_CooldownEvent;
+                            break;
+                        case VirtualKeyCode.VK_S:
+                            timer.Elapsed += S_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_D:
+                            timer.Elapsed += D_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_F:
+                            timer.Elapsed += F_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_Q:
+                            timer.Elapsed += Q_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_W:
+                            timer.Elapsed += W_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_E:
+                            timer.Elapsed += E_CooldownEvent;
+
+                            break;
+                        case VirtualKeyCode.VK_R:
+                            timer.Elapsed += R_CooldownEvent;
+                            break;
+                    }
                     timer.AutoReset = true;
                     timer.Enabled = true;
                 }
@@ -2316,6 +2335,7 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
+            catch { }
         }
 
         private void Q_CooldownEvent(object source, ElapsedEventArgs e)
@@ -2323,214 +2343,48 @@ namespace PixelAimbot
             _Q = true;
         }
 
-        public async void W_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolW.Text));
-
-                    timer.Elapsed += W_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-        }
+   
 
         private void W_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _W = true;
         }
 
-        public async void E_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolE.Text));
-
-                    timer.Elapsed += E_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-        }
+      
 
         private void E_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _E = true;
         }
 
-        public async void R_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolR.Text));
-
-                    timer.Elapsed += R_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-        }
+     
 
         private void R_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _R = true;
         }
 
-        public async void A_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolA.Text));
-
-                    timer.Elapsed += A_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-        }
+  
 
         private void A_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _A = true;
         }
 
-        public async void S_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolS.Text));
-
-                    timer.Elapsed += S_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
+    
 
         private void S_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _S = true;
         }
 
-        public async void D_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolD.Text));
 
-                    timer.Elapsed += D_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
 
         private void D_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _D = true;
         }
 
-        public async void F_Cooldown(CancellationToken token)
-        {
-            try
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-                    timer = new System.Timers.Timer(int.Parse(txCoolF.Text));
-
-                    timer.Elapsed += F_CooldownEvent;
-                    timer.AutoReset = true;
-                    timer.Enabled = true;
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-
-        }
 
         private void F_CooldownEvent(object source, ElapsedEventArgs e)
         {
