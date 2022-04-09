@@ -1226,7 +1226,7 @@ namespace PixelAimbot
                             if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key))
                             {
                                 object[] fightCoord = (object[])fight;
-
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                 var sim = new InputSimulator();
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
                                 {
@@ -1236,7 +1236,7 @@ namespace PixelAimbot
                                 sim.Keyboard.KeyUp(skill.Key);
                                 setKeyCooldown(skill.Key); // Set Cooldown
                                 var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);

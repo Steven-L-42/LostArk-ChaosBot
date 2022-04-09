@@ -91,7 +91,6 @@
             this.txE = new System.Windows.Forms.TextBox();
             this.txR = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label41 = new System.Windows.Forms.Label();
             this.lb2F = new System.Windows.Forms.Label();
             this.lb2D = new System.Windows.Forms.Label();
             this.lb2S = new System.Windows.Forms.Label();
@@ -109,6 +108,10 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chBoxSorcerer = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.chBoxSharpshooter = new System.Windows.Forms.CheckBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chBoxDeathblade = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -184,10 +187,6 @@
             this.Cooldown = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.chBoxSorcerer = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.chBoxSharpshooter = new System.Windows.Forms.CheckBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1063,7 +1062,6 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.label41);
             this.groupBox8.Controls.Add(this.lb2F);
             this.groupBox8.Controls.Add(this.lb2D);
             this.groupBox8.Controls.Add(this.lb2S);
@@ -1089,18 +1087,6 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Cooldown-Time";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Nirmala UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.Orange;
-            this.label41.Location = new System.Drawing.Point(8, 45);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(248, 30);
-            this.label41.TabIndex = 63;
-            this.label41.Text = "UNDER DEVELOPMENT!";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lb2F
             // 
@@ -1344,6 +1330,68 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            // 
+            // chBoxSorcerer
+            // 
+            this.chBoxSorcerer.AutoSize = true;
+            this.chBoxSorcerer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chBoxSorcerer.Location = new System.Drawing.Point(230, 79);
+            this.chBoxSorcerer.Name = "chBoxSorcerer";
+            this.chBoxSorcerer.Size = new System.Drawing.Size(88, 24);
+            this.chBoxSorcerer.TabIndex = 63;
+            this.chBoxSorcerer.Text = "Sorcerer:";
+            this.chBoxSorcerer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxSorcerer.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox2.Location = new System.Drawing.Point(325, 81);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(23, 22);
+            this.textBox2.TabIndex = 62;
+            this.textBox2.Text = "Y";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.WordWrap = false;
+            // 
+            // chBoxSharpshooter
+            // 
+            this.chBoxSharpshooter.AutoSize = true;
+            this.chBoxSharpshooter.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxSharpshooter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.chBoxSharpshooter.Location = new System.Drawing.Point(37, 78);
+            this.chBoxSharpshooter.Name = "chBoxSharpshooter";
+            this.chBoxSharpshooter.Size = new System.Drawing.Size(124, 24);
+            this.chBoxSharpshooter.TabIndex = 61;
+            this.chBoxSharpshooter.Text = "Sharpshooter:";
+            this.chBoxSharpshooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxSharpshooter.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox3.Location = new System.Drawing.Point(168, 80);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(23, 22);
+            this.textBox3.TabIndex = 60;
+            this.textBox3.Text = "Y";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.WordWrap = false;
             // 
             // label3
             // 
@@ -2222,8 +2270,8 @@
             this.tabControl2.AllowDrop = true;
             this.tabControl2.Controls.Add(this.Casttime);
             this.tabControl2.Controls.Add(this.Rotation);
-            this.tabControl2.Controls.Add(this.Ultimate);
             this.tabControl2.Controls.Add(this.Cooldown);
+            this.tabControl2.Controls.Add(this.Ultimate);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.ItemSize = new System.Drawing.Size(220, 16);
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
@@ -2353,68 +2401,6 @@
             this.label47.Size = new System.Drawing.Size(121, 17);
             this.label47.TabIndex = 47;
             this.label47.Text = "COOLDOWN TIME";
-            // 
-            // chBoxSorcerer
-            // 
-            this.chBoxSorcerer.AutoSize = true;
-            this.chBoxSorcerer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxSorcerer.Location = new System.Drawing.Point(230, 79);
-            this.chBoxSorcerer.Name = "chBoxSorcerer";
-            this.chBoxSorcerer.Size = new System.Drawing.Size(88, 24);
-            this.chBoxSorcerer.TabIndex = 63;
-            this.chBoxSorcerer.Text = "Sorcerer:";
-            this.chBoxSorcerer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxSorcerer.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Location = new System.Drawing.Point(325, 81);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(23, 22);
-            this.textBox2.TabIndex = 62;
-            this.textBox2.Text = "Y";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.WordWrap = false;
-            // 
-            // chBoxSharpshooter
-            // 
-            this.chBoxSharpshooter.AutoSize = true;
-            this.chBoxSharpshooter.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxSharpshooter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxSharpshooter.Location = new System.Drawing.Point(37, 78);
-            this.chBoxSharpshooter.Name = "chBoxSharpshooter";
-            this.chBoxSharpshooter.Size = new System.Drawing.Size(124, 24);
-            this.chBoxSharpshooter.TabIndex = 61;
-            this.chBoxSharpshooter.Text = "Sharpshooter:";
-            this.chBoxSharpshooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxSharpshooter.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox3.Location = new System.Drawing.Point(168, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(23, 22);
-            this.textBox3.TabIndex = 60;
-            this.textBox3.Text = "Y";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.WordWrap = false;
             // 
             // ChaosBot
             // 
@@ -2623,7 +2609,6 @@
         private System.Windows.Forms.ComboBox comboBoxRotations;
         private System.Windows.Forms.Label labelComboxRotation;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label41;
         private System.Windows.Forms.CheckBox chBoxDeathblade;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox txtHeal10;
