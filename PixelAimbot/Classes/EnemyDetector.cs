@@ -29,7 +29,7 @@ namespace PixelAimbot.Classes
         private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
-            screenCapture.ROI = new Rectangle(1593, 40, 296, 255);
+            screenCapture.ROI = new Rectangle(PixelAimbot.ChaosBot.recalcRes(1593), PixelAimbot.ChaosBot.recalcRes(40, false), PixelAimbot.ChaosBot.recalcRes(296), PixelAimbot.ChaosBot.recalcRes(255, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;
