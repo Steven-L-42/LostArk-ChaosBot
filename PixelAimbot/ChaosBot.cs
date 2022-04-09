@@ -641,6 +641,19 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
+                    au3.MouseClick("LEFT", recalcRes(1900), recalcRes(50, false), 1);
+                    au3.MouseClick("LEFT", recalcRes(1871), recalcRes(260, false), 1);
+                    Thread.Sleep(1000);
+                    au3.MouseClick("LEFT", recalcRes(1902), recalcRes(87, false), 1);
+                    au3.MouseClick("LEFT", recalcRes(1871), recalcRes(260, false), 1);
+
+                    object minimizeChat = au3.PixelSearch(recalcRes(1896), recalcRes(385, false), recalcRes(1909), recalcRes(392, false), 0xFFF1C6, 100);
+                    if(minimizeChat.ToString() == "0")
+                    {
+                        au3.MouseClick("LEFT", recalcRes(1901), recalcRes(389, false), 1);
+                    }
+
 
                     for (int i = 0; i < 3; i++)
                     {
