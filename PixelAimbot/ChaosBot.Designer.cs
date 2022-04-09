@@ -372,7 +372,7 @@
             // 
             // chBoxLOGOUT
             // 
-            this.chBoxLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.chBoxLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxLOGOUT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxLOGOUT.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxLOGOUT.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -441,7 +441,7 @@
             // 
             // chBoxAutoRepair
             // 
-            this.chBoxAutoRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.chBoxAutoRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxAutoRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxAutoRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxAutoRepair.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -473,7 +473,7 @@
             // 
             // chBoxSaveAll
             // 
-            this.chBoxSaveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.chBoxSaveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxSaveAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxSaveAll.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSaveAll.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -508,7 +508,7 @@
             // 
             // chBoxActivateF2
             // 
-            this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxActivateF2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxActivateF2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -724,7 +724,7 @@
             // 
             // checkBoxHeal
             // 
-            this.checkBoxHeal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.checkBoxHeal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.checkBoxHeal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBoxHeal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxHeal.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -756,7 +756,7 @@
             // 
             // checkBoxInstant
             // 
-            this.checkBoxInstant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.checkBoxInstant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.checkBoxInstant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBoxInstant.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxInstant.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1645,9 +1645,10 @@
             this.txPA.Name = "txPA";
             this.txPA.Size = new System.Drawing.Size(32, 22);
             this.txPA.TabIndex = 28;
-            this.txPA.Text = "7";
+            this.txPA.Text = "5";
             this.txPA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPA.WordWrap = false;
+            this.txPA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPS
             // 
@@ -1660,9 +1661,10 @@
             this.txPS.Name = "txPS";
             this.txPS.Size = new System.Drawing.Size(32, 22);
             this.txPS.TabIndex = 29;
-            this.txPS.Text = "2";
+            this.txPS.Text = "6";
             this.txPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPS.WordWrap = false;
+            this.txPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPD
             // 
@@ -1675,9 +1677,10 @@
             this.txPD.Name = "txPD";
             this.txPD.Size = new System.Drawing.Size(32, 22);
             this.txPD.TabIndex = 30;
-            this.txPD.Text = "1";
+            this.txPD.Text = "7";
             this.txPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPD.WordWrap = false;
+            this.txPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPF
             // 
@@ -1693,6 +1696,7 @@
             this.txPF.Text = "8";
             this.txPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPF.WordWrap = false;
+            this.txPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPW
             // 
@@ -1705,9 +1709,10 @@
             this.txPW.Name = "txPW";
             this.txPW.Size = new System.Drawing.Size(32, 22);
             this.txPW.TabIndex = 24;
-            this.txPW.Text = "3";
+            this.txPW.Text = "2";
             this.txPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPW.WordWrap = false;
+            this.txPW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPQ
             // 
@@ -1721,9 +1726,10 @@
             this.txPQ.Size = new System.Drawing.Size(32, 22);
             this.txPQ.TabIndex = 25;
             this.txPQ.Tag = "";
-            this.txPQ.Text = "5";
+            this.txPQ.Text = "1";
             this.txPQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPQ.WordWrap = false;
+            this.txPQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPE
             // 
@@ -1736,9 +1742,10 @@
             this.txPE.Name = "txPE";
             this.txPE.Size = new System.Drawing.Size(32, 22);
             this.txPE.TabIndex = 26;
-            this.txPE.Text = "6";
+            this.txPE.Text = "3";
             this.txPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPE.WordWrap = false;
+            this.txPE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // txPR
             // 
@@ -1754,6 +1761,7 @@
             this.txPR.Text = "4";
             this.txPR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPR.WordWrap = false;
+            this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // buttonLoadRotation
             // 
