@@ -1968,34 +1968,13 @@ namespace PixelAimbot
 
             Priorized_Skills SKILLS = new Priorized_Skills();
 
-
-          
-                txPQ.Text = SKILLS.Priorized.key;
-                txPW.Text =
-                txPE.Text =
-                txPR.Text =
-                txPA.Text =
-                txPS.Text =
-                txPD.Text =
-                txPF.Text =
-
-
-                txPW.Text = (int.Parse(txPW.Text)
-                txPW.Text = Priorized_Skills(int.Parse(txPW.Text).ToString());
-
-
-            lbE.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lbR.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lbA.Text = currentLayout.A.ToString().Replace("VK_", "");
-
             foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-                // Todo: Implement this shit into rotation pls <3  
-                /*foreach(KeyValuePair<string, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-                {
-                    MessageBox.Show(skill.Key + " " + skill.Value);
-                }
-                */
+            {
+                MessageBox.Show(skill.Key + " " + skill.Value);
+            }
 
+         
+        
 
 
                 List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
