@@ -21,8 +21,8 @@ namespace PixelAimbot
 {
     public partial class frmLogin : Form
     {
-
-        private readonly string versionId = Properties.Settings.Default.version;
+        private Config config = new Config();
+        private readonly string versionId = Config.version;
         private string currentLauncherVersion = "";
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -45,6 +45,7 @@ namespace PixelAimbot
         public static string password;
         
 
+
         private string currentFilename;
 
         private static readonly Random random = new Random();
@@ -56,9 +57,10 @@ namespace PixelAimbot
             downloadResources();
             WebRequest.DefaultWebProxy = null;
             hwid = HWID.Get();
-
+            Config.init();
+            config = Config.Load();
             currentFilename = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-            label15.Text = Properties.Settings.Default.version;
+            label15.Text = Config.version;
             // Rename Application to a Custom Exe name for EAC Prevention / Security
             // Disable for Debug!
             if (!Debugger.IsAttached) {
@@ -100,8 +102,8 @@ namespace PixelAimbot
                 "portalenter1.png",
                 "portalentermask1.png",
                 "revive.png",
-                "mob.png",
-                "mobmask.png"
+                "mob1.png",
+                "mobmask1.png"
             };
 
             if (!File.Exists("cvextern.dll"))
@@ -156,17 +158,19 @@ namespace PixelAimbot
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            
             if (chBoxRemember.Checked == true)
             {
-                Properties.Settings.Default.username = tbUser.Text;
-                Properties.Settings.Default.password = tbPass.Text;
-                Properties.Settings.Default.Save();
+                
+                config.username = tbUser.Text;
+                config.password = tbPass.Text;
+                config.Save();
             }
             else
             {
-                Properties.Settings.Default.username = "";
-                Properties.Settings.Default.password = "";
-                Properties.Settings.Default.Save();
+                config.username = "";
+                config.password = "";
+                config.Save();
             }
             username = tbUser.Text;
             password = tbPass.Text;
@@ -213,8 +217,11 @@ namespace PixelAimbot
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            tbUser.Text = Properties.Settings.Default.username;
-            tbPass.Text = Properties.Settings.Default.password;
+            if (config != null)
+            {
+                tbUser.Text = config.username;
+                tbPass.Text = config.password;
+            }
             if (tbUser.Text !="")
             {
                 chBoxRemember.Checked = true;
