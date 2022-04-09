@@ -892,9 +892,9 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            
-                            
-                          
+
+
+
 
 
 
@@ -1205,7 +1205,7 @@ namespace PixelAimbot
 
         private async Task FLOOR1FIGHT(CancellationToken token)
         {
-            
+
             try
             {
                 token.ThrowIfCancellationRequested();
@@ -1213,7 +1213,7 @@ namespace PixelAimbot
                 await Task.Delay(500);
                 while (_FIGHT == true)
                 {
-                   
+
                     foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                     {
                         try
@@ -1239,7 +1239,7 @@ namespace PixelAimbot
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
                                 au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);                        
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
 
                             }
                         }
@@ -1452,12 +1452,12 @@ namespace PixelAimbot
                             try
                             {
                                 token.ThrowIfCancellationRequested();
-                                 await Task.Delay(100, token);
+                                await Task.Delay(100, token);
                                 object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
 
                                 if (health.ToString() != "1" && _FIGHT == true && checkBoxHeal70.Checked)
                                 {
-                                    
+
 
                                     object[] healthCoord = (object[])health;
                                     au3.Send("{" + txtHeal70.Text + "}");
@@ -1478,12 +1478,12 @@ namespace PixelAimbot
                             try
                             {
                                 token.ThrowIfCancellationRequested();
-                               await Task.Delay(100, token);
+                                await Task.Delay(100, token);
                                 object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
 
                                 if (healthi.ToString() != "1" && _FIGHT == true && checkBoxHeal30.Checked)
                                 {
-                                    
+
 
                                     object[] healthiCoord = (object[])healthi;
                                     au3.Send("{" + txtHeal30.Text + "}");
@@ -1559,29 +1559,29 @@ namespace PixelAimbot
         private bool isKeyOnCooldown(VirtualKeyCode key)
         {
             bool returnBoolean = false;
-            switch(key)
+            switch (key)
             {
                 case VirtualKeyCode.VK_A:
                     returnBoolean = _A;
-                    break;              
+                    break;
                 case VirtualKeyCode.VK_S:
                     returnBoolean = _S;
-                    break;           
+                    break;
                 case VirtualKeyCode.VK_D:
                     returnBoolean = _D;
-                    break;           
+                    break;
                 case VirtualKeyCode.VK_F:
                     returnBoolean = _F;
-                    break;          
+                    break;
                 case VirtualKeyCode.VK_Q:
                     returnBoolean = _Q;
-                    break;          
+                    break;
                 case VirtualKeyCode.VK_W:
                     returnBoolean = _W;
-                    break;         
+                    break;
                 case VirtualKeyCode.VK_E:
                     returnBoolean = _E;
-                    break;       
+                    break;
                 case VirtualKeyCode.VK_R:
                     returnBoolean = _R;
                     break;
@@ -1590,17 +1590,17 @@ namespace PixelAimbot
         }
         private void ULTIMATES_AND_HEAL(CancellationToken token)
         {
-            while(_ULTIMATE_HEAL ==true)
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                Task.Delay(100, token);
+            while (_ULTIMATE_HEAL == true)
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    Task.Delay(100, token);
 
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
 
-              
+
                     if (chBoxY.Checked == true && _Shadowhunter == true)
                     {
                         try
@@ -1727,17 +1727,17 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
-                
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
+
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
         } // OLD
 
         private async Task FLOOR2PORTAL(CancellationToken token)
@@ -2771,7 +2771,7 @@ namespace PixelAimbot
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
 
-          
+
             if (comboBoxRotations.Text != "")
             {
                 if (comboBoxRotations.Text != "main")
@@ -2893,9 +2893,10 @@ namespace PixelAimbot
 
         private void changeSkillSet(object sender, EventArgs e)
         {
-           SKILLS.skillset = new Dictionary<VirtualKeyCode, int>()
+            if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" && txPW.Text != "" && txPE.Text != "" && txPR.Text != "")
+                SKILLS.skillset = new Dictionary<VirtualKeyCode, int>()
             {
-                { VirtualKeyCode.VK_A, int.Parse(txPA.Text) },
+                { VirtualKeyCode.VK_A, int.Parse(txPA.Text)},
                 { VirtualKeyCode.VK_S, int.Parse(txPS.Text)},
                 { VirtualKeyCode.VK_D, int.Parse(txPD.Text)},
                 { VirtualKeyCode.VK_F, int.Parse(txPF.Text)},
