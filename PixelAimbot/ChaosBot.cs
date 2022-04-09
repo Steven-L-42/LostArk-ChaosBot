@@ -32,7 +32,6 @@ namespace PixelAimbot
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
-        private bool _STARTFIGHT = false;
         private bool _ULTIMATE_HEAL = false;
 
 
@@ -231,10 +230,18 @@ namespace PixelAimbot
                 _Z = true;
 
                 _REPAIR = false;
+                _LOGOUT = false;
+
+                _FIGHT = false;
+                _ULTIMATE_HEAL = false;
+
+                _REPAIR = false;
+                _LOGOUT = false;
+
                 _Shadowhunter = true;
                 _Berserker = true;
                 _Paladin = true;
-                _LOGOUT = false;
+              
 
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -364,6 +371,7 @@ namespace PixelAimbot
 
         private System.Timers.Timer timer;
         private int fightSequence = 1;
+        private int searchSequence = 1;
 
         public void REPAIRTIMER()
         {
@@ -462,6 +470,7 @@ namespace PixelAimbot
         {
             try
             {
+                searchSequence = 1;
                 fightSequence = 1;
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
@@ -605,14 +614,14 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is Running..."));
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
 
                             object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
 
                             if (move1.ToString() != "1")
                             {
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
                                 Thread.Sleep(1000);
                             }
                         }
@@ -699,18 +708,6 @@ namespace PixelAimbot
             }
             catch { }
         }
-
-        /*
-          private async Task STARTFIGHT(CancellationToken token)
-          {
-            
-
-                         
-
-          }
-     */  ///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL
-
-
 
 
         private async Task SEARCHPORTAL(CancellationToken token)
@@ -876,6 +873,12 @@ namespace PixelAimbot
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
+                    if (searchSequence == 1)
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                        searchSequence++;
+                    }
 
                     for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                     {
@@ -883,9 +886,9 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                            
+                            
+                          
 
 
 
@@ -1067,35 +1070,51 @@ namespace PixelAimbot
         {
             try
             {
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-                _Q = true;
-                _W = true;
-                _E = true;
-                _R = true;
-                _A = true;
-                _S = true;
-                _D = true;
-                _F = true;
-                _Y = true;
-                _Z = true;
-                _STARTFIGHT = true;
-                _ULTIMATE_HEAL = true;
-                var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
-                _STARTFIGHT = false;
-                if (chBoxActivateF2.Checked && _STARTFIGHT == false)
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+                try
                 {
-                    var t7 = Task.Run(() => SEARCHPORTAL(token));
-                    await Task.WhenAny(new[] { t7 });
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    _Q = true;
+                    _W = true;
+                    _E = true;
+                    _R = true;
+                    _A = true;
+                    _S = true;
+                    _D = true;
+                    _F = true;
+                    _Y = true;
+                    _Z = true;
+                    _FIGHT = true;
+                    _ULTIMATE_HEAL = true;
+                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
+                    await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
+                    _FIGHT = false;
+                    if (chBoxActivateF2.Checked && _FIGHT == false)
+                    {
+                        var t7 = Task.Run(() => SEARCHPORTAL(token));
+                        await Task.WhenAny(new[] { t7 });
+                    }
+                    else
+                   if (!chBoxActivateF2.Checked && _FIGHT == false)
+                    {
+                        var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
                 }
-                else
-               if (!chBoxActivateF2.Checked && _STARTFIGHT == false)
+                catch (AggregateException)
                 {
-                    var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                    await Task.WhenAny(new[] { t12 });
+                    Console.WriteLine("Expected");
                 }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
             }
             catch (AggregateException)
             {
@@ -1112,40 +1131,56 @@ namespace PixelAimbot
         {
             try
             {
-                fightSequence++;
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-                _Q = true;
-                _W = true;
-                _E = true;
-                _R = true;
-                _A = true;
-                _S = true;
-                _D = true;
-                _F = true;
-                _Y = true;
-                _Z = true;
-                _FIGHT = true;
-
-                var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                await Task.WhenAny(new[] { t4 });
-                await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
-
-                _FIGHT = false;
-
-                if (fightSequence == 5)
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+                try
                 {
-                    var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                    await Task.WhenAny(new[] { t12 });
-                }
-                else
-                if (fightSequence == 4)
-                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    fightSequence++;
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    _Q = true;
+                    _W = true;
+                    _E = true;
+                    _R = true;
+                    _A = true;
+                    _S = true;
+                    _D = true;
+                    _F = true;
+                    _Y = true;
+                    _Z = true;
+                    _FIGHT = true;
 
-                    var t13 = Task.Run(() => SEARCHBOSS(token));
-                    await Task.WhenAny(new[] { t13 });
+                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
+                    await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+
+                    _FIGHT = false;
+
+                    if (fightSequence == 7)
+                    {
+                        _ULTIMATE_HEAL = false;
+                        var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
+                    else
+                    if (fightSequence < 7)
+                    {
+
+                        var t13 = Task.Run(() => SEARCHBOSS(token));
+                        await Task.WhenAny(new[] { t13 });
+                    }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
             }
             catch (AggregateException)
             {
@@ -1161,72 +1196,242 @@ namespace PixelAimbot
         private async Task FLOOR1FIGHT(CancellationToken token)
         {
             
-            {
-                foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-                {
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-
-                        object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (fight.ToString() != "1" && _FIGHT == true)
-                        {
-                            object[] fightCoord = (object[])fight;
-
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
-                            {
-                                sim.Keyboard.KeyDown(skill.Key);
-                                await Task.Delay(1);
-                            }
-                            sim.Keyboard.KeyUp(skill.Key);
-
-                            var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                }
-            }
-        }
-
-        private async Task ULTIMATES_AND_HEAL(CancellationToken token)
-        {
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
+                await Task.Delay(500);
+                while (_FIGHT == true)
+                {
+                   
+                    foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                    {
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+
+                            object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+
+                            if (fight.ToString() != "1" && _FIGHT == true)
+                            {
+                                object[] fightCoord = (object[])fight;
+
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
+                                {
+                                    sim.Keyboard.KeyDown(skill.Key);
+                                    await Task.Delay(1);
+                                }
+                                sim.Keyboard.KeyUp(skill.Key);
+
+                                //var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);                        
+
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                           await Task.Delay(100, token);
+
+                            _Shadowhunter = true;
+                            _Paladin = true;
+                            _Berserker = true;
+
+
+                            if (chBoxY.Checked == true && _Shadowhunter == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    _Shadowhunter = false;
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+
+                                    object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+
+                                    if (d.ToString() != "1")
+                                    {
+                                        
+                                        object[] dCoord = (object[])d;
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            else
+
+
+
+                             if (chBoxPaladin.Checked == true && _Paladin == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    _Paladin = false;
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+
+                                    object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+
+                                    if (d.ToString() != "1")
+                                    {
+                                        
+
+                                        object[] dCoord = (object[])d;
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                           await Task.Delay(1);
+                                        }
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                 await Task.Delay(100, token);
+                                object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
+
+                                if (health.ToString() != "1" && _FIGHT == true)
+                                {
+                                    
+
+                                    object[] healthCoord = (object[])health;
+                                    au3.Send("{" + txtHeal.Text + "}");
+                                    au3.Send("{" + txtHeal.Text + "}");
+                                    au3.Send("{" + txtHeal.Text + "}");
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                               await Task.Delay(100, token);
+                                object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
+
+                                if (healthi.ToString() != "1" && _FIGHT == true)
+                                {
+                                    
+
+                                    object[] healthiCoord = (object[])healthi;
+                                    au3.Send(txtInstant.Text);
+                                    au3.Send(txtInstant.Text);
+                                    au3.Send(txtInstant.Text);
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                }
+                            }
+
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        private void ULTIMATES_AND_HEAL(CancellationToken token)
+        {
+            while(_ULTIMATE_HEAL ==true)
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                Task.Delay(100, token);
 
                 _Shadowhunter = true;
                 _Paladin = true;
                 _Berserker = true;
 
-                while (_ULTIMATE_HEAL == true)
-                {
+              
                     if (chBoxY.Checked == true && _Shadowhunter == true)
                     {
                         try
                         {
                             _Shadowhunter = false;
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            Task.Delay(100, token);
 
                             object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
 
-                            if (d.ToString() != "1" && _STARTFIGHT == true)
+                            if (d.ToString() != "1" && _FIGHT == true)
                             {
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
                                 object[] dCoord = (object[])d;
@@ -1234,7 +1439,7 @@ namespace PixelAimbot
                                 for (int t = 0; t < 50; t++)
                                 {
                                     sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                    await Task.Delay(1);
+                                    Task.Delay(1);
                                 }
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
@@ -1260,11 +1465,11 @@ namespace PixelAimbot
                         {
                             _Paladin = false;
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            Task.Delay(100, token);
 
                             object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
 
-                            if (d.ToString() != "1" && _STARTFIGHT == true)
+                            if (d.ToString() != "1" && _FIGHT == true)
                             {
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
 
@@ -1273,7 +1478,7 @@ namespace PixelAimbot
                                 for (int t = 0; t < 50; t++)
                                 {
                                     sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                    await Task.Delay(1);
+                                    Task.Delay(1);
                                 }
                                 sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
@@ -1294,10 +1499,10 @@ namespace PixelAimbot
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                        Task.Delay(100, token);
                         object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
 
-                        if (health.ToString() != "1" && _STARTFIGHT == true)
+                        if (health.ToString() != "1" && _FIGHT == true)
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
 
@@ -1319,10 +1524,10 @@ namespace PixelAimbot
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                        Task.Delay(100, token);
                         object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
 
-                        if (healthi.ToString() != "1" && _STARTFIGHT == true)
+                        if (healthi.ToString() != "1" && _FIGHT == true)
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate:Instant-Heal at 30%"));
 
@@ -1342,7 +1547,7 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
-                }
+                
             }
             catch (AggregateException)
             {
@@ -1353,7 +1558,7 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
-        }
+        } // OLD
 
         private async Task FLOOR2PORTAL(CancellationToken token)
         {
@@ -2386,10 +2591,7 @@ namespace PixelAimbot
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
 
-            foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-            {
-                MessageBox.Show(skill.Key + " " + skill.Value);
-            }
+          
             if (comboBoxRotations.Text != "")
             {
                 if (comboBoxRotations.Text != "main")
