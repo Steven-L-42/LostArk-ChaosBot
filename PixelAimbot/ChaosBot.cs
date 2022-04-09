@@ -30,6 +30,8 @@ namespace PixelAimbot
         private bool _Berserker = false;
         private bool _Paladin = false;
         private bool _Deathblade = false;
+        private bool _Sharpshooter = false;
+        private bool _Sorcerer = false;
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
@@ -243,6 +245,8 @@ namespace PixelAimbot
                 _Berserker = false;
                 _Paladin = false;
                 _Deathblade = false;
+                _Sharpshooter = false;
+                _Sorcerer = false;
 
 
 
@@ -1082,6 +1086,8 @@ namespace PixelAimbot
                     _Paladin = true;
                     _Berserker = true;
                     _Deathblade = true;
+                    _Sharpshooter = true;
+                    _Sorcerer = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1257,7 +1263,7 @@ namespace PixelAimbot
                             {
                                 try
                                 {
-                                    
+
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(100, token);
 
@@ -1265,7 +1271,7 @@ namespace PixelAimbot
 
                                     if (d.ToString() != "1")
                                     {
-                                        
+
                                         object[] dCoord = (object[])d;
                                         var sim = new InputSimulator();
                                         for (int t = 0; t < 50; t++)
@@ -1297,27 +1303,21 @@ namespace PixelAimbot
                             {
                                 try
                                 {
-                                  
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(100, token);
-
                                     object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
-
                                     if (d.ToString() != "1")
                                     {
-                                        
-
                                         object[] dCoord = (object[])d;
                                         var sim = new InputSimulator();
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                           await Task.Delay(1);
+                                            await Task.Delay(1);
                                         }
                                         _Paladin = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
-
                                     }
                                 }
                                 catch (AggregateException)
@@ -1335,16 +1335,11 @@ namespace PixelAimbot
                             {
                                 try
                                 {
-
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(100, token);
-
-                                    object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
-
+                                    object d = au3.PixelSearch(986, 1029, 1017, 1035, 0xDAE7F3, 10);
                                     if (d.ToString() != "1")
                                     {
-
-
                                         object[] dCoord = (object[])d;
                                         var sim = new InputSimulator();
                                         for (int t = 0; t < 50; t++)
@@ -1355,7 +1350,69 @@ namespace PixelAimbot
                                         _Deathblade = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
-
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            else
+                            if (chBoxSharpshooter.Checked == true && _Sharpshooter == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object d = au3.PixelSearch(1006, 1049, 1019, 1068, 0x09B4EB, 10);
+                                    if (d.ToString() != "1")
+                                    {
+                                        object[] dCoord = (object[])d;
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Sharpshooter = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            if (chBoxSorcerer.Checked == true && _Sorcerer == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object d = au3.PixelSearch(1006, 1038, 1010, 1042, 0x8993FF, 10);
+                                    if (d.ToString() != "1")
+                                    {
+                                        object[] dCoord = (object[])d;
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Sorcerer = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -1369,21 +1426,43 @@ namespace PixelAimbot
                                 catch { }
                             }
                             //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
-
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                object health = au3.PixelSearch(633, 962, 651, 969, 0x050405, 15);
+                                if (health.ToString() != "1" && _FIGHT == true && checkBoxHeal10.Checked)
+                                {
+                                    object[] healthCoord = (object[])health;
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
                             try
                             {
                                 token.ThrowIfCancellationRequested();
                                  await Task.Delay(100, token);
                                 object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
 
-                                if (health.ToString() != "1" && _FIGHT == true)
+                                if (health.ToString() != "1" && _FIGHT == true && checkBoxHeal70.Checked)
                                 {
                                     
 
                                     object[] healthCoord = (object[])health;
-                                    au3.Send("{" + txtHeal.Text + "}");
-                                    au3.Send("{" + txtHeal.Text + "}");
-                                    au3.Send("{" + txtHeal.Text + "}");
+                                    au3.Send("{" + txtHeal70.Text + "}");
+                                    au3.Send("{" + txtHeal70.Text + "}");
+                                    au3.Send("{" + txtHeal70.Text + "}");
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
                                 }
                             }
@@ -1402,14 +1481,14 @@ namespace PixelAimbot
                                await Task.Delay(100, token);
                                 object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
 
-                                if (healthi.ToString() != "1" && _FIGHT == true)
+                                if (healthi.ToString() != "1" && _FIGHT == true && checkBoxHeal30.Checked)
                                 {
                                     
 
                                     object[] healthiCoord = (object[])healthi;
-                                    au3.Send(txtInstant.Text);
-                                    au3.Send(txtInstant.Text);
-                                    au3.Send(txtInstant.Text);
+                                    au3.Send("{" + txtHeal30.Text + "}");
+                                    au3.Send("{" + txtHeal30.Text + "}");
+                                    au3.Send("{" + txtHeal30.Text + "}");
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
                                 }
                             }
@@ -1547,9 +1626,9 @@ namespace PixelAimbot
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
 
                             object[] healthCoord = (object[])health;
-                            au3.Send("{" + txtHeal.Text + "}");
-                            au3.Send("{" + txtHeal.Text + "}");
-                            au3.Send("{" + txtHeal.Text + "}");
+                            au3.Send("{" + txtHeal70.Text + "}");
+                            au3.Send("{" + txtHeal70.Text + "}");
+                            au3.Send("{" + txtHeal70.Text + "}");
                         }
                     }
                     catch (AggregateException)
@@ -1572,9 +1651,9 @@ namespace PixelAimbot
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate:Instant-Heal at 30%"));
 
                             object[] healthiCoord = (object[])healthi;
-                            au3.Send(txtInstant.Text);
-                            au3.Send(txtInstant.Text);
-                            au3.Send(txtInstant.Text);
+                            au3.Send(txtHeal30.Text);
+                            au3.Send(txtHeal30.Text);
+                            au3.Send(txtHeal30.Text);
                         }
                     }
 
@@ -2281,10 +2360,10 @@ namespace PixelAimbot
             txCoolS.Text = Properties.Settings.Default.cS;
             txCoolD.Text = Properties.Settings.Default.cD;
             txCoolF.Text = Properties.Settings.Default.cF;
-            txtInstant.Text = Properties.Settings.Default.instant;
-            txtHeal.Text = Properties.Settings.Default.potion;
-            checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
-            checkBoxHeal.Checked = Properties.Settings.Default.chboxheal;
+            txtHeal30.Text = Properties.Settings.Default.instant;
+            txtHeal70.Text = Properties.Settings.Default.potion;
+            checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+            checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
             chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
             txtRepair.Text = Properties.Settings.Default.autorepair;
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -2308,29 +2387,29 @@ namespace PixelAimbot
 
         private void checkBoxInstant_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxInstant.Checked)
+            if (checkBoxHeal30.Checked)
             {
-                txtInstant.ReadOnly = false;
+                txtHeal30.ReadOnly = false;
             }
             else
-            if (!checkBoxInstant.Checked)
+            if (!checkBoxHeal30.Checked)
             {
-                txtInstant.ReadOnly = true;
-                txtInstant.Text = "";
+                txtHeal30.ReadOnly = true;
+                txtHeal30.Text = "";
             }
         }
 
         private void checkBoxHeal_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHeal.Checked)
+            if (checkBoxHeal70.Checked)
             {
-                txtHeal.ReadOnly = false;
+                txtHeal70.ReadOnly = false;
             }
             else
-            if (!checkBoxHeal.Checked)
+            if (!checkBoxHeal70.Checked)
             {
-                txtHeal.ReadOnly = true;
-                txtHeal.Text = "";
+                txtHeal70.ReadOnly = true;
+                txtHeal70.Text = "";
             }
         }
 
@@ -2412,10 +2491,10 @@ namespace PixelAimbot
                 Properties.Settings.Default.Save();
 
                 txtDungeon.Text = Properties.Settings.Default.dungeontimer;
-                txtInstant.Text = Properties.Settings.Default.instant;
-                txtHeal.Text = Properties.Settings.Default.potion;
-                checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
-                checkBoxHeal.Checked = Properties.Settings.Default.chboxheal;
+                txtHeal30.Text = Properties.Settings.Default.instant;
+                txtHeal70.Text = Properties.Settings.Default.potion;
+                checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+                checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
                 txtRepair.Text = Properties.Settings.Default.autorepair;
                 chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -2637,10 +2716,10 @@ namespace PixelAimbot
                 if (comboBoxRotations.Text != "main")
                 {
                     rotation.dungeontimer = txtDungeon.Text;
-                    rotation.instant = txtInstant.Text;
-                    rotation.potion = txtHeal.Text;
-                    rotation.chboxinstant = checkBoxInstant.Checked;
-                    rotation.chboxheal = checkBoxHeal.Checked;
+                    rotation.instant = txtHeal30.Text;
+                    rotation.potion = txtHeal70.Text;
+                    rotation.chboxinstant = checkBoxHeal30.Checked;
+                    rotation.chboxheal = checkBoxHeal70.Checked;
                     rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
                     rotation.chBoxShadowhunter = chBoxY.Checked;
@@ -2698,10 +2777,10 @@ namespace PixelAimbot
             {
 
                 txtDungeon.Text = rotation.dungeontimer;
-                txtInstant.Text = rotation.instant;
-                txtHeal.Text = rotation.potion;
-                checkBoxInstant.Checked = rotation.chboxinstant;
-                checkBoxHeal.Checked = rotation.chboxheal;
+                txtHeal30.Text = rotation.instant;
+                txtHeal70.Text = rotation.potion;
+                checkBoxHeal30.Checked = rotation.chboxinstant;
+                checkBoxHeal70.Checked = rotation.chboxheal;
                 chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
                 txtRepair.Text = rotation.autorepair;
                 chBoxY.Checked = rotation.chBoxShadowhunter;
