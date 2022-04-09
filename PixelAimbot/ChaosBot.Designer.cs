@@ -299,6 +299,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
+            this.label36.Cursor = System.Windows.Forms.Cursors.Help;
             this.label36.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label36.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label36.Location = new System.Drawing.Point(6, 92);
@@ -338,6 +339,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.Cursor = System.Windows.Forms.Cursors.Help;
             this.label33.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.Location = new System.Drawing.Point(103, 95);
             this.label33.Name = "label33";
@@ -375,7 +377,7 @@
             this.chBoxLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxLOGOUT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxLOGOUT.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxLOGOUT.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxLOGOUT.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxLOGOUT.FlatAppearance.BorderSize = 0;
             this.chBoxLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxLOGOUT.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -444,7 +446,7 @@
             this.chBoxAutoRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxAutoRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxAutoRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoRepair.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxAutoRepair.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxAutoRepair.FlatAppearance.BorderSize = 0;
             this.chBoxAutoRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxAutoRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -476,7 +478,7 @@
             this.chBoxSaveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxSaveAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxSaveAll.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxSaveAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxSaveAll.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxSaveAll.FlatAppearance.BorderSize = 0;
             this.chBoxSaveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxSaveAll.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -511,7 +513,7 @@
             this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxActivateF2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxActivateF2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxActivateF2.FlatAppearance.BorderSize = 0;
             this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxActivateF2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -554,6 +556,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
+            this.label22.Cursor = System.Windows.Forms.Cursors.Help;
             this.label22.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label22.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label22.Location = new System.Drawing.Point(17, 83);
@@ -567,6 +570,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
+            this.label20.Cursor = System.Windows.Forms.Cursors.Help;
             this.label20.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label20.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label20.Location = new System.Drawing.Point(17, 112);
@@ -727,7 +731,7 @@
             this.checkBoxHeal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.checkBoxHeal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBoxHeal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxHeal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxHeal.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxHeal.FlatAppearance.BorderSize = 0;
             this.checkBoxHeal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxHeal.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -759,7 +763,7 @@
             this.checkBoxInstant.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.checkBoxInstant.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBoxInstant.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxInstant.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxInstant.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxInstant.FlatAppearance.BorderSize = 0;
             this.checkBoxInstant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxInstant.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1783,6 +1787,7 @@
             // 
             this.labelComboxRotation.AutoSize = true;
             this.labelComboxRotation.BackColor = System.Drawing.Color.Transparent;
+            this.labelComboxRotation.Cursor = System.Windows.Forms.Cursors.Help;
             this.labelComboxRotation.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelComboxRotation.Location = new System.Drawing.Point(10, 65);
             this.labelComboxRotation.Name = "labelComboxRotation";
@@ -1799,6 +1804,7 @@
             this.tabControl1.Controls.Add(this.SETTINGS);
             this.tabControl1.Controls.Add(this.HEAL);
             this.tabControl1.Controls.Add(this.Classes);
+            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabControl1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.ItemSize = new System.Drawing.Size(240, 16);
             this.tabControl1.Location = new System.Drawing.Point(12, 33);
@@ -1807,6 +1813,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(426, 174);
             this.tabControl1.TabIndex = 9;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // STARTEXIT
             // 
@@ -1953,6 +1960,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
+            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
             this.label23.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label23.Location = new System.Drawing.Point(17, 27);
