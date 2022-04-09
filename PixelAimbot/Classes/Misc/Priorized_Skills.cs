@@ -14,7 +14,7 @@ namespace PixelAimbot.Classes.Misc
         private CancellationTokenSource cts = new CancellationTokenSource();
 
         public List<KeyValuePair<VirtualKeyCode, int>> skillset { get; set; } = new Dictionary<VirtualKeyCode, int>()
-        {
+        {            
             {VirtualKeyCode.VK_A, 1},
             {VirtualKeyCode.VK_S, 2},
             {VirtualKeyCode.VK_D, 3},
@@ -24,7 +24,10 @@ namespace PixelAimbot.Classes.Misc
             {VirtualKeyCode.VK_E, 7},
             {VirtualKeyCode.VK_R, 8},
         }.ToList();
+
+
         
+
         public async void Priorized(int Key, ChaosBot ChaosBot)
         {
             try
