@@ -666,10 +666,10 @@ namespace PixelAimbot
                                 var sim = new InputSimulator();
                                 for (int t = 0; t < 50; t++)
                                 {
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Z);
+                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
                                     Thread.Sleep(1);
                                 }
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Z);
+                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
                                 _Berserker = false;
                             }
@@ -1257,7 +1257,7 @@ namespace PixelAimbot
                             {
                                 try
                                 {
-                                    _Shadowhunter = false;
+                                    
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(100, token);
 
@@ -1273,6 +1273,7 @@ namespace PixelAimbot
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
                                             await Task.Delay(1);
                                         }
+                                        _Shadowhunter = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
@@ -1296,7 +1297,7 @@ namespace PixelAimbot
                             {
                                 try
                                 {
-                                    _Paladin = false;
+                                  
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(100, token);
 
@@ -1313,6 +1314,7 @@ namespace PixelAimbot
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
                                            await Task.Delay(1);
                                         }
+                                        _Paladin = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
 
