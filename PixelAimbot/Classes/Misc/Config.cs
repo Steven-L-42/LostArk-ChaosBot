@@ -103,8 +103,15 @@ namespace PixelAimbot.Classes.Misc
         public string cS { get; set; } = "500";
         public string cD { get; set; } = "500";
         public string cF { get; set; } = "500";
+        public string pQ { get; set; } = "1";
+        public string pW { get; set; } = "2";
+        public string pE { get; set; } = "3";
+        public string pR { get; set; } = "4";
+        public string pA { get; set; } = "5";
+        public string pS { get; set; } = "6";
+        public string pD { get; set; } = "7";
+        public string pF { get; set; } = "8";
 
-        
 
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
         public static string ConfigFileName { get; set; }
