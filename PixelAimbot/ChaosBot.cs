@@ -154,7 +154,7 @@ namespace PixelAimbot
             refreshRotationCombox();
             this.Text = RandomString(15);
             // 3. Register HotKeys
-            label15.Text = Properties.Settings.Default.version;
+            label15.Text = Config.version;
             // Set an unique id to your Hotkey, it will be used to
             // identify which hotkey was pressed in your code to execute something
             int FirstHotkeyId = 1;
