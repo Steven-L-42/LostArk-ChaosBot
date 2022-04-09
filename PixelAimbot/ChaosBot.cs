@@ -1160,7 +1160,7 @@ namespace PixelAimbot
 
         private async Task FLOOR1FIGHT(CancellationToken token)
         {
-            Priorized_Skills SKILLS = new Priorized_Skills();
+            
             {
                 foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                 {
