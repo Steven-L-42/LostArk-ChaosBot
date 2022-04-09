@@ -126,14 +126,14 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
+            this.lbPF = new System.Windows.Forms.Label();
+            this.lbPD = new System.Windows.Forms.Label();
+            this.lbPS = new System.Windows.Forms.Label();
+            this.lbPA = new System.Windows.Forms.Label();
+            this.lbPR = new System.Windows.Forms.Label();
+            this.lbPE = new System.Windows.Forms.Label();
+            this.lbPW = new System.Windows.Forms.Label();
+            this.lbPQ = new System.Windows.Forms.Label();
             this.txPA = new System.Windows.Forms.TextBox();
             this.txPS = new System.Windows.Forms.TextBox();
             this.txPD = new System.Windows.Forms.TextBox();
@@ -1428,14 +1428,14 @@
             this.groupBox7.Controls.Add(this.checkBox3);
             this.groupBox7.Controls.Add(this.checkBox2);
             this.groupBox7.Controls.Add(this.checkBox1);
-            this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Controls.Add(this.label14);
-            this.groupBox7.Controls.Add(this.label38);
-            this.groupBox7.Controls.Add(this.label41);
-            this.groupBox7.Controls.Add(this.label42);
-            this.groupBox7.Controls.Add(this.label43);
-            this.groupBox7.Controls.Add(this.label44);
-            this.groupBox7.Controls.Add(this.label45);
+            this.groupBox7.Controls.Add(this.lbPF);
+            this.groupBox7.Controls.Add(this.lbPD);
+            this.groupBox7.Controls.Add(this.lbPS);
+            this.groupBox7.Controls.Add(this.lbPA);
+            this.groupBox7.Controls.Add(this.lbPR);
+            this.groupBox7.Controls.Add(this.lbPE);
+            this.groupBox7.Controls.Add(this.lbPW);
+            this.groupBox7.Controls.Add(this.lbPQ);
             this.groupBox7.Controls.Add(this.txPA);
             this.groupBox7.Controls.Add(this.txPS);
             this.groupBox7.Controls.Add(this.txPD);
@@ -1538,101 +1538,101 @@
             this.checkBox1.TabIndex = 40;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // lbPF
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Orange;
-            this.label3.Location = new System.Drawing.Point(236, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 17);
-            this.label3.TabIndex = 39;
-            this.label3.Text = "F";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPF.AutoSize = true;
+            this.lbPF.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPF.ForeColor = System.Drawing.Color.Orange;
+            this.lbPF.Location = new System.Drawing.Point(236, 61);
+            this.lbPF.Name = "lbPF";
+            this.lbPF.Size = new System.Drawing.Size(15, 17);
+            this.lbPF.TabIndex = 39;
+            this.lbPF.Text = "F";
+            this.lbPF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // lbPD
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Orange;
-            this.label14.Location = new System.Drawing.Point(172, 61);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(18, 17);
-            this.label14.TabIndex = 38;
-            this.label14.Text = "D";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPD.AutoSize = true;
+            this.lbPD.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPD.ForeColor = System.Drawing.Color.Orange;
+            this.lbPD.Location = new System.Drawing.Point(172, 61);
+            this.lbPD.Name = "lbPD";
+            this.lbPD.Size = new System.Drawing.Size(18, 17);
+            this.lbPD.TabIndex = 38;
+            this.lbPD.Text = "D";
+            this.lbPD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label38
+            // lbPS
             // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Orange;
-            this.label38.Location = new System.Drawing.Point(112, 61);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(15, 17);
-            this.label38.TabIndex = 37;
-            this.label38.Text = "S";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPS.AutoSize = true;
+            this.lbPS.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPS.ForeColor = System.Drawing.Color.Orange;
+            this.lbPS.Location = new System.Drawing.Point(112, 61);
+            this.lbPS.Name = "lbPS";
+            this.lbPS.Size = new System.Drawing.Size(15, 17);
+            this.lbPS.TabIndex = 37;
+            this.lbPS.Text = "S";
+            this.lbPS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label41
+            // lbPA
             // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.Orange;
-            this.label41.Location = new System.Drawing.Point(50, 61);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(17, 17);
-            this.label41.TabIndex = 36;
-            this.label41.Text = "A";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPA.AutoSize = true;
+            this.lbPA.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPA.ForeColor = System.Drawing.Color.Orange;
+            this.lbPA.Location = new System.Drawing.Point(50, 61);
+            this.lbPA.Name = "lbPA";
+            this.lbPA.Size = new System.Drawing.Size(17, 17);
+            this.lbPA.TabIndex = 36;
+            this.lbPA.Text = "A";
+            this.lbPA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label42
+            // lbPR
             // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.Orange;
-            this.label42.Location = new System.Drawing.Point(235, 16);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(16, 17);
-            this.label42.TabIndex = 35;
-            this.label42.Text = "R";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPR.AutoSize = true;
+            this.lbPR.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPR.ForeColor = System.Drawing.Color.Orange;
+            this.lbPR.Location = new System.Drawing.Point(235, 16);
+            this.lbPR.Name = "lbPR";
+            this.lbPR.Size = new System.Drawing.Size(16, 17);
+            this.lbPR.TabIndex = 35;
+            this.lbPR.Text = "R";
+            this.lbPR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label43
+            // lbPE
             // 
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.ForeColor = System.Drawing.Color.Orange;
-            this.label43.Location = new System.Drawing.Point(173, 16);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(15, 17);
-            this.label43.TabIndex = 34;
-            this.label43.Text = "E";
-            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPE.AutoSize = true;
+            this.lbPE.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPE.ForeColor = System.Drawing.Color.Orange;
+            this.lbPE.Location = new System.Drawing.Point(173, 16);
+            this.lbPE.Name = "lbPE";
+            this.lbPE.Size = new System.Drawing.Size(15, 17);
+            this.lbPE.TabIndex = 34;
+            this.lbPE.Text = "E";
+            this.lbPE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label44
+            // lbPW
             // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.Orange;
-            this.label44.Location = new System.Drawing.Point(109, 16);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(21, 17);
-            this.label44.TabIndex = 33;
-            this.label44.Text = "W";
-            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPW.AutoSize = true;
+            this.lbPW.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPW.ForeColor = System.Drawing.Color.Orange;
+            this.lbPW.Location = new System.Drawing.Point(109, 16);
+            this.lbPW.Name = "lbPW";
+            this.lbPW.Size = new System.Drawing.Size(21, 17);
+            this.lbPW.TabIndex = 33;
+            this.lbPW.Text = "W";
+            this.lbPW.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label45
+            // lbPQ
             // 
-            this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.ForeColor = System.Drawing.Color.Orange;
-            this.label45.Location = new System.Drawing.Point(50, 14);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(18, 17);
-            this.label45.TabIndex = 32;
-            this.label45.Text = "Q";
-            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbPQ.AutoSize = true;
+            this.lbPQ.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPQ.ForeColor = System.Drawing.Color.Orange;
+            this.lbPQ.Location = new System.Drawing.Point(50, 14);
+            this.lbPQ.Name = "lbPQ";
+            this.lbPQ.Size = new System.Drawing.Size(18, 17);
+            this.lbPQ.TabIndex = 32;
+            this.lbPQ.Text = "Q";
+            this.lbPQ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txPA
             // 
@@ -1648,7 +1648,7 @@
             this.txPA.Text = "5";
             this.txPA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPA.WordWrap = false;
-            this.txPA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPS
             // 
@@ -1664,7 +1664,7 @@
             this.txPS.Text = "6";
             this.txPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPS.WordWrap = false;
-            this.txPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPD
             // 
@@ -1680,7 +1680,7 @@
             this.txPD.Text = "7";
             this.txPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPD.WordWrap = false;
-            this.txPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPF
             // 
@@ -1696,7 +1696,7 @@
             this.txPF.Text = "8";
             this.txPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPF.WordWrap = false;
-            this.txPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPW
             // 
@@ -1712,7 +1712,7 @@
             this.txPW.Text = "2";
             this.txPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPW.WordWrap = false;
-            this.txPW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPQ
             // 
@@ -1729,7 +1729,7 @@
             this.txPQ.Text = "1";
             this.txPQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPQ.WordWrap = false;
-            this.txPQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPE
             // 
@@ -1745,7 +1745,7 @@
             this.txPE.Text = "3";
             this.txPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPE.WordWrap = false;
-            this.txPE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // txPR
             // 
@@ -1761,7 +1761,7 @@
             this.txPR.Text = "4";
             this.txPR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPR.WordWrap = false;
-            this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SkillRota_OnlyDigit);
             // 
             // buttonLoadRotation
             // 
@@ -2439,14 +2439,14 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Rotation;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label lbPF;
+        private System.Windows.Forms.Label lbPD;
+        private System.Windows.Forms.Label lbPS;
+        private System.Windows.Forms.Label lbPA;
+        private System.Windows.Forms.Label lbPR;
+        private System.Windows.Forms.Label lbPE;
+        private System.Windows.Forms.Label lbPW;
+        private System.Windows.Forms.Label lbPQ;
         private System.Windows.Forms.TextBox txPA;
         private System.Windows.Forms.TextBox txPS;
         private System.Windows.Forms.TextBox txPD;

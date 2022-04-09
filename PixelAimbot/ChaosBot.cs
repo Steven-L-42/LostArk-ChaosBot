@@ -1973,11 +1973,7 @@ namespace PixelAimbot
                 MessageBox.Show(skill.Key + " " + skill.Value);
             }
 
-         
-        
-
-
-                List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
+            List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
             Layout_Keyboard QWERTZ = new Layout_Keyboard
             {
                 LAYOUTS = "QWERTZ",
@@ -2100,6 +2096,7 @@ namespace PixelAimbot
         private void checkIsDigit(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
         }
 
         private void checkIsLetter(object sender, KeyPressEventArgs e)
@@ -2235,6 +2232,15 @@ namespace PixelAimbot
             lb2S.Text = currentLayout.S.ToString().Replace("VK_", "");
             lb2D.Text = currentLayout.D.ToString().Replace("VK_", "");
             lb2F.Text = currentLayout.F.ToString().Replace("VK_", "");
+
+            lbPQ.Text = currentLayout.Q.ToString().Replace("VK_", "");
+            lbPW.Text = currentLayout.W.ToString().Replace("VK_", "");
+            lbPE.Text = currentLayout.E.ToString().Replace("VK_", "");
+            lbPR.Text = currentLayout.R.ToString().Replace("VK_", "");
+            lbPA.Text = currentLayout.A.ToString().Replace("VK_", "");
+            lbPS.Text = currentLayout.S.ToString().Replace("VK_", "");
+            lbPD.Text = currentLayout.D.ToString().Replace("VK_", "");
+            lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
 
         public async void Q_Cooldown(CancellationToken token)
@@ -2519,6 +2525,14 @@ namespace PixelAimbot
                     rotation.cS = txS.Text;
                     rotation.cD = txD.Text;
                     rotation.cF = txF.Text;
+                    rotation.cQ = txPQ.Text;
+                    rotation.cW = txPW.Text;
+                    rotation.cE = txPE.Text;
+                    rotation.cR = txPR.Text;
+                    rotation.cA = txPA.Text;
+                    rotation.cS = txPS.Text;
+                    rotation.cD = txPD.Text;
+                    rotation.cF = txPF.Text;
 
                     rotation.Save(comboBoxRotations.Text);
                     MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -2577,6 +2591,15 @@ namespace PixelAimbot
                 txS.Text = rotation.cS;
                 txD.Text = rotation.cD;
                 txF.Text = rotation.cF;
+                txPQ.Text = rotation.cQ;
+                txPW.Text = rotation.cW;
+                txPE.Text = rotation.cE;
+                txPR.Text = rotation.cR;
+                txPA.Text = rotation.cA;
+                txPS.Text = rotation.cS;
+                txPD.Text = rotation.cD;
+                txPF.Text = rotation.cF;
+
                 MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
         }
@@ -2586,6 +2609,13 @@ namespace PixelAimbot
             refreshRotationCombox();
         }
 
-       
+        private void SkillRota_OnlyDigit(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
+          
+
+           
+        }
     }
 }
