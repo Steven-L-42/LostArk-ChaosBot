@@ -646,5 +646,17 @@ namespace PixelAimbot.Properties {
                 this["txtLOGOUT"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxSoulfist {
+            get {
+                return ((bool)(this["chBoxSoulfist"]));
+            }
+            set {
+                this["chBoxSoulfist"] = value;
+            }
+        }
     }
 }

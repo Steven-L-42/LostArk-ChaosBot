@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "1.6.0r";
+        public static string version { get; set; } = "1.6.2r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
@@ -92,6 +92,9 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxautologout { get; set; } = false;
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
+        public bool chBoxSoulfist { get; set; } = false;
+
+
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";
         public bool chBoxDeathblade { get; set; } = false;

@@ -36,11 +36,13 @@ namespace PixelAimbot
         private bool _Deathblade = false;
         private bool _Sharpshooter = false;
         private bool _Sorcerer = false;
+        private bool _Soulfist = false;
+
+
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
         private bool _ULTIMATE_HEAL = false;
-
 
         //SKILL AND COOLDOWN//
         private bool _Q = true;
@@ -251,7 +253,7 @@ namespace PixelAimbot
                 _Deathblade = false;
                 _Sharpshooter = false;
                 _Sorcerer = false;
-
+                _Soulfist = false;
 
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -383,6 +385,7 @@ namespace PixelAimbot
         private System.Timers.Timer timer;
         private int fightSequence = 1;
         private int searchSequence = 1;
+        private int fightOnSecondAbility = 1;
 
         public void REPAIRTIMER()
         {
@@ -1123,6 +1126,7 @@ namespace PixelAimbot
                     _Deathblade = true;
                     _Sharpshooter = true;
                     _Sorcerer = true;
+                    _Soulfist = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1186,6 +1190,9 @@ namespace PixelAimbot
                     _Paladin = true;
                     _Berserker = true;
                     _Deathblade = true;
+                    _Sharpshooter = true;
+                    _Sorcerer = true;
+                    _Soulfist = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1197,6 +1204,7 @@ namespace PixelAimbot
                     _Y = true;
                     _Z = true;
                     _FIGHT = true;
+                    _ULTIMATE_HEAL = true;
 
                     var t4 = Task.Run(() => FLOOR1FIGHT(token));
                     await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
@@ -1245,7 +1253,6 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-                await Task.Delay(500);
                 while (_FIGHT == true)
                 {
 
@@ -1266,15 +1273,31 @@ namespace PixelAimbot
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
                                 {
                                     sim.Keyboard.KeyDown(skill.Key);
-                                    await Task.Delay(1);
+                                    await Task.Delay(10);
                                 }
                                 sim.Keyboard.KeyUp(skill.Key);
                                 setKeyCooldown(skill.Key); // Set Cooldown
                                 var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
+                                au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalcRes(80, false));
+                                fightOnSecondAbility++;
+                                if (fightOnSecondAbility == 3)
+                                {
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
+                                        au3.Send("{C}");
 
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                                    fightOnSecondAbility = 1;
+                                }
+                               
 
                             }
                         }
@@ -1312,7 +1335,7 @@ namespace PixelAimbot
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            await Task.Delay(10);
                                         }
                                         _Shadowhunter = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
@@ -1348,7 +1371,7 @@ namespace PixelAimbot
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            await Task.Delay(10);
                                         }
                                         _Paladin = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
@@ -1380,10 +1403,12 @@ namespace PixelAimbot
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            await Task.Delay(10);
                                         }
                                         _Deathblade = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                     }
                                 }
@@ -1412,10 +1437,14 @@ namespace PixelAimbot
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            await Task.Delay(10);
                                         }
                                         _Sharpshooter = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
+
+                                        var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                     }
                                 }
@@ -1443,12 +1472,42 @@ namespace PixelAimbot
                                         for (int t = 0; t < 50; t++)
                                         {
                                             sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            await Task.Delay(10);
                                         }
                                         _Sorcerer = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                     }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            else
+                            if (chBoxSoulfist.Checked == true && _Soulfist == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    
+                                      
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Soulfist = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                                    
                                 }
                                 catch (AggregateException)
                                 {
@@ -2564,6 +2623,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtLOGOUT = "";
                 Properties.Settings.Default.autorepair = "10";
                 Properties.Settings.Default.chBoxShadowhunter = false;
+                Properties.Settings.Default.chBoxSoulfist = false;
                 Properties.Settings.Default.chBoxBerserker = false;
                 Properties.Settings.Default.chboxPaladin = false;
                 Properties.Settings.Default.RestartTimer = "25";
@@ -2622,6 +2682,7 @@ namespace PixelAimbot
                 chBoxDeathblade.Checked = Properties.Settings.Default.chBoxDeathblade;
                 chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
                 chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
+                chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
                 txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
                 chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
@@ -2697,6 +2758,27 @@ namespace PixelAimbot
             lbPS.Text = currentLayout.S.ToString().Replace("VK_", "");
             lbPD.Text = currentLayout.D.ToString().Replace("VK_", "");
             lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
+        }
+
+        public async void SharpshooterSecondPress(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(3000, token);
+                var sim = new InputSimulator();
+                sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
         }
 
         public async void SkillCooldown(CancellationToken token, VirtualKeyCode key)
@@ -2870,6 +2952,7 @@ namespace PixelAimbot
                     rotation.chBoxBerserker = (bool)chBoxBerserker.Checked;
                     rotation.chBoxDeathblade = (bool)chBoxDeathblade.Checked;
                     rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
+                    rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.RestartTimer = txtRestartTimer.Text;
                     rotation.chBoxSaveAll = chBoxSaveAll.Checked;
@@ -2935,7 +3018,7 @@ namespace PixelAimbot
                 chBoxBerserker.Checked = rotation.chBoxBerserker;
                 chBoxDeathblade.Checked = rotation.chBoxDeathblade;
                 chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
-
+                chBoxSoulfist.Checked = rotation.chBoxSoulfist;
                 txtLOGOUT.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txtHeal10.Text = rotation.txtHeal10;
@@ -3001,5 +3084,18 @@ namespace PixelAimbot
             }.ToList();
         }
 
+        private void checkBoxHeal10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = false;
+            }
+            else
+            if (!checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = true;
+                txtHeal10.Text = "";
+            }
+        }
     }
 }
