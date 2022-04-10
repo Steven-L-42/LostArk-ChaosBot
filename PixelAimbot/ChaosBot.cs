@@ -1740,6 +1740,7 @@ namespace PixelAimbot
             }
             catch { }
         }
+
         private void setKeyCooldown(VirtualKeyCode key)
         {
             switch (key)
