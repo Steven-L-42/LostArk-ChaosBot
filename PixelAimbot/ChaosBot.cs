@@ -522,7 +522,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(recalcRes(917, false), recalcRes(334, true), recalcRes(1477, false), recalcRes(746, true), 0xD9DAD9);
+                            object walk = au3.PixelSearch(recalcRes(917), recalcRes(334, false), recalcRes(1477), recalcRes(746, false), 0xD9DAD9);
 
                             if (walk.ToString() != "1")
                             {
