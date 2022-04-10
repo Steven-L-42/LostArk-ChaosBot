@@ -73,18 +73,6 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("RIGHT")]
-        public string right {
-            get {
-                return ((string)(this["right"]));
-            }
-            set {
-                this["right"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
         public string q {
             get {
@@ -752,6 +740,42 @@ namespace PixelAimbot.Properties {
             }
             set {
                 this["chBoxDoubleF"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxActivateF3 {
+            get {
+                return ((bool)(this["chBoxActivateF3"]));
+            }
+            set {
+                this["chBoxActivateF3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public string txtDungeon3search {
+            get {
+                return ((string)(this["txtDungeon3search"]));
+            }
+            set {
+                this["txtDungeon3search"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public string txtDungeon3 {
+            get {
+                return ((string)(this["txtDungeon3"]));
+            }
+            set {
+                this["txtDungeon3"] = value;
             }
         }
     }

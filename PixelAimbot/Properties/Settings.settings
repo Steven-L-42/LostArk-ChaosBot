@@ -14,9 +14,6 @@
     <Setting Name="left" Type="System.String" Scope="User">
       <Value Profile="(Default)">LEFT</Value>
     </Setting>
-    <Setting Name="right" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RIGHT</Value>
-    </Setting>
     <Setting Name="q" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
@@ -184,6 +181,15 @@
     </Setting>
     <Setting Name="chBoxDoubleF" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chBoxActivateF3" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="txtDungeon3search" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="txtDungeon3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">20</Value>
     </Setting>
   </Settings>
 </SettingsFile>
