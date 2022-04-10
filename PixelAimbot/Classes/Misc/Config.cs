@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "1.6.4r";
+        public static string version { get; set; } = "1.6.7r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
@@ -100,13 +100,15 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxDeathblade { get; set; } = false;
         public bool chBoxSorcerer { get; set; } = false;
         public bool chBoxSharpshooter { get; set; } = false;
+        public bool chBoxActivateF3 { get; set; } = false;
 
-
-
+        public string txtLEFT { get; set; } = "LEFT";
         public string RestartTimer { get; set; } = "25";
         public bool chBoxSaveAll { get; set; } = false;
         public bool chBoxActivateF2 { get; set; } = false;
-        public string txtDungeon2search { get; set; } = "7";
+        public string txtDungeon2search { get; set; } = "5";
+        public string txtDungeon3search { get; set; } = "10";
+        public string txtDungeon3 { get; set; } = "20";
         public string txtDungeon2 { get; set; } = "18";
         public string cQ { get; set; } = "500";
         public string cW { get; set; } = "500";
@@ -124,6 +126,17 @@ namespace PixelAimbot.Classes.Misc
         public string pS { get; set; } = "6";
         public string pD { get; set; } = "7";
         public string pF { get; set; } = "8";
+        public bool chBoxDoubleQ { get; set; } = false;
+        public bool chBoxDoubleW { get; set; } = false;
+        public bool chBoxDoubleE { get; set; } = false;
+        public bool chBoxDoubleR { get; set; } = false;
+        public bool chBoxDoubleA { get; set; } = false;
+        public bool chBoxDoubleS { get; set; } = false;
+        public bool chBoxDoubleD { get; set; } = false;
+        public bool chBoxDoubleF { get; set; } = false;
+
+
+
 
 
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
