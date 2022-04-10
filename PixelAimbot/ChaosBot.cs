@@ -3479,7 +3479,7 @@ namespace PixelAimbot
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
                     rotation.txtDungeon3search = txtDungeon3search.Text;
                     rotation.txtDungeon3 = txtDungeon3.Text;
-                      
+                    rotation.txtLEFT = txtLEFT.Text;
 
                     rotation.txtDungeon2search = txtDungeon2search.Text;
                     rotation.txtDungeon2 = txtDungeon2.Text;
@@ -3537,7 +3537,7 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
-
+                txtLEFT.Text = rotation.left;
                 txtDungeon.Text = rotation.dungeontimer;
                 txtHeal30.Text = rotation.instant;
                 txtHeal70.Text = rotation.potion;

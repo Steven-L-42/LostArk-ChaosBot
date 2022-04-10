@@ -102,7 +102,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxSharpshooter { get; set; } = false;
         public bool chBoxActivateF3 { get; set; } = false;
 
-
+        public string txtLEFT { get; set; } = "LEFT";
         public string RestartTimer { get; set; } = "25";
         public bool chBoxSaveAll { get; set; } = false;
         public bool chBoxActivateF2 { get; set; } = false;
