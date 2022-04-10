@@ -504,6 +504,12 @@
     <Content Include="Resources\revive.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\shardmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\shard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\New_Login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

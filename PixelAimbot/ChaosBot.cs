@@ -34,7 +34,8 @@ namespace PixelAimbot
         private bool _Sorcerer = false;
         private bool _Soulfist = false;
 
-
+        private bool _FloorActivate = false;
+        private bool _Floor3Activate = false;
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
@@ -382,7 +383,9 @@ namespace PixelAimbot
 
         private System.Timers.Timer timer;
         private int fightSequence = 1;
+        private int fightSequence2 = 1;
         private int searchSequence = 1;
+        private int searchSequence2 = 1;
         private int fightOnSecondAbility = 1;
 
         public void REPAIRTIMER()
@@ -482,8 +485,13 @@ namespace PixelAimbot
         {
             try
             {
+                _FloorActivate = false;
+                _Floor3Activate = false;
                 searchSequence = 1;
+                searchSequence2 = 1;
                 fightSequence = 1;
+                fightSequence2 = 1;
+
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
@@ -721,7 +729,6 @@ namespace PixelAimbot
             catch { }
         }
 
-
         private async Task SEARCHPORTAL(CancellationToken token)
         {
             try
@@ -898,14 +905,12 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-
-
-
-
-
-
-
+                            float shardthreshold = 1f;
                             float threshold = 0.7f;
+                            var shardTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/shard.png");
+                            var shardMask =
+                            new Image<Bgr, byte>(resourceFolder + "/shardmask.png");
                             var enemyTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                             var enemyMask =
@@ -925,31 +930,31 @@ namespace PixelAimbot
 
                             Point myPosition = new Point(150, 128);
                             Point screenResolution = new Point(1920, 1080);
-
+                            var shardDetector = new EnemyDetector(shardTemplate, shardMask, shardthreshold);
                             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
                             var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                            var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                            var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
+                            var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
                             var screenPrinter = new PrintScreen();
 
                             screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                             var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var shard = shardDetector.GetClosestEnemy(screenCapture);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             var Boss = BossDetector.GetClosestEnemy(screenCapture);
                             var mob = mobDetector.GetClosestEnemy(screenCapture);
                             var portal = portalDetector.GetClosestEnemy(screenCapture);
 
-
-                            if (Boss.HasValue)
+                            if (shard.HasValue)
                             {
                                 CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
                                     new MCvScalar(255));
                                 double x1 = 963f / myPosition.X;
                                 double y1 = 551f / myPosition.Y;
 
-                                var x2 = x1 * Boss.Value.X;
-                                var y2 = y1 * Boss.Value.Y;
+                                var x2 = x1 * shard.Value.X;
+                                var y2 = y1 * shard.Value.Y;
                                 if (x2 <= 963)
                                     x2 = x2 * 0.9f;
                                 else
@@ -959,7 +964,7 @@ namespace PixelAimbot
                                 else
                                     y2 = y2 * 1.1;
                                 var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                 if (txtLEFT.Text == "LEFT")
                                 {
@@ -972,16 +977,16 @@ namespace PixelAimbot
                             }
                             else
                             {
-                                if (enemy.HasValue)
+                                if (Boss.HasValue)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
-                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
                                         new MCvScalar(255));
                                     double x1 = 963f / myPosition.X;
                                     double y1 = 551f / myPosition.Y;
 
-                                    var x2 = x1 * enemy.Value.X;
-                                    var y2 = y1 * enemy.Value.Y;
+                                    var x2 = x1 * Boss.Value.X;
+                                    var y2 = y1 * Boss.Value.Y;
                                     if (x2 <= 963)
                                         x2 = x2 * 0.9f;
                                     else
@@ -991,7 +996,7 @@ namespace PixelAimbot
                                     else
                                         y2 = y2 * 1.1;
                                     var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                     if (txtLEFT.Text == "LEFT")
                                     {
@@ -1004,16 +1009,16 @@ namespace PixelAimbot
                                 }
                                 else
                                 {
-                                    if (mob.HasValue)
+                                    if (enemy.HasValue)
                                     {
                                         CvInvoke.Rectangle(screenCapture,
-                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                             new MCvScalar(255));
                                         double x1 = 963f / myPosition.X;
                                         double y1 = 551f / myPosition.Y;
 
-                                        var x2 = x1 * mob.Value.X;
-                                        var y2 = y1 * mob.Value.Y;
+                                        var x2 = x1 * enemy.Value.X;
+                                        var y2 = y1 * enemy.Value.Y;
                                         if (x2 <= 963)
                                             x2 = x2 * 0.9f;
                                         else
@@ -1023,8 +1028,7 @@ namespace PixelAimbot
                                         else
                                             y2 = y2 * 1.1;
                                         var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
-
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                         if (txtLEFT.Text == "LEFT")
                                         {
@@ -1035,11 +1039,43 @@ namespace PixelAimbot
                                             inputSimulator.Mouse.RightButtonClick();
                                         }
                                     }
+                                    else
+                                    {
+                                        if (mob.HasValue)
+                                        {
+                                            CvInvoke.Rectangle(screenCapture,
+                                                new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                                new MCvScalar(255));
+                                            double x1 = 963f / myPosition.X;
+                                            double y1 = 551f / myPosition.Y;
+
+                                            var x2 = x1 * mob.Value.X;
+                                            var y2 = y1 * mob.Value.Y;
+                                            if (x2 <= 963)
+                                                x2 = x2 * 0.9f;
+                                            else
+                                                x2 = x2 * 1.1f;
+                                            if (y2 <= 551)
+                                                y2 = y2 * 0.9;
+                                            else
+                                                y2 = y2 * 1.1;
+                                            var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
+
+                                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                            if (txtLEFT.Text == "LEFT")
+                                            {
+                                                inputSimulator.Mouse.LeftButtonClick();
+                                            }
+                                            else
+                                            {
+                                                inputSimulator.Mouse.RightButtonClick();
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-
-
-
+                            }      
+                                
 
                             Random random = new Random();
                             var sleepTime = random.Next(150, 255);
@@ -1088,6 +1124,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+                    _FloorActivate = true;
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -1118,6 +1155,8 @@ namespace PixelAimbot
                     else
                    if (!chBoxActivateF2.Checked && _FIGHT == false)
                     {
+                        _ULTIMATE_HEAL = false;
+                        _FloorActivate = false;
                         var t12 = Task.Run(() => LEAVEDUNGEON(token));
                         await Task.WhenAny(new[] { t12 });
                     }
@@ -1154,6 +1193,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
                     fightSequence++;
+                    _FloorActivate = true;
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -1175,8 +1215,9 @@ namespace PixelAimbot
 
                     _FIGHT = false;
 
-                    if (fightSequence == 7)
+                    if (fightSequence == 8 && !chBoxActivateF3.Checked)
                     {
+                        _FloorActivate = false;
                         _ULTIMATE_HEAL = false;
                         var t12 = Task.Run(() => LEAVEDUNGEON(token));
                         await Task.WhenAny(new[] { t12 });
@@ -1188,6 +1229,84 @@ namespace PixelAimbot
                         var t13 = Task.Run(() => SEARCHBOSS(token));
                         await Task.WhenAny(new[] { t13 });
                     }
+                    else
+                    if (fightSequence < 8)
+                    {
+
+                        var t13 = Task.Run(() => FLOOR2PORTAL(token));
+                        await Task.WhenAny(new[] { t13 });
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        private async void FLOOR3FIGHT_Timer(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+                    fightSequence2++;
+                    _Floor3Activate = true;
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    _Deathblade = true;
+                    _Q = true;
+                    _W = true;
+                    _E = true;
+                    _R = true;
+                    _A = true;
+                    _S = true;
+                    _D = true;
+                    _F = true;
+                    _Y = true;
+                    _Z = true;
+                    _FIGHT = true;
+
+                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
+                    await Task.Delay(int.Parse(txtDungeon3.Text) * 1000);
+
+                    _FIGHT = false;
+
+                    if (fightSequence2 == 8)
+                    {
+                        _FloorActivate = false;
+                        _Floor3Activate = false;
+                        _ULTIMATE_HEAL = false;
+                        var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
+                    else
+                    if (fightSequence2 < 8)
+                    {
+
+                        var t13 = Task.Run(() => SEARCHBOSS2(token));
+                        await Task.WhenAny(new[] { t13 });
+                    }
+                   
                 }
                 catch (AggregateException)
                 {
@@ -1227,10 +1346,55 @@ namespace PixelAimbot
                             
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-
+                            
                             object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
+                            object shardHit = au3.PixelSearch(650, 300, 1269, 797, 0x630E17, 50);
+                            if (shardHit.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _Floor3Activate == true)
+                            {   
+                                object[] shardHitCoord = (object[])shardHit;
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                var sim = new InputSimulator();
+                                for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
+                                {
+                                    sim.Keyboard.KeyDown(skill.Key);
+                                    await Task.Delay(10);
+                                }
+                                sim.Keyboard.KeyUp(skill.Key);
+                                sim.Keyboard.KeyPress(skill.Key);
+                                if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                {
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
 
-                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true)
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+
+                                }
+                                setKeyCooldown(skill.Key); // Set Cooldown
+                                var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
+                                au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
+                                fightOnSecondAbility++;
+                                if (fightOnSecondAbility == 3)
+                                {
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    fightOnSecondAbility = 1;
+                                }
+
+                            }
+
+
+                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _FloorActivate == true)
                             {
                                 object[] fightCoord = (object[])fight;
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
@@ -1244,6 +1408,8 @@ namespace PixelAimbot
                                 sim.Keyboard.KeyPress(skill.Key);
                                 if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                 {
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+
                                     sim.Keyboard.KeyPress(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
@@ -1805,12 +1971,13 @@ namespace PixelAimbot
                 catch { }
         } // OLD
 
-        private async Task FLOOR2PORTAL(CancellationToken token)
+        private async Task SEARCHBOSS2(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: search enemy..."));
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -1819,50 +1986,75 @@ namespace PixelAimbot
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
+                    if (searchSequence2 == 1)
+                    {
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                        au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
+                        searchSequence2++;
+                    }
 
-                    for (int i = 0; i <= 15; i++)
+                    for (int i = 0; i < int.Parse(txtDungeon3search.Text); i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Walk to Portal..."));
-
+                       
                             float threshold = 0.7f;
+                            var shardTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/shard.png");
+                            var shardMask =
+                            new Image<Bgr, byte>(resourceFolder + "/shardmask.png");
+                            var enemyTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/enemy.png");
+                            var enemyMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                            var BossTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            var BossMask =
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            var mobTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/mob1.png");
+                            var mobMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
 
-                            var portalTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
-                            var portalMask =
-                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
                             Point myPosition = new Point(150, 128);
                             Point screenResolution = new Point(1920, 1080);
+                            var shardDetector = new EnemyDetector(shardTemplate, shardMask, threshold);
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
 
-                            var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
                             var screenPrinter = new PrintScreen();
 
                             screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                             var screenCapture = new Image<Bgr, byte>("screen.png");
-                            var portal = portalDetector.GetClosestEnemy(screenCapture);
+                            var shard = shardDetector.GetClosestEnemy(screenCapture);
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                            var mob = mobDetector.GetClosestEnemy(screenCapture);
 
-                            if (portal.HasValue)
+
+                            if (shard.HasValue)
                             {
                                 CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
+                                    new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
                                     new MCvScalar(255));
                                 double x1 = 963f / myPosition.X;
                                 double y1 = 551f / myPosition.Y;
 
-                                var x2 = x1 * portal.Value.X;
-                                var y2 = y1 * portal.Value.Y;
+                                var x2 = x1 * shard.Value.X;
+                                var y2 = y1 * shard.Value.Y;
                                 if (x2 <= 963)
-                                    x2 = x2 * 0.9f;
+                                    x2 = x2 * 0.8f;
                                 else
-                                    x2 = x2 * 1.1f;
+                                    x2 = x2 * 1.2f;
                                 if (y2 <= 551)
-                                    y2 = y2 * 0.9;
+                                    y2 = y2 * 0.8;
                                 else
-                                    y2 = y2 * 1.1;
+                                    y2 = y2 * 1.2;
                                 var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                 if (txtLEFT.Text == "LEFT")
                                 {
@@ -1875,7 +2067,73 @@ namespace PixelAimbot
                             }
                             else
                             {
+                                if (enemy.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new MCvScalar(255));
+                                    double x1 = 963f / myPosition.X;
+                                    double y1 = 551f / myPosition.Y;
+
+                                    var x2 = x1 * enemy.Value.X;
+                                    var y2 = y1 * enemy.Value.Y;
+                                    if (x2 <= 963)
+                                        x2 = x2 * 0.9f;
+                                    else
+                                        x2 = x2 * 1.1f;
+                                    if (y2 <= 551)
+                                        y2 = y2 * 0.9;
+                                    else
+                                        y2 = y2 * 1.1;
+                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        inputSimulator.Mouse.LeftButtonClick();
+                                    }
+                                    else
+                                    {
+                                        inputSimulator.Mouse.RightButtonClick();
+                                    }
+                                }
+                                else
+                                {
+                                    if (mob.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        double x1 = 963f / myPosition.X;
+                                        double y1 = 551f / myPosition.Y;
+
+                                        var x2 = x1 * mob.Value.X;
+                                        var y2 = y1 * mob.Value.Y;
+                                        if (x2 <= 963)
+                                            x2 = x2 * 0.9f;
+                                        else
+                                            x2 = x2 * 1.1f;
+                                        if (y2 <= 551)
+                                            y2 = y2 * 0.9;
+                                        else
+                                            y2 = y2 * 1.1;
+                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
+
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            inputSimulator.Mouse.LeftButtonClick();
+                                        }
+                                        else
+                                        {
+                                            inputSimulator.Mouse.RightButtonClick();
+                                        }
+                                    }
+                                }
+
                             }
+
 
                             Random random = new Random();
                             var sleepTime = random.Next(150, 255);
@@ -1901,7 +2159,153 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                var t12 = Task.Run(() => FLOOR1FIGHT(token));
+                FLOOR3FIGHT_Timer(token);
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        private async Task FLOOR2PORTAL(CancellationToken token)
+        {
+            try
+            {
+
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
+
+
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    for (int i = 0; i <= 20; i++)
+                    {
+                        try
+                        {
+                            au3.Send("{G}");
+                            au3.Send("{G}");
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Search Portal..."));
+                            // Tunable variables
+                            float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                            var enemyTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
+                            var enemyMask =
+                                new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
+                                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                            Point myPosition = new Point(150, 128);
+                            Point screenResolution = new Point(1920, 1080);
+
+                            // Main program loop
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                            var screenPrinter = new PrintScreen();
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            if (enemy.HasValue)
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Portal found..."));
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                    new MCvScalar(255));
+
+                                double x1 = 963f / myPosition.X;
+                                double y1 = 551f / myPosition.Y;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var x2 = x1 * enemy.Value.X;
+                                var y2 = y1 * enemy.Value.Y;
+                                if (x2 <= 963)
+                                    x2 = x2 * 0.68f;
+                                else
+                                    x2 = x2 * 1.38f;
+                                if (y2 <= 551)
+                                    y2 = y2 * 0.68;
+                                else
+                                    y2 = y2 * 1.38;
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
+
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+                                au3.Send("{G}");
+
+
+
+                                au3.Send("{G}");
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    inputSimulator.Mouse.LeftButtonClick();
+                                }
+                                else
+                                {
+                                    inputSimulator.Mouse.RightButtonClick();
+                                }
+
+                                au3.Send("{G}");
+
+                                au3.Send("{G}");
+                            }
+                            else
+                            {
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        Random random = new Random();
+                        var sleepTime = random.Next(300, 500);
+                        Thread.Sleep(sleepTime);
+                        au3.Send("{G}");
+                        au3.Send("{G}");
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+                var t12 = Task.Run(() => SEARCHBOSS2(token));
                 await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
@@ -1913,6 +2317,7 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
+
         }
 
         private async Task LEAVEDUNGEON(CancellationToken token)
