@@ -1189,11 +1189,10 @@ namespace PixelAimbot
 
                         _FIGHT = false;
 
-                        if (fightSequence == 9 && !chBoxActivateF3.Checked)
+                        if (fightSequence == 9 && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
-                            _FloorActivate = false;
-                            _ULTIMATE_HEAL = false;
+
                             var t12 = Task.Run(() => LEAVEDUNGEON(token));
                             await Task.WhenAny(new[] { t12 });
                         }
@@ -1205,7 +1204,7 @@ namespace PixelAimbot
                             await Task.WhenAny(new[] { t13 });
                         }
                         else
-                        if (fightSequence < 9 && chBoxActivateF3.Checked)
+                        if (fightSequence < 9 && chBoxActivateF3.Checked == true)
                         {
 
                             var t13 = Task.Run(() => FLOOR2PORTAL(token));
@@ -1337,6 +1336,7 @@ namespace PixelAimbot
                                 object[] shardHitCoord = (object[])shardHit;
                                
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
                                 var sim = new InputSimulator();
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
                                 {
@@ -2240,6 +2240,8 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+                    _FloorActivate = false;
+                    _ULTIMATE_HEAL = false;
                     _ALLFLOORTIMER = false;
                     _Shadowhunter = true;
                     _Paladin = true;
@@ -3502,12 +3504,16 @@ namespace PixelAimbot
             {
                 txtDungeon2search.ReadOnly = false;
                 txtDungeon2.ReadOnly = false;
+                txtDungeon2Iteration.ReadOnly = false;
+
             }
             else
                if (!chBoxActivateF2.Checked)
             {
                 txtDungeon2search.ReadOnly = true;
                 txtDungeon2.ReadOnly = true;
+                txtDungeon2Iteration.ReadOnly = true;
+
             }
         }
 
@@ -3517,13 +3523,17 @@ namespace PixelAimbot
             {
                 txtDungeon3search.ReadOnly = false;
                 txtDungeon3.ReadOnly = false;
+                txtDungeon3Iteration.ReadOnly = false;
             }
             else
               if (!chBoxActivateF3.Checked)
             {
                 txtDungeon3search.ReadOnly = true;
                 txtDungeon3.ReadOnly = true;
+                txtDungeon3Iteration.ReadOnly = true;
+
             }
         }
+
     }
 }
