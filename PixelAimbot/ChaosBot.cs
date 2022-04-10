@@ -387,6 +387,7 @@ namespace PixelAimbot
         private int fightSequence2 = 1;
         private int searchSequence = 1;
         private int searchSequence2 = 1;
+        private int CompleteIteration = 1;
         private int fightOnSecondAbility = 1;
 
         public void REPAIRTIMER()
@@ -434,16 +435,10 @@ namespace PixelAimbot
                     {
                         try
                         {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
-
-                            if (move1.ToString() != "1")
-                            {
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1,10);
                                 Thread.Sleep(500);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                            }
+                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1,10);
+
                         }
                         catch (AggregateException)
                         {
@@ -486,6 +481,7 @@ namespace PixelAimbot
         {
             try
             {
+                CompleteIteration = 1;
                 _ChaosComplete = false;
                 _FloorActivate = false;
                 _Floor3Activate = false;
@@ -501,36 +497,17 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(917, 334, 1477, 746, 0xD9DAD9);
+                            await Task.Delay(100, token);                           
+                                au3.Send("{G}");
 
-                            if (walk.ToString() != "1")
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
 
-                                object[] walkCoord = (object[])walk;
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
                                 Thread.Sleep(500);
-                            }
+                            
                         }
                         catch (AggregateException)
                         {
@@ -544,19 +521,9 @@ namespace PixelAimbot
                         ////////////////////////////////HIER FOLGT ENTER 2
                         try
                         {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk2 = au3.PixelSearch(1406, 841, 1673, 875, 0x856413, 5);
+                            au3.MouseClick("LEFT", 1467, 858, 1, 10);
 
-                            if (walk2.ToString() != "1")
-                            {
-                                object[] walk2Coord = (object[])walk2;
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                Thread.Sleep(500);
-                            }
+                            Thread.Sleep(500);
                         }
                         catch (AggregateException)
                         {
@@ -572,15 +539,15 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object accept = au3.PixelSearch(861, 590, 954, 616, 0x334454, 8);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
 
-                            if (accept.ToString() != "1")
+                            if (walk.ToString() != "1")
                             {
-                                object[] acceptCoord = (object[])accept;
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", 903, 605, 1, 5);
                             }
+
+
                         }
                         catch (AggregateException)
                         {
@@ -1270,6 +1237,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+                    CompleteIteration = 1;
                     fightSequence2++;
                     _Floor3Activate = true;
                     _Shadowhunter = true;
@@ -1358,8 +1326,8 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
                             
-                            object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-                            object shardHit = au3.PixelSearch(650, 300, 1269, 797, 0x630E17, 10);
+                            object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
+                            object shardHit = au3.PixelSearch(600, 250, 1319, 843, 0x630E17, 10);
                             if (shardHit.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _Floor3Activate == true)
                             {   
                                 object[] shardHitCoord = (object[])shardHit;
@@ -2045,20 +2013,15 @@ namespace PixelAimbot
                             var Boss = BossDetector.GetClosestEnemy(screenCapture);
                             var mob = mobDetector.GetClosestEnemy(screenCapture);
 
-                            object finish = au3.PixelSearch(906, 951, 1017, 972, 0x2B3641, 4);
-                            if (finish.ToString() != "1" && _FIGHT == true && _Floor3Activate == true)
+                            if (CompleteIteration == 1)
                             {
-                                object[] finishCoord = (object[])finish;
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Chaos Dungeon Complete!"));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Complete!"));
                                 au3.MouseClick("LEFT", 963, 961, 3, 10);
                                 _ChaosComplete = true;
-
-
+                                CompleteIteration++;
                             }
                             else
                             {
-
-
                                 if (shard.HasValue)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
@@ -2159,6 +2122,7 @@ namespace PixelAimbot
 
                                 }
                             }
+                            
 
                             Random random = new Random();
                             var sleepTime = random.Next(150, 255);
@@ -2530,14 +2494,12 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", 903, 605, 1, 5);
                             }
                         }
                         catch { }
@@ -2545,14 +2507,12 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", 903, 605, 1, 5);
                             }
                         }
                         catch (AggregateException)
@@ -2568,14 +2528,12 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseClick("LEFT", 903, 605, 1, 5);
                             }
                         }
                         catch (AggregateException)
@@ -3123,8 +3081,6 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtDungeon3search = "10";
                 Properties.Settings.Default.chBoxActivateF3 = false;
       
-
-
                 Properties.Settings.Default.chBoxSharpshooter = false;
                 Properties.Settings.Default.chBoxSorcerer = false;
                 Properties.Settings.Default.chBoxDeathblade = false;
@@ -3138,8 +3094,6 @@ namespace PixelAimbot
                 Properties.Settings.Default.RD = "7";
                 Properties.Settings.Default.RF = "8";
                 
-
-
                 Properties.Settings.Default.cQ = "500";
                 Properties.Settings.Default.cW = "500";
                 Properties.Settings.Default.cE = "500";
@@ -3165,7 +3119,6 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleS = false;
                 Properties.Settings.Default.chBoxDoubleD = false;
                 Properties.Settings.Default.chBoxDoubleF = false;
-
 
                 Properties.Settings.Default.Save();
 
@@ -3229,15 +3182,6 @@ namespace PixelAimbot
                 txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
                 txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
                 chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
-
-
-
-
-
-
-
-
-
                     }
             catch { }
         }
