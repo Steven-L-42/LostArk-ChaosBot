@@ -160,7 +160,7 @@ namespace PixelAimbot
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("UPDATE 1.6.9r: UPDATENOTES");
+           
             if (chBoxRemember.Checked == true)
             {
                 

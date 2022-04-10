@@ -1205,7 +1205,7 @@ namespace PixelAimbot
                             await Task.WhenAny(new[] { t13 });
                         }
                         else
-                        if (fightSequence < 9)
+                        if (fightSequence < 9 && chBoxActivateF3.Checked)
                         {
 
                             var t13 = Task.Run(() => FLOOR2PORTAL(token));
@@ -1331,10 +1331,11 @@ namespace PixelAimbot
                             
                             object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
                             object shardHit = au3.PixelSearch(600, 250, 1319, 843, 0x630E17, 10);
+
                             if (shardHit.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _Floor3Activate == true)
                             {   
                                 object[] shardHitCoord = (object[])shardHit;
-                                au3.MouseClick("LEFT", (int)shardHitCoord[0], (int)shardHitCoord[1] + 80, 1, 5);
+                               
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                 var sim = new InputSimulator();
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
@@ -1344,6 +1345,8 @@ namespace PixelAimbot
                                 }
                                 sim.Keyboard.KeyUp(skill.Key);
                                 sim.Keyboard.KeyPress(skill.Key);
+
+
                                 if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                 {
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
@@ -1995,24 +1998,29 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object complete = au3.PixelSearch(31, 97, 81, 108, 0x8A412C,5);
-                            if (complete.ToString() != "1")
+                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
+
+                            if (walk.ToString() != "1")
                             {
-                                object[] completeCoord = (object[])complete;
-                                au3.MouseClick("LEFT", (int)completeCoord[0], (int)completeCoord[1], 1, 5);
-                                _ALLFLOORTIMER = false;
-                                await Task.Delay(1000);
-                            
-                            try
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseClick("LEFT", 903, 605, 1, 5);
+
+                                try
                             {
+
+
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(100, token);
-                                object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
-
-                                if (walk.ToString() != "1")
+                                object complete = au3.PixelSearch(31, 97, 81, 108, 0x8A412C, 5);
+                                if (complete.ToString() != "1")
                                 {
-                                    object[] walkCoord = (object[])walk;
-                                    au3.MouseClick("LEFT", 903, 605, 1, 5);
+                                    object[] completeCoord = (object[])complete;
+                                    au3.MouseClick("LEFT", 191, 285, 1, 5);
+                                    _ALLFLOORTIMER = false;
+                                    await Task.Delay(1000);
+
+
+                                
                                 }
                                 Thread.Sleep(2000);
                                 if (_REPAIR == true)
