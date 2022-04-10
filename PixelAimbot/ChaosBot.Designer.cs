@@ -190,6 +190,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtDungeon3 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -2273,6 +2274,7 @@
             // Casttime
             // 
             this.Casttime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Casttime.Controls.Add(this.label8);
             this.Casttime.Controls.Add(this.label12);
             this.Casttime.Controls.Add(this.comboBox1);
             this.Casttime.Controls.Add(this.groupBox9);
@@ -2466,6 +2468,17 @@
             this.txtDungeon3.TabIndex = 70;
             this.txtDungeon3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon3.WordWrap = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.Orange;
+            this.label8.Location = new System.Drawing.Point(154, 111);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(232, 15);
+            this.label8.TabIndex = 60;
+            this.label8.Text = "SET: QWERTZ Layout in INGAME settings";
             // 
             // ChaosBot
             // 
@@ -2687,6 +2700,7 @@
         private System.Windows.Forms.TextBox txtDungeon3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
     }
 }
 

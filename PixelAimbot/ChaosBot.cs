@@ -37,6 +37,7 @@ namespace PixelAimbot
         private bool _FloorActivate = false;
         private bool _Floor3Activate = false;
         private bool _LOGOUT = false;
+        private bool _ALLFLOORTIMER = false;
 
         private bool _FIGHT = false;
         private bool _ULTIMATE_HEAL = false;
@@ -436,8 +437,6 @@ namespace PixelAimbot
                         try
                         {
                                 au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1,10);
-                                Thread.Sleep(500);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1,10);
 
                         }
                         catch (AggregateException)
@@ -682,7 +681,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-
+                _ALLFLOORTIMER = true;
                 FLOOR1FIGHT_Timer(token);
 
             }
@@ -1084,9 +1083,12 @@ namespace PixelAimbot
 
         private async void FLOOR1FIGHT_Timer(CancellationToken token)
         {
+
             try
             {
-                token.ThrowIfCancellationRequested();
+                if (_ALLFLOORTIMER == true)
+                { 
+                    token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
                 try
                 {
@@ -1123,6 +1125,7 @@ namespace PixelAimbot
                     else
                    if (!chBoxActivateF2.Checked && _FIGHT == false)
                     {
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
                         _ULTIMATE_HEAL = false;
                         _FloorActivate = false;
                         var t12 = Task.Run(() => LEAVEDUNGEON(token));
@@ -1138,6 +1141,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
+            }
             }
             catch (AggregateException)
             {
@@ -1154,66 +1158,70 @@ namespace PixelAimbot
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-                try
+                if (_ALLFLOORTIMER == true)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    fightSequence++;
-                    _FloorActivate = true;
-                    _Shadowhunter = true;
-                    _Paladin = true;
-                    _Berserker = true;
-                    _Deathblade = true;
-                    _Q = true;
-                    _W = true;
-                    _E = true;
-                    _R = true;
-                    _A = true;
-                    _S = true;
-                    _D = true;
-                    _F = true;
-                    _Y = true;
-                    _Z = true;
-                    _FIGHT = true;
-
-                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                    await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
-
-                    _FIGHT = false;
-
-                    if (fightSequence == 9 && !chBoxActivateF3.Checked)
+                    try
                     {
-                        _FloorActivate = false;
-                        _ULTIMATE_HEAL = false;
-                        var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                        await Task.WhenAny(new[] { t12 });
-                    }
-                    else
-                    if (fightSequence < 8)
-                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        fightSequence++;
+                        _FloorActivate = true;
+                        _Shadowhunter = true;
+                        _Paladin = true;
+                        _Berserker = true;
+                        _Deathblade = true;
+                        _Q = true;
+                        _W = true;
+                        _E = true;
+                        _R = true;
+                        _A = true;
+                        _S = true;
+                        _D = true;
+                        _F = true;
+                        _Y = true;
+                        _Z = true;
+                        _FIGHT = true;
 
-                        var t13 = Task.Run(() => SEARCHBOSS(token));
-                        await Task.WhenAny(new[] { t13 });
-                    }
-                    else
-                    if (fightSequence < 9)
-                    {
+                        var t4 = Task.Run(() => FLOOR1FIGHT(token));
+                        await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
 
-                        var t13 = Task.Run(() => FLOOR2PORTAL(token));
-                        await Task.WhenAny(new[] { t13 });
+                        _FIGHT = false;
+
+                        if (fightSequence == 9 && !chBoxActivateF3.Checked)
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
+                            _FloorActivate = false;
+                            _ULTIMATE_HEAL = false;
+                            var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                            await Task.WhenAny(new[] { t12 });
+                        }
+                        else
+                        if (fightSequence < 8)
+                        {
+
+                            var t13 = Task.Run(() => SEARCHBOSS(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
+                        else
+                        if (fightSequence < 9)
+                        {
+
+                            var t13 = Task.Run(() => FLOOR2PORTAL(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
                     }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                 }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
             }
             catch (AggregateException)
             {
@@ -1230,72 +1238,67 @@ namespace PixelAimbot
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-                try
+                if (_ALLFLOORTIMER == true)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    CompleteIteration = 1;
-                    fightSequence2++;
-                    _Floor3Activate = true;
-                    _Shadowhunter = true;
-                    _Paladin = true;
-                    _Berserker = true;
-                    _Deathblade = true;
-                    _Q = true;
-                    _W = true;
-                    _E = true;
-                    _R = true;
-                    _A = true;
-                    _S = true;
-                    _D = true;
-                    _F = true;
-                    _Y = true;
-                    _Z = true;
-                    _FIGHT = true;
-
-                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                    await Task.Delay(int.Parse(txtDungeon3.Text) * 1000);
-
-                    _FIGHT = false;
-                    if (_ChaosComplete == true)
+                    try
                     {
-                        _ChaosComplete = false;
-                        _FloorActivate = false;
-                        _Floor3Activate = false;
-                        _ULTIMATE_HEAL = false;
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Complete!"));
-                        var t120 = Task.Run(() => LEAVEDUNGEONCOMPLETE(token));
-                        await Task.WhenAny(new[] { t120 });
-                    }
-                    else
-                    if (fightSequence2 == 12)
-                    {
-                        _FloorActivate = false;
-                        _Floor3Activate = false;
-                        _ULTIMATE_HEAL = false;
-                        var t12 = Task.Run(() => LEAVEDUNGEONCOMPLETE(token));
-                        await Task.WhenAny(new[] { t12 });
-                    }
-                    else
-                    if (fightSequence2 < 12)
-                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(100, token);
+                        CompleteIteration = 1;
+                        fightSequence2 ++;
+                        _Floor3Activate = true;
+                        _Shadowhunter = true;
+                        _Paladin = true;
+                        _Berserker = true;
+                        _Deathblade = true;
+                        _Q = true;
+                        _W = true;
+                        _E = true;
+                        _R = true;
+                        _A = true;
+                        _S = true;
+                        _D = true;
+                        _F = true;
+                        _Y = true;
+                        _Z = true;
+                        _FIGHT = true;
 
-                        var t13 = Task.Run(() => SEARCHBOSS2(token));
-                        await Task.WhenAny(new[] { t13 });
+                        var t4 = Task.Run(() => FLOOR1FIGHT(token));
+                        await Task.Delay(int.Parse(txtDungeon3.Text) * 1000);
+
+                        _FIGHT = false;
+                       
+                        if (fightSequence2 == 12 )
+                        {
+                            _ALLFLOORTIMER = false;
+                            _FloorActivate = false;
+                            _Floor3Activate = false;
+                            _ULTIMATE_HEAL = false;
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Leaved ChaosDungeon - not completed!"));
+                            var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                            await Task.WhenAny(new[] { t12 });
+                        }
+                        else
+                        if (fightSequence2 < 12)
+                        {
+
+                            var t13 = Task.Run(() => SEARCHBOSS2(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
+
                     }
-                   
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
                 }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
             }
             catch (AggregateException)
             {
@@ -1331,6 +1334,7 @@ namespace PixelAimbot
                             if (shardHit.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _Floor3Activate == true)
                             {   
                                 object[] shardHitCoord = (object[])shardHit;
+                                au3.MouseClick("LEFT", (int)shardHitCoord[0], (int)shardHitCoord[1] + 80, 1, 5);
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                 var sim = new InputSimulator();
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
@@ -1985,16 +1989,52 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
+                        
                         try
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(141, 274, 245, 294, 0x29343F, 10);
-
-                            if (walk.ToString() != "1")
+                            object complete = au3.PixelSearch(31, 97, 81, 108, 0x8A412C,5);
+                            if (complete.ToString() != "1")
                             {
-                                object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                object[] completeCoord = (object[])complete;
+                                au3.MouseClick("LEFT", (int)completeCoord[0], (int)completeCoord[1], 1, 5);
+                                _ALLFLOORTIMER = false;
+                                await Task.Delay(1000);
+                            
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 10);
+
+                                if (walk.ToString() != "1")
+                                {
+                                    object[] walkCoord = (object[])walk;
+                                    au3.MouseClick("LEFT", 903, 605, 1, 5);
+                                }
+                                Thread.Sleep(2000);
+                                if (_REPAIR == true)
+                                {
+                                    Thread.Sleep(2000);
+                                    var t7 = Task.Run(() => REPAIR(token));
+                                    await Task.WhenAny(new[] { t7 });
+                                }
+                                else
+                                if (_LOGOUT == true)
+                                {
+                                    var t11 = Task.Run(() => LOGOUT(token));
+                                    await Task.WhenAny(new[] { t11 });
+                                }
+                                else
+                                if (_REPAIR == false && _LOGOUT == false)
+                                {
+                                    await Task.Delay(2000);
+                                    var t9 = Task.Run(() => RESTART(token));
+                                    await Task.WhenAny(new[] { t9 });
+                                }
+                            }
+                            catch { }
                             }
                         }
                         catch (AggregateException)
@@ -2006,6 +2046,7 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
+                        
                     }
                 }
                 catch (AggregateException)
@@ -2101,11 +2142,12 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
                                 var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
 
                                 au3.Send("{G}");
                                 if (txtLEFT.Text == "LEFT")
                                 {
+                                    
                                     inputSimulator.Mouse.LeftButtonClick();
                                 }
                                 else
@@ -2125,7 +2167,7 @@ namespace PixelAimbot
                                 {
                                     inputSimulator.Mouse.RightButtonClick();
                                 }
-
+                                
                                 au3.Send("{G}");
 
                                 au3.Send("{G}");
@@ -2189,7 +2231,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-
+                    _ALLFLOORTIMER = false;
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -2273,7 +2315,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-
+                    _ALLFLOORTIMER = false;
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -2304,7 +2346,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
+                            object walk = au3.PixelSearch(141, 274, 245, 294, 0x29343F, 10);
 
                             if (walk.ToString() != "1")
                             {
