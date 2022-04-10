@@ -108,6 +108,8 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chBoxSoulfist = new System.Windows.Forms.CheckBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.chBoxSorcerer = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.chBoxSharpshooter = new System.Windows.Forms.CheckBox();
@@ -124,14 +126,14 @@
             this.txtBerserker = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label49 = new System.Windows.Forms.Label();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleF = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleD = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleS = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleA = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleR = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleE = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleW = new System.Windows.Forms.CheckBox();
+            this.chBoxDoubleQ = new System.Windows.Forms.CheckBox();
             this.lbPF = new System.Windows.Forms.Label();
             this.lbPD = new System.Windows.Forms.Label();
             this.lbPS = new System.Windows.Forms.Label();
@@ -183,10 +185,10 @@
             this.Rotation = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
-            this.Ultimate = new System.Windows.Forms.TabPage();
             this.Cooldown = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
+            this.Ultimate = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -205,8 +207,8 @@
             this.tabControl2.SuspendLayout();
             this.Casttime.SuspendLayout();
             this.Rotation.SuspendLayout();
-            this.Ultimate.SuspendLayout();
             this.Cooldown.SuspendLayout();
+            this.Ultimate.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -699,7 +701,6 @@
             this.txtHeal10.TabIndex = 58;
             this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal10.WordWrap = false;
-            this.txtHeal10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // checkBoxHeal10
             // 
@@ -1306,6 +1307,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chBoxSoulfist);
+            this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Controls.Add(this.chBoxSorcerer);
             this.groupBox3.Controls.Add(this.textBox2);
             this.groupBox3.Controls.Add(this.chBoxSharpshooter);
@@ -1331,16 +1334,47 @@
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
             // 
+            // chBoxSoulfist
+            // 
+            this.chBoxSoulfist.AutoSize = true;
+            this.chBoxSoulfist.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxSoulfist.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxSoulfist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSoulfist.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxSoulfist.Location = new System.Drawing.Point(269, 23);
+            this.chBoxSoulfist.Name = "chBoxSoulfist";
+            this.chBoxSoulfist.Size = new System.Drawing.Size(68, 19);
+            this.chBoxSoulfist.TabIndex = 65;
+            this.chBoxSoulfist.Text = "Soulfist:";
+            this.chBoxSoulfist.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxSoulfist.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox4.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.textBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox4.Location = new System.Drawing.Point(343, 24);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(23, 16);
+            this.textBox4.TabIndex = 64;
+            this.textBox4.Text = "Y";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox4.WordWrap = false;
+            // 
             // chBoxSorcerer
             // 
             this.chBoxSorcerer.AutoSize = true;
             this.chBoxSorcerer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxSorcerer.Location = new System.Drawing.Point(230, 79);
+            this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxSorcerer.Location = new System.Drawing.Point(159, 62);
             this.chBoxSorcerer.Name = "chBoxSorcerer";
-            this.chBoxSorcerer.Size = new System.Drawing.Size(88, 24);
+            this.chBoxSorcerer.Size = new System.Drawing.Size(75, 19);
             this.chBoxSorcerer.TabIndex = 63;
             this.chBoxSorcerer.Text = "Sorcerer:";
             this.chBoxSorcerer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1351,12 +1385,12 @@
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Location = new System.Drawing.Point(325, 81);
+            this.textBox2.Location = new System.Drawing.Point(240, 64);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(23, 22);
+            this.textBox2.Size = new System.Drawing.Size(23, 16);
             this.textBox2.TabIndex = 62;
             this.textBox2.Text = "Y";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1369,10 +1403,10 @@
             this.chBoxSharpshooter.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSharpshooter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxSharpshooter.Location = new System.Drawing.Point(37, 78);
+            this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxSharpshooter.Location = new System.Drawing.Point(8, 63);
             this.chBoxSharpshooter.Name = "chBoxSharpshooter";
-            this.chBoxSharpshooter.Size = new System.Drawing.Size(124, 24);
+            this.chBoxSharpshooter.Size = new System.Drawing.Size(101, 19);
             this.chBoxSharpshooter.TabIndex = 61;
             this.chBoxSharpshooter.Text = "Sharpshooter:";
             this.chBoxSharpshooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1383,12 +1417,12 @@
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox3.Location = new System.Drawing.Point(168, 80);
+            this.textBox3.Location = new System.Drawing.Point(115, 65);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(23, 22);
+            this.textBox3.Size = new System.Drawing.Size(23, 16);
             this.textBox3.TabIndex = 60;
             this.textBox3.Text = "Y";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1412,10 +1446,10 @@
             this.chBoxDeathblade.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxDeathblade.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxDeathblade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxDeathblade.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxDeathblade.Location = new System.Drawing.Point(209, 54);
+            this.chBoxDeathblade.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxDeathblade.Location = new System.Drawing.Point(144, 43);
             this.chBoxDeathblade.Name = "chBoxDeathblade";
-            this.chBoxDeathblade.Size = new System.Drawing.Size(109, 24);
+            this.chBoxDeathblade.Size = new System.Drawing.Size(90, 19);
             this.chBoxDeathblade.TabIndex = 58;
             this.chBoxDeathblade.Text = "Deathblade:";
             this.chBoxDeathblade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1426,12 +1460,12 @@
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox1.Location = new System.Drawing.Point(325, 56);
+            this.textBox1.Location = new System.Drawing.Point(240, 44);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(23, 22);
+            this.textBox1.Size = new System.Drawing.Size(23, 16);
             this.textBox1.TabIndex = 57;
             this.textBox1.Text = "Y";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1443,7 +1477,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.label32.ForeColor = System.Drawing.Color.Coral;
-            this.label32.Location = new System.Drawing.Point(161, 14);
+            this.label32.Location = new System.Drawing.Point(165, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(239, 15);
             this.label32.TabIndex = 52;
@@ -1455,10 +1489,10 @@
             this.chBoxPaladin.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxPaladin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxPaladin.Location = new System.Drawing.Point(238, 30);
+            this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxPaladin.Location = new System.Drawing.Point(169, 23);
             this.chBoxPaladin.Name = "chBoxPaladin";
-            this.chBoxPaladin.Size = new System.Drawing.Size(80, 24);
+            this.chBoxPaladin.Size = new System.Drawing.Size(65, 19);
             this.chBoxPaladin.TabIndex = 50;
             this.chBoxPaladin.Text = "Paladin:";
             this.chBoxPaladin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1469,12 +1503,12 @@
             this.txtPaladin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtPaladin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPaladin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPaladin.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPaladin.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtPaladin.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPaladin.Location = new System.Drawing.Point(325, 30);
+            this.txtPaladin.Location = new System.Drawing.Point(240, 24);
             this.txtPaladin.Name = "txtPaladin";
             this.txtPaladin.ReadOnly = true;
-            this.txtPaladin.Size = new System.Drawing.Size(23, 22);
+            this.txtPaladin.Size = new System.Drawing.Size(23, 16);
             this.txtPaladin.TabIndex = 49;
             this.txtPaladin.Text = "Y";
             this.txtPaladin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1487,10 +1521,10 @@
             this.chBoxY.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxY.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxY.Location = new System.Drawing.Point(29, 53);
+            this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxY.Location = new System.Drawing.Point(1, 43);
             this.chBoxY.Name = "chBoxY";
-            this.chBoxY.Size = new System.Drawing.Size(132, 24);
+            this.chBoxY.Size = new System.Drawing.Size(108, 19);
             this.chBoxY.TabIndex = 46;
             this.chBoxY.Text = "Shadowhunter:";
             this.chBoxY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1501,12 +1535,12 @@
             this.txtY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtY.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtY.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtY.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtY.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtY.Location = new System.Drawing.Point(168, 55);
+            this.txtY.Location = new System.Drawing.Point(115, 45);
             this.txtY.Name = "txtY";
             this.txtY.ReadOnly = true;
-            this.txtY.Size = new System.Drawing.Size(23, 22);
+            this.txtY.Size = new System.Drawing.Size(23, 16);
             this.txtY.TabIndex = 45;
             this.txtY.Text = "Y";
             this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1519,10 +1553,10 @@
             this.chBoxBerserker.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxBerserker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.chBoxBerserker.Location = new System.Drawing.Point(64, 28);
+            this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxBerserker.Location = new System.Drawing.Point(27, 23);
             this.chBoxBerserker.Name = "chBoxBerserker";
-            this.chBoxBerserker.Size = new System.Drawing.Size(97, 24);
+            this.chBoxBerserker.Size = new System.Drawing.Size(82, 19);
             this.chBoxBerserker.TabIndex = 44;
             this.chBoxBerserker.Text = "Berserker:";
             this.chBoxBerserker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1533,12 +1567,12 @@
             this.txtBerserker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtBerserker.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBerserker.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtBerserker.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBerserker.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtBerserker.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtBerserker.Location = new System.Drawing.Point(168, 30);
+            this.txtBerserker.Location = new System.Drawing.Point(115, 25);
             this.txtBerserker.Name = "txtBerserker";
             this.txtBerserker.ReadOnly = true;
-            this.txtBerserker.Size = new System.Drawing.Size(23, 22);
+            this.txtBerserker.Size = new System.Drawing.Size(23, 16);
             this.txtBerserker.TabIndex = 41;
             this.txtBerserker.Text = "Y";
             this.txtBerserker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1548,14 +1582,14 @@
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.label49);
-            this.groupBox7.Controls.Add(this.checkBox8);
-            this.groupBox7.Controls.Add(this.checkBox7);
-            this.groupBox7.Controls.Add(this.checkBox6);
-            this.groupBox7.Controls.Add(this.checkBox5);
-            this.groupBox7.Controls.Add(this.checkBox4);
-            this.groupBox7.Controls.Add(this.checkBox3);
-            this.groupBox7.Controls.Add(this.checkBox2);
-            this.groupBox7.Controls.Add(this.checkBox1);
+            this.groupBox7.Controls.Add(this.chBoxDoubleF);
+            this.groupBox7.Controls.Add(this.chBoxDoubleD);
+            this.groupBox7.Controls.Add(this.chBoxDoubleS);
+            this.groupBox7.Controls.Add(this.chBoxDoubleA);
+            this.groupBox7.Controls.Add(this.chBoxDoubleR);
+            this.groupBox7.Controls.Add(this.chBoxDoubleE);
+            this.groupBox7.Controls.Add(this.chBoxDoubleW);
+            this.groupBox7.Controls.Add(this.chBoxDoubleQ);
             this.groupBox7.Controls.Add(this.lbPF);
             this.groupBox7.Controls.Add(this.lbPD);
             this.groupBox7.Controls.Add(this.lbPS);
@@ -1593,87 +1627,78 @@
             this.label49.Size = new System.Drawing.Size(207, 15);
             this.label49.TabIndex = 50;
             this.label49.Text = " Activate Checkboxes = DoubleClick";
-            this.label49.Visible = false;
             // 
-            // checkBox8
+            // chBoxDoubleF
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(209, 86);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(15, 14);
-            this.checkBox8.TabIndex = 47;
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.Visible = false;
+            this.chBoxDoubleF.AutoSize = true;
+            this.chBoxDoubleF.Location = new System.Drawing.Point(209, 86);
+            this.chBoxDoubleF.Name = "chBoxDoubleF";
+            this.chBoxDoubleF.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleF.TabIndex = 47;
+            this.chBoxDoubleF.UseVisualStyleBackColor = true;
             // 
-            // checkBox7
+            // chBoxDoubleD
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(147, 86);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(15, 14);
-            this.checkBox7.TabIndex = 46;
-            this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.Visible = false;
+            this.chBoxDoubleD.AutoSize = true;
+            this.chBoxDoubleD.Location = new System.Drawing.Point(147, 86);
+            this.chBoxDoubleD.Name = "chBoxDoubleD";
+            this.chBoxDoubleD.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleD.TabIndex = 46;
+            this.chBoxDoubleD.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // chBoxDoubleS
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(85, 86);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(15, 14);
-            this.checkBox6.TabIndex = 45;
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.Visible = false;
+            this.chBoxDoubleS.AutoSize = true;
+            this.chBoxDoubleS.Location = new System.Drawing.Point(85, 86);
+            this.chBoxDoubleS.Name = "chBoxDoubleS";
+            this.chBoxDoubleS.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleS.TabIndex = 45;
+            this.chBoxDoubleS.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // chBoxDoubleA
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(23, 86);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(15, 14);
-            this.checkBox5.TabIndex = 44;
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.Visible = false;
+            this.chBoxDoubleA.AutoSize = true;
+            this.chBoxDoubleA.Location = new System.Drawing.Point(23, 86);
+            this.chBoxDoubleA.Name = "chBoxDoubleA";
+            this.chBoxDoubleA.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleA.TabIndex = 44;
+            this.chBoxDoubleA.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // chBoxDoubleR
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(209, 41);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(15, 14);
-            this.checkBox4.TabIndex = 43;
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.Visible = false;
+            this.chBoxDoubleR.AutoSize = true;
+            this.chBoxDoubleR.Location = new System.Drawing.Point(209, 41);
+            this.chBoxDoubleR.Name = "chBoxDoubleR";
+            this.chBoxDoubleR.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleR.TabIndex = 43;
+            this.chBoxDoubleR.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chBoxDoubleE
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(147, 41);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(15, 14);
-            this.checkBox3.TabIndex = 42;
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.Visible = false;
+            this.chBoxDoubleE.AutoSize = true;
+            this.chBoxDoubleE.Location = new System.Drawing.Point(147, 41);
+            this.chBoxDoubleE.Name = "chBoxDoubleE";
+            this.chBoxDoubleE.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleE.TabIndex = 42;
+            this.chBoxDoubleE.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chBoxDoubleW
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(84, 42);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 41;
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.Visible = false;
+            this.chBoxDoubleW.AutoSize = true;
+            this.chBoxDoubleW.Location = new System.Drawing.Point(84, 42);
+            this.chBoxDoubleW.Name = "chBoxDoubleW";
+            this.chBoxDoubleW.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleW.TabIndex = 41;
+            this.chBoxDoubleW.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // chBoxDoubleQ
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(23, 42);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 40;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
+            this.chBoxDoubleQ.AutoSize = true;
+            this.chBoxDoubleQ.Location = new System.Drawing.Point(23, 42);
+            this.chBoxDoubleQ.Name = "chBoxDoubleQ";
+            this.chBoxDoubleQ.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleQ.TabIndex = 40;
+            this.chBoxDoubleQ.UseVisualStyleBackColor = true;
             // 
             // lbPF
             // 
@@ -2365,18 +2390,6 @@
             this.label46.TabIndex = 48;
             this.label46.Text = "PRIORITIZED SKILLS";
             // 
-            // Ultimate
-            // 
-            this.Ultimate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.Ultimate.Controls.Add(this.groupBox3);
-            this.Ultimate.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Ultimate.Location = new System.Drawing.Point(4, 20);
-            this.Ultimate.Name = "Ultimate";
-            this.Ultimate.Padding = new System.Windows.Forms.Padding(3);
-            this.Ultimate.Size = new System.Drawing.Size(410, 126);
-            this.Ultimate.TabIndex = 1;
-            this.Ultimate.Text = "Ultimate";
-            // 
             // Cooldown
             // 
             this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -2410,6 +2423,18 @@
             this.label47.Size = new System.Drawing.Size(121, 17);
             this.label47.TabIndex = 47;
             this.label47.Text = "COOLDOWN TIME";
+            // 
+            // Ultimate
+            // 
+            this.Ultimate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Ultimate.Controls.Add(this.groupBox3);
+            this.Ultimate.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.Ultimate.Location = new System.Drawing.Point(4, 20);
+            this.Ultimate.Name = "Ultimate";
+            this.Ultimate.Padding = new System.Windows.Forms.Padding(3);
+            this.Ultimate.Size = new System.Drawing.Size(410, 126);
+            this.Ultimate.TabIndex = 1;
+            this.Ultimate.Text = "Ultimate";
             // 
             // ChaosBot
             // 
@@ -2462,9 +2487,9 @@
             this.Casttime.PerformLayout();
             this.Rotation.ResumeLayout(false);
             this.Rotation.PerformLayout();
-            this.Ultimate.ResumeLayout(false);
             this.Cooldown.ResumeLayout(false);
             this.Cooldown.PerformLayout();
+            this.Ultimate.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2606,14 +2631,14 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Button buttonSaveRotation;
         private System.Windows.Forms.Button buttonLoadRotation;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chBoxDoubleQ;
+        private System.Windows.Forms.CheckBox chBoxDoubleF;
+        private System.Windows.Forms.CheckBox chBoxDoubleD;
+        private System.Windows.Forms.CheckBox chBoxDoubleS;
+        private System.Windows.Forms.CheckBox chBoxDoubleA;
+        private System.Windows.Forms.CheckBox chBoxDoubleR;
+        private System.Windows.Forms.CheckBox chBoxDoubleE;
+        private System.Windows.Forms.CheckBox chBoxDoubleW;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.ComboBox comboBoxRotations;
         private System.Windows.Forms.Label labelComboxRotation;
@@ -2628,6 +2653,8 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckBox chBoxSharpshooter;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.CheckBox chBoxSoulfist;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
 

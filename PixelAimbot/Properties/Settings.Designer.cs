@@ -646,5 +646,113 @@ namespace PixelAimbot.Properties {
                 this["txtLOGOUT"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxSoulfist {
+            get {
+                return ((bool)(this["chBoxSoulfist"]));
+            }
+            set {
+                this["chBoxSoulfist"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleQ {
+            get {
+                return ((bool)(this["chBoxDoubleQ"]));
+            }
+            set {
+                this["chBoxDoubleQ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleW {
+            get {
+                return ((bool)(this["chBoxDoubleW"]));
+            }
+            set {
+                this["chBoxDoubleW"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleE {
+            get {
+                return ((bool)(this["chBoxDoubleE"]));
+            }
+            set {
+                this["chBoxDoubleE"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleR {
+            get {
+                return ((bool)(this["chBoxDoubleR"]));
+            }
+            set {
+                this["chBoxDoubleR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleA {
+            get {
+                return ((bool)(this["chBoxDoubleA"]));
+            }
+            set {
+                this["chBoxDoubleA"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleS {
+            get {
+                return ((bool)(this["chBoxDoubleS"]));
+            }
+            set {
+                this["chBoxDoubleS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleD {
+            get {
+                return ((bool)(this["chBoxDoubleD"]));
+            }
+            set {
+                this["chBoxDoubleD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDoubleF {
+            get {
+                return ((bool)(this["chBoxDoubleF"]));
+            }
+            set {
+                this["chBoxDoubleF"] = value;
+            }
+        }
     }
 }

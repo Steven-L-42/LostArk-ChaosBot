@@ -32,6 +32,9 @@ namespace PixelAimbot
         private bool _Deathblade = false;
         private bool _Sharpshooter = false;
         private bool _Sorcerer = false;
+        private bool _Soulfist = false;
+
+
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
@@ -247,6 +250,8 @@ namespace PixelAimbot
                 _Deathblade = false;
                 _Sharpshooter = false;
                 _Sorcerer = false;
+                _Soulfist = false;
+
 
 
 
@@ -378,6 +383,7 @@ namespace PixelAimbot
         private System.Timers.Timer timer;
         private int fightSequence = 1;
         private int searchSequence = 1;
+        private int fightOnSecondAbility = 1;
 
         public void REPAIRTIMER()
         {
@@ -1088,6 +1094,7 @@ namespace PixelAimbot
                     _Deathblade = true;
                     _Sharpshooter = true;
                     _Sorcerer = true;
+                    _Soulfist = true;
                     _Q = true;
                     _W = true;
                     _E = true;
@@ -1210,7 +1217,6 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-                await Task.Delay(500);
                 while (_FIGHT == true)
                 {
 
@@ -1218,12 +1224,13 @@ namespace PixelAimbot
                     {
                         try
                         {
+                            
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
 
                             object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
 
-                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key))
+                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true)
                             {
                                 object[] fightCoord = (object[])fight;
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
@@ -1231,15 +1238,37 @@ namespace PixelAimbot
                                 for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
                                 {
                                     sim.Keyboard.KeyDown(skill.Key);
-                                    await Task.Delay(1);
+                                    await Task.Delay(10);
                                 }
                                 sim.Keyboard.KeyUp(skill.Key);
+                                sim.Keyboard.KeyPress(skill.Key);
+                                if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                {
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+
+                                }
                                 setKeyCooldown(skill.Key); // Set Cooldown
                                 var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-                                
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                                au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
+                                au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                fightOnSecondAbility++;
+                                if (fightOnSecondAbility == 3)
+                                {
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    au3.Send("{C}");
+                                    fightOnSecondAbility = 1;
+                                }
 
                             }
                         }
@@ -1349,6 +1378,8 @@ namespace PixelAimbot
                                         }
                                         _Deathblade = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                     }
                                 }
@@ -1381,6 +1412,10 @@ namespace PixelAimbot
                                         }
                                         _Sharpshooter = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
+
+                                        var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                     }
                                 }
@@ -1394,6 +1429,7 @@ namespace PixelAimbot
                                 }
                                 catch { }
                             }
+                            else
                             if (chBoxSorcerer.Checked == true && _Sorcerer == true && _FIGHT == true)
                             {
                                 try
@@ -1414,6 +1450,35 @@ namespace PixelAimbot
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                     }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                            }
+                            else
+                            if (chBoxSoulfist.Checked == true && _Soulfist == true && _FIGHT == true)
+                            {
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                   
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Soulfist = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                                  
                                 }
                                 catch (AggregateException)
                                 {
@@ -2529,6 +2594,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtLOGOUT = "";
                 Properties.Settings.Default.autorepair = "10";
                 Properties.Settings.Default.chBoxShadowhunter = false;
+                Properties.Settings.Default.chBoxSoulfist = false;
                 Properties.Settings.Default.chBoxBerserker = false;
                 Properties.Settings.Default.chboxPaladin = false;
                 Properties.Settings.Default.RestartTimer = "25";
@@ -2569,6 +2635,16 @@ namespace PixelAimbot
                 Properties.Settings.Default.d = "500";
                 Properties.Settings.Default.f = "500";
 
+                Properties.Settings.Default.chBoxDoubleQ = false;
+                Properties.Settings.Default.chBoxDoubleW = false;
+                Properties.Settings.Default.chBoxDoubleE = false;
+                Properties.Settings.Default.chBoxDoubleR = false;
+                Properties.Settings.Default.chBoxDoubleA = false;
+                Properties.Settings.Default.chBoxDoubleS = false;
+                Properties.Settings.Default.chBoxDoubleD = false;
+                Properties.Settings.Default.chBoxDoubleF = false;
+
+
                 Properties.Settings.Default.Save();
 
                 txtDungeon.Text = Properties.Settings.Default.dungeontimer;
@@ -2587,6 +2663,7 @@ namespace PixelAimbot
                 chBoxDeathblade.Checked = Properties.Settings.Default.chBoxDeathblade;
                 chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
                 chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
+                chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
                 txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
                 chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
@@ -2601,24 +2678,33 @@ namespace PixelAimbot
                 txCoolD.Text = Properties.Settings.Default.cD;
                 txCoolF.Text = Properties.Settings.Default.cF;
                 txtLOGOUT.Text = Properties.Settings.Default.txtLOGOUT;
-                txQ.Text = Properties.Settings.Default.RQ;
-                txW.Text = Properties.Settings.Default.RW;
-                txE.Text = Properties.Settings.Default.RE;
-                txR.Text = Properties.Settings.Default.RR;
-                txA.Text = Properties.Settings.Default.RA;
-                txS.Text = Properties.Settings.Default.RS;
-                txD.Text = Properties.Settings.Default.RD;
-                txF.Text = Properties.Settings.Default.RF;
+                txQ.Text = Properties.Settings.Default.q;
+                txW.Text = Properties.Settings.Default.w;
+                txE.Text = Properties.Settings.Default.e;
+                txR.Text = Properties.Settings.Default.r;
+                txA.Text = Properties.Settings.Default.a;
+                txS.Text = Properties.Settings.Default.s;
+                txD.Text = Properties.Settings.Default.d;
+                txF.Text = Properties.Settings.Default.f;
+           
 
+                txPQ.Text = Properties.Settings.Default.RQ;
+                txPW.Text = Properties.Settings.Default.RW;
+                txPE.Text = Properties.Settings.Default.RE;
+                txPR.Text = Properties.Settings.Default.RR;
+                txPA.Text = Properties.Settings.Default.RA;
+                txPS.Text = Properties.Settings.Default.RS;
+                txPD.Text = Properties.Settings.Default.RD;
+                txPF.Text = Properties.Settings.Default.RF;
+                chBoxDoubleQ.Checked = Properties.Settings.Default.chBoxDoubleQ;
+                chBoxDoubleW.Checked = Properties.Settings.Default.chBoxDoubleW;
+                chBoxDoubleE.Checked = Properties.Settings.Default.chBoxDoubleE;
+                chBoxDoubleR.Checked = Properties.Settings.Default.chBoxDoubleR;
+                chBoxDoubleA.Checked = Properties.Settings.Default.chBoxDoubleA;
+                chBoxDoubleS.Checked = Properties.Settings.Default.chBoxDoubleS;
+                chBoxDoubleD.Checked = Properties.Settings.Default.chBoxDoubleD;
+                chBoxDoubleF.Checked = Properties.Settings.Default.chBoxDoubleF;
 
-                txPQ.Text = Properties.Settings.Default.cQ;
-                txPW.Text = Properties.Settings.Default.cW;
-                txPE.Text = Properties.Settings.Default.cE;
-                txPR.Text = Properties.Settings.Default.cR;
-                txPA.Text = Properties.Settings.Default.cA;
-                txPS.Text = Properties.Settings.Default.cS;
-                txPD.Text = Properties.Settings.Default.cD;
-                txPF.Text = Properties.Settings.Default.cF;
 
 
 
@@ -2663,11 +2749,32 @@ namespace PixelAimbot
             lbPD.Text = currentLayout.D.ToString().Replace("VK_", "");
             lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
-
+      
+        public async void SharpshooterSecondPress(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(3000, token);
+                var sim = new InputSimulator();
+                sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+               
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
         public async void SkillCooldown(CancellationToken token, VirtualKeyCode key)
         {
             try
             {
+                token.ThrowIfCancellationRequested();
                 for (int i = 0; i <= 1; i++)
                 {
                     token.ThrowIfCancellationRequested();
@@ -2835,6 +2942,7 @@ namespace PixelAimbot
                     rotation.chBoxBerserker = (bool)chBoxBerserker.Checked;
                     rotation.chBoxDeathblade = (bool)chBoxDeathblade.Checked;
                     rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
+                    rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.RestartTimer = txtRestartTimer.Text;
                     rotation.chBoxSaveAll = chBoxSaveAll.Checked;
@@ -2865,6 +2973,15 @@ namespace PixelAimbot
                     rotation.pS = txPS.Text;
                     rotation.pD = txPD.Text;
                     rotation.pF = txPF.Text;
+                    rotation.chBoxDoubleQ = chBoxDoubleQ.Checked;
+                    rotation.chBoxDoubleW = chBoxDoubleW.Checked;
+                    rotation.chBoxDoubleE = chBoxDoubleE.Checked;
+                    rotation.chBoxDoubleR = chBoxDoubleR.Checked;
+                    rotation.chBoxDoubleA = chBoxDoubleA.Checked;
+                    rotation.chBoxDoubleS = chBoxDoubleS.Checked;
+                    rotation.chBoxDoubleD = chBoxDoubleD.Checked;
+                    rotation.chBoxDoubleF = chBoxDoubleF.Checked;
+
 
                     rotation.Save(comboBoxRotations.Text);
                     MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -2900,7 +3017,7 @@ namespace PixelAimbot
                 chBoxBerserker.Checked = rotation.chBoxBerserker;
                 chBoxDeathblade.Checked = rotation.chBoxDeathblade;
                 chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
-
+                chBoxSoulfist.Checked = rotation.chBoxSoulfist;
                 txtLOGOUT.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txtHeal10.Text = rotation.txtHeal10;
@@ -2935,6 +3052,16 @@ namespace PixelAimbot
                 txPS.Text = rotation.pS;
                 txPD.Text = rotation.pD;
                 txPF.Text = rotation.pF;
+                chBoxDoubleQ.Checked = rotation.chBoxDoubleQ;
+                chBoxDoubleW.Checked = rotation.chBoxDoubleW;
+                chBoxDoubleE.Checked = rotation.chBoxDoubleE;
+                chBoxDoubleR.Checked = rotation.chBoxDoubleR;
+                chBoxDoubleA.Checked = rotation.chBoxDoubleA;
+                chBoxDoubleS.Checked = rotation.chBoxDoubleS;
+                chBoxDoubleD.Checked = rotation.chBoxDoubleD;
+                chBoxDoubleF.Checked = rotation.chBoxDoubleF;
+
+
 
                 MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
