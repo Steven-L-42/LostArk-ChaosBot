@@ -802,5 +802,29 @@ namespace PixelAimbot.Properties {
                 this["txtDungeon2Iteration"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxBard {
+            get {
+                return ((bool)(this["chBoxBard"]));
+            }
+            set {
+                this["chBoxBard"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxAutoMovement {
+            get {
+                return ((bool)(this["chBoxAutoMovement"]));
+            }
+            set {
+                this["chBoxAutoMovement"] = value;
+            }
+        }
     }
 }

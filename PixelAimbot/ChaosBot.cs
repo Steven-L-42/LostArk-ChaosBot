@@ -3847,6 +3847,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxShadowhunter = false;
                 Properties.Settings.Default.chBoxSoulfist = false;
                 Properties.Settings.Default.chBoxBerserker = false;
+                Properties.Settings.Default.chBoxBard = false;
                 Properties.Settings.Default.chboxPaladin = false;
                 Properties.Settings.Default.RestartTimer = "25";
                 Properties.Settings.Default.chBoxSaveAll = false;
@@ -3856,7 +3857,9 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtDungeon3 = "20";
                 Properties.Settings.Default.txtDungeon3search = "10";
                 Properties.Settings.Default.chBoxActivateF3 = false;
-      
+                Properties.Settings.Default.chBoxAutoMovement = false;
+
+
                 Properties.Settings.Default.chBoxSharpshooter = false;
                 Properties.Settings.Default.chBoxSorcerer = false;
                 Properties.Settings.Default.chBoxDeathblade = false;
@@ -3898,7 +3901,7 @@ namespace PixelAimbot
 
                 Properties.Settings.Default.Save();
 
-
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
                 txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
                 txtDungeon.Text = Properties.Settings.Default.dungeontimer;
@@ -3961,6 +3964,7 @@ namespace PixelAimbot
                 txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
                 txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
                 chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+                chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                     }
             catch { }
         }
@@ -4178,7 +4182,7 @@ namespace PixelAimbot
 
                     rotation.autologout = txtLOGOUT.Text;
                     rotation.chBoxautologout = chBoxLOGOUT.Checked;
-
+                    rotation.chBoxAutoMovement = chBoxAutoMovement.Checked;
                     rotation.autorepair = txtRepair.Text;
                     rotation.chBoxShadowhunter = (bool)chBoxY.Checked;
                     rotation.chboxPaladin = (bool)chBoxPaladin.Checked;
@@ -4187,6 +4191,7 @@ namespace PixelAimbot
                     rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
                     rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
+                    rotation.chBoxBard = (bool)chBoxBard.Checked;
                     rotation.RestartTimer = txtRestartTimer.Text;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
@@ -4263,6 +4268,7 @@ namespace PixelAimbot
                 chBoxY.Checked = rotation.chBoxShadowhunter;
                 chBoxPaladin.Checked = rotation.chboxPaladin;
                 chBoxBerserker.Checked = rotation.chBoxBerserker;
+                chBoxBard.Checked ^= rotation.chBoxBard;
                 chBoxDeathblade.Checked = rotation.chBoxDeathblade;
                 chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
                 chBoxSoulfist.Checked = rotation.chBoxSoulfist;
@@ -4271,7 +4277,7 @@ namespace PixelAimbot
                 txtHeal10.Text = rotation.txtHeal10;
                 txtDungeon2Iteration.Text = rotation.txtDungeon2Iteration;
                 txtDungeon3Iteration.Text = rotation.txtDungeon3Iteration;
-
+                chBoxAutoMovement.Checked = rotation.chBoxAutoMovement; 
                 chBoxActivateF3.Checked = rotation.chBoxActivateF3;
                 txtDungeon3search.Text = rotation.txtDungeon3search;
                 txtDungeon3.Text = rotation.txtDungeon3;

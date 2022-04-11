@@ -197,5 +197,11 @@
     <Setting Name="txtDungeon2Iteration" Type="System.String" Scope="User">
       <Value Profile="(Default)">9</Value>
     </Setting>
+    <Setting Name="chBoxBard" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chBoxAutoMovement" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
