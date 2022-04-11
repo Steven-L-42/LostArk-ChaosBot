@@ -580,7 +580,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
 
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         try
                         {
@@ -588,14 +588,9 @@ namespace PixelAimbot
                             await Task.Delay(100, token);
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
 
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
-
-                            if (move1.ToString() != "1")
-                            {
                                 au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                          
                                 Thread.Sleep(1000);
-                            }
+                            
                         }
                         catch (AggregateException)
                         {
@@ -611,13 +606,8 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
 
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
-
-                            if (move1.ToString() != "1")
-                            {
                                 au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                           
-                            }
+  
                         }
                         catch (AggregateException)
                         {
@@ -1295,10 +1285,10 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     var sim = new InputSimulator();
-                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
-                                    {
+                                    for (int t = 0; t < int.Parse(txD.Text); t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    { 
                                         sim.Keyboard.KeyDown(skill.Key);
-                                        await Task.Delay(10);
+                                        await Task.Delay(1);
                                     }
                                     sim.Keyboard.KeyUp(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);

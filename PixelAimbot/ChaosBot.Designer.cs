@@ -49,6 +49,8 @@
             this.label28 = new System.Windows.Forms.Label();
             this.txtRepair = new System.Windows.Forms.TextBox();
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.chBoxAutoMovement = new System.Windows.Forms.CheckBox();
             this.buttonSaveRotation = new System.Windows.Forms.Button();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -195,8 +197,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.label27 = new System.Windows.Forms.Label();
-            this.chBoxAutoMovement = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -476,6 +476,36 @@
             this.chBoxAutoRepair.UseMnemonic = false;
             this.chBoxAutoRepair.UseVisualStyleBackColor = false;
             this.chBoxAutoRepair.CheckedChanged += new System.EventHandler(this.chBoxAutoRepair_CheckedChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Peru;
+            this.label27.Location = new System.Drawing.Point(141, 21);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(91, 15);
+            this.label27.TabIndex = 35;
+            this.label27.Text = "ALPHA-Version";
+            // 
+            // chBoxAutoMovement
+            // 
+            this.chBoxAutoMovement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoMovement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoMovement.Checked = true;
+            this.chBoxAutoMovement.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
+            this.chBoxAutoMovement.Name = "chBoxAutoMovement";
+            this.chBoxAutoMovement.Size = new System.Drawing.Size(134, 22);
+            this.chBoxAutoMovement.TabIndex = 34;
+            this.chBoxAutoMovement.Text = "Auto Movement";
+            this.chBoxAutoMovement.UseMnemonic = false;
+            this.chBoxAutoMovement.UseVisualStyleBackColor = false;
             // 
             // buttonSaveRotation
             // 
@@ -2547,38 +2577,6 @@
             this.Ultimate.Size = new System.Drawing.Size(410, 126);
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.Peru;
-            this.label27.Location = new System.Drawing.Point(141, 21);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(91, 15);
-            this.label27.TabIndex = 35;
-            this.label27.Text = "ALPHA-Version";
-            this.label27.Visible = false;
-            // 
-            // chBoxAutoMovement
-            // 
-            this.chBoxAutoMovement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxAutoMovement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoMovement.Checked = true;
-            this.chBoxAutoMovement.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
-            this.chBoxAutoMovement.Name = "chBoxAutoMovement";
-            this.chBoxAutoMovement.Size = new System.Drawing.Size(134, 22);
-            this.chBoxAutoMovement.TabIndex = 34;
-            this.chBoxAutoMovement.Text = "Auto Movement";
-            this.chBoxAutoMovement.UseMnemonic = false;
-            this.chBoxAutoMovement.UseVisualStyleBackColor = false;
-            this.chBoxAutoMovement.Visible = false;
             // 
             // ChaosBot
             // 
