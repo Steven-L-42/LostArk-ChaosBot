@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "1.7.0r";
+        public static string version { get; set; } = "1.7.3r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
@@ -93,7 +93,8 @@ namespace PixelAimbot.Classes.Misc
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
-
+        public string txtDungeon3Iteration { get; set; } = "12";
+        public string txtDungeon2Iteration { get; set; } = "9";
 
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";
