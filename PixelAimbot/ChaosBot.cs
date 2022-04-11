@@ -47,7 +47,7 @@ namespace PixelAimbot
         private bool _LOGOUT = false;
 
         private bool _FIGHT = false;
-
+        private bool Search = false;
 
         //SKILL AND COOLDOWN//
         private bool _Q = true;
@@ -1144,6 +1144,7 @@ namespace PixelAimbot
                             await Task.Delay(100, token);
                             walktopUTurn2 = 0;
                             fightSequence++;
+                            Search = true;
                             _Shadowhunter = true;
                             _Berserker = true;
                             _Paladin = true;
@@ -1177,7 +1178,7 @@ namespace PixelAimbot
                             else
                             if (fightSequence < int.Parse(txtDungeon2Iteration.Text))
                             {
-
+                                 Search = true;
                                 var t13 = Task.Run(() => SEARCHBOSS(token));
                                 await Task.WhenAny(new[] { t13 });
                             }
@@ -1344,7 +1345,7 @@ namespace PixelAimbot
 
                                     }
                                 }
-                                else
+                               
                                     if (walktopUTurn == 2)
                                 {
                                     try
@@ -1374,7 +1375,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 6)
+                                if (walktopUTurn == 4)
                                 {
                                     try
                                     {
@@ -1402,7 +1403,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 10)
+                                if (walktopUTurn == 6)
                                 {
                                     try
                                     {
@@ -1430,7 +1431,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 12)
+                                if (walktopUTurn == 8)
                                 {
                                     try
                                     {
@@ -1458,7 +1459,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 14)
+                                if (walktopUTurn == 8)
                                 {
                                     walktopUTurn = 0;
                                     await Task.Delay(10);
@@ -1770,13 +1771,13 @@ namespace PixelAimbot
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     fightOnSecondAbility++;
-                                    if (fightOnSecondAbility == 4)
+                                    if (fightOnSecondAbility == 4 && Search == false)
                                     {
                                         try
                                         {
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(100, token);
-                                            walktopUTurn2++;
+
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
@@ -1784,7 +1785,6 @@ namespace PixelAimbot
                                             au3.Send("{C}");
                                             au3.Send("{C}");
 
-                                            fightOnSecondAbility = 1;
                                         }
                                         catch (AggregateException)
                                         {
@@ -1796,47 +1796,49 @@ namespace PixelAimbot
                                         }
                                         catch { }
                                     }
+                                    if (fightOnSecondAbility == 5 && Search == false)
+                                    { 
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(100, token);
+                                            for (int t = 0; t < 40; t++)
+                                            {
+
+                                                au3.MouseClick("LEFT", 960, 240, 1, 10);
+                                                await Task.Delay(10);
+
+                                            }
+                                            for (int t = 0; t < 90; t++)
+                                            {
+
+                                                au3.MouseClick("LEFT", 960, 566, 1, 10);
+                                                await Task.Delay(10);
+
+                                            }
+                                            for (int t = 0; t < 1; t++)
+                                            {
+
+                                                au3.MouseClick("LEFT", 960, 530, 1, 10);
+                                                await Task.Delay(10);
+
+                                            }
+                                            
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                        fightOnSecondAbility = 1;
+                                    }
                                 }
-                                else
-                                if (isKeyOnCooldown(skill.Key) == false)
-                                {
-                                    try
-                                    {
-                                        token.ThrowIfCancellationRequested();
-                                        await Task.Delay(100, token);
-                                        for (int t = 0; t < 50; t++)
-                                        {
-
-                                            au3.MouseClick("LEFT", 960, 240, 1, 10);
-                                            await Task.Delay(10);
-
-                                        }
-                                        for (int t = 0; t < 60; t++)
-                                        {
-
-                                            au3.MouseClick("LEFT", 960, 566, 1, 10);
-                                            await Task.Delay(10);
-
-                                        }
-                                        for (int t = 0; t < 1; t++)
-                                        {
-
-                                            au3.MouseClick("LEFT", 960, 530, 1, 10);
-                                            await Task.Delay(10);
-
-                                        }
-                                      
-                                    }
-                                    catch (AggregateException)
-                                    {
-                                        Console.WriteLine("Expected");
-                                    }
-                                    catch (ObjectDisposedException)
-                                    {
-                                        Console.WriteLine("Bug");
-                                    }
-                                    catch { }
-                                }
+                               
+                                
                                
                                 
                             }
