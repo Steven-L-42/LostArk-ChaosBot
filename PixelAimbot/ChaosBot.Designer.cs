@@ -105,6 +105,8 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chBoxBard = new System.Windows.Forms.CheckBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.chBoxSoulfist = new System.Windows.Forms.CheckBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.chBoxSorcerer = new System.Windows.Forms.CheckBox();
@@ -1273,6 +1275,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chBoxBard);
+            this.groupBox3.Controls.Add(this.textBox5);
             this.groupBox3.Controls.Add(this.chBoxSoulfist);
             this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Controls.Add(this.chBoxSorcerer);
@@ -1299,6 +1303,37 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            // 
+            // chBoxBard
+            // 
+            this.chBoxBard.AutoSize = true;
+            this.chBoxBard.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxBard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxBard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxBard.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxBard.Location = new System.Drawing.Point(285, 43);
+            this.chBoxBard.Name = "chBoxBard";
+            this.chBoxBard.Size = new System.Drawing.Size(52, 19);
+            this.chBoxBard.TabIndex = 67;
+            this.chBoxBard.Text = "Bard:";
+            this.chBoxBard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxBard.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox5.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox5.Location = new System.Drawing.Point(343, 44);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(23, 16);
+            this.textBox5.TabIndex = 66;
+            this.textBox5.Text = "Y";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.WordWrap = false;
             // 
             // chBoxSoulfist
             // 
@@ -2769,6 +2804,8 @@
         private System.Windows.Forms.TextBox txtDungeon2Iteration;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtDungeon3Iteration;
+        private System.Windows.Forms.CheckBox chBoxBard;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 

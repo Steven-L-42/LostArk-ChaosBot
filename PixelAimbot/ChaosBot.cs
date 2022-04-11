@@ -5,6 +5,7 @@ using PixelAimbot.Classes;
 using PixelAimbot.Classes.Misc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -25,22 +26,27 @@ namespace PixelAimbot
         ///                                                                                                                                               ///
         private bool _start = false;
         private bool _stop = false;
+
+        private bool _Floor1 = false;
+        private bool _Floor2 = false;
+        private bool _Floor3 = false;
+        private bool _Floor1Fight = false;
+        private bool _Floor2Fight = false;
+        private bool _Floor3Fight = false;
+
         private bool _REPAIR = false;
         private bool _Shadowhunter = false;
         private bool _Berserker = false;
         private bool _Paladin = false;
         private bool _Deathblade = false;
         private bool _Sharpshooter = false;
+        private bool _Bard = false;
         private bool _Sorcerer = false;
         private bool _Soulfist = false;
-        private bool _ChaosComplete = false;
-        private bool _FloorActivate = false;
-        private bool _Floor3Activate = false;
+
         private bool _LOGOUT = false;
-        private bool _ALLFLOORTIMER = false;
 
         private bool _FIGHT = false;
-        private bool _ULTIMATE_HEAL = false;
 
 
         //SKILL AND COOLDOWN//
@@ -52,8 +58,18 @@ namespace PixelAimbot
         private bool _S = true;
         private bool _D = true;
         private bool _F = true;
-        private bool _Y = true;
-        private bool _Z = true;
+
+        private System.Timers.Timer timer;
+        private int fightSequence = 0;
+        private int fightSequence2 = 0;
+        private int searchSequence = 0;
+        private int searchSequence2 = 0;
+        private int CompleteIteration = 1;
+        private int fightOnSecondAbility = 1;
+        private int walktopUTurn = 1;
+        private int walktopUTurn2 = 1;
+        private int Floor2 = 1;
+        private int Floor3 = 1;
 
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
@@ -208,6 +224,7 @@ namespace PixelAimbot
             }
 
         }
+
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -229,20 +246,18 @@ namespace PixelAimbot
                 _Shadowhunter = false;
                 _Berserker = false;
                 _Paladin = false;
+                _Bard = false;
+
                 _Deathblade = false;
                 _Sharpshooter = false;
                 _Sorcerer = false;
                 _Soulfist = false;
-                _ChaosComplete = false;
-                _FloorActivate = false;
-                _Floor3Activate = false;
+    
+
                 _LOGOUT = false;
 
                 _FIGHT = false;
-                _ULTIMATE_HEAL = false;
 
-
-              
                 _Q = true;
                 _W = true;
                 _E = true;
@@ -251,8 +266,7 @@ namespace PixelAimbot
                 _S = true;
                 _D = true;
                 _F = true;
-                _Y = true;
-                _Z = true;
+     
 
 
 
@@ -302,14 +316,6 @@ namespace PixelAimbot
                     // Handle other exceptions
                 }
         }
-
-        private System.Timers.Timer timer;
-        private int fightSequence = 0;
-        private int fightSequence2 = 0;
-        private int searchSequence = 0;
-        private int searchSequence2 = 0;
-        private int CompleteIteration = 1;
-        private int fightOnSecondAbility = 1;
 
         public async Task REPAIRTIMER(CancellationToken token)
         {
@@ -459,13 +465,13 @@ namespace PixelAimbot
             {
                 _Berserker = true;
                 CompleteIteration = 1;
-                _ChaosComplete = false;
-                _FloorActivate = false;
-                _Floor3Activate = false;
+                Floor2 = 1;
+                Floor3 = 1;
                 searchSequence = 0;
                 searchSequence2 = 0;
                 fightSequence = 0;
                 fightSequence2 = 0;
+                walktopUTurn = 1;
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
@@ -658,8 +664,8 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                _ALLFLOORTIMER = true;
-                var t12 = Task.Run(() => FLOOR1FIGHT_Timer(token));
+                _Floor1 = true;
+                var t12 = Task.Run(() => FLOORTIME(token));
                 await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
@@ -806,6 +812,8 @@ namespace PixelAimbot
                 }
                 catch { }
                 searchSequence = 1;
+                walktopUTurn = 0;
+                _Floor2 = true;
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -1035,7 +1043,11 @@ namespace PixelAimbot
                         }
                         catch { }
                     }
-                    var t12 = Task.Run(() => FLOOR2FIGHT_Timer(token));
+
+                    if(Floor2 == 1)
+                    { _Floor2 = true; }
+                    
+                    var t12 = Task.Run(() => FLOORTIME(token));
                     await Task.WhenAny(new[] { t12 });
                 }
                 catch (AggregateException)
@@ -1060,139 +1072,58 @@ namespace PixelAimbot
             catch { }
         }
 
-        private async Task FLOOR1FIGHT_Timer(CancellationToken token)
+        private async Task FLOORTIME(CancellationToken token)
         {
-
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-                if (_ALLFLOORTIMER == true)
-                { 
-                   
                 try
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    _FloorActivate = true;
-                    _Shadowhunter = true;
-                    _Paladin = true;
-                    _Berserker = true;
-                    _Deathblade = true;
-                    _Sharpshooter = true;
-                    _Sorcerer = true;
-                    _Soulfist = true;
-                    _Q = true;
-                    _W = true;
-                    _E = true;
-                    _R = true;
-                    _A = true;
-                    _S = true;
-                    _D = true;
-                    _F = true;
-                    _Y = true;
-                    _Z = true;
-                    _FIGHT = true;
-                    _ULTIMATE_HEAL = true;
-                    var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                    await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
-                    _FIGHT = false;
-                    if (chBoxActivateF2.Checked && _FIGHT == false)
+                    if (_Floor1 == true)
                     {
-                        var t7 = Task.Run(() => SEARCHPORTAL(token));
-                        await Task.WhenAny(new[] { t7 });
-                    }
-                    else
-                   if (!chBoxActivateF2.Checked && _FIGHT == false)
-                    {
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
-                        _ULTIMATE_HEAL = false;
-                        _FloorActivate = false;
-                        var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                        await Task.WhenAny(new[] { t12 });
-                    }
-                }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
-            }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
 
-        private async Task FLOOR2FIGHT_Timer(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                if (_ALLFLOORTIMER == true)
-                {
-
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100, token);
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
-                        fightSequence++;
-                        _FloorActivate = true;
+                        walktopUTurn = 0;
                         _Shadowhunter = true;
-                        _Paladin = true;
                         _Berserker = true;
+                        _Paladin = true;
                         _Deathblade = true;
-                        _Q = true;
-                        _W = true;
-                        _E = true;
-                        _R = true;
-                        _A = true;
-                        _S = true;
-                        _D = true;
-                        _F = true;
-                        _Y = true;
-                        _Z = true;
-                        _FIGHT = true;
+                        _Sharpshooter = true;
+                        _Sorcerer = true;
+                        _Soulfist = true;
 
-                        var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                        await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+                        _Floor1Fight = true;
+                            var t12 = Task.Run(() => FLOORFIGHT(token));
+                            await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
+                            
 
-                        _FIGHT = false;
+                            _Floor1Fight = false;
 
-                        if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
+                        if (chBoxActivateF2.Checked)
                         {
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
-
-                            var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                             
+                            _Floor1 = false;
+                            var t7 = Task.Run(() => SEARCHPORTAL(token));
+                            await Task.WhenAny(new[] { t7 });
+                        }
+                        else
+                        if (!chBoxActivateF2.Checked)
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
+                            _Floor1 = false;
+                            var leave = Task.Run(() => LEAVEDUNGEON(token));
+                            await Task.WhenAny(new[] { leave });
+                        }
                             await Task.WhenAny(new[] { t12 });
                         }
-                        else
-                        if (fightSequence < int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF3.Checked == true)
-                        {
-
-                            var t13 = Task.Run(() => FLOOR2PORTAL(token));
-                            await Task.WhenAny(new[] { t13 });
-                        }
-                        else
-                        if (fightSequence < int.Parse(txtDungeon2Iteration.Text))
-                        {
-
-                            var t13 = Task.Run(() => SEARCHBOSS(token));
-                            await Task.WhenAny(new[] { t13 });
-                        }
-                    }
                     catch (AggregateException)
                     {
                         Console.WriteLine("Expected");
@@ -1202,61 +1133,93 @@ namespace PixelAimbot
                         Console.WriteLine("Bug");
                     }
                     catch { }
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
 
-        private async Task FLOOR3FIGHT_Timer(CancellationToken token)
-        {
-            try
-            {
-                if (_ALLFLOORTIMER == true)
+                }
+                    if (_Floor2 == true)
+                    {
+
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(100, token);
+                            walktopUTurn2 = 0;
+                            fightSequence++;
+                            _Shadowhunter = true;
+                            _Berserker = true;
+                            _Paladin = true;
+                            _Deathblade = true;
+                            _Sharpshooter = true;
+                            _Bard = true;
+                            _Sorcerer = true;
+                            _Soulfist = true;
+
+                            _Floor2Fight = true;
+                            var t14 = Task.Run(() => FLOORFIGHT(token));
+                            await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+
+                            _Floor2Fight = false;
+
+                            if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
+
+                                var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                                await Task.WhenAny(new[] { t12 });
+                            }
+                            else
+
+                            if (fightSequence >= int.Parse(txtDungeon2Iteration.Text) - 1 && chBoxActivateF3.Checked == true)
+                            {
+
+                                var t13 = Task.Run(() => FLOOR2PORTAL(token));
+                                await Task.WhenAny(new[] { t13 });
+                            }
+                            else
+                            if (fightSequence < int.Parse(txtDungeon2Iteration.Text))
+                            {
+
+                                var t13 = Task.Run(() => SEARCHBOSS(token));
+                                await Task.WhenAny(new[] { t13 });
+                            }
+                            await Task.WhenAny(new[] { t14 });
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+
+                    }
+                    if (_Floor3 == true)
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         CompleteIteration = 1;
-                        fightSequence2 ++;
-                        _Floor3Activate = true;
+                        fightSequence2++;
                         _Shadowhunter = true;
-                        _Paladin = true;
                         _Berserker = true;
+                        _Paladin = true;
                         _Deathblade = true;
-                        _Q = true;
-                        _W = true;
-                        _E = true;
-                        _R = true;
-                        _A = true;
-                        _S = true;
-                        _D = true;
-                        _F = true;
-                        _Y = true;
-                        _Z = true;
-                        _FIGHT = true;
+                        _Sharpshooter = true;
+                        _Bard = true;
+                        _Sorcerer = true;
+                        _Soulfist = true;
 
-                        var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                        await Task.Delay(int.Parse(txtDungeon3.Text) * 1000);
+                        _Floor3Fight = true;
+                            var t14 = Task.Run(() => FLOORFIGHT(token));
+                            await Task.Delay(int.Parse(txtDungeon3.Text) * 1000);
 
-                        _FIGHT = false;
-                       
+                        _Floor3Fight = false;
+
                         if (fightSequence2 == int.Parse(txtDungeon3Iteration.Text))
                         {
-                            _ALLFLOORTIMER = false;
-                            _FloorActivate = false;
-                            _Floor3Activate = false;
-                            _ULTIMATE_HEAL = false;
+
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Leaved ChaosDungeon - not completed!"));
                             var t12 = Task.Run(() => LEAVEDUNGEON(token));
                             await Task.WhenAny(new[] { t12 });
@@ -1268,8 +1231,9 @@ namespace PixelAimbot
                             var t13 = Task.Run(() => SEARCHBOSS2(token));
                             await Task.WhenAny(new[] { t13 });
                         }
+                            await Task.WhenAny(new[] { t14 });
 
-                    }
+                        }
                     catch (AggregateException)
                     {
                         Console.WriteLine("Expected");
@@ -1280,6 +1244,18 @@ namespace PixelAimbot
                     }
                     catch { }
                 }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(100, token);
             }
             catch (AggregateException)
             {
@@ -1292,317 +1268,361 @@ namespace PixelAimbot
             catch { }
         }
 
-        private async Task FLOOR1FIGHT(CancellationToken token)
+        private async Task FLOORFIGHT(CancellationToken token)
         {
-
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-                while (_FIGHT == true)
+                try
                 {
-
-                    foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                    while (_Floor1Fight == true)
                     {
-                        try
-                        {
-                            
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            
-                            object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                            object shardHit = au3.PixelSearch(600, 250, 1319, 843, 0x630E17, 10);
 
-                            if (shardHit.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _Floor3Activate == true)
-                            {   
-                                object[] shardHitCoord = (object[])shardHit;
-                               
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                                au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
-                                var sim = new InputSimulator();
-                                for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
+                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+
+                                object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
                                 {
-                                    sim.Keyboard.KeyDown(skill.Key);
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    var sim = new InputSimulator();
+                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    {
+                                        sim.Keyboard.KeyDown(skill.Key);
+                                        await Task.Delay(10);
+                                    }
+                                    sim.Keyboard.KeyUp(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    fightOnSecondAbility++;
+                                    if (fightOnSecondAbility == 4)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(100, token);
+                                            walktopUTurn++;
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            fightOnSecondAbility = 1;
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+
+                                    }
+                                }
+                                else
+                                    if (walktopUTurn == 2)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        for (int t = 0; t < 40; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 960, 240, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        for (int t = 0; t < 0.5; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 960, 566, 1, 10);
+                                            await Task.Delay(10);
+
+                                        }
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                if (walktopUTurn == 6)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        for (int t = 0; t < 80; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 523, 800, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        for (int t = 0; t < 0.5; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 1007, 494, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                if (walktopUTurn == 10)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        for (int t = 0; t < 90; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 1578, 524, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        for (int t = 0; t < 0.5; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 905, 531, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                if (walktopUTurn == 12)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        for (int t = 0; t < 70; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 523, 810, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        for (int t = 0; t < 0.5; t++)
+                                        {
+                                            au3.MouseClick("LEFT", 960, 500, 1, 10);
+                                            await Task.Delay(10);
+                                        }
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                if (walktopUTurn == 14)
+                                {
+                                    walktopUTurn = 0;
                                     await Task.Delay(10);
                                 }
-                                sim.Keyboard.KeyUp(skill.Key);
-                                sim.Keyboard.KeyPress(skill.Key);
 
-
-                                if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
-                                {
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-
-                                    sim.Keyboard.KeyPress(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
-
-                                }
-                                setKeyCooldown(skill.Key); // Set Cooldown
-                                var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-                                au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
-                                fightOnSecondAbility++;
-                                if (fightOnSecondAbility == 3)
-                                {
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    fightOnSecondAbility = 1;
-                                }
-
+                                
                             }
-
-
-                            if (fight.ToString() != "1" && _FIGHT == true && isKeyOnCooldown(skill.Key) == true && _FloorActivate == true)
+                            catch (AggregateException)
                             {
-                                object[] fightCoord = (object[])fight;
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                                var sim = new InputSimulator();
-                                for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
-                                {
-                                    sim.Keyboard.KeyDown(skill.Key);
-                                    await Task.Delay(10);
-                                }
-                                sim.Keyboard.KeyUp(skill.Key);
-                                sim.Keyboard.KeyPress(skill.Key);
-                                if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
-                                {
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-
-                                    sim.Keyboard.KeyPress(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
-
-                                }
-                                setKeyCooldown(skill.Key); // Set Cooldown
-                                var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-                                au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
-                                fightOnSecondAbility++;
-                                if (fightOnSecondAbility == 3)
-                                {
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    au3.Send("{C}");
-                                    fightOnSecondAbility = 1;
-                                }
-
+                                Console.WriteLine("Expected");
                             }
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
-                        ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-
-
-                            if (chBoxY.Checked == true && _Shadowhunter == true && _FIGHT == true)
+                            catch (ObjectDisposedException)
                             {
-                                try
-                                {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
 
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
 
-                                    object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 5);
-
-                                    if (d.ToString() != "1")
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
+                                { 
+                                    try
                                     {
-
-                                        object[] dCoord = (object[])d;
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
                                         {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Paladin = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
-                                        _Shadowhunter = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
-
                                     }
-                                }
-                                catch (AggregateException)
-                                {
-                                    Console.WriteLine("Expected");
-                                }
-                                catch (ObjectDisposedException)
-                                {
-                                    Console.WriteLine("Bug");
-                                }
-                                catch { }
-                            }
-                            else
-
-
-
-                             if (chBoxPaladin.Checked == true && _Paladin == true && _FIGHT == true)
-                            {
-                                try
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
-                                    object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
-                                    if (d.ToString() != "1")
+                                    catch (AggregateException)
                                     {
-                                        object[] dCoord = (object[])d;
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
-                                        }
-                                        _Paladin = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        Console.WriteLine("Expected");
                                     }
-                                }
-                                catch (AggregateException)
-                                {
-                                    Console.WriteLine("Expected");
-                                }
-                                catch (ObjectDisposedException)
-                                {
-                                    Console.WriteLine("Bug");
-                                }
-                                catch { }
-                            }
-                            else
-                            if (chBoxDeathblade.Checked == true && _Deathblade == true && _FIGHT == true)
-                            {
-                                try
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
-                                    object d = au3.PixelSearch(986, 1029, 1017, 1035, 0xDAE7F3, 10);
-                                    if (d.ToString() != "1")
+                                    catch (ObjectDisposedException)
                                     {
-                                        object[] dCoord = (object[])d;
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
-                                        }
-                                        _Deathblade = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        Console.WriteLine("Bug");
                                     }
+                                    catch { }
                                 }
-                                catch (AggregateException)
+                                else
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
                                 {
-                                    Console.WriteLine("Expected");
-                                }
-                                catch (ObjectDisposedException)
-                                {
-                                    Console.WriteLine("Bug");
-                                }
-                                catch { }
-                            }
-                            else
-                            if (chBoxSharpshooter.Checked == true && _Sharpshooter == true && _FIGHT == true)
-                            {
-                                try
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
-                                    object d = au3.PixelSearch(1006, 1049, 1019, 1068, 0x09B4EB, 10);
-                                    if (d.ToString() != "1")
+                                    try
                                     {
-                                        object[] dCoord = (object[])d;
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(986, 1029, 1017, 1035, 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
                                         {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Deathblade = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
-                                        _Sharpshooter = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1049, 1019, 1068, 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sharpshooter = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
 
-                                        var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
-                                    }
-                                }
-                                catch (AggregateException)
-                                {
-                                    Console.WriteLine("Expected");
-                                }
-                                catch (ObjectDisposedException)
-                                {
-                                    Console.WriteLine("Bug");
-                                }
-                                catch { }
-                            }
-                            else
-                            if (chBoxSorcerer.Checked == true && _Sorcerer == true && _FIGHT == true)
-                            {
-                                try
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
-                                    object d = au3.PixelSearch(1006, 1038, 1010, 1042, 0x8993FF, 10);
-                                    if (d.ToString() != "1")
-                                    {
-                                        object[] dCoord = (object[])d;
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                         }
-                                        _Sorcerer = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                     }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
                                 }
-                                catch (AggregateException)
+                                else
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
                                 {
-                                    Console.WriteLine("Expected");
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1038, 1010, 1042, 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sorcerer = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
                                 }
-                                catch (ObjectDisposedException)
+                                else
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
                                 {
-                                    Console.WriteLine("Bug");
-                                }
-                                catch { }
-                            }
-                            else
-                            if (chBoxSoulfist.Checked == true && _Soulfist == true && _FIGHT == true)
-                            {
-                                try
-                                {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(100, token);
-                                   
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
                                         var sim = new InputSimulator();
                                         for (int t = 0; t < 50; t++)
                                         {
@@ -1612,7 +1632,911 @@ namespace PixelAimbot
                                         _Soulfist = false;
                                         sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
-                                  
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 651, 969, 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+
+
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+
+
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                    }
+                                }
+
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                        }
+                    }
+                    while (_Floor2Fight == true)
+                    {
+
+                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+
+                                object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
+                                {
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    var sim = new InputSimulator();
+                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    {
+                                        sim.Keyboard.KeyDown(skill.Key);
+                                        await Task.Delay(10);
+                                    }
+                                    sim.Keyboard.KeyUp(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    fightOnSecondAbility++;
+                                    if (fightOnSecondAbility == 4)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(100, token);
+                                            walktopUTurn2++;
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+
+                                            fightOnSecondAbility = 1;
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                    }
+                                }
+                                else
+                                if (isKeyOnCooldown(skill.Key) == false)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        for (int t = 0; t < 50; t++)
+                                        {
+
+                                            au3.MouseClick("LEFT", 960, 240, 1, 10);
+                                            await Task.Delay(10);
+
+                                        }
+                                        for (int t = 0; t < 60; t++)
+                                        {
+
+                                            au3.MouseClick("LEFT", 960, 566, 1, 10);
+                                            await Task.Delay(10);
+
+                                        }
+                                        for (int t = 0; t < 1; t++)
+                                        {
+
+                                            au3.MouseClick("LEFT", 960, 530, 1, 10);
+                                            await Task.Delay(10);
+
+                                        }
+                                      
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                               
+                                
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+
+                                if (chBoxBard.Checked == true && _Bard == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        var sim = new InputSimulator();
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        await Task.Delay(1);
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxY.Checked == true && _Shadowhunter == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 5);
+
+                                        if (d.ToString() != "1")
+                                        {
+
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Shadowhunter = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                 if (chBoxPaladin.Checked == true && _Paladin == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Paladin = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(986, 1029, 1017, 1035, 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Deathblade = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1049, 1019, 1068, 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sharpshooter = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
+
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1038, 1010, 1042, 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sorcerer = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Soulfist = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 651, 969, 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+
+
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+
+
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                    }
+                                }
+
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                        }
+                    }
+                    while (_Floor3Fight == true)
+                    {
+                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                object shardHit = au3.PixelSearch(600, 250, 1319, 843, 0x630E17, 10);
+                                object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && shardHit.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
+                                {
+                                    object[] shardHitCoord = (object[])shardHit;
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    var sim = new InputSimulator();
+                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    {
+                                        sim.Keyboard.KeyDown(skill.Key);
+                                        await Task.Delay(10);
+                                    }
+                                    sim.Keyboard.KeyUp(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                        sim.Keyboard.KeyPress(skill.Key);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    fightOnSecondAbility++;
+                                    if (fightOnSecondAbility == 4)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(100, token);
+                                            walktopUTurn++;
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+
+                                            fightOnSecondAbility = 1;
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                    }
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+
+                                if (chBoxBard.Checked == true && _Bard == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        var sim = new InputSimulator();
+                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        await Task.Delay(1);
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxY.Checked == true && _Shadowhunter == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 5);
+
+                                        if (d.ToString() != "1")
+                                        {
+
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Shadowhunter = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                 if (chBoxPaladin.Checked == true && _Paladin == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Paladin = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(986, 1029, 1017, 1035, 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Deathblade = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1049, 1019, 1068, 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sharpshooter = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
+
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+                                        object d = au3.PixelSearch(1006, 1038, 1010, 1042, 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            var sim = new InputSimulator();
+                                            for (int t = 0; t < 50; t++)
+                                            {
+                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                                await Task.Delay(1);
+                                            }
+                                            _Sorcerer = false;
+                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(100, token);
+
+                                        var sim = new InputSimulator();
+                                        for (int t = 0; t < 50; t++)
+                                        {
+                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
+                                            await Task.Delay(1);
+                                        }
+                                        _Soulfist = false;
+                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 651, 969, 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                    }
                                 }
                                 catch (AggregateException)
                                 {
@@ -1624,21 +2548,6 @@ namespace PixelAimbot
                                 }
                                 catch { }
                             }
-                            //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
-                            try
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                object health = au3.PixelSearch(633, 962, 651, 969, 0x050405, 15);
-                                if (health.ToString() != "1" && _FIGHT == true && checkBoxHeal10.Checked)
-                                {
-                                    object[] healthCoord = (object[])health;
-                                    au3.Send("{" + txtHeal10.Text + "}");
-                                    au3.Send("{" + txtHeal10.Text + "}");
-                                    au3.Send("{" + txtHeal10.Text + "}");
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
-                                }
-                            }
                             catch (AggregateException)
                             {
                                 Console.WriteLine("Expected");
@@ -1648,72 +2557,19 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
-                            try
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 15);
-
-                                if (health.ToString() != "1" && _FIGHT == true && checkBoxHeal70.Checked)
-                                {
-
-
-                                    object[] healthCoord = (object[])health;
-                                    au3.Send("{" + txtHeal70.Text + "}");
-                                    au3.Send("{" + txtHeal70.Text + "}");
-                                    au3.Send("{" + txtHeal70.Text + "}");
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
-                                }
-                            }
-                            catch (AggregateException)
-                            {
-                                Console.WriteLine("Expected");
-                            }
-                            catch (ObjectDisposedException)
-                            {
-                                Console.WriteLine("Bug");
-                            }
-                            catch { }
-                            try
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                object healthi = au3.PixelSearch(633, 962, 686, 969, 0x050405, 15);
-
-                                if (healthi.ToString() != "1" && _FIGHT == true && checkBoxHeal30.Checked)
-                                {
-
-
-                                    object[] healthiCoord = (object[])healthi;
-                                    au3.Send("{" + txtHeal30.Text + "}");
-                                    au3.Send("{" + txtHeal30.Text + "}");
-                                    au3.Send("{" + txtHeal30.Text + "}");
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
-                                }
-                            }
-
-                            catch (AggregateException)
-                            {
-                                Console.WriteLine("Expected");
-                            }
-                            catch (ObjectDisposedException)
-                            {
-                                Console.WriteLine("Bug");
-                            }
-                            catch { }
-
                         }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
                     }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
             }
             catch (AggregateException)
             {
@@ -1998,7 +2854,7 @@ namespace PixelAimbot
                                 {
                                     object[] completeCoord = (object[])complete;
                                     au3.MouseClick("LEFT", 191, 285, 1, 5);
-                                    _ALLFLOORTIMER = false;
+                                
                                     await Task.Delay(1000);
 
 
@@ -2049,7 +2905,10 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                var t12 = Task.Run(() => FLOOR3FIGHT_Timer(token));
+                if(Floor3 == 1)
+                { _Floor3 = true; }
+
+                var t12 = Task.Run(() => FLOORTIME(token));
                 await Task.WhenAny(new[] { t12 }); 
             }
             catch (AggregateException)
@@ -2196,7 +3055,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-
+                searchSequence2 = 1;
                 var t12 = Task.Run(() => SEARCHBOSS2(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -2223,12 +3082,18 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    _FloorActivate = false;
-                    _ULTIMATE_HEAL = false;
-                    _ALLFLOORTIMER = false;
-                    _Shadowhunter = true;
-                    _Paladin = true;
-                    _Berserker = true;
+                    _Bard = false;
+                    _Shadowhunter = false;
+                    _Berserker = false;
+                    _Paladin = false;
+                    _Deathblade = false;
+                    _Sharpshooter = false;
+                    _Bard = false;
+                    _Sorcerer = false;
+                    _Soulfist = false;
+
+
+
                     for (int i = 0; i < 1; i++)
                     {
                         try
@@ -2309,7 +3174,6 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
-                    _ALLFLOORTIMER = false;
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -3518,5 +4382,7 @@ namespace PixelAimbot
             }
         }
 
+        
+        
     }
 }
