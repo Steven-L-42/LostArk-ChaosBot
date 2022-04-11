@@ -49,8 +49,6 @@
             this.label28 = new System.Windows.Forms.Label();
             this.txtRepair = new System.Windows.Forms.TextBox();
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.chBoxSaveAll = new System.Windows.Forms.CheckBox();
             this.buttonSaveRotation = new System.Windows.Forms.Button();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -197,6 +195,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
+            this.chBoxAutoMovement = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -285,7 +285,7 @@
             this.groupBox1.Controls.Add(this.txtRepair);
             this.groupBox1.Controls.Add(this.chBoxAutoRepair);
             this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.chBoxSaveAll);
+            this.groupBox1.Controls.Add(this.chBoxAutoMovement);
             this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox1.Location = new System.Drawing.Point(172, 5);
@@ -397,7 +397,7 @@
             this.chBoxLOGOUT.FlatAppearance.BorderSize = 0;
             this.chBoxLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxLOGOUT.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxLOGOUT.Location = new System.Drawing.Point(6, 65);
+            this.chBoxLOGOUT.Location = new System.Drawing.Point(4, 65);
             this.chBoxLOGOUT.Name = "chBoxLOGOUT";
             this.chBoxLOGOUT.Size = new System.Drawing.Size(154, 22);
             this.chBoxLOGOUT.TabIndex = 44;
@@ -466,7 +466,7 @@
             this.chBoxAutoRepair.FlatAppearance.BorderSize = 0;
             this.chBoxAutoRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxAutoRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxAutoRepair.Location = new System.Drawing.Point(6, 40);
+            this.chBoxAutoRepair.Location = new System.Drawing.Point(4, 40);
             this.chBoxAutoRepair.Name = "chBoxAutoRepair";
             this.chBoxAutoRepair.Size = new System.Drawing.Size(154, 24);
             this.chBoxAutoRepair.TabIndex = 36;
@@ -476,37 +476,6 @@
             this.chBoxAutoRepair.UseMnemonic = false;
             this.chBoxAutoRepair.UseVisualStyleBackColor = false;
             this.chBoxAutoRepair.CheckedChanged += new System.EventHandler(this.chBoxAutoRepair_CheckedChanged);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.Peru;
-            this.label27.Location = new System.Drawing.Point(141, 21);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(87, 15);
-            this.label27.TabIndex = 35;
-            this.label27.Text = "Dont FORGET!";
-            this.label27.Visible = false;
-            // 
-            // chBoxSaveAll
-            // 
-            this.chBoxSaveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxSaveAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxSaveAll.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxSaveAll.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxSaveAll.FlatAppearance.BorderSize = 0;
-            this.chBoxSaveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxSaveAll.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxSaveAll.Location = new System.Drawing.Point(4, 17);
-            this.chBoxSaveAll.Name = "chBoxSaveAll";
-            this.chBoxSaveAll.Size = new System.Drawing.Size(134, 22);
-            this.chBoxSaveAll.TabIndex = 34;
-            this.chBoxSaveAll.Text = "Save ALL:";
-            this.toolTip1.SetToolTip(this.chBoxSaveAll, "Check this to Save ALL and Click START(F9).\r\nAll saved data loads at start!");
-            this.chBoxSaveAll.UseMnemonic = false;
-            this.chBoxSaveAll.UseVisualStyleBackColor = false;
-            this.chBoxSaveAll.Visible = false;
             // 
             // buttonSaveRotation
             // 
@@ -2579,6 +2548,38 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.Peru;
+            this.label27.Location = new System.Drawing.Point(141, 21);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(91, 15);
+            this.label27.TabIndex = 35;
+            this.label27.Text = "ALPHA-Version";
+            this.label27.Visible = false;
+            // 
+            // chBoxAutoMovement
+            // 
+            this.chBoxAutoMovement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoMovement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoMovement.Checked = true;
+            this.chBoxAutoMovement.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
+            this.chBoxAutoMovement.Name = "chBoxAutoMovement";
+            this.chBoxAutoMovement.Size = new System.Drawing.Size(134, 22);
+            this.chBoxAutoMovement.TabIndex = 34;
+            this.chBoxAutoMovement.Text = "Auto Movement";
+            this.chBoxAutoMovement.UseMnemonic = false;
+            this.chBoxAutoMovement.UseVisualStyleBackColor = false;
+            this.chBoxAutoMovement.Visible = false;
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2665,8 +2666,6 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtRepair;
         private System.Windows.Forms.CheckBox chBoxAutoRepair;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.CheckBox chBoxSaveAll;
         private System.Windows.Forms.TextBox txtBerserker;
         private System.Windows.Forms.CheckBox chBoxBerserker;
         private System.Windows.Forms.CheckBox chBoxY;
@@ -2806,6 +2805,8 @@
         private System.Windows.Forms.TextBox txtDungeon3Iteration;
         private System.Windows.Forms.CheckBox chBoxBard;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.CheckBox chBoxAutoMovement;
     }
 }
 

@@ -1144,7 +1144,7 @@ namespace PixelAimbot
                             await Task.Delay(100, token);
                             walktopUTurn2 = 0;
                             fightSequence++;
-                            Search = true;
+                            Search = false;
                             _Shadowhunter = true;
                             _Berserker = true;
                             _Paladin = true;
@@ -1163,7 +1163,7 @@ namespace PixelAimbot
                             if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
                             {
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
-
+                                Search = true;
                                 var t12 = Task.Run(() => LEAVEDUNGEON(token));
                                 await Task.WhenAny(new[] { t12 });
                             }
@@ -1171,7 +1171,7 @@ namespace PixelAimbot
 
                             if (fightSequence >= int.Parse(txtDungeon2Iteration.Text) - 1 && chBoxActivateF3.Checked == true)
                             {
-
+                                Search = true;
                                 var t13 = Task.Run(() => FLOOR2PORTAL(token));
                                 await Task.WhenAny(new[] { t13 });
                             }
@@ -1346,7 +1346,7 @@ namespace PixelAimbot
                                     }
                                 }
                                
-                                    if (walktopUTurn == 2)
+                                    if (walktopUTurn == 2 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1709,7 +1709,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
 
@@ -1796,7 +1796,7 @@ namespace PixelAimbot
                                         }
                                         catch { }
                                     }
-                                    if (fightOnSecondAbility == 5 && Search == false)
+                                    if (fightOnSecondAbility == 5 && Search == false && chBoxAutoMovement.Checked)
                                     { 
                                         try
                                         {
@@ -1809,7 +1809,7 @@ namespace PixelAimbot
                                                 await Task.Delay(10);
 
                                             }
-                                            for (int t = 0; t < 90; t++)
+                                            for (int t = 0; t < 80; t++)
                                             {
 
                                                 au3.MouseClick("LEFT", 960, 566, 1, 10);
@@ -1819,7 +1819,7 @@ namespace PixelAimbot
                                             for (int t = 0; t < 1; t++)
                                             {
 
-                                                au3.MouseClick("LEFT", 960, 530, 1, 10);
+                                                au3.MouseClick("LEFT", 960, 500, 1, 10);
                                                 await Task.Delay(10);
 
                                             }
@@ -2147,7 +2147,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
 
@@ -2537,7 +2537,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Instant-Heal at 30%"));
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -3739,7 +3739,7 @@ namespace PixelAimbot
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
             txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
-            chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+            chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
             txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
@@ -3919,7 +3919,7 @@ namespace PixelAimbot
                 chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
                 chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
                 txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
-                chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
                 txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
                 txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
@@ -4188,7 +4188,7 @@ namespace PixelAimbot
                     rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.RestartTimer = txtRestartTimer.Text;
-                    rotation.chBoxSaveAll = chBoxSaveAll.Checked;
+                    rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
                     rotation.txtDungeon3search = txtDungeon3search.Text;
@@ -4278,7 +4278,7 @@ namespace PixelAimbot
 
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 txtRestartTimer.Text = rotation.RestartTimer;
-                chBoxSaveAll.Checked = rotation.chBoxSaveAll;
+                chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;
                 txtDungeon2search.Text = rotation.txtDungeon2search;
                 txtDungeon2.Text = rotation.txtDungeon2;
