@@ -101,8 +101,11 @@ namespace PixelAimbot
                 "mask.png",
                 "portalenter1.png",
                 "portalentermask1.png",
-                "revive.png",
+                "revive1.png",
+                "revivemask1.png",
                 "mob1.png",
+                "reviveEnglishmask.png",
+                "reviveEnglish.png",
                 "mobmask1.png",
                 "shard.png",
                 "shardmask.png"

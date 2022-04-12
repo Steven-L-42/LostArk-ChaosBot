@@ -367,6 +367,7 @@
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
+    <Compile Include="EnterDetectors.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -458,10 +459,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\bossmask.png">
+    <Content Include="Resources\bossmask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\boss.png">
+    <Content Include="Resources\boss1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ChaosDungeon-Bot.ico" />
@@ -472,6 +473,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ImageSearchDLL.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\handmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\hand.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\hud.png">
@@ -501,7 +508,16 @@
     <Content Include="Resources\resoulution.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\revive.png">
+    <Content Include="Resources\revive1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\reviveEnglish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\reviveEnglishmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\revivemask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\shardmask.png">

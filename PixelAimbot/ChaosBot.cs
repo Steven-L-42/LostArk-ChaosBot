@@ -1316,7 +1316,7 @@ namespace PixelAimbot
                                     }
                                 }
 
-                                if (walktopUTurn == 5 && chBoxAutoMovement.Checked && Search == false)
+                                if (walktopUTurn == 4 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1324,12 +1324,12 @@ namespace PixelAimbot
                                         await Task.Delay(100, token);
                                         for (int t = 0; t < 40; t++)
                                         {
-                                            au3.MouseClick("LEFT", 960, 240, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 960, 240, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         for (int t = 0; t < 0.5; t++)
                                         {
-                                            au3.MouseClick("LEFT", 960, 566, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 960, 566, 1, 10);
                                             await Task.Delay(10);
 
                                         }
@@ -1345,7 +1345,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 10 && chBoxAutoMovement.Checked && Search == false)
+                                if (walktopUTurn == 9 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1353,12 +1353,12 @@ namespace PixelAimbot
                                         await Task.Delay(100, token);
                                         for (int t = 0; t < 80; t++)
                                         {
-                                            au3.MouseClick("LEFT", 523, 800, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 523, 800, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         for (int t = 0; t < 0.5; t++)
                                         {
-                                            au3.MouseClick("LEFT", 1007, 494, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 1007, 494, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         walktopUTurn++;
@@ -1373,7 +1373,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 15 && chBoxAutoMovement.Checked && Search == false)
+                                if (walktopUTurn == 14 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1381,12 +1381,12 @@ namespace PixelAimbot
                                         await Task.Delay(100, token);
                                         for (int t = 0; t < 90; t++)
                                         {
-                                            au3.MouseClick("LEFT", 1578, 524, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 1578, 524, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         for (int t = 0; t < 0.5; t++)
                                         {
-                                            au3.MouseClick("LEFT", 905, 531, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 905, 531, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         walktopUTurn++;
@@ -1401,7 +1401,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
+                                if (walktopUTurn == 19 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1409,12 +1409,12 @@ namespace PixelAimbot
                                         await Task.Delay(100, token);
                                         for (int t = 0; t < 70; t++)
                                         {
-                                            au3.MouseClick("LEFT", 523, 810, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 523, 810, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         for (int t = 0; t < 0.5; t++)
                                         {
-                                            au3.MouseClick("LEFT", 960, 500, 1, 10);
+                                            au3.MouseClick("" + txtLEFT.Text + "", 960, 500, 1, 10);
                                             await Task.Delay(10);
                                         }
                                         walktopUTurn++;
@@ -1429,7 +1429,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
+                                if (walktopUTurn == 19 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     walktopUTurn = 0;
                                     await Task.Delay(10);
@@ -1446,6 +1446,68 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                            ///REVIVE
+                            ///
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                for (int i = 0; i < 1; i++)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    try
+                                    {
+                                        float thresh = 0.9f;
+                                        var ReviveDeutschTemplate =
+                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                        var ReviveDeutschMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                        var ReviveEnglishTemplate =
+                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                        var ReviveEnglishMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                        Point screenResolution = new Point(1920, 1080);
+                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                        var screenPrinter = new PrintScreen();
+                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                        var screenCapture = new Image<Bgr, byte>("screen.png");
+                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                        {
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                            au3.MouseClick("LEFT", 1374, 467, 1, 10);
+                                        }
+                                        Random random = new Random();
+                                        var sleepTime = random.Next(150, 255);
+                                        Thread.Sleep(sleepTime);
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
                             ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
                             try
                             {
@@ -1776,21 +1838,21 @@ namespace PixelAimbot
                                             for (int t = 0; t < 40; t++)
                                             {
 
-                                                au3.MouseClick("LEFT", 960, 240, 1, 10);
+                                                au3.MouseClick("" + txtLEFT.Text + "", 960, 240, 1, 10);
                                                 await Task.Delay(10);
 
                                             }
                                             for (int t = 0; t < 80; t++)
                                             {
 
-                                                au3.MouseClick("LEFT", 960, 566, 1, 10);
+                                                au3.MouseClick("" + txtLEFT.Text + "", 960, 566, 1, 10);
                                                 await Task.Delay(10);
 
                                             }
                                             for (int t = 0; t < 1; t++)
                                             {
 
-                                                au3.MouseClick("LEFT", 960, 500, 1, 10);
+                                                au3.MouseClick("" + txtLEFT.Text + "", 960, 500, 1, 10);
                                                 await Task.Delay(10);
 
                                             }
@@ -1822,6 +1884,68 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                            ///REVIVE
+                            ///
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                for (int i = 0; i < 1; i++)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    try
+                                    {
+                                        float thresh = 0.9f;
+                                        var ReviveDeutschTemplate =
+                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                        var ReviveDeutschMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                        var ReviveEnglishTemplate =
+                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                        var ReviveEnglishMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                        Point screenResolution = new Point(1920, 1080);
+                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                        var screenPrinter = new PrintScreen();
+                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                        var screenCapture = new Image<Bgr, byte>("screen.png");
+                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                        {
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                            au3.MouseClick("LEFT", 1374, 467, 1, 10);
+                                        }
+                                        Random random = new Random();
+                                        var sleepTime = random.Next(150, 255);
+                                        Thread.Sleep(sleepTime);
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
                             ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
                             try
                             {
@@ -2218,6 +2342,68 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                            ///REVIVE
+                            ///
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(100, token);
+                                for (int i = 0; i < 1; i++)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(100, token);
+                                    try
+                                    {
+                                        float thresh = 0.9f;
+                                        var ReviveDeutschTemplate =
+                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                        var ReviveDeutschMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                        var ReviveEnglishTemplate =
+                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                        var ReviveEnglishMask =
+                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                        Point screenResolution = new Point(1920, 1080);
+                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                        var screenPrinter = new PrintScreen();
+                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                        var screenCapture = new Image<Bgr, byte>("screen.png");
+                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                        {
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                            au3.MouseClick("LEFT", 1374, 467, 1, 10);
+                                        }
+                                        Random random = new Random();
+                                        var sleepTime = random.Next(150, 255);
+                                        Thread.Sleep(sleepTime);
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
                             ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
                             try
                             {
@@ -4359,7 +4545,9 @@ namespace PixelAimbot
             }
         }
 
-        
-        
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
