@@ -16,7 +16,7 @@ namespace PixelAimbot.Classes
         private Image<Bgr, byte> _enemyTemplate;
         private Image<Bgr, byte> _enemyMask;
         private float _threshold;
-        private readonly Point _myPosition = new Point(150, 128);
+        private readonly Point _myPosition = new Point(ChaosBot.recalcRes(150), ChaosBot.recalcRes(128, false));
 
         public EnemyDetector(Image<Bgr, byte> enemyTemplate,
             Image<Bgr, byte> enemyMask, float threshold)
@@ -29,14 +29,14 @@ namespace PixelAimbot.Classes
         private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
-            screenCapture.ROI = new Rectangle(PixelAimbot.ChaosBot.recalcRes(1593), PixelAimbot.ChaosBot.recalcRes(40, false), PixelAimbot.ChaosBot.recalcRes(296), PixelAimbot.ChaosBot.recalcRes(255, false));
+            screenCapture.ROI = new Rectangle(ChaosBot.recalcRes(1593), PixelAimbot.ChaosBot.recalcRes(40, false), ChaosBot.recalcRes(296), ChaosBot.recalcRes(255, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;
             Point minPoint = new Point();
             Point maxPoint = new Point();
             CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, TemplateMatchingType.SqdiffNormed, this._enemyMask);
-
+            
             int h = this._enemyTemplate.Size.Height;
             int w = this._enemyTemplate.Size.Width;
 

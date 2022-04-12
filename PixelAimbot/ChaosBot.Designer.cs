@@ -680,7 +680,6 @@
             this.checkBoxHeal10.Text = "HEAL POTION 10%";
             this.checkBoxHeal10.UseMnemonic = false;
             this.checkBoxHeal10.UseVisualStyleBackColor = false;
-            this.checkBoxHeal10.CheckedChanged += new System.EventHandler(this.checkBoxHeal10_CheckedChanged);
             // 
             // label38
             // 

@@ -468,6 +468,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\debug.png" />
     <Content Include="Resources\enemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
