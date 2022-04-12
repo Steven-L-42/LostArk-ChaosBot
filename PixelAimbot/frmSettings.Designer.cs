@@ -108,6 +108,7 @@
             this.label19.TabIndex = 74;
             this.label19.Text = "READ SLOWLY AND CAREFULLY!\r\nNo Support before Checking all Settings are right.";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label17
             // 
@@ -122,6 +123,7 @@
     "ns on. It doesn\'t matter if it\'s standard \r\nor instant-heal potion.";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label17.Click += new System.EventHandler(this.label17_Click);
+            this.label17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label18
             // 
@@ -134,6 +136,7 @@
             this.label18.TabIndex = 81;
             this.label18.Text = "4.";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label15
             // 
@@ -146,6 +149,7 @@
             this.label15.TabIndex = 78;
             this.label15.Text = "2. How long should the Bot hold \r\n    down your Ability Key?";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label16
             // 
@@ -158,6 +162,7 @@
             this.label16.TabIndex = 77;
             this.label16.Text = "2.";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label13
             // 
@@ -171,6 +176,7 @@
             this.label13.Text = "1. Set your cooldown to avoid the bot pressing \r\n    an ability that is already o" +
     "n cooldown.\r\n    *IMPORTANT*";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label14
             // 
@@ -183,6 +189,7 @@
             this.label14.TabIndex = 75;
             this.label14.Text = "7.";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label9
             // 
@@ -195,6 +202,7 @@
             this.label9.TabIndex = 69;
             this.label9.Text = "1. SAVE/LOAD your own Profile";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label11
             // 
@@ -207,6 +215,7 @@
             this.label11.TabIndex = 67;
             this.label11.Text = "1. Set your own Skill Rotation, the Pattern you preferred to use.";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // btnLogin
             // 
@@ -236,6 +245,7 @@
             this.label10.Text = "2. Check the checkboxes for DoubleClick on a Ability.\r\n    Recommened to avoid in" +
     "explicably not pressing a skill.";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label4
             // 
@@ -247,6 +257,7 @@
             this.label4.Size = new System.Drawing.Size(0, 25);
             this.label4.TabIndex = 65;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label5
             // 
@@ -259,6 +270,7 @@
             this.label5.TabIndex = 64;
             this.label5.Text = "Feel free to Join our Discord Community :)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label6
             // 
@@ -271,6 +283,7 @@
             this.label6.TabIndex = 63;
             this.label6.Text = "5.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label3
             // 
@@ -283,6 +296,7 @@
             this.label3.TabIndex = 62;
             this.label3.Text = "6.";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label36
             // 
@@ -295,6 +309,7 @@
             this.label36.TabIndex = 60;
             this.label36.Text = "1.";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label36.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // groupBox1
             // 
@@ -371,6 +386,7 @@
             this.label2.TabIndex = 61;
             this.label2.Text = "3.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label1
             // 
@@ -382,6 +398,7 @@
             this.label1.Size = new System.Drawing.Size(185, 25);
             this.label1.TabIndex = 72;
             this.label1.Text = "ChaosDungeon Bot";
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // lbClose
             // 
@@ -405,6 +422,7 @@
             this.imageBox5.Size = new System.Drawing.Size(346, 130);
             this.imageBox5.TabIndex = 79;
             this.imageBox5.TabStop = false;
+            this.imageBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox4
             // 
@@ -415,6 +433,7 @@
             this.imageBox4.Size = new System.Drawing.Size(346, 130);
             this.imageBox4.TabIndex = 74;
             this.imageBox4.TabStop = false;
+            this.imageBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox3
             // 
@@ -425,6 +444,7 @@
             this.imageBox3.Size = new System.Drawing.Size(346, 130);
             this.imageBox3.TabIndex = 73;
             this.imageBox3.TabStop = false;
+            this.imageBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox7
             // 
@@ -435,6 +455,7 @@
             this.imageBox7.Size = new System.Drawing.Size(346, 130);
             this.imageBox7.TabIndex = 83;
             this.imageBox7.TabStop = false;
+            this.imageBox7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox8
             // 
@@ -445,6 +466,7 @@
             this.imageBox8.Size = new System.Drawing.Size(346, 130);
             this.imageBox8.TabIndex = 84;
             this.imageBox8.TabStop = false;
+            this.imageBox8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox9
             // 
@@ -455,6 +477,7 @@
             this.imageBox9.Size = new System.Drawing.Size(346, 130);
             this.imageBox9.TabIndex = 85;
             this.imageBox9.TabStop = false;
+            this.imageBox9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox10
             // 
@@ -465,6 +488,7 @@
             this.imageBox10.Size = new System.Drawing.Size(346, 130);
             this.imageBox10.TabIndex = 86;
             this.imageBox10.TabStop = false;
+            this.imageBox10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // imageBox11
             // 
@@ -475,6 +499,7 @@
             this.imageBox11.Size = new System.Drawing.Size(346, 130);
             this.imageBox11.TabIndex = 87;
             this.imageBox11.TabStop = false;
+            this.imageBox11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label20
             // 
@@ -487,6 +512,7 @@
             this.label20.TabIndex = 88;
             this.label20.Text = "2. Bot walk a Pattern in Stages";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label21
             // 
@@ -499,6 +525,7 @@
             this.label21.TabIndex = 89;
             this.label21.Text = "4. Auto-Logout to setted time";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label22
             // 
@@ -510,6 +537,7 @@
             this.label22.Size = new System.Drawing.Size(0, 15);
             this.label22.TabIndex = 90;
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label22.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label23
             // 
@@ -522,6 +550,7 @@
             this.label23.TabIndex = 91;
             this.label23.Text = "3. Auto-Repair to setted time";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label23.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label24
             // 
@@ -536,6 +565,7 @@
     "note the loading \r\nscreen+structures/zone loading time \r\nif you want to lower th" +
     "e timer.";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label24.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label25
             // 
@@ -548,6 +578,7 @@
             this.label25.TabIndex = 93;
             this.label25.Text = "1.";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label25.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label26
             // 
@@ -560,6 +591,7 @@
             this.label26.TabIndex = 94;
             this.label26.Text = "3.";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label26.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label27
             // 
@@ -572,6 +604,7 @@
             this.label27.TabIndex = 99;
             this.label27.Text = "4.";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label27.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label28
             // 
@@ -584,6 +617,7 @@
             this.label28.TabIndex = 98;
             this.label28.Text = "2.";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label28.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label29
             // 
@@ -596,6 +630,7 @@
             this.label29.TabIndex = 97;
             this.label29.Text = "9.";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label29.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label30
             // 
@@ -608,6 +643,7 @@
             this.label30.TabIndex = 96;
             this.label30.Text = "5.";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label30.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label31
             // 
@@ -620,6 +656,7 @@
             this.label31.TabIndex = 95;
             this.label31.Text = "8.";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label31.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label32
             // 
@@ -632,6 +669,7 @@
             this.label32.TabIndex = 100;
             this.label32.Text = "1.";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label32.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label35
             // 
@@ -644,6 +682,7 @@
             this.label35.TabIndex = 105;
             this.label35.Text = "2.";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label35.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label40
             // 
@@ -656,6 +695,7 @@
             this.label40.TabIndex = 112;
             this.label40.Text = "5. + 9.  How many Iteration you want to set?";
             this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label40.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label41
             // 
@@ -668,6 +708,7 @@
             this.label41.TabIndex = 111;
             this.label41.Text = "3. + 7. Bot search for enemys - how long should he search for each iteration?";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label41.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label43
             // 
@@ -680,6 +721,7 @@
             this.label43.TabIndex = 109;
             this.label43.Text = "4. + 8. Bot fight with enemy - how long should he fight for each iteration?";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label43.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label44
             // 
@@ -692,6 +734,7 @@
             this.label44.TabIndex = 108;
             this.label44.Text = "2. + 6. Important if you want to use Floor 2";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label44.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label45
             // 
@@ -704,6 +747,7 @@
             this.label45.TabIndex = 107;
             this.label45.Text = "1. Don\'t set the time too low, otherwise the bot can\'t enter the portal.";
             this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label45.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label42
             // 
@@ -716,6 +760,7 @@
             this.label42.TabIndex = 113;
             this.label42.Text = "1.";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label42.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label48
             // 
@@ -728,6 +773,7 @@
             this.label48.TabIndex = 118;
             this.label48.Text = "2.";
             this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label48.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label52
             // 
@@ -740,6 +786,7 @@
             this.label52.TabIndex = 120;
             this.label52.Text = "1.";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label52.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label59
             // 
@@ -753,6 +800,7 @@
             this.label59.Text = "1. Set the exactly the same like your inGame Settings.\r\n    If you Normal Attack " +
     "with LEFT Click then Change this to RIGHT\r\n    \"Always write in UPPERCASE\"";
             this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label59.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label60
             // 
@@ -765,6 +813,7 @@
             this.label60.TabIndex = 128;
             this.label60.Text = "1. Choice your Keybaord Layout\r\n    QWERTZ | QWERTY | AZERTY";
             this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label60.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label61
             // 
@@ -777,6 +826,7 @@
             this.label61.TabIndex = 129;
             this.label61.Text = "1.";
             this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label61.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label62
             // 
@@ -789,6 +839,7 @@
             this.label62.TabIndex = 130;
             this.label62.Text = "1.";
             this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label62.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label63
             // 
@@ -801,6 +852,7 @@
             this.label63.TabIndex = 131;
             this.label63.Text = "1.";
             this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label63.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label64
             // 
@@ -813,6 +865,7 @@
             this.label64.TabIndex = 132;
             this.label64.Text = "1. Activate the Checkbox to use \r\n    the Ultimate Ability\'s for your Class.";
             this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label64.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // frmSettings
             // 
@@ -830,6 +883,7 @@
             this.Name = "frmSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSettings";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox5)).EndInit();
