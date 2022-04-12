@@ -1279,16 +1279,16 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
 
                                 object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                                if (fight.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
+                                if (fight.ToString() != "1")
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     var sim = new InputSimulator();
-                                    for (int t = 0; t < int.Parse(txD.Text); t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    for (int t = 0; t < 10; t++) // TEXTBOX MUSS CUSTOM SEIN
                                     { 
                                         sim.Keyboard.KeyDown(skill.Key);
-                                        await Task.Delay(1);
+                                        await Task.Delay(10);
                                     }
                                     sim.Keyboard.KeyUp(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
@@ -1303,13 +1303,19 @@ namespace PixelAimbot
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     fightOnSecondAbility++;
-                                    if (fightOnSecondAbility == 4)
+                                    if (isKeyOnCooldown(skill.Key) == false)
                                     {
                                         try
                                         {
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(100, token);
                                             walktopUTurn++;
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
@@ -1336,7 +1342,7 @@ namespace PixelAimbot
                                     }
                                 }
                                
-                                    if (walktopUTurn == 2 && chBoxAutoMovement.Checked)
+                                    if (walktopUTurn == 6 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1365,7 +1371,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 4)
+                                if (walktopUTurn == 10)
                                 {
                                     try
                                     {
@@ -1393,7 +1399,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 6)
+                                if (walktopUTurn == 14)
                                 {
                                     try
                                     {
@@ -1421,7 +1427,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 8)
+                                if (walktopUTurn == 18)
                                 {
                                     try
                                     {
@@ -1449,7 +1455,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 8)
+                                if (walktopUTurn == 18)
                                 {
                                     walktopUTurn = 0;
                                     await Task.Delay(10);
@@ -1737,7 +1743,7 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
 
                                 object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                                if (fight.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
+                                if (fight.ToString() != "1")
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
@@ -1761,20 +1767,24 @@ namespace PixelAimbot
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     fightOnSecondAbility++;
-                                    if (fightOnSecondAbility == 4 && Search == false)
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
                                         try
                                         {
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(100, token);
-
+                                            fightOnSecondAbility++;
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
-
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                           
                                         }
                                         catch (AggregateException)
                                         {
@@ -1786,7 +1796,7 @@ namespace PixelAimbot
                                         }
                                         catch { }
                                     }
-                                    if (fightOnSecondAbility == 5 && Search == false && chBoxAutoMovement.Checked)
+                                    if (fightOnSecondAbility == 8 && Search == false && chBoxAutoMovement.Checked)
                                     { 
                                         try
                                         {
