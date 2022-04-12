@@ -121,14 +121,14 @@
     <value>1.8.1r
 - Add Auto Movement
 - Add Faster Combat
-- Cast Time disabled*
-- Cooldown disabled*
-*currently buggy
 
 1.8.2r
 - Add Auto Revive
 
 1.8.3r
+- HOTFIX Auto Movement
+
+1.8.4r
 - Add Patchnote list
 - Guide expanded
 - Add Bot Settings
