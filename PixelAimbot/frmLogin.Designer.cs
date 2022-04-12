@@ -249,9 +249,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(140, 293);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "1.8.1r\n- Add Auto Movement\n- Add Faster Combat\n- Cast Time disabled*\n- Cooldown d" +
-    "isabled*\n*currently buggy\n\n1.8.2r\n- Add Auto Revive\n\n1.8.3r\n- Add Patchnote list" +
-    "\n- Edited Guide!\n";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // frmLogin
             // 
@@ -279,7 +277,7 @@
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmLogin_Load);
