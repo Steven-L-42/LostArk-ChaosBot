@@ -14,7 +14,7 @@ namespace PixelAimbot.Classes
         private Image<Bgr, byte> _enemyTemplate;
         private Image<Bgr, byte> _enemyMask;
         private float _threshold;
-        private readonly Point _myPosition = new Point(ChaosBot.recalcRes(150), ChaosBot.recalcRes(128, false));
+        private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
 
        
 
@@ -32,7 +32,7 @@ namespace PixelAimbot.Classes
             private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
-            screenCapture.ROI = new Rectangle(ChaosBot.recalcRes(1593), PixelAimbot.ChaosBot.recalcRes(40, false), ChaosBot.recalcRes(296), ChaosBot.recalcRes(255, false));
+            screenCapture.ROI = new Rectangle(ChaosBot.recalc(1593), PixelAimbot.ChaosBot.recalc(40, false), ChaosBot.recalc(296), ChaosBot.recalc(255, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;
