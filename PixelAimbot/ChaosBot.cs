@@ -5,7 +5,6 @@ using PixelAimbot.Classes;
 using PixelAimbot.Classes.Misc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
