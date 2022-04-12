@@ -95,8 +95,8 @@ namespace PixelAimbot
         {
             string[] picturesDownload =
             {
-                "boss.png",
-                "bossmask.png",
+                "boss1.png",
+                "bossmask1.png",
                 "enemy.png",
                 "mask.png",
                 "portalenter1.png",

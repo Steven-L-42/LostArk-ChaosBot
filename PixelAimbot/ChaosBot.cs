@@ -834,9 +834,9 @@ namespace PixelAimbot
                             var enemyMask =
                             new Image<Bgr, byte>(resourceFolder + "/mask.png");
                             var BossTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            new Image<Bgr, byte>(resourceFolder + "/boss1.png");
                             var BossMask =
-                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
                             var mobTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/mob1.png");
                             var mobMask =
@@ -1058,7 +1058,8 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(100, token);
                         walktopUTurn = 0;
-                        _Shadowhunter = true;
+                            Search = false;
+                            _Shadowhunter = true;
                         _Berserker = true;
                         _Paladin = true;
                         _Deathblade = true;
@@ -1075,8 +1076,8 @@ namespace PixelAimbot
 
                         if (chBoxActivateF2.Checked)
                         {
-                             
-                            _Floor1 = false;
+                                Search = true;
+                                _Floor1 = false;
                             var t7 = Task.Run(() => SEARCHPORTAL(token));
                             await Task.WhenAny(new[] { t7 });
                         }
@@ -1084,7 +1085,8 @@ namespace PixelAimbot
                         if (!chBoxActivateF2.Checked)
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
-                            _Floor1 = false;
+                                Search = true;
+                                _Floor1 = false;
                             var leave = Task.Run(() => LEAVEDUNGEON(token));
                             await Task.WhenAny(new[] { leave });
                         }
@@ -1243,7 +1245,7 @@ namespace PixelAimbot
                 await Task.Delay(100, token);
                 try
                 {
-                    while (_Floor1Fight == true)
+                    while (_Floor1Fight == true && Search == false)
                     {
 
                         foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
@@ -1255,7 +1257,7 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
 
                                 object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                                if (fight.ToString() != "1")
+                                if (fight.ToString() != "1" && Search == false)
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
@@ -1278,7 +1280,7 @@ namespace PixelAimbot
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     fightOnSecondAbility++;
-                                    if (isKeyOnCooldown(skill.Key) == false)
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
                                         try
                                         {
@@ -1299,9 +1301,7 @@ namespace PixelAimbot
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
+
                                             fightOnSecondAbility = 1;
                                         }
                                         catch (AggregateException)
@@ -1316,7 +1316,7 @@ namespace PixelAimbot
                                     }
                                 }
 
-                                if (walktopUTurn == 5 && chBoxAutoMovement.Checked)
+                                if (walktopUTurn == 5 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1345,7 +1345,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 10 && chBoxAutoMovement.Checked)
+                                if (walktopUTurn == 10 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1373,7 +1373,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 15 && chBoxAutoMovement.Checked)
+                                if (walktopUTurn == 15 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1401,7 +1401,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked)
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     try
                                     {
@@ -1429,7 +1429,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked)
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     walktopUTurn = 0;
                                     await Task.Delay(10);
@@ -2659,9 +2659,9 @@ namespace PixelAimbot
                             var enemyMask =
                             new Image<Bgr, byte>(resourceFolder + "/mask.png");
                             var BossTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            new Image<Bgr, byte>(resourceFolder + "/boss1.png");
                             var BossMask =
-                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
                             var mobTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/mob1.png");
                             var mobMask =
@@ -2820,8 +2820,6 @@ namespace PixelAimbot
 
                                 try
                             {
-
-
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(100, token);
                                 object complete = au3.PixelSearch(31, 97, 81, 108, 0x8A412C, 5);
@@ -2831,9 +2829,6 @@ namespace PixelAimbot
                                     au3.MouseClick("LEFT", 191, 285, 1, 5);
                                 
                                     await Task.Delay(1000);
-
-
-                                
                                 }
                                 Thread.Sleep(2000);
                                 if (_REPAIR == true)
