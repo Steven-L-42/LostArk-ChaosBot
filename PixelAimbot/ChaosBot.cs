@@ -1731,7 +1731,7 @@ namespace PixelAimbot
                             catch { }
                         }
                     }
-                    while (_Floor2Fight == true)
+                    while (_Floor2Fight == true && Search == false)
                     {
 
                         foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
@@ -1743,7 +1743,7 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
 
                                 object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                                if (fight.ToString() != "1")
+                                if (fight.ToString() != "1" && Search == false)
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
@@ -1774,8 +1774,6 @@ namespace PixelAimbot
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(100, token);
                                             fightOnSecondAbility++;
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
