@@ -778,5 +778,53 @@ namespace PixelAimbot.Properties {
                 this["txtDungeon3"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public string txtDungeon3Iteration {
+            get {
+                return ((string)(this["txtDungeon3Iteration"]));
+            }
+            set {
+                this["txtDungeon3Iteration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public string txtDungeon2Iteration {
+            get {
+                return ((string)(this["txtDungeon2Iteration"]));
+            }
+            set {
+                this["txtDungeon2Iteration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxBard {
+            get {
+                return ((bool)(this["chBoxBard"]));
+            }
+            set {
+                this["chBoxBard"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxAutoMovement {
+            get {
+                return ((bool)(this["chBoxAutoMovement"]));
+            }
+            set {
+                this["chBoxAutoMovement"] = value;
+            }
+        }
     }
 }

@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PixelAimbot.Classes
 {
@@ -18,6 +16,11 @@ namespace PixelAimbot.Classes
         private float _threshold;
         private readonly Point _myPosition = new Point(ChaosBot.recalcRes(150), ChaosBot.recalcRes(128, false));
 
+       
+
+
+
+
         public EnemyDetector(Image<Bgr, byte> enemyTemplate,
             Image<Bgr, byte> enemyMask, float threshold)
         {
@@ -26,7 +29,7 @@ namespace PixelAimbot.Classes
             this._threshold = threshold;
         }
 
-        private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
+            private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
             screenCapture.ROI = new Rectangle(ChaosBot.recalcRes(1593), PixelAimbot.ChaosBot.recalcRes(40, false), ChaosBot.recalcRes(296), ChaosBot.recalcRes(255, false));

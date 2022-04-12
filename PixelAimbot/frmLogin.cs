@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoItX3Lib;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Timers;
 using System.Diagnostics;
 using PixelAimbot.Classes.Misc;
 using System.Net;
@@ -95,14 +88,17 @@ namespace PixelAimbot
         {
             string[] picturesDownload =
             {
-                "boss.png",
-                "bossmask.png",
+                "boss1.png",
+                "bossmask1.png",
                 "enemy.png",
                 "mask.png",
                 "portalenter1.png",
                 "portalentermask1.png",
-                "revive.png",
+                "revive1.png",
+                "revivemask1.png",
                 "mob1.png",
+                "reviveEnglishmask.png",
+                "reviveEnglish.png",
                 "mobmask1.png",
                 "shard.png",
                 "shardmask.png"
@@ -160,7 +156,7 @@ namespace PixelAimbot
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            
+           
             if (chBoxRemember.Checked == true)
             {
                 

@@ -367,6 +367,7 @@
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
+    <Compile Include="EnterDetectors.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,6 +382,12 @@
     </Compile>
     <Compile Include="Classes\Misc\Layout_Keyboard.cs" />
     <Compile Include="Classes\Misc\PrintScreen.cs" />
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="prioSkills\Prio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -392,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -458,10 +468,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\bossmask.png">
+    <Content Include="Resources\bossmask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\boss.png">
+    <Content Include="Resources\boss1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ChaosDungeon-Bot.ico" />
@@ -475,9 +485,24 @@
     <Content Include="ImageSearchDLL.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\handmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\hand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\hud.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\TUT8.png" />
+    <None Include="Resources\TUT7.png" />
+    <None Include="Resources\TUT6.png" />
+    <None Include="Resources\TUT5.png" />
+    <None Include="Resources\TUT4.png" />
+    <None Include="Resources\TUT3.png" />
+    <None Include="Resources\TUT2.png" />
+    <None Include="Resources\TUT1.png" />
+    <None Include="Resources\keylayout.png" />
     <Content Include="Resources\mask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -502,7 +527,16 @@
     <Content Include="Resources\resoulution.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\revive.png">
+    <Content Include="Resources\revive1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\reviveEnglish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\reviveEnglishmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\revivemask1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\shardmask.png">
@@ -511,6 +545,8 @@
     <Content Include="Resources\shard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\windowssettings1.png" />
+    <None Include="Resources\windowssettings.png" />
     <None Include="Resources\New_Login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
