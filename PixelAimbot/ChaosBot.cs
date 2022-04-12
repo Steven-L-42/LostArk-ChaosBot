@@ -45,8 +45,6 @@ namespace PixelAimbot
         private bool _Soulfist = false;
 
         private bool _LOGOUT = false;
-
-        private bool _FIGHT = false;
         private bool Search = false;
 
         //SKILL AND COOLDOWN//
@@ -256,7 +254,7 @@ namespace PixelAimbot
 
                 _LOGOUT = false;
 
-                _FIGHT = false;
+                
 
                 _Q = true;
                 _W = true;
@@ -288,24 +286,27 @@ namespace PixelAimbot
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
                     var t1 = Task.Run(() => STARTKLICK(token));
-                    await Task.WhenAny(new[] { t1 });
-                    if (chBoxAutoRepair.Checked == true && _start == false)
+                   
+                    if (chBoxAutoRepair.Checked == true && _start == true)
                     {
                         var repair = Task.Run(() => REPAIRTIMER(token));
+                      
 
                     }
                     else
                     {
                         _REPAIR = false;
                     }
-                    if (chBoxLOGOUT.Checked == true && _start == false)
+                    if (chBoxLOGOUT.Checked == true && _start == true)
                     {
                         var logout = Task.Run(() => LOGOUTTIMER(token));
+                       
                     }
                     else
                     {
                         _LOGOUT = false;
                     }
+                    await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
                 {
@@ -317,89 +318,64 @@ namespace PixelAimbot
                 }
         }
 
-        public async Task REPAIRTIMER(CancellationToken token)
+        public async void REPAIRTIMER(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(100, token);
-
-                timer = new System.Timers.Timer((int.Parse(txtRepair.Text) * 1000) * 60);
-
-                timer.Elapsed += OnTimedEvent;
-                timer.AutoReset = false;
-                timer.Enabled = true;
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
-
-        public async Task LOGOUTTIMER(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-                timer = new System.Timers.Timer((int.Parse(txtLOGOUT.Text) * 1000) * 60);
-
-                timer.Elapsed += OnTimedEvent2;
-                timer.AutoReset = false;
-                timer.Enabled = true;
-                cts.Cancel();
-        }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
-
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            try
-            {
-               
+                await Task.Delay((int.Parse(txtRepair.Text) * 1000) * 60);
                 _REPAIR = true;
             }
             catch (AggregateException)
             {
-                MessageBox.Show("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                MessageBox.Show("Bug");
+                Console.WriteLine("Bug");
             }
             catch { }
+           
 
+           
+           
         }
 
-        private void OnTimedEvent2(object source, ElapsedEventArgs e)
+        public async void LOGOUTTIMER(CancellationToken token)
         {
             try
             {
-              
-                _LOGOUT = true;
+                token.ThrowIfCancellationRequested();
+               await Task.Delay(100, token);
+               await Task.Delay((int.Parse(txtLOGOUT.Text) * 1000) * 60);
+            _LOGOUT = true;
+            cts.Cancel();
             }
             catch (AggregateException)
             {
-                MessageBox.Show("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                MessageBox.Show("Bug");
+                Console.WriteLine("Bug");
             }
             catch { }
+            // timer.Elapsed += OnTimedEvent2;
+            //timer.AutoReset = false;
+            //timer.Enabled = true;
+            //cts.Cancel();
+
+        }
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+                _REPAIR = true;
+        }
+
+        private void OnTimedEvent2(object source, ElapsedEventArgs e)
+        { 
+                _LOGOUT = true;
         }
 
         private async Task STARTKLICK(CancellationToken token)
@@ -1285,18 +1261,17 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     var sim = new InputSimulator();
-                                    for (int t = 0; t < 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    for (int t = 0; t < 50; t++) // TEXTBOX MUSS CUSTOM SEIN
                                     { 
                                         sim.Keyboard.KeyDown(skill.Key);
                                         await Task.Delay(10);
                                     }
                                     sim.Keyboard.KeyUp(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
-                                        sim.Keyboard.KeyPress(skill.Key);
                                         sim.Keyboard.KeyPress(skill.Key);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -1338,11 +1313,10 @@ namespace PixelAimbot
                                             Console.WriteLine("Bug");
                                         }
                                         catch { }
-
                                     }
                                 }
-                               
-                                    if (walktopUTurn == 6 && chBoxAutoMovement.Checked)
+
+                                if (walktopUTurn == 5 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1371,7 +1345,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 10)
+                                if (walktopUTurn == 10 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1399,7 +1373,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 14)
+                                if (walktopUTurn == 15 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1427,7 +1401,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 18)
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked)
                                 {
                                     try
                                     {
@@ -1455,7 +1429,7 @@ namespace PixelAimbot
                                     }
                                     catch { }
                                 }
-                                if (walktopUTurn == 18)
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked)
                                 {
                                     walktopUTurn = 0;
                                     await Task.Delay(10);
@@ -1749,18 +1723,17 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     var sim = new InputSimulator();
-                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    for (int t = 0; t < 50; t++) // TEXTBOX MUSS CUSTOM SEIN
                                     {
                                         sim.Keyboard.KeyDown(skill.Key);
                                         await Task.Delay(10);
                                     }
                                     sim.Keyboard.KeyUp(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
-                                        sim.Keyboard.KeyPress(skill.Key);
                                         sim.Keyboard.KeyPress(skill.Key);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -2171,7 +2144,7 @@ namespace PixelAimbot
                             catch { }
                         }
                     }
-                    while (_Floor3Fight == true)
+                    while (_Floor3Fight == true && Search == false)
                     {
                         foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                         {
@@ -2181,7 +2154,7 @@ namespace PixelAimbot
                                 await Task.Delay(100, token);
                                 object shardHit = au3.PixelSearch(600, 250, 1319, 843, 0x630E17, 10);
                                 object fight = au3.PixelSearch(600, 250, 1319, 843, 0xDD2C02, 10);
-                                if (fight.ToString() != "1" && shardHit.ToString() != "1" && isKeyOnCooldown(skill.Key) == true)
+                                if (fight.ToString() != "1" && shardHit.ToString() != "1" && Search == false)
                                 {
                                     object[] shardHitCoord = (object[])shardHit;
                                     object[] fightCoord = (object[])fight;
@@ -2189,18 +2162,17 @@ namespace PixelAimbot
                                     au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     var sim = new InputSimulator();
-                                    for (int t = 0; t < int.Parse(txD.Text) / 10; t++) // TEXTBOX MUSS CUSTOM SEIN
+                                    for (int t = 0; t < 50; t++) // TEXTBOX MUSS CUSTOM SEIN
                                     {
                                         sim.Keyboard.KeyDown(skill.Key);
                                         await Task.Delay(10);
                                     }
                                     sim.Keyboard.KeyUp(skill.Key);
                                     sim.Keyboard.KeyPress(skill.Key);
+                                    sim.Keyboard.KeyPress(skill.Key);
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
-                                        sim.Keyboard.KeyPress(skill.Key);
                                         sim.Keyboard.KeyPress(skill.Key);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -3385,6 +3357,7 @@ namespace PixelAimbot
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are loged out!"));
                         _start = false;
                         cts.Cancel();
+
                     }
                     catch (AggregateException)
                     {

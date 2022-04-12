@@ -493,8 +493,6 @@
             this.chBoxAutoMovement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
             this.chBoxAutoMovement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoMovement.Checked = true;
-            this.chBoxAutoMovement.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
             this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
