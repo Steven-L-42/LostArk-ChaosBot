@@ -85,6 +85,7 @@
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox4)).BeginInit();
@@ -314,6 +315,7 @@
             // groupBox1
             // 
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label64);
             this.groupBox1.Controls.Add(this.label63);
             this.groupBox1.Controls.Add(this.label62);
@@ -730,9 +732,9 @@
             this.label44.ForeColor = System.Drawing.Color.SeaShell;
             this.label44.Location = new System.Drawing.Point(409, 178);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(244, 15);
+            this.label44.Size = new System.Drawing.Size(394, 15);
             this.label44.TabIndex = 108;
-            this.label44.Text = "2. + 6. Important if you want to use Floor 2";
+            this.label44.Text = "2. + 6. Important if you want to use Stage 2, Stage 3 requires Stage 2!";
             this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label44.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
@@ -807,12 +809,13 @@
             this.label60.AutoSize = true;
             this.label60.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label60.ForeColor = System.Drawing.Color.SeaShell;
-            this.label60.Location = new System.Drawing.Point(409, 382);
+            this.label60.Location = new System.Drawing.Point(409, 407);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(181, 30);
             this.label60.TabIndex = 128;
             this.label60.Text = "1. Choice your Keybaord Layout\r\n    QWERTZ | QWERTY | AZERTY";
             this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label60.Visible = false;
             this.label60.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
             // 
             // label61
@@ -866,6 +869,18 @@
             this.label64.Text = "1. Activate the Checkbox to use \r\n    the Ultimate Ability\'s for your Class.";
             this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label64.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmSettings_MouseDown);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.SeaShell;
+            this.label7.Location = new System.Drawing.Point(409, 382);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(147, 15);
+            this.label7.TabIndex = 133;
+            this.label7.Text = "1. currently NOT working";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmSettings
             // 
@@ -957,5 +972,6 @@
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label7;
     }
 }
