@@ -244,6 +244,7 @@
             this.lbStatus.Size = new System.Drawing.Size(62, 21);
             this.lbStatus.TabIndex = 8;
             this.lbStatus.Text = "READY";
+            this.lbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
             // 
             // label1
             // 
@@ -256,6 +257,7 @@
             this.label1.Size = new System.Drawing.Size(185, 25);
             this.label1.TabIndex = 10;
             this.label1.Text = "ChaosDungeon Bot";
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
             // 
             // label15
             // 
@@ -268,6 +270,7 @@
             this.label15.Size = new System.Drawing.Size(42, 17);
             this.label15.TabIndex = 11;
             this.label15.Text = "1.3.8r";
+            this.label15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
             // 
             // groupBox1
             // 
@@ -2242,11 +2245,11 @@
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.Color.Orange;
-            this.label29.Location = new System.Drawing.Point(242, 0);
+            this.label29.Location = new System.Drawing.Point(172, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(155, 15);
+            this.label29.Size = new System.Drawing.Size(233, 15);
             this.label29.TabIndex = 62;
-            this.label29.Text = "{ Floor 3 = ALPHA Version }";
+            this.label29.Text = "{ Floor 3 = ALPHA Version NO SUPPORT }";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label23

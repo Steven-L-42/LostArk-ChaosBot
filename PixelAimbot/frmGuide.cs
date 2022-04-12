@@ -76,5 +76,12 @@ namespace PixelAimbot
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmSettings Form = new frmSettings();
+            Form.Show();
+        }
     }
 }
