@@ -2208,19 +2208,22 @@ namespace PixelAimbot
                                     au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 80);
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     fightOnSecondAbility++;
-                                    if (fightOnSecondAbility == 4)
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
                                         try
                                         {
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(100, token);
-                                            walktopUTurn++;
+                                            fightOnSecondAbility++;
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
+                                            au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
                                             au3.Send("{C}");
 
-                                            fightOnSecondAbility = 1;
                                         }
                                         catch (AggregateException)
                                         {
