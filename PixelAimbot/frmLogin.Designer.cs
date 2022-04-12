@@ -42,9 +42,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,18 +217,6 @@
             this.chBoxRemember.Text = "Remember";
             this.chBoxRemember.UseVisualStyleBackColor = false;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.BackColor = System.Drawing.Color.Orange;
-            this.progressBar1.CustomText = "Updating...";
-            this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
-            this.progressBar1.ForeColor = System.Drawing.Color.Orange;
-            this.progressBar1.Location = new System.Drawing.Point(168, 328);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(399, 25);
-            this.progressBar1.TabIndex = 18;
-            this.progressBar1.Visible = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
@@ -244,12 +232,29 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
             this.richTextBox1.Location = new System.Drawing.Point(0, 26);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(140, 319);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.BackColor = System.Drawing.Color.Orange;
+            this.progressBar1.CustomText = "Updating...";
+            this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
+            this.progressBar1.ForeColor = System.Drawing.Color.Orange;
+            this.progressBar1.Location = new System.Drawing.Point(168, 328);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(399, 25);
+            this.progressBar1.TabIndex = 18;
+            this.progressBar1.Visible = false;
             // 
             // frmLogin
             // 
