@@ -369,7 +369,7 @@ namespace PixelAimbot
         }
         private int casttimeByKey(VirtualKeyCode key)
         {
-            int cooldownDuration = 0;
+            int cooldownDuration = 500;
             switch (key)
             {
                 case VirtualKeyCode.VK_A:
@@ -397,7 +397,7 @@ namespace PixelAimbot
                     cooldownDuration = int.Parse(txR.Text);
                     break;
             }
-            return cooldownDuration;
+            return cooldownDuration / 10;
         }
         public async void LOGOUTTIMER(CancellationToken token)
         {
@@ -612,6 +612,17 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100, token);
+
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
+                    au3.MouseClick("LEFT", recalc(1900), recalc(50, false), 1);
+                    au3.MouseClick("LEFT", recalc(1871), recalc(260, false), 1);
+                    au3.MouseClick("LEFT", recalc(1902), recalc(87, false), 1);
+                    au3.MouseClick("LEFT", recalc(1871), recalc(260, false), 1);
+                    object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909), recalc(392, false), 0xFFF1C6, 100);
+                    if (minimizeChat.ToString() == "0")
+                    {
+                        au3.MouseClick("LEFT", recalc(1901), recalc(389, false), 1);
+                    }
 
                     for (int i = 0; i < 2; i++)
                     {
