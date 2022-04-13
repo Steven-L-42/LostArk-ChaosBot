@@ -304,7 +304,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                    var t1 = Task.Run(() => RESTART(token));
+                    var t1 = Task.Run(() => STARTKLICK(token));
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
                     {
