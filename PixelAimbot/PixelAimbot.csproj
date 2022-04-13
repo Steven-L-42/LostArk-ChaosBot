@@ -358,6 +358,7 @@
       <DependentUpon>ChaosBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Auth\Access.cs" />
+    <Compile Include="Classes\Misc\KeyboardWrapper.cs" />
     <Compile Include="Classes\OpenCV\ScreenDetector.cs" />
     <Compile Include="Classes\OpenCV\PortalDetectors.cs" />
     <Compile Include="Classes\Misc\Config.cs" />
