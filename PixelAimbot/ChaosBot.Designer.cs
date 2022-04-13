@@ -169,10 +169,13 @@
             this.txtDungeon3 = new System.Windows.Forms.TextBox();
             this.txtDungeon3search = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtDungeon2search = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.txtDungeon2 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtPortalSearch = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -193,9 +196,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtPortalSearch = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -326,6 +326,7 @@
             this.label36.TabIndex = 59;
             this.label36.Text = "Restart-Timer";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label36.Visible = false;
             // 
             // btnReset
             // 
@@ -364,6 +365,7 @@
             this.label33.Size = new System.Drawing.Size(51, 12);
             this.label33.TabIndex = 47;
             this.label33.Text = "min. 25 sec.";
+            this.label33.Visible = false;
             // 
             // label31
             // 
@@ -419,6 +421,7 @@
             this.label30.Size = new System.Drawing.Size(30, 17);
             this.label30.TabIndex = 43;
             this.label30.Text = "sec.";
+            this.label30.Visible = false;
             // 
             // txtRestartTimer
             // 
@@ -431,6 +434,7 @@
             this.txtRestartTimer.Size = new System.Drawing.Size(35, 22);
             this.txtRestartTimer.TabIndex = 42;
             this.txtRestartTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRestartTimer.Visible = false;
             this.txtRestartTimer.WordWrap = false;
             this.txtRestartTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
@@ -2239,6 +2243,19 @@
             this.label29.Text = "{ Floor 3 = ALPHA Version NO SUPPORT }";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label23.Location = new System.Drawing.Point(7, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(254, 15);
+            this.label23.TabIndex = 58;
+            this.label23.Text = "(Floor 1) Portal Search Time (after detect it):";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -2288,6 +2305,30 @@
             this.txtDungeon2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon2.WordWrap = false;
             this.txtDungeon2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(306, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 17);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "sec.";
+            // 
+            // txtPortalSearch
+            // 
+            this.txtPortalSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtPortalSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPortalSearch.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtPortalSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPortalSearch.Location = new System.Drawing.Point(267, 24);
+            this.txtPortalSearch.Name = "txtPortalSearch";
+            this.txtPortalSearch.Size = new System.Drawing.Size(35, 16);
+            this.txtPortalSearch.TabIndex = 29;
+            this.txtPortalSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPortalSearch.WordWrap = false;
+            this.txtPortalSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // SETTINGS
             // 
@@ -2528,43 +2569,6 @@
             this.Ultimate.Size = new System.Drawing.Size(410, 126);
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(306, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 17);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "sec.";
-            // 
-            // txtPortalSearch
-            // 
-            this.txtPortalSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtPortalSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPortalSearch.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtPortalSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPortalSearch.Location = new System.Drawing.Point(267, 24);
-            this.txtPortalSearch.Name = "txtPortalSearch";
-            this.txtPortalSearch.Size = new System.Drawing.Size(35, 16);
-            this.txtPortalSearch.TabIndex = 29;
-            this.txtPortalSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPortalSearch.WordWrap = false;
-            this.txtPortalSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label23.Location = new System.Drawing.Point(7, 25);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(254, 15);
-            this.label23.TabIndex = 58;
-            this.label23.Text = "(Floor 1) Portal Search Time (after detect it):";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ChaosBot
             // 
