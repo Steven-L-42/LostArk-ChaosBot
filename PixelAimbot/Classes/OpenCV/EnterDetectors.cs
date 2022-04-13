@@ -7,34 +7,34 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace PixelAimbot
+namespace PixelAimbot.Classes.OpenCV
 {
-    internal class PortalDetectors
+    internal class EnterDetectors
     {
-        private Image<Bgr, byte> _PortalTemplate;
-        private Image<Bgr, byte> _PortalMask;
+        private Image<Bgr, byte> _EnterTemplate;
+        private Image<Bgr, byte> _EnterMask;
         private float _thresh;
-        private readonly Point _mePosition = new Point(1920, 1080);
-        public PortalDetectors(Image<Bgr, byte> PortalTemplate,
-           Image<Bgr, byte> PortalMask, float thresh)
+        private readonly Point _mePosition = new Point(ChaosBot.recalc(1920), ChaosBot.recalc(1080, false));
+        public EnterDetectors(Image<Bgr, byte> EnterTemplate,
+           Image<Bgr, byte> EnterMask, float thresh)
         {
-            this._PortalMask = PortalMask;
-            this._PortalTemplate = PortalTemplate;
+            this._EnterMask = EnterMask;
+            this._EnterTemplate = EnterTemplate;
             this._thresh = thresh;
         }
-        private List<Point> DetectPortal(Image<Bgr, byte> screenCapture)
+        private List<Point> DetectEnter(Image<Bgr, byte> screenCapture)
         {
-            List<Point> Portals = new List<Point>();
-            screenCapture.ROI = new Rectangle(50, 124, 223, 252);
+            List<Point> Enters = new List<Point>();
+            screenCapture.ROI = new Rectangle(ChaosBot.recalc(1259), ChaosBot.recalc(430, false), ChaosBot.recalc(1501), ChaosBot.recalc(499, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;
             Point minPoint = new Point();
             Point maxPoint = new Point();
-            CvInvoke.MatchTemplate(minimap, this._PortalTemplate, res, TemplateMatchingType.SqdiffNormed, this._PortalMask);
+            CvInvoke.MatchTemplate(minimap, this._EnterTemplate, res, TemplateMatchingType.SqdiffNormed, this._EnterMask);
 
-            int h = this._PortalTemplate.Size.Height;
-            int w = this._PortalTemplate.Size.Width;
+            int h = this._EnterTemplate.Size.Height;
+            int w = this._EnterTemplate.Size.Width;
 
             while (1 - minVal > this._thresh)
             {
@@ -55,34 +55,34 @@ namespace PixelAimbot
                     var vector = new VectorOfPoint(points);
 
                     CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
-                    Portals.Add(minPoint);
+                    Enters.Add(minPoint);
                 }
             }
 
-            return Portals;
+            return Enters;
         }
-        private double Distance(Point Portal)
+        private double Distance(Point Enter)
         {
-            return Math.Sqrt((Math.Pow(Portal.X - _mePosition.X, 2) + Math.Pow(Portal.Y - _mePosition.Y, 2)));
+            return Math.Sqrt((Math.Pow(Enter.X - _mePosition.X, 2) + Math.Pow(Enter.Y - _mePosition.Y, 2)));
         }
-        public Point? GetClosestPortal(Image<Bgr, byte> screenCapture)
+        public Point? GetClosestEnter(Image<Bgr, byte> screenCapture)
         {
-            var Portals = DetectPortal(screenCapture);
-            var PortalAndPosition = Portals.Select(x => (x, Distance(x)));
-            if (PortalAndPosition.Any())
+            var Enters = DetectEnter(screenCapture);
+            var EnterAndPosition = Enters.Select(x => (x, Distance(x)));
+            if (EnterAndPosition.Any())
             {
                 double minDist = Double.MaxValue;
-                Point closestPortal = default;
-                foreach (var (Portal, distance) in PortalAndPosition)
+                Point closestEnter = default;
+                foreach (var (Enter, distance) in EnterAndPosition)
                 {
                     if (distance < minDist)
                     {
                         minDist = distance;
-                        closestPortal = Portal;
+                        closestEnter = Enter;
                     }
                 }
 
-                return closestPortal;
+                return closestEnter;
             }
             else
             {

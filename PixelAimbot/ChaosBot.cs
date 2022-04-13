@@ -3,6 +3,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using PixelAimbot.Classes;
 using PixelAimbot.Classes.Misc;
+using PixelAimbot.Classes.OpenCV;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -313,7 +314,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                    var t1 = Task.Run(() => STARTKLICK(token));
+                    var t1 = Task.Run(() => RESTART(token));
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
                     {
@@ -3960,49 +3961,38 @@ namespace PixelAimbot
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                try
+                Boolean restart = false;
+                while (!restart)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    for (int i = 0; i < 1; i++)
-                    {
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot Paused: Resume in " + int.Parse(txtRestartTimer.Text) + " seconds."));
-                            
-                            await Task.Delay(int.Parse(txtRestartTimer.Text) * 1000, token);
 
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
+                    float threshold = 0.9f;
+                    var handTemplate =
+                    new Image<Bgr, byte>(resourceFolder + "/hand.png");
+                    var handMask =
+                    new Image<Bgr, byte>(resourceFolder + "/handmask.png");
+
+                    var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(640), ChaosBot.recalc(132, false), ChaosBot.recalc(660), ChaosBot.recalc(609, false));
+
+                    var screenPrinter = new PrintScreen();
+
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var hand = handDetector.GetClosestItem(screenCapture);
+
+                    if (!hand.HasValue)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(50, token);
+                    }
+                    else
+                    {
+                        restart = true;
                     }
                 }
-                catch (AggregateException)
-                {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
 
-
-                await Task.Delay(2000, token);
-                var t1 = Task.Run(() => START(token));
-                await Task.WhenAny(new[] { t1 });
             }
             catch (AggregateException)
             {
@@ -4013,6 +4003,12 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
+
+
+             await Task.Delay(2000, token);
+               var t1 = Task.Run(() => START(token));
+            await Task.WhenAny(new[] { t1 });
+
         }
 
         private async Task RESTART_AFTERREPAIR(CancellationToken token)

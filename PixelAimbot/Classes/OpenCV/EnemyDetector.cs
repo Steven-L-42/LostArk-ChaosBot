@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace PixelAimbot.Classes
+namespace PixelAimbot.Classes.OpenCV
 {
     internal class EnemyDetector
     {
@@ -15,11 +15,6 @@ namespace PixelAimbot.Classes
         private Image<Bgr, byte> _enemyMask;
         private float _threshold;
         private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
-
-       
-
-
-
 
         public EnemyDetector(Image<Bgr, byte> enemyTemplate,
             Image<Bgr, byte> enemyMask, float threshold)
@@ -99,4 +94,6 @@ namespace PixelAimbot.Classes
             }
         }
     }
+
+
 }

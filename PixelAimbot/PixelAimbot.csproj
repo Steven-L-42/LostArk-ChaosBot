@@ -358,9 +358,10 @@
       <DependentUpon>ChaosBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Auth\Access.cs" />
-    <Compile Include="PortalDetectors.cs" />
+    <Compile Include="Classes\OpenCV\ScreenDetector.cs" />
+    <Compile Include="Classes\OpenCV\PortalDetectors.cs" />
     <Compile Include="Classes\Misc\Config.cs" />
-    <Compile Include="Classes\EnemyDetector.cs" />
+    <Compile Include="Classes\OpenCV\EnemyDetector.cs" />
     <Compile Include="Classes\Misc\BlowFish.cs" />
     <Compile Include="Classes\Misc\CustomProgressBar.cs">
       <SubType>Component</SubType>
@@ -368,7 +369,7 @@
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
-    <Compile Include="EnterDetectors.cs" />
+    <Compile Include="Classes\OpenCV\EnterDetectors.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -409,7 +410,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Confuser.crproj" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
