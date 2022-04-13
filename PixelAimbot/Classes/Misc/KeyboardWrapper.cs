@@ -93,5 +93,10 @@ namespace PixelAimbot.Classes.Misc
         {
             keybd_event(key, 0, KEY_UP_EVENT, 0);
         }
+
+        public static void KeyDown(byte key)
+        {
+            keybd_event(key, 0, KEY_DOWN_EVENT, 0);
+        }
     }
 }
