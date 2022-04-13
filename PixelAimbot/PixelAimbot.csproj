@@ -358,6 +358,7 @@
       <DependentUpon>ChaosBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Auth\Access.cs" />
+    <Compile Include="PortalDetectors.cs" />
     <Compile Include="Classes\Misc\Config.cs" />
     <Compile Include="Classes\EnemyDetector.cs" />
     <Compile Include="Classes\Misc\BlowFish.cs" />
@@ -476,6 +477,12 @@
     </Content>
     <Content Include="ChaosDungeon-Bot.ico" />
     <Content Include="cvextern.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\siebzehnprozent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\siebzehnprozentmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\debug.png" />
