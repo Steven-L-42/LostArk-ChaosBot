@@ -1000,9 +1000,9 @@ namespace PixelAimbot
                                     double distance_x = (screenWidth - recalc(296)) / 2;
                                     double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                    var boss_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                    var boss_position = ((Boss.Value.X + distance_x), (Boss.Value.Y + distance_y));
                                     double multiplier = 1;
-                                    var boss_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                    var boss_position_on_minimap = ((Boss.Value.X), (Boss.Value.Y));
                                     var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
                                     var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - boss_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - boss_position_on_minimap.Item2), 2));
 
@@ -1106,9 +1106,9 @@ namespace PixelAimbot
                                             double distance_x = (screenWidth - recalc(296)) / 2;
                                             double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                            var mob_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                            var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
                                             double multiplier = 1;
-                                            var mob_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                            var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
                                             var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
                                             var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
 
@@ -1414,7 +1414,7 @@ namespace PixelAimbot
                                         try
                                         {
                                             token.ThrowIfCancellationRequested();
-                                           await Task.Delay(1, token);
+                                            await Task.Delay(1, token);
                                             walktopUTurn++;
                                             au3.Send("{C}");
                                             au3.Send("{C}");
