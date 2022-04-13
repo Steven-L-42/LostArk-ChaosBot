@@ -195,6 +195,9 @@ namespace PixelAimbot
         public ChaosBot()
         {
             InitializeComponent();
+        
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
