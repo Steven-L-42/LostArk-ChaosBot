@@ -118,24 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>1.8.1r
-- Add Auto Movement
-- Add Faster Combat
-
-1.8.2r
-- Add Auto Revive
-
-1.8.3r
-- HOTFIX Auto Movement
-
-1.8.4r
+    <value>1.8.4r
 - Add Patchnote list
 - Guide expanded
 - Add Bot Settings
 Tutorial on GUIDE*
 *Second Page
 
-</value>
+1.8.5r
+- Enabled Cast Time
+- ALL RESOLUTIONS* 
+*{BETA}
+- Portal 1 Detection
+- New Start Sequence
+- Auto set Transparency**
+- Auto set Scale**
+**Minimap
+
+1.8.6r
+- Add Portal Search Time
+on Tab (StagesSettings)</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

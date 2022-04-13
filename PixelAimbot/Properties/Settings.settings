@@ -8,8 +8,8 @@
     <Setting Name="password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="dungeontimer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">65</Value>
+    <Setting Name="txtPortalSearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12</Value>
     </Setting>
     <Setting Name="left" Type="System.String" Scope="User">
       <Value Profile="(Default)">LEFT</Value>
@@ -81,7 +81,7 @@
       <Value Profile="(Default)">7</Value>
     </Setting>
     <Setting Name="txtDungeon2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">18</Value>
+      <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.5.7r</Value>

@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "1.8.4r";
+        public static string version { get; set; } = "1.8.6r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
@@ -69,7 +69,7 @@ namespace PixelAimbot.Classes.Misc
 
     public class Rotations
     {
-        public string dungeontimer { get; set; } = "65";
+        public string txtPortalSearch { get; set; } = "12";
         public string left { get; set; } = "LEFT";
         public string right { get; set; } = "RIGHT";
         public string q { get; set; } = "500";
@@ -112,7 +112,7 @@ namespace PixelAimbot.Classes.Misc
         public string txtDungeon2search { get; set; } = "5";
         public string txtDungeon3search { get; set; } = "10";
         public string txtDungeon3 { get; set; } = "20";
-        public string txtDungeon2 { get; set; } = "18";
+        public string txtDungeon2 { get; set; } = "15";
         public string cQ { get; set; } = "500";
         public string cW { get; set; } = "500";
         public string cE { get; set; } = "500";

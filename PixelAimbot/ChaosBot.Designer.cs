@@ -168,15 +168,11 @@
             this.txtDungeon2Iteration = new System.Windows.Forms.TextBox();
             this.txtDungeon3 = new System.Windows.Forms.TextBox();
             this.txtDungeon3search = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtDungeon2search = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.txtDungeon2 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtDungeon = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -197,7 +193,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtPortalSearch = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -486,11 +484,11 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.Peru;
-            this.label27.Location = new System.Drawing.Point(141, 21);
+            this.label27.Location = new System.Drawing.Point(162, 20);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(91, 15);
+            this.label27.Size = new System.Drawing.Size(45, 15);
             this.label27.TabIndex = 35;
-            this.label27.Text = "ALPHA-Version";
+            this.label27.Text = "Floor 1";
             // 
             // chBoxAutoMovement
             // 
@@ -503,7 +501,7 @@
             this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
             this.chBoxAutoMovement.Name = "chBoxAutoMovement";
-            this.chBoxAutoMovement.Size = new System.Drawing.Size(134, 22);
+            this.chBoxAutoMovement.Size = new System.Drawing.Size(154, 22);
             this.chBoxAutoMovement.TabIndex = 34;
             this.chBoxAutoMovement.Text = "Auto Movement";
             this.chBoxAutoMovement.UseMnemonic = false;
@@ -2074,7 +2072,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.labelComboxRotation);
             this.groupBox2.Controls.Add(this.comboBoxRotations);
             this.groupBox2.Controls.Add(this.buttonLoadRotation);
@@ -2155,7 +2152,6 @@
             this.groupBox5.Controls.Add(this.chBoxActivateF3);
             this.groupBox5.Controls.Add(this.txtDungeon3search);
             this.groupBox5.Controls.Add(this.chBoxActivateF2);
-            this.groupBox5.Controls.Add(this.label26);
             this.groupBox5.Controls.Add(this.label29);
             this.groupBox5.Controls.Add(this.label23);
             this.groupBox5.Controls.Add(this.label22);
@@ -2165,7 +2161,7 @@
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.txtDungeon2);
             this.groupBox5.Controls.Add(this.label10);
-            this.groupBox5.Controls.Add(this.txtDungeon);
+            this.groupBox5.Controls.Add(this.txtPortalSearch);
             this.groupBox5.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox5.Location = new System.Drawing.Point(7, 5);
@@ -2231,18 +2227,6 @@
             this.txtDungeon3search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon3search.WordWrap = false;
             // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Orange;
-            this.label26.Location = new System.Drawing.Point(229, 26);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(137, 15);
-            this.label26.TabIndex = 61;
-            this.label26.Text = "time until portal arrive!";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label29
             // 
             this.label29.AutoSize = true;
@@ -2254,19 +2238,6 @@
             this.label29.TabIndex = 62;
             this.label29.Text = "{ Floor 3 = ALPHA Version NO SUPPORT }";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label23.Location = new System.Drawing.Point(7, 25);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(141, 15);
-            this.label23.TabIndex = 58;
-            this.label23.Text = "(Floor 1) Dungeon Time:";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label21
             // 
@@ -2317,30 +2288,6 @@
             this.txtDungeon2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtDungeon2.WordWrap = false;
             this.txtDungeon2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(193, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(30, 17);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "sec.";
-            // 
-            // txtDungeon
-            // 
-            this.txtDungeon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtDungeon.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDungeon.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDungeon.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon.Location = new System.Drawing.Point(154, 25);
-            this.txtDungeon.Name = "txtDungeon";
-            this.txtDungeon.Size = new System.Drawing.Size(35, 16);
-            this.txtDungeon.TabIndex = 29;
-            this.txtDungeon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDungeon.WordWrap = false;
-            this.txtDungeon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
             // 
             // SETTINGS
             // 
@@ -2582,15 +2529,42 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
-            // button1
+            // label10
             // 
-            this.button1.Location = new System.Drawing.Point(-11, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 116);
-            this.button1.TabIndex = 65;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(306, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 17);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "sec.";
+            // 
+            // txtPortalSearch
+            // 
+            this.txtPortalSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtPortalSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPortalSearch.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtPortalSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPortalSearch.Location = new System.Drawing.Point(267, 24);
+            this.txtPortalSearch.Name = "txtPortalSearch";
+            this.txtPortalSearch.Size = new System.Drawing.Size(35, 16);
+            this.txtPortalSearch.TabIndex = 29;
+            this.txtPortalSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPortalSearch.WordWrap = false;
+            this.txtPortalSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label23.Location = new System.Drawing.Point(7, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(254, 15);
+            this.label23.TabIndex = 58;
+            this.label23.Text = "(Floor 1) Portal Search Time (after detect it):";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ChaosBot
             // 
@@ -2696,15 +2670,11 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDungeon2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDungeon;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txtDungeon2search;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.CheckBox chBoxActivateF2;
@@ -2819,7 +2789,9 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.CheckBox chBoxAutoMovement;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtPortalSearch;
     }
 }
 
