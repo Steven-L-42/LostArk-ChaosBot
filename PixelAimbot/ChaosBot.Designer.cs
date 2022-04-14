@@ -243,6 +243,7 @@
             this.lbStatus.Size = new System.Drawing.Size(62, 21);
             this.lbStatus.TabIndex = 8;
             this.lbStatus.Text = "READY";
+            this.lbStatus.TextChanged += new System.EventHandler(this.lbStatus_TextChanged);
             this.lbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
             // 
             // label1

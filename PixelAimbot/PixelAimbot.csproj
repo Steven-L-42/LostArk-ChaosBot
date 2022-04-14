@@ -385,6 +385,12 @@
     </Compile>
     <Compile Include="Classes\Misc\Layout_Keyboard.cs" />
     <Compile Include="Classes\Misc\PrintScreen.cs" />
+    <Compile Include="frmMinimized.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMinimized.Designer.cs">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMinimized.resx">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
@@ -434,7 +443,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

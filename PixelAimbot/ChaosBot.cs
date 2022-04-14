@@ -75,6 +75,7 @@ namespace PixelAimbot
         private int Floor2 = 1;
         private int Floor3 = 1;
 
+        frmMinimized formMinimized = new frmMinimized();
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
 
@@ -313,8 +314,9 @@ namespace PixelAimbot
 
 
 
-
-
+                this.Show();
+                formMinimized.Hide();
+                formMinimized.sw.Reset();
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
             }
         }
@@ -325,6 +327,18 @@ namespace PixelAimbot
             if (_start == false)
                 try
                 {
+                    formMinimized.StartPosition = FormStartPosition.Manual;
+                    formMinimized.Location = new Point(0, recalc(28, false));
+                    formMinimized.Size = new Size(recalc(594), recalc(28, false));
+                    formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
+                    formMinimized.labelRuntimer.Location = new Point(recalc(464), recalc(9, false));
+                    formMinimized.labelTitle.Location = new Point(recalc(12), recalc(7, false));
+                    formMinimized.timerRuntimer.Enabled = true;
+                    formMinimized.sw.Reset();
+                    formMinimized.sw.Start();
+                    formMinimized.Show();
+                    this.Hide();
+                    
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
@@ -602,6 +616,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
+
                     au3.MouseMove(recalc(1900), recalc(50, false), 10);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     au3.MouseMove(recalc(1871), recalc(260, false), 10);
@@ -725,6 +740,7 @@ namespace PixelAimbot
             if (enemy.HasValue)
             {
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
+                
                 CvInvoke.Rectangle(screenCapture,
                     new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                     new MCvScalar(255));
@@ -4743,6 +4759,9 @@ namespace PixelAimbot
             catch { }
         }
 
-      
+        private void lbStatus_TextChanged(object sender, EventArgs e)
+        {
+            formMinimized.labelMinimizedState.Text = lbStatus.Text;
+        }
     }
 }
