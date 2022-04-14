@@ -68,8 +68,8 @@
     <Setting Name="chBoxBerserker" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="RestartTimer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">25</Value>
+    <Setting Name="chBoxChannelSwap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="chBoxSaveAll" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

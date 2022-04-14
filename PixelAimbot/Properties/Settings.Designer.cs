@@ -289,13 +289,13 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public string RestartTimer {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxChannelSwap {
             get {
-                return ((string)(this["RestartTimer"]));
+                return ((bool)(this["chBoxChannelSwap"]));
             }
             set {
-                this["RestartTimer"] = value;
+                this["chBoxChannelSwap"] = value;
             }
         }
         

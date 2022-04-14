@@ -1289,7 +1289,7 @@ namespace PixelAimbot
                         await Task.Delay(1, token);
                         _SkillFight2 = true;
                         fightOnSecondAbility = 1;
-                        walktopUTurn2 = 0;
+                     
                         fightSequence++;
 
                         Search = false;
@@ -4123,7 +4123,7 @@ namespace PixelAimbot
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
-            txtChannelSwap.Text = Properties.Settings.Default.RestartTimer;
+            chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
             chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
@@ -4234,7 +4234,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxBerserker = false;
                 Properties.Settings.Default.chBoxBard = false;
                 Properties.Settings.Default.chboxPaladin = false;
-                Properties.Settings.Default.RestartTimer = "25";
+                Properties.Settings.Default.chBoxChannelSwap = false;
                 Properties.Settings.Default.chBoxSaveAll = false;
                 Properties.Settings.Default.chBoxActivateF2 = false;
                 Properties.Settings.Default.txtDungeon2 = "15";
@@ -4306,7 +4306,7 @@ namespace PixelAimbot
                 chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
                 chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
                 chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
-                txtChannelSwap.Text = Properties.Settings.Default.RestartTimer;
+                chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
                 txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
@@ -4611,7 +4611,7 @@ namespace PixelAimbot
                     rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.chBoxBard = (bool)chBoxBard.Checked;
-                    rotation.RestartTimer = txtChannelSwap.Text;
+                    rotation.chBoxChannelSwap = (bool)chBoxChannelSwap.Checked;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
@@ -4702,7 +4702,7 @@ namespace PixelAimbot
                 txtDungeon3.Text = rotation.txtDungeon3;
 
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
-                txtChannelSwap.Text = rotation.RestartTimer;
+                chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;
                 chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;
                 txtDungeon2search.Text = rotation.txtDungeon2search;
@@ -4808,7 +4808,21 @@ namespace PixelAimbot
 
             }
         }
+        private void checkBoxHeal10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = false;
+              
+            }
+            else
+              if (!checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = true;
+               
 
+            }
+        }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -4840,5 +4854,7 @@ namespace PixelAimbot
         {
             formMinimized.labelMinimizedState.Text = lbStatus.Text;
         }
+
+       
     }
 }

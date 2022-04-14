@@ -106,7 +106,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxActivateF3 { get; set; } = false;
 
         public string txtLEFT { get; set; } = "LEFT";
-        public string RestartTimer { get; set; } = "25";
+        public bool chBoxChannelSwap { get; set; } = false;
         public bool chBoxSaveAll { get; set; } = false;
         public bool chBoxActivateF2 { get; set; } = false;
         public string txtDungeon2search { get; set; } = "5";

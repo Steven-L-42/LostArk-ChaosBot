@@ -36,9 +36,11 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.btnInstructions = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.txtLOGOUT = new System.Windows.Forms.TextBox();
             this.chBoxLOGOUT = new System.Windows.Forms.CheckBox();
@@ -193,8 +195,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.label33 = new System.Windows.Forms.Label();
-            this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -297,6 +297,25 @@
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
             // 
+            // chBoxChannelSwap
+            // 
+            this.chBoxChannelSwap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxChannelSwap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxChannelSwap.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxChannelSwap.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxChannelSwap.FlatAppearance.BorderSize = 0;
+            this.chBoxChannelSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxChannelSwap.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxChannelSwap.Location = new System.Drawing.Point(4, 89);
+            this.chBoxChannelSwap.Name = "chBoxChannelSwap";
+            this.chBoxChannelSwap.Size = new System.Drawing.Size(135, 22);
+            this.chBoxChannelSwap.TabIndex = 61;
+            this.chBoxChannelSwap.Text = "Channel-Swap";
+            this.toolTip1.SetToolTip(this.chBoxChannelSwap, "adjust your time from when to activate Auto-Logout, \r\nspecify in minutes. Do not " +
+        "enter the same time as for Auto-Repair!\r\nLogout means = character selection.\r\n");
+            this.chBoxChannelSwap.UseMnemonic = false;
+            this.chBoxChannelSwap.UseVisualStyleBackColor = false;
+            // 
             // btnInstructions
             // 
             this.btnInstructions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -339,6 +358,17 @@
             this.label34.Size = new System.Drawing.Size(171, 12);
             this.label34.TabIndex = 48;
             this.label34.Text = "Hover over text for more information!";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label33.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(86, 96);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(0, 12);
+            this.label33.TabIndex = 47;
+            this.label33.Visible = false;
             // 
             // label31
             // 
@@ -647,6 +677,7 @@
             this.checkBoxHeal10.Text = "HEAL POTION 10%";
             this.checkBoxHeal10.UseMnemonic = false;
             this.checkBoxHeal10.UseVisualStyleBackColor = false;
+            this.checkBoxHeal10.CheckedChanged += new System.EventHandler(this.checkBoxHeal10_CheckedChanged);
             // 
             // label38
             // 
@@ -2526,36 +2557,6 @@
             this.Ultimate.Size = new System.Drawing.Size(410, 126);
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label33.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(86, 96);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(0, 12);
-            this.label33.TabIndex = 47;
-            this.label33.Visible = false;
-            // 
-            // chBoxChannelSwap
-            // 
-            this.chBoxChannelSwap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxChannelSwap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxChannelSwap.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxChannelSwap.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxChannelSwap.FlatAppearance.BorderSize = 0;
-            this.chBoxChannelSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxChannelSwap.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxChannelSwap.Location = new System.Drawing.Point(4, 89);
-            this.chBoxChannelSwap.Name = "chBoxChannelSwap";
-            this.chBoxChannelSwap.Size = new System.Drawing.Size(135, 22);
-            this.chBoxChannelSwap.TabIndex = 61;
-            this.chBoxChannelSwap.Text = "Channel-Swap";
-            this.toolTip1.SetToolTip(this.chBoxChannelSwap, "adjust your time from when to activate Auto-Logout, \r\nspecify in minutes. Do not " +
-        "enter the same time as for Auto-Repair!\r\nLogout means = character selection.\r\n");
-            this.chBoxChannelSwap.UseMnemonic = false;
-            this.chBoxChannelSwap.UseVisualStyleBackColor = false;
             // 
             // ChaosBot
             // 
