@@ -6,6 +6,7 @@ using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -22,6 +23,7 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
+       
         ///BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
         ///                                                                                                                                               ///
         private bool _start = false;
@@ -121,6 +123,15 @@ namespace PixelAimbot
             }
 
             base.WndProc(ref m);
+        }
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr handle);
+
+        private IntPtr handle;
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+           
         }
 
         private AutoItX3 au3 = new AutoItX3();
@@ -472,6 +483,13 @@ namespace PixelAimbot
                     {
                         try
                         {
+                            Process[] processName = Process.GetProcessesByName("LostArk");
+                            if (processName.Length == 1)
+                            {
+                                handle = processName[0].MainWindowHandle;
+                                SetForegroundWindow(handle);
+
+                            }
                             au3.MouseMove(recalc(961), recalc(1079, false), 10);
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
@@ -1965,7 +1983,7 @@ namespace PixelAimbot
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Q, casttimeByKey(skill.Key));
+                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
@@ -2379,7 +2397,7 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Q, casttimeByKey(skill.Key));
+                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
@@ -4757,6 +4775,12 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+           
+            
         }
     }
 }
