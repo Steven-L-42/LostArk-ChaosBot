@@ -134,7 +134,10 @@ on Tab (StagesSettings)
 1.9.2r
 - Changed library 
 deleted all sendInputs and
-replaced them with safer one.</value>
+replaced them with safer one.
+
+1.9.5r
+-Fix CastTime</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

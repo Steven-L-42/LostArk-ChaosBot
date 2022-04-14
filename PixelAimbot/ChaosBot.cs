@@ -424,7 +424,7 @@ namespace PixelAimbot
                     cooldownDuration = int.Parse(txR.Text);
                     break;
             }
-            return cooldownDuration / 10;
+            return cooldownDuration;
         }
 
         public async void LOGOUTTIMER(CancellationToken token)
@@ -1151,7 +1151,7 @@ namespace PixelAimbot
                                 }
                             }
                             Random random = new Random();
-                            var sleepTime = random.Next(150, 210);
+                            var sleepTime = random.Next(100, 150);
                             Thread.Sleep(sleepTime);
 
 
@@ -1391,7 +1391,8 @@ namespace PixelAimbot
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
-                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+                               
+                                   KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
@@ -1409,6 +1410,8 @@ namespace PixelAimbot
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(1, token);
                                             walktopUTurn++;
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
@@ -1594,14 +1597,14 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                float thresh = 0.9f;
+                                float thresh = 0.89f;
                                 var ReviveDeutschTemplate =
                                 new Image<Bgr, byte>(resourceFolder + "/revive1.png");
                                 var ReviveDeutschMask =
                                 new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
 
                                 var ReviveEnglishTemplate =
-                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
                                 var ReviveEnglishMask =
                                 new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
 
@@ -1622,8 +1625,8 @@ namespace PixelAimbot
                                     _SkillFight2 = true;
                                 }
                                 Random random = new Random();
-                                var sleepTime = random.Next(150, 255);
-                                await Task.Delay(sleepTime, token);
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
                             }
                             catch (AggregateException)
                             {
@@ -2000,7 +2003,7 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                float thresh = 0.9f;
+                                float thresh = 0.89f;
                                 var ReviveDeutschTemplate =
                                 new Image<Bgr, byte>(resourceFolder + "/revive1.png");
                                 var ReviveDeutschMask =
@@ -2028,8 +2031,8 @@ namespace PixelAimbot
                                     _SkillFight2 = true;
                                 }
                                 Random random = new Random();
-                                var sleepTime = random.Next(150, 255);
-                                await Task.Delay(sleepTime, token);
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
                             }
                             catch (AggregateException)
                             {
@@ -2406,7 +2409,7 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                float thresh = 0.9f;
+                                float thresh = 0.89f;
                                 var ReviveDeutschTemplate =
                                 new Image<Bgr, byte>(resourceFolder + "/revive1.png");
                                 var ReviveDeutschMask =
@@ -2434,8 +2437,8 @@ namespace PixelAimbot
                                     _SkillFight2 = true;
                                 }
                                 Random random = new Random();
-                                var sleepTime = random.Next(150, 255);
-                                await Task.Delay(sleepTime, token);
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
                             }
                             catch (AggregateException)
                             {
@@ -2858,6 +2861,7 @@ namespace PixelAimbot
                     _Berserker = true;
                     if (searchSequence2 == 1)
                     {
+                        await Task.Delay(1500);
                         au3.MouseMove(recalc(960), recalc(529, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
@@ -2880,10 +2884,7 @@ namespace PixelAimbot
                             new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                             var enemyMask =
                             new Image<Bgr, byte>(resourceFolder + "/mask.png");
-                            var BossTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/boss1.png");
-                            var BossMask =
-                            new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
+                            
                             var mobTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/mob1.png");
                             var mobMask =
@@ -2893,7 +2894,7 @@ namespace PixelAimbot
                             Point screenResolution = new Point(screenWidth, screenHeight);
                             var shardDetector = new EnemyDetector(shardTemplate, shardMask, threshold);
                             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                            var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                         
                             var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
 
                             var screenPrinter = new PrintScreen();
@@ -2902,7 +2903,7 @@ namespace PixelAimbot
                             var screenCapture = new Image<Bgr, byte>("screen.png");
                             var shard = shardDetector.GetClosestEnemy(screenCapture);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                            var Boss = BossDetector.GetClosestEnemy(screenCapture);
+                          
                             var mob = mobDetector.GetClosestEnemy(screenCapture);
 
                             if (CompleteIteration == 1)
@@ -3314,16 +3315,13 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
-
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        Random random = new Random();
-                        var sleepTime = random.Next(300, 500);
-                        await Task.Delay(sleepTime, token);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
                     }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
                 }
                 catch (AggregateException)
                 {
