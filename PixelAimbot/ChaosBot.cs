@@ -47,7 +47,7 @@ namespace PixelAimbot
         private bool _Sorcerer = false;
         private bool _Soulfist = false;
         private bool _SkillFight2 = false;
-        private bool _MakeMove = false;
+   
 
         private bool _LOGOUT = false;
         private bool Search = false;
@@ -71,9 +71,11 @@ namespace PixelAimbot
         private int CompleteIteration = 1;
         private int fightOnSecondAbility = 1;
         private int walktopUTurn = 1;
-        private int walktopUTurn2 = 1;
+    
         private int Floor2 = 1;
         private int Floor3 = 1;
+        private int _swap = 0;
+     
 
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
@@ -330,6 +332,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
+                   
                     var t1 = Task.Run(() => START(token));
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
@@ -463,7 +466,31 @@ namespace PixelAimbot
             _LOGOUT = true;
         }
 
-     
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                Process[] processName = Process.GetProcessesByName("LostArk");
+                if (processName.Length == 1)
+                {
+                    handle = processName[0].MainWindowHandle;
+                    SetForegroundWindow(handle);
+
+                }
+                
+
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
 
         private async Task START(CancellationToken token)
         {
@@ -3628,6 +3655,8 @@ namespace PixelAimbot
                 else
                 if (_REPAIR == false && _LOGOUT == false)
                 {
+                    _swap++;
+         
                     await Task.Delay(2000, token);
                     var t9 = Task.Run(() => RESTART(token));
                     await Task.WhenAny(new[] { t9 });
@@ -3871,10 +3900,58 @@ namespace PixelAimbot
                     else
                     {
                         restart = true;
+                        
                     }
                 }
+                if (restart == true && chBoxChannelSwap.Checked == true)
+                {
+                    
+                    if (_swap == 3)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(124, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap++;
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                       
+                    }
+                    else
+                    if (_swap == 6)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(103, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap++;
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                    }
+                    else
+                    if (_swap == 9)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(84, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap = 0;
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                    }
 
+                }
             }
+
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -4030,7 +4107,7 @@ namespace PixelAimbot
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
-            txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
+            txtChannelSwap.Text = Properties.Settings.Default.RestartTimer;
             chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
@@ -4213,7 +4290,7 @@ namespace PixelAimbot
                 chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
                 chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
                 chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
-                txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
+                txtChannelSwap.Text = Properties.Settings.Default.RestartTimer;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
                 txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
@@ -4518,7 +4595,7 @@ namespace PixelAimbot
                     rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
                     rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
                     rotation.chBoxBard = (bool)chBoxBard.Checked;
-                    rotation.RestartTimer = txtRestartTimer.Text;
+                    rotation.RestartTimer = txtChannelSwap.Text;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
@@ -4609,7 +4686,7 @@ namespace PixelAimbot
                 txtDungeon3.Text = rotation.txtDungeon3;
 
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
-                txtRestartTimer.Text = rotation.RestartTimer;
+                txtChannelSwap.Text = rotation.RestartTimer;
                 chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;
                 txtDungeon2search.Text = rotation.txtDungeon2search;
@@ -4743,6 +4820,6 @@ namespace PixelAimbot
             catch { }
         }
 
-      
+       
     }
 }
