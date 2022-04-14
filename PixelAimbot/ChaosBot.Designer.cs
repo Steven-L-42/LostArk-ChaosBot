@@ -37,15 +37,12 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnInstructions = new System.Windows.Forms.Button();
-            this.label36 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.txtLOGOUT = new System.Windows.Forms.TextBox();
             this.chBoxLOGOUT = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.txtRestartTimer = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.txtRepair = new System.Windows.Forms.TextBox();
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
@@ -196,6 +193,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
+            this.label33 = new System.Windows.Forms.Label();
+            this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -274,8 +273,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chBoxChannelSwap);
             this.groupBox1.Controls.Add(this.btnInstructions);
-            this.groupBox1.Controls.Add(this.label36);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.label34);
             this.groupBox1.Controls.Add(this.label33);
@@ -283,7 +282,6 @@
             this.groupBox1.Controls.Add(this.txtLOGOUT);
             this.groupBox1.Controls.Add(this.chBoxLOGOUT);
             this.groupBox1.Controls.Add(this.label30);
-            this.groupBox1.Controls.Add(this.txtRestartTimer);
             this.groupBox1.Controls.Add(this.label28);
             this.groupBox1.Controls.Add(this.txtRepair);
             this.groupBox1.Controls.Add(this.chBoxAutoRepair);
@@ -315,20 +313,6 @@
             this.btnInstructions.UseVisualStyleBackColor = false;
             this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
             // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label36.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label36.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label36.Location = new System.Drawing.Point(6, 92);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(91, 17);
-            this.label36.TabIndex = 59;
-            this.label36.Text = "Restart-Timer";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label36.Visible = false;
-            // 
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -355,18 +339,6 @@
             this.label34.Size = new System.Drawing.Size(171, 12);
             this.label34.TabIndex = 48;
             this.label34.Text = "Hover over text for more information!";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label33.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(103, 95);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(51, 12);
-            this.label33.TabIndex = 47;
-            this.label33.Text = "min. 25 sec.";
-            this.label33.Visible = false;
             // 
             // label31
             // 
@@ -417,27 +389,11 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(204, 92);
+            this.label30.Location = new System.Drawing.Point(145, 91);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(30, 17);
+            this.label30.Size = new System.Drawing.Size(89, 17);
             this.label30.TabIndex = 43;
-            this.label30.Text = "sec.";
-            this.label30.Visible = false;
-            // 
-            // txtRestartTimer
-            // 
-            this.txtRestartTimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtRestartTimer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRestartTimer.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRestartTimer.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRestartTimer.Location = new System.Drawing.Point(166, 88);
-            this.txtRestartTimer.Name = "txtRestartTimer";
-            this.txtRestartTimer.Size = new System.Drawing.Size(35, 22);
-            this.txtRestartTimer.TabIndex = 42;
-            this.txtRestartTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtRestartTimer.Visible = false;
-            this.txtRestartTimer.WordWrap = false;
-            this.txtRestartTimer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.label30.Text = "each third run";
             // 
             // label28
             // 
@@ -2571,6 +2527,36 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label33.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(86, 96);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(0, 12);
+            this.label33.TabIndex = 47;
+            this.label33.Visible = false;
+            // 
+            // chBoxChannelSwap
+            // 
+            this.chBoxChannelSwap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxChannelSwap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxChannelSwap.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxChannelSwap.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxChannelSwap.FlatAppearance.BorderSize = 0;
+            this.chBoxChannelSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxChannelSwap.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxChannelSwap.Location = new System.Drawing.Point(4, 89);
+            this.chBoxChannelSwap.Name = "chBoxChannelSwap";
+            this.chBoxChannelSwap.Size = new System.Drawing.Size(135, 22);
+            this.chBoxChannelSwap.TabIndex = 61;
+            this.chBoxChannelSwap.Text = "Channel-Swap";
+            this.toolTip1.SetToolTip(this.chBoxChannelSwap, "adjust your time from when to activate Auto-Logout, \r\nspecify in minutes. Do not " +
+        "enter the same time as for Auto-Repair!\r\nLogout means = character selection.\r\n");
+            this.chBoxChannelSwap.UseMnemonic = false;
+            this.chBoxChannelSwap.UseVisualStyleBackColor = false;
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2664,13 +2650,11 @@
         private System.Windows.Forms.CheckBox chBoxPaladin;
         private System.Windows.Forms.TextBox txtPaladin;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox txtRestartTimer;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.CheckBox chBoxLOGOUT;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox txtLOGOUT;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label7;
@@ -2684,7 +2668,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.CheckBox chBoxActivateF2;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Button btnInstructions;
         private System.Windows.Forms.TabPage Classes;
         private System.Windows.Forms.GroupBox groupBox9;
@@ -2797,6 +2780,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPortalSearch;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.CheckBox chBoxChannelSwap;
     }
 }
 

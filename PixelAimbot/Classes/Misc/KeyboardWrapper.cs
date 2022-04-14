@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
         private const int KEY_UP_EVENT = 0x0002;
 
         private const int PauseBetweenStrokes = 50;
-
+        public const int MOUSEEVENTF_WHEEL = 2048;
         public const byte VK_LBUTTON = 0x01;
         public const byte VK_RBUTTON = 0x02;
         public const byte VK_SPACE = 0x20;
