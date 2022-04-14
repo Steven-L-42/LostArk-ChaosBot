@@ -4316,36 +4316,56 @@ namespace PixelAimbot
             frmGuide Form = new frmGuide();
             Form.Show();
         }
-
+        private string translateKey(int key)
+        {
+            string translate = "";
+            switch(key)
+            {
+                case 81:
+                    translate = "Q";
+                    break;
+                case 87:
+                    translate = "W";
+                    break;
+                case 69:
+                    translate = "E";
+                    break;
+                case 82:
+                    translate = "R";
+                    break;
+                case 65:
+                    translate = "A";
+                    break;
+                case 83:
+                    translate = "S";
+                    break;
+                case 68:
+                    translate = "D";
+                    break;
+                case 70:
+                    translate = "F";
+                    break;
+                case 90:
+                    translate = "Z";
+                    break;
+                default:
+                    translate = key.ToString();
+                    break;
+            }
+            return translate;
+        }
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Layout_Keyboard currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
-            lbQ.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lbW.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lbE.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lbR.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lbA.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lbS.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lbD.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lbF.Text = currentLayout.F.ToString().Replace("VK_", "");
+            lbPQ.Text = lb2Q.Text = lbQ.Text = translateKey(currentLayout.Q);
+            lbPW.Text = lb2W.Text = lbW.Text = translateKey(currentLayout.W);
+            lbPE.Text = lb2E.Text = lbE.Text = translateKey(currentLayout.E);
+            lbPR.Text = lb2R.Text = lbR.Text = translateKey(currentLayout.R);
+            lbPA.Text = lb2A.Text = lbA.Text = translateKey(currentLayout.A);
+            lbPS.Text = lb2S.Text = lbS.Text = translateKey(currentLayout.S);
+            lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
+            lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
 
-            lb2Q.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lb2W.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lb2E.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lb2R.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lb2A.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lb2S.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lb2D.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lb2F.Text = currentLayout.F.ToString().Replace("VK_", "");
-
-            lbPQ.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lbPW.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lbPE.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lbPR.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lbPA.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lbPS.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lbPD.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
 
         public async void SharpshooterSecondPress(CancellationToken token)
