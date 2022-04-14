@@ -716,8 +716,17 @@ namespace PixelAimbot
             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
             var screenPrinter = new PrintScreen();
 
-            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-            var screenCapture = new Image<Bgr, byte>("screen.png");
+            //screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+            //var screenCapture = new Image<Bgr, byte>("screen.png");
+            var image = screenPrinter.CaptureScreen();
+
+            Bitmap bitmapImage = new Bitmap(image);
+
+            Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
+            BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
+
+            Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+
             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
             if (enemy.HasValue)
             {
