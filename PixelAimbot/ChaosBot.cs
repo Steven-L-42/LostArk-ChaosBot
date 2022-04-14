@@ -129,10 +129,7 @@ namespace PixelAimbot
 
         private IntPtr handle;
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-           
-        }
+       
 
         private AutoItX3 au3 = new AutoItX3();
 
@@ -4689,10 +4686,6 @@ namespace PixelAimbot
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -4720,10 +4713,6 @@ namespace PixelAimbot
             catch { }
         }
 
-        private void button1_Click_3(object sender, EventArgs e)
-        {
-           
-            
-        }
+      
     }
 }
