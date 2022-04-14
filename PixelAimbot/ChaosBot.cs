@@ -75,7 +75,8 @@ namespace PixelAimbot
         private int Floor2 = 1;
         private int Floor3 = 1;
         private int _swap = 0;
-     
+
+        public frmMinimized formMinimized = new frmMinimized();
 
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
