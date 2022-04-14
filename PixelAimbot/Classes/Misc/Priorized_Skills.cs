@@ -13,16 +13,16 @@ namespace PixelAimbot.Classes.Misc
     {
         private CancellationTokenSource cts = new CancellationTokenSource();
 
-        public List<KeyValuePair<VirtualKeyCode, int>> skillset { get; set; } = new Dictionary<VirtualKeyCode, int>()
+        public List<KeyValuePair<byte, int>> skillset { get; set; } = new Dictionary<byte, int>()
         {            
-            {VirtualKeyCode.VK_A, 1},
-            {VirtualKeyCode.VK_S, 2},
-            {VirtualKeyCode.VK_D, 3},
-            {VirtualKeyCode.VK_F, 4},
-            {VirtualKeyCode.VK_Q, 5},
-            {VirtualKeyCode.VK_W, 6},
-            {VirtualKeyCode.VK_E, 7},
-            {VirtualKeyCode.VK_R, 8},
+            {KeyboardWrapper.VK_A, 1},
+            {KeyboardWrapper.VK_S, 2},
+            {KeyboardWrapper.VK_D, 3},
+            {KeyboardWrapper.VK_F, 4},
+            {KeyboardWrapper.VK_Q, 5},
+            {KeyboardWrapper.VK_W, 6},
+            {KeyboardWrapper.VK_E, 7},
+            {KeyboardWrapper.VK_R, 8},
         }.ToList();
 
 

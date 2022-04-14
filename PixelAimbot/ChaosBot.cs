@@ -379,40 +379,40 @@ namespace PixelAimbot
 
 
         }
-        private int casttimeByKey(VirtualKeyCode key)
+        private int casttimeByKey(byte key)
         {
             int cooldownDuration = 500;
             switch (key)
             {
-                case VirtualKeyCode.VK_A:
+                case KeyboardWrapper.VK_A:
                     cooldownDuration = int.Parse(txA.Text);
                     break;
 
-                case VirtualKeyCode.VK_S:
+                case KeyboardWrapper.VK_S:
                     cooldownDuration = int.Parse(txS.Text);
                     break;
 
-                case VirtualKeyCode.VK_D:
+                case KeyboardWrapper.VK_D:
                     cooldownDuration = int.Parse(txD.Text);
                     break;
 
-                case VirtualKeyCode.VK_F:
+                case KeyboardWrapper.VK_F:
                     cooldownDuration = int.Parse(txF.Text);
                     break;
 
-                case VirtualKeyCode.VK_Q:
+                case KeyboardWrapper.VK_Q:
                     cooldownDuration = int.Parse(txQ.Text);
                     break;
 
-                case VirtualKeyCode.VK_W:
+                case KeyboardWrapper.VK_W:
                     cooldownDuration = int.Parse(txW.Text);
                     break;
 
-                case VirtualKeyCode.VK_E:
+                case KeyboardWrapper.VK_E:
                     cooldownDuration = int.Parse(txE.Text);
                     break;
 
-                case VirtualKeyCode.VK_R:
+                case KeyboardWrapper.VK_R:
                     cooldownDuration = int.Parse(txR.Text);
                     break;
             }
@@ -1407,7 +1407,7 @@ namespace PixelAimbot
                     while (_Floor1Fight == true && Search == false)
                     {
 
-                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                         {
                             try
                             {
@@ -1951,7 +1951,7 @@ namespace PixelAimbot
                     while (_Floor2Fight == true && Search == false)
                     {
 
-                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                         {
                             try
                             {
@@ -2086,9 +2086,7 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        var sim = new InputSimulator();
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                        await Task.Delay(1, token);
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
 
@@ -2119,7 +2117,6 @@ namespace PixelAimbot
                                         {
 
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
@@ -2367,7 +2364,7 @@ namespace PixelAimbot
                     }
                     while (_Floor3Fight == true && Search == false)
                     {
-                        foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                         {
                             try
                             {
@@ -2495,7 +2492,6 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        var sim = new InputSimulator();
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                         await Task.Delay(1, token);
 
@@ -2528,7 +2524,6 @@ namespace PixelAimbot
                                         {
 
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
@@ -2798,78 +2793,78 @@ namespace PixelAimbot
             catch { }
         }
 
-        private void setKeyCooldown(VirtualKeyCode key)
+        private void setKeyCooldown(byte key)
         {
             switch (key)
             {
-                case VirtualKeyCode.VK_A:
+                case KeyboardWrapper.VK_A:
                     _A = false;
                     break;
 
-                case VirtualKeyCode.VK_S:
+                case KeyboardWrapper.VK_S:
                     _S = false;
                     break;
 
-                case VirtualKeyCode.VK_D:
+                case KeyboardWrapper.VK_D:
                     _D = false;
                     break;
 
-                case VirtualKeyCode.VK_F:
+                case KeyboardWrapper.VK_F:
                     _F = false;
                     break;
 
-                case VirtualKeyCode.VK_Q:
+                case KeyboardWrapper.VK_Q:
                     _Q = false;
                     break;
 
-                case VirtualKeyCode.VK_W:
+                case KeyboardWrapper.VK_W:
                     _W = false;
                     break;
 
-                case VirtualKeyCode.VK_E:
+                case KeyboardWrapper.VK_E:
                     _E = false;
                     break;
 
-                case VirtualKeyCode.VK_R:
+                case KeyboardWrapper.VK_R:
                     _R = false;
                     break;
             }
         }
 
-        private bool isKeyOnCooldown(VirtualKeyCode key)
+        private bool isKeyOnCooldown(byte key)
         {
             bool returnBoolean = false;
             switch (key)
             {
-                case VirtualKeyCode.VK_A:
+                case KeyboardWrapper.VK_A:
                     returnBoolean = _A;
                     break;
 
-                case VirtualKeyCode.VK_S:
+                case KeyboardWrapper.VK_S:
                     returnBoolean = _S;
                     break;
 
-                case VirtualKeyCode.VK_D:
+                case KeyboardWrapper.VK_D:
                     returnBoolean = _D;
                     break;
 
-                case VirtualKeyCode.VK_F:
+                case KeyboardWrapper.VK_F:
                     returnBoolean = _F;
                     break;
 
-                case VirtualKeyCode.VK_Q:
+                case KeyboardWrapper.VK_Q:
                     returnBoolean = _Q;
                     break;
 
-                case VirtualKeyCode.VK_W:
+                case KeyboardWrapper.VK_W:
                     returnBoolean = _W;
                     break;
 
-                case VirtualKeyCode.VK_E:
+                case KeyboardWrapper.VK_E:
                     returnBoolean = _E;
                     break;
 
-                case VirtualKeyCode.VK_R:
+                case KeyboardWrapper.VK_R:
                     returnBoolean = _R;
                     break;
             }
@@ -3995,42 +3990,42 @@ namespace PixelAimbot
             Layout_Keyboard QWERTZ = new Layout_Keyboard
             {
                 LAYOUTS = "QWERTZ",
-                Q = VirtualKeyCode.VK_Q,
-                W = VirtualKeyCode.VK_W,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_A,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F,
+                Q = KeyboardWrapper.VK_Q,
+                W = KeyboardWrapper.VK_W,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_A,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F,
             };
             LAYOUT.Add(QWERTZ);
 
             Layout_Keyboard QWERTY = new Layout_Keyboard
             {
                 LAYOUTS = "QWERTY",
-                Q = VirtualKeyCode.VK_Q,
-                W = VirtualKeyCode.VK_W,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_A,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F,
+                Q = KeyboardWrapper.VK_Q,
+                W = KeyboardWrapper.VK_W,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_A,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F,
             };
             LAYOUT.Add(QWERTY);
 
             Layout_Keyboard AZERTY = new Layout_Keyboard
             {
                 LAYOUTS = "AZERTY",
-                Q = VirtualKeyCode.VK_A,
-                W = VirtualKeyCode.VK_Z,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_Q,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F
+                Q = KeyboardWrapper.VK_A,
+                W = KeyboardWrapper.VK_Z,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_Q,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F
             };
             LAYOUT.Add(AZERTY);
 
@@ -4341,8 +4336,8 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(3000, token);
-                var sim = new InputSimulator();
-                sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+               
 
             }
             catch (AggregateException)
@@ -4356,7 +4351,7 @@ namespace PixelAimbot
             catch { }
         }
 
-        public async void SkillCooldown(CancellationToken token, VirtualKeyCode key)
+        public async void SkillCooldown(CancellationToken token, byte key)
         {
             try
             {
@@ -4368,82 +4363,82 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
                     switch (key)
                     {
-                        case VirtualKeyCode.VK_A:
+                        case KeyboardWrapper.VK_A:
                             cooldownDuration = int.Parse(txCoolA.Text);
                             break;
 
-                        case VirtualKeyCode.VK_S:
+                        case KeyboardWrapper.VK_S:
                             cooldownDuration = int.Parse(txCoolS.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_D:
+                        case KeyboardWrapper.VK_D:
                             cooldownDuration = int.Parse(txCoolD.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_F:
+                        case KeyboardWrapper.VK_F:
                             cooldownDuration = int.Parse(txCoolF.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_Q:
+                        case KeyboardWrapper.VK_Q:
                             cooldownDuration = int.Parse(txCoolQ.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_W:
+                        case KeyboardWrapper.VK_W:
                             cooldownDuration = int.Parse(txCoolW.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_E:
+                        case KeyboardWrapper.VK_E:
                             cooldownDuration = int.Parse(txCoolE.Text);
 
                             break;
 
-                        case VirtualKeyCode.VK_R:
+                        case KeyboardWrapper.VK_R:
                             cooldownDuration = int.Parse(txCoolR.Text);
                             break;
                     }
                     timer = new System.Timers.Timer(cooldownDuration);
                     switch (key)
                     {
-                        case VirtualKeyCode.VK_A:
+                        case KeyboardWrapper.VK_A:
                             timer.Elapsed += A_CooldownEvent;
                             break;
 
-                        case VirtualKeyCode.VK_S:
+                        case KeyboardWrapper.VK_S:
                             timer.Elapsed += S_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_D:
+                        case KeyboardWrapper.VK_D:
                             timer.Elapsed += D_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_F:
+                        case KeyboardWrapper.VK_F:
                             timer.Elapsed += F_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_Q:
+                        case KeyboardWrapper.VK_Q:
                             timer.Elapsed += Q_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_W:
+                        case KeyboardWrapper.VK_W:
                             timer.Elapsed += W_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_E:
+                        case KeyboardWrapper.VK_E:
                             timer.Elapsed += E_CooldownEvent;
 
                             break;
 
-                        case VirtualKeyCode.VK_R:
+                        case KeyboardWrapper.VK_R:
                             timer.Elapsed += R_CooldownEvent;
                             break;
                     }
@@ -4683,16 +4678,16 @@ namespace PixelAimbot
         private void changeSkillSet(object sender, EventArgs e)
         {
             if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" && txPW.Text != "" && txPE.Text != "" && txPR.Text != "")
-                SKILLS.skillset = new Dictionary<VirtualKeyCode, int>()
+                SKILLS.skillset = new Dictionary<byte, int>()
             {
-                { VirtualKeyCode.VK_A, int.Parse(txPA.Text)},
-                { VirtualKeyCode.VK_S, int.Parse(txPS.Text)},
-                { VirtualKeyCode.VK_D, int.Parse(txPD.Text)},
-                { VirtualKeyCode.VK_F, int.Parse(txPF.Text)},
-                { VirtualKeyCode.VK_Q, int.Parse(txPQ.Text)},
-                { VirtualKeyCode.VK_W, int.Parse(txPW.Text)},
-                { VirtualKeyCode.VK_E, int.Parse(txPE.Text)},
-                { VirtualKeyCode.VK_R, int.Parse(txPR.Text)},
+                { KeyboardWrapper.VK_A, int.Parse(txPA.Text)},
+                { KeyboardWrapper.VK_S, int.Parse(txPS.Text)},
+                { KeyboardWrapper.VK_D, int.Parse(txPD.Text)},
+                { KeyboardWrapper.VK_F, int.Parse(txPF.Text)},
+                { KeyboardWrapper.VK_Q, int.Parse(txPQ.Text)},
+                { KeyboardWrapper.VK_W, int.Parse(txPW.Text)},
+                { KeyboardWrapper.VK_E, int.Parse(txPE.Text)},
+                { KeyboardWrapper.VK_R, int.Parse(txPR.Text)},
             }.ToList();
         }
 
