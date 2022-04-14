@@ -716,17 +716,9 @@ namespace PixelAimbot
             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
             var screenPrinter = new PrintScreen();
 
-            //screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-            //var screenCapture = new Image<Bgr, byte>("screen.png");
-            var image = screenPrinter.CaptureScreen();
 
-            Bitmap bitmapImage = new Bitmap(image);
-
-            Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-            BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-            Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
-
+            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+            var screenCapture = new Image<Bgr, byte>("screen.png");
             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
             if (enemy.HasValue)
             {
@@ -893,7 +885,7 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
+                            await Task.Delay(100, token);
                             float shardthreshold = 1f;
                             float threshold = 0.69f;
                             var shardTemplate =
@@ -926,14 +918,8 @@ namespace PixelAimbot
                             var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
                             var screenPrinter = new PrintScreen();
 
-                            var image = screenPrinter.CaptureScreen();
-
-                            Bitmap bitmapImage = new Bitmap(image);
-
-                            Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                            BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                            Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
                             var shard = shardDetector.GetClosestEnemy(screenCapture);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             var Boss = BossDetector.GetClosestEnemy(screenCapture);
@@ -1612,14 +1598,8 @@ namespace PixelAimbot
                                 var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
                                 var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
                                 var screenPrinter = new PrintScreen();
-                                var image = screenPrinter.CaptureScreen();
-
-                                Bitmap bitmapImage = new Bitmap(image);
-
-                                Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                                BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                                Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
@@ -2024,14 +2004,8 @@ namespace PixelAimbot
                                 var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
                                 var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
                                 var screenPrinter = new PrintScreen();
-                                var image = screenPrinter.CaptureScreen();
-
-                                Bitmap bitmapImage = new Bitmap(image);
-
-                                Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                                BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                                Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
@@ -2436,14 +2410,8 @@ namespace PixelAimbot
                                 var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
                                 var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
                                 var screenPrinter = new PrintScreen();
-                                var image = screenPrinter.CaptureScreen();
-
-                                Bitmap bitmapImage = new Bitmap(image);
-
-                                Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                                BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                                Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
@@ -2919,14 +2887,8 @@ namespace PixelAimbot
 
                             var screenPrinter = new PrintScreen();
 
-                            var image = screenPrinter.CaptureScreen();
-
-                            Bitmap bitmapImage = new Bitmap(image);
-
-                            Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                            BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                            Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
                             var shard = shardDetector.GetClosestEnemy(screenCapture);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             var Boss = BossDetector.GetClosestEnemy(screenCapture);
@@ -3251,14 +3213,8 @@ namespace PixelAimbot
                             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
                             var screenPrinter = new PrintScreen();
 
-                            var image = screenPrinter.CaptureScreen();
-
-                            Bitmap bitmapImage = new Bitmap(image);
-
-                            Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                            BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                            Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             if (enemy.HasValue)
                             {
@@ -3894,14 +3850,8 @@ namespace PixelAimbot
 
                     var screenPrinter = new PrintScreen();
 
-                    var image = screenPrinter.CaptureScreen();
-
-                    Bitmap bitmapImage = new Bitmap(image);
-
-                    Rectangle rectangle = new Rectangle(0, 0, bitmapImage.Width, bitmapImage.Height);//System.Drawing
-                    BitmapData bmpData = bitmapImage.LockBits(rectangle, ImageLockMode.ReadWrite, bitmapImage.PixelFormat);//System.Drawing.Imaging
-
-                    Image<Bgr, byte> screenCapture = new Image<Bgr, byte>(bitmapImage.Width, bitmapImage.Height, bmpData.Stride, bmpData.Scan0);//(IntPtr)
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
                     var hand = handDetector.GetClosestItem(screenCapture);
 
                     if (!hand.HasValue)
