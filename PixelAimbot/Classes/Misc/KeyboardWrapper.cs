@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-
+using System.Threading;
+using WindowsInput.Native;
 
 namespace PixelAimbot.Classes.Misc
 {
@@ -20,6 +21,7 @@ namespace PixelAimbot.Classes.Misc
         public static byte VK_SPACE = 0x20;
         public static byte VK_ESCAPE = 0x1B;
         public static byte VK_RETURN = 0x0D;
+        public static byte VK_C = 0x43;
 
         public static byte VK_G = 0x47;
         public static byte VK_Q = 0x51;
@@ -44,7 +46,8 @@ namespace PixelAimbot.Classes.Misc
         public static byte VK_7 = 0x37;
         public static byte VK_8 = 0x38;
         public static byte VK_9 = 0x39;
-
+        public string LAYOUTS { get; set; }
+       
         /// <summary>
         /// Will hold a key down for a number of milliseconds
         /// </summary>
@@ -55,6 +58,7 @@ namespace PixelAimbot.Classes.Misc
         /// Keyboard.KeyUp((byte)Keys.F24,5000);
         /// </code>
         /// </example>
+        /// 
         public static void HoldKey(byte key, int duration)
         {
             int totalDuration = 0;
@@ -66,6 +70,7 @@ namespace PixelAimbot.Classes.Misc
                 totalDuration += PauseBetweenStrokes;
             }
         }
+
 
         public static void AlternateHoldKey(byte key, int duration)
         {

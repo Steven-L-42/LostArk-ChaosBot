@@ -472,8 +472,8 @@ namespace PixelAimbot
                     {
                         try
                         {
-
-                            au3.MouseClick("" + txtLEFT.Text + "", recalc(961), recalc(1079, false), 1, 10);
+                            au3.MouseMove(recalc(961), recalc(1079, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
 
                         }
@@ -541,7 +541,8 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            au3.Send("{G}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
 
 
                             await Task.Delay(1000, token);
@@ -559,7 +560,10 @@ namespace PixelAimbot
                         ////////////////////////////////HIER FOLGT ENTER 2
                         try
                         {
-                            au3.MouseClick("LEFT", recalc(1467), recalc(858, false), 1, 10);
+                            au3.MouseMove(recalc(1467), recalc(858, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                          
 
                             await Task.Delay(1000, token);
                         }
@@ -582,7 +586,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", recalc(903), recalc(605, false), 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
 
 
@@ -637,14 +642,19 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
-                    au3.MouseClick("LEFT", recalc(1900), recalc(50, false), 1);
-                    au3.MouseClick("LEFT", recalc(1871), recalc(260, false), 1);
-                    au3.MouseClick("LEFT", recalc(1902), recalc(87, false), 1);
-                    au3.MouseClick("LEFT", recalc(1871), recalc(260, false), 1);
+                    au3.MouseMove(recalc(1900), recalc(50, false), 1);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1871), recalc(260, false), 1);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1902), recalc(87, false), 1);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1871), recalc(260, false), 1);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909), recalc(392, false), 0xFFF1C6, 100);
                     if (minimizeChat.ToString() == "0")
                     {
-                        au3.MouseClick("LEFT", recalc(1901), recalc(389, false), 1);
+                        au3.MouseMove(recalc(1901), recalc(389, false), 1); 
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     }
 
                     for (int i = 0; i < 2; i++)
@@ -654,8 +664,8 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
-
-                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 1);
+                            au3.MouseMove(recalc(960), recalc(529, false), 1);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             await Task.Delay(1000, token);
 
                         }
@@ -673,7 +683,9 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 2);
+                            au3.MouseMove(recalc(960), recalc(529, false), 2);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            
 
                         }
                         catch (AggregateException)
@@ -692,12 +704,7 @@ namespace PixelAimbot
 
                             if (chBoxBerserker.Checked == true && _Berserker == true)
                             {
-                                var sim = new InputSimulator();
-
-                                sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-
-
-
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                 _Berserker = false;
                             }
                         }
@@ -834,18 +841,16 @@ namespace PixelAimbot
 
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
 
-                            au3.Send("{G}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                             if (txtLEFT.Text == "LEFT")
                             {
-                                inputSimulator.Mouse.LeftButtonClick();
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                             else
                             {
-                                inputSimulator.Mouse.RightButtonClick();
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                             }
-                            au3.Send("{G}");
-                            au3.Send("{G}");
-                            au3.Send("{G}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
                         }
                         catch (AggregateException)
@@ -908,8 +913,10 @@ namespace PixelAimbot
                     _Berserker = true;
                     if (searchSequence == 1)
                     {
-                        au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 1);
-                        au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 2);
+                        au3.MouseMove(recalc(960), recalc(529, false), 1);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        
                         searchSequence++;
                     }
 
@@ -1005,11 +1012,11 @@ namespace PixelAimbot
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                 if (txtLEFT.Text == "LEFT")
                                 {
-                                    inputSimulator.Mouse.LeftButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 }
                                 else
                                 {
-                                    inputSimulator.Mouse.RightButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                 }
                             }
                             else
@@ -1058,11 +1065,11 @@ namespace PixelAimbot
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                     if (txtLEFT.Text == "LEFT")
                                     {
-                                        inputSimulator.Mouse.LeftButtonClick();
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     }
                                     else
                                     {
-                                        inputSimulator.Mouse.RightButtonClick();
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                     }
                                 }
                                 else
@@ -1111,11 +1118,11 @@ namespace PixelAimbot
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                         if (txtLEFT.Text == "LEFT")
                                         {
-                                            inputSimulator.Mouse.LeftButtonClick();
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                         }
                                         else
                                         {
-                                            inputSimulator.Mouse.RightButtonClick();
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                         }
                                     }
                                     else
@@ -1165,11 +1172,11 @@ namespace PixelAimbot
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                             if (txtLEFT.Text == "LEFT")
                                             {
-                                                inputSimulator.Mouse.LeftButtonClick();
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                             }
                                             else
                                             {
-                                                inputSimulator.Mouse.RightButtonClick();
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                             }
                                         }
                                     }
@@ -1414,18 +1421,12 @@ namespace PixelAimbot
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
-                                    var sim = new InputSimulator();
-                                    for (int t = 0; t < casttimeByKey(skill.Key); t++) // TEXTBOX MUSS CUSTOM SEIN
-                                    {
-                                        sim.Keyboard.KeyDown(skill.Key);
-                                        await Task.Delay(1, token);
-                                    }
-                                    sim.Keyboard.KeyUp(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Q, casttimeByKey(skill.Key));
+
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
@@ -1438,20 +1439,20 @@ namespace PixelAimbot
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(1, token);
                                             walktopUTurn++;
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
 
                                             fightOnSecondAbility = 1;
                                         }
@@ -1472,19 +1473,14 @@ namespace PixelAimbot
 
                                     try
                                     {
+                                       
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(240, false), 1, 10);
-                                            await Task.Delay(10, token);
-                                        }
-                                        for (int t = 0; t < 0.5; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(566, false), 1, 10);
-                                            await Task.Delay(1, token);
+                                        au3.MouseMove(recalc(960), recalc(240, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 5000);
+                                        au3.MouseMove(recalc(960), recalc(566, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
-                                        }
                                         walktopUTurn++;
                                     }
                                     catch (AggregateException)
@@ -1505,16 +1501,12 @@ namespace PixelAimbot
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        for (int t = 0; t < 90; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(523), recalc(810, false), 1, 10);
-                                            await Task.Delay(10, token);
-                                        }
-                                        for (int t = 0; t < 0.5; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(1007), recalc(494, false), 1, 10);
-                                            await Task.Delay(1, token);
-                                        }
+                                        au3.MouseMove(recalc(523), recalc(810, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 9000);
+                                        au3.MouseMove(recalc(1007), recalc(494, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        await Task.Delay(1, token);
+
                                         walktopUTurn++;
                                     }
                                     catch (AggregateException)
@@ -1535,16 +1527,12 @@ namespace PixelAimbot
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        for (int t = 0; t < 100; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(1578), recalc(524, false), 1, 10);
-                                            await Task.Delay(10, token);
-                                        }
-                                        for (int t = 0; t < 0.5; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(905), recalc(531, false), 1, 10);
-                                            await Task.Delay(1, token);
-                                        }
+
+                                        au3.MouseMove(recalc(1578), recalc(524, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 10000);
+                                        au3.MouseMove(recalc(905), recalc(531, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
                                         walktopUTurn++;
                                     }
                                     catch (AggregateException)
@@ -1565,16 +1553,13 @@ namespace PixelAimbot
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        for (int t = 0; t < 70; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(523), recalc(810, false), 1, 10);
-                                            await Task.Delay(10, token);
-                                        }
-                                        for (int t = 0; t < 0.5; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(500, false), 1, 10);
+
+                                            au3.MouseMove(recalc(523), recalc(810, false), 10);
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 7000);
+                                            au3.MouseMove(recalc(960), recalc(500, false), 10);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                             await Task.Delay(1, token);
-                                        }
+                                        
                                         walktopUTurn++;
                                     }
                                     catch (AggregateException)
@@ -1595,17 +1580,14 @@ namespace PixelAimbot
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        for (int t = 0; t < 60; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(70, false), 1, 10);
-                                            await Task.Delay(10, token);
-                                        }
-                                        for (int t = 0; t < 0.5; t++)
-                                        {
-                                            au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(566, false), 1, 10);
-                                            await Task.Delay(1, token);
 
-                                        }
+                                        au3.MouseMove(recalc(960), recalc(70, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 6000);
+                                        au3.MouseMove(recalc(960), recalc(566, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        await Task.Delay(1, token);
+
+
                                         walktopUTurn++;
                                     }
                                     catch (AggregateException)
@@ -1642,52 +1624,36 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                for (int i = 0; i < 1; i++)
+                                float thresh = 0.9f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(1, token);
-                                    try
-                                    {
-                                        float thresh = 0.9f;
-                                        var ReviveDeutschTemplate =
-                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
-                                        var ReviveDeutschMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
-
-                                        var ReviveEnglishTemplate =
-                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
-                                        var ReviveEnglishMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
-
-                                        Point screenResolution = new Point(screenWidth, screenHeight);
-                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
-                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
-                                        var screenPrinter = new PrintScreen();
-                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
-                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
-                                        {
-                                            _SkillFight2 = false;
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                                            au3.MouseClick("LEFT", recalc(1374), recalc(467, false), 1, 10);
-                                            _SkillFight2 = true;
-                                        }
-                                        Random random = new Random();
-                                        var sleepTime = random.Next(150, 255);
-                                        await Task.Delay(sleepTime, token);
-                                    }
-                                    catch (AggregateException)
-                                    {
-                                        Console.WriteLine("Expected");
-                                    }
-                                    catch (ObjectDisposedException)
-                                    {
-                                        Console.WriteLine("Bug");
-                                    }
-                                    catch { }
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
                                 }
+                                Random random = new Random();
+                                var sleepTime = random.Next(150, 255);
+                                await Task.Delay(sleepTime, token);
                             }
                             catch (AggregateException)
                             {
@@ -1764,14 +1730,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                       
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
@@ -1796,16 +1757,11 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Deathblade = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -1830,15 +1786,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
-                                            _Sharpshooter = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
 
+                                            _Sharpshooter = false;
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
@@ -1866,14 +1816,10 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                             _Sorcerer = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
@@ -1895,14 +1841,10 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1, token);
-                                        }
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                         _Soulfist = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
@@ -2023,18 +1965,12 @@ namespace PixelAimbot
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
-                                    var sim = new InputSimulator();
-                                    for (int t = 0; t < casttimeByKey(skill.Key); t++) // TEXTBOX MUSS CUSTOM SEIN
-                                    {
-                                        sim.Keyboard.KeyDown(skill.Key);
-                                        await Task.Delay(1, token);
-                                    }
-                                    sim.Keyboard.KeyUp(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Q, casttimeByKey(skill.Key));
+
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
@@ -2047,12 +1983,20 @@ namespace PixelAimbot
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(1, token);
 
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
 
                                         }
                                         catch (AggregateException)
@@ -2080,55 +2024,42 @@ namespace PixelAimbot
 
                             ///REVIVE
                             ///
+                           
+                                    
                             try
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                for (int i = 0; i < 1; i++)
+                                float thresh = 0.9f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(1, token);
-                                    try
-                                    {
-                                        float thresh = 0.9f;
-                                        var ReviveDeutschTemplate =
-                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
-                                        var ReviveDeutschMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
-
-                                        var ReviveEnglishTemplate =
-                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
-                                        var ReviveEnglishMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
-
-                                        Point screenResolution = new Point(screenWidth, screenHeight);
-                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
-                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
-                                        var screenPrinter = new PrintScreen();
-                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
-                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
-                                        {
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                                            au3.MouseClick("LEFT", recalc(1374), recalc(467, false), 1, 10);
-                                        }
-                                        Random random = new Random();
-                                        var sleepTime = random.Next(150, 255);
-
-                                        await Task.Delay(sleepTime, token);
-                                    }
-                                    catch (AggregateException)
-                                    {
-                                        Console.WriteLine("Expected");
-                                    }
-                                    catch (ObjectDisposedException)
-                                    {
-                                        Console.WriteLine("Bug");
-                                    }
-                                    catch { }
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
                                 }
+                                Random random = new Random();
+                                var sleepTime = random.Next(150, 255);
+                                await Task.Delay(sleepTime, token);
                             }
                             catch (AggregateException)
                             {
@@ -2156,7 +2087,7 @@ namespace PixelAimbot
                                         await Task.Delay(1, token);
 
                                         var sim = new InputSimulator();
-                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                         await Task.Delay(1, token);
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
@@ -2189,13 +2120,8 @@ namespace PixelAimbot
 
                                             object[] dCoord = (object[])d;
                                             var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
                                         }
@@ -2211,7 +2137,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                 if (chBoxPaladin.Checked == true && _Paladin == true)
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
                                 {
                                     try
                                     {
@@ -2221,14 +2147,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
@@ -2243,7 +2164,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
                                 {
                                     try
                                     {
@@ -2253,16 +2174,11 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Deathblade = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2277,7 +2193,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
                                 {
                                     try
                                     {
@@ -2287,15 +2203,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
-                                            _Sharpshooter = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
 
+                                            _Sharpshooter = false;
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
@@ -2313,7 +2223,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
                                 {
                                     try
                                     {
@@ -2323,14 +2233,10 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                             _Sorcerer = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
@@ -2345,21 +2251,17 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
                                 {
                                     try
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1, token);
-                                        }
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                         _Soulfist = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
@@ -2480,19 +2382,12 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
-                                    var sim = new InputSimulator();
-                                    for (int t = 0; t < casttimeByKey(skill.Key); t++) // TEXTBOX MUSS CUSTOM SEIN
-                                    {
-                                        sim.Keyboard.KeyDown(skill.Key);
-                                        await Task.Delay(1, token);
-                                    }
-                                    sim.Keyboard.KeyUp(skill.Key);
-                                    sim.Keyboard.KeyPress(skill.Key);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Q, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
-                                        sim.Keyboard.KeyPress(skill.Key);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
@@ -2506,14 +2401,15 @@ namespace PixelAimbot
                                             token.ThrowIfCancellationRequested();
                                             await Task.Delay(1, token);
                                             fightOnSecondAbility++;
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
-                                            au3.Send("{C}");
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+
 
                                         }
                                         catch (AggregateException)
@@ -2543,50 +2439,36 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                for (int i = 0; i < 1; i++)
+                                float thresh = 0.9f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(1, token);
-                                    try
-                                    {
-                                        float thresh = 0.9f;
-                                        var ReviveDeutschTemplate =
-                                        new Image<Bgr, byte>(resourceFolder + "/revive1.png");
-                                        var ReviveDeutschMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
-
-                                        var ReviveEnglishTemplate =
-                                       new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
-                                        var ReviveEnglishMask =
-                                        new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
-
-                                        Point screenResolution = new Point(screenWidth, screenHeight);
-                                        var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
-                                        var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
-                                        var screenPrinter = new PrintScreen();
-                                        screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                                        var screenCapture = new Image<Bgr, byte>("screen.png");
-                                        var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
-                                        var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                        if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
-                                        {
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                                            au3.MouseClick("LEFT", recalc(1374), recalc(467, false), 1, 10);
-                                        }
-                                        Random random = new Random();
-                                        var sleepTime = random.Next(150, 255);
-                                        await Task.Delay(sleepTime, token);
-                                    }
-                                    catch (AggregateException)
-                                    {
-                                        Console.WriteLine("Expected");
-                                    }
-                                    catch (ObjectDisposedException)
-                                    {
-                                        Console.WriteLine("Bug");
-                                    }
-                                    catch { }
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
                                 }
+                                Random random = new Random();
+                                var sleepTime = random.Next(150, 255);
+                                await Task.Delay(sleepTime, token);
                             }
                             catch (AggregateException)
                             {
@@ -2614,7 +2496,7 @@ namespace PixelAimbot
                                         await Task.Delay(1, token);
 
                                         var sim = new InputSimulator();
-                                        sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                         await Task.Delay(1, token);
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
@@ -2647,13 +2529,8 @@ namespace PixelAimbot
 
                                             object[] dCoord = (object[])d;
                                             var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
                                         }
@@ -2669,7 +2546,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                 if (chBoxPaladin.Checked == true && _Paladin == true)
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
                                 {
                                     try
                                     {
@@ -2679,14 +2556,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
@@ -2701,7 +2573,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
                                 {
                                     try
                                     {
@@ -2711,16 +2583,11 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Deathblade = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
-                                            sim.Keyboard.KeyPress(VirtualKeyCode.VK_Y);
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2735,7 +2602,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
                                 {
                                     try
                                     {
@@ -2745,15 +2612,9 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
-                                            _Sharpshooter = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
 
+                                            _Sharpshooter = false;
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
@@ -2771,7 +2632,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
                                 {
                                     try
                                     {
@@ -2781,14 +2642,10 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            var sim = new InputSimulator();
-                                            for (int t = 0; t < 50; t++)
-                                            {
-                                                sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                                await Task.Delay(1, token);
-                                            }
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                             _Sorcerer = false;
-                                            sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
@@ -2803,21 +2660,17 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
-                                if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
                                 {
                                     try
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        var sim = new InputSimulator();
-                                        for (int t = 0; t < 50; t++)
-                                        {
-                                            sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                            await Task.Delay(1, token);
-                                        }
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
                                         _Soulfist = false;
-                                        sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
@@ -2863,6 +2716,8 @@ namespace PixelAimbot
 
                                     if (health.ToString() != "1" && checkBoxHeal70.Checked)
                                     {
+
+
                                         object[] healthCoord = (object[])health;
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
@@ -2887,6 +2742,8 @@ namespace PixelAimbot
 
                                     if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
                                     {
+
+
                                         object[] healthiCoord = (object[])healthi;
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
@@ -2894,6 +2751,7 @@ namespace PixelAimbot
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
+
                                 catch (AggregateException)
                                 {
                                     Console.WriteLine("Expected");
@@ -2903,6 +2761,7 @@ namespace PixelAimbot
                                     Console.WriteLine("Bug");
                                 }
                                 catch { }
+
                             }
                             catch (AggregateException)
                             {
@@ -2913,6 +2772,7 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                           
                         }
                     }
                 }
@@ -3033,8 +2893,9 @@ namespace PixelAimbot
                     _Berserker = true;
                     if (searchSequence2 == 1)
                     {
-                        au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 1);
-                        au3.MouseClick("" + txtLEFT.Text + "", recalc(960), recalc(529, false), 2);
+                        au3.MouseMove(recalc(960), recalc(529, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         searchSequence2++;
                     }
 
@@ -3082,7 +2943,9 @@ namespace PixelAimbot
                             if (CompleteIteration == 1)
                             {
 
-                                au3.MouseClick("LEFT", recalc(963), recalc(961, false), 3, 10);
+                                au3.MouseMove(recalc(960), recalc(529, false), 10);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 CompleteIteration++;
                             }
                             else
@@ -3131,11 +2994,11 @@ namespace PixelAimbot
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                     if (txtLEFT.Text == "LEFT")
                                     {
-                                        inputSimulator.Mouse.LeftButtonClick();
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     }
                                     else
                                     {
-                                        inputSimulator.Mouse.RightButtonClick();
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                     }
                                 }
                                 else
@@ -3184,11 +3047,11 @@ namespace PixelAimbot
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                         if (txtLEFT.Text == "LEFT")
                                         {
-                                            inputSimulator.Mouse.LeftButtonClick();
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                         }
                                         else
                                         {
-                                            inputSimulator.Mouse.RightButtonClick();
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                         }
                                     }
                                     else
@@ -3238,11 +3101,11 @@ namespace PixelAimbot
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                             if (txtLEFT.Text == "LEFT")
                                             {
-                                                inputSimulator.Mouse.LeftButtonClick();
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                             }
                                             else
                                             {
-                                                inputSimulator.Mouse.RightButtonClick();
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                             }
                                         }
 
@@ -3275,7 +3138,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", recalc(903), recalc(605, false), 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
                                 try
                                 {
@@ -3285,7 +3149,9 @@ namespace PixelAimbot
                                     if (complete.ToString() != "1")
                                     {
                                         object[] completeCoord = (object[])complete;
-                                        au3.MouseClick("LEFT", recalc(191), recalc(285, false), 1, 5);
+                                        au3.MouseMove(recalc(191), recalc(285, false), 5);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                   
 
                                         await Task.Delay(1000, token);
                                     }
@@ -3372,8 +3238,9 @@ namespace PixelAimbot
                     {
                         try
                         {
-                            au3.Send("{G}");
-                            au3.Send("{G}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
 
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
@@ -3442,33 +3309,32 @@ namespace PixelAimbot
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
 
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                                 if (txtLEFT.Text == "LEFT")
                                 {
-
-                                    inputSimulator.Mouse.LeftButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 }
                                 else
                                 {
-                                    inputSimulator.Mouse.RightButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                 }
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
 
 
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                                 if (txtLEFT.Text == "LEFT")
                                 {
-                                    inputSimulator.Mouse.LeftButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 }
                                 else
                                 {
-                                    inputSimulator.Mouse.RightButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                 }
 
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                             }
                             else
                             {
@@ -3489,8 +3355,9 @@ namespace PixelAimbot
                         Random random = new Random();
                         var sleepTime = random.Next(300, 500);
                         await Task.Delay(sleepTime, token);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
                     }
                 }
                 catch (AggregateException)
@@ -3552,7 +3419,9 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+         
                             }
                         }
                         catch (AggregateException)
@@ -3573,7 +3442,9 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                             
                             }
                         }
                         catch (AggregateException)
@@ -3635,7 +3506,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -3656,7 +3528,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -3715,7 +3588,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", recalc(903), recalc(605, false), 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch { }
@@ -3728,7 +3602,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", recalc(903), recalc(605, false), 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -3749,7 +3624,8 @@ namespace PixelAimbot
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", recalc(903), recalc(605, false), 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -3821,13 +3697,13 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT Process starts..."));
-                        au3.Send("{ESCAPE}");
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                         await Task.Delay(2000, token);
-
-                        au3.MouseClick("LEFT", recalc(1238), recalc(728, false), 1, 5);
+                        au3.MouseMove(recalc(1238), recalc(728, false),5);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(2000, token);
-
-                        au3.MouseClick("LEFT", recalc(906), recalc(575, false), 1, 5);
+                        au3.MouseMove(recalc(906), recalc(575, false), 5);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000, token);
 
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are loged out!"));
@@ -3893,8 +3769,8 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-
-                            au3.MouseClick("LEFT", recalc(1741), recalc(1040, false), 1, 5);
+                            au3.MouseMove(recalc(1741), recalc(1040, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         }
                         catch (AggregateException)
                         {
@@ -3912,7 +3788,9 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
 
                             await Task.Delay(1500, token);
-                            au3.MouseClick("LEFT", recalc(1684), recalc(823, false), 1, 5);
+                            au3.MouseMove(recalc(1684), recalc(823, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                       
                         }
                         catch (AggregateException)
                         {
@@ -3930,7 +3808,9 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
 
                             await Task.Delay(1500, token);
-                            au3.MouseClick("LEFT", recalc(1256), recalc(693, false), 1, 5);
+                            au3.MouseMove(recalc(1256), recalc(693, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    
                         }
                         catch (AggregateException)
                         {
@@ -3947,13 +3827,14 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1500, token);
-                            au3.MouseClick("LEFT", recalc(1085), recalc(429, false), 1, 5);
+                            au3.MouseMove(recalc(1085), recalc(429, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1500, token);
-                            au3.Send("{ESCAPE}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                             await Task.Delay(1000, token);
-                            au3.Send("{ESCAPE}");
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
                             _REPAIR = false;
                             _REPAIR = false;
