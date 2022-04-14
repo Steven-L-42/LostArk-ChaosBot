@@ -333,7 +333,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                    var t1 = Task.Run(() => STARTKLICK(token));
+                    var t1 = Task.Run(() => START(token));
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
                     {
@@ -466,71 +466,7 @@ namespace PixelAimbot
             _LOGOUT = true;
         }
 
-        private async Task STARTKLICK(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-
-
-                try
-                {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-
-                    for (int i = 0; i < 2; i++)
-                    {
-                        try
-                        {
-                            Process[] processName = Process.GetProcessesByName("LostArk");
-                            if (processName.Length == 1)
-                            {
-                                handle = processName[0].MainWindowHandle;
-                                SetForegroundWindow(handle);
-
-                            }
-                            au3.MouseMove(recalc(961), recalc(1079, false), 10);
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-
-                        }
-                        catch (AggregateException)
-                        {
-                            MessageBox.Show("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            MessageBox.Show("Bug");
-                        }
-                        catch { }
-                    }
-                }
-                catch (AggregateException)
-                {
-                    MessageBox.Show("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    MessageBox.Show("Bug");
-                }
-                catch { }
-                await Task.Delay(2000, token);
-
-                var t2 = Task.Run(() => START(token));
-                await Task.WhenAny(new[] { t2 });
-            }
-            catch (AggregateException)
-            {
-                MessageBox.Show("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                MessageBox.Show("Bug");
-            }
-            catch { }
-
-        }
+     
 
         private async Task START(CancellationToken token)
         {
@@ -552,6 +488,13 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
+                    Process[] processName = Process.GetProcessesByName("LostArk");
+                    if (processName.Length == 1)
+                    {
+                        handle = processName[0].MainWindowHandle;
+                        SetForegroundWindow(handle);
+
+                    }
 
                     for (int i = 0; i < 2; i++)
                     {
