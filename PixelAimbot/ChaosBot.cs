@@ -872,7 +872,8 @@ namespace PixelAimbot
                     _Berserker = true;
                     if (searchSequence == 1)
                     {
-                        au3.MouseMove(recalc(960), recalc(529, false), 1);
+                        await Task.Delay(2500);
+                        au3.MouseMove(recalc(960), recalc(529, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         
@@ -897,9 +898,9 @@ namespace PixelAimbot
                             var enemyMask =
                             new Image<Bgr, byte>(resourceFolder + "/mask.png");
                             var BossTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            new Image<Bgr, byte>(resourceFolder + "/boss1.png");
                             var BossMask =
-                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
                             var mobTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/mob1.png");
                             var mobMask =
