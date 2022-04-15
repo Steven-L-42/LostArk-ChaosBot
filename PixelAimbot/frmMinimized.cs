@@ -17,6 +17,7 @@ namespace PixelAimbot
         public frmMinimized()
         {
             InitializeComponent();
+            this.Text = frmLogin.RandomString(15);
         }
 
         private void timerRuntimer_Tick(object sender, EventArgs e)

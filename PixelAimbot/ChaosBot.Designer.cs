@@ -58,7 +58,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtLEFT = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtHeal10 = new System.Windows.Forms.TextBox();
             this.checkBoxHeal10 = new System.Windows.Forms.CheckBox();
@@ -176,10 +175,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtPortalSearch = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.HEAL = new System.Windows.Forms.TabPage();
             this.Classes = new System.Windows.Forms.TabPage();
@@ -195,6 +190,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
+            this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
+            this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
+            this.labelApiTelegram = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -215,6 +213,7 @@
             this.Rotation.SuspendLayout();
             this.Cooldown.SuspendLayout();
             this.Ultimate.SuspendLayout();
+            this.groupBoxTelegram.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -266,9 +265,9 @@
             this.label15.ForeColor = System.Drawing.Color.Peru;
             this.label15.Location = new System.Drawing.Point(396, 210);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 17);
+            this.label15.Size = new System.Drawing.Size(53, 17);
             this.label15.TabIndex = 11;
-            this.label15.Text = "1.3.8r";
+            this.label15.Text = "version";
             this.label15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
             // 
             // groupBox1
@@ -580,7 +579,7 @@
             this.groupBox6.Controls.Add(this.txtLEFT);
             this.groupBox6.Controls.Add(this.label17);
             this.groupBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox6.Location = new System.Drawing.Point(10, 57);
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(124, 57);
             this.groupBox6.TabIndex = 41;
@@ -613,18 +612,6 @@
             this.label17.Size = new System.Drawing.Size(58, 20);
             this.label17.TabIndex = 21;
             this.label17.Text = "Walk =";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(17, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(388, 21);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "set your Mouse (same as in your InGame Settings!";
-            this.toolTip1.SetToolTip(this.label2, "Only change if your ingame settings \r\nare different than those given here!");
             // 
             // groupBox4
             // 
@@ -2321,62 +2308,14 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.SETTINGS.Controls.Add(this.label40);
-            this.SETTINGS.Controls.Add(this.label39);
-            this.SETTINGS.Controls.Add(this.label11);
-            this.SETTINGS.Controls.Add(this.label37);
+            this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
-            this.SETTINGS.Controls.Add(this.label2);
             this.SETTINGS.Controls.Add(this.label18);
             this.SETTINGS.Location = new System.Drawing.Point(4, 20);
             this.SETTINGS.Name = "SETTINGS";
             this.SETTINGS.Size = new System.Drawing.Size(418, 150);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ForeColor = System.Drawing.Color.Coral;
-            this.label40.Location = new System.Drawing.Point(134, 102);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(200, 21);
-            this.label40.TabIndex = 48;
-            this.label40.Text = "4. Set preferred Rotation.";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.Coral;
-            this.label39.Location = new System.Drawing.Point(134, 78);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(288, 21);
-            this.label39.TabIndex = 47;
-            this.label39.Text = "3. Set your Cast-Time and Cooldown.";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Coral;
-            this.label11.Location = new System.Drawing.Point(134, 55);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(142, 21);
-            this.label11.TabIndex = 46;
-            this.label11.Text = "2. Go to \"Classes\"";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Coral;
-            this.label37.Location = new System.Drawing.Point(134, 32);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(127, 21);
-            this.label37.TabIndex = 45;
-            this.label37.Text = "1. READ GUIDE!";
             // 
             // label18
             // 
@@ -2558,6 +2497,43 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
+            // groupBoxTelegram
+            // 
+            this.groupBoxTelegram.Controls.Add(this.labelApiTelegram);
+            this.groupBoxTelegram.Controls.Add(this.textBoxTelegramAPI);
+            this.groupBoxTelegram.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBoxTelegram.Location = new System.Drawing.Point(134, 4);
+            this.groupBoxTelegram.Name = "groupBoxTelegram";
+            this.groupBoxTelegram.Size = new System.Drawing.Size(281, 56);
+            this.groupBoxTelegram.TabIndex = 42;
+            this.groupBoxTelegram.TabStop = false;
+            this.groupBoxTelegram.Text = "Telegram Settings";
+            // 
+            // textBoxTelegramAPI
+            // 
+            this.textBoxTelegramAPI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBoxTelegramAPI.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxTelegramAPI.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTelegramAPI.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxTelegramAPI.Location = new System.Drawing.Point(82, 20);
+            this.textBoxTelegramAPI.Name = "textBoxTelegramAPI";
+            this.textBoxTelegramAPI.Size = new System.Drawing.Size(193, 22);
+            this.textBoxTelegramAPI.TabIndex = 40;
+            this.textBoxTelegramAPI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxTelegramAPI.WordWrap = false;
+            this.textBoxTelegramAPI.TextChanged += new System.EventHandler(this.textBoxTelegramAPI_TextChanged);
+            // 
+            // labelApiTelegram
+            // 
+            this.labelApiTelegram.AutoSize = true;
+            this.labelApiTelegram.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelApiTelegram.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.labelApiTelegram.Location = new System.Drawing.Point(5, 23);
+            this.labelApiTelegram.Name = "labelApiTelegram";
+            this.labelApiTelegram.Size = new System.Drawing.Size(75, 20);
+            this.labelApiTelegram.TabIndex = 40;
+            this.labelApiTelegram.Text = "APIKey =";
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2612,6 +2588,8 @@
             this.Cooldown.ResumeLayout(false);
             this.Cooldown.PerformLayout();
             this.Ultimate.ResumeLayout(false);
+            this.groupBoxTelegram.ResumeLayout(false);
+            this.groupBoxTelegram.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2636,7 +2614,6 @@
         private System.Windows.Forms.TabPage SETTINGS;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtLEFT;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -2710,12 +2687,8 @@
         private System.Windows.Forms.TextBox txCoolW;
         private System.Windows.Forms.TextBox txCoolE;
         private System.Windows.Forms.TextBox txCoolR;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Rotation;
@@ -2783,6 +2756,9 @@
         private System.Windows.Forms.TextBox txtPortalSearch;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.CheckBox chBoxChannelSwap;
+        private System.Windows.Forms.GroupBox groupBoxTelegram;
+        private System.Windows.Forms.Label labelApiTelegram;
+        private System.Windows.Forms.TextBox textBoxTelegramAPI;
     }
 }
 

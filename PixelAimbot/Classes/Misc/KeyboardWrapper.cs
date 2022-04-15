@@ -46,6 +46,8 @@ namespace PixelAimbot.Classes.Misc
         public const byte VK_7 = 0x37;
         public const byte VK_8 = 0x38;
         public const byte VK_9 = 0x39;
+
+        public const byte VK_I = 0x49;
         public string LAYOUTS { get; set; }
        
         /// <summary>

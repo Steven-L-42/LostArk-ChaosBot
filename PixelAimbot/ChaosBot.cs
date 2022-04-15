@@ -12,10 +12,12 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using Telegram.Bot;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -77,6 +79,8 @@ namespace PixelAimbot
         private int _swap = 0;
 
         public frmMinimized formMinimized = new frmMinimized();
+        public Config conf = new Config();
+        private bool telegramBotRunning = false;
 
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
@@ -161,7 +165,7 @@ namespace PixelAimbot
         private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
         public static InputSimulator inputSimulator = new InputSimulator();
-
+        
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -209,11 +213,12 @@ namespace PixelAimbot
         public ChaosBot()
         {
             InitializeComponent();
-
+            conf = Config.Load();
+            
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
+            
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
 
@@ -242,7 +247,14 @@ namespace PixelAimbot
             Boolean F10Registered = RegisterHotKey(
                 this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey
             );
-
+            if (conf.telegram != "" && !telegramBotRunning)
+            {
+                textBoxTelegramAPI.Text = conf.telegram;
+                try
+                {
+                    _ = RunBotAsync(conf.telegram);
+                } catch{}
+            }
             // 4. Verify if both hotkeys were succesfully registered, if not, show message in the console
             if (!F9Registered)
             {
@@ -254,6 +266,144 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 cts.Cancel();
             }
+        }
+        public async Task RunBotAsync(string token)
+        {
+            telegramBotRunning = true;
+            var bot = new TelegramBotClient(token);
+            int offset = -1;
+            var botIsRun = true;
+            while (botIsRun)
+            {
+                Telegram.Bot.Types.Update[] updates;
+                
+                try
+                {
+                    updates = await bot.GetUpdatesAsync(offset);
+                    telegramBotRunning = true;
+                }
+                catch (Exception ex)
+                {
+
+                    botIsRun = false;
+                    continue;
+                }
+
+                
+
+                foreach (var update in updates)
+                {
+
+
+                    offset = update.Id + 1;
+                    
+                    if (update.Message == null)
+                    {
+                        continue;
+                    }
+
+                    string text = update.Message.Text.ToLower();
+                    var chatId = update.Message.Chat.Id;
+                    if(text.Contains("/help"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Currently supported Commands")
+                            .AppendLine("/start - Starts the Bot doing Chaosdungeon")
+                            .AppendLine("/stop - Stops the Bot doing anything")
+                            .AppendLine("/info - Returns currently runtime and state of Bot")
+                            .AppendLine("/unstuck - Leaves Chaosdungeon and Restarts everything")
+                            .AppendLine("/inv - Send a screenshot of your inventory")
+                            .AppendLine("/screen - Send a Screenshot of Game");
+
+                        await bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+                    if (text.Contains("/start"))
+                    {
+                        if (_start == false)
+                        {
+                            btnStart_Click(null, null);
+                            await bot.SendTextMessageAsync(chatId, "Bot started");
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot already running!");
+                        }
+                    }
+
+                    if(text.Contains("/stop"))
+                    {
+                        if (_stop)
+                        {
+                            btnPause_Click(null, null);
+                            cts.Cancel();
+                            await bot.SendTextMessageAsync(chatId, "Bot stopped!");
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
+                        }
+                    }
+                    if(text.Contains("/info"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("State: " + lbStatus.Text)
+                            .AppendLine("Runtime: " + formMinimized.sw.Elapsed.Hours.ToString("D2") + ":" + formMinimized.sw.Elapsed.Minutes.ToString("D2") + ":" + formMinimized.sw.Elapsed.Seconds.ToString("D2"));
+
+                        await bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+                    if(text.Contains("/unstuck"))
+                    {
+                        if (_stop)
+                        {
+                            cts.Cancel();
+                            await bot.SendTextMessageAsync(chatId, "Stopped current Process");
+                            var t12 = Task.Run(() => LEAVEDUNGEON(cts.Token));
+
+                            await bot.SendTextMessageAsync(chatId, "Leave Dungeon and send Screenshot in a few seconds");
+                            await Task.WhenAny(new[] { t12 });
+
+                            await Task.Delay(5000);
+
+                            var picture = new PrintScreen();
+                            Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
+                            await bot.SendPhotoAsync(chatId, stream);
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
+                        }
+
+                    }
+                    if(text.Contains("/inv"))
+                    {
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                        await Task.Delay(100);
+                        var picture = new PrintScreen();
+                        var screen = picture.CaptureScreen();
+                        
+                        Stream stream = ToStream(cropImage(screen, new Rectangle(ChaosBot.recalc(1322), PixelAimbot.ChaosBot.recalc(189, false), ChaosBot.recalc(544), ChaosBot.recalc(640, false))), ImageFormat.Png);
+                        await bot.SendPhotoAsync(chatId, stream);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+
+                    }
+                    if(text.Contains("/screen"))
+                    {
+                        var picture = new PrintScreen();
+                        Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
+                        await bot.SendPhotoAsync(chatId, stream);
+                    }
+                }
+            }
+
+        }
+        private static Image cropImage(Image img, Rectangle cropArea)
+        {
+            Bitmap bmpImage = new Bitmap(img);
+            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+        }
+        public Stream ToStream(Image image, ImageFormat format)
+        {
+            var stream = new System.IO.MemoryStream();
+            image.Save(stream, format);
+            stream.Position = 0;
+            return stream;
         }
 
         public void refreshRotationCombox()
@@ -771,7 +921,6 @@ namespace PixelAimbot
                 CvInvoke.Rectangle(screenCapture,
                     new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                     new MCvScalar(255));
-
                 double distance_x = (screenWidth - recalc(296)) / 2;
                 double distance_y = (screenHeight - recalc(255, false)) / 2;
 
@@ -809,7 +958,7 @@ namespace PixelAimbot
 
             }
 
-            return (0, 0);
+            return ((screenWidth / 2), (screenHeight / 2));
 
 
         }
@@ -3714,7 +3863,7 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000, token);
 
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are loged out!"));
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are logged out!"));
                         _start = false;
                         cts.Cancel();
 
@@ -3887,7 +4036,7 @@ namespace PixelAimbot
         {
             try
             {
-                Boolean restart = false;
+                bool restart = false;
                 while (!restart)
                 {
                     token.ThrowIfCancellationRequested();
@@ -4855,6 +5004,14 @@ namespace PixelAimbot
             formMinimized.labelMinimizedState.Text = lbStatus.Text;
         }
 
-       
+        private void textBoxTelegramAPI_TextChanged(object sender, EventArgs e)
+        {
+            conf.telegram = textBoxTelegramAPI.Text;
+            conf.Save();
+            if (!telegramBotRunning)
+            {
+                _ = RunBotAsync(textBoxTelegramAPI.Text);
+            }
+        }
     }
 }
