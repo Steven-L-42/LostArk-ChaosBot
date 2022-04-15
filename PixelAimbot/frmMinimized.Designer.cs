@@ -34,6 +34,7 @@
             this.labelRuntimer = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.timerRuntimer = new System.Windows.Forms.Timer(this.components);
+            this.lbStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelMinimizedState
@@ -77,13 +78,27 @@
             this.timerRuntimer.Interval = 1000;
             this.timerRuntimer.Tick += new System.EventHandler(this.timerRuntimer_Tick);
             // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lbStatus.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStatus.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbStatus.Location = new System.Drawing.Point(12, 26);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(62, 21);
+            this.lbStatus.TabIndex = 0;
+            this.lbStatus.Text = "READY";
+            this.lbStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmMinimized
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(594, 28);
+            this.ClientSize = new System.Drawing.Size(594, 50);
             this.ControlBox = false;
+            this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.labelRuntimer);
             this.Controls.Add(this.labelMinimizedState);
@@ -107,5 +122,6 @@
         public System.Windows.Forms.Label labelRuntimer;
         public System.Windows.Forms.Label labelTitle;
         public System.Windows.Forms.Timer timerRuntimer;
+        public System.Windows.Forms.Label lbStatus;
     }
 }

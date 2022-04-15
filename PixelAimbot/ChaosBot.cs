@@ -319,7 +319,7 @@ namespace PixelAimbot
                 this.Show();
                 formMinimized.Hide();
                 formMinimized.sw.Reset();
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
+                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "STOPPED!"));
             }
         }
 
@@ -329,9 +329,11 @@ namespace PixelAimbot
             if (_start == false)
                 try
                 {
+                  
                     formMinimized.StartPosition = FormStartPosition.Manual;
                     formMinimized.Location = new Point(0, recalc(28, false));
-                    formMinimized.Size = new Size(recalc(594), recalc(28, false));
+                    formMinimized.Size = new Size(recalc(594), recalc(50, false));
+                    formMinimized.lbStatus.Location = new Point(recalc(12), recalc(28, false));
                     formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
                     formMinimized.labelRuntimer.Location = new Point(recalc(464), recalc(9, false));
                     formMinimized.labelTitle.Location = new Point(recalc(12), recalc(7, false));
@@ -340,8 +342,8 @@ namespace PixelAimbot
                     formMinimized.sw.Start();
                     formMinimized.Show();
                     this.Hide();
-                    
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
+
+                    formMinimized.lbStatus.Invoke((MethodInvoker)(() => formMinimized.lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
                     cts = new CancellationTokenSource();
@@ -614,7 +616,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                await Task.Delay(7000, token);
+                await Task.Delay(9000, token);
 
                 var t3 = Task.Run(() => MOVE(token));
                 await Task.WhenAny(new[] { t3 });
@@ -642,7 +644,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
+                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Set Transparency and Scale..."));
 
                     au3.MouseMove(recalc(1900), recalc(50, false), 10);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
@@ -665,7 +667,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Bot moves to start the Dungeon..."));
                             au3.MouseMove(recalc(960), recalc(529, false), 10);
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             await Task.Delay(1000, token);
@@ -766,7 +768,7 @@ namespace PixelAimbot
             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
             if (enemy.HasValue)
             {
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
+                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = foundText));
                 
                 CvInvoke.Rectangle(screenCapture,
                     new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
@@ -837,13 +839,13 @@ namespace PixelAimbot
 
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Search Portal..."));
 
                             var absolutePositions = searchImageAndClick("/portalenter1.png", "/portalentermask1.png", "Floor 1: Portal found...");
 
                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
 
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 1: Enter Portal..."));
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                             if (txtLEFT.Text == "LEFT")
@@ -883,6 +885,7 @@ namespace PixelAimbot
                 searchSequence = 1;
                 walktopUTurn = 0;
                 _Floor2 = true;
+                await Task.Delay(1500);
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -904,7 +907,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: search enemy..."));
+                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: search enemy..."));
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -1011,7 +1014,7 @@ namespace PixelAimbot
 
 
                                 var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 3: Shard found!"));
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                 if (txtLEFT.Text == "LEFT")
                                 {
@@ -1066,7 +1069,7 @@ namespace PixelAimbot
 
 
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Big-Boss found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                     if (txtLEFT.Text == "LEFT")
                                     {
@@ -1121,7 +1124,7 @@ namespace PixelAimbot
 
 
                                         var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Mid-Boss found!"));
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                         if (txtLEFT.Text == "LEFT")
                                         {
@@ -1176,7 +1179,7 @@ namespace PixelAimbot
 
 
                                             var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Mob found!"));
 
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                             if (txtLEFT.Text == "LEFT")
@@ -1310,7 +1313,7 @@ namespace PixelAimbot
 
                         if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
                         {
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
 
                             Search = true;
                             var t12 = Task.Run(() => LEAVEDUNGEON(token));
@@ -1372,7 +1375,7 @@ namespace PixelAimbot
                         if (fightSequence2 == int.Parse(txtDungeon3Iteration.Text))
                         {
 
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Leaved ChaosDungeon - not completed!"));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Leaved ChaosDungeon - not completed!"));
                             var t12 = Task.Run(() => LEAVEDUNGEON(token));
                             await Task.WhenAny(new[] { t12 });
                         }
@@ -1432,14 +1435,14 @@ namespace PixelAimbot
                                 if (fight.ToString() != "1" && Search == false)
                                 {
                                     object[] fightCoord = (object[])fight;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
                                
                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Key Pressed twice!"));
                                         KeyboardWrapper.PressKey(skill.Key);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -1662,7 +1665,7 @@ namespace PixelAimbot
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
                                     _SkillFight2 = false;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "REVIVE!"));
                                     au3.MouseMove(recalc(1374), recalc(467, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     _SkillFight2 = true;
@@ -1695,7 +1698,7 @@ namespace PixelAimbot
                                 {
                                     _SkillFight2 = false;
                                     object[] fightCoord = (object[])fight;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal detected!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 1: Portal detected!"));
 
                                     if (chBoxActivateF2.Checked)
                                     {
@@ -1708,7 +1711,7 @@ namespace PixelAimbot
                                     else
                                     if (!chBoxActivateF2.Checked)
                                     {
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
                                         _Floor1Fight = false;
                                         Search = true;
                                         _Floor1 = false;
@@ -1749,7 +1752,7 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
                                        
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -1778,7 +1781,7 @@ namespace PixelAimbot
 
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -1808,7 +1811,7 @@ namespace PixelAimbot
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -1836,7 +1839,7 @@ namespace PixelAimbot
 
                                             _Sorcerer = false;
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -1861,7 +1864,7 @@ namespace PixelAimbot
 
                                         _Soulfist = false;
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
                                     catch (AggregateException)
@@ -1886,7 +1889,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 10%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -1912,7 +1915,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 70%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -1938,7 +1941,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
 
@@ -1979,13 +1982,13 @@ namespace PixelAimbot
                                 if (fight.ToString() != "1" && Search == false && _SkillFight2 == true)
                                 {
                                     object[] fightCoord = (object[])fight;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
                                     KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Key Pressed twice!"));
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -2068,7 +2071,7 @@ namespace PixelAimbot
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
                                     _SkillFight2 = false;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "REVIVE!"));
                                     au3.MouseMove(recalc(1374), recalc(467, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     _SkillFight2 = true;
@@ -2104,7 +2107,7 @@ namespace PixelAimbot
 
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Bard try to heal..."));
 
 
                                     }
@@ -2135,7 +2138,7 @@ namespace PixelAimbot
                                             object[] dCoord = (object[])d;
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
                                         }
                                     }
@@ -2163,7 +2166,7 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2192,7 +2195,7 @@ namespace PixelAimbot
 
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2222,7 +2225,7 @@ namespace PixelAimbot
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2250,7 +2253,7 @@ namespace PixelAimbot
 
                                             _Sorcerer = false;
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2275,7 +2278,7 @@ namespace PixelAimbot
 
                                         _Soulfist = false;
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
                                     catch (AggregateException)
@@ -2300,7 +2303,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 10%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -2326,7 +2329,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 70%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -2352,7 +2355,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
 
@@ -2392,14 +2395,14 @@ namespace PixelAimbot
                                 {
                                     object[] shardHitCoord = (object[])shardHit;
                                     object[] fightCoord = (object[])fight;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Bot is fighting..."));
                                     au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
                                     au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
                                     KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
                                     {
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Key Pressed twice!"));
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
@@ -2474,7 +2477,7 @@ namespace PixelAimbot
                                 if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
                                 {
                                     _SkillFight2 = false;
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "REVIVE!"));
                                     au3.MouseMove(recalc(1374), recalc(467, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     _SkillFight2 = true;
@@ -2511,7 +2514,7 @@ namespace PixelAimbot
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                         await Task.Delay(1, token);
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Bard try to heal..."));
 
 
                                     }
@@ -2542,7 +2545,7 @@ namespace PixelAimbot
                                             object[] dCoord = (object[])d;
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Shadowhunter = false;
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
                                         }
                                     }
@@ -2570,7 +2573,7 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
                                             _Paladin = false;
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Paladin Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2599,7 +2602,7 @@ namespace PixelAimbot
 
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2629,7 +2632,7 @@ namespace PixelAimbot
 
                                             var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2657,7 +2660,7 @@ namespace PixelAimbot
 
                                             _Sorcerer = false;
 
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Sorcerer Ultimate"));
                                         }
                                     }
                                     catch (AggregateException)
@@ -2682,7 +2685,7 @@ namespace PixelAimbot
 
                                         _Soulfist = false;
 
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Soulfist Ultimate"));
 
                                     }
                                     catch (AggregateException)
@@ -2707,7 +2710,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
                                         au3.Send("{" + txtHeal10.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 10%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -2733,7 +2736,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
                                         au3.Send("{" + txtHeal70.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 70%"));
                                     }
                                 }
                                 catch (AggregateException)
@@ -2759,7 +2762,7 @@ namespace PixelAimbot
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
                                         au3.Send("{" + txtHeal30.Text + "}");
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Activate: Heal-Potion at 30%"));
                                     }
                                 }
 
@@ -2893,7 +2896,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: search enemy..."));
+                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 3: search enemy..."));
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -2999,7 +3002,7 @@ namespace PixelAimbot
 
 
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 3: Shard found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                     if (txtLEFT.Text == "LEFT")
                                     {
@@ -3052,7 +3055,7 @@ namespace PixelAimbot
 
 
                                         var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
+                                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 3: Mid-Boss found!"));
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                         if (txtLEFT.Text == "LEFT")
                                         {
@@ -3105,7 +3108,7 @@ namespace PixelAimbot
 
 
                                             var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
+                                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 3: Mob found!"));
 
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
                                             if (txtLEFT.Text == "LEFT")
@@ -3253,7 +3256,7 @@ namespace PixelAimbot
 
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Search Portal..."));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Search Portal..."));
                             // Tunable variables
                             float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
                             var enemyTemplate =
@@ -3273,7 +3276,7 @@ namespace PixelAimbot
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             if (enemy.HasValue)
                             {
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Portal found..."));
+                                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Portal found..."));
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
                                 CvInvoke.Rectangle(screenCapture,
@@ -3316,7 +3319,7 @@ namespace PixelAimbot
 
                                 var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
+                                 formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Floor 2: Enter Portal..."));
 
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                                 if (txtLEFT.Text == "LEFT")
@@ -3704,7 +3707,7 @@ namespace PixelAimbot
 
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT Process starts..."));
+                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "LOGOUT Process starts..."));
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                         await Task.Delay(2000, token);
                         au3.MouseMove(recalc(1238), recalc(728, false),5);
@@ -3714,7 +3717,7 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000, token);
 
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are loged out!"));
+                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "You are loged out!"));
                         _start = false;
                         cts.Cancel();
 
@@ -3758,7 +3761,7 @@ namespace PixelAimbot
                     {
                         try
                         {
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(25000, token);
@@ -3890,17 +3893,18 @@ namespace PixelAimbot
                 Boolean restart = false;
                 while (!restart)
                 {
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
 
-                    float threshold = 0.90f;
+                    float threshold = 0.7f;
                     var handTemplate =
-                    new Image<Bgr, byte>(resourceFolder + "/hand.png");
+                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeon.png");
                     var handMask =
-                    new Image<Bgr, byte>(resourceFolder + "/handmask.png");
-
-                    var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(640), ChaosBot.recalc(132, false), ChaosBot.recalc(660), ChaosBot.recalc(609, false));
+                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeonmask.png");
+                   
+                    var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
 
                     var screenPrinter = new PrintScreen();
 
@@ -3916,7 +3920,8 @@ namespace PixelAimbot
                     else
                     {
                         restart = true;
-                        
+                         formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "ChaosDungeon found!"));
+
                     }
                 }
                 if (restart == true && chBoxChannelSwap.Checked == true)
@@ -4002,7 +4007,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
+                             formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Auto-Repair done!"));
                             await Task.Delay(4000, token);
                         }
                         catch (AggregateException)
@@ -4835,7 +4840,7 @@ namespace PixelAimbot
                 if (fight.ToString() != "1" && Search == false)
                 {
                     object[] fightCoord = (object[])fight;
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal detected"));
+                     formMinimized.lbStatus.Invoke((MethodInvoker)(() =>  formMinimized.lbStatus.Text = "Portal detected"));
 
                 }
             }
@@ -4852,7 +4857,7 @@ namespace PixelAimbot
 
         private void lbStatus_TextChanged(object sender, EventArgs e)
         {
-            formMinimized.labelMinimizedState.Text = lbStatus.Text;
+            formMinimized.labelMinimizedState.Text =  formMinimized.lbStatus.Text;
         }
 
        

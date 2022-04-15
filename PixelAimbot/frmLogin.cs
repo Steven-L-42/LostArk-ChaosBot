@@ -103,7 +103,9 @@ namespace PixelAimbot
                 "reviveEnglish.png",
                 "mobmask1.png",
                 "shard.png",
-                "shardmask.png"
+                "shardmask.png",
+                "ChaosDungeonmask.png",
+                "ChaosDungeon.png"
             };
 
             if (!File.Exists("cvextern.dll"))
