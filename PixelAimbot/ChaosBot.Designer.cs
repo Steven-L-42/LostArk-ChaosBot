@@ -175,6 +175,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtPortalSearch = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
+            this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
+            this.labelApiTelegram = new System.Windows.Forms.Label();
+            this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.HEAL = new System.Windows.Forms.TabPage();
             this.Classes = new System.Windows.Forms.TabPage();
@@ -190,9 +193,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
-            this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
-            this.labelApiTelegram = new System.Windows.Forms.Label();
+            this.chBoxEnglish = new System.Windows.Forms.CheckBox();
+            this.chBoxGerman = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -206,6 +209,7 @@
             this.Info.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SETTINGS.SuspendLayout();
+            this.groupBoxTelegram.SuspendLayout();
             this.HEAL.SuspendLayout();
             this.Classes.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -213,7 +217,6 @@
             this.Rotation.SuspendLayout();
             this.Cooldown.SuspendLayout();
             this.Ultimate.SuspendLayout();
-            this.groupBoxTelegram.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -2308,6 +2311,9 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.SETTINGS.Controls.Add(this.label2);
+            this.SETTINGS.Controls.Add(this.chBoxGerman);
+            this.SETTINGS.Controls.Add(this.chBoxEnglish);
             this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
             this.SETTINGS.Controls.Add(this.label18);
@@ -2316,6 +2322,43 @@
             this.SETTINGS.Size = new System.Drawing.Size(418, 150);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
+            // 
+            // groupBoxTelegram
+            // 
+            this.groupBoxTelegram.Controls.Add(this.labelApiTelegram);
+            this.groupBoxTelegram.Controls.Add(this.textBoxTelegramAPI);
+            this.groupBoxTelegram.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBoxTelegram.Location = new System.Drawing.Point(134, 4);
+            this.groupBoxTelegram.Name = "groupBoxTelegram";
+            this.groupBoxTelegram.Size = new System.Drawing.Size(281, 56);
+            this.groupBoxTelegram.TabIndex = 42;
+            this.groupBoxTelegram.TabStop = false;
+            this.groupBoxTelegram.Text = "Telegram Settings";
+            // 
+            // labelApiTelegram
+            // 
+            this.labelApiTelegram.AutoSize = true;
+            this.labelApiTelegram.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelApiTelegram.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.labelApiTelegram.Location = new System.Drawing.Point(5, 23);
+            this.labelApiTelegram.Name = "labelApiTelegram";
+            this.labelApiTelegram.Size = new System.Drawing.Size(75, 20);
+            this.labelApiTelegram.TabIndex = 40;
+            this.labelApiTelegram.Text = "APIKey =";
+            // 
+            // textBoxTelegramAPI
+            // 
+            this.textBoxTelegramAPI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBoxTelegramAPI.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxTelegramAPI.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTelegramAPI.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxTelegramAPI.Location = new System.Drawing.Point(82, 20);
+            this.textBoxTelegramAPI.Name = "textBoxTelegramAPI";
+            this.textBoxTelegramAPI.Size = new System.Drawing.Size(193, 22);
+            this.textBoxTelegramAPI.TabIndex = 40;
+            this.textBoxTelegramAPI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxTelegramAPI.WordWrap = false;
+            this.textBoxTelegramAPI.TextChanged += new System.EventHandler(this.textBoxTelegramAPI_TextChanged);
             // 
             // label18
             // 
@@ -2497,42 +2540,54 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
-            // groupBoxTelegram
+            // chBoxEnglish
             // 
-            this.groupBoxTelegram.Controls.Add(this.labelApiTelegram);
-            this.groupBoxTelegram.Controls.Add(this.textBoxTelegramAPI);
-            this.groupBoxTelegram.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBoxTelegram.Location = new System.Drawing.Point(134, 4);
-            this.groupBoxTelegram.Name = "groupBoxTelegram";
-            this.groupBoxTelegram.Size = new System.Drawing.Size(281, 56);
-            this.groupBoxTelegram.TabIndex = 42;
-            this.groupBoxTelegram.TabStop = false;
-            this.groupBoxTelegram.Text = "Telegram Settings";
+            this.chBoxEnglish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxEnglish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxEnglish.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxEnglish.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxEnglish.FlatAppearance.BorderSize = 0;
+            this.chBoxEnglish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxEnglish.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxEnglish.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxEnglish.Location = new System.Drawing.Point(209, 81);
+            this.chBoxEnglish.Name = "chBoxEnglish";
+            this.chBoxEnglish.Size = new System.Drawing.Size(83, 22);
+            this.chBoxEnglish.TabIndex = 35;
+            this.chBoxEnglish.Text = "English:";
+            this.chBoxEnglish.UseMnemonic = false;
+            this.chBoxEnglish.UseVisualStyleBackColor = false;
+            this.chBoxEnglish.CheckedChanged += new System.EventHandler(this.chBoxEnglish_CheckedChanged);
             // 
-            // textBoxTelegramAPI
+            // chBoxGerman
             // 
-            this.textBoxTelegramAPI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBoxTelegramAPI.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxTelegramAPI.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTelegramAPI.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBoxTelegramAPI.Location = new System.Drawing.Point(82, 20);
-            this.textBoxTelegramAPI.Name = "textBoxTelegramAPI";
-            this.textBoxTelegramAPI.Size = new System.Drawing.Size(193, 22);
-            this.textBoxTelegramAPI.TabIndex = 40;
-            this.textBoxTelegramAPI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxTelegramAPI.WordWrap = false;
-            this.textBoxTelegramAPI.TextChanged += new System.EventHandler(this.textBoxTelegramAPI_TextChanged);
+            this.chBoxGerman.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxGerman.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxGerman.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGerman.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxGerman.FlatAppearance.BorderSize = 0;
+            this.chBoxGerman.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGerman.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGerman.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxGerman.Location = new System.Drawing.Point(120, 81);
+            this.chBoxGerman.Name = "chBoxGerman";
+            this.chBoxGerman.Size = new System.Drawing.Size(83, 22);
+            this.chBoxGerman.TabIndex = 43;
+            this.chBoxGerman.Text = "Deutsch:";
+            this.chBoxGerman.UseMnemonic = false;
+            this.chBoxGerman.UseVisualStyleBackColor = false;
+            this.chBoxGerman.CheckedChanged += new System.EventHandler(this.chBoxGerman_CheckedChanged);
             // 
-            // labelApiTelegram
+            // label2
             // 
-            this.labelApiTelegram.AutoSize = true;
-            this.labelApiTelegram.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelApiTelegram.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.labelApiTelegram.Location = new System.Drawing.Point(5, 23);
-            this.labelApiTelegram.Name = "labelApiTelegram";
-            this.labelApiTelegram.Size = new System.Drawing.Size(75, 20);
-            this.labelApiTelegram.TabIndex = 40;
-            this.labelApiTelegram.Text = "APIKey =";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Orange;
+            this.label2.Location = new System.Drawing.Point(97, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(222, 15);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "set your current Game Language here!";
             // 
             // ChaosBot
             // 
@@ -2578,6 +2633,8 @@
             this.groupBox5.PerformLayout();
             this.SETTINGS.ResumeLayout(false);
             this.SETTINGS.PerformLayout();
+            this.groupBoxTelegram.ResumeLayout(false);
+            this.groupBoxTelegram.PerformLayout();
             this.HEAL.ResumeLayout(false);
             this.Classes.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
@@ -2588,8 +2645,6 @@
             this.Cooldown.ResumeLayout(false);
             this.Cooldown.PerformLayout();
             this.Ultimate.ResumeLayout(false);
-            this.groupBoxTelegram.ResumeLayout(false);
-            this.groupBoxTelegram.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2759,6 +2814,9 @@
         private System.Windows.Forms.GroupBox groupBoxTelegram;
         private System.Windows.Forms.Label labelApiTelegram;
         private System.Windows.Forms.TextBox textBoxTelegramAPI;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chBoxGerman;
+        private System.Windows.Forms.CheckBox chBoxEnglish;
     }
 }
 

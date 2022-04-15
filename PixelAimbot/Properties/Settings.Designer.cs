@@ -826,5 +826,29 @@ namespace PixelAimbot.Properties {
                 this["chBoxAutoMovement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxGerman {
+            get {
+                return ((bool)(this["chBoxGerman"]));
+            }
+            set {
+                this["chBoxGerman"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxEnglish {
+            get {
+                return ((bool)(this["chBoxEnglish"]));
+            }
+            set {
+                this["chBoxEnglish"] = value;
+            }
+        }
     }
 }

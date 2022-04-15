@@ -1793,7 +1793,7 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                float thresh = 0.89f;
+                                float thresh = 0.86f;
                                 var ReviveDeutschTemplate =
                                 new Image<Bgr, byte>(resourceFolder + "/revive1.png");
                                 var ReviveDeutschMask =
@@ -1812,7 +1812,16 @@ namespace PixelAimbot
                                 var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                if (ReviveDeutsch.HasValue && chBoxGerman.Checked == true)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                else
+                                if (ReviveEnglish.HasValue && chBoxEnglish.Checked == true)
                                 {
                                     _SkillFight2 = false;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
@@ -2218,7 +2227,16 @@ namespace PixelAimbot
                                 var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                if (ReviveDeutsch.HasValue && chBoxGerman.Checked == true)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                else
+                                if (ReviveEnglish.HasValue && chBoxEnglish.Checked == true)
                                 {
                                     _SkillFight2 = false;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
@@ -2624,7 +2642,16 @@ namespace PixelAimbot
                                 var screenCapture = new Image<Bgr, byte>("screen.png");
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                if (ReviveDeutsch.HasValue && chBoxGerman.Checked == true)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                else
+                               if (ReviveEnglish.HasValue && chBoxEnglish.Checked == true)
                                 {
                                     _SkillFight2 = false;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
@@ -4040,7 +4067,7 @@ namespace PixelAimbot
         {
             try
             {
-                bool restart = false;
+               restart = false;
                 while (!restart)
                 {
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
@@ -4048,21 +4075,33 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
 
-                    float threshold = 0.9f;
+                    float threshold = 0.85f;
                     var handTemplate =
                     new Image<Bgr, byte>(resourceFolder + "/ChaosDungeon.png");
                     var handMask =
                     new Image<Bgr, byte>(resourceFolder + "/ChaosDungeonmask.png");
-                   
+                    var hand2Template =
+                    new Image<Bgr, byte>(resourceFolder + "/check_if_city.png");
+                    var hand2Mask =
+                    new Image<Bgr, byte>(resourceFolder + "/check_if_citymask.png");
+
                     var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
+                    var hand2Detector = new ScreenDetector(hand2Template, hand2Mask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
 
                     var screenPrinter = new PrintScreen();
 
                     screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                     var screenCapture = new Image<Bgr, byte>("screen.png");
                     var hand = handDetector.GetClosestItem(screenCapture);
+                    var hand2 = handDetector.GetClosestItem(screenCapture);
 
-                    if (!hand.HasValue)
+                    if (!hand.HasValue && chBoxEnglish.Checked == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(50, token);
+                    }
+                    else
+                    if (!hand2.HasValue && chBoxEnglish.Checked == true)
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(50, token);
@@ -4379,6 +4418,9 @@ namespace PixelAimbot
         {
             try
             {
+                Properties.Settings.Default.chBoxGerman = false;
+                Properties.Settings.Default.chBoxEnglish = false;
+
                 Properties.Settings.Default.txtDungeon3Iteration = "12";
                 Properties.Settings.Default.txtDungeon2Iteration = "9";
 
@@ -4448,7 +4490,8 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleF = false;
 
                 Properties.Settings.Default.Save();
-
+                chBoxGerman.Checked = Properties.Settings.Default.chBoxGerman;
+                chBoxEnglish.Checked = Properties.Settings.Default.chBoxEnglish;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
                 txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
@@ -4749,6 +4792,8 @@ namespace PixelAimbot
             {
                 if (comboBoxRotations.Text != "main")
                 {
+                    rotation.chBoxEnglish = (bool)chBoxEnglish.Checked;
+                    rotation.chBoxGerman = (bool)chBoxGerman.Checked;
                     rotation.txtDungeon2Iteration = txtDungeon2Iteration.Text;
                     rotation.txtDungeon3Iteration = txtDungeon3Iteration.Text;
 
@@ -4838,6 +4883,9 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
+                chBoxEnglish.Checked = rotation.chBoxEnglish;
+                chBoxGerman.Checked = rotation.chBoxGerman;
+
                 txtLEFT.Text = rotation.left;
                 txtPortalSearch.Text = rotation.txtPortalSearch;
                 txtHeal30.Text = rotation.instant;
@@ -4987,6 +5035,37 @@ namespace PixelAimbot
             }
         }
 
+        private void chBoxGerman_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxGerman.Checked)
+            {
+                chBoxEnglish.Checked = false;
+
+            }
+            else
+             if (!chBoxGerman.Checked)
+            {
+                chBoxEnglish.Checked = true;
+
+
+            }
+        }
+
+        private void chBoxEnglish_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxEnglish.Checked)
+            {
+                chBoxGerman.Checked = false;
+
+            }
+            else
+             if (!chBoxEnglish.Checked)
+            {
+                chBoxGerman.Checked = true;
+
+
+            }
+        }
         private void button1_Click_2(object sender, EventArgs e)
         {
             try
@@ -5027,5 +5106,6 @@ namespace PixelAimbot
                 _ = RunBotAsync(textBoxTelegramAPI.Text);
             }
         }
+
     }
 }
