@@ -552,11 +552,6 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
-
-
-
-
-
         }
         private int casttimeByKey(byte key)
         {
@@ -598,7 +593,9 @@ namespace PixelAimbot
             return cooldownDuration;
         }
 
-        public async void LOGOUTTIMER(CancellationToken token)
+       
+ 
+    public async void LOGOUTTIMER(CancellationToken token)
         {
             try
             {
@@ -860,7 +857,8 @@ namespace PixelAimbot
 
                             if (chBoxBerserker.Checked == true && _Berserker == true)
                             {
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y,1000);
+                                
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(skill.Key),1000);
                                 _Berserker = false;
                             }
                         }
@@ -2993,7 +2991,18 @@ namespace PixelAimbot
             }
             catch { }
         }
-
+        private void UltimateKey(byte key)
+        {
+                switch (txBoxUltimateKey.Text)
+            {
+                case "Y":
+                    key = KeyboardWrapper.VK_Y;
+                    break;
+                case "Z":
+                    key = KeyboardWrapper.VK_Z;
+                    break;
+            }
+        }
         private void setKeyCooldown(byte key)
         {
             switch (key)
