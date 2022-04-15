@@ -1670,7 +1670,7 @@ namespace PixelAimbot
                                     {
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-                                        au3.MouseMove(recalc(523), recalc(830, false), 10);
+                                        au3.MouseMove(recalc(523), recalc(840, false), 10);
                                         KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 3000);
                                         au3.MouseMove(recalc(1007), recalc(494, false), 10);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
@@ -3333,7 +3333,7 @@ namespace PixelAimbot
                                     else
                                     if (_REPAIR == false && _LOGOUT == false)
                                     {
-                                        await Task.Delay(2000, token);
+                                        await Task.Delay(7000, token);
                                         var t9 = Task.Run(() => RESTART(token));
                                         await Task.WhenAny(new[] { t9 });
                                     }
