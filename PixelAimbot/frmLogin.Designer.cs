@@ -42,7 +42,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClose
@@ -50,7 +53,7 @@
             this.lbClose.AutoSize = true;
             this.lbClose.BackColor = System.Drawing.Color.Transparent;
             this.lbClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbClose.Location = new System.Drawing.Point(681, 13);
+            this.lbClose.Location = new System.Drawing.Point(681, 12);
             this.lbClose.Name = "lbClose";
             this.lbClose.Size = new System.Drawing.Size(47, 17);
             this.lbClose.TabIndex = 0;
@@ -192,7 +195,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Peru;
-            this.label15.Location = new System.Drawing.Point(686, 421);
+            this.label15.Location = new System.Drawing.Point(686, 420);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 17);
             this.label15.TabIndex = 12;
@@ -214,13 +217,40 @@
             this.chBoxRemember.Text = "Remember";
             this.chBoxRemember.UseVisualStyleBackColor = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.Orange;
+            this.groupBox1.Location = new System.Drawing.Point(593, 60);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(139, 345);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Patchnotes";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 26);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(140, 319);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
             // progressBar1
             // 
             this.progressBar1.BackColor = System.Drawing.Color.Orange;
             this.progressBar1.CustomText = "Updating...";
             this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
             this.progressBar1.ForeColor = System.Drawing.Color.Orange;
-            this.progressBar1.Location = new System.Drawing.Point(168, 327);
+            this.progressBar1.Location = new System.Drawing.Point(168, 328);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(399, 25);
             this.progressBar1.TabIndex = 18;
@@ -232,7 +262,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.BackgroundImage = global::PixelAimbot.Properties.Resources.New_Login;
-            this.ClientSize = new System.Drawing.Size(740, 447);
+            this.ClientSize = new System.Drawing.Size(741, 447);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.chBoxRemember);
             this.Controls.Add(this.label15);
@@ -251,11 +282,12 @@
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmLogin_MouseDown);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,5 +309,7 @@
         private PixelAimbot.Classes.Misc.CustomProgressBar progressBar1;
         private System.Windows.Forms.TextBox tbUser;
         private System.Windows.Forms.TextBox tbPass;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

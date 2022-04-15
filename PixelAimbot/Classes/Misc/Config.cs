@@ -15,9 +15,11 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "1.5.8r";
+        public static string version { get; set; } = "1.9.9r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
+
+        public string telegram { get; set; }
 
         public bool chBoxRemember { get; set; } = false;
 
@@ -69,7 +71,7 @@ namespace PixelAimbot.Classes.Misc
 
     public class Rotations
     {
-        public string dungeontimer { get; set; } = "65";
+        public string txtPortalSearch { get; set; } = "12";
         public string left { get; set; } = "LEFT";
         public string right { get; set; } = "RIGHT";
         public string q { get; set; } = "500";
@@ -80,21 +82,39 @@ namespace PixelAimbot.Classes.Misc
         public string s { get; set; } = "500";
         public string d { get; set; } = "500";
         public string f { get; set; } = "500";
+        public bool chBoxAutoMovement { get; set; } = false;
         public string instant { get; set; }
         public string potion { get; set; }
         public bool chboxinstant { get; set; } = false;
         public bool chboxheal { get; set; } = false;
+        public bool chboxheal10 { get; set; } = false;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";
+        public string autologout { get; set; } = "";
+        public bool chBoxautologout { get; set; } = false;
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
+        public bool chBoxBard { get; set; } = false;
+        public bool chBoxSoulfist { get; set; } = false;
+        public string txtDungeon3Iteration { get; set; } = "12";
+        public string txtDungeon2Iteration { get; set; } = "9";
+
         public bool chBoxBerserker { get; set; } = false;
-        public string RestartTimer { get; set; } = "25";
+        public string txtHeal10 { get; set; } = "";
+        public bool chBoxDeathblade { get; set; } = false;
+        public bool chBoxSorcerer { get; set; } = false;
+        public bool chBoxSharpshooter { get; set; } = false;
+        public bool chBoxActivateF3 { get; set; } = false;
+
+        public string txtLEFT { get; set; } = "LEFT";
+        public bool chBoxChannelSwap { get; set; } = false;
         public bool chBoxSaveAll { get; set; } = false;
         public bool chBoxActivateF2 { get; set; } = false;
-        public string txtDungeon2search { get; set; } = "7";
-        public string txtDungeon2 { get; set; } = "18";
+        public string txtDungeon2search { get; set; } = "5";
+        public string txtDungeon3search { get; set; } = "10";
+        public string txtDungeon3 { get; set; } = "20";
+        public string txtDungeon2 { get; set; } = "15";
         public string cQ { get; set; } = "500";
         public string cW { get; set; } = "500";
         public string cE { get; set; } = "500";
@@ -111,6 +131,17 @@ namespace PixelAimbot.Classes.Misc
         public string pS { get; set; } = "6";
         public string pD { get; set; } = "7";
         public string pF { get; set; } = "8";
+        public bool chBoxDoubleQ { get; set; } = false;
+        public bool chBoxDoubleW { get; set; } = false;
+        public bool chBoxDoubleE { get; set; } = false;
+        public bool chBoxDoubleR { get; set; } = false;
+        public bool chBoxDoubleA { get; set; } = false;
+        public bool chBoxDoubleS { get; set; } = false;
+        public bool chBoxDoubleD { get; set; } = false;
+        public bool chBoxDoubleF { get; set; } = false;
+
+
+
 
 
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();

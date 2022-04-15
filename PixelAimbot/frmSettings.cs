@@ -4,10 +4,9 @@ using System.Windows.Forms;
 
 namespace PixelAimbot
 {
-    public partial class frmGuide : Form
+    public partial class frmSettings : Form
+
     {
-
-
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -45,10 +44,16 @@ namespace PixelAimbot
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
-        public frmGuide()
+        public frmSettings()
         {
-           
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmGuide Form = new frmGuide();
+            Form.Show();
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -56,25 +61,18 @@ namespace PixelAimbot
             this.Hide();
         }
 
-        private void frmGuide_Load(object sender, EventArgs e)
+        private void label17_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void frmGuide_MouseDown(object sender, MouseEventArgs e)
+        private void frmSettings_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmSettings Form = new frmSettings();
-            Form.Show();
         }
     }
 }

@@ -3,17 +3,21 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using PixelAimbot.Classes;
 using PixelAimbot.Classes.Misc;
+using PixelAimbot.Classes.OpenCV;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using Telegram.Bot;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -21,23 +25,38 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
+       
         ///BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
         ///                                                                                                                                               ///
         private bool _start = false;
+        private bool restart = false;
         private bool _stop = false;
+
+        private bool _Floor1 = false;
+        private bool _Floor2 = false;
+        private bool _Floor3 = false;
+        private bool _Floor1Fight = false;
+        private bool _Floor2Fight = false;
+        private bool _Floor3Fight = false;
+
         private bool _REPAIR = false;
-        private bool _Shadowhunter = true;
-        private bool _Berserker = true;
-        private bool _Paladin = true;
+        private bool _Shadowhunter = false;
+        private bool _Berserker = false;
+        private bool _Paladin = false;
+        private bool _Deathblade = false;
+        private bool _Sharpshooter = false;
+        private bool _Bard = false;
+        private bool _Sorcerer = false;
+        private bool _Soulfist = false;
+        private bool _SkillFight2 = false;
+   
+
         private bool _LOGOUT = false;
-
-        private bool _FIGHT = false;
-        private bool _STARTFIGHT = false;
-        private bool _ULTIMATE_HEAL = false;
-
+        private bool Search = false;
 
         //SKILL AND COOLDOWN//
         private bool _Q = true;
+
         private bool _W = true;
         private bool _E = true;
         private bool _R = true;
@@ -45,8 +64,23 @@ namespace PixelAimbot
         private bool _S = true;
         private bool _D = true;
         private bool _F = true;
-        private bool _Y = true;
-        private bool _Z = true;
+
+        private System.Timers.Timer timer;
+        private int fightSequence = 0;
+        private int fightSequence2 = 0;
+        private int searchSequence = 0;
+        private int searchSequence2 = 0;
+        private int CompleteIteration = 1;
+        private int fightOnSecondAbility = 1;
+        private int walktopUTurn = 1;
+    
+        private int Floor2 = 1;
+        private int Floor3 = 1;
+        private int _swap = 0;
+
+        public frmMinimized formMinimized = new frmMinimized();
+        public Config conf = new Config();
+        private bool telegramBotRunning = false;
 
         ///                                                                                                                                                 ///
         ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
@@ -55,6 +89,7 @@ namespace PixelAimbot
 
         public string resourceFolder = "";
         Priorized_Skills SKILLS = new Priorized_Skills();
+
         private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
         {
             int newX = (int)(x / screenResolution.X * 65535);
@@ -64,6 +99,7 @@ namespace PixelAimbot
 
         private static readonly Random random = new Random();
         public Rotations rotation = new Rotations();
+
         /////
         ///
         // 2. Import the RegisterHotKey Method
@@ -95,6 +131,12 @@ namespace PixelAimbot
 
             base.WndProc(ref m);
         }
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr handle);
+
+        private IntPtr handle;
+
+       
 
         private AutoItX3 au3 = new AutoItX3();
 
@@ -123,7 +165,7 @@ namespace PixelAimbot
         private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
         public static InputSimulator inputSimulator = new InputSimulator();
-
+        
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -139,12 +181,44 @@ namespace PixelAimbot
                 return cp;
             }
         }
+
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
+
+        static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+
+        public static int recalc(int value, bool horizontal = true)
+        {
+            decimal oldResolution;
+            decimal newResolution;
+            if (horizontal)
+            {
+                oldResolution = 1920;
+                newResolution = screenWidth;
+            }
+            else
+            {
+                oldResolution = 1080;
+                newResolution = screenHeight;
+            }
+
+
+            decimal normalized = (decimal)value * newResolution;
+            decimal rescaledPosition = (decimal)normalized / oldResolution;
+
+            int returnValue = Decimal.ToInt32(rescaledPosition);
+            return returnValue;
+        }
+
         public ChaosBot()
         {
             InitializeComponent();
+            conf = Config.Load();
+            
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
+            
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
 
@@ -173,7 +247,14 @@ namespace PixelAimbot
             Boolean F10Registered = RegisterHotKey(
                 this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey
             );
-
+            if (conf.telegram != "" && !telegramBotRunning)
+            {
+                textBoxTelegramAPI.Text = conf.telegram;
+                try
+                {
+                    _ = RunBotAsync(conf.telegram);
+                } catch{}
+            }
             // 4. Verify if both hotkeys were succesfully registered, if not, show message in the console
             if (!F9Registered)
             {
@@ -185,6 +266,144 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 cts.Cancel();
             }
+        }
+        public async Task RunBotAsync(string token)
+        {
+            telegramBotRunning = true;
+            var bot = new TelegramBotClient(token);
+            int offset = -1;
+            var botIsRun = true;
+            while (botIsRun)
+            {
+                Telegram.Bot.Types.Update[] updates;
+                
+                try
+                {
+                    updates = await bot.GetUpdatesAsync(offset);
+                    telegramBotRunning = true;
+                }
+                catch (Exception ex)
+                {
+
+                    botIsRun = false;
+                    continue;
+                }
+
+                
+
+                foreach (var update in updates)
+                {
+
+
+                    offset = update.Id + 1;
+                    
+                    if (update.Message == null)
+                    {
+                        continue;
+                    }
+
+                    string text = update.Message.Text.ToLower();
+                    var chatId = update.Message.Chat.Id;
+                    if(text.Contains("/help"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Currently supported Commands")
+                            .AppendLine("/start - Starts the Bot doing Chaosdungeon")
+                            .AppendLine("/stop - Stops the Bot doing anything")
+                            .AppendLine("/info - Returns currently runtime and state of Bot")
+                            .AppendLine("/unstuck - Leaves Chaosdungeon and Restarts everything")
+                            .AppendLine("/inv - Send a screenshot of your inventory")
+                            .AppendLine("/screen - Send a Screenshot of Game");
+
+                        await bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+                    if (text.Contains("/start"))
+                    {
+                        if (_start == false)
+                        {
+                            btnStart_Click(null, null);
+                            await bot.SendTextMessageAsync(chatId, "Bot started");
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot already running!");
+                        }
+                    }
+
+                    if(text.Contains("/stop"))
+                    {
+                        if (_stop)
+                        {
+                            btnPause_Click(null, null);
+                            cts.Cancel();
+                            await bot.SendTextMessageAsync(chatId, "Bot stopped!");
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
+                        }
+                    }
+                    if(text.Contains("/info"))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("State: " + lbStatus.Text)
+                            .AppendLine("Runtime: " + formMinimized.sw.Elapsed.Hours.ToString("D2") + ":" + formMinimized.sw.Elapsed.Minutes.ToString("D2") + ":" + formMinimized.sw.Elapsed.Seconds.ToString("D2"));
+
+                        await bot.SendTextMessageAsync(chatId, sb.ToString());
+                    }
+                    if(text.Contains("/unstuck"))
+                    {
+                        if (_stop)
+                        {
+                            cts.Cancel();
+                            await bot.SendTextMessageAsync(chatId, "Stopped current Process");
+                            var t12 = Task.Run(() => LEAVEDUNGEON(cts.Token));
+
+                            await bot.SendTextMessageAsync(chatId, "Leave Dungeon and send Screenshot in a few seconds");
+                            await Task.WhenAny(new[] { t12 });
+
+                            await Task.Delay(5000);
+
+                            var picture = new PrintScreen();
+                            Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
+                            await bot.SendPhotoAsync(chatId, stream);
+                        } else
+                        {
+                            await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
+                        }
+
+                    }
+                    if(text.Contains("/inv"))
+                    {
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                        await Task.Delay(100);
+                        var picture = new PrintScreen();
+                        var screen = picture.CaptureScreen();
+                        
+                        Stream stream = ToStream(cropImage(screen, new Rectangle(ChaosBot.recalc(1322), PixelAimbot.ChaosBot.recalc(189, false), ChaosBot.recalc(544), ChaosBot.recalc(640, false))), ImageFormat.Png);
+                        await bot.SendPhotoAsync(chatId, stream);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+
+                    }
+                    if(text.Contains("/screen"))
+                    {
+                        var picture = new PrintScreen();
+                        Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
+                        await bot.SendPhotoAsync(chatId, stream);
+                    }
+                }
+            }
+
+        }
+        private static Image cropImage(Image img, Rectangle cropArea)
+        {
+            Bitmap bmpImage = new Bitmap(img);
+            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+        }
+        public Stream ToStream(Image image, ImageFormat format)
+        {
+            var stream = new System.IO.MemoryStream();
+            image.Save(stream, format);
+            stream.Position = 0;
+            return stream;
         }
 
         public void refreshRotationCombox()
@@ -201,6 +420,7 @@ namespace PixelAimbot
             }
 
         }
+
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -216,8 +436,23 @@ namespace PixelAimbot
             if (_stop == true)
             {
                 cts.Cancel();
-                _stop = false;
                 _start = false;
+                _stop = false;
+                _REPAIR = false;
+                _Shadowhunter = false;
+                _Berserker = false;
+                _Paladin = false;
+                _Bard = false;
+
+                _Deathblade = false;
+                _Sharpshooter = false;
+                _Sorcerer = false;
+                _Soulfist = false;
+
+
+                _LOGOUT = false;
+
+
 
                 _Q = true;
                 _W = true;
@@ -227,16 +462,13 @@ namespace PixelAimbot
                 _S = true;
                 _D = true;
                 _F = true;
-                _Y = true;
-                _Z = true;
-
-                _REPAIR = false;
-                _Shadowhunter = true;
-                _Berserker = true;
-                _Paladin = true;
-                _LOGOUT = false;
 
 
+
+
+                this.Show();
+                formMinimized.Hide();
+                formMinimized.sw.Reset();
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
             }
         }
@@ -244,112 +476,49 @@ namespace PixelAimbot
         private async void btnStart_Click(object sender, EventArgs e)
         {
 
-
-
-
-            /*if (chBoxSaveAll.Checked == true)
-            {
-                Properties.Settings.Default.dungeontimer = txtDungeon.Text;
-                Properties.Settings.Default.left = txtLEFT.Text;
-                Properties.Settings.Default.right = txtRIGHT.Text;
-                Properties.Settings.Default.q = txQ.Text;
-                Properties.Settings.Default.w = txW.Text;
-                Properties.Settings.Default.e = txE.Text;
-                Properties.Settings.Default.r = txR.Text;
-                Properties.Settings.Default.a = txA.Text;
-                Properties.Settings.Default.s = txS.Text;
-                Properties.Settings.Default.d = txD.Text;
-                Properties.Settings.Default.f = txF.Text;
-                Properties.Settings.Default.cQ = txCoolQ.Text;
-                Properties.Settings.Default.cW = txCoolW.Text;
-                Properties.Settings.Default.cE = txCoolE.Text;
-                Properties.Settings.Default.cR = txCoolR.Text;
-                Properties.Settings.Default.cA = txCoolA.Text;
-                Properties.Settings.Default.cS = txCoolS.Text;
-                Properties.Settings.Default.cD = txCoolD.Text;
-                Properties.Settings.Default.cF = txCoolF.Text;
-
-                Properties.Settings.Default.instant = txtInstant.Text;
-                Properties.Settings.Default.potion = txtHeal.Text;
-                Properties.Settings.Default.chboxinstant = checkBoxInstant.Checked;
-                Properties.Settings.Default.chboxheal = checkBoxHeal.Checked;
-                Properties.Settings.Default.chBoxAutoRepair = chBoxAutoRepair.Checked;
-                Properties.Settings.Default.autorepair = txtRepair.Text;
-                Properties.Settings.Default.chBoxShadowhunter = chBoxY.Checked;
-                Properties.Settings.Default.chBoxBerserker = chBoxBerserker.Checked;
-                Properties.Settings.Default.chboxPaladin = chBoxPaladin.Checked;
-                Properties.Settings.Default.RestartTimer = txtRestartTimer.Text;
-                Properties.Settings.Default.chBoxSaveAll = chBoxSaveAll.Checked;
-                Properties.Settings.Default.chBoxActivateF2 = chBoxActivateF2.Checked;
-                Properties.Settings.Default.txtDungeon2 = txtDungeon2.Text;
-                Properties.Settings.Default.txtDungeon2search = txtDungeon2search.Text;
-
-                Properties.Settings.Default.Save();
-            }
-            else
-            {
-                Properties.Settings.Default.dungeontimer = "65";
-                Properties.Settings.Default.left = "LEFT";
-                Properties.Settings.Default.right = "RIGHT";
-                Properties.Settings.Default.q = "500";
-                Properties.Settings.Default.w = "500";
-                Properties.Settings.Default.e = "500";
-                Properties.Settings.Default.r = "500";
-                Properties.Settings.Default.a = "500";
-                Properties.Settings.Default.s = "500";
-                Properties.Settings.Default.d = "500";
-                Properties.Settings.Default.f = "500";
-                Properties.Settings.Default.cQ = "500";
-                Properties.Settings.Default.cW = "500";
-                Properties.Settings.Default.cE = "500";
-                Properties.Settings.Default.cR = "500";
-                Properties.Settings.Default.cA = "500";
-                Properties.Settings.Default.cS = "500";
-                Properties.Settings.Default.cD = "500";
-                Properties.Settings.Default.cF = "500";
-                Properties.Settings.Default.instant = "";
-                Properties.Settings.Default.potion = "";
-                Properties.Settings.Default.chboxinstant = false;
-                Properties.Settings.Default.chboxheal = false;
-                Properties.Settings.Default.chBoxAutoRepair = false;
-                Properties.Settings.Default.autorepair = "10";
-                Properties.Settings.Default.chBoxShadowhunter = false;
-                Properties.Settings.Default.chBoxBerserker = false;
-                Properties.Settings.Default.chboxPaladin = false;
-                Properties.Settings.Default.RestartTimer = "25";
-                Properties.Settings.Default.chBoxSaveAll = false;
-                Properties.Settings.Default.chBoxActivateF2 = false;
-                Properties.Settings.Default.txtDungeon2 = "18";
-                Properties.Settings.Default.txtDungeon2search = "7";
-                Properties.Settings.Default.Save();
-            }*/
-
-            // await Task.Run(new Action(STARTKLICK));
-            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
-            if (chBoxAutoRepair.Checked == true && _start == false)
-            {
-                REPAIRTIMER();
-            }
-            else
-            {
-                _REPAIR = false;
-            }
-            if (chBoxLOGOUT.Checked == true && _start == false)
-            {
-                LOGOUTTIMER();
-            }
-            else
-            {
-                _LOGOUT = false;
-            }
             if (_start == false)
                 try
                 {
+                  
+                    formMinimized.StartPosition = FormStartPosition.Manual;
+                    formMinimized.Location = new Point(0, recalc(28, false));
+                    formMinimized.Size = new Size(recalc(594), recalc(28, false));
+                    formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
+                    formMinimized.labelRuntimer.Location = new Point(recalc(464), recalc(9, false));
+                    formMinimized.labelTitle.Location = new Point(recalc(12), recalc(7, false));
+                    formMinimized.timerRuntimer.Enabled = true;
+                    formMinimized.sw.Reset();
+                    formMinimized.sw.Start();
+                    formMinimized.Show();
+                    this.Hide();
+                    
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                    var t1 = Task.Run(() => STARTKLICK(token));
+                   
+                    var t1 = Task.Run(() => START(token));
+
+                    if (chBoxAutoRepair.Checked == true && _start == true)
+                    {
+                        var repair = Task.Run(() => REPAIRTIMER(token));
+
+
+                    }
+                    else
+                    {
+                        _REPAIR = false;
+                    }
+                    if (chBoxLOGOUT.Checked == true && _start == true)
+                    {
+                        var logout = Task.Run(() => LOGOUTTIMER(token));
+
+                    }
+                    else
+                    {
+                        _LOGOUT = false;
+                    }
                     await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
@@ -362,25 +531,94 @@ namespace PixelAimbot
                 }
         }
 
-        private System.Timers.Timer timer;
-        private int fightSequence = 1;
-
-        public void REPAIRTIMER()
+        public async void REPAIRTIMER(CancellationToken token)
         {
-            timer = new System.Timers.Timer((int.Parse(txtRepair.Text) * 1000) * 60);
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                await Task.Delay((int.Parse(txtRepair.Text) * 1000) * 60, token);
+                _REPAIR = true;
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
 
-            timer.Elapsed += OnTimedEvent;
-            timer.AutoReset = false;
-            timer.Enabled = true;
+
+
+
+
+        }
+        private int casttimeByKey(byte key)
+        {
+            int cooldownDuration = 500;
+            switch (key)
+            {
+                case KeyboardWrapper.VK_A:
+                    cooldownDuration = int.Parse(txA.Text);
+                    break;
+
+                case KeyboardWrapper.VK_S:
+                    cooldownDuration = int.Parse(txS.Text);
+                    break;
+
+                case KeyboardWrapper.VK_D:
+                    cooldownDuration = int.Parse(txD.Text);
+                    break;
+
+                case KeyboardWrapper.VK_F:
+                    cooldownDuration = int.Parse(txF.Text);
+                    break;
+
+                case KeyboardWrapper.VK_Q:
+                    cooldownDuration = int.Parse(txQ.Text);
+                    break;
+
+                case KeyboardWrapper.VK_W:
+                    cooldownDuration = int.Parse(txW.Text);
+                    break;
+
+                case KeyboardWrapper.VK_E:
+                    cooldownDuration = int.Parse(txE.Text);
+                    break;
+
+                case KeyboardWrapper.VK_R:
+                    cooldownDuration = int.Parse(txR.Text);
+                    break;
+            }
+            return cooldownDuration;
         }
 
-        public void LOGOUTTIMER()
+        public async void LOGOUTTIMER(CancellationToken token)
         {
-            timer = new System.Timers.Timer((int.Parse(txtLOGOUT.Text) * 1000) * 60);
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                await Task.Delay((int.Parse(txtLOGOUT.Text) * 1000) * 60, token);
+                _LOGOUT = true;
+                cts.Cancel();
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+            // timer.Elapsed += OnTimedEvent2;
+            //timer.AutoReset = false;
+            //timer.Enabled = true;
+            //cts.Cancel();
 
-            timer.Elapsed += OnTimedEvent2;
-            timer.AutoReset = false;
-            timer.Enabled = true;
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -393,113 +631,74 @@ namespace PixelAimbot
             _LOGOUT = true;
         }
 
-        private async Task STARTKLICK(CancellationToken token)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-
-                try
+                
+                Process[] processName = Process.GetProcessesByName("LostArk");
+                if (processName.Length == 1)
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    handle = processName[0].MainWindowHandle;
+                    SetForegroundWindow(handle);
 
-                    for (int i = 0; i < 2; i++)
-                    {
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
+                }
+                
 
-                            if (move1.ToString() != "1")
-                            {
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                                Thread.Sleep(500);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                            }
-                        }
-                        catch (AggregateException)
-                        {
-                            MessageBox.Show("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            MessageBox.Show("Bug");
-                        }
-                        catch { }
-                    }
-                }
-                catch (AggregateException)
-                {
-                    MessageBox.Show("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    MessageBox.Show("Bug");
-                }
-                catch { }
-                Thread.Sleep(2000);
-
-                var t2 = Task.Run(() => START(token));
-                await Task.WhenAny(new[] { t2 });
             }
             catch (AggregateException)
             {
-                MessageBox.Show("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                MessageBox.Show("Bug");
+                Console.WriteLine("Bug");
             }
             catch { }
-
         }
 
         private async Task START(CancellationToken token)
         {
             try
             {
-                fightSequence = 1;
+                _Berserker = true;
+                CompleteIteration = 1;
+                Floor2 = 1;
+                Floor3 = 1;
+                searchSequence = 0;
+                searchSequence2 = 0;
+                fightSequence = 0;
+                fightSequence2 = 0;
+                walktopUTurn = 1;
+
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
+                    Process[] processName = Process.GetProcessesByName("LostArk");
+                    if (processName.Length == 1)
+                    {
+                        handle = processName[0].MainWindowHandle;
+                        SetForegroundWindow(handle);
 
-                    for (int i = 0; i < 10; i++)
+                    }
+                    await Task.Delay(1500, token);
+
+
+                    for (int i = 0; i < 2; i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(917, 334, 1477, 746, 0xD9DAD9);
+                            await Task.Delay(1, token);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                            if (walk.ToString() != "1")
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
 
-                                object[] walkCoord = (object[])walk;
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                au3.Send("{G}");
-                                Thread.Sleep(500);
-                            }
+
+                            await Task.Delay(1000, token);
+
                         }
                         catch (AggregateException)
                         {
@@ -513,19 +712,12 @@ namespace PixelAimbot
                         ////////////////////////////////HIER FOLGT ENTER 2
                         try
                         {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk2 = au3.PixelSearch(1406, 841, 1673, 875, 0x856413, 5);
+                            au3.MouseMove(recalc(1467), recalc(858, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
-                            if (walk2.ToString() != "1")
-                            {
-                                object[] walk2Coord = (object[])walk2;
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                au3.MouseClick("LEFT", 1467, 858, 2, 10);
-                                Thread.Sleep(500);
-                            }
+                          
+
+                            await Task.Delay(1000, token);
                         }
                         catch (AggregateException)
                         {
@@ -540,16 +732,18 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object accept = au3.PixelSearch(861, 590, 954, 616, 0x334454, 8);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
 
-                            if (accept.ToString() != "1")
+                            if (walk.ToString() != "1")
                             {
-                                object[] acceptCoord = (object[])accept;
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)acceptCoord[0], (int)acceptCoord[1], 1, 5);
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
+
+
+
                         }
                         catch (AggregateException)
                         {
@@ -571,7 +765,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                Thread.Sleep(7000);
+                await Task.Delay(9000, token);
 
                 var t3 = Task.Run(() => MOVE(token));
                 await Task.WhenAny(new[] { t3 });
@@ -592,29 +786,41 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
 
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
-                    for (int i = 0; i < 3; i++)
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Set Transparency and Scale..."));
+
+                    au3.MouseMove(recalc(1900), recalc(50, false), 10);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1871), recalc(260, false), 10);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1902), recalc(87, false), 10);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    au3.MouseMove(recalc(1871), recalc(260, false), 10);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909), recalc(392, false), 0xFFF1C6, 100);
+                    if (minimizeChat.ToString() == "0")
+                    {
+                        au3.MouseMove(recalc(1901), recalc(389, false), 10); 
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    }
+
+                    for (int i = 0; i < 2; i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is Running..."));
+                            await Task.Delay(1, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
+                            au3.MouseMove(recalc(960), recalc(529, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            await Task.Delay(1000, token);
 
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
-
-                            if (move1.ToString() != "1")
-                            {
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                                Thread.Sleep(1000);
-                            }
                         }
                         catch (AggregateException)
                         {
@@ -628,15 +834,12 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            await Task.Delay(1, token);
 
-                            object move1 = au3.PixelSearch(0, 0, 1920, 1080, 0x2A3540, 100);
+                            au3.MouseMove(recalc(960), recalc(529, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            
 
-                            if (move1.ToString() != "1")
-                            {
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                                au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-                            }
                         }
                         catch (AggregateException)
                         {
@@ -650,18 +853,11 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            await Task.Delay(1, token);
 
                             if (chBoxBerserker.Checked == true && _Berserker == true)
                             {
-                                var sim = new InputSimulator();
-                                for (int t = 0; t < 50; t++)
-                                {
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Z);
-                                    Thread.Sleep(1);
-                                }
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Z);
-
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
                                 _Berserker = false;
                             }
                         }
@@ -685,9 +881,9 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-
-                FLOOR1FIGHT_Timer(token);
-
+                _Floor1 = true;
+                var t12 = Task.Run(() => FLOORTIME(token));
+                await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
             {
@@ -700,122 +896,116 @@ namespace PixelAimbot
             catch { }
         }
 
-        /*
-          private async Task STARTFIGHT(CancellationToken token)
-          {
-            
+        public (int, int) searchImageAndClick(string templateImage, string templateMask, string foundText, float threshold = 0.7f, double softMultiplier = 1, double hardMultiplier = 1.2)
+        {
+            // Tunable variables
+            var enemyTemplate =
+                new Image<Bgr, byte>(resourceFolder + templateImage); // icon of the enemy
+            var enemyMask =
+                new Image<Bgr, byte>(resourceFolder + templateMask); // make white what the important parts are, other parts should be black
+                                                                     //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+            Point myPosition = new Point(recalc(148), recalc(127, false));
+            Point screenResolution = new Point(screenWidth, screenHeight);
 
-                         
-
-          }
-     */  ///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL///ULTIMATE FÄHIGKEITEN UND HEAL
-
+            // Main program loop
+            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+            var screenPrinter = new PrintScreen();
 
 
+            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+            var screenCapture = new Image<Bgr, byte>("screen.png");
+            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+            if (enemy.HasValue)
+            {
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
+                
+                CvInvoke.Rectangle(screenCapture,
+                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                    new MCvScalar(255));
+                double distance_x = (screenWidth - recalc(296)) / 2;
+                double distance_y = (screenHeight - recalc(255, false)) / 2;
 
+                var friend_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                double multiplier = softMultiplier;
+                var friend_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - friend_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - friend_position_on_minimap.Item2), 2));
+
+                if (dist < 180)
+                {
+                    multiplier = 1.2;
+                }
+
+                double posx;
+                double posy;
+                if (friend_position.Item1 < (screenWidth / 2))
+                {
+                    posx = friend_position.Item1 * (2 - multiplier);
+                }
+                else
+                {
+                    posx = friend_position.Item1 * multiplier;
+                }
+                if (friend_position.Item2 < (screenHeight / 2))
+                {
+                    posy = friend_position.Item2 * (2 - multiplier);
+                }
+                else
+                {
+                    posy = friend_position.Item2 * multiplier;
+                }
+
+                return PixelToAbsolute(posx, posy, screenResolution);
+
+            }
+
+            return ((screenWidth / 2), (screenHeight / 2));
+
+
+        }
         private async Task SEARCHPORTAL(CancellationToken token)
         {
             try
             {
 
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
 
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
 
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
-                    for (int i = 0; i <= 10; i++)
+                    for (int i = 0; i <= int.Parse(txtPortalSearch.Text); i++)
                     {
                         try
                         {
-                            au3.Send("{G}");
-                            au3.Send("{G}");
 
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Search Portal..."));
-                            // Tunable variables
-                            float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
-                            var enemyTemplate =
-                                new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
-                            var enemyMask =
-                                new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
-                                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
-                            Point myPosition = new Point(150, 128);
-                            Point screenResolution = new Point(1920, 1080);
 
-                            // Main program loop
-                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                            var screenPrinter = new PrintScreen();
+                            var absolutePositions = searchImageAndClick("/portalenter1.png", "/portalentermask1.png", "Floor 1: Portal found...");
 
-                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                            var screenCapture = new Image<Bgr, byte>("screen.png");
-                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                            if (enemy.HasValue)
+                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
+
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            if (txtLEFT.Text == "LEFT")
                             {
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal found..."));
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                                    new MCvScalar(255));
-
-                                double x1 = 963f / myPosition.X;
-                                double y1 = 551f / myPosition.Y;
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                var x2 = x1 * enemy.Value.X;
-                                var y2 = y1 * enemy.Value.Y;
-                                if (x2 <= 963)
-                                    x2 = x2 * 0.68f;
-                                else
-                                    x2 = x2 * 1.38f;
-                                if (y2 <= 551)
-                                    y2 = y2 * 0.68;
-                                else
-                                    y2 = y2 * 1.38;
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(100, token);
-                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
-
-                                au3.Send("{G}");
-                                if (txtLEFT.Text == "LEFT")
-                                {
-                                    inputSimulator.Mouse.LeftButtonClick();
-                                }
-                                else
-                                {
-                                    inputSimulator.Mouse.RightButtonClick();
-                                }
-                                au3.Send("{G}");
-
-
-
-                                au3.Send("{G}");
-                                if (txtLEFT.Text == "LEFT")
-                                {
-                                    inputSimulator.Mouse.LeftButtonClick();
-                                }
-                                else
-                                {
-                                    inputSimulator.Mouse.RightButtonClick();
-                                }
-
-                                au3.Send("{G}");
-
-                                au3.Send("{G}");
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                             else
                             {
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                             }
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
                         }
                         catch (AggregateException)
                         {
@@ -826,15 +1016,10 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
-
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        Random random = new Random();
-                        var sleepTime = random.Next(300, 500);
-                        Thread.Sleep(sleepTime);
-                        au3.Send("{G}");
-                        au3.Send("{G}");
                     }
+                    Random random = new Random();
+                    var sleepTime = random.Next(150, 210);
+                    Thread.Sleep(sleepTime);
                 }
                 catch (AggregateException)
                 {
@@ -845,7 +1030,10 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-
+                searchSequence = 1;
+                walktopUTurn = 0;
+                _Floor2 = true;
+                await Task.Delay(1500);
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -866,39 +1054,47 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: search enemy..."));
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
+                    if (searchSequence == 1)
+                    {
+                        await Task.Delay(2500);
+                        au3.MouseMove(recalc(960), recalc(529, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        
+                        searchSequence++;
+                    }
 
                     for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                     {
+
                         try
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 1);
-                            au3.MouseClick("" + txtLEFT.Text + "", 960, 529, 2);
-
-
-
-
+                            float shardthreshold = 1f;
                             float threshold = 0.7f;
+                            var shardTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/shard.png");
+                            var shardMask =
+                            new Image<Bgr, byte>(resourceFolder + "/shardmask.png");
                             var enemyTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                             var enemyMask =
                             new Image<Bgr, byte>(resourceFolder + "/mask.png");
                             var BossTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/boss.png");
+                            new Image<Bgr, byte>(resourceFolder + "/boss1.png");
                             var BossMask =
-                            new Image<Bgr, byte>(resourceFolder + "/bossmask.png");
+                            new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
                             var mobTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/mob1.png");
                             var mobMask =
@@ -908,127 +1104,251 @@ namespace PixelAimbot
                             var portalMask =
                             new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
 
-                            Point myPosition = new Point(150, 128);
-                            Point screenResolution = new Point(1920, 1080);
-
+                            Point myPosition = new Point(recalc(148), recalc(127, false));
+                            Point screenResolution = new Point(screenWidth, screenHeight);
+                            var shardDetector = new EnemyDetector(shardTemplate, shardMask, shardthreshold);
                             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
                             var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                            var mobDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-                            var portalDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+                            var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
+                            var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
                             var screenPrinter = new PrintScreen();
 
                             screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                             var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var shard = shardDetector.GetClosestEnemy(screenCapture);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                             var Boss = BossDetector.GetClosestEnemy(screenCapture);
                             var mob = mobDetector.GetClosestEnemy(screenCapture);
                             var portal = portalDetector.GetClosestEnemy(screenCapture);
 
-
-                            if (Boss.HasValue)
+                            if (shard.HasValue)
                             {
                                 CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
+                                    new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
                                     new MCvScalar(255));
-                                double x1 = 963f / myPosition.X;
-                                double y1 = 551f / myPosition.Y;
 
-                                var x2 = x1 * Boss.Value.X;
-                                var y2 = y1 * Boss.Value.Y;
-                                if (x2 <= 963)
-                                    x2 = x2 * 0.9f;
-                                else
-                                    x2 = x2 * 1.1f;
-                                if (y2 <= 551)
-                                    y2 = y2 * 0.9;
-                                else
-                                    y2 = y2 * 1.1;
-                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
-                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                if (txtLEFT.Text == "LEFT")
+                                double distance_x = (screenWidth - recalc(296)) / 2;
+                                double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                var shard_position = ((shard.Value.X + distance_x), (shard.Value.Y + distance_y));
+                                double multiplier = 1;
+                                var shard_position_on_minimap = ((shard.Value.X), (shard.Value.Y));
+                                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - shard_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - shard_position_on_minimap.Item2), 2));
+
+                                if (dist < 180)
                                 {
-                                    inputSimulator.Mouse.LeftButtonClick();
+                                    multiplier = 1.2;
+                                }
+
+                                double posx;
+                                double posy;
+                                if (shard_position.Item1 < (screenWidth / 2))
+                                {
+                                    posx = shard_position.Item1 * (2 - multiplier);
                                 }
                                 else
                                 {
-                                    inputSimulator.Mouse.RightButtonClick();
+                                    posx = shard_position.Item1 * multiplier;
+                                }
+                                if (shard_position.Item2 < (screenHeight / 2))
+                                {
+                                    posy = shard_position.Item2 * (2 - multiplier);
+                                }
+                                else
+                                {
+                                    posy = shard_position.Item2 * multiplier;
+                                }
+
+
+                                var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+                                  
+                                }
+                                else
+                                {
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
+                                    
                                 }
                             }
                             else
                             {
-                                if (enemy.HasValue)
+                                if (Boss.HasValue)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
-                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                        new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
                                         new MCvScalar(255));
-                                    double x1 = 963f / myPosition.X;
-                                    double y1 = 551f / myPosition.Y;
+                                    double distance_x = (screenWidth - recalc(296)) / 2;
+                                    double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                    var x2 = x1 * enemy.Value.X;
-                                    var y2 = y1 * enemy.Value.Y;
-                                    if (x2 <= 963)
-                                        x2 = x2 * 0.9f;
-                                    else
-                                        x2 = x2 * 1.1f;
-                                    if (y2 <= 551)
-                                        y2 = y2 * 0.9;
-                                    else
-                                        y2 = y2 * 1.1;
-                                    var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
-                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                    if (txtLEFT.Text == "LEFT")
+                                    var boss_position = ((Boss.Value.X + distance_x), (Boss.Value.Y + distance_y));
+                                    double multiplier = 1;
+                                    var boss_position_on_minimap = ((Boss.Value.X), (Boss.Value.Y));
+                                    var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                    var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - boss_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - boss_position_on_minimap.Item2), 2));
+
+                                    if (dist < 180)
                                     {
-                                        inputSimulator.Mouse.LeftButtonClick();
+                                        multiplier = 1.2;
+                                    }
+
+                                    double posx;
+                                    double posy;
+                                    if (boss_position.Item1 < (screenWidth / 2))
+                                    {
+                                        posx = boss_position.Item1 * (2 - multiplier);
                                     }
                                     else
                                     {
-                                        inputSimulator.Mouse.RightButtonClick();
+                                        posx = boss_position.Item1 * multiplier;
+                                    }
+                                    if (boss_position.Item2 < (screenHeight / 2))
+                                    {
+                                        posy = boss_position.Item2 * (2 - multiplier);
+                                    }
+                                    else
+                                    {
+                                        posy = boss_position.Item2 * multiplier;
+                                    }
+
+
+                                    var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+
+                                    }
+                                    else
+                                    {
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
+
                                     }
                                 }
                                 else
                                 {
-                                    if (mob.HasValue)
+                                    if (enemy.HasValue)
                                     {
                                         CvInvoke.Rectangle(screenCapture,
-                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                             new MCvScalar(255));
-                                        double x1 = 963f / myPosition.X;
-                                        double y1 = 551f / myPosition.Y;
+                                        double distance_x = (screenWidth - recalc(296)) / 2;
+                                        double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                        var x2 = x1 * mob.Value.X;
-                                        var y2 = y1 * mob.Value.Y;
-                                        if (x2 <= 963)
-                                            x2 = x2 * 0.9f;
-                                        else
-                                            x2 = x2 * 1.1f;
-                                        if (y2 <= 551)
-                                            y2 = y2 * 0.9;
-                                        else
-                                            y2 = y2 * 1.1;
-                                        var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
+                                        var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                        double multiplier = 1;
+                                        var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                        var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                        var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
 
-                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                        if (txtLEFT.Text == "LEFT")
+                                        if (dist < 180)
                                         {
-                                            inputSimulator.Mouse.LeftButtonClick();
+                                            multiplier = 1.2;
+                                        }
+
+                                        double posx;
+                                        double posy;
+                                        if (enemy_position.Item1 < (screenWidth / 2))
+                                        {
+                                            posx = enemy_position.Item1 * (2 - multiplier);
                                         }
                                         else
                                         {
-                                            inputSimulator.Mouse.RightButtonClick();
+                                            posx = enemy_position.Item1 * multiplier;
+                                        }
+                                        if (enemy_position.Item2 < (screenHeight / 2))
+                                        {
+                                            posy = enemy_position.Item2 * (2 - multiplier);
+                                        }
+                                        else
+                                        {
+                                            posy = enemy_position.Item2 * multiplier;
+                                        }
+
+
+                                        var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+
+                                        }
+                                        else
+                                        {
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (mob.HasValue)
+                                        {
+                                            CvInvoke.Rectangle(screenCapture,
+                                                new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                                new MCvScalar(255));
+                                            double distance_x = (screenWidth - recalc(296)) / 2;
+                                            double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                            var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
+                                            double multiplier = 1;
+                                            var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
+                                            var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                            var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
+
+                                            if (dist < 180)
+                                            {
+                                                multiplier = 1.2;
+                                            }
+
+                                            double posx;
+                                            double posy;
+                                            if (mob_position.Item1 < (screenWidth / 2))
+                                            {
+                                                posx = mob_position.Item1 * (2 - multiplier);
+                                            }
+                                            else
+                                            {
+                                                posx = mob_position.Item1 * multiplier;
+                                            }
+                                            if (mob_position.Item2 < (screenHeight / 2))
+                                            {
+                                                posy = mob_position.Item2 * (2 - multiplier);
+                                            }
+                                            else
+                                            {
+                                                posy = mob_position.Item2 * multiplier;
+                                            }
+
+
+                                            var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
+
+                                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                            if (txtLEFT.Text == "LEFT")
+                                            {
+                                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+
+                                            }
+                                            else
+                                            {
+                                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
+
+                                            }
                                         }
                                     }
                                 }
                             }
-
-
-
-
                             Random random = new Random();
-                            var sleepTime = random.Next(150, 255);
+                            var sleepTime = random.Next(100, 150);
                             Thread.Sleep(sleepTime);
+
+
                         }
                         catch (AggregateException)
                         {
@@ -1039,6 +1359,1585 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
+                    }
+
+                    if (Floor2 == 1)
+                    { _Floor2 = true; }
+
+                    var t12 = Task.Run(() => FLOORTIME(token));
+                    await Task.WhenAny(new[] { t12 });
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        private async Task FLOORTIME(CancellationToken token)
+        {
+
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                if (_Floor1 == true)
+                {
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        walktopUTurn = 0;
+
+                        Search = false;
+                        _Shadowhunter = true;
+                        _Berserker = true;
+                        _Paladin = true;
+                        _Deathblade = true;
+                        _Sharpshooter = true;
+                        _Sorcerer = true;
+                        _Soulfist = true;
+
+                        _Floor1Fight = true;
+                        var t12 = Task.Run(() => FLOORFIGHT(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                }
+                if (_Floor2 == true)
+                {
+
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        _SkillFight2 = true;
+                        fightOnSecondAbility = 1;
+                     
+                        fightSequence++;
+
+                        Search = false;
+                        _Shadowhunter = true;
+                        _Berserker = true;
+                        _Paladin = true;
+                        _Deathblade = true;
+                        _Sharpshooter = true;
+                        _Bard = true;
+                        _Sorcerer = true;
+                        _Soulfist = true;
+
+                        _Floor2Fight = true;
+                        var t14 = Task.Run(() => FLOORFIGHT(token));
+                        await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+
+                        _Floor2Fight = false;
+
+                        if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
+                        {
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
+
+                            Search = true;
+                            var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                            await Task.WhenAny(new[] { t12 });
+                        }
+                        else
+
+                        if (fightSequence >= int.Parse(txtDungeon2Iteration.Text) - 1 && chBoxActivateF3.Checked == true)
+                        {
+
+                            Search = true;
+                            var t13 = Task.Run(() => FLOOR2PORTAL(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
+                        else
+                        if (fightSequence < int.Parse(txtDungeon2Iteration.Text))
+                        {
+
+                            Search = true;
+                            var t13 = Task.Run(() => SEARCHBOSS(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
+                        await Task.WhenAny(new[] { t14 });
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+
+                }
+                if (_Floor3 == true)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        CompleteIteration = 1;
+                        fightSequence2++;
+                        _Shadowhunter = true;
+                        _Berserker = true;
+                        _Paladin = true;
+                        _Deathblade = true;
+                        _Sharpshooter = true;
+                        _Bard = true;
+                        _Sorcerer = true;
+                        _Soulfist = true;
+
+                        _Floor3Fight = true;
+                        var t14 = Task.Run(() => FLOORFIGHT(token));
+                        await Task.Delay(int.Parse(txtDungeon3.Text) * 1000, token);
+
+                        _Floor3Fight = false;
+
+                        if (fightSequence2 == int.Parse(txtDungeon3Iteration.Text))
+                        {
+
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Leaved ChaosDungeon - not completed!"));
+                            var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                            await Task.WhenAny(new[] { t12 });
+                        }
+                        else
+                        if (fightSequence2 < int.Parse(txtDungeon3Iteration.Text))
+                        {
+                            searchSequence2 = 1;
+                            var t13 = Task.Run(() => SEARCHBOSS2(token));
+                            await Task.WhenAny(new[] { t13 });
+                        }
+                        await Task.WhenAny(new[] { t14 });
+
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch { }
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+
+        }
+
+        private async Task FLOORFIGHT(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                try
+                {
+                    while (_Floor1Fight == true && Search == false)
+                    {
+
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                object fight = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && Search == false)
+                                {
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                               
+                                   KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        KeyboardWrapper.PressKey(skill.Key);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    fightOnSecondAbility++;
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(1, token);
+                                            walktopUTurn++;
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+
+                                            fightOnSecondAbility = 1;
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                    }
+                                }
+
+                                if (walktopUTurn == 3 && chBoxAutoMovement.Checked && Search == false)
+                                {
+
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        au3.MouseMove(recalc(960), recalc(240, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2500);
+                                        au3.MouseMove(recalc(960), recalc(566, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+
+                                }
+                                if (walktopUTurn == 9 && chBoxAutoMovement.Checked && Search == false)
+                                {
+
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        au3.MouseMove(recalc(523), recalc(830, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 3000);
+                                        au3.MouseMove(recalc(1007), recalc(494, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        await Task.Delay(1, token);
+
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+
+                                }
+                                if (walktopUTurn == 15 && chBoxAutoMovement.Checked && Search == false)
+                                {
+
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        au3.MouseMove(recalc(1578), recalc(524, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 3000);
+                                        au3.MouseMove(recalc(905), recalc(531, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+
+                                }
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
+                                {
+
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        au3.MouseMove(recalc(523), recalc(810, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 3000);
+                                        au3.MouseMove(recalc(960), recalc(500, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        await Task.Delay(1, token);
+
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+
+                                }
+                                if (walktopUTurn == 25 && chBoxAutoMovement.Checked && Search == false)
+                                {
+
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        au3.MouseMove(recalc(960), recalc(70, false), 10);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 4000);
+                                        au3.MouseMove(recalc(960), recalc(566, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        await Task.Delay(1, token);
+
+
+                                        walktopUTurn++;
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+
+                                }
+                                if (walktopUTurn == 25 && chBoxAutoMovement.Checked && Search == false)
+                                {
+                                    walktopUTurn = 1;
+                                    await Task.Delay(1, token);
+                                }
+
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            ///REVIVE
+                            ///
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                float thresh = 0.89f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                Random random = new Random();
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
+                            ///Portal Erkennung Start
+                            ///
+                            try
+                            {
+
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                object fight = au3.PixelSearch(recalc(114), recalc(208, false), recalc(168), recalc(220, false), 0xDBC7AC, 7);
+                                if (fight.ToString() != "1" && Search == false)
+                                {
+                                    _SkillFight2 = false;
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal detected!"));
+
+                                    if (chBoxActivateF2.Checked)
+                                    {
+                                        _Floor1Fight = false;
+                                        Search = true;
+                                        _Floor1 = false;
+                                        var t7 = Task.Run(() => SEARCHPORTAL(token));
+                                        await Task.WhenAny(new[] { t7 });
+                                    }
+                                    else
+                                    if (!chBoxActivateF2.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
+                                        _Floor1Fight = false;
+                                        Search = true;
+                                        _Floor1 = false;
+                                        var leave = Task.Run(() => LEAVEDUNGEON(token));
+                                        await Task.WhenAny(new[] { leave });
+                                    }
+
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// Portal Erkennung ENDE
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(892), recalc(1027, false), recalc(934), recalc(1060, false), 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Paladin = false;
+                                       
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(986), recalc(1029, false), recalc(1017), recalc(1035, false), 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Deathblade = false;
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1049, false), recalc(1019), recalc(1068, false), 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sharpshooter = false;
+
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1038, false), recalc(1010), recalc(1042, false), 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sorcerer = false;
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                        _Soulfist = false;
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(651), recalc(969, false), 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(820), recalc(970, false), 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+
+
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object healthi = au3.PixelSearch(recalc(633), recalc(962, false), recalc(686), recalc(969, false), 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+
+
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                    }
+                                }
+
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                        }
+                    }
+                    while (_Floor2Fight == true && Search == false)
+                    {
+
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                object fight = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && Search == false && _SkillFight2 == true)
+                                {
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    // fightOnSecondAbility++;
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(1, token);
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                    }
+
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+
+                            ///REVIVE
+                            ///
+                           
+                                    
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                float thresh = 0.89f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                Random random = new Random();
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                if (chBoxBard.Checked == true && _Bard == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxY.Checked == true && _Shadowhunter == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        object d = au3.PixelSearch(recalc(948), recalc(969, false), recalc(968), recalc(979, false), 0xBC08F0, 5);
+
+                                        if (d.ToString() != "1")
+                                        {
+
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Shadowhunter = false;
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(892), recalc(1027, false), recalc(934), recalc(1060, false), 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Paladin = false;
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(986), recalc(1029, false), recalc(1017), recalc(1035, false), 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Deathblade = false;
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1049, false), recalc(1019), recalc(1068, false), 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sharpshooter = false;
+
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1038, false), recalc(1010), recalc(1042, false), 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sorcerer = false;
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                        _Soulfist = false;
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(651), recalc(969, false), 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(820), recalc(970, false), 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+
+
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object healthi = au3.PixelSearch(recalc(633), recalc(962, false), recalc(686), recalc(969, false), 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+
+
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                    }
+                                }
+
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                        }
+                    }
+                    while (_Floor3Fight == true && Search == false)
+                    {
+                        foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
+                        {
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                object shardHit = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0x630E17, 10);
+                                object fight = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0xDD2C02, 10);
+                                if (fight.ToString() != "1" && shardHit.ToString() != "1" && Search == false)
+                                {
+                                    object[] shardHitCoord = (object[])shardHit;
+                                    object[] fightCoord = (object[])fight;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+
+                                    if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
+                                    {
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Key Pressed twice!"));
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
+                                    }
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    fightOnSecondAbility++;
+                                    if (isKeyOnCooldown(skill.Key) == false && Search == false)
+                                    {
+                                        try
+                                        {
+                                            token.ThrowIfCancellationRequested();
+                                            await Task.Delay(1, token);
+                                            fightOnSecondAbility++;
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+
+
+                                        }
+                                        catch (AggregateException)
+                                        {
+                                            Console.WriteLine("Expected");
+                                        }
+                                        catch (ObjectDisposedException)
+                                        {
+                                            Console.WriteLine("Bug");
+                                        }
+                                        catch { }
+                                    }
+                                }
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            ///REVIVE
+                            ///
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                float thresh = 0.89f;
+                                var ReviveDeutschTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                var ReviveDeutschMask =
+                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+
+                                var ReviveEnglishTemplate =
+                               new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                var ReviveEnglishMask =
+                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+
+                                Point screenResolution = new Point(screenWidth, screenHeight);
+                                var ReviveDeutschDetector = new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);
+                                var ReviveEnglishDetector = new EnterDetectors(ReviveEnglishTemplate, ReviveEnglishMask, thresh);
+                                var screenPrinter = new PrintScreen();
+                                screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                                var screenCapture = new Image<Bgr, byte>("screen.png");
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue)
+                                {
+                                    _SkillFight2 = false;
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                    au3.MouseMove(recalc(1374), recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _SkillFight2 = true;
+                                }
+                                Random random = new Random();
+                                var sleepTime = random.Next(100, 150);
+                                Thread.Sleep(sleepTime);
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                            /// 
+                            /// REVIVE ENDE
+                            ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                if (chBoxBard.Checked == true && _Bard == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                        await Task.Delay(1, token);
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxY.Checked == true && _Shadowhunter == true)
+                                {
+                                    try
+                                    {
+
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        object d = au3.PixelSearch(recalc(948), recalc(969, false), recalc(968), recalc(979, false), 0xBC08F0, 5);
+
+                                        if (d.ToString() != "1")
+                                        {
+
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Shadowhunter = false;
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                if (chBoxPaladin.Checked == true && _Paladin == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(892), recalc(1027, false), recalc(934), recalc(1060, false), 0x75D6FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Paladin = false;
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxDeathblade.Checked == true && _Deathblade == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(986), recalc(1029, false), recalc(1017), recalc(1035, false), 0xDAE7F3, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            _Deathblade = false;
+
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSharpshooter.Checked == true && _Sharpshooter == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1049, false), recalc(1019), recalc(1068, false), 0x09B4EB, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sharpshooter = false;
+
+                                            var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSorcerer.Checked == true && _Sorcerer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        object d = au3.PixelSearch(recalc(1006), recalc(1038, false), recalc(1010), recalc(1042, false), 0x8993FF, 10);
+                                        if (d.ToString() != "1")
+                                        {
+                                            object[] dCoord = (object[])d;
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                            _Sorcerer = false;
+
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                        }
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                               if (chBoxSoulfist.Checked == true && _Soulfist == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+
+                                        _Soulfist = false;
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(651), recalc(969, false), 0x050405, 15);
+                                    if (health.ToString() != "1" && checkBoxHeal10.Checked)
+                                    {
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        au3.Send("{" + txtHeal10.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object health = au3.PixelSearch(recalc(633), recalc(962, false), recalc(820), recalc(970, false), 0x050405, 15);
+
+                                    if (health.ToString() != "1" && checkBoxHeal70.Checked)
+                                    {
+
+
+                                        object[] healthCoord = (object[])health;
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        au3.Send("{" + txtHeal70.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                                    }
+                                }
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object healthi = au3.PixelSearch(recalc(633), recalc(962, false), recalc(686), recalc(969, false), 0x050405, 15);
+
+                                    if (healthi.ToString() != "1" && checkBoxHeal30.Checked)
+                                    {
+
+
+                                        object[] healthiCoord = (object[])healthi;
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        au3.Send("{" + txtHeal30.Text + "}");
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                                    }
+                                }
+
+                                catch (AggregateException)
+                                {
+                                    Console.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Console.WriteLine("Bug");
+                                }
+                                catch { }
+
+                            }
+                            catch (AggregateException)
+                            {
+                                Console.WriteLine("Expected");
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                Console.WriteLine("Bug");
+                            }
+                            catch { }
+                           
+                        }
                     }
                 }
                 catch (AggregateException)
@@ -1050,7 +2949,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                FLOOR2FIGHT_Timer(token);
+
             }
             catch (AggregateException)
             {
@@ -1063,181 +2962,383 @@ namespace PixelAimbot
             catch { }
         }
 
-        private async void FLOOR1FIGHT_Timer(CancellationToken token)
+        private void setKeyCooldown(byte key)
         {
-            try
+            switch (key)
             {
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-                _Q = true;
-                _W = true;
-                _E = true;
-                _R = true;
-                _A = true;
-                _S = true;
-                _D = true;
-                _F = true;
-                _Y = true;
-                _Z = true;
-                _STARTFIGHT = true;
-                _ULTIMATE_HEAL = true;
-                var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                await Task.Delay(int.Parse(txtDungeon.Text) * 1000);
-                _STARTFIGHT = false;
-                if (chBoxActivateF2.Checked && _STARTFIGHT == false)
-                {
-                    var t7 = Task.Run(() => SEARCHPORTAL(token));
-                    await Task.WhenAny(new[] { t7 });
-                }
-                else
-               if (!chBoxActivateF2.Checked && _STARTFIGHT == false)
-                {
-                    var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                    await Task.WhenAny(new[] { t12 });
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
+                case KeyboardWrapper.VK_A:
+                    _A = false;
+                    break;
 
-        private async void FLOOR2FIGHT_Timer(CancellationToken token)
-        {
-            try
-            {
-                fightSequence++;
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-                _Q = true;
-                _W = true;
-                _E = true;
-                _R = true;
-                _A = true;
-                _S = true;
-                _D = true;
-                _F = true;
-                _Y = true;
-                _Z = true;
-                _FIGHT = true;
+                case KeyboardWrapper.VK_S:
+                    _S = false;
+                    break;
 
-                var t4 = Task.Run(() => FLOOR1FIGHT(token));
-                await Task.WhenAny(new[] { t4 });
-                await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
+                case KeyboardWrapper.VK_D:
+                    _D = false;
+                    break;
 
-                _FIGHT = false;
+                case KeyboardWrapper.VK_F:
+                    _F = false;
+                    break;
 
-                if (fightSequence == 5)
-                {
-                    var t12 = Task.Run(() => LEAVEDUNGEON(token));
-                    await Task.WhenAny(new[] { t12 });
-                }
-                else
-                if (fightSequence == 4)
-                {
+                case KeyboardWrapper.VK_Q:
+                    _Q = false;
+                    break;
 
-                    var t13 = Task.Run(() => SEARCHBOSS(token));
-                    await Task.WhenAny(new[] { t13 });
-                }
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch { }
-        }
+                case KeyboardWrapper.VK_W:
+                    _W = false;
+                    break;
 
-        private async Task FLOOR1FIGHT(CancellationToken token)
-        {
-            
-            {
-                foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-                {
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                case KeyboardWrapper.VK_E:
+                    _E = false;
+                    break;
 
-                        object fight = au3.PixelSearch(650, 300, 1269, 797, 0xDD2C02, 10);
-
-                        if (fight.ToString() != "1" && _FIGHT == true)
-                        {
-                            object[] fightCoord = (object[])fight;
-
-                            var sim = new InputSimulator();
-                            for (int t = 0; t < int.Parse(txD.Text) / 10; t++)
-                            {
-                                sim.Keyboard.KeyDown(skill.Key);
-                                await Task.Delay(1);
-                            }
-                            sim.Keyboard.KeyUp(skill.Key);
-
-                            var td = Task.Run(() => SkillCooldown(token, skill.Key)); // Muss auch custom sein
-
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                            au3.MouseClick("" + txtRIGHT.Text + "", (int)fightCoord[0], (int)fightCoord[1] + 80, 7, 4);
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                }
+                case KeyboardWrapper.VK_R:
+                    _R = false;
+                    break;
             }
         }
 
-        private async Task ULTIMATES_AND_HEAL(CancellationToken token)
+        private bool isKeyOnCooldown(byte key)
+        {
+            bool returnBoolean = false;
+            switch (key)
+            {
+                case KeyboardWrapper.VK_A:
+                    returnBoolean = _A;
+                    break;
+
+                case KeyboardWrapper.VK_S:
+                    returnBoolean = _S;
+                    break;
+
+                case KeyboardWrapper.VK_D:
+                    returnBoolean = _D;
+                    break;
+
+                case KeyboardWrapper.VK_F:
+                    returnBoolean = _F;
+                    break;
+
+                case KeyboardWrapper.VK_Q:
+                    returnBoolean = _Q;
+                    break;
+
+                case KeyboardWrapper.VK_W:
+                    returnBoolean = _W;
+                    break;
+
+                case KeyboardWrapper.VK_E:
+                    returnBoolean = _E;
+                    break;
+
+                case KeyboardWrapper.VK_R:
+                    returnBoolean = _R;
+                    break;
+            }
+            return returnBoolean;
+        }
+
+        private async Task SEARCHBOSS2(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-
-                _Shadowhunter = true;
-                _Paladin = true;
-                _Berserker = true;
-
-                while (_ULTIMATE_HEAL == true)
+                await Task.Delay(1, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: search enemy..."));
+                try
                 {
-                    if (chBoxY.Checked == true && _Shadowhunter == true)
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+
+                    _Shadowhunter = true;
+                    _Paladin = true;
+                    _Berserker = true;
+                    if (searchSequence2 == 1)
+                    {
+                        await Task.Delay(1500);
+                        au3.MouseMove(recalc(960), recalc(529, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        searchSequence2++;
+                    }
+
+                    for (int i = 0; i < int.Parse(txtDungeon3search.Text); i++)
                     {
                         try
                         {
-                            _Shadowhunter = false;
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            await Task.Delay(1, token);
 
-                            object d = au3.PixelSearch(948, 969, 968, 979, 0xBC08F0, 10);
+                            float threshold = 0.7f;
+                            var shardTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/shard.png");
+                            var shardMask =
+                            new Image<Bgr, byte>(resourceFolder + "/shardmask.png");
+                            var enemyTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/enemy.png");
+                            var enemyMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                            
+                            var mobTemplate =
+                            new Image<Bgr, byte>(resourceFolder + "/mob1.png");
+                            var mobMask =
+                            new Image<Bgr, byte>(resourceFolder + "/mobmask1.png");
 
-                            if (d.ToString() != "1" && _STARTFIGHT == true)
+                            Point myPosition = new Point(recalc(150), recalc(128, false));
+                            Point screenResolution = new Point(screenWidth, screenHeight);
+                            var shardDetector = new EnemyDetector(shardTemplate, shardMask, threshold);
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                         
+                            var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
+
+                            var screenPrinter = new PrintScreen();
+
+                            screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                            var screenCapture = new Image<Bgr, byte>("screen.png");
+                            var shard = shardDetector.GetClosestEnemy(screenCapture);
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                          
+                            var mob = mobDetector.GetClosestEnemy(screenCapture);
+
+                            if (CompleteIteration == 1)
                             {
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
-                                object[] dCoord = (object[])d;
-                                var sim = new InputSimulator();
-                                for (int t = 0; t < 50; t++)
-                                {
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                    await Task.Delay(1);
-                                }
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
 
+                                au3.MouseMove(recalc(960), recalc(529, false), 10);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                CompleteIteration++;
+                            }
+                            else
+                            {
+                                if (shard.HasValue)
+                                {
+                                    CvInvoke.Rectangle(screenCapture,
+                                        new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
+                                        new MCvScalar(255));
+                                    double distance_x = (screenWidth - recalc(296)) / 2;
+                                    double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                    var shard_position = ((shard.Value.X + distance_x), (shard.Value.Y + distance_y));
+                                    double multiplier = 1;
+                                    var shard_position_on_minimap = ((shard.Value.X), (shard.Value.Y));
+                                    var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                    var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - shard_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - shard_position_on_minimap.Item2), 2));
+
+                                    if (dist < 180)
+                                    {
+                                        multiplier = 1.2;
+                                    }
+
+                                    double posx;
+                                    double posy;
+                                    if (shard_position.Item1 < (screenWidth / 2))
+                                    {
+                                        posx = shard_position.Item1 * (2 - multiplier);
+                                    }
+                                    else
+                                    {
+                                        posx = shard_position.Item1 * multiplier;
+                                    }
+                                    if (shard_position.Item2 < (screenHeight / 2))
+                                    {
+                                        posy = shard_position.Item2 * (2 - multiplier);
+                                    }
+                                    else
+                                    {
+                                        posy = shard_position.Item2 * multiplier;
+                                    }
+
+
+                                    var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                    inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                    if (txtLEFT.Text == "LEFT")
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    }
+                                    else
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
+                                    }
+                                }
+                                else
+                                {
+                                    if (enemy.HasValue)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                            new MCvScalar(255));
+                                        double distance_x = (screenWidth - recalc(296)) / 2;
+                                        double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                        var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                        double multiplier = 1;
+                                        var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                        var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                        var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
+
+                                        if (dist < 180)
+                                        {
+                                            multiplier = 1.2;
+                                        }
+
+                                        double posx;
+                                        double posy;
+                                        if (enemy_position.Item1 < (screenWidth / 2))
+                                        {
+                                            posx = enemy_position.Item1 * (2 - multiplier);
+                                        }
+                                        else
+                                        {
+                                            posx = enemy_position.Item1 * multiplier;
+                                        }
+                                        if (enemy_position.Item2 < (screenHeight / 2))
+                                        {
+                                            posy = enemy_position.Item2 * (2 - multiplier);
+                                        }
+                                        else
+                                        {
+                                            posy = enemy_position.Item2 * multiplier;
+                                        }
+
+
+                                        var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
+                                        inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                        if (txtLEFT.Text == "LEFT")
+                                        {
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        }
+                                        else
+                                        {
+                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (mob.HasValue)
+                                        {
+                                            CvInvoke.Rectangle(screenCapture,
+                                                new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                                new MCvScalar(255));
+                                            double distance_x = (screenWidth - recalc(296)) / 2;
+                                            double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                            var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
+                                            double multiplier = 1;
+                                            var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
+                                            var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                            var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
+
+                                            if (dist < 180)
+                                            {
+                                                multiplier = 1.2;
+                                            }
+
+                                            double posx;
+                                            double posy;
+                                            if (mob_position.Item1 < (screenWidth / 2))
+                                            {
+                                                posx = mob_position.Item1 * (2 - multiplier);
+                                            }
+                                            else
+                                            {
+                                                posx = mob_position.Item1 * multiplier;
+                                            }
+                                            if (mob_position.Item2 < (screenHeight / 2))
+                                            {
+                                                posy = mob_position.Item2 * (2 - multiplier);
+                                            }
+                                            else
+                                            {
+                                                posy = mob_position.Item2 * multiplier;
+                                            }
+
+
+                                            var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
+
+                                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                            if (txtLEFT.Text == "LEFT")
+                                            {
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                            }
+                                            else
+                                            {
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
+                                            }
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+
+                            Random random = new Random();
+                            var sleepTime = random.Next(150, 255);
+                            await Task.Delay(sleepTime, token);
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
+
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    object complete = au3.PixelSearch(recalc(31), recalc(97, false), recalc(81), recalc(108, false), 0x8A412C, 5);
+                                    if (complete.ToString() != "1")
+                                    {
+                                        object[] completeCoord = (object[])complete;
+                                        au3.MouseMove(recalc(191), recalc(285, false), 5);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                   
+
+                                        await Task.Delay(1000, token);
+                                    }
+                                    await Task.Delay(2000, token);
+                                    if (_REPAIR == true)
+                                    {
+                                        await Task.Delay(2000, token);
+                                        var t7 = Task.Run(() => REPAIR(token));
+                                        await Task.WhenAny(new[] { t7 });
+                                    }
+                                    else
+                                    if (_LOGOUT == true)
+                                    {
+                                        var t11 = Task.Run(() => LOGOUT(token));
+                                        await Task.WhenAny(new[] { t11 });
+                                    }
+                                    else
+                                    if (_REPAIR == false && _LOGOUT == false)
+                                    {
+                                        await Task.Delay(2000, token);
+                                        var t9 = Task.Run(() => RESTART(token));
+                                        await Task.WhenAny(new[] { t9 });
+                                    }
+                                }
+                                catch { }
                             }
                         }
                         catch (AggregateException)
@@ -1249,100 +3350,23 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
+
                     }
-                    else
-
-
-
-                     if (chBoxPaladin.Checked == true && _Paladin == true)
-                    {
-                        try
-                        {
-                            _Paladin = false;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-
-                            object d = au3.PixelSearch(892, 1027, 934, 1060, 0x75D6FF, 10);
-
-                            if (d.ToString() != "1" && _STARTFIGHT == true)
-                            {
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
-
-                                object[] dCoord = (object[])d;
-                                var sim = new InputSimulator();
-                                for (int t = 0; t < 50; t++)
-                                {
-                                    sim.Keyboard.KeyDown(VirtualKeyCode.VK_Y);
-                                    await Task.Delay(1);
-                                }
-                                sim.Keyboard.KeyUp(VirtualKeyCode.VK_Y);
-
-                            }
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
-                    }
-                    //////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//////////POTION//
-
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object health = au3.PixelSearch(633, 962, 820, 970, 0x050405, 20);
-
-                        if (health.ToString() != "1" && _STARTFIGHT == true)
-                        {
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
-
-                            object[] healthCoord = (object[])health;
-                            au3.Send("{" + txtHeal.Text + "}");
-                            au3.Send("{" + txtHeal.Text + "}");
-                            au3.Send("{" + txtHeal.Text + "}");
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
-                        object healthi = au3.PixelSearch(633, 962, 680, 970, 0x050405, 20);
-
-                        if (healthi.ToString() != "1" && _STARTFIGHT == true)
-                        {
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate:Instant-Heal at 30%"));
-
-                            object[] healthiCoord = (object[])healthi;
-                            au3.Send(txtInstant.Text);
-                            au3.Send(txtInstant.Text);
-                            au3.Send(txtInstant.Text);
-                        }
-                    }
-
-                    catch (AggregateException)
-                    {
-                        Console.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("Bug");
-                    }
-                    catch { }
                 }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                if (Floor3 == 1)
+                { _Floor3 = true; }
+
+                var t12 = Task.Run(() => FLOORTIME(token));
+                await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
             {
@@ -1359,77 +3383,228 @@ namespace PixelAimbot
         {
             try
             {
+
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
+
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
+
 
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
-
-                    for (int i = 0; i <= 15; i++)
+                    for (int i = 0; i <= 20; i++)
                     {
                         try
                         {
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
+
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Walk to Portal..."));
+                            await Task.Delay(1, token);
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Search Portal..."));
+                            // Tunable variables
+                            float threshold = 0.7f; // set this higher for fewer false positives and lower for fewer false negatives
+                            var enemyTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/portalenter1.png"); // icon of the enemy
+                            var enemyMask =
+                                new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png"); // make white what the important parts are, other parts should be black
+                                                                                                //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+                            Point myPosition = new Point(recalc(150), recalc(128, false));
+                            Point screenResolution = new Point(screenWidth, screenHeight);
 
-                            float threshold = 0.7f;
-
-                            var portalTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
-                            var portalMask =
-                            new Image<Bgr, byte>(resourceFolder + "/portalentermask1.png");
-                            Point myPosition = new Point(150, 128);
-                            Point screenResolution = new Point(1920, 1080);
-
-                            var portalDetector = new EnemyDetector(portalTemplate, portalMask, threshold);
+                            // Main program loop
+                            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
                             var screenPrinter = new PrintScreen();
 
                             screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
                             var screenCapture = new Image<Bgr, byte>("screen.png");
-                            var portal = portalDetector.GetClosestEnemy(screenCapture);
-
-                            if (portal.HasValue)
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+                            if (enemy.HasValue)
                             {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Portal found..."));
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
                                 CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(portal.Value.X, portal.Value.Y), portalTemplate.Size),
+                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                     new MCvScalar(255));
-                                double x1 = 963f / myPosition.X;
-                                double y1 = 551f / myPosition.Y;
 
-                                var x2 = x1 * portal.Value.X;
-                                var y2 = y1 * portal.Value.Y;
-                                if (x2 <= 963)
-                                    x2 = x2 * 0.9f;
+                                double distance_x = (screenWidth - recalc(296)) / 2;
+                                double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                double multiplier = 1;
+                                var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
+
+                                if (dist < 180)
+                                {
+                                    multiplier = 1.2;
+                                }
+
+                                double posx;
+                                double posy;
+                                if (enemy_position.Item1 < (screenWidth / 2))
+                                {
+                                    posx = enemy_position.Item1 * (2 - multiplier);
+                                }
                                 else
-                                    x2 = x2 * 1.1f;
-                                if (y2 <= 551)
-                                    y2 = y2 * 0.9;
+                                {
+                                    posx = enemy_position.Item1 * multiplier;
+                                }
+                                if (enemy_position.Item2 < (screenHeight / 2))
+                                {
+                                    posy = enemy_position.Item2 * (2 - multiplier);
+                                }
                                 else
-                                    y2 = y2 * 1.1;
-                                var absolutePositions = PixelToAbsolute(x2, y2, screenResolution);
+                                {
+                                    posy = enemy_position.Item2 * multiplier;
+                                }
+
+
+                                var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                                 if (txtLEFT.Text == "LEFT")
                                 {
-                                    inputSimulator.Mouse.LeftButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 }
                                 else
                                 {
-                                    inputSimulator.Mouse.RightButtonClick();
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
                                 }
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
+
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                if (txtLEFT.Text == "LEFT")
+                                {
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                }
+                                else
+                                {
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
+                                }
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                             }
                             else
                             {
                             }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                            Random random = new Random();
-                            var sleepTime = random.Next(150, 255);
-                            Thread.Sleep(sleepTime);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch { }
+                searchSequence2 = 1;
+                var t12 = Task.Run(() => SEARCHBOSS2(token));
+                await Task.WhenAny(new[] { t12 });
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+
+        }
+
+        private async Task LEAVEDUNGEON(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    _Bard = false;
+                    _Shadowhunter = false;
+                    _Berserker = false;
+                    _Paladin = false;
+                    _Deathblade = false;
+                    _Sharpshooter = false;
+                    _Bard = false;
+                    _Sorcerer = false;
+                    _Soulfist = false;
+
+
+
+                    for (int i = 0; i < 1; i++)
+                    {
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(77), recalc(270, false), recalc(190), recalc(298, false), 0x29343F, 5);
+
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+         
+                            }
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(77), recalc(270, false), recalc(190), recalc(298, false), 0x29343F, 5);
+
+                            if (walk.ToString() != "1")
+                            {
+                                object[] walkCoord = (object[])walk;
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                             
+                            }
                         }
                         catch (AggregateException)
                         {
@@ -1451,8 +3626,8 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                var t12 = Task.Run(() => FLOOR1FIGHT(token));
-                await Task.WhenAny(new[] { t12 });
+                var t6 = Task.Run(() => LEAVEACCEPT(token));
+                await Task.WhenAny(new[] { t6 });
             }
             catch (AggregateException)
             {
@@ -1465,18 +3640,17 @@ namespace PixelAimbot
             catch { }
         }
 
-        private async Task LEAVEDUNGEON(CancellationToken token)
+        private async Task LEAVEDUNGEONCOMPLETE(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
 
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
-
+                    await Task.Delay(1, token);
                     _Shadowhunter = true;
                     _Paladin = true;
                     _Berserker = true;
@@ -1485,13 +3659,14 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(141), recalc(274, false), recalc(245), recalc(294, false), 0x29343F, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -1506,13 +3681,14 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(77, 270, 190, 298, 0x29343F, 5);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(141), recalc(274, false), recalc(245), recalc(294, false), 0x29343F, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove((int)walkCoord[0], (int)walkCoord[1], 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -1554,41 +3730,39 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
                     for (int i = 0; i < 1; i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch { }
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -1603,15 +3777,14 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            object walk = au3.PixelSearch(560, 260, 1382, 817, 0x21BD08, 1);
+                            await Task.Delay(1, token);
+                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
                             {
                                 object[] walkCoord = (object[])walk;
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
-                                au3.MouseClick("LEFT", (int)walkCoord[0], (int)walkCoord[1], 1, 5);
+                                au3.MouseMove(recalc(903), recalc(605, false), 5);
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                         }
                         catch (AggregateException)
@@ -1635,10 +3808,10 @@ namespace PixelAimbot
                 }
                 catch { }
 
-                Thread.Sleep(2000);
+                await Task.Delay(2000, token);
                 if (_REPAIR == true)
                 {
-                    Thread.Sleep(2000);
+                    await Task.Delay(2000, token);
                     var t7 = Task.Run(() => REPAIR(token));
                     await Task.WhenAny(new[] { t7 });
                 }
@@ -1651,7 +3824,9 @@ namespace PixelAimbot
                 else
                 if (_REPAIR == false && _LOGOUT == false)
                 {
-                    await Task.Delay(2000);
+                    _swap++;
+         
+                    await Task.Delay(7000, token);
                     var t9 = Task.Run(() => RESTART(token));
                     await Task.WhenAny(new[] { t9 });
                 }
@@ -1672,25 +3847,31 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
 
                 for (int i = 0; i < 1; i++)
                 {
                     try
                     {
-                        Thread.Sleep(20000);
+                        await Task.Delay(20000, token);
+
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(100, token);
+                        await Task.Delay(1, token);
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT Process starts..."));
-                        au3.Send("{ESCAPE}");
-                        Thread.Sleep(2000);
-                        au3.MouseClick("LEFT", 1238, 728, 1, 5);
-                        Thread.Sleep(2000);
-                        au3.MouseClick("LEFT", 906, 575, 1, 5);
-                        Thread.Sleep(1000);
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are loged out!"));
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
+                        await Task.Delay(2000, token);
+                        au3.MouseMove(recalc(1238), recalc(728, false),5);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(2000, token);
+                        au3.MouseMove(recalc(906), recalc(575, false), 5);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000, token);
+
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are logged out!"));
                         _start = false;
                         cts.Cancel();
+
+
                     }
                     catch (AggregateException)
                     {
@@ -1720,11 +3901,11 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
                     for (int i = 0; i < 1; i++)
                     {
@@ -1732,8 +3913,8 @@ namespace PixelAimbot
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            await Task.Delay(25000);
+                            await Task.Delay(1, token);
+                            await Task.Delay(25000, token);
                         }
                         catch (AggregateException)
                         {
@@ -1748,9 +3929,9 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-
-                            au3.MouseClick("LEFT", 1741, 1040, 1, 5);
+                            await Task.Delay(1, token);
+                            au3.MouseMove(recalc(1741), recalc(1040, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         }
                         catch (AggregateException)
                         {
@@ -1761,32 +3942,16 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
-                        await Task.Delay(2000);
+                        await Task.Delay(2000, token);
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            await Task.Delay(1, token);
 
-                            await Task.Delay(1500);
-                            au3.MouseClick("LEFT", 1684, 823, 1, 5);
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
-
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-
-                            await Task.Delay(1500);
-                            au3.MouseClick("LEFT", 1256, 693, 1, 5);
+                            await Task.Delay(1500, token);
+                            au3.MouseMove(recalc(1684), recalc(823, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                       
                         }
                         catch (AggregateException)
                         {
@@ -1801,19 +3966,40 @@ namespace PixelAimbot
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            await Task.Delay(1500);
-                            au3.MouseClick("LEFT", 1085, 429, 1, 5);
+                            await Task.Delay(1, token);
+
+                            await Task.Delay(1500, token);
+                            au3.MouseMove(recalc(1256), recalc(693, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+
+                        try
+                        {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            await Task.Delay(1500);
-                            au3.Send("{ESCAPE}");
-                            await Task.Delay(1000);
-                            au3.Send("{ESCAPE}");
+                            await Task.Delay(1, token);
+                            await Task.Delay(1500, token);
+                            au3.MouseMove(recalc(1085), recalc(429, false), 5);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            await Task.Delay(1500, token);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
+                            await Task.Delay(1000, token);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
                             _REPAIR = false;
                             _REPAIR = false;
-                            REPAIRTIMER();
+                            var repair = Task.Run(() => REPAIRTIMER(token));
                         }
                         catch (AggregateException)
                         {
@@ -1835,7 +4021,7 @@ namespace PixelAimbot
                     Console.WriteLine("Bug");
                 }
                 catch { }
-                await Task.Delay(2000);
+                await Task.Delay(2000, token);
                 var t10 = Task.Run(() => RESTART_AFTERREPAIR(token));
                 await Task.WhenAny(new[] { t10 });
             }
@@ -1854,48 +4040,95 @@ namespace PixelAimbot
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-                try
+                bool restart = false;
+                while (!restart)
                 {
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
-                    for (int i = 0; i < 1; i++)
+
+                    float threshold = 0.9f;
+                    var handTemplate =
+                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeon.png");
+                    var handMask =
+                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeonmask.png");
+                   
+                    var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
+
+                    var screenPrinter = new PrintScreen();
+
+                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
+                    var screenCapture = new Image<Bgr, byte>("screen.png");
+                    var hand = handDetector.GetClosestItem(screenCapture);
+
+                    if (!hand.HasValue)
                     {
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot Paused: Resume in " + int.Parse(txtRestartTimer.Text) + " seconds."));
-                            Thread.Sleep(int.Parse(txtRestartTimer.Text) * 1000);
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(50, token);
+                    }
+                    else
+                    {
+                        restart = true;
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon found!"));
+
                     }
                 }
-                catch (AggregateException)
+                if (restart == true && chBoxChannelSwap.Checked == true)
                 {
-                    Console.WriteLine("Expected");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("Bug");
-                }
-                catch { }
+                    
+                    if (_swap == 3)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(124, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap++;
+                        restart = false;
+                        await Task.Delay(2000);
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                       
+                    }
+                    else
+                    if (_swap == 6)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(103, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap++;
+                        restart = false;
+                        await Task.Delay(2000);
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                    }
+                    else
+                    if (_swap == 9)
+                    {
+                        au3.MouseMove(recalc(1875), recalc(16, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        await Task.Delay(1000);
+                        au3.MouseMove(recalc(1875), recalc(123, false), 10);
+                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        au3.MouseMove(recalc(1845), recalc(84, false), 10);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        _swap = 0;
+                        restart = false;
+                        await Task.Delay(2000);
+                        var t9 = Task.Run(() => RESTART(token));
+                        await Task.WhenAny(new[] { t9 });
+                    }
 
-
-                Thread.Sleep(2000);
-                var t1 = Task.Run(() => START(token));
-                await Task.WhenAny(new[] { t1 });
+                }
             }
+
             catch (AggregateException)
             {
                 Console.WriteLine("Expected");
@@ -1905,6 +4138,14 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
+
+            if (restart == true)
+            {
+                await Task.Delay(2000, token);
+                var t1 = Task.Run(() => START(token));
+                await Task.WhenAny(new[] { t1 });
+            }
+
         }
 
         private async Task RESTART_AFTERREPAIR(CancellationToken token)
@@ -1912,20 +4153,20 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
+                await Task.Delay(1, token);
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
 
                     for (int i = 0; i < 1; i++)
                     {
                         try
                         {
                             token.ThrowIfCancellationRequested();
-                            await Task.Delay(100, token);
+                            await Task.Delay(1, token);
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
-                            Thread.Sleep(4000);
+                            await Task.Delay(4000, token);
                         }
                         catch (AggregateException)
                         {
@@ -1973,42 +4214,42 @@ namespace PixelAimbot
             Layout_Keyboard QWERTZ = new Layout_Keyboard
             {
                 LAYOUTS = "QWERTZ",
-                Q = VirtualKeyCode.VK_Q,
-                W = VirtualKeyCode.VK_W,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_A,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F,
+                Q = KeyboardWrapper.VK_Q,
+                W = KeyboardWrapper.VK_W,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_A,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F,
             };
             LAYOUT.Add(QWERTZ);
 
             Layout_Keyboard QWERTY = new Layout_Keyboard
             {
                 LAYOUTS = "QWERTY",
-                Q = VirtualKeyCode.VK_Q,
-                W = VirtualKeyCode.VK_W,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_A,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F,
+                Q = KeyboardWrapper.VK_Q,
+                W = KeyboardWrapper.VK_W,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_A,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F,
             };
             LAYOUT.Add(QWERTY);
 
             Layout_Keyboard AZERTY = new Layout_Keyboard
             {
                 LAYOUTS = "AZERTY",
-                Q = VirtualKeyCode.VK_A,
-                W = VirtualKeyCode.VK_Z,
-                E = VirtualKeyCode.VK_E,
-                R = VirtualKeyCode.VK_R,
-                A = VirtualKeyCode.VK_Q,
-                S = VirtualKeyCode.VK_S,
-                D = VirtualKeyCode.VK_D,
-                F = VirtualKeyCode.VK_F
+                Q = KeyboardWrapper.VK_A,
+                W = KeyboardWrapper.VK_Z,
+                E = KeyboardWrapper.VK_E,
+                R = KeyboardWrapper.VK_R,
+                A = KeyboardWrapper.VK_Q,
+                S = KeyboardWrapper.VK_S,
+                D = KeyboardWrapper.VK_D,
+                F = KeyboardWrapper.VK_F
             };
             LAYOUT.Add(AZERTY);
 
@@ -2017,9 +4258,9 @@ namespace PixelAimbot
             currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
-            txtDungeon.Text = Properties.Settings.Default.dungeontimer;
+            txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
             txtLEFT.Text = Properties.Settings.Default.left;
-            txtRIGHT.Text = Properties.Settings.Default.right;
+
             txQ.Text = Properties.Settings.Default.q;
             txW.Text = Properties.Settings.Default.w;
             txE.Text = Properties.Settings.Default.e;
@@ -2036,20 +4277,26 @@ namespace PixelAimbot
             txCoolS.Text = Properties.Settings.Default.cS;
             txCoolD.Text = Properties.Settings.Default.cD;
             txCoolF.Text = Properties.Settings.Default.cF;
-            txtInstant.Text = Properties.Settings.Default.instant;
-            txtHeal.Text = Properties.Settings.Default.potion;
-            checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
-            checkBoxHeal.Checked = Properties.Settings.Default.chboxheal;
+            txtHeal30.Text = Properties.Settings.Default.instant;
+            txtHeal70.Text = Properties.Settings.Default.potion;
+            checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+            checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
             chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
             txtRepair.Text = Properties.Settings.Default.autorepair;
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
-            txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
-            chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+            chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
+            chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
             txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+            txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
+            txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
+            chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+            txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
+            txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
+
         }
 
         private void ChaosBot_MouseDown(object sender, MouseEventArgs e)
@@ -2063,29 +4310,29 @@ namespace PixelAimbot
 
         private void checkBoxInstant_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxInstant.Checked)
+            if (checkBoxHeal30.Checked)
             {
-                txtInstant.ReadOnly = false;
+                txtHeal30.ReadOnly = false;
             }
             else
-            if (!checkBoxInstant.Checked)
+            if (!checkBoxHeal30.Checked)
             {
-                txtInstant.ReadOnly = true;
-                txtInstant.Text = "";
+                txtHeal30.ReadOnly = true;
+                txtHeal30.Text = "";
             }
         }
 
         private void checkBoxHeal_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxHeal.Checked)
+            if (checkBoxHeal70.Checked)
             {
-                txtHeal.ReadOnly = false;
+                txtHeal70.ReadOnly = false;
             }
             else
-            if (!checkBoxHeal.Checked)
+            if (!checkBoxHeal70.Checked)
             {
-                txtHeal.ReadOnly = true;
-                txtHeal.Text = "";
+                txtHeal70.ReadOnly = true;
+                txtHeal70.Text = "";
             }
         }
 
@@ -2132,21 +4379,48 @@ namespace PixelAimbot
         {
             try
             {
-                Properties.Settings.Default.dungeontimer = "65";
+                Properties.Settings.Default.txtDungeon3Iteration = "12";
+                Properties.Settings.Default.txtDungeon2Iteration = "9";
+
+                Properties.Settings.Default.txtPortalSearch = "12";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
+                Properties.Settings.Default.heal10 = "";
                 Properties.Settings.Default.chboxinstant = false;
                 Properties.Settings.Default.chboxheal = false;
                 Properties.Settings.Default.chBoxAutoRepair = false;
+                Properties.Settings.Default.chBoxLOGOUT = false;
+                Properties.Settings.Default.txtLOGOUT = "";
                 Properties.Settings.Default.autorepair = "10";
                 Properties.Settings.Default.chBoxShadowhunter = false;
+                Properties.Settings.Default.chBoxSoulfist = false;
                 Properties.Settings.Default.chBoxBerserker = false;
+                Properties.Settings.Default.chBoxBard = false;
                 Properties.Settings.Default.chboxPaladin = false;
-                Properties.Settings.Default.RestartTimer = "25";
+                Properties.Settings.Default.chBoxChannelSwap = false;
                 Properties.Settings.Default.chBoxSaveAll = false;
                 Properties.Settings.Default.chBoxActivateF2 = false;
-                Properties.Settings.Default.txtDungeon2 = "18";
+                Properties.Settings.Default.txtDungeon2 = "15";
                 Properties.Settings.Default.txtDungeon2search = "7";
+                Properties.Settings.Default.txtDungeon3 = "20";
+                Properties.Settings.Default.txtDungeon3search = "10";
+                Properties.Settings.Default.chBoxActivateF3 = false;
+                Properties.Settings.Default.chBoxAutoMovement = false;
+
+
+                Properties.Settings.Default.chBoxSharpshooter = false;
+                Properties.Settings.Default.chBoxSorcerer = false;
+                Properties.Settings.Default.chBoxDeathblade = false;
+
+                Properties.Settings.Default.RQ = "1";
+                Properties.Settings.Default.RW = "2";
+                Properties.Settings.Default.RE = "3";
+                Properties.Settings.Default.RR = "4";
+                Properties.Settings.Default.RA = "5";
+                Properties.Settings.Default.RS = "6";
+                Properties.Settings.Default.RD = "7";
+                Properties.Settings.Default.RF = "8";
+
                 Properties.Settings.Default.cQ = "500";
                 Properties.Settings.Default.cW = "500";
                 Properties.Settings.Default.cE = "500";
@@ -2164,20 +4438,39 @@ namespace PixelAimbot
                 Properties.Settings.Default.d = "500";
                 Properties.Settings.Default.f = "500";
 
+                Properties.Settings.Default.chBoxDoubleQ = false;
+                Properties.Settings.Default.chBoxDoubleW = false;
+                Properties.Settings.Default.chBoxDoubleE = false;
+                Properties.Settings.Default.chBoxDoubleR = false;
+                Properties.Settings.Default.chBoxDoubleA = false;
+                Properties.Settings.Default.chBoxDoubleS = false;
+                Properties.Settings.Default.chBoxDoubleD = false;
+                Properties.Settings.Default.chBoxDoubleF = false;
+
                 Properties.Settings.Default.Save();
 
-                txtDungeon.Text = Properties.Settings.Default.dungeontimer;
-                txtInstant.Text = Properties.Settings.Default.instant;
-                txtHeal.Text = Properties.Settings.Default.potion;
-                checkBoxInstant.Checked = Properties.Settings.Default.chboxinstant;
-                checkBoxHeal.Checked = Properties.Settings.Default.chboxheal;
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
+                txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
+                txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
+                txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
+                txtHeal10.Text = Properties.Settings.Default.instant;
+                chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
+                txtHeal30.Text = Properties.Settings.Default.instant;
+                txtHeal70.Text = Properties.Settings.Default.potion;
+                checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+                checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
+                checkBoxHeal10.Checked = Properties.Settings.Default.checkBoxHeal10;
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
                 txtRepair.Text = Properties.Settings.Default.autorepair;
                 chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
                 chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
                 chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
-                txtRestartTimer.Text = Properties.Settings.Default.RestartTimer;
-                chBoxSaveAll.Checked = Properties.Settings.Default.chBoxSaveAll;
+                chBoxDeathblade.Checked = Properties.Settings.Default.chBoxDeathblade;
+                chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
+                chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
+                chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
+                chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
                 chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
                 txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
                 txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
@@ -2189,15 +4482,37 @@ namespace PixelAimbot
                 txCoolS.Text = Properties.Settings.Default.cS;
                 txCoolD.Text = Properties.Settings.Default.cD;
                 txCoolF.Text = Properties.Settings.Default.cF;
+                txtLOGOUT.Text = Properties.Settings.Default.txtLOGOUT;
+                txQ.Text = Properties.Settings.Default.q;
+                txW.Text = Properties.Settings.Default.w;
+                txE.Text = Properties.Settings.Default.e;
+                txR.Text = Properties.Settings.Default.r;
+                txA.Text = Properties.Settings.Default.a;
+                txS.Text = Properties.Settings.Default.s;
+                txD.Text = Properties.Settings.Default.d;
+                txF.Text = Properties.Settings.Default.f;
 
-                txQ.Text = Properties.Settings.Default.cQ;
-                txW.Text = Properties.Settings.Default.cW;
-                txE.Text = Properties.Settings.Default.cE;
-                txR.Text = Properties.Settings.Default.cR;
-                txA.Text = Properties.Settings.Default.cA;
-                txS.Text = Properties.Settings.Default.cS;
-                txD.Text = Properties.Settings.Default.cD;
-                txF.Text = Properties.Settings.Default.cF;
+
+                txPQ.Text = Properties.Settings.Default.RQ;
+                txPW.Text = Properties.Settings.Default.RW;
+                txPE.Text = Properties.Settings.Default.RE;
+                txPR.Text = Properties.Settings.Default.RR;
+                txPA.Text = Properties.Settings.Default.RA;
+                txPS.Text = Properties.Settings.Default.RS;
+                txPD.Text = Properties.Settings.Default.RD;
+                txPF.Text = Properties.Settings.Default.RF;
+                chBoxDoubleQ.Checked = Properties.Settings.Default.chBoxDoubleQ;
+                chBoxDoubleW.Checked = Properties.Settings.Default.chBoxDoubleW;
+                chBoxDoubleE.Checked = Properties.Settings.Default.chBoxDoubleE;
+                chBoxDoubleR.Checked = Properties.Settings.Default.chBoxDoubleR;
+                chBoxDoubleA.Checked = Properties.Settings.Default.chBoxDoubleA;
+                chBoxDoubleS.Checked = Properties.Settings.Default.chBoxDoubleS;
+                chBoxDoubleD.Checked = Properties.Settings.Default.chBoxDoubleD;
+                chBoxDoubleF.Checked = Properties.Settings.Default.chBoxDoubleF;
+                txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
+                txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
+                chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+                chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
             }
             catch { }
         }
@@ -2207,115 +4522,171 @@ namespace PixelAimbot
             frmGuide Form = new frmGuide();
             Form.Show();
         }
-
+        private string translateKey(int key)
+        {
+            string translate = "";
+            switch(key)
+            {
+                case 81:
+                    translate = "Q";
+                    break;
+                case 87:
+                    translate = "W";
+                    break;
+                case 69:
+                    translate = "E";
+                    break;
+                case 82:
+                    translate = "R";
+                    break;
+                case 65:
+                    translate = "A";
+                    break;
+                case 83:
+                    translate = "S";
+                    break;
+                case 68:
+                    translate = "D";
+                    break;
+                case 70:
+                    translate = "F";
+                    break;
+                case 90:
+                    translate = "Z";
+                    break;
+                default:
+                    translate = key.ToString();
+                    break;
+            }
+            return translate;
+        }
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Layout_Keyboard currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
-            lbQ.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lbW.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lbE.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lbR.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lbA.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lbS.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lbD.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lbF.Text = currentLayout.F.ToString().Replace("VK_", "");
+            lbPQ.Text = lb2Q.Text = lbQ.Text = translateKey(currentLayout.Q);
+            lbPW.Text = lb2W.Text = lbW.Text = translateKey(currentLayout.W);
+            lbPE.Text = lb2E.Text = lbE.Text = translateKey(currentLayout.E);
+            lbPR.Text = lb2R.Text = lbR.Text = translateKey(currentLayout.R);
+            lbPA.Text = lb2A.Text = lbA.Text = translateKey(currentLayout.A);
+            lbPS.Text = lb2S.Text = lbS.Text = translateKey(currentLayout.S);
+            lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
+            lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
 
-            lb2Q.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lb2W.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lb2E.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lb2R.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lb2A.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lb2S.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lb2D.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lb2F.Text = currentLayout.F.ToString().Replace("VK_", "");
-
-            lbPQ.Text = currentLayout.Q.ToString().Replace("VK_", "");
-            lbPW.Text = currentLayout.W.ToString().Replace("VK_", "");
-            lbPE.Text = currentLayout.E.ToString().Replace("VK_", "");
-            lbPR.Text = currentLayout.R.ToString().Replace("VK_", "");
-            lbPA.Text = currentLayout.A.ToString().Replace("VK_", "");
-            lbPS.Text = currentLayout.S.ToString().Replace("VK_", "");
-            lbPD.Text = currentLayout.D.ToString().Replace("VK_", "");
-            lbPF.Text = currentLayout.F.ToString().Replace("VK_", "");
         }
 
-        public async void SkillCooldown(CancellationToken token, VirtualKeyCode key)
+        public async void SharpshooterSecondPress(CancellationToken token)
         {
             try
             {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(3000, token);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+               
+
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        public async void SkillCooldown(CancellationToken token, byte key)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
                 for (int i = 0; i <= 1; i++)
                 {
                     token.ThrowIfCancellationRequested();
                     int cooldownDuration = 0;
-                    await Task.Delay(100, token);
+                    await Task.Delay(1, token);
                     switch (key)
                     {
-                        case VirtualKeyCode.VK_A:
+                        case KeyboardWrapper.VK_A:
                             cooldownDuration = int.Parse(txCoolA.Text);
                             break;
-                        case VirtualKeyCode.VK_S:
+
+                        case KeyboardWrapper.VK_S:
                             cooldownDuration = int.Parse(txCoolS.Text);
 
                             break;
-                        case VirtualKeyCode.VK_D:
+
+                        case KeyboardWrapper.VK_D:
                             cooldownDuration = int.Parse(txCoolD.Text);
 
                             break;
-                        case VirtualKeyCode.VK_F:
+
+                        case KeyboardWrapper.VK_F:
                             cooldownDuration = int.Parse(txCoolF.Text);
 
                             break;
-                        case VirtualKeyCode.VK_Q:
+
+                        case KeyboardWrapper.VK_Q:
                             cooldownDuration = int.Parse(txCoolQ.Text);
 
                             break;
-                        case VirtualKeyCode.VK_W:
+
+                        case KeyboardWrapper.VK_W:
                             cooldownDuration = int.Parse(txCoolW.Text);
 
                             break;
-                        case VirtualKeyCode.VK_E:
+
+                        case KeyboardWrapper.VK_E:
                             cooldownDuration = int.Parse(txCoolE.Text);
 
                             break;
-                        case VirtualKeyCode.VK_R:
+
+                        case KeyboardWrapper.VK_R:
                             cooldownDuration = int.Parse(txCoolR.Text);
                             break;
                     }
                     timer = new System.Timers.Timer(cooldownDuration);
                     switch (key)
                     {
-                        case VirtualKeyCode.VK_A:
+                        case KeyboardWrapper.VK_A:
                             timer.Elapsed += A_CooldownEvent;
                             break;
-                        case VirtualKeyCode.VK_S:
+
+                        case KeyboardWrapper.VK_S:
                             timer.Elapsed += S_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_D:
+
+                        case KeyboardWrapper.VK_D:
                             timer.Elapsed += D_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_F:
+
+                        case KeyboardWrapper.VK_F:
                             timer.Elapsed += F_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_Q:
+
+                        case KeyboardWrapper.VK_Q:
                             timer.Elapsed += Q_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_W:
+
+                        case KeyboardWrapper.VK_W:
                             timer.Elapsed += W_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_E:
+
+                        case KeyboardWrapper.VK_E:
                             timer.Elapsed += E_CooldownEvent;
 
                             break;
-                        case VirtualKeyCode.VK_R:
+
+                        case KeyboardWrapper.VK_R:
                             timer.Elapsed += R_CooldownEvent;
                             break;
                     }
-                    timer.AutoReset = true;
+                    timer.AutoReset = false;
                     timer.Enabled = true;
                 }
             }
@@ -2335,48 +4706,35 @@ namespace PixelAimbot
             _Q = true;
         }
 
-
-
         private void W_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _W = true;
         }
-
-
 
         private void E_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _E = true;
         }
 
-
-
         private void R_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _R = true;
         }
-
-
 
         private void A_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _A = true;
         }
 
-
-
         private void S_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _S = true;
         }
 
-
-
         private void D_CooldownEvent(object source, ElapsedEventArgs e)
         {
             _D = true;
         }
-
 
         private void F_CooldownEvent(object source, ElapsedEventArgs e)
         {
@@ -2386,27 +4744,44 @@ namespace PixelAimbot
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
 
-            foreach (KeyValuePair<VirtualKeyCode, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
-            {
-                MessageBox.Show(skill.Key + " " + skill.Value);
-            }
+
             if (comboBoxRotations.Text != "")
             {
                 if (comboBoxRotations.Text != "main")
                 {
-                    rotation.dungeontimer = txtDungeon.Text;
-                    rotation.instant = txtInstant.Text;
-                    rotation.potion = txtHeal.Text;
-                    rotation.chboxinstant = checkBoxInstant.Checked;
-                    rotation.chboxheal = checkBoxHeal.Checked;
+                    rotation.txtDungeon2Iteration = txtDungeon2Iteration.Text;
+                    rotation.txtDungeon3Iteration = txtDungeon3Iteration.Text;
+
+                    rotation.txtPortalSearch = txtPortalSearch.Text;
+                    rotation.instant = txtHeal30.Text;
+                    rotation.potion = txtHeal70.Text;
+                    rotation.txtHeal10 = txtHeal10.Text;
+                    rotation.chboxinstant = (bool)checkBoxHeal30.Checked;
+                    rotation.chboxheal = (bool)checkBoxHeal70.Checked;
+                    rotation.chboxheal10 = (bool)checkBoxHeal10.Checked;
                     rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
-                    rotation.chBoxShadowhunter = chBoxY.Checked;
+
+                    rotation.autologout = txtLOGOUT.Text;
+                    rotation.chBoxautologout = chBoxLOGOUT.Checked;
+                    rotation.chBoxAutoMovement = chBoxAutoMovement.Checked;
+                    rotation.autorepair = txtRepair.Text;
+                    rotation.chBoxShadowhunter = (bool)chBoxY.Checked;
                     rotation.chboxPaladin = (bool)chBoxPaladin.Checked;
-                    rotation.chBoxBerserker = chBoxBerserker.Checked;
-                    rotation.RestartTimer = txtRestartTimer.Text;
-                    rotation.chBoxSaveAll = chBoxSaveAll.Checked;
+                    rotation.chBoxBerserker = (bool)chBoxBerserker.Checked;
+                    rotation.chBoxDeathblade = (bool)chBoxDeathblade.Checked;
+                    rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
+                    rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
+                    rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
+                    rotation.chBoxBard = (bool)chBoxBard.Checked;
+                    rotation.chBoxChannelSwap = (bool)chBoxChannelSwap.Checked;
+                    rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
+                    rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
+                    rotation.txtDungeon3search = txtDungeon3search.Text;
+                    rotation.txtDungeon3 = txtDungeon3.Text;
+                    rotation.txtLEFT = txtLEFT.Text;
+
                     rotation.txtDungeon2search = txtDungeon2search.Text;
                     rotation.txtDungeon2 = txtDungeon2.Text;
                     rotation.cQ = txCoolQ.Text;
@@ -2433,6 +4808,15 @@ namespace PixelAimbot
                     rotation.pS = txPS.Text;
                     rotation.pD = txPD.Text;
                     rotation.pF = txPF.Text;
+                    rotation.chBoxDoubleQ = chBoxDoubleQ.Checked;
+                    rotation.chBoxDoubleW = chBoxDoubleW.Checked;
+                    rotation.chBoxDoubleE = chBoxDoubleE.Checked;
+                    rotation.chBoxDoubleR = chBoxDoubleR.Checked;
+                    rotation.chBoxDoubleA = chBoxDoubleA.Checked;
+                    rotation.chBoxDoubleS = chBoxDoubleS.Checked;
+                    rotation.chBoxDoubleD = chBoxDoubleD.Checked;
+                    rotation.chBoxDoubleF = chBoxDoubleF.Checked;
+
 
                     rotation.Save(comboBoxRotations.Text);
                     MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -2454,19 +4838,35 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
-
-                txtDungeon.Text = rotation.dungeontimer;
-                txtInstant.Text = rotation.instant;
-                txtHeal.Text = rotation.potion;
-                checkBoxInstant.Checked = rotation.chboxinstant;
-                checkBoxHeal.Checked = rotation.chboxheal;
+                txtLEFT.Text = rotation.left;
+                txtPortalSearch.Text = rotation.txtPortalSearch;
+                txtHeal30.Text = rotation.instant;
+                txtHeal70.Text = rotation.potion;
+                checkBoxHeal30.Checked = rotation.chboxinstant;
+                checkBoxHeal70.Checked = rotation.chboxheal;
+                checkBoxHeal10.Checked = rotation.chboxheal10;
                 chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
                 txtRepair.Text = rotation.autorepair;
                 chBoxY.Checked = rotation.chBoxShadowhunter;
                 chBoxPaladin.Checked = rotation.chboxPaladin;
                 chBoxBerserker.Checked = rotation.chBoxBerserker;
-                txtRestartTimer.Text = rotation.RestartTimer;
-                chBoxSaveAll.Checked = rotation.chBoxSaveAll;
+                chBoxBard.Checked = rotation.chBoxBard;
+                chBoxDeathblade.Checked = rotation.chBoxDeathblade;
+                chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
+                chBoxSoulfist.Checked = rotation.chBoxSoulfist;
+                txtLOGOUT.Text = rotation.autologout;
+                chBoxLOGOUT.Checked = rotation.chBoxautologout;
+                txtHeal10.Text = rotation.txtHeal10;
+                txtDungeon2Iteration.Text = rotation.txtDungeon2Iteration;
+                txtDungeon3Iteration.Text = rotation.txtDungeon3Iteration;
+                chBoxAutoMovement.Checked = rotation.chBoxAutoMovement;
+                chBoxActivateF3.Checked = rotation.chBoxActivateF3;
+                txtDungeon3search.Text = rotation.txtDungeon3search;
+                txtDungeon3.Text = rotation.txtDungeon3;
+
+                chBoxSorcerer.Checked = rotation.chBoxSorcerer;
+                chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;
+                chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;
                 txtDungeon2search.Text = rotation.txtDungeon2search;
                 txtDungeon2.Text = rotation.txtDungeon2;
@@ -2494,6 +4894,16 @@ namespace PixelAimbot
                 txPS.Text = rotation.pS;
                 txPD.Text = rotation.pD;
                 txPF.Text = rotation.pF;
+                chBoxDoubleQ.Checked = rotation.chBoxDoubleQ;
+                chBoxDoubleW.Checked = rotation.chBoxDoubleW;
+                chBoxDoubleE.Checked = rotation.chBoxDoubleE;
+                chBoxDoubleR.Checked = rotation.chBoxDoubleR;
+                chBoxDoubleA.Checked = rotation.chBoxDoubleA;
+                chBoxDoubleS.Checked = rotation.chBoxDoubleS;
+                chBoxDoubleD.Checked = rotation.chBoxDoubleD;
+                chBoxDoubleF.Checked = rotation.chBoxDoubleF;
+
+
 
                 MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
@@ -2511,18 +4921,111 @@ namespace PixelAimbot
 
         private void changeSkillSet(object sender, EventArgs e)
         {
-           SKILLS.skillset = new Dictionary<VirtualKeyCode, int>()
+            if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" && txPW.Text != "" && txPE.Text != "" && txPR.Text != "")
+                SKILLS.skillset = new Dictionary<byte, int>()
             {
-                { VirtualKeyCode.VK_A, int.Parse(txPA.Text) },
-                { VirtualKeyCode.VK_S, int.Parse(txPS.Text)},
-                { VirtualKeyCode.VK_D, int.Parse(txPD.Text)},
-                { VirtualKeyCode.VK_F, int.Parse(txPF.Text)},
-                { VirtualKeyCode.VK_Q, int.Parse(txPQ.Text)},
-                { VirtualKeyCode.VK_W, int.Parse(txPW.Text)},
-                { VirtualKeyCode.VK_E, int.Parse(txPE.Text)},
-                { VirtualKeyCode.VK_R, int.Parse(txPR.Text)},
+                { KeyboardWrapper.VK_A, int.Parse(txPA.Text)},
+                { KeyboardWrapper.VK_S, int.Parse(txPS.Text)},
+                { KeyboardWrapper.VK_D, int.Parse(txPD.Text)},
+                { KeyboardWrapper.VK_F, int.Parse(txPF.Text)},
+                { KeyboardWrapper.VK_Q, int.Parse(txPQ.Text)},
+                { KeyboardWrapper.VK_W, int.Parse(txPW.Text)},
+                { KeyboardWrapper.VK_E, int.Parse(txPE.Text)},
+                { KeyboardWrapper.VK_R, int.Parse(txPR.Text)},
             }.ToList();
         }
 
+        private void chBoxActivateF2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxActivateF2.Checked)
+            {
+                txtDungeon2search.ReadOnly = false;
+                txtDungeon2.ReadOnly = false;
+                txtDungeon2Iteration.ReadOnly = false;
+
+            }
+            else
+               if (!chBoxActivateF2.Checked)
+            {
+                txtDungeon2search.ReadOnly = true;
+                txtDungeon2.ReadOnly = true;
+                txtDungeon2Iteration.ReadOnly = true;
+
+            }
+        }
+
+        private void chBoxActivateF3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxActivateF3.Checked)
+            {
+                txtDungeon3search.ReadOnly = false;
+                txtDungeon3.ReadOnly = false;
+                txtDungeon3Iteration.ReadOnly = false;
+            }
+            else
+              if (!chBoxActivateF3.Checked)
+            {
+                txtDungeon3search.ReadOnly = true;
+                txtDungeon3.ReadOnly = true;
+                txtDungeon3Iteration.ReadOnly = true;
+
+            }
+        }
+        private void checkBoxHeal10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = false;
+              
+            }
+            else
+              if (!checkBoxHeal10.Checked)
+            {
+                txtHeal10.ReadOnly = true;
+               
+
+            }
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+
+                object fight = au3.PixelSearch(recalc(114), recalc(208, false), recalc(168), recalc(220, false), 0xDBC7AC, 5);
+                if (fight.ToString() != "1" && Search == false)
+                {
+                    object[] fightCoord = (object[])fight;
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal detected"));
+
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+
+        private void lbStatus_TextChanged(object sender, EventArgs e)
+        {
+            formMinimized.labelMinimizedState.Text = lbStatus.Text;
+        }
+
+        private void textBoxTelegramAPI_TextChanged(object sender, EventArgs e)
+        {
+            conf.telegram = textBoxTelegramAPI.Text;
+            conf.Save();
+            if (!telegramBotRunning)
+            {
+                _ = RunBotAsync(textBoxTelegramAPI.Text);
+            }
+        }
     }
 }

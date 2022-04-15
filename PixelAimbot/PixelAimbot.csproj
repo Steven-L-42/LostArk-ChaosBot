@@ -331,6 +331,9 @@
     <Reference Include="System.Threading.Tasks.Dataflow, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Dataflow.6.0.0\lib\net461\System.Threading.Tasks.Dataflow.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -345,6 +348,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telegram.Bot, Version=18.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telegram.Bot.18.0.0-alpha.1\lib\netstandard2.0\Telegram.Bot.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
       <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
@@ -358,8 +364,11 @@
       <DependentUpon>ChaosBot.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Auth\Access.cs" />
+    <Compile Include="Classes\Misc\KeyboardWrapper.cs" />
+    <Compile Include="Classes\OpenCV\ScreenDetector.cs" />
+    <Compile Include="Classes\OpenCV\PortalDetectors.cs" />
     <Compile Include="Classes\Misc\Config.cs" />
-    <Compile Include="Classes\EnemyDetector.cs" />
+    <Compile Include="Classes\OpenCV\EnemyDetector.cs" />
     <Compile Include="Classes\Misc\BlowFish.cs" />
     <Compile Include="Classes\Misc\CustomProgressBar.cs">
       <SubType>Component</SubType>
@@ -367,6 +376,7 @@
     <Compile Include="Classes\Misc\HWID.cs" />
     <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
+    <Compile Include="Classes\OpenCV\EnterDetectors.cs" />
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,6 +391,18 @@
     </Compile>
     <Compile Include="Classes\Misc\Layout_Keyboard.cs" />
     <Compile Include="Classes\Misc\PrintScreen.cs" />
+    <Compile Include="frmMinimized.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMinimized.Designer.cs">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="prioSkills\Prio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -393,12 +415,17 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMinimized.resx">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Confuser.crproj" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -458,25 +485,65 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\boss.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\bossmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\boss.png">
+    <Content Include="Resources\bossmask1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\boss1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ChaosDungeon-Bot.ico" />
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\ChaosDungeon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ChaosDungeonmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\check_if_citymask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\check_if_city.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\siebzehnprozent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\siebzehnprozentmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\debug.png" />
     <Content Include="Resources\enemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ImageSearchDLL.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\handmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\hand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\hud.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\TUT8.png" />
+    <None Include="Resources\TUT7.png" />
+    <None Include="Resources\TUT6.png" />
+    <None Include="Resources\TUT5.png" />
+    <None Include="Resources\TUT4.png" />
+    <None Include="Resources\TUT3.png" />
+    <None Include="Resources\TUT2.png" />
+    <None Include="Resources\TUT1.png" />
+    <None Include="Resources\keylayout.png" />
     <Content Include="Resources\mask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -501,9 +568,26 @@
     <Content Include="Resources\resoulution.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\revive.png">
+    <Content Include="Resources\revive1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\reviveEnglish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\reviveEnglishmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\revivemask1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\shardmask.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\shard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\windowssettings1.png" />
+    <None Include="Resources\windowssettings.png" />
     <None Include="Resources\New_Login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

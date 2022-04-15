@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
 
 namespace PixelAimbot.Classes.Auth
 {
     public static class Access
     {
-
-
         public static void CheckAccessAsyncCall()
         {
             try
@@ -22,14 +18,14 @@ namespace PixelAimbot.Classes.Auth
                 HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
                 var webClient = new WebClient();
                 webClient.CachePolicy = noCachePolicy;
-                
+
                 var values = new NameValueCollection
                 {
                     ["username"] = PixelAimbot.frmLogin.username,
                     ["password"] = PixelAimbot.frmLogin.password,
                     ["hwid"] = PixelAimbot.frmLogin.hwid
                 };
-                
+
                 webClient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/checkUser"), values);
                 webClient.UploadValuesCompleted += (s, e) =>
                 {
@@ -49,23 +45,21 @@ namespace PixelAimbot.Classes.Auth
                 MessageBox.Show("Webserver currently not Available! Try Again later.");
             }
         }
-        
+
         public static bool CheckAccess(byte[] response)
         {
             try
             {
-
                 var values = new NameValueCollection();
                 values["username"] = PixelAimbot.frmLogin.username;
                 values["password"] = PixelAimbot.frmLogin.password;
                 values["hwid"] = Misc.HWID.Get();
-             //   Misc.Config config = new Misc.Config();
-             //   config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
-             //   config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
-             //   config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
+                //   Misc.Config config = new Misc.Config();
+                //   config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
+                //   config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
+                //   config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
 
-//                config.Save();
-               
+                //                config.Save();
 
                 var responseString = Encoding.Default.GetString(response);
                 PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
@@ -105,27 +99,5 @@ namespace PixelAimbot.Classes.Auth
                 return false;
             }
         }
-
-        public static string CheckAccessMainForm(byte[] response)
-        {
-            try
-            {
-                var responseString = Encoding.Default.GetString(response);
-                PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
-
-                return PixelAimbot.frmLogin.LicenceInformations["message"].ToString();
-            }
-            catch (WebException)
-            {
-                
-                return "false";
-            }
-            catch (Exception ex)
-            {
-                
-                return "false";
-            }
-        }
-        
     }
 }
