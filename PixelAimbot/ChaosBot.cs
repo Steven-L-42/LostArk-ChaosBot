@@ -922,7 +922,7 @@ namespace PixelAimbot
             Bitmap bitmapImage = new Bitmap(rawScreen);
             var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
-            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
+            var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
             if (enemy.HasValue)
             {
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
@@ -1126,11 +1126,11 @@ namespace PixelAimbot
                             Bitmap bitmapImage = new Bitmap(rawScreen);
                             var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
-                            var shard = shardDetector.GetClosestEnemy(screenCapture);
-                            var enemy = enemyDetector.GetClosestEnemy(screenCapture);
-                            var Boss = BossDetector.GetClosestEnemy(screenCapture);
-                            var mob = mobDetector.GetClosestEnemy(screenCapture);
-                            var portal = portalDetector.GetClosestEnemy(screenCapture);
+                            var shard = shardDetector.GetClosestEnemy(screenCapture, true);
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture, true);
+                            var mob = mobDetector.GetClosestEnemy(screenCapture, true);
+                            var portal = portalDetector.GetClosestEnemy(screenCapture, true);
 
                             if (shard.HasValue)
                             {

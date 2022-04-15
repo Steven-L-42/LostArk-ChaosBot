@@ -15,6 +15,7 @@ namespace PixelAimbot.Classes.OpenCV
         private Image<Bgr, byte> _enemyMask;
         private float _threshold;
         private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
+        private DrawScreen _screenDrawer;
 
         public EnemyDetector(Image<Bgr, byte> enemyTemplate,
             Image<Bgr, byte> enemyMask, float threshold)
@@ -22,9 +23,11 @@ namespace PixelAimbot.Classes.OpenCV
             this._enemyMask = enemyMask;
             this._enemyTemplate = enemyTemplate;
             this._threshold = threshold;
+            this._screenDrawer = new DrawScreen();
+
         }
 
-            private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
+        private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
             screenCapture.ROI = new Rectangle(ChaosBot.recalc(1593), PixelAimbot.ChaosBot.recalc(40, false), ChaosBot.recalc(296), ChaosBot.recalc(255, false));
@@ -69,7 +72,7 @@ namespace PixelAimbot.Classes.OpenCV
             return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
         }
 
-        public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture)
+        public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture, bool showDetections = false)
         {
             var enemies = DetectEnemies(screenCapture);
             var enemyAndPosition = enemies.Select(x => (x, Distance(x)));
@@ -83,6 +86,14 @@ namespace PixelAimbot.Classes.OpenCV
                     {
                         minDist = distance;
                         closestEnemy = enemy;
+                    }
+
+                    if (showDetections)
+                    {
+                        // Draw enemy detection
+                        int h = this._enemyTemplate.Size.Height;
+                        int w = this._enemyTemplate.Size.Width;
+                        _screenDrawer.Draw(enemy.X + ChaosBot.recalc(1593), enemy.Y + ChaosBot.recalc(40, false), w, h);
                     }
                 }
 
