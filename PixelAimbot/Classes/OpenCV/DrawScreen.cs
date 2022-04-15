@@ -16,7 +16,7 @@ public class DrawScreen
         Graphics g = Graphics.FromHdc(desktopPtr);
 
         SolidBrush b = new SolidBrush(Color.Red);
-        Pen p = new Pen(Color.Red);
+        Pen p = new Pen(Color.Red, 2);
         //g.FillRectangle(b, new Rectangle(0, 0, 1920, 1080));
         g.DrawRectangle(p, new Rectangle(x,y, width, height));
 

@@ -224,7 +224,6 @@ namespace PixelAimbot
             string applicationFolder = Path.Combine(folder, "cb_res");
 
             resourceFolder = applicationFolder;
-
             this.FormBorderStyle = FormBorderStyle.None;
             refreshRotationCombox();
             this.Text = RandomString(15);
