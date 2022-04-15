@@ -19,7 +19,7 @@ namespace PixelAimbot.Classes.Misc
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
-        public string telegram { get; set; }
+        public string telegram { get; set; } = "";
 
         public bool chBoxRemember { get; set; } = false;
 
