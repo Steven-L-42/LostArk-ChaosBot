@@ -860,7 +860,7 @@ namespace PixelAimbot
 
                             if (chBoxBerserker.Checked == true && _Berserker == true)
                             {
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y,1000);
                                 _Berserker = false;
                             }
                         }
@@ -4266,6 +4266,7 @@ namespace PixelAimbot
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
                 F = KeyboardWrapper.VK_F,
+                Y = KeyboardWrapper.VK_Y,
             };
             LAYOUT.Add(QWERTZ);
 
@@ -4280,6 +4281,7 @@ namespace PixelAimbot
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
                 F = KeyboardWrapper.VK_F,
+                Y = KeyboardWrapper.VK_Z,
             };
             LAYOUT.Add(QWERTY);
 
@@ -4293,7 +4295,8 @@ namespace PixelAimbot
                 A = KeyboardWrapper.VK_Q,
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
-                F = KeyboardWrapper.VK_F
+                F = KeyboardWrapper.VK_F,
+                Y = KeyboardWrapper.VK_Z,
             };
             LAYOUT.Add(AZERTY);
 
@@ -4599,6 +4602,9 @@ namespace PixelAimbot
                 case 70:
                     translate = "F";
                     break;
+                case 89:
+                    translate = "Y";
+                    break;
                 case 90:
                     translate = "Z";
                     break;
@@ -4619,6 +4625,8 @@ namespace PixelAimbot
             lbPS.Text = lb2S.Text = lbS.Text = translateKey(currentLayout.S);
             lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
             lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
+            txBoxUltimateKey.Text = translateKey(currentLayout.Y);
+        
 
         }
 
@@ -5112,5 +5120,9 @@ namespace PixelAimbot
             }
         }
 
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

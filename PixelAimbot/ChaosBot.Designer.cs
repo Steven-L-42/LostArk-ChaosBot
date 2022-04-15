@@ -104,7 +104,7 @@
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chBoxBard = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txBoxUltimateKey = new System.Windows.Forms.TextBox();
             this.chBoxSoulfist = new System.Windows.Forms.CheckBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.chBoxSorcerer = new System.Windows.Forms.CheckBox();
@@ -196,6 +196,7 @@
             this.chBoxEnglish = new System.Windows.Forms.CheckBox();
             this.chBoxGerman = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbULTIMATE = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1258,7 +1259,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.chBoxBard);
-            this.groupBox3.Controls.Add(this.textBox5);
+            this.groupBox3.Controls.Add(this.txBoxUltimateKey);
             this.groupBox3.Controls.Add(this.chBoxSoulfist);
             this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Controls.Add(this.chBoxSorcerer);
@@ -1301,21 +1302,21 @@
             this.chBoxBard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chBoxBard.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // txBoxUltimateKey
             // 
-            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox5.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox5.Location = new System.Drawing.Point(343, 44);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(23, 16);
-            this.textBox5.TabIndex = 66;
-            this.textBox5.Text = "Y";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox5.WordWrap = false;
+            this.txBoxUltimateKey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txBoxUltimateKey.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txBoxUltimateKey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txBoxUltimateKey.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txBoxUltimateKey.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txBoxUltimateKey.Location = new System.Drawing.Point(343, 77);
+            this.txBoxUltimateKey.Name = "txBoxUltimateKey";
+            this.txBoxUltimateKey.ReadOnly = true;
+            this.txBoxUltimateKey.Size = new System.Drawing.Size(23, 16);
+            this.txBoxUltimateKey.TabIndex = 66;
+            this.txBoxUltimateKey.Text = "Y";
+            this.txBoxUltimateKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txBoxUltimateKey.WordWrap = false;
             // 
             // chBoxSoulfist
             // 
@@ -2410,6 +2411,7 @@
             // Casttime
             // 
             this.Casttime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Casttime.Controls.Add(this.lbULTIMATE);
             this.Casttime.Controls.Add(this.label8);
             this.Casttime.Controls.Add(this.label12);
             this.Casttime.Controls.Add(this.comboBox1);
@@ -2588,6 +2590,16 @@
             this.label2.Size = new System.Drawing.Size(222, 15);
             this.label2.TabIndex = 44;
             this.label2.Text = "set your current Game Language here!";
+            // 
+            // lbULTIMATE
+            // 
+            this.lbULTIMATE.AutoSize = true;
+            this.lbULTIMATE.Location = new System.Drawing.Point(77, 88);
+            this.lbULTIMATE.Name = "lbULTIMATE";
+            this.lbULTIMATE.Size = new System.Drawing.Size(44, 13);
+            this.lbULTIMATE.TabIndex = 61;
+            this.lbULTIMATE.Text = "label11";
+            this.lbULTIMATE.Click += new System.EventHandler(this.label11_Click);
             // 
             // ChaosBot
             // 
@@ -2803,7 +2815,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtDungeon3Iteration;
         private System.Windows.Forms.CheckBox chBoxBard;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txBoxUltimateKey;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.CheckBox chBoxAutoMovement;
         private System.Windows.Forms.Label label23;
@@ -2817,6 +2829,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chBoxGerman;
         private System.Windows.Forms.CheckBox chBoxEnglish;
+        private System.Windows.Forms.Label lbULTIMATE;
     }
 }
 
