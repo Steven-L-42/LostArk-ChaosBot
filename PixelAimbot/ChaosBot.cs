@@ -858,7 +858,7 @@ namespace PixelAimbot
                             if (chBoxBerserker.Checked == true && _Berserker == true)
                             {
                                 
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(skill.Key),1000);
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text),1000);
                                 _Berserker = false;
                             }
                         }
@@ -2991,17 +2991,19 @@ namespace PixelAimbot
             }
             catch { }
         }
-        private void UltimateKey(byte key)
+        public byte UltimateKey(string text)
         {
-                switch (txBoxUltimateKey.Text)
+            byte foundkey = 0x0;
+            switch (text)
             {
                 case "Y":
-                    key = KeyboardWrapper.VK_Y;
+                    foundkey = KeyboardWrapper.VK_Y;
                     break;
                 case "Z":
-                    key = KeyboardWrapper.VK_Z;
+                    foundkey = KeyboardWrapper.VK_Z;
                     break;
             }
+            return foundkey;
         }
         private void setKeyCooldown(byte key)
         {
