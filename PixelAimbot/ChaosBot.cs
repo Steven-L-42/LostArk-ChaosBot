@@ -301,7 +301,10 @@ namespace PixelAimbot
                     {
                         continue;
                     }
-
+                    if(update.Message.Date < DateTime.Now.AddHours(-2))
+                    {
+                        continue;
+                    }
                     string text = update.Message.Text.ToLower();
                     var chatId = update.Message.Chat.Id;
                     if(text.Contains("/help"))
@@ -497,7 +500,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                   
+
                     var t1 = Task.Run(() => START(token));
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
@@ -914,6 +917,7 @@ namespace PixelAimbot
 
             screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
             var screenCapture = new Image<Bgr, byte>("screen.png");
+
             var enemy = enemyDetector.GetClosestEnemy(screenCapture);
             if (enemy.HasValue)
             {
@@ -922,6 +926,7 @@ namespace PixelAimbot
                 CvInvoke.Rectangle(screenCapture,
                     new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                     new MCvScalar(255));
+                
                 double distance_x = (screenWidth - recalc(296)) / 2;
                 double distance_y = (screenHeight - recalc(255, false)) / 2;
 
