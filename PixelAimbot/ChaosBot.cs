@@ -49,7 +49,8 @@ namespace PixelAimbot
         private bool _Sorcerer = false;
         private bool _Soulfist = false;
         private bool _SkillFight2 = false;
-   
+        private bool DungBrowser = false;
+
 
         private bool _LOGOUT = false;
         private bool Search = false;
@@ -742,6 +743,7 @@ namespace PixelAimbot
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
                             */
+                            await Task.Delay(1000);
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                         }
@@ -803,6 +805,7 @@ namespace PixelAimbot
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     au3.MouseMove(recalc(1871), recalc(260, false), 10);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
                     object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909), recalc(392, false), 0xFFF1C6, 100);
                     if (minimizeChat.ToString() == "0")
                     {
@@ -855,11 +858,13 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            if (chBoxBerserker.Checked == true && _Berserker == true)
+                            if (chBoxBerserker.Checked == true)
                             {
-                                
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text),1000);
+                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+
                                 _Berserker = false;
+                                await Task.Delay(1000);
                             }
                         }
                         catch (AggregateException)
@@ -1036,7 +1041,7 @@ namespace PixelAimbot
                 searchSequence = 1;
                 walktopUTurn = 0;
                 _Floor2 = true;
-                await Task.Delay(1500);
+                await Task.Delay(5000);
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -1450,7 +1455,6 @@ namespace PixelAimbot
                         _Shadowhunter = true;
                         _Berserker = true;
                         _Paladin = true;
-                        _Deathblade = true;
                         _Sharpshooter = true;
                         _Bard = true;
                         _Sorcerer = true;
@@ -1941,8 +1945,8 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
+
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2365,8 +2369,7 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2782,8 +2785,7 @@ namespace PixelAimbot
                                             KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -3799,6 +3801,7 @@ namespace PixelAimbot
                                 au3.MouseMove(recalc(903), recalc(605, false), 5);
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }*/
+                            await Task.Delay(1000);
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
                         }
                         catch { }
@@ -4047,52 +4050,9 @@ namespace PixelAimbot
         {
             try
             {
-               restart = false;
-                while (!restart)
-                {
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " sekunden."));
+                await Task.Delay(int.Parse(txtRestart.Text)*1000);
 
-
-                    float threshold = 0.90f;
-                    var handTemplate =
-                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeon.png");
-                    var handMask =
-                    new Image<Bgr, byte>(resourceFolder + "/ChaosDungeonmask.png");
-                    var hand2Template =
-                    new Image<Bgr, byte>(resourceFolder + "/check_if_city.png");
-                    var hand2Mask =
-                    new Image<Bgr, byte>(resourceFolder + "/check_if_citymask.png");
-
-                    var handDetector = new ScreenDetector(handTemplate, handMask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
-                    var hand2Detector = new ScreenDetector(hand2Template, hand2Mask, threshold, ChaosBot.recalc(708), ChaosBot.recalc(78, false), ChaosBot.recalc(1213), ChaosBot.recalc(164, false));
-
-                    var screenPrinter = new PrintScreen();
-
-                    screenPrinter.CaptureScreenToFile("screen.png", ImageFormat.Png);
-                    var screenCapture = new Image<Bgr, byte>("screen.png");
-                    var hand = handDetector.GetClosestItem(screenCapture);
-                    var hand2 = handDetector.GetClosestItem(screenCapture);
-
-                    if (!hand.HasValue && chBoxEnglish.Checked == true)
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(50, token);
-                    }
-                    else
-                    if (!hand2.HasValue && chBoxEnglish.Checked == true)
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(50, token);
-                    }
-                    else
-                    {
-                        restart = true;
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon found!"));
-
-                    }
-                }
                 if (restart == true && chBoxChannelSwap.Checked == true)
                 {
                     
@@ -4147,12 +4107,7 @@ namespace PixelAimbot
                     
 
                 }
-                if(!chBoxGerman.Checked && !chBoxEnglish.Checked)
-                {
-                    await Task.Delay(25000);
 
-                }
-                
             }
 
             catch (AggregateException)
@@ -4165,12 +4120,11 @@ namespace PixelAimbot
             }
             catch { }
 
-            if (restart == true)
-            {
-                await Task.Delay(2000, token);
+           
+                await Task.Delay(1000, token);
                 var t1 = Task.Run(() => START(token));
                 await Task.WhenAny(new[] { t1 });
-            }
+            
 
         }
 
@@ -4325,6 +4279,7 @@ namespace PixelAimbot
             chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
             txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
             txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
+            txtRestart.Text = Properties.Settings.Default.txtRestart;
 
         }
 
@@ -4438,6 +4393,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtDungeon3search = "10";
                 Properties.Settings.Default.chBoxActivateF3 = false;
                 Properties.Settings.Default.chBoxAutoMovement = false;
+                Properties.Settings.Default.txtRestart = "25";
 
 
                 Properties.Settings.Default.chBoxSharpshooter = false;
@@ -4479,7 +4435,10 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleD = false;
                 Properties.Settings.Default.chBoxDoubleF = false;
 
+
                 Properties.Settings.Default.Save();
+
+                txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxGerman.Checked = Properties.Settings.Default.chBoxGerman;
                 chBoxEnglish.Checked = Properties.Settings.Default.chBoxEnglish;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
@@ -4608,10 +4567,34 @@ namespace PixelAimbot
             lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
             lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
             txBoxUltimateKey.Text = translateKey(currentLayout.Y);
-        
 
+          
+            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
         }
+        public async void DeathbladeSecondPress(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(12000, token);
+                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                await Task.Delay(12000, token);
+                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                _Deathblade = true;
 
+
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
         public async void SharpshooterSecondPress(CancellationToken token)
         {
             try
@@ -4793,7 +4776,7 @@ namespace PixelAimbot
                     rotation.chBoxGerman = (bool)chBoxGerman.Checked;
                     rotation.txtDungeon2Iteration = txtDungeon2Iteration.Text;
                     rotation.txtDungeon3Iteration = txtDungeon3Iteration.Text;
-
+                    rotation.txtRestart = txtRestart.Text;
                     rotation.txtPortalSearch = txtPortalSearch.Text;
                     rotation.instant = txtHeal30.Text;
                     rotation.potion = txtHeal70.Text;
@@ -4882,7 +4865,7 @@ namespace PixelAimbot
             {
                 chBoxEnglish.Checked = rotation.chBoxEnglish;
                 chBoxGerman.Checked = rotation.chBoxGerman;
-
+                txtRestart.Text = rotation.txtRestart;
                 txtLEFT.Text = rotation.left;
                 txtPortalSearch.Text = rotation.txtPortalSearch;
                 txtHeal30.Text = rotation.instant;

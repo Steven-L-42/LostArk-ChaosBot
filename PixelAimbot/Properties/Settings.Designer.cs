@@ -850,5 +850,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxEnglish"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public string txtRestart {
+            get {
+                return ((string)(this["txtRestart"]));
+            }
+            set {
+                this["txtRestart"] = value;
+            }
+        }
     }
 }

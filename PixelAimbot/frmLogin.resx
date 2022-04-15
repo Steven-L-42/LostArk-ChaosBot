@@ -118,11 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>1.8.6r
-- Add Portal Search Time
-on Tab (StagesSettings)
-
-1.9.2r
+    <value>1.9.2r
 - Changed library 
 deleted all sendInputs and
 replaced them with safer one.
@@ -133,7 +129,11 @@ replaced them with safer one.
 2.0.4r
 - Choice your
 Language in Bot
-GameSettings</value>
+GameSettings
+
+2.1.1r
+- Restart timer
+(StageSettings)</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

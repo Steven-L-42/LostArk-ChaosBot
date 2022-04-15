@@ -188,6 +188,8 @@
             this.chBoxGerman = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtRestart = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -549,9 +551,9 @@
             this.label22.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label22.Location = new System.Drawing.Point(7, 68);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(128, 15);
+            this.label22.Size = new System.Drawing.Size(103, 15);
             this.label22.TabIndex = 57;
-            this.label22.Text = "(Floor 2) Search Time:";
+            this.label22.Text = "(F2) Search Time:";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label22, "ALPHA VERSION. JUST TEST!");
             // 
@@ -563,9 +565,9 @@
             this.label20.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label20.Location = new System.Drawing.Point(7, 87);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(118, 15);
+            this.label20.Size = new System.Drawing.Size(93, 15);
             this.label20.TabIndex = 53;
-            this.label20.Text = "(Floor 2) Fight Time:";
+            this.label20.Text = "(F2) Fight Time:";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label20, "ALPHA VERSION. JUST TEST!");
             // 
@@ -1829,9 +1831,9 @@
             this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label4.Location = new System.Drawing.Point(225, 68);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(128, 15);
+            this.label4.Size = new System.Drawing.Size(103, 15);
             this.label4.TabIndex = 68;
-            this.label4.Text = "(Floor 3) Search Time:";
+            this.label4.Text = "(F3) Search Time:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label4, "ALPHA VERSION. JUST TEST!");
             // 
@@ -1843,9 +1845,9 @@
             this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label5.Location = new System.Drawing.Point(225, 88);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 15);
+            this.label5.Size = new System.Drawing.Size(93, 15);
             this.label5.TabIndex = 69;
-            this.label5.Text = "(Floor 3) Fight Time:";
+            this.label5.Text = "(F3) Fight Time:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label5, "ALPHA VERSION. JUST TEST!");
             // 
@@ -1979,6 +1981,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.txtRestart);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.txtDungeon3Iteration);
             this.groupBox5.Controls.Add(this.label9);
@@ -2085,9 +2089,9 @@
             this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label23.Location = new System.Drawing.Point(7, 25);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(254, 15);
+            this.label23.Size = new System.Drawing.Size(139, 15);
             this.label23.TabIndex = 58;
-            this.label23.Text = "(Floor 1) Portal Search Time (after detect it):";
+            this.label23.Text = "(F1) Portal Search Time:";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label21
@@ -2144,7 +2148,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(306, 23);
+            this.label10.Location = new System.Drawing.Point(194, 25);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(30, 17);
             this.label10.TabIndex = 31;
@@ -2156,7 +2160,7 @@
             this.txtPortalSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPortalSearch.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtPortalSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPortalSearch.Location = new System.Drawing.Point(267, 24);
+            this.txtPortalSearch.Location = new System.Drawing.Point(153, 25);
             this.txtPortalSearch.Name = "txtPortalSearch";
             this.txtPortalSearch.Size = new System.Drawing.Size(35, 16);
             this.txtPortalSearch.TabIndex = 29;
@@ -2444,6 +2448,32 @@
             this.label11.TabIndex = 68;
             this.label11.Text = "ULTIMATE KEY:";
             // 
+            // txtRestart
+            // 
+            this.txtRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtRestart.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtRestart.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtRestart.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtRestart.Location = new System.Drawing.Point(362, 28);
+            this.txtRestart.Name = "txtRestart";
+            this.txtRestart.Size = new System.Drawing.Size(35, 16);
+            this.txtRestart.TabIndex = 62;
+            this.txtRestart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRestart.WordWrap = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(228, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(128, 15);
+            this.label3.TabIndex = 65;
+            this.label3.Text = "RESTART TIMER (sec):";
+            this.toolTip1.SetToolTip(this.label3, "Select Config from list or write a Filename into Listbox and press Save!");
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2664,6 +2694,8 @@
         private System.Windows.Forms.CheckBox chBoxGerman;
         private System.Windows.Forms.CheckBox chBoxEnglish;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtRestart;
+        private System.Windows.Forms.Label label3;
     }
 }
 
