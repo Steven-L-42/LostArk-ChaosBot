@@ -3894,7 +3894,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
 
-                    float threshold = 0.89f;
+                    float threshold = 0.90f;
                     var handTemplate =
                     new Image<Bgr, byte>(resourceFolder + "/hand.png");
                     var handMask =
