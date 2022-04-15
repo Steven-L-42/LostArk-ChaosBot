@@ -26,5 +26,7 @@ namespace PixelAimbot
             labelRuntimer.Text = sw.Elapsed.Hours.ToString("D2") + ":" + sw.Elapsed.Minutes.ToString("D2") + ":" + sw.Elapsed.Seconds.ToString("D2") + " running";
             
         }
+
+      
     }
 }
