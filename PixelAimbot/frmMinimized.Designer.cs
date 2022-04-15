@@ -43,9 +43,8 @@
             this.labelMinimizedState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.labelMinimizedState.Location = new System.Drawing.Point(203, 7);
             this.labelMinimizedState.Name = "labelMinimizedState";
-            this.labelMinimizedState.Size = new System.Drawing.Size(159, 20);
+            this.labelMinimizedState.Size = new System.Drawing.Size(0, 20);
             this.labelMinimizedState.TabIndex = 0;
-            this.labelMinimizedState.Text = "labelMinimizedState";
             this.labelMinimizedState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelRuntimer
@@ -55,9 +54,8 @@
             this.labelRuntimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.labelRuntimer.Location = new System.Drawing.Point(464, 7);
             this.labelRuntimer.Name = "labelRuntimer";
-            this.labelRuntimer.Size = new System.Drawing.Size(117, 20);
+            this.labelRuntimer.Size = new System.Drawing.Size(0, 20);
             this.labelRuntimer.TabIndex = 1;
-            this.labelRuntimer.Text = "labelRunTimer";
             this.labelRuntimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelTitle
