@@ -730,7 +730,7 @@ namespace PixelAimbot
                         catch { }
                         /////////////// ACCEPT
                         try
-                        {
+                        {/*
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
@@ -741,8 +741,8 @@ namespace PixelAimbot
                                 au3.MouseMove(recalc(903), recalc(605, false), 5);
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                             }
-
-
+                            */
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                         }
                         catch (AggregateException)
@@ -1911,7 +1911,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Paladin = false;
                                        
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
@@ -1938,11 +1938,11 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -1967,7 +1967,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                             _Sharpshooter = false;
 
@@ -1997,7 +1997,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                             _Sorcerer = false;
 
@@ -2022,7 +2022,7 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                         _Soulfist = false;
 
@@ -2275,8 +2275,8 @@ namespace PixelAimbot
 
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                       
+                                        KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
 
@@ -2307,7 +2307,7 @@ namespace PixelAimbot
                                         {
 
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Shadowhunter = false;
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
@@ -2334,7 +2334,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Paladin = false;
 
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
@@ -2361,11 +2361,12 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                           
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2390,7 +2391,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                             _Sharpshooter = false;
 
@@ -2420,7 +2421,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                             _Sorcerer = false;
 
@@ -2445,7 +2446,7 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
 
                                         _Soulfist = false;
 
@@ -2690,8 +2691,8 @@ namespace PixelAimbot
 
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
-
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                        KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                         await Task.Delay(1, token);
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
@@ -2723,7 +2724,8 @@ namespace PixelAimbot
                                         {
 
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+
                                             _Shadowhunter = false;
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
 
@@ -2750,7 +2752,7 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Paladin = false;
 
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Paladin Ultimate"));
@@ -2777,11 +2779,11 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                                             _Deathblade = false;
 
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
                                         }
                                     }
@@ -2806,7 +2808,8 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+
 
                                             _Sharpshooter = false;
 
@@ -2836,7 +2839,8 @@ namespace PixelAimbot
                                         if (d.ToString() != "1")
                                         {
                                             object[] dCoord = (object[])d;
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+
 
                                             _Sorcerer = false;
 
@@ -2861,7 +2865,8 @@ namespace PixelAimbot
                                         token.ThrowIfCancellationRequested();
                                         await Task.Delay(1, token);
 
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_Y, 500);
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+
 
                                         _Soulfist = false;
 
@@ -3785,6 +3790,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
+                            /*
                             object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
 
                             if (walk.ToString() != "1")
@@ -3792,53 +3798,11 @@ namespace PixelAimbot
                                 object[] walkCoord = (object[])walk;
                                 au3.MouseMove(recalc(903), recalc(605, false), 5);
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            }
+                            }*/
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
                         }
                         catch { }
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
-
-                            if (walk.ToString() != "1")
-                            {
-                                object[] walkCoord = (object[])walk;
-                                au3.MouseMove(recalc(903), recalc(605, false), 5);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            }
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
-                        try
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            object walk = au3.PixelSearch(recalc(560), recalc(260, false), recalc(1382), recalc(817, false), 0x21BD08, 10);
-
-                            if (walk.ToString() != "1")
-                            {
-                                object[] walkCoord = (object[])walk;
-                                au3.MouseMove(recalc(903), recalc(605, false), 5);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            }
-                        }
-                        catch (AggregateException)
-                        {
-                            Console.WriteLine("Expected");
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("Bug");
-                        }
-                        catch { }
+                       
                     }
                 }
                 catch (AggregateException)
@@ -4091,7 +4055,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
 
-                    float threshold = 0.85f;
+                    float threshold = 0.90f;
                     var handTemplate =
                     new Image<Bgr, byte>(resourceFolder + "/ChaosDungeon.png");
                     var handMask =
@@ -4180,8 +4144,15 @@ namespace PixelAimbot
                         var t9 = Task.Run(() => RESTART(token));
                         await Task.WhenAny(new[] { t9 });
                     }
+                    
 
                 }
+                if(!chBoxGerman.Checked && !chBoxEnglish.Checked)
+                {
+                    await Task.Delay(25000);
+
+                }
+                
             }
 
             catch (AggregateException)
@@ -4647,7 +4618,9 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(3000, token);
-                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Y);
+               
+
+                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                
 
             }

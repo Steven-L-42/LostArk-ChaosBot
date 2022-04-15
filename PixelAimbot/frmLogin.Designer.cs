@@ -65,7 +65,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(163, 182);
+            this.label2.Location = new System.Drawing.Point(169, 182);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 17);
             this.label2.TabIndex = 2;
@@ -79,7 +79,7 @@
             this.tbUser.Font = new System.Drawing.Font("MS UI Gothic", 15.75F);
             this.tbUser.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.tbUser.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tbUser.Location = new System.Drawing.Point(165, 202);
+            this.tbUser.Location = new System.Drawing.Point(171, 202);
             this.tbUser.Name = "tbUser";
             this.tbUser.Size = new System.Drawing.Size(192, 21);
             this.tbUser.TabIndex = 1;
@@ -92,7 +92,7 @@
             this.tbPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPass.Font = new System.Drawing.Font("MS UI Gothic", 15.75F);
             this.tbPass.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.tbPass.Location = new System.Drawing.Point(375, 202);
+            this.tbPass.Location = new System.Drawing.Point(378, 202);
             this.tbPass.Name = "tbPass";
             this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(192, 21);
@@ -104,7 +104,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.Orange;
-            this.label3.Location = new System.Drawing.Point(373, 182);
+            this.label3.Location = new System.Drawing.Point(376, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 17);
             this.label3.TabIndex = 4;
@@ -117,7 +117,7 @@
             this.checkBox1.FlatAppearance.BorderSize = 0;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.Color.Orange;
-            this.checkBox1.Location = new System.Drawing.Point(264, 229);
+            this.checkBox1.Location = new System.Drawing.Point(267, 229);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(119, 21);
             this.checkBox1.TabIndex = 6;
@@ -131,7 +131,7 @@
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Location = new System.Drawing.Point(168, 256);
+            this.btnLogin.Location = new System.Drawing.Point(171, 256);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(399, 34);
             this.btnLogin.TabIndex = 3;
@@ -145,7 +145,7 @@
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Location = new System.Drawing.Point(168, 296);
+            this.btnClear.Location = new System.Drawing.Point(171, 296);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(399, 25);
             this.btnClear.TabIndex = 4;
@@ -210,7 +210,7 @@
             this.chBoxRemember.FlatAppearance.BorderSize = 0;
             this.chBoxRemember.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxRemember.ForeColor = System.Drawing.Color.Orange;
-            this.chBoxRemember.Location = new System.Drawing.Point(168, 229);
+            this.chBoxRemember.Location = new System.Drawing.Point(171, 229);
             this.chBoxRemember.Name = "chBoxRemember";
             this.chBoxRemember.Size = new System.Drawing.Size(90, 21);
             this.chBoxRemember.TabIndex = 13;
@@ -250,7 +250,7 @@
             this.progressBar1.CustomText = "Updating...";
             this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
             this.progressBar1.ForeColor = System.Drawing.Color.Orange;
-            this.progressBar1.Location = new System.Drawing.Point(168, 328);
+            this.progressBar1.Location = new System.Drawing.Point(171, 328);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(399, 25);
             this.progressBar1.TabIndex = 18;
