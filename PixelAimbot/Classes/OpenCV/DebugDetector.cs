@@ -1,5 +1,4 @@
-﻿
-using Emgu.CV;
+﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
@@ -10,28 +9,35 @@ using System.Linq;
 
 namespace PixelAimbot.Classes.OpenCV
 {
-    internal class EnemyDetector
+    internal class DebugDetector
     {
         private Image<Bgr, byte> _enemyTemplate;
         private Image<Bgr, byte> _enemyMask;
         private float _threshold;
         private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
         private DrawScreen _screenDrawer;
+        int rectangleX = 0;
+        int rectangleY = 0;
+        int rectangleWidth = 0;
+        int rectangleHeight = 0;
 
-        public EnemyDetector(Image<Bgr, byte> enemyTemplate,
-            Image<Bgr, byte> enemyMask, float threshold)
+        public DebugDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
         {
             this._enemyMask = enemyMask;
             this._enemyTemplate = enemyTemplate;
             this._threshold = threshold;
             this._screenDrawer = new DrawScreen();
+            this.rectangleHeight = rectangleHeight;
+            this.rectangleWidth = rectangleWidth;
+            this.rectangleX = rectangleX;
+            this.rectangleY = rectangleY;
 
         }
 
         private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             List<Point> enemies = new List<Point>();
-            screenCapture.ROI = new Rectangle(ChaosBot.recalc(1593), PixelAimbot.ChaosBot.recalc(40, false), ChaosBot.recalc(296), ChaosBot.recalc(255, false));
+            screenCapture.ROI = new Rectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;

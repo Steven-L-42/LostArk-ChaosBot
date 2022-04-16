@@ -10,7 +10,7 @@ namespace PixelAimbot
     internal static class Program
     {
         /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
+        /// Der Haupteinstiegspunkt für die Anwendung.yy
         /// </summary>
         [STAThread]
         static void Main()

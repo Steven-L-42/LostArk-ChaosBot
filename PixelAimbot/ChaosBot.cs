@@ -138,7 +138,6 @@ namespace PixelAimbot
         private IntPtr handle;
 
        
-
         private AutoItX3 au3 = new AutoItX3();
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
