@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.1.6r";
+        public static string version { get; set; } = "2.1.7r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
