@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ namespace PixelAimbot
 {
     public partial class Debugging : Form
     {
+        private int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+        private int screenHeight = Screen.PrimaryScreen.Bounds.Height; 
         public Debugging()
         {
             InitializeComponent();
@@ -33,20 +37,28 @@ namespace PixelAimbot
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Thread thr = new Thread(cap);
-            thr.Start();
+            byte[] buffer = {};
+            Thread th = new Thread(() => cap(buffer));
+            th.Start();
+
         }
 
-        private void cap()
+        private void cap(byte[] buffer)
         {
-           // throw new NotImplementedException();
-           while(true)
+
+
+            // throw new NotImplementedException();
+            Bitmap bitmap = new Bitmap(screenWidth, screenHeight);
+            while (true)
             {
-                Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-                Graphics g = Graphics.FromImage(bitmap);
-                g.CopyFromScreen(1500, 0, 0, 0, bitmap.Size);
-                pictureBox1.Image = bitmap;
-                Thread.Sleep(1000);
+                try
+                {
+                    
+                    Graphics g = Graphics.FromImage(bitmap);
+                    g.CopyFromScreen(1500, 0, 0, 0, bitmap.Size);
+                    pictureBox1.Image = bitmap;
+                    Thread.Sleep(10);
+                } catch { }
             }
         }
     }
