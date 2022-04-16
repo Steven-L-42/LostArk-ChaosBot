@@ -116,5 +116,13 @@ namespace PixelAimbot
             
 
         }
+
+        private void btnGetMinimap_Click(object sender, EventArgs e)
+        {
+            textBoxX.Text = "1593";
+            textBoxY.Text = "40";
+            textBoxHeight.Text = "255";
+            textBoxWidth.Text = "296";
+        }
     }
 }
