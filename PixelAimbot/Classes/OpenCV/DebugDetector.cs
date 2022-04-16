@@ -11,15 +11,15 @@ namespace PixelAimbot.Classes.OpenCV
 {
     internal class DebugDetector
     {
-        private Image<Bgr, byte> _enemyTemplate;
-        private Image<Bgr, byte> _enemyMask;
-        private float _threshold;
+        public Image<Bgr, byte> _enemyTemplate;
+        public Image<Bgr, byte> _enemyMask;
+        public float _threshold { get; set; } = 0.7f;
         private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
         private DrawScreen _screenDrawer;
-        int rectangleX = 0;
-        int rectangleY = 0;
-        int rectangleWidth = 0;
-        int rectangleHeight = 0;
+        public int rectangleX = 0;
+        public int rectangleY = 0;
+        public int rectangleWidth = 0;
+        public int rectangleHeight = 0;
 
         public DebugDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
         {
@@ -100,8 +100,8 @@ namespace PixelAimbot.Classes.OpenCV
                     // Draw enemy detection
                     int h = this._enemyTemplate.Size.Height;
                     int w = this._enemyTemplate.Size.Width;
-                    _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
-                    _screenDrawer.Draw(enemy.X + ChaosBot.recalc(1593), enemy.Y + ChaosBot.recalc(40, false), w, h);
+                 //   _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
+                    _screenDrawer.Draw(enemy.X + rectangleX, enemy.Y + rectangleY, w, h);
                     //}
                 }
 

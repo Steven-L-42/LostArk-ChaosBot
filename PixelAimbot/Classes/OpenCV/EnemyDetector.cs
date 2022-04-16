@@ -1,5 +1,4 @@
-﻿
-using Emgu.CV;
+﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
@@ -94,8 +93,8 @@ namespace PixelAimbot.Classes.OpenCV
                     // Draw enemy detection
                     int h = this._enemyTemplate.Size.Height;
                     int w = this._enemyTemplate.Size.Width;
-                    _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
-                    _screenDrawer.Draw(enemy.X + ChaosBot.recalc(1593), enemy.Y + ChaosBot.recalc(40, false), w, h);
+                   // _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
+                //    _screenDrawer.Draw(enemy.X + ChaosBot.recalc(1593), enemy.Y + ChaosBot.recalc(40, false), w, h);
                     //}
                 }
 
