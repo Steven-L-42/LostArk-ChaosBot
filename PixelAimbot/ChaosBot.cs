@@ -50,6 +50,7 @@ namespace PixelAimbot
         private bool _Soulfist = false;
         private bool _SkillFight2 = false;
         private bool DungBrowser = false;
+        private bool _STOPP = false;
 
 
         private bool _LOGOUT = false;
@@ -74,7 +75,7 @@ namespace PixelAimbot
         private int CompleteIteration = 1;
         private int fightOnSecondAbility = 1;
         private int walktopUTurn = 1;
-    
+        private int leavetimer = 0;
         private int Floor2 = 1;
         private int Floor3 = 1;
         private int _swap = 0;
@@ -661,6 +662,7 @@ namespace PixelAimbot
             try
             {
                 _Berserker = true;
+                leavetimer = 0;
                 CompleteIteration = 1;
                 Floor2 = 1;
                 Floor3 = 1;
@@ -1035,6 +1037,7 @@ namespace PixelAimbot
                 searchSequence = 1;
                 walktopUTurn = 0;
                 _Floor2 = true;
+                _STOPP = false;
                 await Task.Delay(5000);
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
@@ -1412,16 +1415,17 @@ namespace PixelAimbot
                     catch { }
 
                 }
-                if (_Floor2 == true)
+                if (_Floor2 == true && _STOPP == false)
                 {
 
                     try
                     {
+                       
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
                         _SkillFight2 = true;
                         fightOnSecondAbility = 1;
-                     
+                        leavetimer++;
                         fightSequence++;
 
                         Search = false;
@@ -1434,12 +1438,17 @@ namespace PixelAimbot
                         _Soulfist = true;
 
                         _Floor2Fight = true;
+                        if (leavetimer == 1 && chBoxActivateF3.Checked == false)
+                        {
+                            var t36 = Task.Run(() => LEAVETIMERFLOOR2(token));
+                            await Task.WhenAny(new[] { t36 });
+                        }
                         var t14 = Task.Run(() => FLOORFIGHT(token));
                         await Task.Delay(int.Parse(txtDungeon2.Text) * 1000);
 
                         _Floor2Fight = false;
-
-                        if (fightSequence == int.Parse(txtDungeon2Iteration.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
+                        /*
+                        if (fightSequence == int.Parse(txLeaveTimerFloor2.Text) && chBoxActivateF2.Checked == true && chBoxActivateF3.Checked == false)
                         {
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
 
@@ -1448,8 +1457,8 @@ namespace PixelAimbot
                             await Task.WhenAny(new[] { t12 });
                         }
                         else
-
-                        if (fightSequence >= int.Parse(txtDungeon2Iteration.Text) - 1 && chBoxActivateF3.Checked == true)
+                        */
+                        if (fightSequence >= 7 && chBoxActivateF3.Checked == true)
                         {
 
                             Search = true;
@@ -1457,7 +1466,7 @@ namespace PixelAimbot
                             await Task.WhenAny(new[] { t13 });
                         }
                         else
-                        if (fightSequence < int.Parse(txtDungeon2Iteration.Text))
+                        if (fightSequence < 7 && _STOPP == false)
                         {
 
                             Search = true;
@@ -1722,6 +1731,7 @@ namespace PixelAimbot
                                     catch { }
 
                                 }
+                                /*
                                 if (walktopUTurn == 25 && chBoxAutoMovement.Checked && Search == false)
                                 {
 
@@ -1749,8 +1759,8 @@ namespace PixelAimbot
                                     }
                                     catch { }
 
-                                }
-                                if (walktopUTurn == 25 && chBoxAutoMovement.Checked && Search == false)
+                                }*/
+                                if (walktopUTurn == 20 && chBoxAutoMovement.Checked && Search == false)
                                 {
                                     walktopUTurn = 1;
                                     await Task.Delay(1, token);
@@ -4239,7 +4249,7 @@ namespace PixelAimbot
             txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
             chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
             txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
-            txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
+            txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
 
 
@@ -4330,7 +4340,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxEnglish = false;
 
                 Properties.Settings.Default.txtDungeon3Iteration = "12";
-                Properties.Settings.Default.txtDungeon2Iteration = "6";
+                Properties.Settings.Default.txLeaveTimerFloor2 = "2";
 
                 Properties.Settings.Default.txtPortalSearch = "20";
                 Properties.Settings.Default.instant = "";
@@ -4406,7 +4416,7 @@ namespace PixelAimbot
                 chBoxEnglish.Checked = Properties.Settings.Default.chBoxEnglish;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
-                txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
+                txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
                 txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
                 txtHeal10.Text = Properties.Settings.Default.instant;
                 chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
@@ -4547,6 +4557,29 @@ namespace PixelAimbot
                 _Deathblade = true;
 
 
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
+        public async void LEAVETIMERFLOOR2(CancellationToken token)
+        {
+            try
+            {
+                
+                token.ThrowIfCancellationRequested();
+                await Task.Delay((int.Parse(txLeaveTimerFloor2.Text)*1000)*60, token);
+                _STOPP = true;
+                Search = true;
+                _Floor2Fight = false;
+                var t12 = Task.Run(() => LEAVEDUNGEON(token));
+                await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
             {
@@ -4737,7 +4770,7 @@ namespace PixelAimbot
                 {
                     rotation.chBoxEnglish = (bool)chBoxEnglish.Checked;
                     rotation.chBoxGerman = (bool)chBoxGerman.Checked;
-                    rotation.txtDungeon2Iteration = txtDungeon2Iteration.Text;
+                    rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
                     rotation.txtDungeon3Iteration = txtDungeon3Iteration.Text;
                     rotation.txtRestart = txtRestart.Text;
                     rotation.txtPortalSearch = txtPortalSearch.Text;
@@ -4848,7 +4881,7 @@ namespace PixelAimbot
                 txtLOGOUT.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txtHeal10.Text = rotation.txtHeal10;
-                txtDungeon2Iteration.Text = rotation.txtDungeon2Iteration;
+                txLeaveTimerFloor2.Text = rotation.txLeaveTimerFloor2;
                 txtDungeon3Iteration.Text = rotation.txtDungeon3Iteration;
                 chBoxAutoMovement.Checked = rotation.chBoxAutoMovement;
                 chBoxActivateF3.Checked = rotation.chBoxActivateF3;
@@ -4932,7 +4965,7 @@ namespace PixelAimbot
             {
                 txtDungeon2search.ReadOnly = false;
                 txtDungeon2.ReadOnly = false;
-                txtDungeon2Iteration.ReadOnly = false;
+                txLeaveTimerFloor2.ReadOnly = false;
 
             }
             else
@@ -4940,7 +4973,7 @@ namespace PixelAimbot
             {
                 txtDungeon2search.ReadOnly = true;
                 txtDungeon2.ReadOnly = true;
-                txtDungeon2Iteration.ReadOnly = true;
+                txLeaveTimerFloor2.ReadOnly = true;
 
             }
         }

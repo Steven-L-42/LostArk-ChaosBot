@@ -781,13 +781,13 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public string txtDungeon2Iteration {
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public string txLeaveTimerFloor2 {
             get {
-                return ((string)(this["txtDungeon2Iteration"]));
+                return ((string)(this["txLeaveTimerFloor2"]));
             }
             set {
-                this["txtDungeon2Iteration"] = value;
+                this["txLeaveTimerFloor2"] = value;
             }
         }
         

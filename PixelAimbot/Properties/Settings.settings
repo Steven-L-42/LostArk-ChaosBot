@@ -191,8 +191,8 @@
     <Setting Name="txtDungeon3Iteration" Type="System.String" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
-    <Setting Name="txtDungeon2Iteration" Type="System.String" Scope="User">
-      <Value Profile="(Default)">6</Value>
+    <Setting Name="txLeaveTimerFloor2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="chBoxBard" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
