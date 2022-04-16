@@ -49,25 +49,13 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
         public string txtPortalSearch {
             get {
                 return ((string)(this["txtPortalSearch"]));
             }
             set {
                 this["txtPortalSearch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("LEFT")]
-        public string left {
-            get {
-                return ((string)(this["left"]));
-            }
-            set {
-                this["left"] = value;
             }
         }
         
@@ -325,7 +313,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public string txtDungeon2search {
             get {
                 return ((string)(this["txtDungeon2search"]));
@@ -530,96 +518,96 @@ namespace PixelAimbot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public string RQ {
+        public string txPQ {
             get {
-                return ((string)(this["RQ"]));
+                return ((string)(this["txPQ"]));
             }
             set {
-                this["RQ"] = value;
+                this["txPQ"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
-        public string RW {
+        public string txPW {
             get {
-                return ((string)(this["RW"]));
+                return ((string)(this["txPW"]));
             }
             set {
-                this["RW"] = value;
+                this["txPW"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public string RE {
+        public string txPE {
             get {
-                return ((string)(this["RE"]));
+                return ((string)(this["txPE"]));
             }
             set {
-                this["RE"] = value;
+                this["txPE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public string RR {
+        public string txPR {
             get {
-                return ((string)(this["RR"]));
+                return ((string)(this["txPR"]));
             }
             set {
-                this["RR"] = value;
+                this["txPR"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public string RA {
+        public string txPA {
             get {
-                return ((string)(this["RA"]));
+                return ((string)(this["txPA"]));
             }
             set {
-                this["RA"] = value;
+                this["txPA"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6")]
-        public string RS {
+        public string txPS {
             get {
-                return ((string)(this["RS"]));
+                return ((string)(this["txPS"]));
             }
             set {
-                this["RS"] = value;
+                this["txPS"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7")]
-        public string RD {
+        public string txPD {
             get {
-                return ((string)(this["RD"]));
+                return ((string)(this["txPD"]));
             }
             set {
-                this["RD"] = value;
+                this["txPD"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public string RF {
+        public string txPF {
             get {
-                return ((string)(this["RF"]));
+                return ((string)(this["txPF"]));
             }
             set {
-                this["RF"] = value;
+                this["txPF"] = value;
             }
         }
         
@@ -793,7 +781,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
         public string txtDungeon2Iteration {
             get {
                 return ((string)(this["txtDungeon2Iteration"]));
@@ -853,7 +841,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public string txtRestart {
             get {
                 return ((string)(this["txtRestart"]));

@@ -71,9 +71,8 @@ namespace PixelAimbot.Classes.Misc
 
     public class Rotations
     {
-        public string txtPortalSearch { get; set; } = "12";
-        public string left { get; set; } = "LEFT";
-        public string right { get; set; } = "RIGHT";
+        public string txtPortalSearch { get; set; } = "20";
+
         public string q { get; set; } = "500";
         public string w { get; set; } = "500";
         public string e { get; set; } = "500";
@@ -82,7 +81,7 @@ namespace PixelAimbot.Classes.Misc
         public string s { get; set; } = "500";
         public string d { get; set; } = "500";
         public string f { get; set; } = "500";
-        public string txtRestart { get; set; } = "25";
+        public string txtRestart { get; set; } = "15";
         public bool chBoxGerman { get; set; } = false;
         public bool chBoxEnglish { get; set; } = false;
         public bool chBoxAutoMovement { get; set; } = false;
@@ -101,7 +100,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxBard { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
         public string txtDungeon3Iteration { get; set; } = "12";
-        public string txtDungeon2Iteration { get; set; } = "9";
+        public string txtDungeon2Iteration { get; set; } = "6";
 
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";
@@ -126,14 +125,14 @@ namespace PixelAimbot.Classes.Misc
         public string cS { get; set; } = "500";
         public string cD { get; set; } = "500";
         public string cF { get; set; } = "500";
-        public string pQ { get; set; } = "1";
-        public string pW { get; set; } = "2";
-        public string pE { get; set; } = "3";
-        public string pR { get; set; } = "4";
-        public string pA { get; set; } = "5";
-        public string pS { get; set; } = "6";
-        public string pD { get; set; } = "7";
-        public string pF { get; set; } = "8";
+        public string txPQ { get; set; } = "1";
+        public string txPW { get; set; } = "2";
+        public string txPE { get; set; } = "3";
+        public string txPR { get; set; } = "4";
+        public string txPA { get; set; } = "5";
+        public string txPS { get; set; } = "6";
+        public string txPD { get; set; } = "7";
+        public string txPF { get; set; } = "8";
         public bool chBoxDoubleQ { get; set; } = false;
         public bool chBoxDoubleW { get; set; } = false;
         public bool chBoxDoubleE { get; set; } = false;

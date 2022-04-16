@@ -1003,14 +1003,9 @@ namespace PixelAimbot
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                            if (txtLEFT.Text == "LEFT")
-                            {
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            }
-                            else
-                            {
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                            }
+                            
+                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
                         }
@@ -1173,16 +1168,11 @@ namespace PixelAimbot
                                 var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                if (txtLEFT.Text == "LEFT")
-                                {
+                               
+                                
                                     KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
-                                  
-                                }
-                                else
-                                {
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
                                     
-                                }
+                                
                             }
                             else
                             {
@@ -1228,16 +1218,10 @@ namespace PixelAimbot
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Big-Boss found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                    if (txtLEFT.Text == "LEFT")
-                                    {
+                                 
                                         KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
 
-                                    }
-                                    else
-                                    {
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
-
-                                    }
+                                    
                                 }
                                 else
                                 {
@@ -1283,16 +1267,10 @@ namespace PixelAimbot
                                         var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                        if (txtLEFT.Text == "LEFT")
-                                        {
+                                      
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
 
-                                        }
-                                        else
-                                        {
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
-
-                                        }
+                                        
                                     }
                                     else
                                     {
@@ -1339,16 +1317,10 @@ namespace PixelAimbot
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Mob found!"));
 
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                            if (txtLEFT.Text == "LEFT")
-                                            {
+                                         
                                                 KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
 
-                                            }
-                                            else
-                                            {
-                                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_RBUTTON, 1000);
-
-                                            }
+                                            
                                         }
                                     }
                                 }
@@ -3209,14 +3181,9 @@ namespace PixelAimbot
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                    if (txtLEFT.Text == "LEFT")
-                                    {
+                                 
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                    }
-                                    else
-                                    {
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                                    }
+                                    
                                 }
                                 else
                                 {
@@ -3262,14 +3229,9 @@ namespace PixelAimbot
                                         var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                        if (txtLEFT.Text == "LEFT")
-                                        {
+                                  
                                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                        }
-                                        else
-                                        {
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                                        }
+                                        
                                     }
                                     else
                                     {
@@ -3316,14 +3278,9 @@ namespace PixelAimbot
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
 
                                             inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                            if (txtLEFT.Text == "LEFT")
-                                            {
+                                      
                                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                            }
-                                            else
-                                            {
-                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                                            }
+                                            
                                         }
 
                                     }
@@ -3528,31 +3485,21 @@ namespace PixelAimbot
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
 
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                                if (txtLEFT.Text == "LEFT")
-                                {
+                              
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                }
-                                else
-                                {
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                                }
+                           
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
 
 
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                                if (txtLEFT.Text == "LEFT")
-                                {
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                }
-                                else
-                                {
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RBUTTON);
-                                }
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+
+                               
                             }
                             else
                             {
@@ -4248,7 +4195,15 @@ namespace PixelAimbot
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
             txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
-            txtLEFT.Text = Properties.Settings.Default.left;
+
+            txPQ.Text = Properties.Settings.Default.txPQ;
+            txPW.Text = Properties.Settings.Default.txPW;
+            txPE.Text = Properties.Settings.Default.txPE;
+            txPR.Text = Properties.Settings.Default.txPR;
+            txPA.Text = Properties.Settings.Default.txPA;
+            txPS.Text = Properties.Settings.Default.txPS;
+            txPD.Text = Properties.Settings.Default.txPD;
+            txPF.Text = Properties.Settings.Default.txPF;
 
             txQ.Text = Properties.Settings.Default.q;
             txW.Text = Properties.Settings.Default.w;
@@ -4286,6 +4241,8 @@ namespace PixelAimbot
             txtDungeon3Iteration.Text = Properties.Settings.Default.txtDungeon3Iteration;
             txtDungeon2Iteration.Text = Properties.Settings.Default.txtDungeon2Iteration;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
+
+
 
         }
 
@@ -4373,9 +4330,9 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxEnglish = false;
 
                 Properties.Settings.Default.txtDungeon3Iteration = "12";
-                Properties.Settings.Default.txtDungeon2Iteration = "9";
+                Properties.Settings.Default.txtDungeon2Iteration = "6";
 
-                Properties.Settings.Default.txtPortalSearch = "12";
+                Properties.Settings.Default.txtPortalSearch = "20";
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.heal10 = "";
@@ -4394,26 +4351,26 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxSaveAll = false;
                 Properties.Settings.Default.chBoxActivateF2 = false;
                 Properties.Settings.Default.txtDungeon2 = "15";
-                Properties.Settings.Default.txtDungeon2search = "7";
+                Properties.Settings.Default.txtDungeon2search = "5";
                 Properties.Settings.Default.txtDungeon3 = "20";
                 Properties.Settings.Default.txtDungeon3search = "10";
                 Properties.Settings.Default.chBoxActivateF3 = false;
                 Properties.Settings.Default.chBoxAutoMovement = false;
-                Properties.Settings.Default.txtRestart = "25";
+                Properties.Settings.Default.txtRestart = "15";
 
 
                 Properties.Settings.Default.chBoxSharpshooter = false;
                 Properties.Settings.Default.chBoxSorcerer = false;
                 Properties.Settings.Default.chBoxDeathblade = false;
 
-                Properties.Settings.Default.RQ = "1";
-                Properties.Settings.Default.RW = "2";
-                Properties.Settings.Default.RE = "3";
-                Properties.Settings.Default.RR = "4";
-                Properties.Settings.Default.RA = "5";
-                Properties.Settings.Default.RS = "6";
-                Properties.Settings.Default.RD = "7";
-                Properties.Settings.Default.RF = "8";
+                Properties.Settings.Default.txPQ = "1";
+                Properties.Settings.Default.txPW = "2";
+                Properties.Settings.Default.txPE = "3";
+                Properties.Settings.Default.txPR = "4";
+                Properties.Settings.Default.txPA = "5";
+                Properties.Settings.Default.txPS = "6";
+                Properties.Settings.Default.txPD = "7";
+                Properties.Settings.Default.txPF = "8";
 
                 Properties.Settings.Default.cQ = "500";
                 Properties.Settings.Default.cW = "500";
@@ -4491,14 +4448,14 @@ namespace PixelAimbot
                 txF.Text = Properties.Settings.Default.f;
 
 
-                txPQ.Text = Properties.Settings.Default.RQ;
-                txPW.Text = Properties.Settings.Default.RW;
-                txPE.Text = Properties.Settings.Default.RE;
-                txPR.Text = Properties.Settings.Default.RR;
-                txPA.Text = Properties.Settings.Default.RA;
-                txPS.Text = Properties.Settings.Default.RS;
-                txPD.Text = Properties.Settings.Default.RD;
-                txPF.Text = Properties.Settings.Default.RF;
+                txPQ.Text = Properties.Settings.Default.txPQ;
+                txPW.Text = Properties.Settings.Default.txPW;
+                txPE.Text = Properties.Settings.Default.txPE;
+                txPR.Text = Properties.Settings.Default.txPR;
+                txPA.Text = Properties.Settings.Default.txPA;
+                txPS.Text = Properties.Settings.Default.txPS;
+                txPD.Text = Properties.Settings.Default.txPD;
+                txPF.Text = Properties.Settings.Default.txPF;
                 chBoxDoubleQ.Checked = Properties.Settings.Default.chBoxDoubleQ;
                 chBoxDoubleW.Checked = Properties.Settings.Default.chBoxDoubleW;
                 chBoxDoubleE.Checked = Properties.Settings.Default.chBoxDoubleE;
@@ -4811,7 +4768,7 @@ namespace PixelAimbot
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
                     rotation.txtDungeon3search = txtDungeon3search.Text;
                     rotation.txtDungeon3 = txtDungeon3.Text;
-                    rotation.txtLEFT = txtLEFT.Text;
+               
 
                     rotation.txtDungeon2search = txtDungeon2search.Text;
                     rotation.txtDungeon2 = txtDungeon2.Text;
@@ -4831,14 +4788,14 @@ namespace PixelAimbot
                     rotation.s = txS.Text;
                     rotation.d = txD.Text;
                     rotation.f = txF.Text;
-                    rotation.pQ = txPQ.Text;
-                    rotation.pW = txPW.Text;
-                    rotation.pE = txPE.Text;
-                    rotation.pR = txPR.Text;
-                    rotation.pA = txPA.Text;
-                    rotation.pS = txPS.Text;
-                    rotation.pD = txPD.Text;
-                    rotation.pF = txPF.Text;
+                    rotation.txPQ = txPQ.Text;
+                    rotation.txPW = txPW.Text;
+                    rotation.txPE = txPE.Text;
+                    rotation.txPR = txPR.Text;
+                    rotation.txPA = txPA.Text;
+                    rotation.txPS = txPS.Text;
+                    rotation.txPD = txPD.Text;
+                    rotation.txPF = txPF.Text;
                     rotation.chBoxDoubleQ = chBoxDoubleQ.Checked;
                     rotation.chBoxDoubleW = chBoxDoubleW.Checked;
                     rotation.chBoxDoubleE = chBoxDoubleE.Checked;
@@ -4872,7 +4829,7 @@ namespace PixelAimbot
                 chBoxEnglish.Checked = rotation.chBoxEnglish;
                 chBoxGerman.Checked = rotation.chBoxGerman;
                 txtRestart.Text = rotation.txtRestart;
-                txtLEFT.Text = rotation.left;
+          
                 txtPortalSearch.Text = rotation.txtPortalSearch;
                 txtHeal30.Text = rotation.instant;
                 txtHeal70.Text = rotation.potion;
@@ -4920,14 +4877,14 @@ namespace PixelAimbot
                 txS.Text = rotation.s;
                 txD.Text = rotation.d;
                 txF.Text = rotation.f;
-                txPQ.Text = rotation.pQ;
-                txPW.Text = rotation.pW;
-                txPE.Text = rotation.pE;
-                txPR.Text = rotation.pR;
-                txPA.Text = rotation.pA;
-                txPS.Text = rotation.pS;
-                txPD.Text = rotation.pD;
-                txPF.Text = rotation.pF;
+                txPQ.Text = rotation.txPQ;
+                txPW.Text = rotation.txPW;
+                txPE.Text = rotation.txPE;
+                txPR.Text = rotation.txPR;
+                txPA.Text = rotation.txPA;
+                txPS.Text = rotation.txPS;
+                txPD.Text = rotation.txPD;
+                txPF.Text = rotation.txPF;
                 chBoxDoubleQ.Checked = rotation.chBoxDoubleQ;
                 chBoxDoubleW.Checked = rotation.chBoxDoubleW;
                 chBoxDoubleE.Checked = rotation.chBoxDoubleE;
