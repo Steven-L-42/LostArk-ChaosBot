@@ -81,27 +81,38 @@ namespace PixelAimbot
 
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
         {
-            height = int.Parse(textBoxHeight.Text) * -1;
-            pictureBox1.Height = height * -1;
+            if (textBoxHeight.Text != "")
+            {
+                height = int.Parse(textBoxHeight.Text) * -1;
+                pictureBox1.Height = height * -1;
+            }
         }
 
         private void textBoxWidth_TextChanged(object sender, EventArgs e)
         {
-            
-            width = int.Parse(textBoxWidth.Text) * -1;
-            pictureBox1.Width = width * -1;
+
+            if (textBoxWidth.Text != "")
+            {
+                width = int.Parse(textBoxWidth.Text) * -1;
+                pictureBox1.Width = width * -1;
+            }
         }
 
         private void textBoxY_TextChanged(object sender, EventArgs e)
         {
-            y = int.Parse(textBoxY.Text);
-            
+            if (textBoxY.Text != "")
+            {
+                y = int.Parse(textBoxY.Text);
+            }
 
         }
 
         private void textBoxX_TextChanged(object sender, EventArgs e)
         {
-            x = int.Parse(textBoxX.Text);
+            if (textBoxX.Text != "")
+            {
+                x = int.Parse(textBoxX.Text);
+            }
             
 
         }
