@@ -378,6 +378,12 @@
     <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
     <Compile Include="Classes\OpenCV\EnterDetectors.cs" />
+    <Compile Include="Debugging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debugging.Designer.cs">
+      <DependentUpon>Debugging.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -409,6 +415,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChaosBot.resx">
       <DependentUpon>ChaosBot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debugging.resx">
+      <DependentUpon>Debugging.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGuide.resx">
       <DependentUpon>frmGuide.cs</DependentUpon>
@@ -450,7 +459,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
