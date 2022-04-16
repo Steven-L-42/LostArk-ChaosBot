@@ -223,9 +223,9 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
-            this.groupBox1.Location = new System.Drawing.Point(593, 60);
+            this.groupBox1.Location = new System.Drawing.Point(592, 168);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(139, 345);
+            this.groupBox1.Size = new System.Drawing.Size(139, 109);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Patchnotes";
@@ -240,9 +240,9 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(140, 319);
+            this.richTextBox1.Size = new System.Drawing.Size(140, 83);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.Text = "\n2.1.7r\n- Fix API Key Save\n- Fix Rotation Save";
             // 
             // progressBar1
             // 
