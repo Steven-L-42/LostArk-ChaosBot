@@ -189,10 +189,10 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="txLeaveTimerFloor3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">180</Value>
     </Setting>
     <Setting Name="txLeaveTimerFloor2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">150</Value>
     </Setting>
     <Setting Name="chBoxBard" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

@@ -769,7 +769,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("180")]
         public string txLeaveTimerFloor3 {
             get {
                 return ((string)(this["txLeaveTimerFloor3"]));
@@ -781,7 +781,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
         public string txLeaveTimerFloor2 {
             get {
                 return ((string)(this["txLeaveTimerFloor2"]));

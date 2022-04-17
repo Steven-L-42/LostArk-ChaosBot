@@ -891,6 +891,8 @@ namespace PixelAimbot
                 }
                 catch { }
                 _Floor1 = true;
+                _STOPP = false;
+                _SkillFight = true;
                 var t12 = Task.Run(() => FLOORTIME(token));
                 await Task.WhenAny(new[] { t12 });
             }
@@ -1023,10 +1025,11 @@ namespace PixelAimbot
                             Console.WriteLine("Bug");
                         }
                         catch { }
+                        Random random = new Random();
+                        var sleepTime = random.Next(500, 570);
+                        Thread.Sleep(sleepTime);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(150, 210);
-                    Thread.Sleep(sleepTime);
+                   
                 }
                 catch (AggregateException)
                 {
@@ -1040,7 +1043,7 @@ namespace PixelAimbot
                 searchSequence = 1;
                 walktopUTurn = 0;
                 _Floor2 = true;
-                _STOPP = false;
+                
                 await Task.Delay(5000);
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] { t12 });
@@ -1487,7 +1490,7 @@ namespace PixelAimbot
                         */
                         if (fightSequence >= 7 && chBoxActivateF3.Checked == true && _Floor3 == false)
                         {
-
+                            fightSequence2 = 1;
                             Search = true;
                             var t13 = Task.Run(() => FLOOR2PORTAL(token));
                             await Task.WhenAny(new[] { t13 });
@@ -1520,7 +1523,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
                         _Floor2Fight = false;
-                        CompleteIteration = 1;
+                     
                         _SkillFight = true;
                         leavetimer2++;
                         fightSequence2++;
@@ -1556,7 +1559,7 @@ namespace PixelAimbot
                         */
                         if (fightSequence2 < 7 && _STOPP == false)
                         {
-                            searchSequence2 = 1;
+                            
                             var t13 = Task.Run(() => SEARCHBOSS2(token));
                             await Task.WhenAny(new[] { t13 });
                         }
@@ -1816,6 +1819,7 @@ namespace PixelAimbot
                             catch { }
                             ///REVIVE
                             ///
+                            /*
                             try
                             {
                                 token.ThrowIfCancellationRequested();
@@ -1840,23 +1844,17 @@ namespace PixelAimbot
                                 var screenCapture = bitmapImage.ToImage<Bgr, byte>();
                                 var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
                                 var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                                if (ReviveDeutsch.HasValue && chBoxGerman.Checked == true)
-                                {
-                                    _SkillFight = false;
+                                
+                                   
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
                                     au3.MouseMove(recalc(1374), recalc(467, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                    _SkillFight = true;
-                                }
-                                else
-                                if (ReviveEnglish.HasValue && chBoxEnglish.Checked == true)
-                                {
-                                    _SkillFight = false;
+
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
                                     au3.MouseMove(recalc(1374), recalc(467, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                    _SkillFight = true;
-                                }
+                           
+                                
                                 Random random = new Random();
                                 var sleepTime = random.Next(100, 150);
                                 Thread.Sleep(sleepTime);
@@ -1870,6 +1868,7 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                            */
                             /// 
                             /// REVIVE ENDE
                             ///Portal Erkennung Start
@@ -1883,13 +1882,14 @@ namespace PixelAimbot
                                 object fight = au3.PixelSearch(recalc(114), recalc(208, false), recalc(168), recalc(220, false), 0xDBC7AC, 7);
                                 if (fight.ToString() != "1" && Search == false)
                                 {
-                                    _SkillFight = false;
+                                    
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal detected!"));
 
                                     if (chBoxActivateF2.Checked)
                                     {
                                         _Floor1Fight = false;
+                                        _SkillFight = false;
                                         Search = true;
                                         _Floor1 = false;
                                         var t7 = Task.Run(() => SEARCHPORTAL(token));
@@ -1899,6 +1899,7 @@ namespace PixelAimbot
                                     if (!chBoxActivateF2.Checked)
                                     {
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
+                                        _SkillFight = false;
                                         _Floor1Fight = false;
                                         Search = true;
                                         _Floor1 = false;
@@ -2232,7 +2233,7 @@ namespace PixelAimbot
                             ///REVIVE
                             ///
                            
-                                    
+                                    /*
                             try
                             {
                                 token.ThrowIfCancellationRequested();
@@ -2287,6 +2288,7 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                                    */
                             /// 
                             /// REVIVE ENDE
                             ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
@@ -2673,6 +2675,7 @@ namespace PixelAimbot
                             catch { }
                             ///REVIVE
                             ///
+                            /*
                             try
                             {
                                 token.ThrowIfCancellationRequested();
@@ -2727,6 +2730,7 @@ namespace PixelAimbot
                                 Console.WriteLine("Bug");
                             }
                             catch { }
+                            */
                             /// 
                             /// REVIVE ENDE
                             ///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE///////////ULTIMATE
@@ -3142,21 +3146,68 @@ namespace PixelAimbot
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 CompleteIteration++;
                             }
+
+                            if (shard.HasValue)
+                            {
+                                CvInvoke.Rectangle(screenCapture,
+                                    new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
+                                    new MCvScalar(255));
+                                double distance_x = (screenWidth - recalc(296)) / 2;
+                                double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                                var shard_position = ((shard.Value.X + distance_x), (shard.Value.Y + distance_y));
+                                double multiplier = 1;
+                                var shard_position_on_minimap = ((shard.Value.X), (shard.Value.Y));
+                                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - shard_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - shard_position_on_minimap.Item2), 2));
+
+                                if (dist < 180)
+                                {
+                                    multiplier = 1.2;
+                                }
+
+                                double posx;
+                                double posy;
+                                if (shard_position.Item1 < (screenWidth / 2))
+                                {
+                                    posx = shard_position.Item1 * (2 - multiplier);
+                                }
+                                else
+                                {
+                                    posx = shard_position.Item1 * multiplier;
+                                }
+                                if (shard_position.Item2 < (screenHeight / 2))
+                                {
+                                    posy = shard_position.Item2 * (2 - multiplier);
+                                }
+                                else
+                                {
+                                    posy = shard_position.Item2 * multiplier;
+                                }
+
+
+                                var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
+
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                            }
                             else
                             {
-                                if (shard.HasValue)
+                                if (enemy.HasValue)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
-                                        new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                         new MCvScalar(255));
                                     double distance_x = (screenWidth - recalc(296)) / 2;
                                     double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                    var shard_position = ((shard.Value.X + distance_x), (shard.Value.Y + distance_y));
+                                    var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
                                     double multiplier = 1;
-                                    var shard_position_on_minimap = ((shard.Value.X), (shard.Value.Y));
+                                    var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
                                     var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                                    var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - shard_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - shard_position_on_minimap.Item2), 2));
+                                    var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
 
                                     if (dist < 180)
                                     {
@@ -3165,46 +3216,46 @@ namespace PixelAimbot
 
                                     double posx;
                                     double posy;
-                                    if (shard_position.Item1 < (screenWidth / 2))
+                                    if (enemy_position.Item1 < (screenWidth / 2))
                                     {
-                                        posx = shard_position.Item1 * (2 - multiplier);
+                                        posx = enemy_position.Item1 * (2 - multiplier);
                                     }
                                     else
                                     {
-                                        posx = shard_position.Item1 * multiplier;
+                                        posx = enemy_position.Item1 * multiplier;
                                     }
-                                    if (shard_position.Item2 < (screenHeight / 2))
+                                    if (enemy_position.Item2 < (screenHeight / 2))
                                     {
-                                        posy = shard_position.Item2 * (2 - multiplier);
+                                        posy = enemy_position.Item2 * (2 - multiplier);
                                     }
                                     else
                                     {
-                                        posy = shard_position.Item2 * multiplier;
+                                        posy = enemy_position.Item2 * multiplier;
                                     }
 
 
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
                                     inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                 
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                    
+
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
                                 }
                                 else
                                 {
-                                    if (enemy.HasValue)
+                                    if (mob.HasValue)
                                     {
                                         CvInvoke.Rectangle(screenCapture,
-                                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
                                             new MCvScalar(255));
                                         double distance_x = (screenWidth - recalc(296)) / 2;
                                         double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                        var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                        var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
                                         double multiplier = 1;
-                                        var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                        var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
                                         var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                                        var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
+                                        var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
 
                                         if (dist < 180)
                                         {
@@ -3213,87 +3264,37 @@ namespace PixelAimbot
 
                                         double posx;
                                         double posy;
-                                        if (enemy_position.Item1 < (screenWidth / 2))
+                                        if (mob_position.Item1 < (screenWidth / 2))
                                         {
-                                            posx = enemy_position.Item1 * (2 - multiplier);
+                                            posx = mob_position.Item1 * (2 - multiplier);
                                         }
                                         else
                                         {
-                                            posx = enemy_position.Item1 * multiplier;
+                                            posx = mob_position.Item1 * multiplier;
                                         }
-                                        if (enemy_position.Item2 < (screenHeight / 2))
+                                        if (mob_position.Item2 < (screenHeight / 2))
                                         {
-                                            posy = enemy_position.Item2 * (2 - multiplier);
+                                            posy = mob_position.Item2 * (2 - multiplier);
                                         }
                                         else
                                         {
-                                            posy = enemy_position.Item2 * multiplier;
+                                            posy = mob_position.Item2 * multiplier;
                                         }
 
 
                                         var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
+
                                         inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                  
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                        
-                                    }
-                                    else
-                                    {
-                                        if (mob.HasValue)
-                                        {
-                                            CvInvoke.Rectangle(screenCapture,
-                                                new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
-                                                new MCvScalar(255));
-                                            double distance_x = (screenWidth - recalc(296)) / 2;
-                                            double distance_y = (screenHeight - recalc(255, false)) / 2;
 
-                                            var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
-                                            double multiplier = 1;
-                                            var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
-                                            var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                                            var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
-
-                                            if (dist < 180)
-                                            {
-                                                multiplier = 1.2;
-                                            }
-
-                                            double posx;
-                                            double posy;
-                                            if (mob_position.Item1 < (screenWidth / 2))
-                                            {
-                                                posx = mob_position.Item1 * (2 - multiplier);
-                                            }
-                                            else
-                                            {
-                                                posx = mob_position.Item1 * multiplier;
-                                            }
-                                            if (mob_position.Item2 < (screenHeight / 2))
-                                            {
-                                                posy = mob_position.Item2 * (2 - multiplier);
-                                            }
-                                            else
-                                            {
-                                                posy = mob_position.Item2 * multiplier;
-                                            }
-
-
-                                            var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Mob found!"));
-
-                                            inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                                      
-                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                            
-                                        }
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
                                     }
 
                                 }
+
                             }
-
-
+                            
                             Random random = new Random();
                             var sleepTime = random.Next(150, 210);
                             Thread.Sleep(sleepTime);
@@ -3484,11 +3485,11 @@ namespace PixelAimbot
                         catch { }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-
+                        Random random = new Random();
+                        var sleepTime = random.Next(100, 150);
+                        Thread.Sleep(sleepTime);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                   
                 }
                 catch (AggregateException)
                 {
@@ -4392,9 +4393,9 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxGerman = false;
                 Properties.Settings.Default.chBoxEnglish = false;
 
-                Properties.Settings.Default.txLeaveTimerFloor3 = "12";
-                Properties.Settings.Default.txLeaveTimerFloor2 = "2";
-                Properties.Settings.Default.txLeaveTimerFloor3 = "3";
+              
+                Properties.Settings.Default.txLeaveTimerFloor2 = "150";
+                Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 
                 Properties.Settings.Default.txtPortalSearch = "20";
                 Properties.Settings.Default.instant = "";
@@ -4629,7 +4630,7 @@ namespace PixelAimbot
             {
                 
                 token.ThrowIfCancellationRequested();
-                await Task.Delay((int.Parse(txLeaveTimerFloor2.Text)*1000)*60, token);
+                await Task.Delay(int.Parse(txLeaveTimerFloor2.Text)*1000, token);
                 _STOPP = true;
                 Search = true;
                 _Floor2Fight = false;
@@ -4652,7 +4653,7 @@ namespace PixelAimbot
             {
 
                 token.ThrowIfCancellationRequested();
-                await Task.Delay((int.Parse(txLeaveTimerFloor3.Text) * 1000) * 60, token);
+                await Task.Delay(int.Parse(txLeaveTimerFloor3.Text) * 1000, token);
                 _STOPP = true;
                 Search = true;
                 _Floor3Fight = false;

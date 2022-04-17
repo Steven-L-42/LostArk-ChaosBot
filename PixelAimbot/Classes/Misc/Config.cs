@@ -99,8 +99,8 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxBard { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
-        public string txLeaveTimerFloor3 { get; set; } = "3";
-        public string txLeaveTimerFloor2 { get; set; } = "2";
+        public string txLeaveTimerFloor3 { get; set; } = "180";
+        public string txLeaveTimerFloor2 { get; set; } = "150";
 
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";
