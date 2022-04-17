@@ -1114,12 +1114,8 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(100, token);
-                            float shardthreshold = 1f;
                             float threshold = 0.7f;
-                            var shardTemplate =
-                            new Image<Bgr, byte>(resourceFolder + "/shard.png");
-                            var shardMask =
-                            new Image<Bgr, byte>(resourceFolder + "/shardmask.png");
+                          
                             var enemyTemplate =
                             new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                             var enemyMask =
@@ -1139,7 +1135,6 @@ namespace PixelAimbot
 
                             Point myPosition = new Point(recalc(148), recalc(127, false));
                             Point screenResolution = new Point(screenWidth, screenHeight);
-                            var shardDetector = new EnemyDetector(shardTemplate, shardMask, shardthreshold);
                             var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
                             var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
                             var mobDetector = new EnemyDetector(mobTemplate, mobMask, threshold);
@@ -1150,63 +1145,12 @@ namespace PixelAimbot
                             Bitmap bitmapImage = new Bitmap(rawScreen);
                             var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
-                            var shard = shardDetector.GetClosestEnemy(screenCapture, true);
                             var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
                             var Boss = BossDetector.GetClosestEnemy(screenCapture, true);
                             var mob = mobDetector.GetClosestEnemy(screenCapture, true);
                             var portal = portalDetector.GetClosestEnemy(screenCapture, true);
 
-                            if (shard.HasValue)
-                            {
-                                CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(shard.Value.X, shard.Value.Y), shardTemplate.Size),
-                                    new MCvScalar(255));
-
-                                double distance_x = (screenWidth - recalc(296)) / 2;
-                                double distance_y = (screenHeight - recalc(255, false)) / 2;
-
-                                var shard_position = ((shard.Value.X + distance_x), (shard.Value.Y + distance_y));
-                                double multiplier = 1;
-                                var shard_position_on_minimap = ((shard.Value.X), (shard.Value.Y));
-                                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - shard_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - shard_position_on_minimap.Item2), 2));
-
-                                if (dist < 180)
-                                {
-                                    multiplier = 1.2;
-                                }
-
-                                double posx;
-                                double posy;
-                                if (shard_position.Item1 < (screenWidth / 2))
-                                {
-                                    posx = shard_position.Item1 * (2 - multiplier);
-                                }
-                                else
-                                {
-                                    posx = shard_position.Item1 * multiplier;
-                                }
-                                if (shard_position.Item2 < (screenHeight / 2))
-                                {
-                                    posy = shard_position.Item2 * (2 - multiplier);
-                                }
-                                else
-                                {
-                                    posy = shard_position.Item2 * multiplier;
-                                }
-
-
-                                var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 3: Shard found!"));
-                                inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
-                               
-                                
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
-                                    
-                                
-                            }
-                            else
-                            {
+                          
                                 if (Boss.HasValue)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
@@ -1355,7 +1299,7 @@ namespace PixelAimbot
                                         }
                                     }
                                 }
-                            }
+                            
                             Random random = new Random();
                             var sleepTime = random.Next(100, 150);
                             Thread.Sleep(sleepTime);
@@ -1613,7 +1557,7 @@ namespace PixelAimbot
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                
                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
@@ -1624,7 +1568,7 @@ namespace PixelAimbot
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                     fightOnSecondAbility++;
                                     if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
@@ -2172,7 +2116,7 @@ namespace PixelAimbot
                                 {
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                     KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
@@ -2182,7 +2126,7 @@ namespace PixelAimbot
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 100);
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                     // fightOnSecondAbility++;
                                     if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
@@ -2613,15 +2557,15 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                object shardHit = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0x630E17, 10);
+                                object shardHit = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0x2B0205, 10);
                                 object fight = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319), recalc(843, false), 0xDD2C02, 10);
-                                if (fight.ToString() != "1" && shardHit.ToString() != "1" && Search == false && _SkillFight == true)
+                                if (fight.ToString() != "1" || shardHit.ToString() != "1" && Search == false && _SkillFight == true)
                                 {
                                     object[] shardHitCoord = (object[])shardHit;
                                     object[] fightCoord = (object[])fight;
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
-                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + recalc(100, false));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                     KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
 
                                     if (chBoxDoubleQ.Checked || chBoxDoubleW.Checked || chBoxDoubleE.Checked || chBoxDoubleR.Checked || chBoxDoubleA.Checked || chBoxDoubleS.Checked || chBoxDoubleD.Checked || chBoxDoubleF.Checked)
@@ -2631,8 +2575,8 @@ namespace PixelAimbot
                                     }
                                     setKeyCooldown(skill.Key); // Set Cooldown
                                     var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + 100);
-                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + 80);
+                                    au3.MouseMove((int)shardHitCoord[0], (int)shardHitCoord[1] + recalc(100, false));
+                                    au3.MouseMove((int)fightCoord[0], (int)fightCoord[1] + recalc(100, false));
                                     fightOnSecondAbility++;
                                     if (isKeyOnCooldown(skill.Key) == false && Search == false)
                                     {
@@ -3138,15 +3082,6 @@ namespace PixelAimbot
                           
                             var mob = mobDetector.GetClosestEnemy(screenCapture);
 
-                            if (CompleteIteration == 1)
-                            {
-
-                                au3.MouseMove(recalc(960), recalc(529, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                CompleteIteration++;
-                            }
-
                             if (shard.HasValue)
                             {
                                 CvInvoke.Rectangle(screenCapture,
@@ -3191,6 +3126,7 @@ namespace PixelAimbot
                                 inputSimulator.Mouse.MoveMouseTo(absolutePositions.Item1, absolutePositions.Item2);
 
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
 
                             }
                             else
