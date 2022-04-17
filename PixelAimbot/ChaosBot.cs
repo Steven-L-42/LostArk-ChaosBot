@@ -4990,6 +4990,7 @@ namespace PixelAimbot
                 txtDungeon2search.ReadOnly = true;
                 txtDungeon2.ReadOnly = true;
                 txLeaveTimerFloor2.ReadOnly = true;
+                chBoxActivateF3.Checked = false;
 
             }
         }
@@ -5001,6 +5002,7 @@ namespace PixelAimbot
                 txtDungeon3search.ReadOnly = false;
                 txtDungeon3.ReadOnly = false;
                 txLeaveTimerFloor3.ReadOnly = false;
+                chBoxActivateF2.Checked = true;
             }
             else
               if (!chBoxActivateF3.Checked)

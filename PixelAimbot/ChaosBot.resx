@@ -128,8 +128,38 @@ fighting or addicting.
 All sequences are ended immediately 
 and he starts from the beginning.
 
-For Example: 2 minutes = leave in 2 minutes 
-after reaching Floor 2. </value>
+For Example: 150 seconds = leave in 2.5 minutes 
+after reaching Floor 2. 
+
+! Only Works if Floor 3 is unchecked !
+Otherwise, this timer simply has no function 
+and will not interfere with the game.</value>
+  </data>
+  <data name="label14.ToolTip" xml:space="preserve">
+    <value>After this time..
+The bot leaves the dungeon, 
+regardless of whether he is currently 
+fighting or addicting. 
+All sequences are ended immediately 
+and he starts from the beginning.
+
+For Example: 180 seconds = leave in 3 minutes 
+after reaching Floor 3. 
+
+</value>
+  </data>
+  <data name="label3.ToolTip" xml:space="preserve">
+    <value>Restart Timer:
+
+After the Bot clicked on
+"Dungeon Leave", 7 seconds begins to count down.
+This 7 seconds are still only the loading screen!
+And after the Loadingscreen is gone, 
+the RESTART TIMER begins!
+
+For example: 15 seconds means that the Bot try to Restart
+after the loading screen is gone, then he starts counting 
+down and 15 seconds later he Start.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
