@@ -156,7 +156,7 @@
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtRestart = new System.Windows.Forms.TextBox();
-            this.txtDungeon3Iteration = new System.Windows.Forms.TextBox();
+            this.txLeaveTimerFloor3 = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor2 = new System.Windows.Forms.TextBox();
             this.txtDungeon3 = new System.Windows.Forms.TextBox();
             this.txtDungeon3search = new System.Windows.Forms.TextBox();
@@ -525,7 +525,6 @@
             this.chBoxActivateF2.Size = new System.Drawing.Size(166, 24);
             this.chBoxActivateF2.TabIndex = 65;
             this.chBoxActivateF2.Text = "ACTIVATE FLOOR 2 --->";
-            this.toolTip1.SetToolTip(this.chBoxActivateF2, "ALPHA VERSION. JUST TEST!");
             this.chBoxActivateF2.UseMnemonic = false;
             this.chBoxActivateF2.UseVisualStyleBackColor = false;
             this.chBoxActivateF2.CheckedChanged += new System.EventHandler(this.chBoxActivateF2_CheckedChanged);
@@ -555,7 +554,7 @@
             this.label22.TabIndex = 57;
             this.label22.Text = "(F2) Search Time:";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label22, "ALPHA VERSION. JUST TEST!");
+            this.toolTip1.SetToolTip(this.label22, "Bot is searching for enemys..\r\nWe recommend to set this down to 5-6 seconds.");
             // 
             // label20
             // 
@@ -569,7 +568,8 @@
             this.label20.TabIndex = 53;
             this.label20.Text = "(F2) Fight Time:";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label20, "ALPHA VERSION. JUST TEST!");
+            this.toolTip1.SetToolTip(this.label20, "Bot is fighting against enemys..\r\nWe recommend to set this down to 15-18 seconds." +
+        "\r\n");
             // 
             // groupBox6
             // 
@@ -1851,7 +1851,7 @@
             this.label9.TabIndex = 72;
             this.label9.Text = "LEAVETIMER in minutes:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label9, "ALPHA VERSION. JUST TEST!");
+            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // label14
             // 
@@ -1861,9 +1861,9 @@
             this.label14.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label14.Location = new System.Drawing.Point(225, 108);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(133, 15);
+            this.label14.Size = new System.Drawing.Size(140, 15);
             this.label14.TabIndex = 74;
-            this.label14.Text = "Fight/Search Iteration:";
+            this.label14.Text = "LEAVETIMER in minutes:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label14, "ALPHA VERSION. JUST TEST!");
             // 
@@ -1985,7 +1985,7 @@
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.txtRestart);
             this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.txtDungeon3Iteration);
+            this.groupBox5.Controls.Add(this.txLeaveTimerFloor3);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.txLeaveTimerFloor2);
             this.groupBox5.Controls.Add(this.label25);
@@ -2027,19 +2027,19 @@
             this.txtRestart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRestart.WordWrap = false;
             // 
-            // txtDungeon3Iteration
+            // txLeaveTimerFloor3
             // 
-            this.txtDungeon3Iteration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtDungeon3Iteration.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDungeon3Iteration.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDungeon3Iteration.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon3Iteration.Location = new System.Drawing.Point(362, 108);
-            this.txtDungeon3Iteration.Name = "txtDungeon3Iteration";
-            this.txtDungeon3Iteration.ReadOnly = true;
-            this.txtDungeon3Iteration.Size = new System.Drawing.Size(35, 16);
-            this.txtDungeon3Iteration.TabIndex = 73;
-            this.txtDungeon3Iteration.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDungeon3Iteration.WordWrap = false;
+            this.txLeaveTimerFloor3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txLeaveTimerFloor3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txLeaveTimerFloor3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txLeaveTimerFloor3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txLeaveTimerFloor3.Location = new System.Drawing.Point(362, 108);
+            this.txLeaveTimerFloor3.Name = "txLeaveTimerFloor3";
+            this.txLeaveTimerFloor3.ReadOnly = true;
+            this.txLeaveTimerFloor3.Size = new System.Drawing.Size(35, 16);
+            this.txLeaveTimerFloor3.TabIndex = 73;
+            this.txLeaveTimerFloor3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txLeaveTimerFloor3.WordWrap = false;
             // 
             // txLeaveTimerFloor2
             // 
@@ -2671,7 +2671,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txLeaveTimerFloor2;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtDungeon3Iteration;
+        private System.Windows.Forms.TextBox txLeaveTimerFloor3;
         private System.Windows.Forms.CheckBox chBoxBard;
         private System.Windows.Forms.TextBox txBoxUltimateKey;
         private System.Windows.Forms.Label label27;

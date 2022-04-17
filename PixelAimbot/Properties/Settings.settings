@@ -188,8 +188,8 @@
     <Setting Name="txtDungeon3" Type="System.String" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="txtDungeon3Iteration" Type="System.String" Scope="User">
-      <Value Profile="(Default)">12</Value>
+    <Setting Name="txLeaveTimerFloor3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="txLeaveTimerFloor2" Type="System.String" Scope="User">
       <Value Profile="(Default)">2</Value>
