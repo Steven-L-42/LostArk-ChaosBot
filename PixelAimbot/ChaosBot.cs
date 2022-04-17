@@ -973,7 +973,7 @@ namespace PixelAimbot
 
             }
 
-            return ((screenWidth / 2), (screenHeight / 2));
+            return PixelToAbsolute((screenWidth / 2), (screenHeight / 2), screenResolution);
 
 
         }
