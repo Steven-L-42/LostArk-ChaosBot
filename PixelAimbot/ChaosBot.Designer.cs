@@ -189,6 +189,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
+            this.chBoxGunlancer = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1234,6 +1235,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chBoxGunlancer);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.chBoxBard);
             this.groupBox3.Controls.Add(this.txBoxUltimateKey);
@@ -2452,6 +2454,21 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
+            // chBoxGunlancer
+            // 
+            this.chBoxGunlancer.AutoSize = true;
+            this.chBoxGunlancer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGunlancer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxGunlancer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGunlancer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGunlancer.Location = new System.Drawing.Point(254, 62);
+            this.chBoxGunlancer.Name = "chBoxGunlancer";
+            this.chBoxGunlancer.Size = new System.Drawing.Size(83, 19);
+            this.chBoxGunlancer.TabIndex = 69;
+            this.chBoxGunlancer.Text = "Gunlancer:";
+            this.chBoxGunlancer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxGunlancer.UseVisualStyleBackColor = true;
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2673,6 +2690,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtRestart;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chBoxGunlancer;
     }
 }
 

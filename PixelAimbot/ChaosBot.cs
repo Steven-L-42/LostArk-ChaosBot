@@ -40,6 +40,7 @@ namespace PixelAimbot
         private bool _Floor3Fight = false;
 
         private bool _REPAIR = false;
+        private bool _Gunlancer = false;
         private bool _Shadowhunter = false;
         private bool _Berserker = false;
         private bool _Paladin = false;
@@ -603,7 +604,7 @@ namespace PixelAimbot
                 await Task.Delay(1, token);
                 await Task.Delay((int.Parse(txtLOGOUT.Text) * 1000) * 60, token);
                 _LOGOUT = true;
-                cts.Cancel();
+               
             }
             catch (AggregateException)
             {
@@ -1078,7 +1079,29 @@ namespace PixelAimbot
                         
                         searchSequence++;
                     }
+                    if (chBoxGunlancer.Checked == true && _Gunlancer == false)
+                    {
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
 
+                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                            _Gunlancer = true;
+
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Deactivate: Gunlancer Ultimate"));
+
+                        }
+                        catch (AggregateException)
+                        {
+                            Console.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("Bug");
+                        }
+                        catch { }
+                    }
                     for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                     {
 
@@ -1392,6 +1415,7 @@ namespace PixelAimbot
                         walktopUTurn = 0;
 
                         Search = false;
+                       // _Gunlancer = true;
                         _Shadowhunter = true;
                         _Berserker = true;
                         _Paladin = true;
@@ -1429,6 +1453,7 @@ namespace PixelAimbot
                         fightSequence++;
 
                         Search = false;
+                        _Gunlancer = true;
                         _Shadowhunter = true;
                         _Berserker = true;
                         _Paladin = true;
@@ -1494,6 +1519,7 @@ namespace PixelAimbot
                         await Task.Delay(1, token);
                         CompleteIteration = 1;
                         fightSequence2++;
+                        _Gunlancer = true;
                         _Shadowhunter = true;
                         _Berserker = true;
                         _Paladin = true;
@@ -1916,6 +1942,7 @@ namespace PixelAimbot
                                     catch { }
                                 }
                                 else
+                                
                                if (chBoxDeathblade.Checked == true && _Deathblade == true)
                                 {
                                     try
@@ -2269,6 +2296,30 @@ namespace PixelAimbot
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
 
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                 if (chBoxGunlancer.Checked == true && _Gunlancer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                        _Gunlancer = false;
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Gunlancer Ultimate"));
 
                                     }
                                     catch (AggregateException)
@@ -2686,6 +2737,30 @@ namespace PixelAimbot
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
 
+
+                                    }
+                                    catch (AggregateException)
+                                    {
+                                        Console.WriteLine("Expected");
+                                    }
+                                    catch (ObjectDisposedException)
+                                    {
+                                        Console.WriteLine("Bug");
+                                    }
+                                    catch { }
+                                }
+                                else
+                                 if (chBoxGunlancer.Checked == true && _Gunlancer == true)
+                                {
+                                    try
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                        _Gunlancer = false;
+
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Gunlancer Ultimate"));
 
                                     }
                                     catch (AggregateException)
@@ -4015,8 +4090,8 @@ namespace PixelAimbot
             {
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " sekunden."));
                 await Task.Delay(int.Parse(txtRestart.Text)*1000);
-
-                if (restart == true && chBoxChannelSwap.Checked == true)
+               
+                if (chBoxChannelSwap.Checked == true)
                 {
                     
                     if (_swap == 3)
@@ -4029,7 +4104,7 @@ namespace PixelAimbot
                         au3.MouseMove(recalc(1845), recalc(124, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap++;
-                        restart = false;
+                       // restart = false;
                         await Task.Delay(2000);
                         var t9 = Task.Run(() => RESTART(token));
                         await Task.WhenAny(new[] { t9 });
@@ -4046,7 +4121,7 @@ namespace PixelAimbot
                         au3.MouseMove(recalc(1845), recalc(103, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap++;
-                        restart = false;
+                     //   restart = false;
                         await Task.Delay(2000);
                         var t9 = Task.Run(() => RESTART(token));
                         await Task.WhenAny(new[] { t9 });
@@ -4062,7 +4137,7 @@ namespace PixelAimbot
                         au3.MouseMove(recalc(1845), recalc(84, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap = 0;
-                        restart = false;
+                     //   restart = false;
                         await Task.Delay(2000);
                         var t9 = Task.Run(() => RESTART(token));
                         await Task.WhenAny(new[] { t9 });
@@ -4239,6 +4314,7 @@ namespace PixelAimbot
             txtRepair.Text = Properties.Settings.Default.autorepair;
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
             chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
+            chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
             chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
             chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
             chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
@@ -4336,6 +4412,7 @@ namespace PixelAimbot
         {
             try
             {
+                Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxGerman = false;
                 Properties.Settings.Default.chBoxEnglish = false;
 
@@ -4368,10 +4445,11 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxAutoMovement = false;
                 Properties.Settings.Default.txtRestart = "15";
 
-
+                Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxSharpshooter = false;
                 Properties.Settings.Default.chBoxSorcerer = false;
                 Properties.Settings.Default.chBoxDeathblade = false;
+            
 
                 Properties.Settings.Default.txPQ = "1";
                 Properties.Settings.Default.txPW = "2";
@@ -4410,7 +4488,7 @@ namespace PixelAimbot
 
 
                 Properties.Settings.Default.Save();
-
+                chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxGerman.Checked = Properties.Settings.Default.chBoxGerman;
                 chBoxEnglish.Checked = Properties.Settings.Default.chBoxEnglish;
@@ -4768,6 +4846,7 @@ namespace PixelAimbot
             {
                 if (comboBoxRotations.Text != "main")
                 {
+                    rotation.chBoxGunlancer = (bool)chBoxGunlancer.Checked;
                     rotation.chBoxEnglish = (bool)chBoxEnglish.Checked;
                     rotation.chBoxGerman = (bool)chBoxGerman.Checked;
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
@@ -4862,7 +4941,7 @@ namespace PixelAimbot
                 chBoxEnglish.Checked = rotation.chBoxEnglish;
                 chBoxGerman.Checked = rotation.chBoxGerman;
                 txtRestart.Text = rotation.txtRestart;
-          
+                chBoxGunlancer.Checked = rotation.chBoxGunlancer;
                 txtPortalSearch.Text = rotation.txtPortalSearch;
                 txtHeal30.Text = rotation.instant;
                 txtHeal70.Text = rotation.potion;

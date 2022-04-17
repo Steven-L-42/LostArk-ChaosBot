@@ -209,5 +209,8 @@
     <Setting Name="txtRestart" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
+    <Setting Name="chBoxGunlancer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
