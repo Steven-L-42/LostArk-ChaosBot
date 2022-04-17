@@ -3486,7 +3486,7 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         Random random = new Random();
-                        var sleepTime = random.Next(100, 150);
+                        var sleepTime = random.Next(500, 570);
                         Thread.Sleep(sleepTime);
                     }
                    

@@ -242,8 +242,7 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(140, 207);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "\n2.1.7r\n- Fix API Key Save\n- Fix Rotation Save\n\n2.1.8r\n- ADD LEAVETIMER\n- DELETE " +
-    "(F2) Iteration\n- REDUCE Movement\n\n2.1.9r\n- ADD Gunlancer Ultimate\n";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // progressBar1
             // 
