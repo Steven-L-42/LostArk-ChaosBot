@@ -371,6 +371,7 @@
     <Compile Include="Classes\Misc\SelectArea.Designer.cs">
       <DependentUpon>SelectArea.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\OpenCV\DrawScreenWin.cs" />
     <Compile Include="Classes\OpenCV\DrawScreen.cs" />
     <Compile Include="Classes\OpenCV\DebugDetector.cs" />
     <Compile Include="Classes\OpenCV\ScreenDetector.cs" />

@@ -46,15 +46,19 @@
             this.buttonSelectArea = new System.Windows.Forms.Button();
             this.pictureBoxMask = new System.Windows.Forms.PictureBox();
             this.pictureBoxPicture = new System.Windows.Forms.PictureBox();
+            this.labelRefresh = new System.Windows.Forms.Label();
+            this.trackBarThreadSleep = new System.Windows.Forms.TrackBar();
+            this.checkBoxShowAll = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(11, 261);
+            this.button2.Location = new System.Drawing.Point(11, 341);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(314, 27);
             this.button2.TabIndex = 2;
@@ -132,7 +136,7 @@
             // 
             // btnGetMinimap
             // 
-            this.btnGetMinimap.Location = new System.Drawing.Point(14, 153);
+            this.btnGetMinimap.Location = new System.Drawing.Point(14, 233);
             this.btnGetMinimap.Name = "btnGetMinimap";
             this.btnGetMinimap.Size = new System.Drawing.Size(148, 27);
             this.btnGetMinimap.TabIndex = 11;
@@ -146,7 +150,7 @@
             // 
             // buttonSelectPicture
             // 
-            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 186);
+            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 266);
             this.buttonSelectPicture.Name = "buttonSelectPicture";
             this.buttonSelectPicture.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectPicture.TabIndex = 12;
@@ -156,7 +160,7 @@
             // 
             // buttonSelectMask
             // 
-            this.buttonSelectMask.Location = new System.Drawing.Point(63, 219);
+            this.buttonSelectMask.Location = new System.Drawing.Point(63, 299);
             this.buttonSelectMask.Name = "buttonSelectMask";
             this.buttonSelectMask.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectMask.TabIndex = 13;
@@ -185,7 +189,7 @@
             // 
             // buttonSelectArea
             // 
-            this.buttonSelectArea.Location = new System.Drawing.Point(178, 153);
+            this.buttonSelectArea.Location = new System.Drawing.Point(178, 233);
             this.buttonSelectArea.Name = "buttonSelectArea";
             this.buttonSelectArea.Size = new System.Drawing.Size(147, 27);
             this.buttonSelectArea.TabIndex = 19;
@@ -195,7 +199,7 @@
             // 
             // pictureBoxMask
             // 
-            this.pictureBoxMask.Location = new System.Drawing.Point(14, 219);
+            this.pictureBoxMask.Location = new System.Drawing.Point(14, 299);
             this.pictureBoxMask.Name = "pictureBoxMask";
             this.pictureBoxMask.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxMask.TabIndex = 15;
@@ -203,17 +207,52 @@
             // 
             // pictureBoxPicture
             // 
-            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 186);
+            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 266);
             this.pictureBoxPicture.Name = "pictureBoxPicture";
             this.pictureBoxPicture.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxPicture.TabIndex = 14;
             this.pictureBoxPicture.TabStop = false;
             // 
+            // labelRefresh
+            // 
+            this.labelRefresh.AutoSize = true;
+            this.labelRefresh.Location = new System.Drawing.Point(11, 149);
+            this.labelRefresh.Name = "labelRefresh";
+            this.labelRefresh.Size = new System.Drawing.Size(84, 13);
+            this.labelRefresh.TabIndex = 20;
+            this.labelRefresh.Text = "Refresh (100ms)";
+            // 
+            // trackBarThreadSleep
+            // 
+            this.trackBarThreadSleep.Location = new System.Drawing.Point(117, 149);
+            this.trackBarThreadSleep.Maximum = 1000;
+            this.trackBarThreadSleep.Name = "trackBarThreadSleep";
+            this.trackBarThreadSleep.Size = new System.Drawing.Size(211, 45);
+            this.trackBarThreadSleep.TabIndex = 21;
+            this.trackBarThreadSleep.Value = 100;
+            this.trackBarThreadSleep.ValueChanged += new System.EventHandler(this.trackBarThreadSleep_ValueChanged);
+            // 
+            // checkBoxShowAll
+            // 
+            this.checkBoxShowAll.AutoSize = true;
+            this.checkBoxShowAll.Checked = true;
+            this.checkBoxShowAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowAll.Location = new System.Drawing.Point(14, 196);
+            this.checkBoxShowAll.Name = "checkBoxShowAll";
+            this.checkBoxShowAll.Size = new System.Drawing.Size(161, 17);
+            this.checkBoxShowAll.TabIndex = 22;
+            this.checkBoxShowAll.Text = "Show only Closest Detection";
+            this.checkBoxShowAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxShowAll.UseVisualStyleBackColor = true;
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 310);
+            this.ClientSize = new System.Drawing.Size(339, 380);
+            this.Controls.Add(this.checkBoxShowAll);
+            this.Controls.Add(this.trackBarThreadSleep);
+            this.Controls.Add(this.labelRefresh);
             this.Controls.Add(this.buttonSelectArea);
             this.Controls.Add(this.btnGetMinimap);
             this.Controls.Add(this.trackBarTreshold);
@@ -237,6 +276,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +301,8 @@
         public System.Windows.Forms.TextBox textBoxY;
         public System.Windows.Forms.TextBox textBoxWidth;
         public System.Windows.Forms.TextBox textBoxHeight;
+        private System.Windows.Forms.Label labelRefresh;
+        private System.Windows.Forms.TrackBar trackBarThreadSleep;
+        private System.Windows.Forms.CheckBox checkBoxShowAll;
     }
 }

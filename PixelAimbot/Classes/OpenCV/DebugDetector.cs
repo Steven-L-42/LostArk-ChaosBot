@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace PixelAimbot.Classes.OpenCV
 {
@@ -15,7 +16,7 @@ namespace PixelAimbot.Classes.OpenCV
         public Image<Bgr, byte> _enemyMask;
         public float _threshold { get; set; } = 0.7f;
         private readonly Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
-        private DrawScreen _screenDrawer;
+        private DrawScreenWin _screenDrawer;
         public int rectangleX = 0;
         public int rectangleY = 0;
         public int rectangleWidth = 0;
@@ -26,7 +27,7 @@ namespace PixelAimbot.Classes.OpenCV
             this._enemyMask = enemyMask;
             this._enemyTemplate = enemyTemplate;
             this._threshold = threshold;
-            this._screenDrawer = new DrawScreen();
+            this._screenDrawer = new DrawScreenWin();
             this.rectangleHeight = rectangleHeight;
             this.rectangleWidth = rectangleWidth;
             this.rectangleX = rectangleX;
@@ -36,6 +37,9 @@ namespace PixelAimbot.Classes.OpenCV
 
         private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
+            this._enemyTemplate.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+
             List<Point> enemies = new List<Point>();
             screenCapture.ROI = new Rectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
             var minimap = screenCapture.Copy();
@@ -79,7 +83,7 @@ namespace PixelAimbot.Classes.OpenCV
             return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
         }
 
-        public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture, bool showDetections = false, Form form = null)
         {
             var enemies = DetectEnemies(screenCapture);
             var enemyAndPosition = enemies.Select(x => (x, Distance(x)));
@@ -95,14 +99,14 @@ namespace PixelAimbot.Classes.OpenCV
                         closestEnemy = enemy;
                     }
 
-                    //  if (showDetections)
-                    // {
-                    // Draw enemy detection
-                    int h = this._enemyTemplate.Size.Height;
-                    int w = this._enemyTemplate.Size.Width;
-                 //   _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
-                    _screenDrawer.Draw(enemy.X + rectangleX, enemy.Y + rectangleY, w, h);
-                    //}
+                    if (showDetections)
+                    {
+                        // Draw enemy detection
+                        int h = this._enemyTemplate.Size.Height;
+                        int w = this._enemyTemplate.Size.Width;
+                        //   _screenDrawer.Draw(ChaosBot.recalc(1593), ChaosBot.recalc(40, false), ChaosBot.recalc(296, false), ChaosBot.recalc(255));
+                        _screenDrawer.Draw(form, enemy.X , enemy.Y, w, h);
+                    }
                 }
 
                 return closestEnemy;

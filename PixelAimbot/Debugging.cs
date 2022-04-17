@@ -13,7 +13,7 @@ namespace PixelAimbot
     {
         private int screenWidth = Screen.PrimaryScreen.Bounds.Width;
         private int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-        private DrawScreen screenDrawer = new DrawScreen();
+        private DrawScreenWin screenDrawer = new DrawScreenWin();
         private PrintScreen screenPrinter = new PrintScreen();
 
         private int x = 0;
@@ -25,11 +25,16 @@ namespace PixelAimbot
         private Thread th;
         private string picturePath = "";
         private string maskPath = "";
-        private Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+        private int threadSleep = 100;
+        Bitmap bitmapImage;
         private DebugDetector debugDetector = new DebugDetector(null, null, 0.7f, 0, 0, 0, 0);
+        Image<Bgr, byte> enemyTemplate = null;
+        Image<Bgr, byte> enemyMask = null;
 
         public Debugging()
         {
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             InitializeComponent();
             _Debugging = this;
             this.DoubleBuffered = true;
@@ -47,18 +52,16 @@ namespace PixelAimbot
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var enemyTemplate =
-       new Image<Bgr, byte>(this.picturePath); // icon of the enemy
-            var enemyMask =
-               new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
+            enemyTemplate = new Image<Bgr, byte>(this.picturePath); // icon of the enemy
+            enemyMask = new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
             debugDetector._enemyTemplate = enemyTemplate;
             debugDetector._enemyMask = enemyMask;
             debugDetector.rectangleX = x;
             debugDetector.rectangleY = y;
             debugDetector.rectangleWidth = width * -1;
             debugDetector.rectangleHeight = height * -1;
-            Graphics g = Graphics.FromImage(bitmap);
-            g.CopyFromScreen(x, y, width, height, bitmap.Size);
+
+ 
         }
 
         private void Debugging_Load(object sender, EventArgs e)
@@ -85,9 +88,9 @@ namespace PixelAimbot
 
         private void cap(byte[] buffer)
         {
-            var enemyTemplate =
+            enemyTemplate =
               new Image<Bgr, byte>(this.picturePath); // icon of the enemy
-            var enemyMask =
+            enemyMask =
                 new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
             debugDetector._enemyTemplate = enemyTemplate;
             debugDetector._enemyMask = enemyMask;
@@ -95,31 +98,49 @@ namespace PixelAimbot
             debugDetector.rectangleY = y;
             debugDetector.rectangleWidth = width * -1;
             debugDetector.rectangleHeight = height * -1;
+            Form testform = new Form();
 
+            testform.Size = new Size(width * -1, height * -1);
+            testform.StartPosition = FormStartPosition.Manual;
+            testform.Location = new Point(x, y);
+            testform.BackColor = Color.White;
+            testform.TopMost = true;
+            testform.FormBorderStyle = FormBorderStyle.None;
+            testform.TransparencyKey = Color.White;
+            testform.Show();
+            Application.EnableVisualStyles();
+            try
+            {
+                while (true)
+                {
+                    Thread.Sleep(threadSleep);
+                    testform.Refresh();
+                    var rawScreen = screenPrinter.CaptureScreen();
+                    if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
+                    {
+                        using (bitmapImage = new Bitmap(rawScreen))
+                        {
+                            rawScreen.Dispose();
+                            var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
+                            screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
+                            var enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                            if (enemy.HasValue)
+                            {
+   
+                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, ChaosBot.recalc(enemyTemplate.Size.Width), ChaosBot.recalc(enemyTemplate.Size.Height), new Pen(Color.Blue, 3));
+
+                            }
+                            
+                        }
+                    }
+                }
+            } catch (Exception ex)
+            {
+              //  MessageBox.Show(ex.Message);
+            } 
             // throw new NotImplementedException();
 
-            while (true)
-            {
-                try
-                {
-                    var rawScreen = screenPrinter.CaptureScreen();
-                    Bitmap bitmapImage = new Bitmap(rawScreen);
-                    var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-                    //   CvInvoke.Rectangle(bitmap.ToImage<Bgr, byte>(), new Rectangle(new Point(x, y), new Size(width, height)), new MCvScalar(255));
-                    screenDrawer.Draw(x, y, width * -1, height * -1);
-                    var enemy = debugDetector.GetClosestEnemy(screenCapture, true);
-                    if (enemy.HasValue)
-                    {
-                        screenDrawer.Draw(enemy.Value.X + x, enemy.Value.Y + y, enemyTemplate.Size.Width, enemyTemplate.Size.Height, new Pen(Color.Blue, 3));
-                        /*CvInvoke.Rectangle(bitmap.ToImage<Bgr, byte>(),
-                            new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                            new MCvScalar(255));*/
-                    }
-                    Thread.Sleep(1);
-                }
-                catch { }
-            }
         }
 
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
@@ -150,7 +171,7 @@ namespace PixelAimbot
         {
             if (textBoxX.Text != "")
             {
-                x = int.Parse(textBoxX.Text);
+                 x = int.Parse(textBoxX.Text);
             }
         }
 
@@ -210,6 +231,14 @@ namespace PixelAimbot
             SelectArea form1 = new SelectArea();
             form1.InstanceRef = this;
             form1.Show();
+        }
+
+        private void trackBarThreadSleep_ValueChanged(object sender, EventArgs e)
+        {
+            
+            this.threadSleep = trackBarThreadSleep.Value;
+            
+            labelRefresh.Text = "Refresh (" + threadSleep + "ms)";
         }
     }
 }
