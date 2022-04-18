@@ -49,6 +49,7 @@
             this.labelRefresh = new System.Windows.Forms.Label();
             this.trackBarThreadSleep = new System.Windows.Forms.TrackBar();
             this.checkBoxShowAll = new System.Windows.Forms.CheckBox();
+            this.checkBoxGetClosest = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
@@ -237,7 +238,7 @@
             this.checkBoxShowAll.AutoSize = true;
             this.checkBoxShowAll.Checked = true;
             this.checkBoxShowAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowAll.Location = new System.Drawing.Point(14, 196);
+            this.checkBoxShowAll.Location = new System.Drawing.Point(14, 186);
             this.checkBoxShowAll.Name = "checkBoxShowAll";
             this.checkBoxShowAll.Size = new System.Drawing.Size(161, 17);
             this.checkBoxShowAll.TabIndex = 22;
@@ -245,11 +246,25 @@
             this.checkBoxShowAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxShowAll.UseVisualStyleBackColor = true;
             // 
+            // checkBoxGetClosest
+            // 
+            this.checkBoxGetClosest.AutoSize = true;
+            this.checkBoxGetClosest.Checked = true;
+            this.checkBoxGetClosest.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxGetClosest.Location = new System.Drawing.Point(14, 210);
+            this.checkBoxGetClosest.Name = "checkBoxGetClosest";
+            this.checkBoxGetClosest.Size = new System.Drawing.Size(249, 17);
+            this.checkBoxGetClosest.TabIndex = 23;
+            this.checkBoxGetClosest.Text = "Get Best (Checked) / Get Closest (Unchecked)";
+            this.checkBoxGetClosest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxGetClosest.UseVisualStyleBackColor = true;
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 380);
+            this.Controls.Add(this.checkBoxGetClosest);
             this.Controls.Add(this.checkBoxShowAll);
             this.Controls.Add(this.trackBarThreadSleep);
             this.Controls.Add(this.labelRefresh);
@@ -304,5 +319,6 @@
         private System.Windows.Forms.Label labelRefresh;
         private System.Windows.Forms.TrackBar trackBarThreadSleep;
         private System.Windows.Forms.CheckBox checkBoxShowAll;
+        private System.Windows.Forms.CheckBox checkBoxGetClosest;
     }
 }

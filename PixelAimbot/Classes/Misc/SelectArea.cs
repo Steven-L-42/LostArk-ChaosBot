@@ -59,7 +59,7 @@ namespace PixelAimbot.Classes.Misc
 
         public int RectangleHeight = new int();
         public int RectangleWidth = new int();
-
+        public bool _debugging;
         Graphics g;
         Pen MyPen = new Pen(Color.Black, 1);
         SolidBrush TransparentBrush = new SolidBrush(Color.White);
@@ -100,7 +100,7 @@ namespace PixelAimbot.Classes.Misc
         #endregion
 
         #region:::::::::::::::::::::::::::::::::::::::::::Mouse Event Handlers & Drawing Initialization:::::::::::::::::::::::::::::::::::::::::::
-        public SelectArea()
+        public SelectArea(bool debugging = true)
         {
 
             InitializeComponent();
@@ -109,6 +109,7 @@ namespace PixelAimbot.Classes.Misc
             this.MouseUp += new MouseEventHandler(mouse_Up);
             this.MouseMove += new MouseEventHandler(mouse_Move);
             this.KeyUp += new KeyEventHandler(key_press);
+            this._debugging = debugging;
             g = this.CreateGraphics();
 
         }
@@ -126,20 +127,26 @@ namespace PixelAimbot.Classes.Misc
 
 
 
-          
 
-                //Allow 250 milliseconds for the screen to repaint itself (we don't want to include this form in the capture)
-                System.Threading.Thread.Sleep(250);
 
-                Point StartPoint = new Point(CurrentTopLeft.X, CurrentTopLeft.Y);
-                Rectangle bounds = new Rectangle(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
+            //Allow 250 milliseconds for the screen to repaint itself (we don't want to include this form in the capture)
+            System.Threading.Thread.Sleep(250);
 
+            Point StartPoint = new Point(CurrentTopLeft.X, CurrentTopLeft.Y);
+            Rectangle bounds = new Rectangle(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
+            if (_debugging)
+            {
                 Debugging._Debugging.updateArea(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
+            }
+            else
+            {
+                FishBot._FishBot.updateArea(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
+            }
 
-                this.InstanceRef.Show();
-                this.Close();
+            this.InstanceRef.Show();
+            this.Close();
 
-            
+
         }
 
 
@@ -147,7 +154,7 @@ namespace PixelAimbot.Classes.Misc
         public void key_press(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode.ToString() == "S" && (RectangleDrawn && (CursorPosition() == CursPos.WithinSelectionArea || CursorPosition() == CursPos.OutsideSelectionArea)))
+            if ((e.KeyCode.ToString() == "Return" || e.KeyCode.ToString() == "S") && (RectangleDrawn && (CursorPosition() == CursPos.WithinSelectionArea || CursorPosition() == CursPos.OutsideSelectionArea)))
             {
 
                 SaveSelection(true);

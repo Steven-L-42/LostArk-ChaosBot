@@ -122,14 +122,20 @@ namespace PixelAimbot
                         {
                             rawScreen.Dispose();
                             var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
+                            Point? enemy = null;
                             screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                            var enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                            if (checkBoxGetClosest.Checked)
+                            {
+                                enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                            }
+                            else
+                            {
+                                enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                            }
+
                             if (enemy.HasValue)
                             {
-   
-                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, ChaosBot.recalc(enemyTemplate.Size.Width), ChaosBot.recalc(enemyTemplate.Size.Height), new Pen(Color.Blue, 3));
-
+                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, FishBot.recalc(enemyTemplate.Size.Width), FishBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
                             }
                             
                         }
@@ -177,10 +183,10 @@ namespace PixelAimbot
 
         private void btnGetMinimap_Click(object sender, EventArgs e)
         {
-            textBoxX.Text = ChaosBot.recalc(1593).ToString();
-            textBoxY.Text = ChaosBot.recalc(40).ToString();
-            textBoxHeight.Text = ChaosBot.recalc(255).ToString();
-            textBoxWidth.Text = ChaosBot.recalc(296).ToString();
+            textBoxX.Text = FishBot.recalc(1593).ToString();
+            textBoxY.Text = FishBot.recalc(40).ToString();
+            textBoxHeight.Text = FishBot.recalc(255).ToString();
+            textBoxWidth.Text = FishBot.recalc(296).ToString();
         }
 
         private void buttonSelectPicture_Click(object sender, EventArgs e)
