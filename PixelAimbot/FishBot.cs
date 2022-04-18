@@ -25,7 +25,7 @@ namespace PixelAimbot
 {
     public partial class FishBot : Form
     {
-       
+
         ///BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
         ///                                                                                                                                               ///
         private bool _start = false;
@@ -42,9 +42,9 @@ namespace PixelAimbot
 
         private bool _REPAIR = false;
 
- 
+
         private bool _LOGOUT = false;
-      
+
 
         //SKILL AND COOLDOWN//
 
@@ -110,7 +110,7 @@ namespace PixelAimbot
 
         private IntPtr handle;
 
-       
+
         private AutoItX3 au3 = new AutoItX3();
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -138,7 +138,7 @@ namespace PixelAimbot
         private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
         public static InputSimulator inputSimulator = new InputSimulator();
-        
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
@@ -187,11 +187,11 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            
+
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            
+
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
             _FishBot = this;
@@ -245,7 +245,7 @@ namespace PixelAimbot
             while (botIsRun)
             {
                 Telegram.Bot.Types.Update[] updates;
-                
+
                 try
                 {
                     updates = await bot.GetUpdatesAsync(offset);
@@ -258,25 +258,25 @@ namespace PixelAimbot
                     continue;
                 }
 
-                
+
 
                 foreach (var update in updates)
                 {
 
 
                     offset = update.Id + 1;
-                    
+
                     if (update.Message == null)
                     {
                         continue;
                     }
-                    if(update.Message.Date < DateTime.Now.AddHours(-2))
+                    if (update.Message.Date < DateTime.Now.AddHours(-2))
                     {
                         continue;
                     }
                     string text = update.Message.Text.ToLower();
                     var chatId = update.Message.Chat.Id;
-                    if(text.Contains("/help"))
+                    if (text.Contains("/help"))
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("Currently supported Commands")
@@ -295,25 +295,27 @@ namespace PixelAimbot
                         {
                             btnStart_Click(null, null);
                             await bot.SendTextMessageAsync(chatId, "Bot started");
-                        } else
+                        }
+                        else
                         {
                             await bot.SendTextMessageAsync(chatId, "Bot already running!");
                         }
                     }
 
-                    if(text.Contains("/stop"))
+                    if (text.Contains("/stop"))
                     {
                         if (_stop)
                         {
                             btnPause_Click(null, null);
                             cts.Cancel();
                             await bot.SendTextMessageAsync(chatId, "Bot stopped!");
-                        } else
+                        }
+                        else
                         {
                             await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
                         }
                     }
-                    if(text.Contains("/info"))
+                    if (text.Contains("/info"))
                     {
                         StringBuilder sb = new StringBuilder();
                         sb.AppendLine("State: " + lbStatus.Text)
@@ -321,31 +323,32 @@ namespace PixelAimbot
 
                         await bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
-                    if(text.Contains("/unstuck"))
+                    if (text.Contains("/unstuck"))
                     {
                         if (_stop)
                         {
                             cts.Cancel();
-                         
-                        } else
+
+                        }
+                        else
                         {
                             await bot.SendTextMessageAsync(chatId, "Bot isnt running!");
                         }
 
                     }
-                    if(text.Contains("/inv"))
+                    if (text.Contains("/inv"))
                     {
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(100);
                         var picture = new PrintScreen();
                         var screen = picture.CaptureScreen();
-                        
+
                         Stream stream = ToStream(cropImage(screen, new Rectangle(FishBot.recalc(1322), PixelAimbot.FishBot.recalc(189, false), FishBot.recalc(544), FishBot.recalc(640, false))), ImageFormat.Png);
                         await bot.SendPhotoAsync(chatId, stream);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
 
                     }
-                    if(text.Contains("/screen"))
+                    if (text.Contains("/screen"))
                     {
                         var picture = new PrintScreen();
                         Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
@@ -387,7 +390,7 @@ namespace PixelAimbot
                 _start = false;
                 _stop = false;
                 _REPAIR = false;
-         
+
 
                 _LOGOUT = false;
 
@@ -519,13 +522,6 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-
-           
-
-
-
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
                 Process[] processName = Process.GetProcessesByName("LostArk");
                 if (processName.Length == 1)
                 {
@@ -536,38 +532,8 @@ namespace PixelAimbot
                 await Task.Delay(1500, token);
 
 
-                for (int i = 0; i < 2; i++)
-                {
-
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-
-
-
-                    await Task.Delay(1000, token);
-
-                    ////////////////////////////////HIER FOLGT ENTER 2
-
-                    au3.MouseMove(recalc(1467), recalc(858, false), 10);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-
-
-                    await Task.Delay(1000, token);
-
-                    /////////////// ACCEPT
-
-                    await Task.Delay(1000);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
-
-
-                }
-
-                await Task.Delay(9000, token);
-
-         //       var t3 = Task.Run(() => MOVE(token));
-        //        await Task.WhenAny(new[] { t3 });
+                var t3 = Task.Run(() => CheckGathering(token));
+                await Task.WhenAny(new[] { t3 });
             }
             catch (AggregateException)
             {
@@ -581,81 +547,41 @@ namespace PixelAimbot
         }
 
 
-        public (int, int) searchImageAndClick(string templateImage, string templateMask, string foundText, float threshold = 0.7f, double softMultiplier = 1, double hardMultiplier = 1.2)
+
+
+
+        ///    FIGHT SEQUENCES    ///
+        private async Task CheckGathering(CancellationToken token)
         {
-            // Tunable variables
-            var enemyTemplate =
-                new Image<Bgr, byte>(resourceFolder + templateImage); // icon of the enemy
-            var enemyMask =
-                new Image<Bgr, byte>(resourceFolder + templateMask); // make white what the important parts are, other parts should be black
-                                                                     //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
-            Point myPosition = new Point(recalc(148), recalc(127, false));
-            Point screenResolution = new Point(screenWidth, screenHeight);
-
-            // Main program loop
-            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-            var screenPrinter = new PrintScreen();
-
-
-            var rawScreen = screenPrinter.CaptureScreen();
-            Bitmap bitmapImage = new Bitmap(rawScreen);
-            var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-            var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-            if (enemy.HasValue)
+            try
             {
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                var template =
+                new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+                var mask =
+                new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+
                 
-                CvInvoke.Rectangle(screenCapture,
-                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                    new MCvScalar(255));
-                
-                double distance_x = (screenWidth - recalc(296)) / 2;
-                double distance_y = (screenHeight - recalc(255, false)) / 2;
+                var Detector = new ScreenDetector(template, mask, 0.7f, ChaosBot.recalc(526), ChaosBot.recalc(953), ChaosBot.recalc(100), ChaosBot.recalc(107));
+                var screenPrinter = new PrintScreen();
+                var rawScreen = screenPrinter.CaptureScreen();
+                Bitmap bitmapImage = new Bitmap(rawScreen);
+                var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
-                var friend_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
-                double multiplier = softMultiplier;
-                var friend_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
-                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - friend_position_on_minimap.Item1), 2) + Math.Pow((my_position_on_minimap.Item2 - friend_position_on_minimap.Item2), 2));
-
-                if (dist < 180)
+                var item = Detector.GetBest(screenCapture, true);
+                if(item.HasValue)
                 {
-                    multiplier = 1.2;
-                }
-
-                double posx;
-                double posy;
-                if (friend_position.Item1 < (screenWidth / 2))
+                    // Found
+                } else
                 {
-                    posx = friend_position.Item1 * (2 - multiplier);
+                    // Not Found
                 }
-                else
-                {
-                    posx = friend_position.Item1 * multiplier;
-                }
-                if (friend_position.Item2 < (screenHeight / 2))
-                {
-                    posy = friend_position.Item2 * (2 - multiplier);
-                }
-                else
-                {
-                    posy = friend_position.Item2 * multiplier;
-                }
-
-                return PixelToAbsolute(posx, posy, screenResolution);
 
             }
-
-            return PixelToAbsolute((screenWidth / 2), (screenHeight / 2), screenResolution);
-
-
+            catch { }
         }
-
-
-
-                ///    FIGHT SEQUENCES    ///
-
         private async Task FLOORTIME(CancellationToken token)
         {
 
@@ -672,12 +598,12 @@ namespace PixelAimbot
 
                     _FloorFight = true;
                     // Fishbot start and cooldown checker for fishing blabla
-                 //   var t12 = Task.Run(() => FLOORFIGHT(token));
-                  //  var t14 = Task.Run(() => ULTIMATE(token));
-                  //  var t16 = Task.Run(() => REVIVE(token));
-                  //  var t18 = Task.Run(() => PORTALDETECT(token));
-                  //  var t20 = Task.Run(() => POTIONS(token));
-                  //  await Task.WhenAny(new[] { t12, t14, t16, t18, t20 });
+                    //   var t12 = Task.Run(() => FLOORFIGHT(token));
+                    //  var t14 = Task.Run(() => ULTIMATE(token));
+                    //  var t16 = Task.Run(() => REVIVE(token));
+                    //  var t18 = Task.Run(() => PORTALDETECT(token));
+                    //  var t20 = Task.Run(() => POTIONS(token));
+                    //  await Task.WhenAny(new[] { t12, t14, t16, t18, t20 });
 
 
                 }
@@ -697,7 +623,7 @@ namespace PixelAimbot
 
 
 
-                ///    RUN AT SAME TIME    ///
+        ///    RUN AT SAME TIME    ///
 
         private async Task POTIONS(CancellationToken token)
         {
@@ -727,9 +653,9 @@ namespace PixelAimbot
                     }
                     catch { }
                 }
-            
-                    
-                
+
+
+
             }
             catch (AggregateException)
             {
@@ -743,9 +669,9 @@ namespace PixelAimbot
         }
 
 
-               
-               ///    BOT COMES TO THE END    ///
-                
+
+        ///    BOT COMES TO THE END    ///
+
 
         private async Task LOGOUT(CancellationToken token)
         {
@@ -855,8 +781,8 @@ namespace PixelAimbot
                 }
 
                 await Task.Delay(2000, token);
-             //   var t10 = Task.Run(() => RESTART_AFTERREPAIR(token));
-     //           await Task.WhenAny(new[] { t10 });
+                //   var t10 = Task.Run(() => RESTART_AFTERREPAIR(token));
+                //           await Task.WhenAny(new[] { t10 });
             }
             catch (AggregateException)
             {
@@ -878,7 +804,7 @@ namespace PixelAimbot
 
         public void ChaosBot_Load(object sender, EventArgs e)
         {
-          
+
 
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
@@ -892,13 +818,13 @@ namespace PixelAimbot
             txPD.Text = Properties.Settings.Default.txPD;
             txPF.Text = Properties.Settings.Default.txPF;
 
-         
+
             chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
             txtRepair.Text = Properties.Settings.Default.autorepair;
-        
+
             chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
             chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
-        
+
 
 
 
@@ -956,7 +882,7 @@ namespace PixelAimbot
             frmGuide Form = new frmGuide();
             Form.Show();
         }
-      
+
 
         private void lbStatus_TextChanged(object sender, EventArgs e)
         {

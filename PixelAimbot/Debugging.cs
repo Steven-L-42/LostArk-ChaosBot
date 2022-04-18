@@ -4,6 +4,7 @@ using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -139,7 +140,7 @@ namespace PixelAimbot
 
                             if (enemy.HasValue)
                             {
-                                screenDrawer.Draw(testform, enemy.Value.X - 15, enemy.Value.Y - 5, FishBot.recalc(enemyTemplate.Size.Width), FishBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
+                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, ChaosBot.recalc(enemyTemplate.Size.Width), ChaosBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
                             }
                             
                         }
@@ -187,10 +188,10 @@ namespace PixelAimbot
 
         private void btnGetMinimap_Click(object sender, EventArgs e)
         {
-            textBoxX.Text = FishBot.recalc(1593).ToString();
-            textBoxY.Text = FishBot.recalc(40).ToString();
-            textBoxHeight.Text = FishBot.recalc(255).ToString();
-            textBoxWidth.Text = FishBot.recalc(296).ToString();
+            textBoxX.Text = ChaosBot.recalc(1593).ToString();
+            textBoxY.Text = ChaosBot.recalc(40).ToString();
+            textBoxHeight.Text = ChaosBot.recalc(255).ToString();
+            textBoxWidth.Text = ChaosBot.recalc(296).ToString();
         }
 
         private void buttonSelectPicture_Click(object sender, EventArgs e)
@@ -204,6 +205,7 @@ namespace PixelAimbot
                     if (this.picturePath != "" && this.maskPath != "")
                     {
                         button2.Enabled = true;
+                        buttonGenerateCode.Enabled = true;
                     }
                 }
                 catch { }
@@ -221,6 +223,7 @@ namespace PixelAimbot
                     if (this.picturePath != "" && this.maskPath != "")
                     {
                         button2.Enabled = true;
+                        buttonGenerateCode.Enabled = true;
                     }
                 }
                 catch { }
@@ -249,6 +252,54 @@ namespace PixelAimbot
             this.threadSleep = trackBarThreadSleep.Value;
             
             labelRefresh.Text = "Refresh (" + threadSleep + "ms)";
+        }
+
+        private void buttonGenerateCode_Click(object sender, EventArgs e)
+        {
+
+            string method = "";
+            if(radioButtonGetBest.Checked)
+            {
+                method = "var item = Detector.GetBest(screenCapture, true);";
+            }
+            if(radioButtonGetClosest.Checked)
+            {
+                method = "var item = Detector.GetClosestEnemy(screenCapture, true);";
+            }
+            if(radioButtonGetClosestBest.Checked)
+            {
+                method = "var item = Detector.GetClosestBest(screenCapture, true);";
+            }
+
+            String text = @"try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                var template = new Image<Bgr, byte>(resourceFolder + '" + Path.GetFileName(picturePath) + @"');
+                var mask = new Image<Bgr, byte>(resourceFolder + '" + Path.GetFileName(maskPath) + @"');
+
+
+                var Detector = new ScreenDetector(template, mask, " + treshold.ToString().Replace(",",".") + @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" + width*-1 + @"), ChaosBot.recalc(" + height*-1 + @", false));
+                var screenPrinter = new PrintScreen();
+                var rawScreen = screenPrinter.CaptureScreen();
+                Bitmap bitmapImage = new Bitmap(rawScreen);
+                var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
+                " + method + @"
+                if (item.HasValue)
+                {
+                    // Found
+                }
+                else
+                {
+                    // Not Found
+                }
+
+            }
+            catch { }";
+            Clipboard.SetText(text.Replace("'", "\""));
+        
         }
     }
 }

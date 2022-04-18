@@ -52,6 +52,7 @@
             this.radioButtonGetBest = new System.Windows.Forms.RadioButton();
             this.radioButtonGetClosest = new System.Windows.Forms.RadioButton();
             this.radioButtonGetClosestBest = new System.Windows.Forms.RadioButton();
+            this.buttonGenerateCode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
@@ -61,7 +62,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(11, 341);
+            this.button2.Location = new System.Drawing.Point(11, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(314, 27);
             this.button2.TabIndex = 2;
@@ -251,6 +252,7 @@
             // radioButtonGetBest
             // 
             this.radioButtonGetBest.AutoSize = true;
+            this.radioButtonGetBest.Checked = true;
             this.radioButtonGetBest.Location = new System.Drawing.Point(14, 210);
             this.radioButtonGetBest.Name = "radioButtonGetBest";
             this.radioButtonGetBest.Size = new System.Drawing.Size(66, 17);
@@ -281,11 +283,23 @@
             this.radioButtonGetClosestBest.Text = "Get Closest Best";
             this.radioButtonGetClosestBest.UseVisualStyleBackColor = true;
             // 
+            // buttonGenerateCode
+            // 
+            this.buttonGenerateCode.Enabled = false;
+            this.buttonGenerateCode.Location = new System.Drawing.Point(11, 362);
+            this.buttonGenerateCode.Name = "buttonGenerateCode";
+            this.buttonGenerateCode.Size = new System.Drawing.Size(314, 27);
+            this.buttonGenerateCode.TabIndex = 27;
+            this.buttonGenerateCode.Text = "Generate Code to Clipboard";
+            this.buttonGenerateCode.UseVisualStyleBackColor = true;
+            this.buttonGenerateCode.Click += new System.EventHandler(this.buttonGenerateCode_Click);
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 380);
+            this.ClientSize = new System.Drawing.Size(339, 396);
+            this.Controls.Add(this.buttonGenerateCode);
             this.Controls.Add(this.radioButtonGetClosestBest);
             this.Controls.Add(this.radioButtonGetClosest);
             this.Controls.Add(this.radioButtonGetBest);
@@ -346,5 +360,6 @@
         private System.Windows.Forms.RadioButton radioButtonGetBest;
         private System.Windows.Forms.RadioButton radioButtonGetClosest;
         private System.Windows.Forms.RadioButton radioButtonGetClosestBest;
+        private System.Windows.Forms.Button buttonGenerateCode;
     }
 }
