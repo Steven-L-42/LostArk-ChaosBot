@@ -103,6 +103,12 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.chBoxGunlancer2 = new System.Windows.Forms.CheckBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.chBoxDeathblade2 = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.chBoxGunlancer = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.chBoxBard = new System.Windows.Forms.CheckBox();
@@ -193,12 +199,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.chBoxDeathblade2 = new System.Windows.Forms.CheckBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.chBoxGunlancer2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1285,6 +1285,80 @@
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.Coral;
+            this.label36.Location = new System.Drawing.Point(294, 80);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(108, 13);
+            this.label36.TabIndex = 75;
+            this.label36.Text = "ALWAYS ON MODE";
+            // 
+            // chBoxGunlancer2
+            // 
+            this.chBoxGunlancer2.AutoSize = true;
+            this.chBoxGunlancer2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGunlancer2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxGunlancer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGunlancer2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGunlancer2.Location = new System.Drawing.Point(205, 78);
+            this.chBoxGunlancer2.Name = "chBoxGunlancer2";
+            this.chBoxGunlancer2.Size = new System.Drawing.Size(83, 19);
+            this.chBoxGunlancer2.TabIndex = 74;
+            this.chBoxGunlancer2.Text = "Gunlancer:";
+            this.chBoxGunlancer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxGunlancer2.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.Coral;
+            this.label35.Location = new System.Drawing.Point(294, 62);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(88, 13);
+            this.label35.TabIndex = 73;
+            this.label35.Text = "ON/ OFF MODE";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Coral;
+            this.label26.Location = new System.Drawing.Point(294, 44);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(83, 13);
+            this.label26.TabIndex = 72;
+            this.label26.Text = "DOUBLE CLICK";
+            // 
+            // chBoxDeathblade2
+            // 
+            this.chBoxDeathblade2.AutoSize = true;
+            this.chBoxDeathblade2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxDeathblade2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxDeathblade2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxDeathblade2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxDeathblade2.Location = new System.Drawing.Point(198, 42);
+            this.chBoxDeathblade2.Name = "chBoxDeathblade2";
+            this.chBoxDeathblade2.Size = new System.Drawing.Size(90, 19);
+            this.chBoxDeathblade2.TabIndex = 71;
+            this.chBoxDeathblade2.Text = "Deathblade:";
+            this.chBoxDeathblade2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxDeathblade2.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Coral;
+            this.label24.Location = new System.Drawing.Point(294, 26);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(104, 13);
+            this.label24.TabIndex = 70;
+            this.label24.Text = "EACH 12 SECONDS";
+            // 
             // chBoxGunlancer
             // 
             this.chBoxGunlancer.AutoSize = true;
@@ -1364,7 +1438,7 @@
             this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxSorcerer.Location = new System.Drawing.Point(36, 80);
+            this.chBoxSorcerer.Location = new System.Drawing.Point(36, 78);
             this.chBoxSorcerer.Name = "chBoxSorcerer";
             this.chBoxSorcerer.Size = new System.Drawing.Size(75, 19);
             this.chBoxSorcerer.TabIndex = 63;
@@ -2525,80 +2599,6 @@
             this.Ultimate.Size = new System.Drawing.Size(410, 126);
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.Coral;
-            this.label24.Location = new System.Drawing.Point(294, 26);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(104, 13);
-            this.label24.TabIndex = 70;
-            this.label24.Text = "EACH 12 SECONDS";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Coral;
-            this.label26.Location = new System.Drawing.Point(294, 44);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(83, 13);
-            this.label26.TabIndex = 72;
-            this.label26.Text = "DOUBLE CLICK";
-            // 
-            // chBoxDeathblade2
-            // 
-            this.chBoxDeathblade2.AutoSize = true;
-            this.chBoxDeathblade2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxDeathblade2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxDeathblade2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxDeathblade2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxDeathblade2.Location = new System.Drawing.Point(198, 42);
-            this.chBoxDeathblade2.Name = "chBoxDeathblade2";
-            this.chBoxDeathblade2.Size = new System.Drawing.Size(90, 19);
-            this.chBoxDeathblade2.TabIndex = 71;
-            this.chBoxDeathblade2.Text = "Deathblade:";
-            this.chBoxDeathblade2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxDeathblade2.UseVisualStyleBackColor = true;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.Coral;
-            this.label35.Location = new System.Drawing.Point(294, 62);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(88, 13);
-            this.label35.TabIndex = 73;
-            this.label35.Text = "ON/ OFF MODE";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.Coral;
-            this.label36.Location = new System.Drawing.Point(294, 80);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(108, 13);
-            this.label36.TabIndex = 75;
-            this.label36.Text = "ALWAYS ON MODE";
-            // 
-            // chBoxGunlancer2
-            // 
-            this.chBoxGunlancer2.AutoSize = true;
-            this.chBoxGunlancer2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxGunlancer2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxGunlancer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxGunlancer2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxGunlancer2.Location = new System.Drawing.Point(205, 78);
-            this.chBoxGunlancer2.Name = "chBoxGunlancer2";
-            this.chBoxGunlancer2.Size = new System.Drawing.Size(83, 19);
-            this.chBoxGunlancer2.TabIndex = 74;
-            this.chBoxGunlancer2.Text = "Gunlancer:";
-            this.chBoxGunlancer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxGunlancer2.UseVisualStyleBackColor = true;
             // 
             // ChaosBot
             // 

@@ -701,39 +701,37 @@ namespace PixelAimbot
                     SetForegroundWindow(handle);
 
                 }
+
+
+                /////////////// ANTI KICK ///////////////////
+                token.ThrowIfCancellationRequested();
                 await Task.Delay(1500, token);
+                au3.MouseMove(recalc(960), recalc(529, false), 10);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
 
-                for (int i = 0; i < 2; i++)
-                {
-
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                /////////////// PRESS G TO ENTER ///////////////
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
 
-
-                    await Task.Delay(1000, token);
-
-                    ////////////////////////////////HIER FOLGT ENTER 2
-
-                    au3.MouseMove(recalc(1467), recalc(858, false), 10);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                /////////////// CLICK ON ENTER /////////////////
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                au3.MouseMove(recalc(1467), recalc(858, false), 10);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
 
-
-                    await Task.Delay(1000, token);
-
-                    /////////////// ACCEPT
-
-                    await Task.Delay(1000);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
+                /////////////// CLICK ON ACCEPT /////////////// 
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
 
-                }
 
+                token.ThrowIfCancellationRequested();
                 await Task.Delay(9000, token);
-
                 var t3 = Task.Run(() => MOVE(token));
                 await Task.WhenAny(new[] { t3 });
             }
@@ -761,13 +759,16 @@ namespace PixelAimbot
 
                 au3.MouseMove(recalc(1900), recalc(50, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                token.ThrowIfCancellationRequested();
                 au3.MouseMove(recalc(1871), recalc(260, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                token.ThrowIfCancellationRequested();
                 au3.MouseMove(recalc(1902), recalc(87, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                token.ThrowIfCancellationRequested();
                 au3.MouseMove(recalc(1871), recalc(260, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
+                token.ThrowIfCancellationRequested();
                 object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909), recalc(392, false), 0xFFF1C6, 100);
                 if (minimizeChat.ToString() == "0")
                 {
@@ -775,25 +776,13 @@ namespace PixelAimbot
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 }
 
-                for (int i = 0; i < 2; i++)
-                {
-
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot moves to start the Dungeon..."));
+
                     au3.MouseMove(recalc(960), recalc(529, false), 10);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     await Task.Delay(1000, token);
-
-
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-
-                    au3.MouseMove(recalc(960), recalc(529, false), 10);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-
-
 
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -807,7 +796,7 @@ namespace PixelAimbot
                         await Task.Delay(1000);
                     }
 
-                }
+                
 
                 _Floor1 = true;
                 _STOPP = false;
