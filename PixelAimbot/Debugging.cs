@@ -276,8 +276,8 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                var template = new Image<Bgr, byte>(resourceFolder + '" + Path.GetFileName(picturePath) + @"');
-                var mask = new Image<Bgr, byte>(resourceFolder + '" + Path.GetFileName(maskPath) + @"');
+                var template = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(picturePath) + @"');
+                var mask = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(maskPath) + @"');
 
 
                 var Detector = new ScreenDetector(template, mask, " + treshold.ToString().Replace(",",".") + @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" + width*-1 + @"), ChaosBot.recalc(" + height*-1 + @", false));

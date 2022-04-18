@@ -22,6 +22,7 @@ namespace PixelAimbot.Classes.Misc
         public const byte VK_ESCAPE = 0x1B;
         public const byte VK_RETURN = 0x0D;
         public const byte VK_C = 0x43;
+        public const byte VK_B = 0x42;
 
         public const byte VK_G = 0x47;
         public const byte VK_Q = 0x51;

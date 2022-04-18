@@ -558,25 +558,20 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                var template =
-                new Image<Bgr, byte>(resourceFolder + "/gathering.png");
-                var mask =
-                new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+                var template = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+                var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
-                
-                var Detector = new ScreenDetector(template, mask, 0.7f, ChaosBot.recalc(526), ChaosBot.recalc(953), ChaosBot.recalc(100), ChaosBot.recalc(107));
+
+                var Detector = new ScreenDetector(template, mask, 0.7f, ChaosBot.recalc(529), ChaosBot.recalc(963, false), ChaosBot.recalc(91), ChaosBot.recalc(94, false));
                 var screenPrinter = new PrintScreen();
                 var rawScreen = screenPrinter.CaptureScreen();
                 Bitmap bitmapImage = new Bitmap(rawScreen);
                 var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
                 var item = Detector.GetBest(screenCapture, true);
-                if(item.HasValue)
+                if (item.HasValue)
                 {
-                    // Found
-                } else
-                {
-                    // Not Found
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
                 }
 
             }

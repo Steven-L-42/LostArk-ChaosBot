@@ -17,7 +17,8 @@ namespace PixelAimbot
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Debugging());
+            Application.Run(new FishBot());
+            
             
         }
 
