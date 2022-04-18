@@ -223,9 +223,9 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
-            this.groupBox1.Location = new System.Drawing.Point(592, 173);
+            this.groupBox1.Location = new System.Drawing.Point(592, 107);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(139, 228);
+            this.groupBox1.Size = new System.Drawing.Size(139, 294);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Patchnotes";
@@ -241,10 +241,11 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(140, 202);
+            this.richTextBox1.Size = new System.Drawing.Size(140, 268);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "2.2.3r\n- Changed LEAVETIMER\n- ADD LEAVETIMER F3\n\n2.2.5r\n- Fix Channel Swap \n- Dea" +
-    "thblade 2 modes\n- Gunlancer 2 modes\n- Revive ON/OFF\n- Performance improvements";
+            this.richTextBox1.Text = "2.2.5r\n- Fix Channel Swap \n- Deathblade 2 modes\n- Gunlancer 2 modes\n- Revive ON/O" +
+    "FF\n- Performance improvements\n\n2.2.8r\n+Anti Kick\n+Awakening V\n+Auto-Attack Toggl" +
+    "e\n+Deathblade adjustment\n";
             // 
             // progressBar1
             // 

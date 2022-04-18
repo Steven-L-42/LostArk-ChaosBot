@@ -179,13 +179,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtPortalSearch = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chBoxGerman = new System.Windows.Forms.CheckBox();
-            this.chBoxEnglish = new System.Windows.Forms.CheckBox();
             this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
             this.labelApiTelegram = new System.Windows.Forms.Label();
             this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.HEAL = new System.Windows.Forms.TabPage();
             this.Classes = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -199,6 +198,11 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
+            this.chBoxAutoAttackZero = new System.Windows.Forms.CheckBox();
+            this.chBoxAutoAttackHalf = new System.Windows.Forms.CheckBox();
+            this.chBoxAutoAttackFull = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chBoxAwakening = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -413,9 +417,10 @@
             this.chBoxLOGOUT.Name = "chBoxLOGOUT";
             this.chBoxLOGOUT.Size = new System.Drawing.Size(154, 22);
             this.chBoxLOGOUT.TabIndex = 44;
-            this.chBoxLOGOUT.Text = "Auto-Logout";
-            this.toolTip1.SetToolTip(this.chBoxLOGOUT, "adjust your time from when to activate Auto-Logout, \r\nspecify in minutes. Do not " +
-        "enter the same time as for Auto-Repair!\r\nLogout means = character selection.\r\n");
+            this.chBoxLOGOUT.Text = "Auto-Close Game";
+            this.toolTip1.SetToolTip(this.chBoxLOGOUT, "adjust your time from when to activate Auto-Close Game, \r\nspecify in minutes. Do " +
+        "not enter the same time as for Auto-Repair!\r\nClose Game means = Game will be ful" +
+        "ly closed and Bot shutsdown.\r\n");
             this.chBoxLOGOUT.UseMnemonic = false;
             this.chBoxLOGOUT.UseVisualStyleBackColor = false;
             this.chBoxLOGOUT.CheckedChanged += new System.EventHandler(this.chBoxLOGOUT_CheckedChanged);
@@ -1256,6 +1261,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chBoxAwakening);
+            this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.label36);
             this.groupBox3.Controls.Add(this.chBoxGunlancer2);
             this.groupBox3.Controls.Add(this.label35);
@@ -1379,7 +1386,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.Orange;
-            this.label11.Location = new System.Drawing.Point(145, 99);
+            this.label11.Location = new System.Drawing.Point(227, 99);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 15);
             this.label11.TabIndex = 68;
@@ -1407,7 +1414,7 @@
             this.txBoxUltimateKey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txBoxUltimateKey.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txBoxUltimateKey.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txBoxUltimateKey.Location = new System.Drawing.Point(241, 99);
+            this.txBoxUltimateKey.Location = new System.Drawing.Point(323, 99);
             this.txBoxUltimateKey.Name = "txBoxUltimateKey";
             this.txBoxUltimateKey.ReadOnly = true;
             this.txBoxUltimateKey.Size = new System.Drawing.Size(23, 16);
@@ -2333,67 +2340,52 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.SETTINGS.Controls.Add(this.label18);
+            this.SETTINGS.Controls.Add(this.chBoxAutoAttackZero);
+            this.SETTINGS.Controls.Add(this.label37);
             this.SETTINGS.Controls.Add(this.label2);
-            this.SETTINGS.Controls.Add(this.chBoxGerman);
-            this.SETTINGS.Controls.Add(this.chBoxEnglish);
+            this.SETTINGS.Controls.Add(this.chBoxAutoAttackHalf);
+            this.SETTINGS.Controls.Add(this.chBoxAutoAttackFull);
             this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
-            this.SETTINGS.Controls.Add(this.label18);
             this.SETTINGS.Location = new System.Drawing.Point(4, 20);
             this.SETTINGS.Name = "SETTINGS";
             this.SETTINGS.Size = new System.Drawing.Size(418, 150);
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Orange;
+            this.label18.Location = new System.Drawing.Point(168, 123);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(202, 15);
+            this.label18.TabIndex = 48;
+            this.label18.Text = "This means Auto-Attack is disabled.";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Orange;
+            this.label37.Location = new System.Drawing.Point(168, 97);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(156, 15);
+            this.label37.TabIndex = 46;
+            this.label37.Text = "This is the reduced setting.";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(97, 63);
+            this.label2.Location = new System.Drawing.Point(168, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 15);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "set your current Game Language here!";
-            this.label2.Visible = false;
-            // 
-            // chBoxGerman
-            // 
-            this.chBoxGerman.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxGerman.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxGerman.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxGerman.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxGerman.FlatAppearance.BorderSize = 0;
-            this.chBoxGerman.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxGerman.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxGerman.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxGerman.Location = new System.Drawing.Point(120, 81);
-            this.chBoxGerman.Name = "chBoxGerman";
-            this.chBoxGerman.Size = new System.Drawing.Size(83, 22);
-            this.chBoxGerman.TabIndex = 43;
-            this.chBoxGerman.Text = "Deutsch:";
-            this.chBoxGerman.UseMnemonic = false;
-            this.chBoxGerman.UseVisualStyleBackColor = false;
-            this.chBoxGerman.Visible = false;
-            // 
-            // chBoxEnglish
-            // 
-            this.chBoxEnglish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxEnglish.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxEnglish.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxEnglish.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxEnglish.FlatAppearance.BorderSize = 0;
-            this.chBoxEnglish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxEnglish.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxEnglish.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxEnglish.Location = new System.Drawing.Point(209, 81);
-            this.chBoxEnglish.Name = "chBoxEnglish";
-            this.chBoxEnglish.Size = new System.Drawing.Size(83, 22);
-            this.chBoxEnglish.TabIndex = 35;
-            this.chBoxEnglish.Text = "English:";
-            this.chBoxEnglish.UseMnemonic = false;
-            this.chBoxEnglish.UseVisualStyleBackColor = false;
-            this.chBoxEnglish.Visible = false;
+            this.label2.Size = new System.Drawing.Size(149, 15);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "This is the normal setting.";
             // 
             // groupBoxTelegram
             // 
@@ -2431,17 +2423,6 @@
             this.textBoxTelegramAPI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxTelegramAPI.WordWrap = false;
             this.textBoxTelegramAPI.TextChanged += new System.EventHandler(this.textBoxTelegramAPI_TextChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Orange;
-            this.label18.Location = new System.Drawing.Point(35, 129);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(347, 15);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "Stand near the Dungeon Statue. Interact \"G\" must be visible.";
             // 
             // HEAL
             // 
@@ -2600,6 +2581,95 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
+            // chBoxAutoAttackZero
+            // 
+            this.chBoxAutoAttackZero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoAttackZero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoAttackZero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoAttackZero.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoAttackZero.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoAttackZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoAttackZero.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoAttackZero.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxAutoAttackZero.Location = new System.Drawing.Point(21, 120);
+            this.chBoxAutoAttackZero.Name = "chBoxAutoAttackZero";
+            this.chBoxAutoAttackZero.Size = new System.Drawing.Size(141, 22);
+            this.chBoxAutoAttackZero.TabIndex = 47;
+            this.chBoxAutoAttackZero.Text = "Auto-Attack ZERO:";
+            this.chBoxAutoAttackZero.UseMnemonic = false;
+            this.chBoxAutoAttackZero.UseVisualStyleBackColor = false;
+            this.chBoxAutoAttackZero.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackZero_CheckedChanged);
+            // 
+            // chBoxAutoAttackHalf
+            // 
+            this.chBoxAutoAttackHalf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoAttackHalf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoAttackHalf.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoAttackHalf.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoAttackHalf.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoAttackHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoAttackHalf.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoAttackHalf.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxAutoAttackHalf.Location = new System.Drawing.Point(21, 94);
+            this.chBoxAutoAttackHalf.Name = "chBoxAutoAttackHalf";
+            this.chBoxAutoAttackHalf.Size = new System.Drawing.Size(141, 22);
+            this.chBoxAutoAttackHalf.TabIndex = 44;
+            this.chBoxAutoAttackHalf.Text = "Auto-Attack HALF:";
+            this.chBoxAutoAttackHalf.UseMnemonic = false;
+            this.chBoxAutoAttackHalf.UseVisualStyleBackColor = false;
+            this.chBoxAutoAttackHalf.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackHalf_CheckedChanged);
+            // 
+            // chBoxAutoAttackFull
+            // 
+            this.chBoxAutoAttackFull.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoAttackFull.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoAttackFull.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoAttackFull.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoAttackFull.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoAttackFull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoAttackFull.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoAttackFull.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxAutoAttackFull.Location = new System.Drawing.Point(21, 66);
+            this.chBoxAutoAttackFull.Name = "chBoxAutoAttackFull";
+            this.chBoxAutoAttackFull.Size = new System.Drawing.Size(141, 22);
+            this.chBoxAutoAttackFull.TabIndex = 43;
+            this.chBoxAutoAttackFull.Text = "Auto-Attack FULL:";
+            this.chBoxAutoAttackFull.UseMnemonic = false;
+            this.chBoxAutoAttackFull.UseVisualStyleBackColor = false;
+            this.chBoxAutoAttackFull.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackFull_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox1.Location = new System.Drawing.Point(184, 98);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(23, 16);
+            this.textBox1.TabIndex = 77;
+            this.textBox1.Text = "V";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.WordWrap = false;
+            // 
+            // chBoxAwakening
+            // 
+            this.chBoxAwakening.AutoSize = true;
+            this.chBoxAwakening.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAwakening.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxAwakening.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAwakening.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAwakening.ForeColor = System.Drawing.Color.Orange;
+            this.chBoxAwakening.Location = new System.Drawing.Point(79, 97);
+            this.chBoxAwakening.Name = "chBoxAwakening";
+            this.chBoxAwakening.Size = new System.Drawing.Size(99, 19);
+            this.chBoxAwakening.TabIndex = 78;
+            this.chBoxAwakening.Text = "AWAKENING:";
+            this.chBoxAwakening.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxAwakening.UseVisualStyleBackColor = true;
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2679,7 +2749,6 @@
         private System.Windows.Forms.TabPage Info;
         private System.Windows.Forms.TabPage SETTINGS;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -2815,9 +2884,6 @@
         private System.Windows.Forms.GroupBox groupBoxTelegram;
         private System.Windows.Forms.Label labelApiTelegram;
         private System.Windows.Forms.TextBox textBoxTelegramAPI;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chBoxGerman;
-        private System.Windows.Forms.CheckBox chBoxEnglish;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtRestart;
         private System.Windows.Forms.Label label3;
@@ -2831,6 +2897,14 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.CheckBox chBoxDeathblade2;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox chBoxAutoAttackZero;
+        private System.Windows.Forms.CheckBox chBoxAutoAttackHalf;
+        private System.Windows.Forms.CheckBox chBoxAutoAttackFull;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox chBoxAwakening;
     }
 }
 

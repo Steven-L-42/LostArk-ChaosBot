@@ -962,7 +962,12 @@ namespace PixelAimbot
                         var t36 = Task.Run(() => LEAVETIMERFLOOR2(token));
                         await Task.WhenAny(new[] { t36});
                     }
-                      
+                    if (leavetimer == 1 && chBoxAwakening.Checked == true)
+                    {
+                        var t39 = Task.Run(() => AWAKENINGSKILL(token));
+                        await Task.WhenAny(new[] { t39 });
+                    }
+
                     var t12 = Task.Run(() => FLOORFIGHT(token));
                     var t14 = Task.Run(() => ULTIMATE(token));
                     var t16 = Task.Run(() => REVIVE(token));
@@ -1074,8 +1079,6 @@ namespace PixelAimbot
                     {
                         foreach (KeyValuePair<byte, int> skill in SKILLS.skillset.OrderBy(x => x.Value))
                         {
-
-
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
@@ -1103,25 +1106,30 @@ namespace PixelAimbot
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     walktopUTurn++;
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-
+                                    if (chBoxAutoAttackHalf.Checked && chBoxAutoAttackFull.Checked)
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                    }
+                                    if(chBoxAutoAttackFull.Checked)
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                    }
                                     fightOnSecondAbility = 1;
 
                                 }
@@ -1143,7 +1151,7 @@ namespace PixelAimbot
 
 
                             }
-                            if (walktopUTurn == 9 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
+                            if (walktopUTurn == 10 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
 
 
@@ -1159,7 +1167,7 @@ namespace PixelAimbot
 
 
                             }
-                            if (walktopUTurn == 15 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
+                            if (walktopUTurn == 17 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
 
 
@@ -1175,7 +1183,7 @@ namespace PixelAimbot
 
 
                             }
-                            if (walktopUTurn == 20 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
+                            if (walktopUTurn == 23 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
 
 
@@ -1192,7 +1200,7 @@ namespace PixelAimbot
 
                             }
 
-                            if (walktopUTurn == 20 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
+                            if (walktopUTurn == 23 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
                                 walktopUTurn = 1;
                                 await Task.Delay(1, token);
@@ -1729,7 +1737,9 @@ namespace PixelAimbot
                                 if(chBoxDeathblade2.Checked == true)
                                 {
                                     await Task.Delay(500);
-                                    KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 500); }
+                                    KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                    KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                }
 
                                 var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Deathblade Ultimate"));
@@ -2098,30 +2108,23 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                for (int i = 0; i < 1; i++)
-                {
+                await Task.Delay(20000, token);
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT Process starts..."));
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
+                await Task.Delay(2000, token);
+                au3.MouseMove(recalc(1427), recalc(723, false), 5);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                await Task.Delay(2000, token);
+                au3.MouseMove(recalc(906), recalc(575, false), 5);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
+                await Task.Delay(1000, token);
 
-                    await Task.Delay(20000, token);
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are logged out!"));
+                _start = false;
+                cts.Cancel();
 
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT Process starts..."));
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
-                    await Task.Delay(2000, token);
-                    au3.MouseMove(recalc(1238), recalc(728, false), 5);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                    await Task.Delay(2000, token);
-                    au3.MouseMove(recalc(906), recalc(575, false), 5);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                    await Task.Delay(1000, token);
-
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "You are logged out!"));
-                    _start = false;
-                    cts.Cancel();
-
-
-
-                }
             }
             catch (AggregateException)
             {
@@ -2514,6 +2517,12 @@ namespace PixelAimbot
             txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
             txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
+            chBoxAutoAttackFull.Checked = Properties.Settings.Default.chBoxAutoAttackFull;
+            chBoxAutoAttackHalf.Checked = Properties.Settings.Default.chBoxAutoAttackHalf;
+            chBoxAutoAttackZero.Checked = Properties.Settings.Default.chBoxAutoAttackZero;
+            chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
+         
+
 
 
 
@@ -2675,7 +2684,10 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleS = false;
                 Properties.Settings.Default.chBoxDoubleD = false;
                 Properties.Settings.Default.chBoxDoubleF = false;
-
+                Properties.Settings.Default.chBoxAutoAttackFull = true;
+                Properties.Settings.Default.chBoxAutoAttackHalf = false;
+                Properties.Settings.Default.chBoxAutoAttackZero = false;
+                Properties.Settings.Default.chBoxAwakening = false;
 
                 Properties.Settings.Default.Save();
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
@@ -2748,6 +2760,10 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
                 chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                 chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
+                chBoxAutoAttackFull.Checked = Properties.Settings.Default.chBoxAutoAttackFull;
+                chBoxAutoAttackHalf.Checked = Properties.Settings.Default.chBoxAutoAttackHalf;
+                chBoxAutoAttackZero.Checked = Properties.Settings.Default.chBoxAutoAttackZero;
+                chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             }
             catch { }
         }
@@ -2838,8 +2854,32 @@ namespace PixelAimbot
             }
             catch { }
         }
+        public async void AWAKENINGSKILL(CancellationToken token)
+        {
+           
+            try
+            {
+
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                await Task.Delay((int.Parse(txLeaveTimerFloor2.Text) * 1000) - 7000, token);
+
+                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V,1000);
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch { }
+        }
         public async void LEAVETIMERFLOOR2(CancellationToken token)
         {
+            
             try
             {
                
@@ -3154,6 +3194,11 @@ namespace PixelAimbot
                     rotation.chBoxDoubleS = chBoxDoubleS.Checked;
                     rotation.chBoxDoubleD = chBoxDoubleD.Checked;
                     rotation.chBoxDoubleF = chBoxDoubleF.Checked;
+                    rotation.chBoxAutoAttackHalf = chBoxAutoAttackHalf.Checked;
+                    rotation.chBoxAutoAttackFull = chBoxAutoAttackFull.Checked;
+                    rotation.chBoxAutoAttackZERO = chBoxAutoAttackZero.Checked;
+                    rotation.chBoxAwakening = chBoxAwakening.Checked;
+
 
 
                     rotation.Save(comboBoxRotations.Text);
@@ -3205,7 +3250,10 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = rotation.chBoxActivateF3;
                 txtDungeon3search.Text = rotation.txtDungeon3search;
                 txtDungeon3.Text = rotation.txtDungeon3;
-
+                chBoxAutoAttackHalf.Checked = rotation.chBoxAutoAttackHalf;
+                chBoxAutoAttackFull.Checked = rotation.chBoxAutoAttackFull;
+                chBoxAutoAttackZero.Checked = rotation.chBoxAutoAttackZERO;
+                chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;
                 chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
@@ -3354,6 +3402,34 @@ namespace PixelAimbot
         private void groupBox4_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void chBoxAutoAttackFull_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chBoxAutoAttackFull.Checked)
+            {
+                chBoxAutoAttackHalf.Checked = false;
+                chBoxAutoAttackZero.Checked = false;
+            }
+
+        }
+
+        private void chBoxAutoAttackHalf_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxAutoAttackHalf.Checked)
+            {
+                chBoxAutoAttackFull.Checked = false;
+                chBoxAutoAttackZero.Checked = false;
+            }
+        }
+
+        private void chBoxAutoAttackZero_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxAutoAttackZero.Checked)
+            {
+                chBoxAutoAttackFull.Checked = false;
+                chBoxAutoAttackHalf.Checked = false;
+            }
         }
     }
 }
