@@ -113,7 +113,37 @@ namespace PixelAimbot.Classes.OpenCV
                 return null;
             }
         }
+        public Point? GetClosestBest(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        {
+            var enemies = DetectEnemies(screenCapture);
+            var enemyAndPosition = enemies.Select(x => (x, Distance(x.position)));
+            if (enemyAndPosition.Any())
+            {
+                double minDist = Double.MaxValue;
+                double maxValue = Double.MinValue;
+                Point closestEnemy = default;
+                foreach (var (enemy, distance) in enemyAndPosition)
+                {
+                    if (distance < minDist)
+                    {
+                        minDist = distance;
 
+                        if (enemy.matchValue > maxValue)
+                        {
+                            maxValue = enemy.matchValue;
+                            closestEnemy = enemy.position;
+                        }
+                    }
+
+                }
+
+                return closestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public Point? GetClosest(Image<Bgr, byte> screenCapture, bool showDetections = false)
         {
             var enemies = DetectEnemies(screenCapture);

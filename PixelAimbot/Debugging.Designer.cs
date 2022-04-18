@@ -49,7 +49,9 @@
             this.labelRefresh = new System.Windows.Forms.Label();
             this.trackBarThreadSleep = new System.Windows.Forms.TrackBar();
             this.checkBoxShowAll = new System.Windows.Forms.CheckBox();
-            this.checkBoxGetClosest = new System.Windows.Forms.CheckBox();
+            this.radioButtonGetBest = new System.Windows.Forms.RadioButton();
+            this.radioButtonGetClosest = new System.Windows.Forms.RadioButton();
+            this.radioButtonGetClosestBest = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
@@ -246,25 +248,47 @@
             this.checkBoxShowAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxShowAll.UseVisualStyleBackColor = true;
             // 
-            // checkBoxGetClosest
+            // radioButtonGetBest
             // 
-            this.checkBoxGetClosest.AutoSize = true;
-            this.checkBoxGetClosest.Checked = true;
-            this.checkBoxGetClosest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxGetClosest.Location = new System.Drawing.Point(14, 210);
-            this.checkBoxGetClosest.Name = "checkBoxGetClosest";
-            this.checkBoxGetClosest.Size = new System.Drawing.Size(249, 17);
-            this.checkBoxGetClosest.TabIndex = 23;
-            this.checkBoxGetClosest.Text = "Get Best (Checked) / Get Closest (Unchecked)";
-            this.checkBoxGetClosest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxGetClosest.UseVisualStyleBackColor = true;
+            this.radioButtonGetBest.AutoSize = true;
+            this.radioButtonGetBest.Location = new System.Drawing.Point(14, 210);
+            this.radioButtonGetBest.Name = "radioButtonGetBest";
+            this.radioButtonGetBest.Size = new System.Drawing.Size(66, 17);
+            this.radioButtonGetBest.TabIndex = 24;
+            this.radioButtonGetBest.TabStop = true;
+            this.radioButtonGetBest.Text = "Get Best";
+            this.radioButtonGetBest.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonGetClosest
+            // 
+            this.radioButtonGetClosest.AutoSize = true;
+            this.radioButtonGetClosest.Location = new System.Drawing.Point(86, 210);
+            this.radioButtonGetClosest.Name = "radioButtonGetClosest";
+            this.radioButtonGetClosest.Size = new System.Drawing.Size(79, 17);
+            this.radioButtonGetClosest.TabIndex = 25;
+            this.radioButtonGetClosest.TabStop = true;
+            this.radioButtonGetClosest.Text = "Get Closest";
+            this.radioButtonGetClosest.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonGetClosestBest
+            // 
+            this.radioButtonGetClosestBest.AutoSize = true;
+            this.radioButtonGetClosestBest.Location = new System.Drawing.Point(171, 210);
+            this.radioButtonGetClosestBest.Name = "radioButtonGetClosestBest";
+            this.radioButtonGetClosestBest.Size = new System.Drawing.Size(103, 17);
+            this.radioButtonGetClosestBest.TabIndex = 26;
+            this.radioButtonGetClosestBest.TabStop = true;
+            this.radioButtonGetClosestBest.Text = "Get Closest Best";
+            this.radioButtonGetClosestBest.UseVisualStyleBackColor = true;
             // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 380);
-            this.Controls.Add(this.checkBoxGetClosest);
+            this.Controls.Add(this.radioButtonGetClosestBest);
+            this.Controls.Add(this.radioButtonGetClosest);
+            this.Controls.Add(this.radioButtonGetBest);
             this.Controls.Add(this.checkBoxShowAll);
             this.Controls.Add(this.trackBarThreadSleep);
             this.Controls.Add(this.labelRefresh);
@@ -319,6 +343,8 @@
         private System.Windows.Forms.Label labelRefresh;
         private System.Windows.Forms.TrackBar trackBarThreadSleep;
         private System.Windows.Forms.CheckBox checkBoxShowAll;
-        private System.Windows.Forms.CheckBox checkBoxGetClosest;
+        private System.Windows.Forms.RadioButton radioButtonGetBest;
+        private System.Windows.Forms.RadioButton radioButtonGetClosest;
+        private System.Windows.Forms.RadioButton radioButtonGetClosestBest;
     }
 }

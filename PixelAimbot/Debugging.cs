@@ -124,18 +124,22 @@ namespace PixelAimbot
                             var screenCapture = bitmapImage.ToImage<Bgr, byte>();
                             Point? enemy = null;
                             screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                            if (checkBoxGetClosest.Checked)
+                            if (radioButtonGetBest.Checked)
                             {
-                                enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                               enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
                             }
-                            else
+                            if(radioButtonGetClosest.Checked)
                             {
                                 enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                            }
+                            if(radioButtonGetClosestBest.Checked)
+                            {
+                                enemy = debugDetector.GetClosestBest(screenCapture, !checkBoxShowAll.Checked, testform);
                             }
 
                             if (enemy.HasValue)
                             {
-                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, FishBot.recalc(enemyTemplate.Size.Width), FishBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
+                                screenDrawer.Draw(testform, enemy.Value.X - 15, enemy.Value.Y - 5, FishBot.recalc(enemyTemplate.Size.Width), FishBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
                             }
                             
                         }
