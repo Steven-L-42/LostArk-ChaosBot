@@ -11,37 +11,50 @@ namespace PixelAimbot.Classes.OpenCV
 {
     internal class ScreenDetector
     {
-        private Image<Bgr, byte> _pictureTemplate;
-        private Image<Bgr, byte> _pictureMask;
-        private float _threshold;
-        private int x, y, width, height;
-        private readonly Point _myPosition = new Point(ChaosBot.recalc(1920), ChaosBot.recalc(1080, false));
+        public Image<Bgr, byte> _enemyTemplate;
+        public Image<Bgr, byte> _enemyMask;
+        public float _threshold { get; set; } = 0.7f;
+        private Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
+        private DrawScreenWin _screenDrawer;
+        public int rectangleX = 0;
+        public int rectangleY = 0;
+        public int rectangleWidth = 0;
+        public int rectangleHeight = 0;
 
-        public ScreenDetector(Image<Bgr, byte> pictureTemplate,
-            Image<Bgr, byte> pictureMask, float threshold, int x, int y, int width, int height)
+       
+        public ScreenDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
         {
-            this._pictureMask = pictureMask;
-            this._pictureTemplate = pictureTemplate;
+            this._enemyMask = enemyMask;
+            this._enemyTemplate = enemyTemplate;
             this._threshold = threshold;
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            this._screenDrawer = new DrawScreenWin();
+            this.rectangleHeight = rectangleHeight;
+            this.rectangleWidth = rectangleWidth;
+            this.rectangleX = rectangleX;
+            this.rectangleY = rectangleY;
+
+        }
+        public void setMyPosition(Point point)
+        {
+            this._myPosition = point;
         }
 
-            private List<Point> DetectItems(Image<Bgr, byte> screenCapture)
+        private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
-            List<Point> items = new List<Point>();
-            screenCapture.ROI = new Rectangle(x, y, width, height);
-            var fullscreen = screenCapture.Copy();
+            this._enemyTemplate.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+
+            List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();
+            screenCapture.ROI = new Rectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
+            var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;
             Point minPoint = new Point();
             Point maxPoint = new Point();
-            CvInvoke.MatchTemplate(fullscreen, this._pictureTemplate, res, TemplateMatchingType.SqdiffNormed, this._pictureMask);
-            
-            int h = this._pictureTemplate.Size.Height;
-            int w = this._pictureTemplate.Size.Width;
+            CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, TemplateMatchingType.SqdiffNormed, this._enemyMask);
+
+            int h = this._enemyTemplate.Size.Height;
+            int w = this._enemyTemplate.Size.Width;
 
             while (1 - minVal > this._threshold)
             {
@@ -62,36 +75,64 @@ namespace PixelAimbot.Classes.OpenCV
                     var vector = new VectorOfPoint(points);
 
                     CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
-                    items.Add(minPoint);
+                    enemies.Add((minPoint, 1 - minVal));
                 }
             }
 
-            return items;
+            return enemies;
         }
 
-        private double Distance(Point item)
+        private double Distance(Point enemy)
         {
-            return Math.Sqrt((Math.Pow(item.X - _myPosition.X, 2) + Math.Pow(item.Y - _myPosition.Y, 2)));
+            return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
         }
 
-        public Point? GetClosestItem(Image<Bgr, byte> screenCapture)
+
+
+        public Point? GetBest(Image<Bgr, byte> screenCapture, bool showDetections = false)
         {
-            var items = DetectItems(screenCapture);
-            var itemsAndPosition = items.Select(x => (x, Distance(x)));
-            if (itemsAndPosition.Any())
+            var enemies = DetectEnemies(screenCapture);
+            if (enemies.Any())
+            {
+                double maxValue = Double.MinValue;
+                Point bestEnemy = default;
+                foreach (var enemy in enemies)
+                {
+                    if (enemy.matchValue > maxValue)
+                    {
+                        maxValue = enemy.matchValue;
+                        bestEnemy = enemy.position;
+                    }
+
+                }
+
+                return bestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Point? GetClosest(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        {
+            var enemies = DetectEnemies(screenCapture);
+            var enemyAndPosition = enemies.Select(x => (x, Distance(x.position)));
+            if (enemyAndPosition.Any())
             {
                 double minDist = Double.MaxValue;
-                Point closestItem = default;
-                foreach (var (item, distance) in itemsAndPosition)
+                Point closestEnemy = default;
+                foreach (var (enemy, distance) in enemyAndPosition)
                 {
                     if (distance < minDist)
                     {
                         minDist = distance;
-                        closestItem = item;
+                        closestEnemy = enemy.position;
                     }
+
                 }
 
-                return closestItem;
+                return closestEnemy;
             }
             else
             {
@@ -99,4 +140,5 @@ namespace PixelAimbot.Classes.OpenCV
             }
         }
     }
+
 }

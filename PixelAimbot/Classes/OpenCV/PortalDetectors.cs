@@ -22,9 +22,13 @@ namespace PixelAimbot.Classes.OpenCV
             this._PortalTemplate = PortalTemplate;
             this._thresh = thresh;
         }
-        private List<Point> DetectPortal(Image<Bgr, byte> screenCapture)
+        private List<(Point position, double matchValue)> DetectPortal(Image<Bgr, byte> screenCapture)
         {
-            List<Point> Portals = new List<Point>();
+            this._PortalTemplate.Resize(ChaosBot.recalc(this._PortalTemplate.Size.Width), ChaosBot.recalc(this._PortalTemplate.Size.Height), Inter.Linear);
+            this._PortalMask.Resize(ChaosBot.recalc(this._PortalMask.Size.Width), ChaosBot.recalc(this._PortalMask.Size.Height), Inter.Linear);
+
+            List<(Point minPoint, double)> Portals = new List<(Point position, double matchValue)>();
+
             screenCapture.ROI = new Rectangle(ChaosBot.recalc(50), ChaosBot.recalc(124, false), ChaosBot.recalc(223), ChaosBot.recalc(252, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
@@ -55,7 +59,7 @@ namespace PixelAimbot.Classes.OpenCV
                     var vector = new VectorOfPoint(points);
 
                     CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
-                    Portals.Add(minPoint);
+                    Portals.Add((minPoint, 1 - minVal));
                 }
             }
 
@@ -65,10 +69,33 @@ namespace PixelAimbot.Classes.OpenCV
         {
             return Math.Sqrt((Math.Pow(Portal.X - _mePosition.X, 2) + Math.Pow(Portal.Y - _mePosition.Y, 2)));
         }
+        public Point? GetBestPortal(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        {
+            var enemies = DetectPortal(screenCapture);
+            if (enemies.Any())
+            {
+                double maxValue = Double.MinValue;
+                Point bestEnemy = default;
+                foreach (var enemy in enemies)
+                {
+                    if (enemy.matchValue > maxValue)
+                    {
+                        maxValue = enemy.matchValue;
+                        bestEnemy = enemy.position;
+                    }
+                }
+
+                return bestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public Point? GetClosestPortal(Image<Bgr, byte> screenCapture)
         {
             var Portals = DetectPortal(screenCapture);
-            var PortalAndPosition = Portals.Select(x => (x, Distance(x)));
+            var PortalAndPosition = Portals.Select(x => (x, Distance(x.position)));
             if (PortalAndPosition.Any())
             {
                 double minDist = Double.MaxValue;
@@ -78,7 +105,7 @@ namespace PixelAimbot.Classes.OpenCV
                     if (distance < minDist)
                     {
                         minDist = distance;
-                        closestPortal = Portal;
+                        closestPortal = Portal.position;
                     }
                 }
 

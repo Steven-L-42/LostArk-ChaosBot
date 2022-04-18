@@ -27,9 +27,12 @@ namespace PixelAimbot.Classes.OpenCV
 
         }
 
-        private List<Point> DetectEnemies(Image<Bgr, byte> screenCapture)
+        private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
-            List<Point> enemies = new List<Point>();
+            this._enemyTemplate.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+
+            List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();
             screenCapture.ROI = new Rectangle(ChaosBot.recalc(1593), PixelAimbot.ChaosBot.recalc(40, false), ChaosBot.recalc(296), ChaosBot.recalc(255, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
@@ -60,7 +63,7 @@ namespace PixelAimbot.Classes.OpenCV
                     var vector = new VectorOfPoint(points);
 
                     CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
-                    enemies.Add(minPoint);
+                    enemies.Add((minPoint, 1 - minVal));
                 }
             }
 
@@ -71,11 +74,33 @@ namespace PixelAimbot.Classes.OpenCV
         {
             return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
         }
+        public Point? GetBestEnemy(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        {
+            var enemies = DetectEnemies(screenCapture);
+            if (enemies.Any())
+            {
+                double maxValue = Double.MinValue;
+                Point bestEnemy = default;
+                foreach (var enemy in enemies)
+                {
+                    if (enemy.matchValue > maxValue)
+                    {
+                        maxValue = enemy.matchValue;
+                        bestEnemy = enemy.position;
+                    }
+                }
 
+                return bestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public Point? GetClosestEnemy(Image<Bgr, byte> screenCapture, bool showDetections = false)
         {
             var enemies = DetectEnemies(screenCapture);
-            var enemyAndPosition = enemies.Select(x => (x, Distance(x)));
+            var enemyAndPosition = enemies.Select(x => (x, Distance(x.position)));
             if (enemyAndPosition.Any())
             {
                 double minDist = Double.MaxValue;
@@ -85,7 +110,7 @@ namespace PixelAimbot.Classes.OpenCV
                     if (distance < minDist)
                     {
                         minDist = distance;
-                        closestEnemy = enemy;
+                        closestEnemy = enemy.position;
                     }
                 }
 

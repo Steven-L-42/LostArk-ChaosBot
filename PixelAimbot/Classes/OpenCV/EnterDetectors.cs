@@ -22,9 +22,14 @@ namespace PixelAimbot.Classes.OpenCV
             this._EnterTemplate = EnterTemplate;
             this._thresh = thresh;
         }
-        private List<Point> DetectEnter(Image<Bgr, byte> screenCapture)
+        
+        private List<(Point position, double matchValue)> DetectEnter(Image<Bgr, byte> screenCapture)
         {
-            List<Point> Enters = new List<Point>();
+
+            this._EnterTemplate.Resize(ChaosBot.recalc(this._EnterTemplate.Size.Width), ChaosBot.recalc(this._EnterTemplate.Size.Height), Inter.Linear);
+            this._EnterMask.Resize(ChaosBot.recalc(this._EnterMask.Size.Width), ChaosBot.recalc(this._EnterMask.Size.Height), Inter.Linear);
+
+            List<(Point minPoint, double)> Enters = new List<(Point position, double matchValue)>();
             screenCapture.ROI = new Rectangle(ChaosBot.recalc(1259), ChaosBot.recalc(430, false), ChaosBot.recalc(1501), ChaosBot.recalc(499, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
@@ -55,7 +60,7 @@ namespace PixelAimbot.Classes.OpenCV
                     var vector = new VectorOfPoint(points);
 
                     CvInvoke.FillConvexPoly(res, vector, new MCvScalar(255));
-                    Enters.Add(minPoint);
+                    Enters.Add((minPoint, 1 - minVal));
                 }
             }
 
@@ -65,10 +70,33 @@ namespace PixelAimbot.Classes.OpenCV
         {
             return Math.Sqrt((Math.Pow(Enter.X - _mePosition.X, 2) + Math.Pow(Enter.Y - _mePosition.Y, 2)));
         }
+        public Point? GetBestEnter(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        {
+            var enemies = DetectEnter(screenCapture);
+            if (enemies.Any())
+            {
+                double maxValue = Double.MinValue;
+                Point bestEnemy = default;
+                foreach (var enemy in enemies)
+                {
+                    if (enemy.matchValue > maxValue)
+                    {
+                        maxValue = enemy.matchValue;
+                        bestEnemy = enemy.position;
+                    }
+                }
+
+                return bestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public Point? GetClosestEnter(Image<Bgr, byte> screenCapture)
         {
             var Enters = DetectEnter(screenCapture);
-            var EnterAndPosition = Enters.Select(x => (x, Distance(x)));
+            var EnterAndPosition = Enters.Select(x => (x, Distance(x.position)));
             if (EnterAndPosition.Any())
             {
                 double minDist = Double.MaxValue;
@@ -78,7 +106,7 @@ namespace PixelAimbot.Classes.OpenCV
                     if (distance < minDist)
                     {
                         minDist = distance;
-                        closestEnter = Enter;
+                        closestEnter = Enter.position;
                     }
                 }
 
