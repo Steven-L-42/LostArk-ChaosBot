@@ -200,16 +200,19 @@
     <Setting Name="chBoxAutoMovement" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="chBoxGerman" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="chBoxEnglish" Type="System.Boolean" Scope="User">
+    <Setting Name="chBoxRevive" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="txtRestart" Type="System.String" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="chBoxGunlancer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chBoxGunlancer2" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chBoxDeathblade2" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

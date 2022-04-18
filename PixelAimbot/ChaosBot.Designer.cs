@@ -57,6 +57,8 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.chBoxRevive = new System.Windows.Forms.CheckBox();
             this.txtHeal10 = new System.Windows.Forms.TextBox();
             this.checkBoxHeal10 = new System.Windows.Forms.CheckBox();
             this.label38 = new System.Windows.Forms.Label();
@@ -147,6 +149,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -156,13 +159,13 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtRestart = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor3 = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor2 = new System.Windows.Forms.TextBox();
             this.txtDungeon3 = new System.Windows.Forms.TextBox();
             this.txtDungeon3search = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtDungeon2search = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -190,7 +193,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.chBoxDeathblade2 = new System.Windows.Forms.CheckBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.chBoxGunlancer2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -578,6 +586,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.chBoxRevive);
             this.groupBox4.Controls.Add(this.txtHeal10);
             this.groupBox4.Controls.Add(this.checkBoxHeal10);
             this.groupBox4.Controls.Add(this.label38);
@@ -596,17 +606,46 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Heal and Potion";
             this.toolTip1.SetToolTip(this.groupBox4, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Orange;
+            this.label16.Location = new System.Drawing.Point(206, 98);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(181, 30);
+            this.label16.TabIndex = 60;
+            this.label16.Text = "If Player get stucked because \r\nof Auto-Revive, then disable it!";
+            // 
+            // chBoxRevive
+            // 
+            this.chBoxRevive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxRevive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxRevive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxRevive.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxRevive.FlatAppearance.BorderSize = 0;
+            this.chBoxRevive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxRevive.Location = new System.Drawing.Point(5, 97);
+            this.chBoxRevive.Name = "chBoxRevive";
+            this.chBoxRevive.Size = new System.Drawing.Size(187, 31);
+            this.chBoxRevive.TabIndex = 59;
+            this.chBoxRevive.Text = "AUTO-REVIVE (ON/OFF)";
+            this.chBoxRevive.UseMnemonic = false;
+            this.chBoxRevive.UseVisualStyleBackColor = false;
             // 
             // txtHeal10
             // 
             this.txtHeal10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtHeal10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal10.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeal10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHeal10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal10.Location = new System.Drawing.Point(170, 36);
+            this.txtHeal10.Location = new System.Drawing.Point(170, 27);
             this.txtHeal10.Name = "txtHeal10";
             this.txtHeal10.ReadOnly = true;
-            this.txtHeal10.Size = new System.Drawing.Size(35, 22);
+            this.txtHeal10.Size = new System.Drawing.Size(35, 18);
             this.txtHeal10.TabIndex = 58;
             this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal10.WordWrap = false;
@@ -619,8 +658,8 @@
             this.checkBoxHeal10.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxHeal10.FlatAppearance.BorderSize = 0;
             this.checkBoxHeal10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal10.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal10.Location = new System.Drawing.Point(5, 31);
+            this.checkBoxHeal10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxHeal10.Location = new System.Drawing.Point(5, 20);
             this.checkBoxHeal10.Name = "checkBoxHeal10";
             this.checkBoxHeal10.Size = new System.Drawing.Size(159, 31);
             this.checkBoxHeal10.TabIndex = 57;
@@ -634,7 +673,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.label38.ForeColor = System.Drawing.Color.Coral;
-            this.label38.Location = new System.Drawing.Point(38, 123);
+            this.label38.Location = new System.Drawing.Point(38, 127);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(330, 15);
             this.label38.TabIndex = 56;
@@ -656,7 +695,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Orange;
-            this.label6.Location = new System.Drawing.Point(237, 37);
+            this.label6.Location = new System.Drawing.Point(269, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(131, 75);
             this.label6.TabIndex = 17;
@@ -667,12 +706,12 @@
             // 
             this.txtHeal70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtHeal70.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal70.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeal70.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHeal70.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal70.Location = new System.Drawing.Point(170, 92);
+            this.txtHeal70.Location = new System.Drawing.Point(170, 78);
             this.txtHeal70.Name = "txtHeal70";
             this.txtHeal70.ReadOnly = true;
-            this.txtHeal70.Size = new System.Drawing.Size(35, 22);
+            this.txtHeal70.Size = new System.Drawing.Size(35, 18);
             this.txtHeal70.TabIndex = 9;
             this.txtHeal70.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal70.WordWrap = false;
@@ -685,8 +724,8 @@
             this.checkBoxHeal70.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxHeal70.FlatAppearance.BorderSize = 0;
             this.checkBoxHeal70.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal70.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal70.Location = new System.Drawing.Point(5, 88);
+            this.checkBoxHeal70.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxHeal70.Location = new System.Drawing.Point(5, 71);
             this.checkBoxHeal70.Name = "checkBoxHeal70";
             this.checkBoxHeal70.Size = new System.Drawing.Size(159, 31);
             this.checkBoxHeal70.TabIndex = 8;
@@ -699,12 +738,12 @@
             // 
             this.txtHeal30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtHeal30.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal30.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeal30.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHeal30.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal30.Location = new System.Drawing.Point(170, 64);
+            this.txtHeal30.Location = new System.Drawing.Point(170, 52);
             this.txtHeal30.Name = "txtHeal30";
             this.txtHeal30.ReadOnly = true;
-            this.txtHeal30.Size = new System.Drawing.Size(35, 22);
+            this.txtHeal30.Size = new System.Drawing.Size(35, 18);
             this.txtHeal30.TabIndex = 1;
             this.txtHeal30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal30.WordWrap = false;
@@ -717,8 +756,8 @@
             this.checkBoxHeal30.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxHeal30.FlatAppearance.BorderSize = 0;
             this.checkBoxHeal30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal30.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal30.Location = new System.Drawing.Point(5, 59);
+            this.checkBoxHeal30.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxHeal30.Location = new System.Drawing.Point(5, 45);
             this.checkBoxHeal30.Name = "checkBoxHeal30";
             this.checkBoxHeal30.Size = new System.Drawing.Size(159, 31);
             this.checkBoxHeal30.TabIndex = 0;
@@ -1217,6 +1256,12 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label36);
+            this.groupBox3.Controls.Add(this.chBoxGunlancer2);
+            this.groupBox3.Controls.Add(this.label35);
+            this.groupBox3.Controls.Add(this.label26);
+            this.groupBox3.Controls.Add(this.chBoxDeathblade2);
+            this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.chBoxGunlancer);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.chBoxBard);
@@ -1247,7 +1292,7 @@
             this.chBoxGunlancer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxGunlancer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxGunlancer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxGunlancer.Location = new System.Drawing.Point(254, 62);
+            this.chBoxGunlancer.Location = new System.Drawing.Point(205, 60);
             this.chBoxGunlancer.Name = "chBoxGunlancer";
             this.chBoxGunlancer.Size = new System.Drawing.Size(83, 19);
             this.chBoxGunlancer.TabIndex = 69;
@@ -1260,7 +1305,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.label11.ForeColor = System.Drawing.Color.Orange;
-            this.label11.Location = new System.Drawing.Point(145, 93);
+            this.label11.Location = new System.Drawing.Point(145, 99);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 15);
             this.label11.TabIndex = 68;
@@ -1273,7 +1318,7 @@
             this.chBoxBard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxBard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxBard.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxBard.Location = new System.Drawing.Point(285, 43);
+            this.chBoxBard.Location = new System.Drawing.Point(140, 60);
             this.chBoxBard.Name = "chBoxBard";
             this.chBoxBard.Size = new System.Drawing.Size(52, 19);
             this.chBoxBard.TabIndex = 67;
@@ -1288,7 +1333,7 @@
             this.txBoxUltimateKey.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txBoxUltimateKey.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txBoxUltimateKey.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txBoxUltimateKey.Location = new System.Drawing.Point(241, 93);
+            this.txBoxUltimateKey.Location = new System.Drawing.Point(241, 99);
             this.txBoxUltimateKey.Name = "txBoxUltimateKey";
             this.txBoxUltimateKey.ReadOnly = true;
             this.txBoxUltimateKey.Size = new System.Drawing.Size(23, 16);
@@ -1304,7 +1349,7 @@
             this.chBoxSoulfist.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSoulfist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxSoulfist.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxSoulfist.Location = new System.Drawing.Point(269, 23);
+            this.chBoxSoulfist.Location = new System.Drawing.Point(124, 42);
             this.chBoxSoulfist.Name = "chBoxSoulfist";
             this.chBoxSoulfist.Size = new System.Drawing.Size(68, 19);
             this.chBoxSoulfist.TabIndex = 65;
@@ -1319,7 +1364,7 @@
             this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxSorcerer.Location = new System.Drawing.Point(159, 62);
+            this.chBoxSorcerer.Location = new System.Drawing.Point(36, 80);
             this.chBoxSorcerer.Name = "chBoxSorcerer";
             this.chBoxSorcerer.Size = new System.Drawing.Size(75, 19);
             this.chBoxSorcerer.TabIndex = 63;
@@ -1334,7 +1379,7 @@
             this.chBoxSharpshooter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxSharpshooter.Location = new System.Drawing.Point(8, 63);
+            this.chBoxSharpshooter.Location = new System.Drawing.Point(10, 42);
             this.chBoxSharpshooter.Name = "chBoxSharpshooter";
             this.chBoxSharpshooter.Size = new System.Drawing.Size(101, 19);
             this.chBoxSharpshooter.TabIndex = 61;
@@ -1349,7 +1394,7 @@
             this.chBoxDeathblade.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxDeathblade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxDeathblade.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxDeathblade.Location = new System.Drawing.Point(144, 43);
+            this.chBoxDeathblade.Location = new System.Drawing.Point(198, 24);
             this.chBoxDeathblade.Name = "chBoxDeathblade";
             this.chBoxDeathblade.Size = new System.Drawing.Size(90, 19);
             this.chBoxDeathblade.TabIndex = 58;
@@ -1375,7 +1420,7 @@
             this.chBoxPaladin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxPaladin.Location = new System.Drawing.Point(169, 23);
+            this.chBoxPaladin.Location = new System.Drawing.Point(127, 24);
             this.chBoxPaladin.Name = "chBoxPaladin";
             this.chBoxPaladin.Size = new System.Drawing.Size(65, 19);
             this.chBoxPaladin.TabIndex = 50;
@@ -1390,7 +1435,7 @@
             this.chBoxY.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxY.Location = new System.Drawing.Point(1, 43);
+            this.chBoxY.Location = new System.Drawing.Point(3, 24);
             this.chBoxY.Name = "chBoxY";
             this.chBoxY.Size = new System.Drawing.Size(108, 19);
             this.chBoxY.TabIndex = 46;
@@ -1405,7 +1450,7 @@
             this.chBoxBerserker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxBerserker.Location = new System.Drawing.Point(27, 23);
+            this.chBoxBerserker.Location = new System.Drawing.Point(29, 60);
             this.chBoxBerserker.Name = "chBoxBerserker";
             this.chBoxBerserker.Size = new System.Drawing.Size(82, 19);
             this.chBoxBerserker.TabIndex = 44;
@@ -1877,6 +1922,21 @@
             this.label3.Text = "RESTART TIMER (sec):";
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label23.Location = new System.Drawing.Point(7, 25);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(139, 15);
+            this.label23.TabIndex = 58;
+            this.label23.Text = "(F1) Portal Search Time:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label23, "Portal Search Time:\r\nBot try to enter for x seconds \r\nthe arrived Portal.\r\n\r\nWe r" +
+        "ecommend to set this\r\nup to 20 seconds!");
+            // 
             // chBoxActivateF2
             // 
             this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -2031,6 +2091,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(192, 106);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(30, 17);
+            this.label8.TabIndex = 75;
+            this.label8.Text = "sec.";
+            // 
             // txtRestart
             // 
             this.txtRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -2111,21 +2181,6 @@
             this.label29.TabIndex = 62;
             this.label29.Text = "{ Floor 3 = ALPHA Version NO SUPPORT }";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label23.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label23.Location = new System.Drawing.Point(7, 25);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(139, 15);
-            this.label23.TabIndex = 58;
-            this.label23.Text = "(F1) Portal Search Time:";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label23, "Portal Search Time:\r\nBot try to enter for x seconds \r\nthe arrived Portal.\r\n\r\nWe r" +
-        "ecommend to set this\r\nup to 20 seconds!");
             // 
             // label21
             // 
@@ -2246,7 +2301,6 @@
             this.chBoxGerman.UseMnemonic = false;
             this.chBoxGerman.UseVisualStyleBackColor = false;
             this.chBoxGerman.Visible = false;
-            this.chBoxGerman.CheckedChanged += new System.EventHandler(this.chBoxGerman_CheckedChanged);
             // 
             // chBoxEnglish
             // 
@@ -2266,7 +2320,6 @@
             this.chBoxEnglish.UseMnemonic = false;
             this.chBoxEnglish.UseVisualStyleBackColor = false;
             this.chBoxEnglish.Visible = false;
-            this.chBoxEnglish.CheckedChanged += new System.EventHandler(this.chBoxEnglish_CheckedChanged);
             // 
             // groupBoxTelegram
             // 
@@ -2473,15 +2526,79 @@
             this.Ultimate.TabIndex = 1;
             this.Ultimate.Text = "Ultimate";
             // 
-            // label8
+            // label24
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(192, 106);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(30, 17);
-            this.label8.TabIndex = 75;
-            this.label8.Text = "sec.";
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Coral;
+            this.label24.Location = new System.Drawing.Point(294, 26);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(104, 13);
+            this.label24.TabIndex = 70;
+            this.label24.Text = "EACH 12 SECONDS";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Coral;
+            this.label26.Location = new System.Drawing.Point(294, 44);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(83, 13);
+            this.label26.TabIndex = 72;
+            this.label26.Text = "DOUBLE CLICK";
+            // 
+            // chBoxDeathblade2
+            // 
+            this.chBoxDeathblade2.AutoSize = true;
+            this.chBoxDeathblade2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxDeathblade2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxDeathblade2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxDeathblade2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxDeathblade2.Location = new System.Drawing.Point(198, 42);
+            this.chBoxDeathblade2.Name = "chBoxDeathblade2";
+            this.chBoxDeathblade2.Size = new System.Drawing.Size(90, 19);
+            this.chBoxDeathblade2.TabIndex = 71;
+            this.chBoxDeathblade2.Text = "Deathblade:";
+            this.chBoxDeathblade2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxDeathblade2.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.Coral;
+            this.label35.Location = new System.Drawing.Point(294, 62);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(88, 13);
+            this.label35.TabIndex = 73;
+            this.label35.Text = "ON/ OFF MODE";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.Coral;
+            this.label36.Location = new System.Drawing.Point(294, 80);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(108, 13);
+            this.label36.TabIndex = 75;
+            this.label36.Text = "ALWAYS ON MODE";
+            // 
+            // chBoxGunlancer2
+            // 
+            this.chBoxGunlancer2.AutoSize = true;
+            this.chBoxGunlancer2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGunlancer2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxGunlancer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGunlancer2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGunlancer2.Location = new System.Drawing.Point(205, 78);
+            this.chBoxGunlancer2.Name = "chBoxGunlancer2";
+            this.chBoxGunlancer2.Size = new System.Drawing.Size(83, 19);
+            this.chBoxGunlancer2.TabIndex = 74;
+            this.chBoxGunlancer2.Text = "Gunlancer:";
+            this.chBoxGunlancer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxGunlancer2.UseVisualStyleBackColor = true;
             // 
             // ChaosBot
             // 
@@ -2706,6 +2823,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chBoxGunlancer;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox chBoxRevive;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.CheckBox chBoxGunlancer2;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.CheckBox chBoxDeathblade2;
+        private System.Windows.Forms.Label label24;
     }
 }
 

@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.2.4r";
+        public static string version { get; set; } = "2.2.6r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
 
@@ -82,8 +82,9 @@ namespace PixelAimbot.Classes.Misc
         public string d { get; set; } = "500";
         public string f { get; set; } = "500";
         public string txtRestart { get; set; } = "15";
-        public bool chBoxGerman { get; set; } = false;
-        public bool chBoxEnglish { get; set; } = false;
+
+        public bool chBoxRevive { get; set; } = false;
+
         public bool chBoxAutoMovement { get; set; } = false;
         public string instant { get; set; }
         public string potion { get; set; }
@@ -98,6 +99,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxBard { get; set; } = false;
+        public bool chBoxGunlancer2 { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
         public string txLeaveTimerFloor3 { get; set; } = "180";
         public string txLeaveTimerFloor2 { get; set; } = "150";
@@ -105,6 +107,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";
         public bool chBoxDeathblade { get; set; } = false;
+        public bool chBoxDeathblade2 { get; set; } = false;
         public bool chBoxSorcerer { get; set; } = false;
         public bool chBoxSharpshooter { get; set; } = false;
         public bool chBoxActivateF3 { get; set; } = false;

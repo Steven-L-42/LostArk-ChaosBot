@@ -818,24 +818,12 @@ namespace PixelAimbot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chBoxGerman {
+        public bool chBoxRevive {
             get {
-                return ((bool)(this["chBoxGerman"]));
+                return ((bool)(this["chBoxRevive"]));
             }
             set {
-                this["chBoxGerman"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chBoxEnglish {
-            get {
-                return ((bool)(this["chBoxEnglish"]));
-            }
-            set {
-                this["chBoxEnglish"] = value;
+                this["chBoxRevive"] = value;
             }
         }
         
@@ -860,6 +848,30 @@ namespace PixelAimbot.Properties {
             }
             set {
                 this["chBoxGunlancer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxGunlancer2 {
+            get {
+                return ((bool)(this["chBoxGunlancer2"]));
+            }
+            set {
+                this["chBoxGunlancer2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxDeathblade2 {
+            get {
+                return ((bool)(this["chBoxDeathblade2"]));
+            }
+            set {
+                this["chBoxDeathblade2"] = value;
             }
         }
     }
