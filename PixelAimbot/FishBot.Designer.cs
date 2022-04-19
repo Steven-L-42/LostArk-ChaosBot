@@ -85,6 +85,7 @@
             this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
+            this.labelSwap = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -820,6 +821,20 @@
             this.label48.TabIndex = 49;
             this.label48.Text = "Set your own \r\nSkill Rotation!\r\nprioritize by Nr\'s...\r\n\r\n1 , 2 , 3 , 4 , 5 , 6 , " + "7 , 8";
             // 
+            // labelSwap
+            // 
+            this.labelSwap.AutoSize = true;
+            this.labelSwap.BackColor = System.Drawing.Color.Transparent;
+            this.labelSwap.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelSwap.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.labelSwap.ForeColor = System.Drawing.Color.White;
+            this.labelSwap.Location = new System.Drawing.Point(325, 8);
+            this.labelSwap.Name = "labelSwap";
+            this.labelSwap.Size = new System.Drawing.Size(50, 21);
+            this.labelSwap.TabIndex = 12;
+            this.labelSwap.Text = "CBOT";
+            this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click);
+            // 
             // FishBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -828,6 +843,7 @@
             this.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(450, 237);
+            this.Controls.Add(this.labelSwap);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbStatus);
@@ -856,6 +872,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label labelSwap;
 
         #endregion
         private System.Windows.Forms.Label lbClose;

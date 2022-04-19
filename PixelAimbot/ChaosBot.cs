@@ -577,11 +577,8 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
-
         private int casttimeByKey(byte key)
         {
             int cooldownDuration = 500;
@@ -935,8 +932,9 @@ namespace PixelAimbot
                     var t18 = Task.Run(() => PORTALDETECT(token));
                     var t20 = Task.Run(() => POTIONS(token));
                     await Task.WhenAny(new[] {t12, t14, t16, t18, t20});
-                }
 
+
+                }
                 if (_Floor2 == true && _STOPP == false)
                 {
                     token.ThrowIfCancellationRequested();
@@ -1150,8 +1148,8 @@ namespace PixelAimbot
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
                                 walktopUTurn++;
-                            }
 
+                            
                             }
                             if (walktopUTurn == 10 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
@@ -1164,8 +1162,8 @@ namespace PixelAimbot
                                 await Task.Delay(1, token);
 
                                 walktopUTurn++;
-                            }
 
+                            
                             }
                             if (walktopUTurn == 17 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
@@ -1178,8 +1176,8 @@ namespace PixelAimbot
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
                                 walktopUTurn++;
-                            }
 
+                            
                             }
                             if (walktopUTurn == 23 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
@@ -1296,10 +1294,9 @@ namespace PixelAimbot
                     {
                         Console.WriteLine("Bug");
                     }
-                    catch
-                    {
+                    catch { }
                     }
-                }
+
             }
             catch (AggregateException)
             {
@@ -1407,8 +1404,9 @@ namespace PixelAimbot
                         _Gunlancer = true;
 
                         lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Deactivate: Gunlancer Ultimate"));
-                    }
 
+
+                    }
                     for (int i = 0; i < int.Parse(txtDungeon2search.Text); i++)
                     {
                         token.ThrowIfCancellationRequested();
@@ -1659,10 +1657,9 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
+
 
 
         ///    RUN AT SAME TIME    ///
@@ -1983,10 +1980,11 @@ namespace PixelAimbot
                     {
                         Console.WriteLine("Bug");
                     }
-                    catch
-                    {
+                    catch { }
                     }
-                }
+
+
+
             }
             catch (AggregateException)
             {
@@ -1996,10 +1994,9 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
+
 
 
         ///    BOT COMES TO THE END    ///
@@ -2342,10 +2339,9 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
+
 
 
         public byte UltimateKey(string text)
@@ -2908,11 +2904,8 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
-
         public async void LEAVETIMERFLOOR2(CancellationToken token)
         {
             
@@ -2945,11 +2938,8 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
-
         public async void LEAVETIMERFLOOR3(CancellationToken token)
         {
             try
@@ -2978,11 +2968,8 @@ namespace PixelAimbot
             {
                 Console.WriteLine("Bug");
             }
-            catch
-            {
+            catch { }
             }
-        }
-
         public async void SharpshooterSecondPress(CancellationToken token)
         {
             try

@@ -508,16 +508,20 @@ namespace PixelAimbot
 
                 await Task.Delay(1500, token);
                 rodCounter = 0;
+                
                 var t12 = Task.Run(() => CheckGathering(token));
                 await Task.Delay(1, token);
                 var t14 = Task.Run(() => REPAIRCHECK(token));
+                var t1 = Task.Run(() => CheckEnergy(token));
 
-                await Task.WhenAny(new[] {t12, t14});
+                await Task.WhenAny(new[] {t1, t12, t14});
             }
             catch
             {
             }
         }
+
+
 
         private async Task CheckEnergy(CancellationToken token)
         {
@@ -574,7 +578,6 @@ namespace PixelAimbot
                 if (item.HasValue)
                 {
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Switch to Gathering"));
-
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
                 }
 
@@ -631,30 +634,39 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-
                         rawScreen = screenPrinter.CaptureScreen();
                         bitmapImage = new Bitmap(rawScreen);
-                        screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-
-                        var item = detector.GetClosest(screenCapture, true);
-                        if (item.HasValue)
+                        using (screenCapture = bitmapImage.ToImage<Bgr, byte>())
                         {
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
-                            await Task.Delay(500, token);
-                            _swap++;
-                            fishing = false;
-                        }
-                        else
-                        {
-                            failCounter++;
-
-                            if (failCounter >= 160)
+                            var item = detector.GetClosest(screenCapture, true);
+                            if (item.HasValue)
                             {
-                                lbStatus.Invoke((MethodInvoker) (() =>
-                                    lbStatus.Text = "Fishing (" + rodCounter + ") failed..."));
-
+                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
+                                await Task.Delay(500, token);
+                                _swap++;
                                 fishing = false;
+                                lbStatus.Invoke((MethodInvoker) (() =>
+                                    lbStatus.Text = "Fishing (" + rodCounter + ") success..."));
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+
+                                    var subTemp = new Image<Bgr, byte>(resourceFolder + "/canFish.png");
+                                 
+                                    var subDetector = new ScreenDetector(template, null, 0.9f, System.Windows.Forms.Cursor.Position.X - 20,
+                                            System.Windows.Forms.Cursor.Position.Y - 20, 40, 40);
+
+    
+                                    if (subDetector.GetBest(screenCapture, true).HasValue)
+                                    {
+                                        _Fishing = false;
+
+                                    }
+                                } catch {}
                             }
                         }
                     }
@@ -1007,6 +1019,13 @@ namespace PixelAimbot
             this.height = height;
             btnStart.Enabled = true;
             btnPause.Enabled = true;
+        }
+
+        private void labelSwap_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ChaosBot cb = new ChaosBot();
+            cb.Show();
         }
     }
 }
