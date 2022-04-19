@@ -107,7 +107,13 @@ namespace PixelAimbot
                 "ChaosDungeonmask.png",
                 "ChaosDungeon.png",
                 "check_if_citymask.png",
-                "check_if_city.png"
+                "check_if_city.png",
+                "attention2.png",
+                "attention.png",
+                "attention_mask.png",
+                "energy_fish.png",
+                "gatheringRepair.png",
+                "gathering.png"
             };
 
             if (!File.Exists("cvextern.dll"))
