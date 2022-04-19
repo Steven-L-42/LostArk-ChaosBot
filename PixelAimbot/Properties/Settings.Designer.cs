@@ -874,5 +874,53 @@ namespace PixelAimbot.Properties {
                 this["chBoxDeathblade2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxAutoAttackHalf {
+            get {
+                return ((bool)(this["chBoxAutoAttackHalf"]));
+            }
+            set {
+                this["chBoxAutoAttackHalf"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chBoxAutoAttackFull {
+            get {
+                return ((bool)(this["chBoxAutoAttackFull"]));
+            }
+            set {
+                this["chBoxAutoAttackFull"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxAutoAttackZero {
+            get {
+                return ((bool)(this["chBoxAutoAttackZero"]));
+            }
+            set {
+                this["chBoxAutoAttackZero"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxAwakening {
+            get {
+                return ((bool)(this["chBoxAwakening"]));
+            }
+            set {
+                this["chBoxAwakening"] = value;
+            }
+        }
     }
 }
