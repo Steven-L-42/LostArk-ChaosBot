@@ -55,6 +55,8 @@
             this.buttonGenerateCode = new System.Windows.Forms.Button();
             this.buttonRecalc = new System.Windows.Forms.Button();
             this.buttonRecalcToBotresolution = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxMethod = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
@@ -64,7 +66,7 @@
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(11, 329);
+            this.button2.Location = new System.Drawing.Point(11, 377);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(314, 27);
             this.button2.TabIndex = 2;
@@ -142,7 +144,7 @@
             // 
             // btnGetMinimap
             // 
-            this.btnGetMinimap.Location = new System.Drawing.Point(14, 233);
+            this.btnGetMinimap.Location = new System.Drawing.Point(14, 281);
             this.btnGetMinimap.Name = "btnGetMinimap";
             this.btnGetMinimap.Size = new System.Drawing.Size(148, 27);
             this.btnGetMinimap.TabIndex = 11;
@@ -156,7 +158,7 @@
             // 
             // buttonSelectPicture
             // 
-            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 266);
+            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 314);
             this.buttonSelectPicture.Name = "buttonSelectPicture";
             this.buttonSelectPicture.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectPicture.TabIndex = 12;
@@ -166,7 +168,7 @@
             // 
             // buttonSelectMask
             // 
-            this.buttonSelectMask.Location = new System.Drawing.Point(63, 299);
+            this.buttonSelectMask.Location = new System.Drawing.Point(63, 347);
             this.buttonSelectMask.Name = "buttonSelectMask";
             this.buttonSelectMask.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectMask.TabIndex = 13;
@@ -177,7 +179,7 @@
             // labelTreshold
             // 
             this.labelTreshold.AutoSize = true;
-            this.labelTreshold.Location = new System.Drawing.Point(11, 123);
+            this.labelTreshold.Location = new System.Drawing.Point(10, 149);
             this.labelTreshold.Name = "labelTreshold";
             this.labelTreshold.Size = new System.Drawing.Size(72, 13);
             this.labelTreshold.TabIndex = 17;
@@ -185,7 +187,7 @@
             // 
             // trackBarTreshold
             // 
-            this.trackBarTreshold.Location = new System.Drawing.Point(117, 117);
+            this.trackBarTreshold.Location = new System.Drawing.Point(116, 143);
             this.trackBarTreshold.Maximum = 100;
             this.trackBarTreshold.Name = "trackBarTreshold";
             this.trackBarTreshold.Size = new System.Drawing.Size(211, 45);
@@ -195,7 +197,7 @@
             // 
             // buttonSelectArea
             // 
-            this.buttonSelectArea.Location = new System.Drawing.Point(178, 233);
+            this.buttonSelectArea.Location = new System.Drawing.Point(178, 281);
             this.buttonSelectArea.Name = "buttonSelectArea";
             this.buttonSelectArea.Size = new System.Drawing.Size(147, 27);
             this.buttonSelectArea.TabIndex = 19;
@@ -205,7 +207,7 @@
             // 
             // pictureBoxMask
             // 
-            this.pictureBoxMask.Location = new System.Drawing.Point(14, 299);
+            this.pictureBoxMask.Location = new System.Drawing.Point(14, 347);
             this.pictureBoxMask.Name = "pictureBoxMask";
             this.pictureBoxMask.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxMask.TabIndex = 15;
@@ -213,7 +215,7 @@
             // 
             // pictureBoxPicture
             // 
-            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 266);
+            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 314);
             this.pictureBoxPicture.Name = "pictureBoxPicture";
             this.pictureBoxPicture.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxPicture.TabIndex = 14;
@@ -222,7 +224,7 @@
             // labelRefresh
             // 
             this.labelRefresh.AutoSize = true;
-            this.labelRefresh.Location = new System.Drawing.Point(11, 149);
+            this.labelRefresh.Location = new System.Drawing.Point(10, 175);
             this.labelRefresh.Name = "labelRefresh";
             this.labelRefresh.Size = new System.Drawing.Size(84, 13);
             this.labelRefresh.TabIndex = 20;
@@ -230,7 +232,7 @@
             // 
             // trackBarThreadSleep
             // 
-            this.trackBarThreadSleep.Location = new System.Drawing.Point(117, 149);
+            this.trackBarThreadSleep.Location = new System.Drawing.Point(116, 175);
             this.trackBarThreadSleep.Maximum = 1000;
             this.trackBarThreadSleep.Name = "trackBarThreadSleep";
             this.trackBarThreadSleep.Size = new System.Drawing.Size(211, 45);
@@ -243,7 +245,7 @@
             this.checkBoxShowAll.AutoSize = true;
             this.checkBoxShowAll.Checked = true;
             this.checkBoxShowAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowAll.Location = new System.Drawing.Point(14, 186);
+            this.checkBoxShowAll.Location = new System.Drawing.Point(14, 234);
             this.checkBoxShowAll.Name = "checkBoxShowAll";
             this.checkBoxShowAll.Size = new System.Drawing.Size(161, 17);
             this.checkBoxShowAll.TabIndex = 22;
@@ -255,7 +257,7 @@
             // 
             this.radioButtonGetBest.AutoSize = true;
             this.radioButtonGetBest.Checked = true;
-            this.radioButtonGetBest.Location = new System.Drawing.Point(14, 210);
+            this.radioButtonGetBest.Location = new System.Drawing.Point(14, 258);
             this.radioButtonGetBest.Name = "radioButtonGetBest";
             this.radioButtonGetBest.Size = new System.Drawing.Size(66, 17);
             this.radioButtonGetBest.TabIndex = 24;
@@ -266,7 +268,7 @@
             // radioButtonGetClosest
             // 
             this.radioButtonGetClosest.AutoSize = true;
-            this.radioButtonGetClosest.Location = new System.Drawing.Point(86, 210);
+            this.radioButtonGetClosest.Location = new System.Drawing.Point(86, 258);
             this.radioButtonGetClosest.Name = "radioButtonGetClosest";
             this.radioButtonGetClosest.Size = new System.Drawing.Size(79, 17);
             this.radioButtonGetClosest.TabIndex = 25;
@@ -277,7 +279,7 @@
             // radioButtonGetClosestBest
             // 
             this.radioButtonGetClosestBest.AutoSize = true;
-            this.radioButtonGetClosestBest.Location = new System.Drawing.Point(171, 210);
+            this.radioButtonGetClosestBest.Location = new System.Drawing.Point(171, 258);
             this.radioButtonGetClosestBest.Name = "radioButtonGetClosestBest";
             this.radioButtonGetClosestBest.Size = new System.Drawing.Size(103, 17);
             this.radioButtonGetClosestBest.TabIndex = 26;
@@ -288,7 +290,7 @@
             // buttonGenerateCode
             // 
             this.buttonGenerateCode.Enabled = false;
-            this.buttonGenerateCode.Location = new System.Drawing.Point(11, 362);
+            this.buttonGenerateCode.Location = new System.Drawing.Point(11, 410);
             this.buttonGenerateCode.Name = "buttonGenerateCode";
             this.buttonGenerateCode.Size = new System.Drawing.Size(314, 27);
             this.buttonGenerateCode.TabIndex = 27;
@@ -316,11 +318,32 @@
             this.buttonRecalcToBotresolution.UseVisualStyleBackColor = true;
             this.buttonRecalcToBotresolution.Click += new System.EventHandler(this.buttonRecalcToBotresolution_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 119);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Comparison Method";
+            // 
+            // comboBoxMethod
+            // 
+            this.comboBoxMethod.FormattingEnabled = true;
+            this.comboBoxMethod.Items.AddRange(new object[] {"TemplateMatchingType.SqdiffNormed", "TemplateMatchingType.Sqdiff", "TemplateMatchingType.Ccoeff", "TemplateMatchingType.CcoeffNormed", "TemplateMatchingType.Ccorr", "TemplateMatchingType.CcorrNormed", "            "});
+            this.comboBoxMethod.Location = new System.Drawing.Point(131, 116);
+            this.comboBoxMethod.Name = "comboBoxMethod";
+            this.comboBoxMethod.Size = new System.Drawing.Size(194, 21);
+            this.comboBoxMethod.TabIndex = 31;
+            this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 396);
+            this.ClientSize = new System.Drawing.Size(339, 449);
+            this.Controls.Add(this.comboBoxMethod);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonRecalcToBotresolution);
             this.Controls.Add(this.buttonRecalc);
             this.Controls.Add(this.buttonGenerateCode);
@@ -357,6 +380,9 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxMethod;
 
         private System.Windows.Forms.Button buttonRecalcToBotresolution;
 

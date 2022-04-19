@@ -20,6 +20,7 @@ namespace PixelAimbot.Classes.OpenCV
         public int rectangleY = 0;
         public int rectangleWidth = 0;
         public int rectangleHeight = 0;
+        public TemplateMatchingType method = TemplateMatchingType.SqdiffNormed;
 
        
         public ScreenDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
@@ -39,10 +40,18 @@ namespace PixelAimbot.Classes.OpenCV
             this._myPosition = point;
         }
 
+        public void setMatchingMethod(TemplateMatchingType type)
+        {
+            this.method = type;
+        }
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
             this._enemyTemplate.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
-            this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            if (this._enemyMask != null)
+            {
+                this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width),
+                    ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            }
 
             List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();
             screenCapture.ROI = new Rectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
@@ -51,8 +60,8 @@ namespace PixelAimbot.Classes.OpenCV
             double minVal = 0, maxVal = 0;
             Point minPoint = new Point();
             Point maxPoint = new Point();
-            CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, TemplateMatchingType.SqdiffNormed, this._enemyMask);
-
+            CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, method, this._enemyMask);
+        
             int h = this._enemyTemplate.Size.Height;
             int w = this._enemyTemplate.Size.Width;
 

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using Emgu.CV.CvEnum;
 
 namespace PixelAimbot
 {
@@ -54,15 +55,14 @@ namespace PixelAimbot
         private void button1_Click(object sender, EventArgs e)
         {
             enemyTemplate = new Image<Bgr, byte>(this.picturePath); // icon of the enemy
-            enemyMask = new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
+            enemyMask = new Image<Bgr, byte>(this
+                .maskPath); // make white what the important parts are, other parts should be black
             debugDetector._enemyTemplate = enemyTemplate;
             debugDetector._enemyMask = enemyMask;
             debugDetector.rectangleX = x;
             debugDetector.rectangleY = y;
             debugDetector.rectangleWidth = width * -1;
             debugDetector.rectangleHeight = height * -1;
-
- 
         }
 
         private void Debugging_Load(object sender, EventArgs e)
@@ -90,9 +90,14 @@ namespace PixelAimbot
         private void cap(byte[] buffer)
         {
             enemyTemplate =
-              new Image<Bgr, byte>(this.picturePath); // icon of the enemy
-            enemyMask =
-                new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
+                new Image<Bgr, byte>(this.picturePath); // icon of the enemy
+            if (this.maskPath != "")
+            {
+                enemyMask =
+                    new Image<Bgr, byte>(this
+                        .maskPath); // make white what the important parts are, other parts should be black
+            }
+
             debugDetector._enemyTemplate = enemyTemplate;
             debugDetector._enemyMask = enemyMask;
             debugDetector.rectangleX = x;
@@ -129,33 +134,38 @@ namespace PixelAimbot
                                 screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
                                 if (radioButtonGetBest.Checked)
                                 {
-                                    enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                                    enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked,
+                                        testform);
                                 }
-                                if(radioButtonGetClosest.Checked)
+
+                                if (radioButtonGetClosest.Checked)
                                 {
-                                    enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked, testform);
+                                    enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked,
+                                        testform);
                                 }
-                                if(radioButtonGetClosestBest.Checked)
+
+                                if (radioButtonGetClosestBest.Checked)
                                 {
-                                    enemy = debugDetector.GetClosestBest(screenCapture, !checkBoxShowAll.Checked, testform);
+                                    enemy = debugDetector.GetClosestBest(screenCapture, !checkBoxShowAll.Checked,
+                                        testform);
                                 }
+
                                 if (enemy.HasValue)
                                 {
-                                    screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y, ChaosBot.recalc(enemyTemplate.Size.Width), ChaosBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
+                                    screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
+                                        ChaosBot.recalc(enemyTemplate.Size.Width),
+                                        ChaosBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
                                 }
                             }
-
-
-                            
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-              //  MessageBox.Show(ex.Message);
-            } 
+                //  MessageBox.Show(ex.Message);
+            }
             // throw new NotImplementedException();
-
         }
 
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
@@ -186,7 +196,7 @@ namespace PixelAimbot
         {
             if (textBoxX.Text != "")
             {
-                 x = int.Parse(textBoxX.Text);
+                x = int.Parse(textBoxX.Text);
             }
         }
 
@@ -206,13 +216,15 @@ namespace PixelAimbot
                 {
                     this.picturePath = openFileDialog1.FileName;
                     pictureBoxPicture.Image = Image.FromFile(this.picturePath);
-                    if (this.picturePath != "" && this.maskPath != "")
+                    if (this.picturePath != "")
                     {
                         button2.Enabled = true;
                         buttonGenerateCode.Enabled = true;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -224,13 +236,15 @@ namespace PixelAimbot
                 {
                     this.maskPath = openFileDialog1.FileName;
                     pictureBoxMask.Image = Image.FromFile(this.maskPath);
-                    if (this.picturePath != "" && this.maskPath != "")
+                    if (this.picturePath != "")
                     {
                         button2.Enabled = true;
                         buttonGenerateCode.Enabled = true;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -252,25 +266,25 @@ namespace PixelAimbot
 
         private void trackBarThreadSleep_ValueChanged(object sender, EventArgs e)
         {
-            
             this.threadSleep = trackBarThreadSleep.Value;
-            
+
             labelRefresh.Text = "Refresh (" + threadSleep + "ms)";
         }
 
         private void buttonGenerateCode_Click(object sender, EventArgs e)
         {
-
             string method = "";
-            if(radioButtonGetBest.Checked)
+            if (radioButtonGetBest.Checked)
             {
                 method = "var item = Detector.GetBest(screenCapture, true);";
             }
-            if(radioButtonGetClosest.Checked)
+
+            if (radioButtonGetClosest.Checked)
             {
                 method = "var item = Detector.GetClosestEnemy(screenCapture, true);";
             }
-            if(radioButtonGetClosestBest.Checked)
+
+            if (radioButtonGetClosestBest.Checked)
             {
                 method = "var item = Detector.GetClosestBest(screenCapture, true);";
             }
@@ -284,7 +298,10 @@ namespace PixelAimbot
                 var mask = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(maskPath) + @"');
 
 
-                var Detector = new ScreenDetector(template, mask, " + treshold.ToString().Replace(",",".") + @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" + width*-1 + @"), ChaosBot.recalc(" + height*-1 + @", false));
+                var Detector = new ScreenDetector(template, mask, " + treshold.ToString().Replace(",", ".") +
+                          @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" +
+                          width * -1 +
+                          @"), ChaosBot.recalc(" + height * -1 + @", false));
                 var screenPrinter = new PrintScreen();
                 var rawScreen = screenPrinter.CaptureScreen();
                 Bitmap bitmapImage = new Bitmap(rawScreen);
@@ -303,7 +320,6 @@ namespace PixelAimbot
             }
             catch { }";
             Clipboard.SetText(text.Replace("'", "\""));
-        
         }
 
         private void buttonRecalc_Click(object sender, EventArgs e)
@@ -343,6 +359,36 @@ namespace PixelAimbot
             textBoxY.Text = recalcToBotResolution(int.Parse(textBoxY.Text), true).ToString();
             textBoxWidth.Text = recalcToBotResolution(int.Parse(textBoxWidth.Text)).ToString();
             textBoxHeight.Text = recalcToBotResolution(int.Parse(textBoxHeight.Text), true).ToString();
+        }
+
+        private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TemplateMatchingType type;
+
+            switch (comboBoxMethod.SelectedIndex)
+            {
+                case 0:
+                default:
+                    type = TemplateMatchingType.SqdiffNormed;
+                    break;
+                case 1:
+                    type = TemplateMatchingType.Sqdiff;
+                    break;
+                case 2:
+                    type = TemplateMatchingType.Ccoeff;
+                    break;
+                case 3:
+                    type = TemplateMatchingType.CcoeffNormed;
+                    break;
+                case 4:
+                    type = TemplateMatchingType.Ccorr;
+                    break;
+                case 5:
+                    type = TemplateMatchingType.CcorrNormed;
+                    break;
+            }
+
+            debugDetector.setMatchingMethod(type);
         }
     }
 }

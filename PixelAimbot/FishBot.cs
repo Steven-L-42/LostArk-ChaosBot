@@ -17,6 +17,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using Emgu.CV.CvEnum;
 using Telegram.Bot;
 using WindowsInput;
 using WindowsInput.Native;
@@ -39,6 +40,12 @@ namespace PixelAimbot
         private int _swap = 0;
         private int x, y, width, height = 0;
         private int rodCounter = 0;
+
+        PrintScreen screenPrinter = new PrintScreen();
+
+        private Image rawScreen;
+        private Bitmap bitmapImage;
+        Image<Bgr, byte> screenCapture;
 
         //SKILL AND COOLDOWN//
 
@@ -177,8 +184,7 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            var debug = new Debugging();
-            debug.Show();
+            
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -189,7 +195,7 @@ namespace PixelAimbot
             resourceFolder = applicationFolder;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = RandomString(15);
-            
+
             if (conf.telegram != "" && !telegramBotRunning)
             {
                 textBoxTelegramAPI.Text = conf.telegram;
@@ -229,6 +235,7 @@ namespace PixelAimbot
                 _cts.Cancel();
             }
         }
+
 
         public async Task RunBotAsync(string token)
         {
@@ -318,7 +325,7 @@ namespace PixelAimbot
 
                         await bot.SendTextMessageAsync(chatId, sb.ToString());
                     }
-                    
+
                     if (text.Contains("/inv"))
                     {
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
@@ -392,6 +399,7 @@ namespace PixelAimbot
                 try
                 {
                     formMinimized.StartPosition = FormStartPosition.Manual;
+                    formMinimized.updateLabel("Gatheringbot");
                     formMinimized.Location = new Point(0, recalc(28, false));
                     formMinimized.Size = new Size(recalc(594), recalc(28, false));
                     formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
@@ -410,7 +418,14 @@ namespace PixelAimbot
                     var token = _cts.Token;
 
                     var t1 = Task.Run(() => START(token));
-
+                    if (chBoxAutoBuff.Checked == true)
+                    {
+                        _Buff = true;
+                    }
+                    else
+                    {
+                        _Buff = false;
+                    }
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
                         var logout = Task.Run(() => LOGOUTTIMER(token));
@@ -494,6 +509,7 @@ namespace PixelAimbot
                 await Task.Delay(1500, token);
                 rodCounter = 0;
                 var t12 = Task.Run(() => CheckGathering(token));
+                await Task.Delay(1, token);
                 var t14 = Task.Run(() => REPAIRCHECK(token));
 
                 await Task.WhenAny(new[] {t12, t14});
@@ -503,6 +519,37 @@ namespace PixelAimbot
             }
         }
 
+        private async Task CheckEnergy(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                var template = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
+                var mask = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
+
+
+                var Detector = new ScreenDetector(template, mask, 0.9f, ChaosBot.recalc(683),
+                    ChaosBot.recalc(979, false), ChaosBot.recalc(45), ChaosBot.recalc(33, false));
+                rawScreen = screenPrinter.CaptureScreen();
+                bitmapImage = new Bitmap(rawScreen);
+                screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
+
+                var item = Detector.GetBest(screenCapture, true);
+                if (item.HasValue)
+                {
+                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
+                    _start = false;
+                    _cts.Cancel();
+                    
+                }
+            }
+            catch
+            {
+            }
+        }
 
         ///    FIGHT SEQUENCES    ///
         private async Task CheckGathering(CancellationToken token)
@@ -516,12 +563,12 @@ namespace PixelAimbot
                 var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
 
-                var Detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.recalc(529),
-                    ChaosBot.recalc(963, false), ChaosBot.recalc(91), ChaosBot.recalc(94, false));
-                var screenPrinter = new PrintScreen();
-                var rawScreen = screenPrinter.CaptureScreen();
-                Bitmap bitmapImage = new Bitmap(rawScreen);
-                var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+                var Detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.recalc(550),
+                    ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
+                rawScreen = screenPrinter.CaptureScreen();
+                bitmapImage = new Bitmap(rawScreen);
+                screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
 
                 var item = Detector.GetBest(screenCapture, true);
                 if (item.HasValue)
@@ -531,14 +578,15 @@ namespace PixelAimbot
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
                 }
 
-                if (chBoxAutoBuff.Checked)
+                if (chBoxAutoBuff.Checked && _Buff == true)
                 {
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
                     au3.MouseMove(x + (width / 2), y + (height / 2), 5);
 
                     await Task.Delay(1000, token);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
-                    await Task.Delay(5000, token);
+                    await Task.Delay(3000, token);
+                    _Buff = false;
                     var bufftimer = Task.Run(() => BUFFTIMER(token));
                 }
 
@@ -571,13 +619,12 @@ namespace PixelAimbot
                 await Task.Delay(3000, token);
                 var fishing = true;
                 int failCounter = 0;
-                var screenPrinter = new PrintScreen();
+
                 var template = new Image<Bgr, byte>(resourceFolder + "/attention2.png");
-                var mask = new Image<Bgr, byte>(resourceFolder + "/attention2.png");
 
-
-                var detector = new ScreenDetector(template, mask, 0.94f, ChaosBot.recalc(955),
-                    ChaosBot.recalc(465, false), ChaosBot.recalc(8), ChaosBot.recalc(34, false));
+                var detector = new ScreenDetector(template, null, 0.91f, ChaosBot.recalc(950),
+                    ChaosBot.recalc(465, false), ChaosBot.recalc(20), ChaosBot.recalc(44, false));
+                detector.setMatchingMethod(TemplateMatchingType.SqdiffNormed);
                 while (fishing)
                 {
                     try
@@ -585,13 +632,12 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
+                        rawScreen = screenPrinter.CaptureScreen();
+                        bitmapImage = new Bitmap(rawScreen);
+                        screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
 
-                        var rawScreen = screenPrinter.CaptureScreen();
-                        Bitmap bitmapImage = new Bitmap(rawScreen);
-                        var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-                        var item = detector.GetBest(screenCapture, true);
+                        var item = detector.GetClosest(screenCapture, true);
                         if (item.HasValue)
                         {
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
@@ -601,8 +647,8 @@ namespace PixelAimbot
                         }
                         else
                         {
-                         
                             failCounter++;
+
                             if (failCounter >= 160)
                             {
                                 lbStatus.Invoke((MethodInvoker) (() =>
@@ -610,15 +656,14 @@ namespace PixelAimbot
 
                                 fishing = false;
                             }
-                            
                         }
-
-                        await Task.Delay(60, token);
                     }
                     catch
                     {
-                        //ignored
+                        fishing = false;
                     }
+
+                    await Task.Delay(100, token);
                 }
 
                 Random rnd = new Random();
@@ -628,7 +673,8 @@ namespace PixelAimbot
                 {
                     var t3 = Task.Run(() => RepairTask(token));
                     await Task.WhenAny(new[] {t3});
-                } else if (_Buff)
+                }
+                else if (_Buff)
                 {
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
                     au3.MouseMove(x + (width / 2), y + (height / 2), 5);
@@ -637,6 +683,8 @@ namespace PixelAimbot
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
                     await Task.Delay(5000, token);
                     _Buff = false;
+                    var t3 = Task.Run(() => RESTART(token));
+                    await Task.WhenAny(new[] {t3});
                 }
                 else
                 {
@@ -655,6 +703,8 @@ namespace PixelAimbot
         {
             try
             {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
                 _Restart = true;
                 if (chBoxChannelSwap.Checked == true)
                 {
@@ -705,7 +755,7 @@ namespace PixelAimbot
                 if (_Restart == true)
                 {
                     await Task.Delay(1000, token);
-                    var t1 = Task.Run(() => ThrowFishingRod(token));
+                    var t1 = Task.Run(() => CheckGathering(token));
                     await Task.WhenAny(new[] {t1});
                 }
             }
@@ -779,11 +829,9 @@ namespace PixelAimbot
 
                     var Detector = new ScreenDetector(template, mask, 0.85f, ChaosBot.recalc(1456),
                         ChaosBot.recalc(65, false), ChaosBot.recalc(13), ChaosBot.recalc(11, false));
-                    var screenPrinter = new PrintScreen();
-                    var rawScreen = screenPrinter.CaptureScreen();
-                    Bitmap bitmapImage = new Bitmap(rawScreen);
-                    var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
+                    rawScreen = screenPrinter.CaptureScreen();
+                    bitmapImage = new Bitmap(rawScreen);
+                    screenCapture = bitmapImage.ToImage<Bgr, byte>();
                     var item = Detector.GetBest(screenCapture, true);
                     if (item.HasValue)
                     {
