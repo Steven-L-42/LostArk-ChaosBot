@@ -303,18 +303,17 @@ namespace PixelAimbot
                           width * -1 +
                           @"), ChaosBot.recalc(" + height * -1 + @", false));
                 var screenPrinter = new PrintScreen();
-                var rawScreen = screenPrinter.CaptureScreen();
-                Bitmap bitmapImage = new Bitmap(rawScreen);
-                var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+                using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
 
-                " + method + @"
-                if (item.HasValue)
-                {
-                    // Found
-                }
-                else
-                {
-                    // Not Found
+                    " + method + @"
+                    if (item.HasValue)
+                    {
+                        // Found
+                    }
+                    else
+                    {
+                        // Not Found
+                    }
                 }
 
             }

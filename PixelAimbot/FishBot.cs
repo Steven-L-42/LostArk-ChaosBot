@@ -184,7 +184,7 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            
+
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -527,27 +527,30 @@ namespace PixelAimbot
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-
-                var template = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
-                var mask = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
-
-
-                var Detector = new ScreenDetector(template, mask, 0.9f, ChaosBot.recalc(683),
-                    ChaosBot.recalc(979, false), ChaosBot.recalc(45), ChaosBot.recalc(33, false));
-                rawScreen = screenPrinter.CaptureScreen();
-                bitmapImage = new Bitmap(rawScreen);
-                screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-
-                var item = Detector.GetBest(screenCapture, true);
-                if (item.HasValue)
+                while (true)
                 {
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
-                    _start = false;
-                    _cts.Cancel();
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+
+                    var template = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
+                    var mask = new Image<Bgr, byte>(resourceFolder + "/energy_fish.png");
+
+
+                    var Detector = new ScreenDetector(template, mask, 0.9f, ChaosBot.recalc(683),
+                        ChaosBot.recalc(979, false), ChaosBot.recalc(45), ChaosBot.recalc(33, false));
                     
+                    
+                    using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                    {
+                        var item = Detector.GetBest(screenCapture, true);
+                        if (item.HasValue)
+                        {
+                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
+                            _start = false;
+                            _cts.Cancel();
+
+                        }
+                    }
                 }
             }
             catch
@@ -650,23 +653,14 @@ namespace PixelAimbot
                             }
                             else
                             {
-                                try
+                                failCounter++;
+                                if (failCounter > 80)
                                 {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(1, token);
+                                    fishing = false;
+                                    lbStatus.Invoke((MethodInvoker) (() =>
+                                        lbStatus.Text = "Fishing (" + rodCounter + ") failed..."));
+                                }
 
-                                    var subTemp = new Image<Bgr, byte>(resourceFolder + "/canFish.png");
-                                 
-                                    var subDetector = new ScreenDetector(template, null, 0.9f, System.Windows.Forms.Cursor.Position.X - 20,
-                                            System.Windows.Forms.Cursor.Position.Y - 20, 40, 40);
-
-    
-                                    if (subDetector.GetBest(screenCapture, true).HasValue)
-                                    {
-                                        _Fishing = false;
-
-                                    }
-                                } catch {}
                             }
                         }
                     }
