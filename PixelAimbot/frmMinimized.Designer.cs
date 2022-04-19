@@ -38,35 +38,35 @@
             // 
             // labelMinimizedState
             // 
-            this.labelMinimizedState.AutoSize = true;
+            this.labelMinimizedState.AutoSize = false;
             this.labelMinimizedState.BackColor = System.Drawing.Color.Transparent;
             this.labelMinimizedState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.labelMinimizedState.Location = new System.Drawing.Point(203, 7);
+            this.labelMinimizedState.Location = new System.Drawing.Point(191, 1);
             this.labelMinimizedState.Name = "labelMinimizedState";
-            this.labelMinimizedState.Size = new System.Drawing.Size(0, 20);
+            this.labelMinimizedState.Size = new System.Drawing.Size(242, 28);
             this.labelMinimizedState.TabIndex = 0;
             this.labelMinimizedState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelRuntimer
             // 
-            this.labelRuntimer.AutoSize = true;
+            this.labelRuntimer.AutoSize = false;
             this.labelRuntimer.BackColor = System.Drawing.Color.Transparent;
             this.labelRuntimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.labelRuntimer.Location = new System.Drawing.Point(464, 7);
+            this.labelRuntimer.Location = new System.Drawing.Point(464, 1);
             this.labelRuntimer.Name = "labelRuntimer";
-            this.labelRuntimer.Size = new System.Drawing.Size(0, 20);
+            this.labelRuntimer.Size = new System.Drawing.Size(200, 28);
             this.labelRuntimer.TabIndex = 1;
-            this.labelRuntimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelRuntimer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTitle
             // 
-            this.labelTitle.AutoSize = true;
+            this.labelTitle.AutoSize = false;
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.Color.Orange;
-            this.labelTitle.Location = new System.Drawing.Point(12, 2);
+            this.labelTitle.Location = new System.Drawing.Point(12, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(185, 25);
+            this.labelTitle.Size = new System.Drawing.Size(185, 28);
             this.labelTitle.TabIndex = 12;
             this.labelTitle.Text = "ChaosDungeon Bot";
             // 
@@ -90,6 +90,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMinimized";
+            this.Size = new System.Drawing.Size(594, 28);
             this.Opacity = 0.8D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMinimized";

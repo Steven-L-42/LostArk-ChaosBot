@@ -26,10 +26,8 @@ namespace PixelAimbot
 {
     public partial class FishBot : Form
     {
-        ///BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
         ///                                                                                                                                               ///
         private bool _start = false;
-
         private bool _stop = false;
         private bool _REPAIR = false;
         private bool _LOGOUT = false;
@@ -40,6 +38,7 @@ namespace PixelAimbot
         private int _swap = 0;
         private int x, y, width, height = 0;
         private int rodCounter = 0;
+        private bool telegramBotRunning = false;
 
         PrintScreen screenPrinter = new PrintScreen();
 
@@ -53,21 +52,13 @@ namespace PixelAimbot
         public static FishBot _FishBot;
 
         public Config conf = new Config();
-        private bool telegramBotRunning = false;
 
         ///                                                                                                                                                 ///
-        ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
         public string resourceFolder = "";
 
-        private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
-        {
-            int newX = (int) (x / screenResolution.X * 65535);
-            int newY = (int) (y / screenResolution.Y * 65535);
-            return (newX, newY);
-        }
+
 
         private static readonly Random random = new Random();
-        public Rotations rotation = new Rotations();
 
         /////
         ///
@@ -77,13 +68,10 @@ namespace PixelAimbot
 
         protected override void WndProc(ref Message m)
         {
-            // 5. Catch when a HotKey is pressed !
             if (m.Msg == 0x0312)
             {
                 int id = m.WParam.ToInt32();
-                // MessageBox.Show(string.Format("Hotkey #{0} pressed", id));
 
-                // 6. Handle what will happen once a respective hotkey is pressed
                 switch (id)
                 {
                     case 1:
@@ -120,12 +108,7 @@ namespace PixelAimbot
         public static extern bool ReleaseCapture();
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
-
-        private static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
-
-        private static readonly IntPtr HWND_TOP = new IntPtr(0);
-
-        private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+        
 
         private const UInt32 SWP_NOSIZE = 0x0001;
 
@@ -133,15 +116,12 @@ namespace PixelAimbot
 
         private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
 
-        public static InputSimulator inputSimulator = new InputSimulator();
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
             uint uFlags);
-
-        public Layout_Keyboard currentLayout;
-
+        
         protected override CreateParams CreateParams
         {
             get
@@ -152,7 +132,6 @@ namespace PixelAimbot
             }
         }
 
-        public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
 
         static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
@@ -388,6 +367,7 @@ namespace PixelAimbot
                 formMinimized.Hide();
                 formMinimized.sw.Reset();
                 this.Show();
+                this.TopMost = true;
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "STOPPED!"));
             }
         }
@@ -401,14 +381,13 @@ namespace PixelAimbot
                     formMinimized.StartPosition = FormStartPosition.Manual;
                     formMinimized.updateLabel("Gatheringbot");
                     formMinimized.Location = new Point(0, recalc(28, false));
-                    formMinimized.Size = new Size(recalc(594), recalc(28, false));
-                    formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
-                    formMinimized.labelRuntimer.Location = new Point(recalc(464), recalc(9, false));
-                    formMinimized.labelTitle.Location = new Point(recalc(12), recalc(7, false));
                     formMinimized.timerRuntimer.Enabled = true;
                     formMinimized.sw.Reset();
                     formMinimized.sw.Start();
                     formMinimized.Show();
+                    formMinimized.Location = new Point(0, recalc(28, false));
+                    formMinimized.Size = new Size(594, 28);
+
                     this.Hide();
 
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
@@ -546,8 +525,8 @@ namespace PixelAimbot
                         if (item.HasValue)
                         {
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
-                            _start = false;
-                            _cts.Cancel();
+                            btnPause_Click(null, null);
+                            
 
                         }
                     }

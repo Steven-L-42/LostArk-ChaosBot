@@ -511,14 +511,11 @@ namespace PixelAimbot
                 {
                     formMinimized.StartPosition = FormStartPosition.Manual;
                     formMinimized.Location = new Point(0, recalc(28, false));
-                    formMinimized.Size = new Size(recalc(594), recalc(28, false));
-                    formMinimized.labelMinimizedState.Location = new Point(recalc(203), recalc(9, false));
-                    formMinimized.labelRuntimer.Location = new Point(recalc(464), recalc(9, false));
-                    formMinimized.labelTitle.Location = new Point(recalc(12), recalc(7, false));
                     formMinimized.timerRuntimer.Enabled = true;
                     formMinimized.sw.Reset();
                     formMinimized.sw.Start();
                     formMinimized.Show();
+                    formMinimized.Size = new Size(594, 28);
                     this.Hide();
 
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "READY!"));
