@@ -36,6 +36,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnInstructions = new System.Windows.Forms.Button();
             this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -76,6 +77,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSetup = new System.Windows.Forms.Button();
             this.buttonSelectArea = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
@@ -152,6 +154,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.chBoxChannelSwap);
             this.groupBox1.Controls.Add(this.label34);
             this.groupBox1.Controls.Add(this.label33);
@@ -170,6 +173,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
+            // 
+            // btnInstructions
+            // 
+            this.btnInstructions.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
+            this.btnInstructions.FlatAppearance.BorderSize = 0;
+            this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInstructions.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnInstructions.ForeColor = System.Drawing.Color.Peru;
+            this.btnInstructions.Location = new System.Drawing.Point(6, 111);
+            this.btnInstructions.Name = "btnInstructions";
+            this.btnInstructions.Size = new System.Drawing.Size(59, 22);
+            this.btnInstructions.TabIndex = 62;
+            this.btnInstructions.Text = "GUIDE";
+            this.toolTip1.SetToolTip(this.btnInstructions, "Thats resets everything except gamesettings.");
+            this.btnInstructions.UseVisualStyleBackColor = false;
+            this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click_1);
             // 
             // chBoxChannelSwap
             // 
@@ -692,6 +711,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonSetup);
             this.groupBox2.Controls.Add(this.buttonSelectArea);
             this.groupBox2.Controls.Add(this.btnPause);
             this.groupBox2.Controls.Add(this.btnStart);
@@ -703,6 +723,21 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main";
+            // 
+            // buttonSetup
+            // 
+            this.buttonSetup.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
+            this.buttonSetup.FlatAppearance.BorderSize = 0;
+            this.buttonSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetup.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.buttonSetup.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonSetup.Location = new System.Drawing.Point(10, 98);
+            this.buttonSetup.Name = "buttonSetup";
+            this.buttonSetup.Size = new System.Drawing.Size(144, 30);
+            this.buttonSetup.TabIndex = 12;
+            this.buttonSetup.Text = "Setup Fishing Bot";
+            this.buttonSetup.UseVisualStyleBackColor = false;
+            this.buttonSetup.Click += new System.EventHandler(this.buttonSetup_Click);
             // 
             // buttonSelectArea
             // 
@@ -828,7 +863,7 @@
             this.labelSwap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelSwap.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.labelSwap.ForeColor = System.Drawing.Color.White;
-            this.labelSwap.Location = new System.Drawing.Point(325, 8);
+            this.labelSwap.Location = new System.Drawing.Point(325, 9);
             this.labelSwap.Name = "labelSwap";
             this.labelSwap.Size = new System.Drawing.Size(50, 21);
             this.labelSwap.TabIndex = 12;
@@ -872,6 +907,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button btnInstructions;
+
+        private System.Windows.Forms.Button buttonSetup;
 
         private System.Windows.Forms.Label labelSwap;
 

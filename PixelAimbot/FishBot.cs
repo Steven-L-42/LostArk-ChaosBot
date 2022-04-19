@@ -1000,5 +1000,58 @@ namespace PixelAimbot
             ChaosBot cb = new ChaosBot();
             cb.Show();
         }
+
+        private void buttonSetup_Click(object sender, EventArgs e)
+        {
+            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Bot"));
+
+            var processName = Process.GetProcessesByName("LostArk");
+            if (processName.Length == 1)
+            {
+                handle = processName[0].MainWindowHandle;
+                SetForegroundWindow(handle);
+            }
+
+            Thread.Sleep(1500);
+            var template = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+            var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
+            
+            
+            var detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.recalc(550),
+                ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
+            using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+            {
+                var item = detector.GetBest(screenCapture, true);
+                if (item.HasValue)
+                {
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
+                }
+
+            }
+
+            Thread.Sleep(1000);
+            KeyboardWrapper.PressKey(KeyboardWrapper.VK_L);
+            au3.MouseMove(ChaosBot.recalc(666), ChaosBot.recalc(489, false), 10);
+            KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
+            au3.MouseMove(ChaosBot.recalc(698), ChaosBot.recalc(998, false), 10);
+            KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
+            au3.MouseMove(ChaosBot.recalc(666), ChaosBot.recalc(588, false), 10);
+            KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
+            au3.MouseMove(ChaosBot.recalc(744), ChaosBot.recalc(998, false), 10);
+            KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
+            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
+            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));
+
+     
+            handle = Process.GetCurrentProcess().MainWindowHandle;
+            SetForegroundWindow(handle);
+            
+        }
+
+        private void btnInstructions_Click_1(object sender, EventArgs e)
+        {
+            frmGuideFishbot fishbotGuide = new frmGuideFishbot();
+            fishbotGuide.Show();
+        }
     }
 }

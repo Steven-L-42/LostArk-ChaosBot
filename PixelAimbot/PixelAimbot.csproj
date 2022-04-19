@@ -404,6 +404,12 @@
     <Compile Include="frmGuide.Designer.cs">
       <DependentUpon>frmGuide.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmGuideFishbot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGuideFishbot.Designer.cs">
+      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -441,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGuide.resx">
       <DependentUpon>frmGuide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGuideFishbot.resx">
+      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
