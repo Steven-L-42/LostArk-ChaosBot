@@ -40,15 +40,13 @@
             this.btnInstructions = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.txtLOGOUT = new System.Windows.Forms.TextBox();
             this.chBoxLOGOUT = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.txtRepair = new System.Windows.Forms.TextBox();
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.chBoxAutoMovement = new System.Windows.Forms.CheckBox();
+            this.chBoxAutoBuff = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -125,7 +123,7 @@
             this.lbStatus.TabIndex = 8;
             this.lbStatus.Text = "READY";
             this.lbStatus.TextChanged += new System.EventHandler(this.lbStatus_TextChanged);
-            this.lbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
+            this.lbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
             // 
             // label1
             // 
@@ -138,7 +136,7 @@
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 10;
             this.label1.Text = "Fish Bot";
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
             // 
             // label15
             // 
@@ -151,7 +149,7 @@
             this.label15.Size = new System.Drawing.Size(53, 17);
             this.label15.TabIndex = 11;
             this.label15.Text = "version";
-            this.label15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
+            this.label15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
             // 
             // groupBox1
             // 
@@ -159,15 +157,13 @@
             this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.label34);
             this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.txtLOGOUT);
             this.groupBox1.Controls.Add(this.chBoxLOGOUT);
             this.groupBox1.Controls.Add(this.label30);
             this.groupBox1.Controls.Add(this.label28);
-            this.groupBox1.Controls.Add(this.txtRepair);
             this.groupBox1.Controls.Add(this.chBoxAutoRepair);
             this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.chBoxAutoMovement);
+            this.groupBox1.Controls.Add(this.chBoxAutoBuff);
             this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox1.Location = new System.Drawing.Point(172, 5);
@@ -235,16 +231,6 @@
             this.label33.TabIndex = 47;
             this.label33.Visible = false;
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(204, 42);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(32, 17);
-            this.label31.TabIndex = 46;
-            this.label31.Text = "min.";
-            // 
             // txtLOGOUT
             // 
             this.txtLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
@@ -300,21 +286,6 @@
             this.label28.TabIndex = 38;
             this.label28.Text = "min.";
             // 
-            // txtRepair
-            // 
-            this.txtRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtRepair.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRepair.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRepair.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRepair.Location = new System.Drawing.Point(166, 40);
-            this.txtRepair.Name = "txtRepair";
-            this.txtRepair.ReadOnly = true;
-            this.txtRepair.Size = new System.Drawing.Size(35, 22);
-            this.txtRepair.TabIndex = 37;
-            this.txtRepair.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtRepair.WordWrap = false;
-            this.txtRepair.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
-            // 
             // chBoxAutoRepair
             // 
             this.chBoxAutoRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -346,22 +317,22 @@
             this.label27.TabIndex = 35;
             this.label27.Text = "Fishing Buff";
             // 
-            // chBoxAutoMovement
+            // chBoxAutoBuff
             // 
-            this.chBoxAutoMovement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxAutoMovement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
-            this.chBoxAutoMovement.Name = "chBoxAutoMovement";
-            this.chBoxAutoMovement.Size = new System.Drawing.Size(154, 22);
-            this.chBoxAutoMovement.TabIndex = 34;
-            this.chBoxAutoMovement.Text = "Auto Buff";
-            this.chBoxAutoMovement.UseMnemonic = false;
-            this.chBoxAutoMovement.UseVisualStyleBackColor = false;
+            this.chBoxAutoBuff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxAutoBuff.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxAutoBuff.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxAutoBuff.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxAutoBuff.FlatAppearance.BorderSize = 0;
+            this.chBoxAutoBuff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoBuff.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxAutoBuff.Location = new System.Drawing.Point(4, 17);
+            this.chBoxAutoBuff.Name = "chBoxAutoBuff";
+            this.chBoxAutoBuff.Size = new System.Drawing.Size(154, 22);
+            this.chBoxAutoBuff.TabIndex = 34;
+            this.chBoxAutoBuff.Text = "Auto Buff";
+            this.chBoxAutoBuff.UseMnemonic = false;
+            this.chBoxAutoBuff.UseVisualStyleBackColor = false;
             // 
             // groupBox6
             // 
@@ -783,6 +754,7 @@
             // btnPause
             // 
             this.btnPause.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnPause.Enabled = false;
             this.btnPause.FlatAppearance.BorderSize = 0;
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPause.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -798,6 +770,7 @@
             // btnStart
             // 
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnStart.Enabled = false;
             this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -899,9 +872,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FishBot";
-            this.Text = "ChaosDungeon Bot";
-            this.Load += new System.EventHandler(this.ChaosBot_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChaosBot_MouseDown);
+            this.Text = "FishBot";
+            this.Load += new System.EventHandler(this.FishBot_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -934,7 +907,6 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.CheckBox chBoxLOGOUT;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox txtLOGOUT;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label34;
@@ -942,7 +914,7 @@
         private System.Windows.Forms.Button btnInstructions;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.CheckBox chBoxAutoMovement;
+        private System.Windows.Forms.CheckBox chBoxAutoBuff;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.CheckBox chBoxChannelSwap;
         private System.Windows.Forms.GroupBox groupBoxTelegram;
@@ -976,7 +948,6 @@
         private System.Windows.Forms.TextBox txPR;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.TextBox txtRepair;
         private System.Windows.Forms.CheckBox chBoxAutoRepair;
         private System.Windows.Forms.Button buttonSelectArea;
     }

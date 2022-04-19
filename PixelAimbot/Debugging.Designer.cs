@@ -53,10 +53,12 @@
             this.radioButtonGetClosest = new System.Windows.Forms.RadioButton();
             this.radioButtonGetClosestBest = new System.Windows.Forms.RadioButton();
             this.buttonGenerateCode = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
+            this.buttonRecalc = new System.Windows.Forms.Button();
+            this.buttonRecalcToBotresolution = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -294,11 +296,33 @@
             this.buttonGenerateCode.UseVisualStyleBackColor = true;
             this.buttonGenerateCode.Click += new System.EventHandler(this.buttonGenerateCode_Click);
             // 
+            // buttonRecalc
+            // 
+            this.buttonRecalc.Location = new System.Drawing.Point(131, 13);
+            this.buttonRecalc.Name = "buttonRecalc";
+            this.buttonRecalc.Size = new System.Drawing.Size(88, 46);
+            this.buttonRecalc.TabIndex = 28;
+            this.buttonRecalc.Text = "Recalc to my Resolution";
+            this.buttonRecalc.UseVisualStyleBackColor = true;
+            this.buttonRecalc.Click += new System.EventHandler(this.buttonRecalc_Click);
+            // 
+            // buttonRecalcToBotresolution
+            // 
+            this.buttonRecalcToBotresolution.Location = new System.Drawing.Point(131, 65);
+            this.buttonRecalcToBotresolution.Name = "buttonRecalcToBotresolution";
+            this.buttonRecalcToBotresolution.Size = new System.Drawing.Size(88, 46);
+            this.buttonRecalcToBotresolution.TabIndex = 29;
+            this.buttonRecalcToBotresolution.Text = "Recalc to Bot Resolution";
+            this.buttonRecalcToBotresolution.UseVisualStyleBackColor = true;
+            this.buttonRecalcToBotresolution.Click += new System.EventHandler(this.buttonRecalcToBotresolution_Click);
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 396);
+            this.Controls.Add(this.buttonRecalcToBotresolution);
+            this.Controls.Add(this.buttonRecalc);
             this.Controls.Add(this.buttonGenerateCode);
             this.Controls.Add(this.radioButtonGetClosestBest);
             this.Controls.Add(this.radioButtonGetClosest);
@@ -326,14 +350,17 @@
             this.Name = "Debugging";
             this.Text = "Debugging";
             this.Load += new System.EventHandler(this.Debugging_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.Button buttonRecalcToBotresolution;
+
+        private System.Windows.Forms.Button buttonRecalc;
 
         #endregion
         private System.Windows.Forms.Button button2;
