@@ -243,9 +243,8 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(140, 268);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "2.2.5r\n- Fix Channel Swap \n- Deathblade 2 modes\n- Gunlancer 2 modes\n- Revive ON/O" +
-    "FF\n- Performance improvements\n\n2.2.8r\n+Anti Kick\n+Awakening V\n+Auto-Attack Toggl" +
-    "e\n+Deathblade adjustment\n";
+            this.richTextBox1.Text = "2.2.8r\n+Anti Kick\n+Awakening V\n+Auto-Attack Toggle\n+Deathblade adjustment\n\n2.3.1r" +
+    "\n+Revive (Gamesettings)\nYou have to adjust the Value!";
             // 
             // progressBar1
             // 

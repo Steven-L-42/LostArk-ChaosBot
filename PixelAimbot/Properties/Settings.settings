@@ -227,5 +227,8 @@
     <Setting Name="chBoxAwakening" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="txtRevive" Type="System.String" Scope="User">
+      <Value Profile="(Default)">85</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

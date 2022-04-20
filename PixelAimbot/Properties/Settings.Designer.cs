@@ -922,5 +922,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxAwakening"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("85")]
+        public string txtRevive {
+            get {
+                return ((string)(this["txtRevive"]));
+            }
+            set {
+                this["txtRevive"] = value;
+            }
+        }
     }
 }

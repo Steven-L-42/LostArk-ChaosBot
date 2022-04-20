@@ -1830,7 +1830,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            float thresh = 0.85f;
+                            float thresh = int.Parse(txtRevive.Text) * 0.01f;
                             var ReviveDeutschTemplate =
                                 new Image<Bgr, byte>(resourceFolder + "/revive1.png");
                             var ReviveDeutschMask =
@@ -2659,6 +2659,8 @@ namespace PixelAimbot
             chBoxAutoAttackHalf.Checked = Properties.Settings.Default.chBoxAutoAttackHalf;
             chBoxAutoAttackZero.Checked = Properties.Settings.Default.chBoxAutoAttackZero;
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
+            txtRevive.Text = Properties.Settings.Default.txtRevive;
+            chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
         }
 
         private void ChaosBot_MouseDown(object sender, MouseEventArgs e)
@@ -2738,7 +2740,7 @@ namespace PixelAimbot
             {
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
-
+                Properties.Settings.Default.txtRevive = "85";
                 Properties.Settings.Default.txLeaveTimerFloor2 = "150";
                 Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 
@@ -2818,7 +2820,7 @@ namespace PixelAimbot
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
-
+                txtRevive.Text = Properties.Settings.Default.txtRevive;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
                 txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
@@ -3317,7 +3319,7 @@ namespace PixelAimbot
                 if (comboBoxRotations.Text != "main")
                 {
                     rotation.chBoxGunlancer = (bool)chBoxGunlancer.Checked;
-
+                    rotation.txtRevive = txtRevive.Text;
                     rotation.chBoxRevive = (bool)chBoxRevive.Checked;
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
                     rotation.txLeaveTimerFloor3 = txLeaveTimerFloor3.Text;
@@ -3411,6 +3413,7 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
+                txtRevive.Text = rotation.txtRevive;
                 chBoxRevive.Checked = rotation.chBoxRevive;
                 txtRestart.Text = rotation.txtRestart;
                 chBoxGunlancer.Checked = rotation.chBoxGunlancer;
@@ -3557,7 +3560,18 @@ namespace PixelAimbot
                 txtHeal10.ReadOnly = true;
             }
         }
+        private void chBoxRevive_CheckedChanged(object sender, EventArgs e)
+        {
 
+            if (chBoxRevive.Checked)
+            {
+                txtRevive.ReadOnly = false;
+            }
+            else if (!chBoxRevive.Checked)
+            {
+                txtRevive.ReadOnly = true;
+            }
+        }
         private void lbStatus_TextChanged(object sender, EventArgs e)
         {
             formMinimized.labelMinimizedState.Text = lbStatus.Text;
@@ -3607,5 +3621,7 @@ namespace PixelAimbot
                 chBoxAutoAttackHalf.Checked = false;
             }
         }
+
+        
     }
 }
