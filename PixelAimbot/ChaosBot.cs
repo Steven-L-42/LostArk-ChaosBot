@@ -574,47 +574,6 @@ namespace PixelAimbot
             catch { }
         }
 
-        private int casttimeByKey(byte key)
-        {
-            int cooldownDuration = 500;
-            switch (key)
-            {
-                case KeyboardWrapper.VK_A:
-                    cooldownDuration = int.Parse(txA.Text);
-                    break;
-
-                case KeyboardWrapper.VK_S:
-                    cooldownDuration = int.Parse(txS.Text);
-                    break;
-
-                case KeyboardWrapper.VK_D:
-                    cooldownDuration = int.Parse(txD.Text);
-                    break;
-
-                case KeyboardWrapper.VK_F:
-                    cooldownDuration = int.Parse(txF.Text);
-                    break;
-
-                case KeyboardWrapper.VK_Q:
-                    cooldownDuration = int.Parse(txQ.Text);
-                    break;
-
-                case KeyboardWrapper.VK_W:
-                    cooldownDuration = int.Parse(txW.Text);
-                    break;
-
-                case KeyboardWrapper.VK_E:
-                    cooldownDuration = int.Parse(txE.Text);
-                    break;
-
-                case KeyboardWrapper.VK_R:
-                    cooldownDuration = int.Parse(txR.Text);
-                    break;
-            }
-
-            return cooldownDuration;
-        }
-
         public async void LOGOUTTIMER(CancellationToken token)
         {
             try
@@ -675,6 +634,78 @@ namespace PixelAimbot
             }
         }
 
+        public (int, int) searchImageAndClick(string templateImage, string templateMask, string foundText, float threshold = 0.7f, double softMultiplier = 1, double hardMultiplier = 1.2)
+        {
+            // Tunable variables
+            var enemyTemplate =
+                new Image<Bgr, byte>(resourceFolder + templateImage); // icon of the enemy
+            var enemyMask =
+                new Image<Bgr, byte>(resourceFolder +
+                                     templateMask); // make white what the important parts are, other parts should be black
+            //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
+            Point myPosition = new Point(recalc(148), recalc(127, false));
+            Point screenResolution = new Point(screenWidth, screenHeight);
+
+            // Main program loop
+            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+            var screenPrinter = new PrintScreen();
+
+            var rawScreen = screenPrinter.CaptureScreen();
+            Bitmap bitmapImage = new Bitmap(rawScreen);
+            var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
+            var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
+            if (enemy.HasValue)
+            {
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
+
+                CvInvoke.Rectangle(screenCapture,
+                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                    new MCvScalar(255));
+
+                double distance_x = (screenWidth - recalc(296)) / 2;
+                double distance_y = (screenHeight - recalc(255, false)) / 2;
+
+                var friend_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                double multiplier = softMultiplier;
+                var friend_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
+                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - friend_position_on_minimap.Item1), 2) +
+                                     Math.Pow((my_position_on_minimap.Item2 - friend_position_on_minimap.Item2), 2));
+
+                if (dist < 180)
+                {
+                    multiplier = 1.2;
+                }
+
+                double posx;
+                double posy;
+                if (friend_position.Item1 < (screenWidth / 2))
+                {
+                    posx = friend_position.Item1 * (2 - multiplier);
+                }
+                else
+                {
+                    posx = friend_position.Item1 * multiplier;
+                }
+
+                if (friend_position.Item2 < (screenHeight / 2))
+                {
+                    posy = friend_position.Item2 * (2 - multiplier);
+                }
+                else
+                {
+                    posy = friend_position.Item2 * multiplier;
+                }
+
+                return PixelToAbsolute(posx, posy, screenResolution);
+            }
+
+            return PixelToAbsolute((screenWidth / 2), (screenHeight / 2), screenResolution);
+        }
+
+
+        ///    START SEQUENCES    ///
         private async Task START(CancellationToken token)
         {
             try
@@ -811,76 +842,6 @@ namespace PixelAimbot
             catch
             {
             }
-        }
-
-        public (int, int) searchImageAndClick(string templateImage, string templateMask, string foundText,float threshold = 0.7f, double softMultiplier = 1, double hardMultiplier = 1.2)
-        {
-            // Tunable variables
-            var enemyTemplate =
-                new Image<Bgr, byte>(resourceFolder + templateImage); // icon of the enemy
-            var enemyMask =
-                new Image<Bgr, byte>(resourceFolder +
-                                     templateMask); // make white what the important parts are, other parts should be black
-            //var screenCapture = new Image<Bgr, byte>("D:/Projects/bot-enemy-detection/EnemyDetection/screen.png");
-            Point myPosition = new Point(recalc(148), recalc(127, false));
-            Point screenResolution = new Point(screenWidth, screenHeight);
-
-            // Main program loop
-            var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-            var screenPrinter = new PrintScreen();
-
-            var rawScreen = screenPrinter.CaptureScreen();
-            Bitmap bitmapImage = new Bitmap(rawScreen);
-            var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-            var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-            if (enemy.HasValue)
-            {
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = foundText));
-
-                CvInvoke.Rectangle(screenCapture,
-                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
-                    new MCvScalar(255));
-
-                double distance_x = (screenWidth - recalc(296)) / 2;
-                double distance_y = (screenHeight - recalc(255, false)) / 2;
-
-                var friend_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
-                double multiplier = softMultiplier;
-                var friend_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
-                var my_position_on_minimap = ((recalc(296) / 2), (recalc(255, false) / 2));
-                var dist = Math.Sqrt(Math.Pow((my_position_on_minimap.Item1 - friend_position_on_minimap.Item1), 2) +
-                                     Math.Pow((my_position_on_minimap.Item2 - friend_position_on_minimap.Item2), 2));
-
-                if (dist < 180)
-                {
-                    multiplier = 1.2;
-                }
-
-                double posx;
-                double posy;
-                if (friend_position.Item1 < (screenWidth / 2))
-                {
-                    posx = friend_position.Item1 * (2 - multiplier);
-                }
-                else
-                {
-                    posx = friend_position.Item1 * multiplier;
-                }
-
-                if (friend_position.Item2 < (screenHeight / 2))
-                {
-                    posy = friend_position.Item2 * (2 - multiplier);
-                }
-                else
-                {
-                    posy = friend_position.Item2 * multiplier;
-                }
-
-                return PixelToAbsolute(posx, posy, screenResolution);
-            }
-
-            return PixelToAbsolute((screenWidth / 2), (screenHeight / 2), screenResolution);
         }
 
         ///    FIGHT SEQUENCES    ///
@@ -1213,8 +1174,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
-                        object fight = au3.PixelSearch(recalc(114), recalc(208, false), recalc(168), recalc(220, false),
-                            0xDBC7AC, 7);
+                        object fight = au3.PixelSearch(recalc(114), recalc(208, false), recalc(168), recalc(220, false),0xDBC7AC, 7);
                         if (fight.ToString() != "1" && _STOPP == false)
                         {
                             object[] fightCoord = (object[])fight;
@@ -1292,7 +1252,7 @@ namespace PixelAimbot
             {
             }
         }
-
+       
         private async Task PORTALISDETECTED(CancellationToken token)
         {
             try
@@ -2373,6 +2333,48 @@ namespace PixelAimbot
                 Console.WriteLine("Bug");
             }
             catch { }
+        }
+
+
+        private int casttimeByKey(byte key)
+        {
+            int cooldownDuration = 500;
+            switch (key)
+            {
+                case KeyboardWrapper.VK_A:
+                    cooldownDuration = int.Parse(txA.Text);
+                    break;
+
+                case KeyboardWrapper.VK_S:
+                    cooldownDuration = int.Parse(txS.Text);
+                    break;
+
+                case KeyboardWrapper.VK_D:
+                    cooldownDuration = int.Parse(txD.Text);
+                    break;
+
+                case KeyboardWrapper.VK_F:
+                    cooldownDuration = int.Parse(txF.Text);
+                    break;
+
+                case KeyboardWrapper.VK_Q:
+                    cooldownDuration = int.Parse(txQ.Text);
+                    break;
+
+                case KeyboardWrapper.VK_W:
+                    cooldownDuration = int.Parse(txW.Text);
+                    break;
+
+                case KeyboardWrapper.VK_E:
+                    cooldownDuration = int.Parse(txE.Text);
+                    break;
+
+                case KeyboardWrapper.VK_R:
+                    cooldownDuration = int.Parse(txR.Text);
+                    break;
+            }
+
+            return cooldownDuration;
         }
 
         public byte UltimateKey(string text)
