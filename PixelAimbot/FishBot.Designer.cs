@@ -908,11 +908,11 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Label labelSwap;
+
         private System.Windows.Forms.Button btnInstructions;
 
         private System.Windows.Forms.Button buttonSetup;
-
-        private System.Windows.Forms.Label labelSwap;
 
         #endregion
         private System.Windows.Forms.Label lbClose;

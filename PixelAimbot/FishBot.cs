@@ -28,6 +28,7 @@ namespace PixelAimbot
     {
         ///                                                                                                                                               ///
         private bool _start = false;
+
         private bool _stop = false;
         private bool _REPAIR = false;
         private bool _LOGOUT = false;
@@ -57,7 +58,6 @@ namespace PixelAimbot
         public string resourceFolder = "";
 
 
-
         private static readonly Random random = new Random();
 
         /////
@@ -65,6 +65,8 @@ namespace PixelAimbot
         // 2. Import the RegisterHotKey Method
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id); 
 
         protected override void WndProc(ref Message m)
         {
@@ -108,7 +110,7 @@ namespace PixelAimbot
         public static extern bool ReleaseCapture();
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
-        
+
 
         private const UInt32 SWP_NOSIZE = 0x0001;
 
@@ -121,7 +123,7 @@ namespace PixelAimbot
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
             uint uFlags);
-        
+
         protected override CreateParams CreateParams
         {
             get
@@ -192,6 +194,8 @@ namespace PixelAimbot
             int FirstHotkeyId = 1;
             int FirstHotKeyKey = (int) Keys.F9;
             // Register the "F9" hotkey
+            UnregisterHotKey(this.Handle, FirstHotkeyId);
+            
             Boolean F9Registered = RegisterHotKey(
                 this.Handle, FirstHotkeyId, 0x0000, FirstHotKeyKey
             );
@@ -199,6 +203,8 @@ namespace PixelAimbot
             // Repeat the same process but with F10
             int SecondHotkeyId = 2;
             int SecondHotKeyKey = (int) Keys.F10;
+            UnregisterHotKey( this.Handle, SecondHotKeyKey);
+
             Boolean F10Registered = RegisterHotKey(
                 this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey
             );
@@ -405,6 +411,7 @@ namespace PixelAimbot
                     {
                         _Buff = false;
                     }
+
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
                         var logout = Task.Run(() => LOGOUTTIMER(token));
@@ -487,7 +494,7 @@ namespace PixelAimbot
 
                 await Task.Delay(1500, token);
                 rodCounter = 0;
-                
+
                 var t12 = Task.Run(() => CheckGathering(token));
                 await Task.Delay(1, token);
                 var t14 = Task.Run(() => REPAIRCHECK(token));
@@ -499,7 +506,6 @@ namespace PixelAimbot
             {
             }
         }
-
 
 
         private async Task CheckEnergy(CancellationToken token)
@@ -517,8 +523,8 @@ namespace PixelAimbot
 
                     var Detector = new ScreenDetector(template, mask, 0.9f, ChaosBot.recalc(683),
                         ChaosBot.recalc(979, false), ChaosBot.recalc(45), ChaosBot.recalc(33, false));
-                    
-                    
+
+
                     using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
                         var item = Detector.GetBest(screenCapture, true);
@@ -526,8 +532,6 @@ namespace PixelAimbot
                         {
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
                             btnPause_Click(null, null);
-                            
-
                         }
                     }
                 }
@@ -639,7 +643,6 @@ namespace PixelAimbot
                                     lbStatus.Invoke((MethodInvoker) (() =>
                                         lbStatus.Text = "Fishing (" + rodCounter + ") failed..."));
                                 }
-
                             }
                         }
                     }
@@ -996,9 +999,17 @@ namespace PixelAimbot
 
         private void labelSwap_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            ChaosBot cb = new ChaosBot();
-            cb.Show();
+            _cts.Cancel();
+            UnregisterHotKey(this.Handle, 1);
+            UnregisterHotKey(this.Handle, 2);
+            
+            if (Application.OpenForms.OfType<PixelAimbot.ChaosBot>().Count() == 1)
+                Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
+
+            ChaosBot Form = new ChaosBot();
+            Form.Show();
+            Application.OpenForms.OfType<PixelAimbot.FishBot>().First().Hide();
+            Application.OpenForms.OfType<PixelAimbot.FishBot>().First().Close();
         }
 
         private void buttonSetup_Click(object sender, EventArgs e)
@@ -1015,8 +1026,8 @@ namespace PixelAimbot
             Thread.Sleep(1500);
             var template = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
             var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
-            
-            
+
+
             var detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.recalc(550),
                 ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
             using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
@@ -1026,7 +1037,6 @@ namespace PixelAimbot
                 {
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
                 }
-
             }
 
             Thread.Sleep(1000);
@@ -1042,10 +1052,9 @@ namespace PixelAimbot
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));
 
-     
+
             handle = Process.GetCurrentProcess().MainWindowHandle;
             SetForegroundWindow(handle);
-            
         }
 
         private void btnInstructions_Click_1(object sender, EventArgs e)

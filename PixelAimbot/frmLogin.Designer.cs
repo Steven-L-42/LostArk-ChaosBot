@@ -45,6 +45,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
+            this.checkBoxEarlyAccess = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +75,7 @@
             // tbUser
             // 
             this.tbUser.AcceptsTab = true;
-            this.tbUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.tbUser.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (48)))), ((int) (((byte) (48)))), ((int) (((byte) (48)))));
             this.tbUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbUser.Font = new System.Drawing.Font("MS UI Gothic", 15.75F);
             this.tbUser.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -88,7 +89,7 @@
             // tbPass
             // 
             this.tbPass.AcceptsTab = true;
-            this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.tbPass.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (48)))), ((int) (((byte) (48)))), ((int) (((byte) (48)))));
             this.tbPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPass.Font = new System.Drawing.Font("MS UI Gothic", 15.75F);
             this.tbPass.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -127,7 +128,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.FlatAppearance.BorderSize = 0;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -141,7 +142,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (80)))), ((int) (((byte) (80)))), ((int) (((byte) (80)))));
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -165,7 +166,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
             this.btnRegister.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegister.FlatAppearance.BorderSize = 0;
             this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -181,7 +182,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label6.ForeColor = System.Drawing.Color.Orange;
             this.label6.Location = new System.Drawing.Point(279, 134);
             this.label6.Name = "label6";
@@ -193,7 +194,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label15.ForeColor = System.Drawing.Color.Peru;
             this.label15.Location = new System.Drawing.Point(686, 420);
             this.label15.Name = "label15";
@@ -221,30 +222,28 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.richTextBox1);
-            this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
             this.groupBox1.Location = new System.Drawing.Point(592, 107);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(139, 294);
+            this.groupBox1.Size = new System.Drawing.Size(139, 298);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Patchnotes";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (67)))), ((int) (((byte) (67)))), ((int) (((byte) (67)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.Info;
             this.richTextBox1.Location = new System.Drawing.Point(0, 26);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(140, 268);
+            this.richTextBox1.Size = new System.Drawing.Size(140, 272);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "2.2.8r\n+Anti Kick\n+Awakening V\n+Auto-Attack Toggle\n+Deathblade adjustment\n\n2.3.1r" +
-    "\n+Revive (Gamesettings)\nYou have to adjust the Value!";
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // progressBar1
             // 
@@ -258,13 +257,29 @@
             this.progressBar1.TabIndex = 18;
             this.progressBar1.Visible = false;
             // 
+            // checkBoxEarlyAccess
+            // 
+            this.checkBoxEarlyAccess.AutoSize = true;
+            this.checkBoxEarlyAccess.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxEarlyAccess.FlatAppearance.BorderSize = 0;
+            this.checkBoxEarlyAccess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxEarlyAccess.ForeColor = System.Drawing.Color.Orange;
+            this.checkBoxEarlyAccess.Location = new System.Drawing.Point(472, 229);
+            this.checkBoxEarlyAccess.Name = "checkBoxEarlyAccess";
+            this.checkBoxEarlyAccess.Size = new System.Drawing.Size(98, 21);
+            this.checkBoxEarlyAccess.TabIndex = 20;
+            this.checkBoxEarlyAccess.Text = "Early Access";
+            this.checkBoxEarlyAccess.UseVisualStyleBackColor = true;
+            this.checkBoxEarlyAccess.CheckedChanged += new System.EventHandler(this.checkBoxEarlyAccess_CheckedChanged);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.BackgroundImage = global::PixelAimbot.Properties.Resources.New_Login;
+            this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (37)))), ((int) (((byte) (37)))), ((int) (((byte) (37)))));
+            this.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(741, 447);
+            this.Controls.Add(this.checkBoxEarlyAccess);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.chBoxRemember);
@@ -283,7 +298,7 @@
             this.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -292,8 +307,9 @@
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.CheckBox checkBoxEarlyAccess;
 
         #endregion
 

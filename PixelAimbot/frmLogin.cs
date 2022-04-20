@@ -66,19 +66,10 @@ namespace PixelAimbot
                     Application.Exit();
                 }
             }
-            // Try Generate Configuration
-            /*
-            try
-            {
-                Classes.Misc.ConfigurationHandler.init();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Cannot create Configuration file");
-            }
-            */
+
+            checkBoxEarlyAccess.Checked = config.earlyaccess;
             //Check for a Update
-            CheckForUpdate();
+            CheckForUpdate(config.earlyaccess);
 
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -160,11 +151,6 @@ namespace PixelAimbot
 
 
         //Exit Button
-        private void button2_Click(object sender, EventArgs e)
-        {   
-            Environment.Exit(0);
-            Application.Exit();
-        }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -251,12 +237,20 @@ Windows operating System Settings and inGame
 
         }
 
-        public void CheckForUpdate()
+        public void CheckForUpdate(bool early_access = false)
         {
 
             try
             {
-                currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version.php");
+                if (early_access)
+                {
+                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version_earlyaccess.php");
+                }
+                else
+                {
+                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version.php");
+                }
+
                 // Search old Shit
                 string[] files = System.IO.Directory.GetFiles(Directory.GetCurrentDirectory(), "*.bin");
 
@@ -286,8 +280,16 @@ Windows operating System Settings and inGame
                         wc.Proxy = null;
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-
-                        wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot.exe"), Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
+                        if (early_access)
+                        {
+                            wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot-Early.exe"),
+                                Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
+                        }
+                        else
+                        {
+                            wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot.exe"),
+                                Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
+                        }
                     }
                 }
             }
@@ -322,11 +324,24 @@ Windows operating System Settings and inGame
             Application.Exit();
 
         }
+        
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void checkBoxEarlyAccess_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBoxEarlyAccess.Checked)
+            {
+                config.earlyaccess = true;
+                config.Save();
+            }
+            else
+            {
+                config.earlyaccess = false;
+                config.Save();
+            }
+            CheckForUpdate(config.earlyaccess);
 
         }
+        
     }
 }
 
