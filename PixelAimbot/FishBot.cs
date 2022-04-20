@@ -553,18 +553,18 @@ namespace PixelAimbot
                 var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
 
-                var Detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.recalc(550),
+                var Detector = new ScreenDetector(template, mask, 0.85f, ChaosBot.recalc(550),
                     ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
-                rawScreen = screenPrinter.CaptureScreen();
-                bitmapImage = new Bitmap(rawScreen);
-                screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-
-                var item = Detector.GetBest(screenCapture, true);
-                if (item.HasValue)
+                using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                 {
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Switch to Gathering"));
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
+
+
+                    var item = Detector.GetBest(screenCapture, true);
+                    if (item.HasValue)
+                    {
+                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Switch to Gathering"));
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);
+                    }
                 }
 
                 if (chBoxAutoBuff.Checked && _Buff == true)
@@ -815,17 +815,17 @@ namespace PixelAimbot
                     var mask = new Image<Bgr, byte>(resourceFolder + "/gatheringRepair.png");
 
 
-                    var Detector = new ScreenDetector(template, mask, 0.85f, ChaosBot.recalc(1456),
+                    var Detector = new ScreenDetector(template, mask, 0.90f, ChaosBot.recalc(1456),
                         ChaosBot.recalc(65, false), ChaosBot.recalc(13), ChaosBot.recalc(11, false));
-                    rawScreen = screenPrinter.CaptureScreen();
-                    bitmapImage = new Bitmap(rawScreen);
-                    screenCapture = bitmapImage.ToImage<Bgr, byte>();
-                    var item = Detector.GetBest(screenCapture, true);
-                    if (item.HasValue)
+                    using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
-                        // Found
+                        var item = Detector.GetBest(screenCapture, true);
+                        if (item.HasValue)
+                        {
+                            // Found
 
-                        _REPAIR = true;
+                            _REPAIR = true;
+                        }
                     }
                 }
                 catch
@@ -884,7 +884,8 @@ namespace PixelAimbot
             // 2x ESCAPE REPARATUR UND BEGLEITER FENSTER SCHLIEßEN
             await Task.Delay(1500, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
-            await Task.Delay(1000, token);
+            
+            await Task.Delay(3000, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
             _REPAIR = false;
