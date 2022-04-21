@@ -567,7 +567,7 @@ namespace PixelAimbot
                 if (chBoxAutoBuff.Checked && _Buff == true)
                 {
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
-                    VirtualMouse.Smoothing(x + (width / 2), y + (height / 2), 5);
+                    VirtualMouse.MoveTo(x + (width / 2), y + (height / 2), 5);
 
                     await Task.Delay(1000, token);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
@@ -600,7 +600,7 @@ namespace PixelAimbot
                 rodCounter++;
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Fishing (" + rodCounter + ")..."));
 
-                VirtualMouse.Smoothing(x + (width / 2), y + (height / 2), 5);
+                VirtualMouse.MoveTo(x + (width / 2), y + (height / 2), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                 await Task.Delay(3000, token);
                 var fishing = true;
@@ -662,7 +662,7 @@ namespace PixelAimbot
                 else if (_Buff)
                 {
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
-                    VirtualMouse.Smoothing(x + (width / 2), y + (height / 2), 5);
+                    VirtualMouse.MoveTo(x + (width / 2), y + (height / 2), 5);
 
                     await Task.Delay(1000, token);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
@@ -695,10 +695,10 @@ namespace PixelAimbot
                 {
                     if (_swap == 15)
                     {
-                        VirtualMouse.Smoothing(recalc(1875), recalc(16, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.Smoothing(recalc(1875), recalc(43, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(43, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap++;
                         _Restart = false;
@@ -709,10 +709,10 @@ namespace PixelAimbot
                     }
                     else if (_swap == 30)
                     {
-                        VirtualMouse.Smoothing(recalc(1875), recalc(16, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.Smoothing(recalc(1875), recalc(63, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(63, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap++;
                         _Restart = false;
@@ -723,10 +723,10 @@ namespace PixelAimbot
                     }
                     else if (_swap == 45)
                     {
-                        VirtualMouse.Smoothing(recalc(1875), recalc(16, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.Smoothing(recalc(1875), recalc(83, false), 10);
+                        VirtualMouse.MoveTo(recalc(1875), recalc(83, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap = 0;
                         _Restart = false;
@@ -773,10 +773,10 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "LOGOUT Process starts..."));
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                     await Task.Delay(2000, token);
-                    VirtualMouse.Smoothing(recalc(1238), recalc(728, false), 5);
+                    VirtualMouse.MoveTo(recalc(1238), recalc(728, false), 5);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     await Task.Delay(2000, token);
-                    VirtualMouse.Smoothing(recalc(906), recalc(575, false), 5);
+                    VirtualMouse.MoveTo(recalc(906), recalc(575, false), 5);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     await Task.Delay(1000, token);
 
@@ -845,7 +845,7 @@ namespace PixelAimbot
             // KLICK UNTEN RECHTS (RATGEBER)
             token.ThrowIfCancellationRequested();
             await Task.Delay(1, token);
-            VirtualMouse.Smoothing(recalc(1741), recalc(1040, false), 5);
+            VirtualMouse.MoveTo(recalc(1741), recalc(1040, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
             await Task.Delay(500, token);
 
@@ -854,7 +854,7 @@ namespace PixelAimbot
 
             // KLICK AUF BEGLEITER
             await Task.Delay(500, token);
-            VirtualMouse.Smoothing(recalc(1684), recalc(823, false), 5);
+            VirtualMouse.MoveTo(recalc(1684), recalc(823, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
             token.ThrowIfCancellationRequested();
@@ -862,7 +862,7 @@ namespace PixelAimbot
 
             // KLICK AUF AMBOSS
             await Task.Delay(500, token);
-            VirtualMouse.Smoothing(recalc(1291), recalc(693, false), 5);
+            VirtualMouse.MoveTo(recalc(1291), recalc(693, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
             token.ThrowIfCancellationRequested();
@@ -870,7 +870,7 @@ namespace PixelAimbot
 
             // KLICK AUF REPARIEREN
             await Task.Delay(500, token);
-            VirtualMouse.Smoothing(recalc(717), recalc(745, false), 5);
+            VirtualMouse.MoveTo(recalc(717), recalc(745, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
             token.ThrowIfCancellationRequested();
             await Task.Delay(1, token);
@@ -1042,13 +1042,13 @@ namespace PixelAimbot
 
             Thread.Sleep(1000);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_L);
-            VirtualMouse.Smoothing(ChaosBot.recalc(666), ChaosBot.recalc(489, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(489, false), 10);
             KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.Smoothing(ChaosBot.recalc(698), ChaosBot.recalc(998, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(698), ChaosBot.recalc(998, false), 10);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.Smoothing(ChaosBot.recalc(666), ChaosBot.recalc(588, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(588, false), 10);
             KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.Smoothing(ChaosBot.recalc(744), ChaosBot.recalc(998, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(744), ChaosBot.recalc(998, false), 10);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));
