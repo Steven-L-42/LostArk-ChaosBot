@@ -553,7 +553,7 @@ namespace PixelAimbot
                 var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
 
-                var Detector = new ScreenDetector(template, mask, 0.85f, ChaosBot.recalc(550),
+                var Detector = new ScreenDetector(template, null, 0.80f, ChaosBot.recalc(550),
                     ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
                 using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                 {
