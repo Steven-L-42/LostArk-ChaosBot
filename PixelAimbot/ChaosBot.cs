@@ -2476,7 +2476,7 @@ namespace PixelAimbot
                         _D = false;
                         _F = false;
                         await Task.Delay(humanizer.Next(10, 240) + 1000);
-                        au3.Send("{F9}");
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
                         _stop = true;
                     }
                     catch (AggregateException)
