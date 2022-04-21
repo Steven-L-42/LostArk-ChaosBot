@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using WindowsInput.Native;
 
@@ -11,10 +12,12 @@ namespace PixelAimbot.Classes.Misc
     {
         [DllImport("user32.dll", SetLastError = true)]
         private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
         /// <summary>
         /// Key down flag
         /// </summary>
         private const int KEY_DOWN_EVENT = 0x0001;
+
         private const int KEY_UP_EVENT = 0x0002;
 
         private const int PauseBetweenStrokes = 50;
@@ -54,7 +57,7 @@ namespace PixelAimbot.Classes.Misc
 
         public const byte VK_I = 0x49;
         public string LAYOUTS { get; set; }
-       
+
         /// <summary>
         /// Will hold a key down for a number of milliseconds
         /// </summary>
@@ -88,8 +91,10 @@ namespace PixelAimbot.Classes.Misc
                 System.Threading.Thread.Sleep(PauseBetweenStrokes);
                 totalDuration += PauseBetweenStrokes;
             }
+
             keybd_event(key, 0, KEY_UP_EVENT, 0);
         }
+
         /// <summary>
         /// Will press a key
         /// </summary>
@@ -104,6 +109,7 @@ namespace PixelAimbot.Classes.Misc
             keybd_event(key, 0, KEY_DOWN_EVENT, 0);
             keybd_event(key, 0, KEY_UP_EVENT, 0);
         }
+
         /// <summary>
         /// Will trigger the KeyUp event for a key. Easy way to keep the computer awake without sending any input.
         /// </summary>
@@ -121,6 +127,99 @@ namespace PixelAimbot.Classes.Misc
         public static void KeyDown(byte key)
         {
             keybd_event(key, 0, KEY_DOWN_EVENT, 0);
+        }
+    }
+    
+    
+    public static class VirtualMouse
+    {
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+
+            public static implicit operator Point(POINT point)
+            {
+                return new Point(point.X, point.Y);
+            }
+        }
+    
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+
+        public static Point GetCursorPosition()
+        {
+            POINT lpPoint;
+            GetCursorPos(out lpPoint);
+            // NOTE: If you need error handling
+            // bool success = GetCursorPos(out lpPoint);
+            // if (!success)
+        
+            return lpPoint;
+        }
+        
+        // import the necessary API function so .NET can
+        // marshall parameters appropriately
+        [DllImport("user32.dll")]
+        static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
+
+        // constants for the mouse_input() API function
+        private const int MOUSEEVENTF_MOVE = 0x0001;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+
+        // simulates movement of the mouse.  parameters specify changes
+        // in relative position.  positive values indicate movement
+        // right or down
+        public static void Move(int xDelta, int yDelta)
+        {
+            mouse_event(MOUSEEVENTF_MOVE, xDelta, yDelta, 0, 0);
+        }
+
+        // simulates movement of the mouse.  parameters specify an
+        // absolute location, with the top left corner being the
+        // origin
+        public static void MoveTo(int x, int y)
+        {
+            double absX = 65535.0 * (x + 1) / Screen.PrimaryScreen.Bounds.Width;
+            double absY = 65535.0 * (y + 1) / Screen.PrimaryScreen.Bounds.Height;
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, (int)absX , (int)absY , 0, 0);
+        }
+        public static void Smoothing(int x, int y, int smoothing = 0)
+        {
+            Point currentMousePosition = new Point();
+            int i = 0;
+            while(i <= smoothing)
+            {
+                currentMousePosition = GetCursorPosition();
+                //int xI = i * x / smoothing;
+                //int yI = i * y / smoothing;
+                int xI = (int)currentMousePosition.X + (x - (int)currentMousePosition.X) / smoothing;
+                int yI = (int)currentMousePosition.Y + (y - (int)currentMousePosition.Y) / smoothing;
+                Task.Delay(10).Wait();
+                MoveTo(xI, yI);
+                i++;
+            }
+            MoveTo(x, y);
+        }
+        // simulates a click-and-release action of the left mouse
+        // button at its current position
+        public static void LeftClick()
+        {
+            mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+            mouse_event(MOUSEEVENTF_LEFTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+        }
+
+        public static void RightClick()
+        {
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+            mouse_event(MOUSEEVENTF_RIGHTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
         }
     }
 }
