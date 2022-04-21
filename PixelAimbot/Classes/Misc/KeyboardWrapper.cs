@@ -195,7 +195,7 @@ namespace PixelAimbot.Classes.Misc
         {
             Point currentMousePosition = new Point();
             int i = 0;
-            while(i <= smoothing)
+        /*    while(i <= smoothing)
             {
                 currentMousePosition = GetCursorPosition();
                 //int xI = i * x / smoothing;
@@ -205,7 +205,7 @@ namespace PixelAimbot.Classes.Misc
                 Task.Delay(10).Wait();
                 MoveTo(xI, yI);
                 i++;
-            }
+            }*/
             MoveTo(x, y);
         }
         // simulates a click-and-release action of the left mouse
