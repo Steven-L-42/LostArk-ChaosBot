@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Net.WebSockets;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using WindowsInput.Native;
+using Point = System.Windows.Point;
 
 namespace PixelAimbot.Classes.Misc
 {
@@ -130,8 +138,8 @@ namespace PixelAimbot.Classes.Misc
             keybd_event(key, 0, KEY_DOWN_EVENT, 0);
         }
     }
-    
-    
+
+
     public static class VirtualMouse
     {
         [StructLayout(LayoutKind.Sequential)]
@@ -145,7 +153,7 @@ namespace PixelAimbot.Classes.Misc
                 return new Point(point.X, point.Y);
             }
         }
-    
+
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out POINT lpPoint);
 
@@ -156,10 +164,10 @@ namespace PixelAimbot.Classes.Misc
             // NOTE: If you need error handling
             // bool success = GetCursorPos(out lpPoint);
             // if (!success)
-        
+
             return lpPoint;
         }
-        
+
         // import the necessary API function so .NET can
         // marshall parameters appropriately
         [DllImport("user32.dll")]
@@ -190,25 +198,85 @@ namespace PixelAimbot.Classes.Misc
         {
             double absX = 65535.0 * (x + 1) / Screen.PrimaryScreen.Bounds.Width;
             double absY = 65535.0 * (y + 1) / Screen.PrimaryScreen.Bounds.Height;
-            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, (int)absX , (int)absY , 0, 0);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, (int) absX, (int) absY, 0, 0);
         }
-        public static void Smoothing(int x, int y, int smoothing = 0)
+
+        public static void Smoothing(int x, int y, int nSpeed = 0)
         {
-            Point currentMousePosition = new Point();
-            int i = 0;
-        /*    while(i <= smoothing)
+            Point ptCur;
+            Rectangle rect = Screen.PrimaryScreen.Bounds;
+            int xCur, yCur;
+            int delta;
+            const int nMinSpeed = 32;
+
+            x = ((65535 * x) / (rect.Right - 1)) + 1;
+            y = ((65535 * y) / (rect.Bottom - 1)) + 1;
+            
+            if (nSpeed == 0)
             {
-                currentMousePosition = GetCursorPosition();
-                //int xI = i * x / smoothing;
-                //int yI = i * y / smoothing;
-                int xI = (int)currentMousePosition.X + (x - (int)currentMousePosition.X) / smoothing;
-                int yI = (int)currentMousePosition.Y + (y - (int)currentMousePosition.Y) / smoothing;
+                mouse_event(MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE, x, y, 0, 0);
+                Task.Delay(10).Wait(); 
+                return;
+            }
+            
+            if (nSpeed < 0 || nSpeed > 100)
+                nSpeed = 10; // Default is speed 10
+            
+            ptCur = GetCursorPosition();
+            xCur = (((int) ptCur.X * 65535) / (rect.Right - 1)) + 1;
+            yCur = (((int) ptCur.Y * 65535) / (rect.Bottom - 1)) + 1;
+
+            // Mouse Calculation magic fickt meinen kopf ... im out now
+            while (xCur != x || yCur != y)
+            {
+                if (xCur < x)
+                {
+                    delta = (x - xCur) / nSpeed;
+                    if (delta == 0 || delta < nMinSpeed)
+                        delta = nMinSpeed;
+                    if ((xCur + delta) > x)
+                        xCur = x;
+                    else
+                        xCur += delta;
+                }
+                else if (xCur > x)
+                {
+                    delta = (xCur - x) / nSpeed;
+                    if (delta == 0 || delta < nMinSpeed)
+                        delta = nMinSpeed;
+                    if ((xCur - delta) < x)
+                        xCur = x;
+                    else
+                        xCur -= delta;
+                }
+
+                if (yCur < y)
+                {
+                    delta = (y - yCur) / nSpeed;
+                    if (delta == 0 || delta < nMinSpeed)
+                        delta = nMinSpeed;
+                    if ((yCur + delta) > y)
+                        yCur = y;
+                    else
+                        yCur += delta;
+                }
+                else if (yCur > y)
+                {
+                    delta = (yCur - y) / nSpeed;
+                    if (delta == 0 || delta < nMinSpeed)
+                        delta = nMinSpeed;
+                    if ((yCur - delta) < y)
+                        yCur = y;
+                    else
+                        yCur -= delta;
+                }
+
+                mouse_event(MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE, xCur, yCur, 0, 0);
+
                 Task.Delay(10).Wait();
-                MoveTo(xI, yI);
-                i++;
-            }*/
-            MoveTo(x, y);
+            }
         }
+
         // simulates a click-and-release action of the left mouse
         // button at its current position
         public static void LeftClick()
@@ -222,5 +290,19 @@ namespace PixelAimbot.Classes.Misc
             mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
             mouse_event(MOUSEEVENTF_RIGHTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
         }
+    }
+
+    public static class AI
+    {
+
+        public static int
+            PixelSearch(int Left, int Top, int Right, int Bottom, int color, int Shade_Variation = 0) 
+        {
+            //soon alla
+        
+
+            return 0;
+        }
+
     }
 }
