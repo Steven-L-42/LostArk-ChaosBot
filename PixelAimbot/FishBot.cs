@@ -157,6 +157,7 @@ namespace PixelAimbot
             int returnValue = Decimal.ToInt32(rescaledPosition);
             return returnValue;
         }
+        private AutoItX3 au3 = new AutoItX3();
 
         public FishBot()
         {
