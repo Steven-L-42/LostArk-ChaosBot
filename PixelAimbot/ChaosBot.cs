@@ -38,6 +38,7 @@ namespace PixelAimbot
         private bool _Searchboss = false;
 
         private bool PortalIsDetected = false;
+        private bool PortalIsNotDetected = false;
 
         private bool _Revive = false;
         private bool _Portaldetect = false;
@@ -838,9 +839,10 @@ namespace PixelAimbot
 
                 _Floor1 = true;
                 _STOPP = false;
-
+                PortalIsNotDetected = true;
+                var t16 = Task.Run(() => FLOOR1DETECTIONTIMER(token));
                 var t12 = Task.Run(() => FLOORTIME(token));
-                await Task.WhenAny(new[] {t12});
+                await Task.WhenAny(new[] { t12, t16 });
             }
             catch (AggregateException)
             {
@@ -1177,6 +1179,51 @@ namespace PixelAimbot
             {
             }
         }
+        private async Task FLOOR1DETECTIONTIMER(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(180000, token);
+
+
+                if (PortalIsNotDetected == true)
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    PortalIsNotDetected = false;
+
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
+
+                    _STOPP = true;
+                    PortalIsNotDetected = false;
+                    _FloorFight = false;
+                    _Searchboss = false;
+                    _Revive = false;
+                    _Ultimate = false;
+                    _Portaldetect = false;
+                    _Potions = false;
+                    _Floor1 = false;
+                    _Floor2 = false;
+                    _Floor3 = false;
+
+                    var leave = Task.Run(() => LEAVEDUNGEON(token));
+                    await Task.WhenAny(new[] { leave });
+
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch
+            {
+            }
+        }
 
         private async Task PORTALDETECT(CancellationToken token)
         {
@@ -1224,6 +1271,7 @@ namespace PixelAimbot
                                 }
 
                                 PortalIsDetected = true;
+                                PortalIsNotDetected = false;
                                 var t5 = Task.Run(() => PORTALISDETECTED(token));
                                 var t7 = Task.Run(() => SEARCHPORTAL(token));
                                 await Task.WhenAny(new[] {t5, t7});
@@ -1236,7 +1284,7 @@ namespace PixelAimbot
                                     (MethodInvoker) (() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
 
                                 _STOPP = true;
-
+                                PortalIsNotDetected = false;
                                 _FloorFight = false;
                                 _Searchboss = false;
                                 _Revive = false;
@@ -2010,7 +2058,7 @@ namespace PixelAimbot
             try
             {
                 _STOPP = true;
-
+                PortalIsNotDetected = false;
                 _FloorFight = false;
                 _Searchboss = false;
                 _Revive = false;
@@ -2239,11 +2287,11 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
                 _REPAIR = false;
-
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
                 var repair = Task.Run(() => REPAIRTIMER(token));
 
                 await Task.Delay(2000, token);
-                var t10 = Task.Run(() => RESTART_AFTERREPAIR(token));
+                var t10 = Task.Run(() => RESTART(token));
                 await Task.WhenAny(new[] {t10});
             }
             catch (AggregateException)
@@ -2415,31 +2463,7 @@ namespace PixelAimbot
             }
         }
 
-        private async Task RESTART_AFTERREPAIR(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair done!"));
-                await Task.Delay(4000, token);
-
-                var t1 = Task.Run(() => START(token));
-                await Task.WhenAny(new[] {t1});
-            }
-            catch (AggregateException)
-            {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch
-            {
-            }
-        }
+   
 
 
         private int casttimeByKey(byte key)
@@ -3080,7 +3104,7 @@ namespace PixelAimbot
                 if (!enemy.HasValue)
                 {
                     _STOPP = true;
-
+                    PortalIsNotDetected = false;
                     _FloorFight = false;
                     _Searchboss = false;
                     _Revive = false;
@@ -3121,7 +3145,7 @@ namespace PixelAimbot
                 await Task.Delay(int.Parse(txLeaveTimerFloor2.Text) * 1000, token);
 
                 _STOPP = true;
-
+                PortalIsNotDetected = false;
                 _FloorFight = false;
                 _Searchboss = false;
                 _Revive = false;
@@ -3155,7 +3179,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(int.Parse(txLeaveTimerFloor3.Text) * 1000, token);
                 _STOPP = true;
-
+                PortalIsNotDetected = false;
                 _FloorFight = false;
                 _Searchboss = false;
                 _Revive = false;
