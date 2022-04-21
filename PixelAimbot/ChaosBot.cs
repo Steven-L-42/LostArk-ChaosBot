@@ -534,7 +534,7 @@ namespace PixelAimbot
 
                     if (chBoxAutoRepair.Checked == true && _start == true)
                     {
-                        var repair = Task.Run(() => REPAIRTIMER(token));
+                        var repair = Task.Run(() => REPAIRTIMER());
                     }
                     else
                     {
@@ -563,13 +563,12 @@ namespace PixelAimbot
             }
         }
 
-        public async void REPAIRTIMER(CancellationToken token)
+        public async void REPAIRTIMER()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                await Task.Delay((int.Parse(txtRepair.Text) * 1000) * 60, token);
+              
+                await Task.Delay((int.Parse(txtRepair.Text) * 1000) * 60);
                 _REPAIR = true;
             }
             catch (AggregateException)
@@ -2288,7 +2287,7 @@ namespace PixelAimbot
 
                 _REPAIR = false;
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
-                var repair = Task.Run(() => REPAIRTIMER(token));
+                var repair = Task.Run(() => REPAIRTIMER());
 
                 await Task.Delay(2000, token);
                 var t10 = Task.Run(() => RESTART(token));
@@ -2400,7 +2399,7 @@ namespace PixelAimbot
                         _stop = false;
                         _Restart = false;
                         _LOGOUT = false;
-                        _REPAIR = false;
+                  
 
                         _Gunlancer = false;
                         _Shadowhunter = false;
