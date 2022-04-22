@@ -274,31 +274,38 @@ namespace PixelAimbot
         private void buttonGenerateCode_Click(object sender, EventArgs e)
         {
             string method = "";
+            string mask = "";
+            string maskBool = "null";
             if (radioButtonGetBest.Checked)
             {
-                method = "var item = Detector.GetBest(screenCapture, true);";
+                method = "var item = detector.GetBest(screenCapture, true);";
             }
 
             if (radioButtonGetClosest.Checked)
             {
-                method = "var item = Detector.GetClosestEnemy(screenCapture, true);";
+                method = "var item = detector.GetClosestEnemy(screenCapture, true);";
             }
 
             if (radioButtonGetClosestBest.Checked)
             {
-                method = "var item = Detector.GetClosestBest(screenCapture, true);";
+                method = "var item = detector.GetClosestBest(screenCapture, true);";
             }
 
+            if (maskPath != "")
+            {
+                mask = "var mask = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(maskPath) + @"');";
+                maskBool = "mask";
+            }
             String text = @"try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
                 var template = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(picturePath) + @"');
-                var mask = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(maskPath) + @"');
+                " + mask + @"
 
 
-                var Detector = new ScreenDetector(template, mask, " + treshold.ToString().Replace(",", ".") +
+                var detector = new ScreenDetector(template, " + maskBool + @", " + treshold.ToString().Replace(",", ".") +
                           @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" +
                           width * -1 +
                           @"), ChaosBot.recalc(" + height * -1 + @", false));

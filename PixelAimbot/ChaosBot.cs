@@ -219,7 +219,7 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-
+            var t11 = Task.Run(() => SearchNearEnemys(CancellationToken.None));
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(recalc(0), recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -798,13 +798,29 @@ namespace PixelAimbot
                 VirtualMouse.MoveTo(recalc(1871), recalc(260, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
-                object minimizeChat = au3.PixelSearch(recalc(1896), recalc(385, false), recalc(1909),
-                    recalc(392, false), 0xFFF1C6, 100);
-                if (minimizeChat.ToString() == "0")
+                
+                try
                 {
-                    VirtualMouse.MoveTo(recalc(1901), recalc(389, false), 10);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+
+                    var template = new Image<Bgr, byte>(resourceFolder + "/questmarker.png");
+
+                    var detector = new ScreenDetector(template, null, 0.79f, ChaosBot.recalc(1890), ChaosBot.recalc(378, false), ChaosBot.recalc(28), ChaosBot.recalc(31, false));
+                    var screenPrinter = new PrintScreen();
+                    using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
+
+                        var item = detector.GetBest(screenCapture, true);
+                        if (item.HasValue)
+                        {
+                            VirtualMouse.MoveTo(recalc(1901), recalc(389, false), 10);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        }
+                    }
+
                 }
+                catch { }
+
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -1022,18 +1038,32 @@ namespace PixelAimbot
                 await Task.Delay(1, token);
                 while (_FloorFight && _STOPP == false)
                 {
+                    
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        fight = au3.PixelSearch(recalc(600), recalc(250, false), recalc(1319),
-                            recalc(843, false), 0xDD2C02, 10);
-                        object[] fightCoord = (object[]) fight;
-                        VirtualMouse.MoveTo((int) fightCoord[0], (int) fightCoord[1] + recalc(100, false));
+
+                        var template = new Image<Bgr, byte>(resourceFolder + "/red_hp.png");
+                        var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.recalc(503), ChaosBot.recalc(111, false), ChaosBot.recalc(933), ChaosBot.recalc(840, false));
+                        var screenPrinter = new PrintScreen();
+                        using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
+
+                            var item = detector.GetBest(screenCapture, true);
+                            if (item.HasValue)
+                            {
+                                // Found
+                                VirtualMouse.MoveTo((int) item.Value.X, item.Value.Y + recalc(100, false));
+                                fight = "0";
+                            }
+                            else
+                            {
+                                fight = "1";
+                            }
+                        }
+
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
             catch {}

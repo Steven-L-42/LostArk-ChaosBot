@@ -104,7 +104,9 @@ namespace PixelAimbot
                 "attention_mask.png",
                 "energy_fish.png",
                 "gatheringRepair.png",
-                "gathering.png"
+                "gathering.png",
+                "red_hp.png",
+                "questmarker.png"
             };
 
             if (!File.Exists("cvextern.dll"))
