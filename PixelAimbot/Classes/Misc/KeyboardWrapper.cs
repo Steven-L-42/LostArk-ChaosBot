@@ -1,28 +1,28 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Numerics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
-using WindowsInput.Native;
+using SharpDX;
+using SharpDX.Direct3D11;
+using SharpDX.DXGI;
+using Device = SharpDX.Direct3D11.Device;
+using MapFlags = SharpDX.Direct3D11.MapFlags;
 using Point = System.Windows.Point;
+using ResultCode = SharpDX.DXGI.ResultCode;
 
 namespace PixelAimbot.Classes.Misc
 {
     public class KeyboardWrapper
     {
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
-
         /// <summary>
-        /// Key down flag
+        ///     Key down flag
         /// </summary>
         private const int KEY_DOWN_EVENT = 0x0001;
 
@@ -67,25 +67,27 @@ namespace PixelAimbot.Classes.Misc
         public const byte VK_I = 0x49;
         public string LAYOUTS { get; set; }
 
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
         /// <summary>
-        /// Will hold a key down for a number of milliseconds
+        ///     Will hold a key down for a number of milliseconds
         /// </summary>
         /// <param name="key">byte value for key. can cast like this: (byte)System.Windows.Forms.Keys.F24</param>
         /// <param name="duration">ms to hold key down for</param>
         /// <example>
-        /// <code>
+        ///     <code>
         /// Keyboard.KeyUp((byte)Keys.F24,5000);
         /// </code>
         /// </example>
-        /// 
         public static void HoldKey(byte key, int duration)
         {
-            int totalDuration = 0;
+            var totalDuration = 0;
             while (totalDuration < duration)
             {
                 keybd_event(key, 0, KEY_DOWN_EVENT, 0);
                 keybd_event(key, 0, KEY_UP_EVENT, 0);
-                System.Threading.Thread.Sleep(PauseBetweenStrokes);
+                Thread.Sleep(PauseBetweenStrokes);
                 totalDuration += PauseBetweenStrokes;
             }
         }
@@ -93,11 +95,11 @@ namespace PixelAimbot.Classes.Misc
 
         public static void AlternateHoldKey(byte key, int duration)
         {
-            int totalDuration = 0;
+            var totalDuration = 0;
             while (totalDuration < duration)
             {
                 keybd_event(key, 0, KEY_DOWN_EVENT, 0);
-                System.Threading.Thread.Sleep(PauseBetweenStrokes);
+                Thread.Sleep(PauseBetweenStrokes);
                 totalDuration += PauseBetweenStrokes;
             }
 
@@ -105,11 +107,11 @@ namespace PixelAimbot.Classes.Misc
         }
 
         /// <summary>
-        /// Will press a key
+        ///     Will press a key
         /// </summary>
         /// <param name="key">byte value for key. can cast like this: (byte)System.Windows.Forms.Keys.F24</param>
         /// <example>
-        /// <code>
+        ///     <code>
         /// Keyboard.PressKey((byte)Keys.F24);
         /// </code>
         /// </example>
@@ -120,11 +122,11 @@ namespace PixelAimbot.Classes.Misc
         }
 
         /// <summary>
-        /// Will trigger the KeyUp event for a key. Easy way to keep the computer awake without sending any input.
+        ///     Will trigger the KeyUp event for a key. Easy way to keep the computer awake without sending any input.
         /// </summary>
         /// <param name="key">byte value for key. can cast like this: (byte)System.Windows.Forms.Keys.F24</param>
         /// <example>
-        /// <code>
+        ///     <code>
         /// Keyboard.KeyUp((byte)Keys.F24);
         /// </code>
         /// </example>
@@ -142,17 +144,15 @@ namespace PixelAimbot.Classes.Misc
 
     public static class VirtualMouse
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
-
-            public static implicit operator Point(POINT point)
-            {
-                return new Point(point.X, point.Y);
-            }
-        }
+        // constants for the mouse_input() API function
+        private const int MOUSEEVENTF_MOVE = 0x0001;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
 
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out POINT lpPoint);
@@ -171,45 +171,33 @@ namespace PixelAimbot.Classes.Misc
         // import the necessary API function so .NET can
         // marshall parameters appropriately
         [DllImport("user32.dll")]
-        static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
-
-        // constants for the mouse_input() API function
-        private const int MOUSEEVENTF_MOVE = 0x0001;
-        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
-        private const int MOUSEEVENTF_LEFTUP = 0x0004;
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
-        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
-        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
-        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
-        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
-
-
+        private static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
 
 
         public static void MoveTo(int x, int y, int nSpeed = 0)
         {
             Point ptCur;
-            Rectangle rect = Screen.PrimaryScreen.Bounds;
+            var rect = Screen.PrimaryScreen.Bounds;
             int xCur, yCur;
             int delta;
             const int nMinSpeed = 32;
 
-            x = ((65535 * x) / (rect.Right - 1)) + 1;
-            y = ((65535 * y) / (rect.Bottom - 1)) + 1;
-            
+            x = 65535 * x / (rect.Right - 1) + 1;
+            y = 65535 * y / (rect.Bottom - 1) + 1;
+
             if (nSpeed == 0)
             {
                 mouse_event(MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE, x, y, 0, 0);
-                Task.Delay(10).Wait(); 
+                Task.Delay(10).Wait();
                 return;
             }
-            
+
             if (nSpeed < 0 || nSpeed > 100)
                 nSpeed = 10; // Default is speed 10
-            
+
             ptCur = GetCursorPosition();
-            xCur = (((int) ptCur.X * 65535) / (rect.Right - 1)) + 1;
-            yCur = (((int) ptCur.Y * 65535) / (rect.Bottom - 1)) + 1;
+            xCur = (int) ptCur.X * 65535 / (rect.Right - 1) + 1;
+            yCur = (int) ptCur.Y * 65535 / (rect.Bottom - 1) + 1;
 
             // Mouse Calculation magic fickt meinen kopf ... im out now
             while (xCur != x || yCur != y)
@@ -219,7 +207,7 @@ namespace PixelAimbot.Classes.Misc
                     delta = (x - xCur) / nSpeed;
                     if (delta == 0 || delta < nMinSpeed)
                         delta = nMinSpeed;
-                    if ((xCur + delta) > x)
+                    if (xCur + delta > x)
                         xCur = x;
                     else
                         xCur += delta;
@@ -229,7 +217,7 @@ namespace PixelAimbot.Classes.Misc
                     delta = (xCur - x) / nSpeed;
                     if (delta == 0 || delta < nMinSpeed)
                         delta = nMinSpeed;
-                    if ((xCur - delta) < x)
+                    if (xCur - delta < x)
                         xCur = x;
                     else
                         xCur -= delta;
@@ -240,7 +228,7 @@ namespace PixelAimbot.Classes.Misc
                     delta = (y - yCur) / nSpeed;
                     if (delta == 0 || delta < nMinSpeed)
                         delta = nMinSpeed;
-                    if ((yCur + delta) > y)
+                    if (yCur + delta > y)
                         yCur = y;
                     else
                         yCur += delta;
@@ -250,7 +238,7 @@ namespace PixelAimbot.Classes.Misc
                     delta = (yCur - y) / nSpeed;
                     if (delta == 0 || delta < nMinSpeed)
                         delta = nMinSpeed;
-                    if ((yCur - delta) < y)
+                    if (yCur - delta < y)
                         yCur = y;
                     else
                         yCur -= delta;
@@ -275,19 +263,17 @@ namespace PixelAimbot.Classes.Misc
             mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
             mouse_event(MOUSEEVENTF_RIGHTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
         }
-    }
 
-    public static class AI
-    {
-
-        public static int
-            PixelSearch(int Left, int Top, int Right, int Bottom, int color, int Shade_Variation = 0) 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
         {
-            //soon alla
-        
+            public int X;
+            public int Y;
 
-            return 0;
+            public static implicit operator Point(POINT point)
+            {
+                return new Point(point.X, point.Y);
+            }
         }
-
     }
 }
