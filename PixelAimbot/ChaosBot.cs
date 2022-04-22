@@ -1102,42 +1102,42 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            
-                            if (isKeyOnCooldown(skill.Key) && _FloorFight && _STOPP == false)
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                walktopUTurn++;
-                                if (chBoxAutoAttackHalf.Checked || chBoxAutoAttackFull.Checked)
-                                {
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                }
 
-                                if (chBoxAutoAttackFull.Checked)
-                                {
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                }
-
-                                fightOnSecondAbility = 1;
-                            }
-                            if (!isKeyOnCooldown(skill.Key) && fight.ToString() != "1" && _FloorFight &&
-                                                                   _STOPP == false)
+                            if (_FloorFight && !_STOPP)
                             {
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
-                                KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+                                if (!isKeyOnCooldown(skill.Key) && fight.ToString() != "1")
+                                {
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
+                                    KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
                              
-                                if (isDoubleKey(skill.Key))
-                                {
-                                    KeyboardWrapper.PressKey(skill.Key);
+                                    if (isDoubleKey(skill.Key))
+                                    {
+                                        KeyboardWrapper.PressKey(skill.Key);
+                                    }
+
+                                    setKeyCooldown(skill.Key); // Set Cooldown
+                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                    fightOnSecondAbility++;
                                 }
+                                else
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    walktopUTurn++;
+                                    if (chBoxAutoAttackHalf.Checked || chBoxAutoAttackFull.Checked)
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                    }
 
-                                setKeyCooldown(skill.Key); // Set Cooldown
-                                var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                fightOnSecondAbility++;
-                                
+                                    if (chBoxAutoAttackFull.Checked)
+                                    {
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                    }
+
+                                    fightOnSecondAbility = 1;
+                                }
                             }
-
-
+                         
                        
                             if (walktopUTurn == 3 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
