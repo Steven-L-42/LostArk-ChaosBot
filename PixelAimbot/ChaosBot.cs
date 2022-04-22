@@ -541,7 +541,7 @@ namespace PixelAimbot
 
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                        var logout = Task.Run(() => LOGOUTTIMER());
                     }
                     else
                     {
@@ -582,13 +582,12 @@ namespace PixelAimbot
             }
         }
 
-        public async void LOGOUTTIMER(CancellationToken token)
+        public async void LOGOUTTIMER()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtLOGOUT.Text) * 1000) * 60, token);
+                
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtLOGOUT.Text) * 1000) * 60);
                 _LOGOUT = true;
             }
             catch (AggregateException)
@@ -608,15 +607,7 @@ namespace PixelAimbot
             //cts.Cancel();
         }
 
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            _REPAIR = true;
-        }
-
-        private void OnTimedEvent2(object source, ElapsedEventArgs e)
-        {
-            _LOGOUT = true;
-        }
+    
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -889,7 +880,7 @@ namespace PixelAimbot
                     var t16 = Task.Run(() => REVIVE(token));
                     var t18 = Task.Run(() => PORTALDETECT(token));
                     var t20 = Task.Run(() => POTIONS(token));
-                    await Task.WhenAll(new[] {t11, t12, t14, t16, t18, t20});
+                    await Task.WhenAny(new[] {t11, t12, t14, t16, t18, t20});
                 }
 
                 if (_Floor2 == true && _STOPP == false)
@@ -2334,7 +2325,7 @@ namespace PixelAimbot
 
                 _REPAIR = false;
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
-                var repair = Task.Run(() => REPAIRTIMER());
+            
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                 var t10 = Task.Run(() => RESTART(token));
