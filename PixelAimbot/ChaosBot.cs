@@ -1036,6 +1036,10 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
+                var template = new Image<Bgr, byte>(resourceFolder + "/red_hp.png");
+                var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.recalc(503), ChaosBot.recalc(111, false), ChaosBot.recalc(933), ChaosBot.recalc(840, false));
+                detector.setMyPosition(new Point(ChaosBot.recalc(215), ChaosBot.recalc(366, false)));
+                var screenPrinter = new PrintScreen();
                 while (_FloorFight && _STOPP == false)
                 {
                     
@@ -1044,12 +1048,11 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
-                        var template = new Image<Bgr, byte>(resourceFolder + "/red_hp.png");
-                        var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.recalc(503), ChaosBot.recalc(111, false), ChaosBot.recalc(933), ChaosBot.recalc(840, false));
-                        var screenPrinter = new PrintScreen();
+
+                        
                         using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
 
-                            var item = detector.GetBest(screenCapture, true);
+                            var item = detector.GetClosest(screenCapture, true);
                             if (item.HasValue)
                             {
                                 // Found
