@@ -571,11 +571,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -593,11 +593,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -631,11 +631,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -775,11 +775,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -844,11 +844,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1011,11 +1011,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1102,23 +1102,7 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            if (!isKeyOnCooldown(skill.Key) && fight.ToString() != "1" && _FloorFight &&
-                                                                   _STOPP == false)
-                            {
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
-                                KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
-                             
-                                if (isDoubleKey(skill.Key))
-                                {
-                                    KeyboardWrapper.PressKey(skill.Key);
-                                }
-
-                                setKeyCooldown(skill.Key); // Set Cooldown
-                                var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                fightOnSecondAbility++;
-                                
-                            }
-
+                            
                             if (isKeyOnCooldown(skill.Key) && _FloorFight && _STOPP == false)
                             {
                                 token.ThrowIfCancellationRequested();
@@ -1136,6 +1120,24 @@ namespace PixelAimbot
 
                                 fightOnSecondAbility = 1;
                             }
+                            if (!isKeyOnCooldown(skill.Key) && fight.ToString() != "1" && _FloorFight &&
+                                                                   _STOPP == false)
+                            {
+                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
+                                KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
+                             
+                                if (isDoubleKey(skill.Key))
+                                {
+                                    KeyboardWrapper.PressKey(skill.Key);
+                                }
+
+                                setKeyCooldown(skill.Key); // Set Cooldown
+                                var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                fightOnSecondAbility++;
+                                
+                            }
+
+
                        
                             if (walktopUTurn == 3 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
@@ -1200,11 +1202,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
                     catch
                     {
@@ -1213,11 +1215,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1258,11 +1260,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1346,11 +1348,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
                     catch
                     {
@@ -1359,11 +1361,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1394,11 +1396,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
                     catch
                     {
@@ -1407,11 +1409,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1461,11 +1463,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1751,11 +1753,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1908,11 +1910,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
                     catch
                     {
@@ -1921,11 +1923,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -1992,11 +1994,11 @@ namespace PixelAimbot
                         }
                         catch (AggregateException)
                         {
-                            Console.WriteLine("Expected");
+                            Debug.WriteLine("Expected");
                         }
                         catch (ObjectDisposedException)
                         {
-                            Console.WriteLine("Bug");
+                            Debug.WriteLine("Bug");
                         }
                         catch
                         {
@@ -2006,11 +2008,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2072,11 +2074,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
                     catch
                     {
@@ -2085,11 +2087,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2129,11 +2131,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2163,11 +2165,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2230,11 +2232,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2267,11 +2269,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2340,11 +2342,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -2481,11 +2483,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Console.WriteLine("Expected");
+                        Debug.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Console.WriteLine("Bug");
+                        Debug.WriteLine("Bug");
                     }
 
                     /*
@@ -2496,11 +2498,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3084,11 +3086,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3108,11 +3110,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3168,11 +3170,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3205,11 +3207,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3238,11 +3240,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3260,11 +3262,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
@@ -3370,11 +3372,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch
             {
