@@ -3068,9 +3068,6 @@ namespace PixelAimbot
             lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
             lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
             txBoxUltimateKey.Text = translateKey(currentLayout.Y);
-
-            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
         }
 
         public async void DeathbladeSecondPress(CancellationToken token)
