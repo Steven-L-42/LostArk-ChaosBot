@@ -1156,22 +1156,28 @@ namespace PixelAimbot
                                     fightOnSecondAbility++;
                                 }
                                 else
+                                if (isKeyOnCooldown(skill.Key))
                                 {
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is autoattacking..."));
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     walktopUTurn++;
-                                    if (comboBoxAutoAttack.SelectedIndex == 0  || comboBoxAutoAttack.SelectedIndex == 1)
+
+                                    switch (Convert.ToString(comboBoxAutoAttack.SelectedItem))
                                     {
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
+                                        case "FULL":
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "FULL"));
+                                            break;
+                                        case "HALF":
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "HALF"));
+                                            break;
+                                        case "DISABLED":
+                                        default:
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "NO FUNCTION"));
+                                            break;
+
                                     }
 
-                                    if (comboBoxAutoAttack.SelectedIndex == 0)
-                                    {
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_C);
-                                    }
-
-                                    fightOnSecondAbility = 1;
                                 }
                             }
                          
