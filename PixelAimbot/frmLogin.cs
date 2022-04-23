@@ -156,10 +156,14 @@ namespace PixelAimbot
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(@"*ALL RESOLUTIONS IS BETA, If something is not working good
+            if (Screen.PrimaryScreen.Bounds.Width != 1920)
+            {
+                MessageBox.Show(@"*ALL RESOLUTIONS IS BETA, If something is not working good
 then set your Resolution back to 1920x1080 on your 
 Windows operating System Settings and inGame
 * *BORDERLESS is NECESSARY");
+            }
+
             if (chBoxRemember.Checked == true)
             {
                 

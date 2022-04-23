@@ -290,7 +290,7 @@ namespace PixelAimbot
             var bot = new TelegramBotClient(apikey);
             int offset = -1;
             botIsRun = true;
-            buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
+            buttonConnectTelegram.Text = "disconnect";
             
             while (botIsRun)
             {
@@ -308,7 +308,7 @@ namespace PixelAimbot
                     catch (Exception ex)
                     {
                         botIsRun = false;
-                        buttonConnectTelegram.Text = "Verbinden";
+                        buttonConnectTelegram.Text = "connect";
                         continue;
                     }
 
@@ -3709,7 +3709,7 @@ namespace PixelAimbot
             {
                 bot.GetMeAsync().Wait();
                 telegramBotRunning = true;
-                labelTelegramState.Text = "Status = Erfolgreich!";
+                labelTelegramState.Text = "State = success!";
                 labelTelegramState.ForeColor = Color.Green;
                 conf.telegram = textBoxTelegramAPI.Text;
                 conf.Save();
@@ -3717,7 +3717,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
-                labelTelegramState.Text = "Status = Fehler!";
+                labelTelegramState.Text = "State = error!";
                 labelTelegramState.ForeColor = Color.Red;
             }
         }
@@ -3729,14 +3729,14 @@ namespace PixelAimbot
             {
 
                 botIsRun = false;
-                labelTelegramState.Text = "Status = Getrennt";
+                labelTelegramState.Text = "State = disconnected";
                 labelTelegramState.ForeColor = Color.White;
-                buttonConnectTelegram.Text = "Verbinden";
+                buttonConnectTelegram.Text = "connect";
             }
             else
             {
                 TelegramTask = RunBotAsync(textBoxTelegramAPI.Text, telegramToken.Token);
-                buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
+                buttonConnectTelegram.Text = "disconnect";
                 buttonTestTelegram_Click_1(null, null);
 
             }

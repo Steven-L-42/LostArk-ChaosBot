@@ -2429,7 +2429,7 @@
             this.buttonConnectTelegram.Name = "buttonConnectTelegram";
             this.buttonConnectTelegram.Size = new System.Drawing.Size(269, 23);
             this.buttonConnectTelegram.TabIndex = 43;
-            this.buttonConnectTelegram.Text = "Verbinden";
+            this.buttonConnectTelegram.Text = "connect";
             this.buttonConnectTelegram.UseVisualStyleBackColor = true;
             this.buttonConnectTelegram.Click += new System.EventHandler(this.buttonConnectTelegram_Click);
             // 
@@ -2443,7 +2443,7 @@
             this.buttonTestTelegram.Name = "buttonTestTelegram";
             this.buttonTestTelegram.Size = new System.Drawing.Size(147, 23);
             this.buttonTestTelegram.TabIndex = 42;
-            this.buttonTestTelegram.Text = "Teste Verbindung";
+            this.buttonTestTelegram.Text = "test connection";
             this.buttonTestTelegram.UseVisualStyleBackColor = true;
             this.buttonTestTelegram.Click += new System.EventHandler(this.buttonTestTelegram_Click_1);
             // 
@@ -2453,7 +2453,7 @@
             this.labelTelegramState.Name = "labelTelegramState";
             this.labelTelegramState.Size = new System.Drawing.Size(269, 23);
             this.labelTelegramState.TabIndex = 41;
-            this.labelTelegramState.Text = "Status = Unbekannt";
+            this.labelTelegramState.Text = "State = Unknown";
             this.labelTelegramState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelApiTelegram

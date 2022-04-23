@@ -227,7 +227,7 @@ namespace PixelAimbot
             var bot = new TelegramBotClient(telegramToken);
             int offset = -1;
             botIsRun = true;
-            buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
+            buttonConnectTelegram.Text = "disconnect";
             while (botIsRun)
             {
                 Telegram.Bot.Types.Update[] updates;
@@ -1065,7 +1065,7 @@ namespace PixelAimbot
                 bot.GetMeAsync().Wait();
 
                 telegramBotRunning = true;
-                labelTelegramState.Text = "Status = Erfolgreich!";
+                labelTelegramState.Text = "State = success!";
                 labelTelegramState.ForeColor = Color.Green;
                 conf.telegram = textBoxTelegramAPI.Text;
                 conf.Save();
@@ -1073,7 +1073,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
-                labelTelegramState.Text = "Status = Fehler!";
+                labelTelegramState.Text = "State = error!";
                 labelTelegramState.ForeColor = Color.Red;
             }
         }
@@ -1085,14 +1085,14 @@ namespace PixelAimbot
             {
 
                 botIsRun = false;
-                labelTelegramState.Text = "Status = Getrennt";
+                labelTelegramState.Text = "State = disconnected";
                 labelTelegramState.ForeColor = Color.White;
-                buttonConnectTelegram.Text = "Verbinden";
+                buttonConnectTelegram.Text = "connect";
             }
             else
             {
                 TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
-                buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
+                buttonConnectTelegram.Text = "disconnect";
                 buttonTestTelegram_Click_1(null, null);
 
             }
