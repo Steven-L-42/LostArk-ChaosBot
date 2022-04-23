@@ -1163,7 +1163,7 @@ namespace PixelAimbot
                                     await Task.Delay(1, token);
                                     walktopUTurn++;
 
-                                    switch (Convert.ToString(comboBoxAutoAttack.SelectedItem))
+                                    switch (Convert.ToString(comboBoxAutoAttack.SelectedText))
                                     {
                                         case "FULL":
                                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "FULL"));
