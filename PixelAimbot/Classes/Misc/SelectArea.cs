@@ -140,7 +140,7 @@ namespace PixelAimbot.Classes.Misc
             }
             else
             {
-                FishBot._FishBot.updateArea(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
+                GatheringBot._GatheringBot.UpdateArea(CurrentTopLeft.X, CurrentTopLeft.Y, CurrentBottomRight.X - CurrentTopLeft.X, CurrentBottomRight.Y - CurrentTopLeft.Y);
             }
 
             this.InstanceRef.Show();

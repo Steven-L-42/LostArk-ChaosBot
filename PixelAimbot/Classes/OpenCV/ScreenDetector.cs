@@ -14,7 +14,7 @@ namespace PixelAimbot.Classes.OpenCV
         public Image<Bgr, byte> _enemyTemplate;
         public Image<Bgr, byte> _enemyMask;
         public float _threshold { get; set; } = 0.7f;
-        private Point _myPosition = new Point(ChaosBot.recalc(150), ChaosBot.recalc(128, false));
+        private Point _myPosition = new Point(ChaosBot.Recalc(150), ChaosBot.Recalc(128, false));
         private DrawScreen _screenDrawer;
         public int rectangleX = 0;
         public int rectangleY = 0;
@@ -46,11 +46,11 @@ namespace PixelAimbot.Classes.OpenCV
         }
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
-            this._enemyTemplate.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width), ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+            this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width), ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
             if (this._enemyMask != null)
             {
-                this._enemyMask.Resize(ChaosBot.recalc(this._enemyTemplate.Size.Width),
-                    ChaosBot.recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                this._enemyMask.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
+                    ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
             }
 
             List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();

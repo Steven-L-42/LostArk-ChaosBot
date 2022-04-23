@@ -1,6 +1,6 @@
 ﻿namespace PixelAimbot
 {
-    partial class FishBot
+    partial class GatheringBot
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FishBot));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GatheringBot));
             this.lbClose = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -246,7 +246,7 @@
             this.txtLOGOUT.TabIndex = 45;
             this.txtLOGOUT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtLOGOUT.WordWrap = false;
-            this.txtLOGOUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txtLOGOUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // chBoxLOGOUT
             // 
@@ -577,7 +577,7 @@
             this.txPA.TabIndex = 28;
             this.txPA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPA.WordWrap = false;
-            this.txPA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPS
             // 
@@ -592,7 +592,7 @@
             this.txPS.TabIndex = 29;
             this.txPS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPS.WordWrap = false;
-            this.txPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPS.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPD
             // 
@@ -607,7 +607,7 @@
             this.txPD.TabIndex = 30;
             this.txPD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPD.WordWrap = false;
-            this.txPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPD.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPF
             // 
@@ -622,7 +622,7 @@
             this.txPF.TabIndex = 31;
             this.txPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPF.WordWrap = false;
-            this.txPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPW
             // 
@@ -637,7 +637,7 @@
             this.txPW.TabIndex = 24;
             this.txPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPW.WordWrap = false;
-            this.txPW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPQ
             // 
@@ -653,7 +653,7 @@
             this.txPQ.Tag = "";
             this.txPQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPQ.WordWrap = false;
-            this.txPQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPQ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPE
             // 
@@ -668,7 +668,7 @@
             this.txPE.TabIndex = 26;
             this.txPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPE.WordWrap = false;
-            this.txPE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // txPR
             // 
@@ -683,7 +683,7 @@
             this.txPR.TabIndex = 27;
             this.txPR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txPR.WordWrap = false;
-            this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkIsDigit);
+            this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
             // tabControl1
             // 

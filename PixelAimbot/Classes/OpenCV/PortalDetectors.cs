@@ -14,7 +14,7 @@ namespace PixelAimbot.Classes.OpenCV
         private Image<Bgr, byte> _PortalTemplate;
         private Image<Bgr, byte> _PortalMask;
         private float _thresh;
-        private readonly Point _mePosition = new Point(ChaosBot.recalc(1920), ChaosBot.recalc(1080, false));
+        private readonly Point _mePosition = new Point(ChaosBot.Recalc(1920), ChaosBot.Recalc(1080, false));
         public PortalDetectors(Image<Bgr, byte> PortalTemplate,
            Image<Bgr, byte> PortalMask, float thresh)
         {
@@ -24,12 +24,12 @@ namespace PixelAimbot.Classes.OpenCV
         }
         private List<(Point position, double matchValue)> DetectPortal(Image<Bgr, byte> screenCapture)
         {
-            this._PortalTemplate.Resize(ChaosBot.recalc(this._PortalTemplate.Size.Width), ChaosBot.recalc(this._PortalTemplate.Size.Height), Inter.Linear);
-            this._PortalMask.Resize(ChaosBot.recalc(this._PortalMask.Size.Width), ChaosBot.recalc(this._PortalMask.Size.Height), Inter.Linear);
+            this._PortalTemplate.Resize(ChaosBot.Recalc(this._PortalTemplate.Size.Width), ChaosBot.Recalc(this._PortalTemplate.Size.Height), Inter.Linear);
+            this._PortalMask.Resize(ChaosBot.Recalc(this._PortalMask.Size.Width), ChaosBot.Recalc(this._PortalMask.Size.Height), Inter.Linear);
 
             List<(Point minPoint, double)> Portals = new List<(Point position, double matchValue)>();
 
-            screenCapture.ROI = new Rectangle(ChaosBot.recalc(50), ChaosBot.recalc(124, false), ChaosBot.recalc(223), ChaosBot.recalc(252, false));
+            screenCapture.ROI = new Rectangle(ChaosBot.Recalc(50), ChaosBot.Recalc(124, false), ChaosBot.Recalc(223), ChaosBot.Recalc(252, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;

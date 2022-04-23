@@ -14,7 +14,7 @@ namespace PixelAimbot.Classes.OpenCV
         private Image<Bgr, byte> _EnterTemplate;
         private Image<Bgr, byte> _EnterMask;
         private float _thresh;
-        private readonly Point _mePosition = new Point(ChaosBot.recalc(1920), ChaosBot.recalc(1080, false));
+        private readonly Point _mePosition = new Point(ChaosBot.Recalc(1920), ChaosBot.Recalc(1080, false));
         public EnterDetectors(Image<Bgr, byte> EnterTemplate,
            Image<Bgr, byte> EnterMask, float thresh)
         {
@@ -26,11 +26,11 @@ namespace PixelAimbot.Classes.OpenCV
         private List<(Point position, double matchValue)> DetectEnter(Image<Bgr, byte> screenCapture)
         {
 
-            this._EnterTemplate.Resize(ChaosBot.recalc(this._EnterTemplate.Size.Width), ChaosBot.recalc(this._EnterTemplate.Size.Height), Inter.Linear);
-            this._EnterMask.Resize(ChaosBot.recalc(this._EnterMask.Size.Width), ChaosBot.recalc(this._EnterMask.Size.Height), Inter.Linear);
+            this._EnterTemplate.Resize(ChaosBot.Recalc(this._EnterTemplate.Size.Width), ChaosBot.Recalc(this._EnterTemplate.Size.Height), Inter.Linear);
+            this._EnterMask.Resize(ChaosBot.Recalc(this._EnterMask.Size.Width), ChaosBot.Recalc(this._EnterMask.Size.Height), Inter.Linear);
 
             List<(Point minPoint, double)> Enters = new List<(Point position, double matchValue)>();
-            screenCapture.ROI = new Rectangle(ChaosBot.recalc(1259), ChaosBot.recalc(430, false), ChaosBot.recalc(1501), ChaosBot.recalc(499, false));
+            screenCapture.ROI = new Rectangle(ChaosBot.Recalc(1259), ChaosBot.Recalc(430, false), ChaosBot.Recalc(1501), ChaosBot.Recalc(499, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;

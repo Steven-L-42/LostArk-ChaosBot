@@ -392,11 +392,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FishBot.cs">
+    <Compile Include="Classes\ChaosBot\Helpers.cs" />
+    <Compile Include="Classes\ChaosBot\Imports.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Awakeningskill.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Deathblade.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\FightSequences.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\LeaveDungeon.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Logout.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Messenger.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Move.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Potions.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Repair.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Restart.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Revive.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Sharpshooter.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Start.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Timers.cs" />
+    <Compile Include="Classes\ChaosBot\Tasks\Ultimate.cs" />
+    <Compile Include="Classes\ChaosBot\Variables.cs" />
+    <Compile Include="Classes\GatheringBot\Helpers.cs" />
+    <Compile Include="Classes\GatheringBot\Imports.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\CheckEnergy.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\CheckGathering.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\Logout.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\Messenger.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\RepairCheck.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\RepairTask.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\Restart.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\Start.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\ThrowFishingRod.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\Timers.cs" />
+    <Compile Include="Classes\GatheringBot\Variables.cs" />
+    <Compile Include="GatheringBot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FishBot.Designer.cs">
-      <DependentUpon>FishBot.cs</DependentUpon>
+    <Compile Include="GatheringBot.Designer.cs">
+      <DependentUpon>GatheringBot.cs</DependentUpon>
     </Compile>
     <Compile Include="ChaosBot.cs">
       <SubType>Form</SubType>
@@ -468,8 +499,8 @@
     <Compile Include="prioSkills\Prio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FishBot.resx">
-      <DependentUpon>FishBot.cs</DependentUpon>
+    <EmbeddedResource Include="GatheringBot.resx">
+      <DependentUpon>GatheringBot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChaosBot.resx">
       <DependentUpon>ChaosBot.cs</DependentUpon>
@@ -677,9 +708,6 @@
     <None Include="Resources\New_Login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Task\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets" Condition="Exists('..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets')" />

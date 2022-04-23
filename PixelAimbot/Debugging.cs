@@ -153,8 +153,8 @@ namespace PixelAimbot
                                 if (enemy.HasValue)
                                 {
                                     screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
-                                        ChaosBot.recalc(enemyTemplate.Size.Width),
-                                        ChaosBot.recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
+                                        ChaosBot.Recalc(enemyTemplate.Size.Width),
+                                        ChaosBot.Recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
                                 }
                             }
                         }
@@ -202,10 +202,10 @@ namespace PixelAimbot
 
         private void btnGetMinimap_Click(object sender, EventArgs e)
         {
-            textBoxX.Text = ChaosBot.recalc(1593).ToString();
-            textBoxY.Text = ChaosBot.recalc(40).ToString();
-            textBoxHeight.Text = ChaosBot.recalc(255).ToString();
-            textBoxWidth.Text = ChaosBot.recalc(296).ToString();
+            textBoxX.Text = ChaosBot.Recalc(1593).ToString();
+            textBoxY.Text = ChaosBot.Recalc(40).ToString();
+            textBoxHeight.Text = ChaosBot.Recalc(255).ToString();
+            textBoxWidth.Text = ChaosBot.Recalc(296).ToString();
         }
 
         private void buttonSelectPicture_Click(object sender, EventArgs e)
@@ -330,10 +330,10 @@ namespace PixelAimbot
 
         private void buttonRecalc_Click(object sender, EventArgs e)
         {
-            textBoxX.Text = ChaosBot.recalc(int.Parse(textBoxX.Text)).ToString();
-            textBoxY.Text = ChaosBot.recalc(int.Parse(textBoxY.Text), true).ToString();
-            textBoxWidth.Text = ChaosBot.recalc(int.Parse(textBoxWidth.Text)).ToString();
-            textBoxHeight.Text = ChaosBot.recalc(int.Parse(textBoxHeight.Text), true).ToString();
+            textBoxX.Text = ChaosBot.Recalc(int.Parse(textBoxX.Text)).ToString();
+            textBoxY.Text = ChaosBot.Recalc(int.Parse(textBoxY.Text), true).ToString();
+            textBoxWidth.Text = ChaosBot.Recalc(int.Parse(textBoxWidth.Text)).ToString();
+            textBoxHeight.Text = ChaosBot.Recalc(int.Parse(textBoxHeight.Text), true).ToString();
         }
 
         public int recalcToBotResolution(int value, bool horizontal = true)
