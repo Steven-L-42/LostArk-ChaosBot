@@ -423,6 +423,24 @@
     <Compile Include="Classes\GatheringBot\Tasks\ThrowFishingRod.cs" />
     <Compile Include="Classes\GatheringBot\Tasks\Timers.cs" />
     <Compile Include="Classes\GatheringBot\Variables.cs" />
+    <Compile Include="Forms\Debugging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Debugging.Designer.cs">
+      <DependentUpon>Debugging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMinimized.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMinimized.Designer.cs">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="GatheringBot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -455,27 +473,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Misc\HWID.cs" />
-    <Compile Include="Classes\Misc\key.cs" />
     <Compile Include="Classes\Misc\Priorized_Skills.cs" />
     <Compile Include="Classes\OpenCV\EnterDetectors.cs" />
-    <Compile Include="Debugging.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debugging.Designer.cs">
-      <DependentUpon>Debugging.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmGuide.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGuide.Designer.cs">
-      <DependentUpon>frmGuide.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmGuideFishbot.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGuideFishbot.Designer.cs">
-      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,21 +483,29 @@
     </Compile>
     <Compile Include="Classes\Misc\Layout_Keyboard.cs" />
     <Compile Include="Classes\Misc\PrintScreen.cs" />
-    <Compile Include="frmMinimized.cs">
+    <Compile Include="Forms\frmGuide.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMinimized.Designer.cs">
-      <DependentUpon>frmMinimized.cs</DependentUpon>
+    <Compile Include="Forms\frmGuide.Designer.cs">
+      <DependentUpon>frmGuide.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSettings.cs">
+    <Compile Include="Forms\frmGuideFishbot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSettings.Designer.cs">
-      <DependentUpon>frmSettings.cs</DependentUpon>
+    <Compile Include="Forms\frmGuideFishbot.Designer.cs">
+      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
     </Compile>
-    <Compile Include="prioSkills\Prio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Debugging.resx">
+      <DependentUpon>Debugging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMinimized.resx">
+      <DependentUpon>frmMinimized.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GatheringBot.resx">
       <DependentUpon>GatheringBot.cs</DependentUpon>
     </EmbeddedResource>
@@ -508,23 +515,14 @@
     <EmbeddedResource Include="Classes\Misc\SelectArea.resx">
       <DependentUpon>SelectArea.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debugging.resx">
-      <DependentUpon>Debugging.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGuide.resx">
-      <DependentUpon>frmGuide.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGuideFishbot.resx">
-      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMinimized.resx">
-      <DependentUpon>frmMinimized.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmGuide.resx">
+      <DependentUpon>frmGuide.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSettings.resx">
-      <DependentUpon>frmSettings.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmGuideFishbot.resx">
+      <DependentUpon>frmGuideFishbot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
