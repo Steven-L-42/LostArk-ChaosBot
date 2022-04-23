@@ -31,6 +31,7 @@ namespace PixelAimbot
 
         private bool _stop = false;
         private bool _REPAIR = false;
+        private bool _CANREPAIR = false;
         private bool _LOGOUT = false;
         private bool _Fishing = false;
         private bool _Buff = false;
@@ -657,7 +658,7 @@ namespace PixelAimbot
                 Random rnd = new Random();
 
                 await Task.Delay((5500 + rnd.Next(10, 200)), token);
-                if (_REPAIR)
+                if (_CANREPAIR)
                 {
                     var t3 = Task.Run(() => RepairTask(token));
                     await Task.WhenAny(new[] {t3});
@@ -804,7 +805,7 @@ namespace PixelAimbot
         private async Task REPAIRCHECK(CancellationToken token)
 
         {
-            while (true)
+            while (_REPAIR)
             {
                 try
                 {
@@ -824,7 +825,7 @@ namespace PixelAimbot
                         {
                             // Found
 
-                            _REPAIR = true;
+                            _CANREPAIR = true;
                         }
                     }
                 }
@@ -885,11 +886,11 @@ namespace PixelAimbot
             await Task.Delay(2500, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             
-            await Task.Delay(3000, token);
+            await Task.Delay(2500, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             
 
-            _REPAIR = false;
+            _CANREPAIR = false;
             var t3 = Task.Run(() => ThrowFishingRod(token));
             await Task.WhenAny(new[] {t3});
         }
@@ -939,10 +940,7 @@ namespace PixelAimbot
 
         private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chBoxAutoRepair.Checked)
-            {
-                _REPAIR = false;
-            }
+            _REPAIR = chBoxAutoRepair.Checked;
         }
 
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)
@@ -1017,7 +1015,7 @@ namespace PixelAimbot
                 SetForegroundWindow(handle);
             }
 
-            Thread.Sleep(1500);
+            Thread.Sleep(500);
             var template = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
             var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
@@ -1035,13 +1033,15 @@ namespace PixelAimbot
 
             Thread.Sleep(1000);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_L);
-            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(489, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(435), ChaosBot.recalc(741, false), 5);
+            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(489, false), 5);
             KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.MoveTo(ChaosBot.recalc(698), ChaosBot.recalc(998, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(698), ChaosBot.recalc(998, false), 5);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(588, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(666), ChaosBot.recalc(588, false), 5);
             KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
-            VirtualMouse.MoveTo(ChaosBot.recalc(744), ChaosBot.recalc(998, false), 10);
+            VirtualMouse.MoveTo(ChaosBot.recalc(744), ChaosBot.recalc(998, false), 5);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));
