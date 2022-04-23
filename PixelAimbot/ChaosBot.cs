@@ -1187,30 +1187,7 @@ namespace PixelAimbot
                                 {
                                     
                                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
-                                    if (comboattack == "")
-                                    {
-                                        MethodInvoker UpdateAttack = delegate
-                                        {
-                                            comboattack = comboBoxAutoAttack.Text.ToString();
-                                        };
-                                        Invoke(UpdateAttack);
-                                    }
-
-                                    switch (comboattack)
-                                    {
-                                        case "FULL":
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "FULL"));
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C, 3000);
-                                            break;
-                                        case "HALF":
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "HALF"));
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C, 1500);
-                                            break;
-                                        default:
-                                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "NO FUNCTION"));
-                                            break;
-                                    }
-
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C, int.Parse(textBoxAutoAttack.Text));
                                     walktopUTurn++;
                                 }
                             }
@@ -2870,7 +2847,7 @@ namespace PixelAimbot
             chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
             txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
             txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
-            comboBoxAutoAttack.SelectedIndex = int.Parse(Properties.Settings.Default.chBoxAutoAttack);
+            textBoxAutoAttack.Text = Properties.Settings.Default.chBoxAutoAttack;
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             txtRevive.Text = Properties.Settings.Default.txtRevive;
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
@@ -3097,7 +3074,7 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
                 chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                 chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
-                comboBoxAutoAttack.SelectedIndex = int.Parse(Properties.Settings.Default.chBoxAutoAttack);
+                textBoxAutoAttack.Text = Properties.Settings.Default.chBoxAutoAttack;
 
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             }
@@ -3449,42 +3426,40 @@ namespace PixelAimbot
                     {
                         case KeyboardWrapper.VK_A:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _A = false; };
-                            ;
+                            
                             break;
 
                         case KeyboardWrapper.VK_S:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _S = false; };
-                            ;
+                            
 
                             break;
 
                         case KeyboardWrapper.VK_D:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _D = false; };
-                            ;
+                            
 
                             break;
 
                         case KeyboardWrapper.VK_F:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _F = false; };
-                            ;
+                            
 
                             break;
 
                         case KeyboardWrapper.VK_Q:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _Q = false; };
-                            ;
-
                             break;
 
                         case KeyboardWrapper.VK_W:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _W = false; };
-                            ;
+                            
 
                             break;
 
                         case KeyboardWrapper.VK_E:
                             timer.Elapsed += (object source, ElapsedEventArgs e) => { _E = false; };
-                            ;
+                           
 
                             break;
 
@@ -3589,7 +3564,7 @@ namespace PixelAimbot
                     rotation.chBoxDoubleS = chBoxDoubleS.Checked;
                     rotation.chBoxDoubleD = chBoxDoubleD.Checked;
                     rotation.chBoxDoubleF = chBoxDoubleF.Checked;
-                    rotation.comboBoxAutoAttack = comboBoxAutoAttack.SelectedIndex;
+                    rotation.comboBoxAutoAttack = int.Parse(textBoxAutoAttack.Text);
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
@@ -3640,7 +3615,7 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = rotation.chBoxActivateF3;
                 txtDungeon3search.Text = rotation.txtDungeon3search;
                 txtDungeon3.Text = rotation.txtDungeon3;
-                comboBoxAutoAttack.SelectedIndex = rotation.comboBoxAutoAttack;
+                textBoxAutoAttack.Text = rotation.comboBoxAutoAttack.ToString();
                 chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;

@@ -154,12 +154,13 @@
             this.chBoxActivateF3 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.comboBoxAutoAttack = new System.Windows.Forms.ComboBox();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -1994,47 +1995,6 @@
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label5, "ALPHA VERSION. JUST TEST!");
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label9.Location = new System.Drawing.Point(7, 107);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(139, 15);
-            this.label9.TabIndex = 72;
-            this.label9.Text = "LEAVETIMER in seconds:\r\n";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label14.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label14.Location = new System.Drawing.Point(222, 108);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(139, 15);
-            this.label14.TabIndex = 74;
-            this.label14.Text = "LEAVETIMER in seconds:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(225, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 15);
-            this.label3.TabIndex = 65;
-            this.label3.Text = "RESTART TIMER (sec):";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -2052,7 +2012,8 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.comboBoxAutoAttack);
+            this.groupBox10.Controls.Add(this.label2);
+            this.groupBox10.Controls.Add(this.textBoxAutoAttack);
             this.groupBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox10.Location = new System.Drawing.Point(3, 66);
             this.groupBox10.Name = "groupBox10";
@@ -2062,14 +2023,66 @@
             this.groupBox10.Text = "Auto-Attack";
             this.toolTip1.SetToolTip(this.groupBox10, "Only change if your ingame settings \r\nare different than those given here!");
             // 
-            // comboBoxAutoAttack
+            // label2
             // 
-            this.comboBoxAutoAttack.FormattingEnabled = true;
-            this.comboBoxAutoAttack.Items.AddRange(new object[] {"FULL", "HALF", "DISABLED"});
-            this.comboBoxAutoAttack.Location = new System.Drawing.Point(6, 21);
-            this.comboBoxAutoAttack.Name = "comboBoxAutoAttack";
-            this.comboBoxAutoAttack.Size = new System.Drawing.Size(112, 21);
-            this.comboBoxAutoAttack.TabIndex = 48;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label2.Location = new System.Drawing.Point(85, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 17);
+            this.label2.TabIndex = 57;
+            this.label2.Text = "ms";
+            // 
+            // textBoxAutoAttack
+            // 
+            this.textBoxAutoAttack.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
+            this.textBoxAutoAttack.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxAutoAttack.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.textBoxAutoAttack.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxAutoAttack.Location = new System.Drawing.Point(6, 21);
+            this.textBoxAutoAttack.Name = "textBoxAutoAttack";
+            this.textBoxAutoAttack.Size = new System.Drawing.Size(73, 22);
+            this.textBoxAutoAttack.TabIndex = 41;
+            this.textBoxAutoAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxAutoAttack.WordWrap = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label9.Location = new System.Drawing.Point(7, 107);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(139, 15);
+            this.label9.TabIndex = 72;
+            this.label9.Text = "LEAVETIMER in seconds:\r\n";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label14.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label14.Location = new System.Drawing.Point(222, 108);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(139, 15);
+            this.label14.TabIndex = 74;
+            this.label14.Text = "LEAVETIMER in seconds:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(225, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(128, 15);
+            this.label3.TabIndex = 65;
+            this.label3.Text = "RESTART TIMER (sec):";
             // 
             // chBoxActivateF2
             // 
@@ -2687,6 +2700,7 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.STARTEXIT.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -2711,6 +2725,9 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.TextBox textBoxAutoAttack;
+        private System.Windows.Forms.Label label2;
+
         private System.Windows.Forms.Button buttonConnectTelegram;
 
         private System.Windows.Forms.Button buttonTestTelegram;
@@ -2718,7 +2735,6 @@
         private System.Windows.Forms.Label labelTelegramState;
 
         private System.Windows.Forms.GroupBox groupBox10;
-        public System.Windows.Forms.ComboBox comboBoxAutoAttack;
 
         private System.Windows.Forms.Label labelSwap;
 
