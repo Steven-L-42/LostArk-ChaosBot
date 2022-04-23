@@ -2718,7 +2718,7 @@
         private System.Windows.Forms.Label labelTelegramState;
 
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.ComboBox comboBoxAutoAttack;
+        public System.Windows.Forms.ComboBox comboBoxAutoAttack;
 
         private System.Windows.Forms.Label labelSwap;
 

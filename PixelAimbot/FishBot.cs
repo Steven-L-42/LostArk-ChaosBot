@@ -219,6 +219,9 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 _cts.Cancel();
             }
+
+            Debugging debug = new Debugging();
+            debug.Show();
         }
 
         public bool botIsRun = true;
@@ -424,13 +427,10 @@ namespace PixelAimbot
 
                     await Task.WhenAny(new[] {t1});
                 }
-                catch (OperationCanceledException)
+                catch(Exception ex)
                 {
-                    // Handle canceled
-                }
-                catch (Exception)
-                {
-                    // Handle other exceptions
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
                 }
             }
         }
@@ -445,16 +445,10 @@ namespace PixelAimbot
                 await Task.Delay((int.Parse(txtLOGOUT.Text) * 1000) * 60, token);
                 _LOGOUT = true;
             }
-            catch (AggregateException)
+            catch(Exception ex)
             {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch
-            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -467,16 +461,10 @@ namespace PixelAimbot
                 await Task.Delay(15 * 1000 * 60 * 15, token); // 15 Minutes
                 _Buff = true;
             }
-            catch (AggregateException)
+            catch(Exception ex)
             {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch
-            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -503,8 +491,10 @@ namespace PixelAimbot
 
                 await Task.WhenAny(new[] {t1, t12, t14});
             }
-            catch
+            catch(Exception ex)
             {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -537,8 +527,10 @@ namespace PixelAimbot
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -554,7 +546,7 @@ namespace PixelAimbot
                 var mask = new Image<Bgr, byte>(resourceFolder + "/gathering.png");
 
 
-                var Detector = new ScreenDetector(template, null, 0.80f, ChaosBot.recalc(550),
+                var Detector = new ScreenDetector(template, null, 0.78f, ChaosBot.recalc(550),
                     ChaosBot.recalc(997, false), ChaosBot.recalc(56), ChaosBot.recalc(54, false));
                 using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                 {
@@ -583,8 +575,10 @@ namespace PixelAimbot
                 var t3 = Task.Run(() => ThrowFishingRod(token));
                 await Task.WhenAny(new[] {t3});
             }
-            catch
+            catch(Exception ex)
             {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -681,9 +675,10 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] {t3});
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -748,16 +743,10 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] {t1});
                 }
             }
-            catch (AggregateException)
+            catch(Exception ex)
             {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch
-            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -789,16 +778,10 @@ namespace PixelAimbot
                     _cts.Cancel();
                 }
             }
-            catch (AggregateException)
+            catch(Exception ex)
             {
-                Console.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("Bug");
-            }
-            catch
-            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
@@ -813,14 +796,13 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
 
                     var template = new Image<Bgr, byte>(resourceFolder + "/gatheringRepair.png");
-                    var mask = new Image<Bgr, byte>(resourceFolder + "/gatheringRepair.png");
 
 
-                    var Detector = new ScreenDetector(template, mask, 0.90f, ChaosBot.recalc(1456),
+                    var detector = new ScreenDetector(template, null, 0.85f, ChaosBot.recalc(1456),
                         ChaosBot.recalc(65, false), ChaosBot.recalc(13), ChaosBot.recalc(11, false));
                     using (screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
-                        var item = Detector.GetBest(screenCapture, true);
+                        var item = detector.GetBest(screenCapture, true);
                         if (item.HasValue)
                         {
                             // Found
@@ -829,8 +811,10 @@ namespace PixelAimbot
                         }
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
                 }
 
                 await Task.Delay(2000, token);
