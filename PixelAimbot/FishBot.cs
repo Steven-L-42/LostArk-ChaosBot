@@ -157,7 +157,8 @@ namespace PixelAimbot
             int returnValue = Decimal.ToInt32(rescaledPosition);
             return returnValue;
         }
-
+        public Task TelegramTask;
+        private CancellationTokenSource telegramToken = new CancellationTokenSource();
         public FishBot()
         {
             InitializeComponent();
@@ -173,13 +174,14 @@ namespace PixelAimbot
             resourceFolder = applicationFolder;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = RandomString(15);
-
+            telegramToken = new CancellationTokenSource();
             if (conf.telegram != "" && !telegramBotRunning)
             {
                 textBoxTelegramAPI.Text = conf.telegram;
                 try
                 {
-                    _ = RunBotAsync(conf.telegram);
+                    buttonTestTelegram_Click_1(null, null);
+                    TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
                 }
                 catch
                 {
@@ -218,13 +220,14 @@ namespace PixelAimbot
             }
         }
 
-
-        public async Task RunBotAsync(string token)
+        public bool botIsRun = true;
+        public async Task RunBotAsync(string telegramToken, CancellationToken token)
         {
             telegramBotRunning = true;
-            var bot = new TelegramBotClient(token);
+            var bot = new TelegramBotClient(telegramToken);
             int offset = -1;
-            var botIsRun = true;
+            botIsRun = true;
+            buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
             while (botIsRun)
             {
                 Telegram.Bot.Types.Update[] updates;
@@ -879,14 +882,12 @@ namespace PixelAimbot
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
             // 2x ESCAPE REPARATUR UND BEGLEITER FENSTER SCHLIEßEN
-            await Task.Delay(1500, token);
+            await Task.Delay(2500, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             
             await Task.Delay(3000, token);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             
-            await Task.Delay(1500, token);
-            KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
             _REPAIR = false;
             var t3 = Task.Run(() => ThrowFishingRod(token));
@@ -970,15 +971,7 @@ namespace PixelAimbot
             formMinimized.labelMinimizedState.Text = lbStatus.Text;
         }
 
-        private void textBoxTelegramAPI_TextChanged(object sender, EventArgs e)
-        {
-            conf.telegram = textBoxTelegramAPI.Text;
-            conf.Save();
-            if (!telegramBotRunning)
-            {
-                _ = RunBotAsync(textBoxTelegramAPI.Text);
-            }
-        }
+        
 
         private void buttonSelectArea_Click(object sender, EventArgs e)
         {
@@ -1062,6 +1055,46 @@ namespace PixelAimbot
         {
             frmGuideFishbot fishbotGuide = new frmGuideFishbot();
             fishbotGuide.Show();
+        }
+        private void buttonTestTelegram_Click_1(object sender, EventArgs e)
+        {
+
+            var bot = new TelegramBotClient(textBoxTelegramAPI.Text);
+            try
+            {
+                bot.TestApiAsync().Wait();
+                telegramBotRunning = true;
+                labelTelegramState.Text = "Status = Erfolgreich!";
+                labelTelegramState.ForeColor = Color.Green;
+                conf.telegram = textBoxTelegramAPI.Text;
+                conf.Save();
+
+            }
+            catch (Exception ex)
+            {
+                labelTelegramState.Text = "Status = Fehler!";
+                labelTelegramState.ForeColor = Color.Red;
+            }
+        }
+
+
+        private void buttonConnectTelegram_Click(object sender, EventArgs e)
+        {
+            if (botIsRun)
+            {
+
+                botIsRun = false;
+                labelTelegramState.Text = "Status = Getrennt";
+                labelTelegramState.ForeColor = Color.White;
+                buttonConnectTelegram.Text = "Verbinden";
+            }
+            else
+            {
+                TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
+                buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
+                buttonTestTelegram_Click_1(null, null);
+
+            }
         }
     }
 }

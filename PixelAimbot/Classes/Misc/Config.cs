@@ -84,9 +84,8 @@ namespace PixelAimbot.Classes.Misc
         public string f { get; set; } = "500";
         public string txtRestart { get; set; } = "15";
         public string txtRevive { get; set; } = "85";
-        public bool chBoxAutoAttackFull { get; set; } = true;
-        public bool chBoxAutoAttackHalf { get; set; } = false;
-        public bool chBoxAutoAttackZERO { get; set; } = false;
+        
+        public int comboBoxAutoAttack { get; set; } = 0;
         public bool chBoxAwakening { get; set; } = false;
 
         public bool chBoxRevive { get; set; } = false;

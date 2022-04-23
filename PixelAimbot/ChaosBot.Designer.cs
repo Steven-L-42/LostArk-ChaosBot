@@ -158,6 +158,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.comboBoxAutoAttack = new System.Windows.Forms.ComboBox();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -181,13 +183,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txtPortalSearch = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
-            this.label18 = new System.Windows.Forms.Label();
-            this.chBoxAutoAttackZero = new System.Windows.Forms.CheckBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chBoxAutoAttackHalf = new System.Windows.Forms.CheckBox();
-            this.chBoxAutoAttackFull = new System.Windows.Forms.CheckBox();
             this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
+            this.buttonConnectTelegram = new System.Windows.Forms.Button();
+            this.buttonTestTelegram = new System.Windows.Forms.Button();
+            this.labelTelegramState = new System.Windows.Forms.Label();
             this.labelApiTelegram = new System.Windows.Forms.Label();
             this.textBoxTelegramAPI = new System.Windows.Forms.TextBox();
             this.HEAL = new System.Windows.Forms.TabPage();
@@ -211,6 +210,7 @@
             this.groupBox8.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -2050,6 +2050,27 @@
             this.toolTip1.SetToolTip(this.label23, "Portal Search Time:\r\nBot try to enter for x seconds \r\nthe arrived Portal.\r\n\r\nWe r" + "ecommend to set this\r\nup to 20 seconds!");
             this.label23.Visible = false;
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.comboBoxAutoAttack);
+            this.groupBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox10.Location = new System.Drawing.Point(3, 66);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(124, 52);
+            this.groupBox10.TabIndex = 42;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Auto-Attack";
+            this.toolTip1.SetToolTip(this.groupBox10, "Only change if your ingame settings \r\nare different than those given here!");
+            // 
+            // comboBoxAutoAttack
+            // 
+            this.comboBoxAutoAttack.FormattingEnabled = true;
+            this.comboBoxAutoAttack.Items.AddRange(new object[] {"FULL", "HALF", "DISABLED"});
+            this.comboBoxAutoAttack.Location = new System.Drawing.Point(6, 21);
+            this.comboBoxAutoAttack.Name = "comboBoxAutoAttack";
+            this.comboBoxAutoAttack.Size = new System.Drawing.Size(112, 21);
+            this.comboBoxAutoAttack.TabIndex = 48;
+            // 
             // chBoxActivateF2
             // 
             this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
@@ -2374,12 +2395,7 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
-            this.SETTINGS.Controls.Add(this.label18);
-            this.SETTINGS.Controls.Add(this.chBoxAutoAttackZero);
-            this.SETTINGS.Controls.Add(this.label37);
-            this.SETTINGS.Controls.Add(this.label2);
-            this.SETTINGS.Controls.Add(this.chBoxAutoAttackHalf);
-            this.SETTINGS.Controls.Add(this.chBoxAutoAttackFull);
+            this.SETTINGS.Controls.Add(this.groupBox10);
             this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
             this.SETTINGS.Location = new System.Drawing.Point(4, 20);
@@ -2388,107 +2404,57 @@
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label18.ForeColor = System.Drawing.Color.Orange;
-            this.label18.Location = new System.Drawing.Point(168, 123);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(202, 15);
-            this.label18.TabIndex = 48;
-            this.label18.Text = "This means Auto-Attack is disabled.";
-            // 
-            // chBoxAutoAttackZero
-            // 
-            this.chBoxAutoAttackZero.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
-            this.chBoxAutoAttackZero.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxAutoAttackZero.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoAttackZero.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxAutoAttackZero.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoAttackZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxAutoAttackZero.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.chBoxAutoAttackZero.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxAutoAttackZero.Location = new System.Drawing.Point(21, 120);
-            this.chBoxAutoAttackZero.Name = "chBoxAutoAttackZero";
-            this.chBoxAutoAttackZero.Size = new System.Drawing.Size(141, 22);
-            this.chBoxAutoAttackZero.TabIndex = 47;
-            this.chBoxAutoAttackZero.Text = "Auto-Attack ZERO:";
-            this.chBoxAutoAttackZero.UseMnemonic = false;
-            this.chBoxAutoAttackZero.UseVisualStyleBackColor = false;
-            this.chBoxAutoAttackZero.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackZero_CheckedChanged);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label37.ForeColor = System.Drawing.Color.Orange;
-            this.label37.Location = new System.Drawing.Point(168, 97);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(156, 15);
-            this.label37.TabIndex = 46;
-            this.label37.Text = "This is the reduced setting.";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label2.ForeColor = System.Drawing.Color.Orange;
-            this.label2.Location = new System.Drawing.Point(168, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 15);
-            this.label2.TabIndex = 45;
-            this.label2.Text = "This is the normal setting.";
-            // 
-            // chBoxAutoAttackHalf
-            // 
-            this.chBoxAutoAttackHalf.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
-            this.chBoxAutoAttackHalf.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxAutoAttackHalf.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoAttackHalf.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxAutoAttackHalf.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoAttackHalf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxAutoAttackHalf.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.chBoxAutoAttackHalf.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxAutoAttackHalf.Location = new System.Drawing.Point(21, 94);
-            this.chBoxAutoAttackHalf.Name = "chBoxAutoAttackHalf";
-            this.chBoxAutoAttackHalf.Size = new System.Drawing.Size(141, 22);
-            this.chBoxAutoAttackHalf.TabIndex = 44;
-            this.chBoxAutoAttackHalf.Text = "Auto-Attack HALF:";
-            this.chBoxAutoAttackHalf.UseMnemonic = false;
-            this.chBoxAutoAttackHalf.UseVisualStyleBackColor = false;
-            this.chBoxAutoAttackHalf.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackHalf_CheckedChanged);
-            // 
-            // chBoxAutoAttackFull
-            // 
-            this.chBoxAutoAttackFull.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
-            this.chBoxAutoAttackFull.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxAutoAttackFull.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxAutoAttackFull.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxAutoAttackFull.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoAttackFull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxAutoAttackFull.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.chBoxAutoAttackFull.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxAutoAttackFull.Location = new System.Drawing.Point(21, 66);
-            this.chBoxAutoAttackFull.Name = "chBoxAutoAttackFull";
-            this.chBoxAutoAttackFull.Size = new System.Drawing.Size(141, 22);
-            this.chBoxAutoAttackFull.TabIndex = 43;
-            this.chBoxAutoAttackFull.Text = "Auto-Attack FULL:";
-            this.chBoxAutoAttackFull.UseMnemonic = false;
-            this.chBoxAutoAttackFull.UseVisualStyleBackColor = false;
-            this.chBoxAutoAttackFull.CheckedChanged += new System.EventHandler(this.chBoxAutoAttackFull_CheckedChanged);
-            // 
             // groupBoxTelegram
             // 
+            this.groupBoxTelegram.Controls.Add(this.buttonConnectTelegram);
+            this.groupBoxTelegram.Controls.Add(this.buttonTestTelegram);
+            this.groupBoxTelegram.Controls.Add(this.labelTelegramState);
             this.groupBoxTelegram.Controls.Add(this.labelApiTelegram);
             this.groupBoxTelegram.Controls.Add(this.textBoxTelegramAPI);
             this.groupBoxTelegram.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBoxTelegram.Location = new System.Drawing.Point(134, 4);
             this.groupBoxTelegram.Name = "groupBoxTelegram";
-            this.groupBoxTelegram.Size = new System.Drawing.Size(281, 56);
+            this.groupBoxTelegram.Size = new System.Drawing.Size(281, 114);
             this.groupBoxTelegram.TabIndex = 42;
             this.groupBoxTelegram.TabStop = false;
             this.groupBoxTelegram.Text = "Telegram Settings";
+            // 
+            // buttonConnectTelegram
+            // 
+            this.buttonConnectTelegram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
+            this.buttonConnectTelegram.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
+            this.buttonConnectTelegram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConnectTelegram.ForeColor = System.Drawing.Color.Orange;
+            this.buttonConnectTelegram.Location = new System.Drawing.Point(6, 83);
+            this.buttonConnectTelegram.Name = "buttonConnectTelegram";
+            this.buttonConnectTelegram.Size = new System.Drawing.Size(269, 23);
+            this.buttonConnectTelegram.TabIndex = 43;
+            this.buttonConnectTelegram.Text = "Verbinden";
+            this.buttonConnectTelegram.UseVisualStyleBackColor = true;
+            this.buttonConnectTelegram.Click += new System.EventHandler(this.buttonConnectTelegram_Click);
+            // 
+            // buttonTestTelegram
+            // 
+            this.buttonTestTelegram.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
+            this.buttonTestTelegram.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
+            this.buttonTestTelegram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTestTelegram.ForeColor = System.Drawing.Color.Orange;
+            this.buttonTestTelegram.Location = new System.Drawing.Point(128, 48);
+            this.buttonTestTelegram.Name = "buttonTestTelegram";
+            this.buttonTestTelegram.Size = new System.Drawing.Size(147, 23);
+            this.buttonTestTelegram.TabIndex = 42;
+            this.buttonTestTelegram.Text = "Teste Verbindung";
+            this.buttonTestTelegram.UseVisualStyleBackColor = true;
+            this.buttonTestTelegram.Click += new System.EventHandler(this.buttonTestTelegram_Click_1);
+            // 
+            // labelTelegramState
+            // 
+            this.labelTelegramState.Location = new System.Drawing.Point(6, 48);
+            this.labelTelegramState.Name = "labelTelegramState";
+            this.labelTelegramState.Size = new System.Drawing.Size(269, 23);
+            this.labelTelegramState.TabIndex = 41;
+            this.labelTelegramState.Text = "Status = Unbekannt";
+            this.labelTelegramState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelApiTelegram
             // 
@@ -2720,6 +2686,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.STARTEXIT.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -2728,7 +2695,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.SETTINGS.ResumeLayout(false);
-            this.SETTINGS.PerformLayout();
             this.groupBoxTelegram.ResumeLayout(false);
             this.groupBoxTelegram.PerformLayout();
             this.HEAL.ResumeLayout(false);
@@ -2744,6 +2710,15 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button buttonConnectTelegram;
+
+        private System.Windows.Forms.Button buttonTestTelegram;
+
+        private System.Windows.Forms.Label labelTelegramState;
+
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.ComboBox comboBoxAutoAttack;
 
         private System.Windows.Forms.Label labelSwap;
 
@@ -2912,12 +2887,6 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.CheckBox chBoxDeathblade2;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.CheckBox chBoxAutoAttackZero;
-        private System.Windows.Forms.CheckBox chBoxAutoAttackHalf;
-        private System.Windows.Forms.CheckBox chBoxAutoAttackFull;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox chBoxAwakening;
         private System.Windows.Forms.TextBox txtRevive;

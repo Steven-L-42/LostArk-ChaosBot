@@ -152,6 +152,15 @@ namespace PixelAimbot.Classes.OpenCV
                             closestEnemy = enemy.position;
                         }
                     }
+                    if (showDetections)
+                    {
+                        // Draw enemy detection
+                        int h = this._enemyTemplate.Size.Height;
+                        int w = this._enemyTemplate.Size.Width;
+
+                        _screenDrawer.Draw(enemy.position.X + rectangleX , enemy.position.Y + rectangleY, w, h);
+
+                    }
 
                 }
 
@@ -177,7 +186,15 @@ namespace PixelAimbot.Classes.OpenCV
                         minDist = distance;
                         closestEnemy = enemy.position;
                     }
+                    if (showDetections)
+                    {
+                        // Draw enemy detection
+                        int h = this._enemyTemplate.Size.Height;
+                        int w = this._enemyTemplate.Size.Width;
 
+                       // _screenDrawer.Draw(enemy.position.X , enemy.position.Y, w, h);
+
+                    }
                 }
 
                 return closestEnemy;

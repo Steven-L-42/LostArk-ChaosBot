@@ -158,7 +158,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(192, 384);
+            this.label4.Location = new System.Drawing.Point(149, 384);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 17);
             this.label4.TabIndex = 9;

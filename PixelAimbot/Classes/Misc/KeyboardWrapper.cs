@@ -98,12 +98,27 @@ namespace PixelAimbot.Classes.Misc
             var totalDuration = 0;
             while (totalDuration < duration)
             {
-                keybd_event(key, 0, KEY_DOWN_EVENT, 0);
+                if (key == KeyboardWrapper.VK_LBUTTON)
+                {
+                    VirtualMouse.LeftDown();
+                }
+                else
+                {
+
+                    keybd_event(key, 0, KEY_DOWN_EVENT, 0);
+                }
+
                 Thread.Sleep(PauseBetweenStrokes);
                 totalDuration += PauseBetweenStrokes;
             }
-
-            keybd_event(key, 0, KEY_UP_EVENT, 0);
+            if (key == KeyboardWrapper.VK_LBUTTON)
+            {
+                VirtualMouse.LeftUp();
+            }
+            else
+            {
+                keybd_event(key, 0, KEY_UP_EVENT, 0);
+            }
         }
 
         /// <summary>
@@ -117,8 +132,15 @@ namespace PixelAimbot.Classes.Misc
         /// </example>
         public static void PressKey(byte key)
         {
-            keybd_event(key, 0, KEY_DOWN_EVENT, 0);
-            keybd_event(key, 0, KEY_UP_EVENT, 0);
+            if (key == KeyboardWrapper.VK_LBUTTON)
+            {
+                VirtualMouse.LeftClick();
+            }
+            else
+            {
+                keybd_event(key, 0, KEY_DOWN_EVENT, 0);
+                keybd_event(key, 0, KEY_UP_EVENT, 0);
+            }
         }
 
         /// <summary>
@@ -255,6 +277,14 @@ namespace PixelAimbot.Classes.Misc
         public static void LeftClick()
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+            mouse_event(MOUSEEVENTF_LEFTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+        }  
+        public static void LeftDown()
+        {
+            mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+        }
+        public static void LeftUp()
+        {
             mouse_event(MOUSEEVENTF_LEFTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
         }
 

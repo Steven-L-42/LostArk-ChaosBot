@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.VisualStyles;
 
 public class PrintScreen
 {
@@ -15,6 +16,41 @@ public class PrintScreen
         return CaptureWindow(User32.GetDesktopWindow());
     }
 
+    public Image CaptureScreenArea(int left, int top, int right, int bottom)
+    {
+        return CaptureWindowArea(User32.GetDesktopWindow(), left, top, right, bottom);
+    }
+
+    public Image CaptureWindowArea(IntPtr handle, int left, int top, int right, int bottom)
+    {
+        // get te hDC of the target window
+        IntPtr hdcSrc = User32.GetWindowDC(handle);
+        // get the size
+
+        int width = right - left;
+        int height = bottom - top;
+        // create a device context we can copy to
+        IntPtr hdcDest = GDI32.CreateCompatibleDC(hdcSrc);
+        // create a bitmap we can copy it to,
+        // using GetDeviceCaps to get the width/height
+        IntPtr hBitmap = GDI32.CreateCompatibleBitmap(hdcSrc, width, height);
+        // select the bitmap object
+        IntPtr hOld = GDI32.SelectObject(hdcDest, hBitmap);
+        // bitblt over
+        GDI32.BitBlt(hdcDest, left, top, width, height, hdcSrc, left, top, GDI32.SRCCOPY);
+        // restore selection
+        GDI32.SelectObject(hdcDest, hOld);
+        // clean up
+        GDI32.DeleteDC(hdcDest);
+        User32.ReleaseDC(handle, hdcSrc);
+
+        // get a .NET image object for it
+        Image img = Image.FromHbitmap(hBitmap);
+        // free up the Bitmap object
+        GDI32.DeleteObject(hBitmap);
+
+        return img;
+    }
     /// <summary>
     /// Creates an Image object containing a screen shot of a specific window
     /// </summary>

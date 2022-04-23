@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PixelAimbot.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
@@ -215,14 +215,8 @@
     <Setting Name="chBoxDeathblade2" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="chBoxAutoAttackHalf" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="chBoxAutoAttackFull" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="chBoxAutoAttackZero" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="chBoxAutoAttack" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="chBoxAwakening" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -232,3 +226,4 @@
     </Setting>
   </Settings>
 </SettingsFile>
+

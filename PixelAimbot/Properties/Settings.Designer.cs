@@ -874,42 +874,20 @@ namespace PixelAimbot.Properties {
                 this["chBoxDeathblade2"] = value;
             }
         }
+
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chBoxAutoAttackHalf {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string chBoxAutoAttack {
             get {
-                return ((bool)(this["chBoxAutoAttackHalf"]));
+                return ((string)(this["chBoxAutoAttack"]));
             }
             set {
-                this["chBoxAutoAttackHalf"] = value;
+                this["chBoxAutoAttack"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool chBoxAutoAttackFull {
-            get {
-                return ((bool)(this["chBoxAutoAttackFull"]));
-            }
-            set {
-                this["chBoxAutoAttackFull"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool chBoxAutoAttackZero {
-            get {
-                return ((bool)(this["chBoxAutoAttackZero"]));
-            }
-            set {
-                this["chBoxAutoAttackZero"] = value;
-            }
-        }
+   
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
