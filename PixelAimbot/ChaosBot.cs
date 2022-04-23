@@ -1,4 +1,9 @@
-﻿using System;
+﻿using AutoItX3Lib;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using PixelAimbot.Classes.Misc;
+using PixelAimbot.Classes.OpenCV;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -11,31 +16,147 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using AutoItX3Lib;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using PixelAimbot.Classes.Misc;
-using PixelAimbot.Classes.OpenCV;
-using PixelAimbot.Properties;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using Message = System.Windows.Forms.Message;
-using Timer = System.Timers.Timer;
+using WindowsInput;
 
 namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
+        ///BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
+        ///                                                                                                                                               ///
+        private bool _start = false;
+
+        private bool _STOPP = false;
+        private bool _stop = false;
+        private bool _Restart = false;
+
+        private bool _Floor1 = false;
+        private bool _Floor2 = false;
+        private bool _Floor3 = false;
+        private bool _FloorFight = false;
+        private bool _Searchboss = false;
+
+        private bool PortalIsDetected = false;
+        private bool PortalIsNotDetected = false;
+
+        private bool _Revive = false;
+        private bool _Portaldetect = false;
+        private bool _Ultimate = false;
+        private bool _Potions = false;
+
+        private bool _REPAIR = false;
+        private bool _Gunlancer = false;
+        private bool _Shadowhunter = false;
+        private bool _Berserker = false;
+        private bool _Paladin = false;
+        private bool _Deathblade = false;
+        private bool _Sharpshooter = false;
+        private bool _Bard = false;
+        private bool _Sorcerer = false;
+        private bool _Soulfist = false;
+
+        private bool _LOGOUT = false;
+
+        //SKILL AND COOLDOWN//
+        private bool _Q = false;
+        private bool _W = false;
+        private bool _E = false;
+        private bool _R = false;
+        private bool _A = false;
+        private bool _S = false;
+        private bool _D = false;
+        private bool _F = false;
+
+        private System.Timers.Timer timer;
+        private int fightSequence = 0;
+        private int fightSequence2 = 0;
+        private int searchSequence = 0;
+        private int searchSequence2 = 0;
+        private int fightOnSecondAbility = 1;
+        private int walktopUTurn = 1;
+        private int leavetimer = 0;
+        private int leavetimer2 = 0;
+        private int leavetimer1 = 0;
+        private int Floor2 = 1;
+        private int Floor3 = 1;
+        private int _swap = 0;
+        private int _FormExists = 0;
+
+        public frmMinimized formMinimized = new frmMinimized();
+        public Config conf = new Config();
+        private bool telegramBotRunning = false;
+        Random humanizer = new Random();
+
+        public Task TelegramTask;
+        ///                                                                                                                                                 ///
+        ///BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
+        /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
+        public string resourceFolder = "";
+
+        private Priorized_Skills SKILLS = new Priorized_Skills();
+
+        private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
+        {
+            int newX = (int) (x);// / screenResolution.X * 65535);
+            int newY = (int) (y);// / screenResolution.Y * 65535);
+            return (newX, newY);
+        }
+
+        private static readonly Random random = new Random();
+        public Rotations rotation = new Rotations();
+
+        /////
+        ///
+        // 2. Import the RegisterHotKey Method
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id); 
+        
+
+        protected override void WndProc(ref Message m)
+        {
+            // 5. Catch when a HotKey is pressed !
+            if (m.Msg == 0x0312)
+            {
+                int id = m.WParam.ToInt32();
+                // MessageBox.Show(string.Format("Hotkey #{0} pressed", id));
+
+                // 6. Handle what will happen once a respective hotkey is pressed
+                switch (id)
+                {
+                    case 1:
+                        btnStart_Click(null, null);
+
+                        break;
+
+                    case 2:
+                        btnPause_Click(null, null);
+
+                        break;
+                }
+            }
+
+            base.WndProc(ref m);
+        }
+
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr handle);
+
+        private IntPtr handle;
+
+        private AutoItX3 au3 = new AutoItX3();
+
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        private const UInt32 SWP_NOSIZE = 0x0001;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+            int Msg, int wParam, int lParam);
 
-        private const UInt32 SWP_NOMOVE = 0x0002;
-
-        private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
-
-        private static readonly Random random = new Random();
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
 
@@ -45,98 +166,60 @@ namespace PixelAimbot
 
         private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
 
-        private static int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-        private static int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-        private bool _A = false;
-        private bool _Bard = false;
-        private bool _Berserker = false;
-        private bool _D = false;
-        private bool _Deathblade = false;
-        private bool _E = false;
-        private bool _F = false;
+        private const UInt32 SWP_NOSIZE = 0x0001;
 
-        private bool _Floor1 = false;
-        private bool _Floor2 = false;
-        private bool _Floor3 = false;
-        private bool _FloorFight = false;
-        private int _FormExists = 0;
-        private bool _Gunlancer = false;
+        private const UInt32 SWP_NOMOVE = 0x0002;
 
-        private bool _LOGOUT = false;
-        private bool _Paladin = false;
-        private bool _Portaldetect = false;
-        private bool _Potions = false;
-
-        //SKILL AND COOLDOWN//
-        private bool _Q = false;
-        private bool _R = false;
-
-        private bool _REPAIR = false;
-        private bool _Restart = false;
-
-        private bool _Revive = false;
-        private bool _S = false;
-        private bool _Searchboss = false;
-        private bool _Shadowhunter = false;
-        private bool _Sharpshooter = false;
-        private bool _Sorcerer = false;
-        private bool _Soulfist = false;
-
-        /// BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///////////BOOLS START///
-        /// ///
-        private bool _start = false;
-
-        private bool _stop = false;
-
-        private bool _STOPP = false;
-        private int _swap = 0;
-        private bool _Ultimate = false;
-        private bool _W = false;
-
-        private AutoItX3 au3 = new AutoItX3();
-
-        public bool botIsRun = true;
-        public Config conf = new Config();
-
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        private const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
+        
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
+            uint uFlags);
 
         public Layout_Keyboard currentLayout;
 
-        private object fight = "1";
-        private int fightOnSecondAbility = 1;
-        private int fightSequence = 0;
-        private int fightSequence2 = 0;
-        private int Floor2 = 1;
-        private int Floor3 = 1;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
 
-        public frmMinimized formMinimized = new frmMinimized();
+        public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
 
-        private IntPtr handle;
-        Random humanizer = new Random();
-        private int leavetimer = 0;
-        private int leavetimer1 = 0;
-        private int leavetimer2 = 0;
+        private static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        private static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        private bool PortalIsDetected = false;
-        private bool PortalIsNotDetected = false;
+        public static int recalc(int value, bool horizontal = true)
+        {
+            decimal oldResolution;
+            decimal newResolution;
+            if (horizontal)
+            {
+                oldResolution = 1920;
+                newResolution = screenWidth;
+            }
+            else
+            {
+                oldResolution = 1080;
+                newResolution = screenHeight;
+            }
 
-        /// ///
-        /// BOOLS ENDE////////////BOOLS ENDE////////////////BOOLS ENDE//////////////////BOOLS ENDE///////////////BOOLS ENDE/////////////////////BOOLS ENDE/////
-        /// OPENCV START  /// OPENCV START  /// OPENCV START  /// OPENCV START
-        public string resourceFolder = "";
+            int returnValue = value;
+            if (oldResolution != newResolution)
+            {
+                decimal normalized = (decimal) value * newResolution;
+                decimal rescaledPosition = (decimal) normalized / oldResolution;
 
-        public Rotations rotation = new Rotations();
-        private int searchSequence = 0;
-        private int searchSequence2 = 0;
+                 returnValue = Decimal.ToInt32(rescaledPosition);
+            }
 
-        private Priorized_Skills SKILLS = new Priorized_Skills();
-        private bool telegramBotRunning = false;
-
-        public Task TelegramTask;
-        private CancellationTokenSource telegramToken = new CancellationTokenSource();
-
-        private Timer timer;
-        private int walktopUTurn = 1;
+            return returnValue;
+        }
 
         public ChaosBot()
         {
@@ -174,11 +257,14 @@ namespace PixelAimbot
             telegramToken = new CancellationTokenSource();
             if (conf.telegram != "" && !telegramBotRunning)
             {
+                
+                
                 textBoxTelegramAPI.Text = conf.telegram;
                 try
                 {
                     buttonTestTelegram_Click_1(null, null);
                     TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
+                    
                 }
                 catch
                 {
@@ -197,104 +283,7 @@ namespace PixelAimbot
                 cts.Cancel();
             }
         }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
-
-        public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
-
-        private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
-        {
-            int newX = (int) (x); // / screenResolution.X * 65535);
-            int newY = (int) (y); // / screenResolution.Y * 65535);
-            return (newX, newY);
-        }
-
-        /////
-        ///
-        // 2. Import the RegisterHotKey Method
-        [DllImport("user32.dll")]
-        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
-
-        [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
-        protected override void WndProc(ref Message m)
-        {
-            // 5. Catch when a HotKey is pressed !
-            if (m.Msg == 0x0312)
-            {
-                int id = m.WParam.ToInt32();
-                // MessageBox.Show(string.Format("Hotkey #{0} pressed", id));
-
-                // 6. Handle what will happen once a respective hotkey is pressed
-                switch (id)
-                {
-                    case 1:
-                        btnStart_Click(null, null);
-
-                        break;
-
-                    case 2:
-                        btnPause_Click(null, null);
-
-                        break;
-                }
-            }
-
-            base.WndProc(ref m);
-        }
-
-        [DllImport("User32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr handle);
-
-        [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd,
-            int Msg, int wParam, int lParam);
-
-        [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
-            uint uFlags);
-
-        public static int recalc(int value, bool horizontal = true)
-        {
-            decimal oldResolution;
-            decimal newResolution;
-            if (horizontal)
-            {
-                oldResolution = 1920;
-                newResolution = screenWidth;
-            }
-            else
-            {
-                oldResolution = 1080;
-                newResolution = screenHeight;
-            }
-
-            int returnValue = value;
-            if (oldResolution != newResolution)
-            {
-                decimal normalized = (decimal) value * newResolution;
-                decimal rescaledPosition = (decimal) normalized / oldResolution;
-
-                returnValue = Decimal.ToInt32(rescaledPosition);
-            }
-
-            return returnValue;
-        }
-
+        public bool botIsRun = true;
         public async Task RunBotAsync(string apikey, CancellationToken token)
         {
             telegramBotRunning = true;
@@ -302,15 +291,15 @@ namespace PixelAimbot
             int offset = -1;
             botIsRun = true;
             buttonConnectTelegram.Text = "disconnect";
-
+            
             while (botIsRun)
             {
                 try
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    Update[] updates;
-
+                    Telegram.Bot.Types.Update[] updates;
+                
                     try
                     {
                         updates = await bot.GetUpdatesAsync(offset);
@@ -425,8 +414,8 @@ namespace PixelAimbot
                             Stream stream =
                                 ToStream(
                                     cropImage(screen,
-                                        new Rectangle(recalc(1322), recalc(189, false),
-                                            recalc(544), recalc(640, false))), ImageFormat.Png);
+                                        new Rectangle(ChaosBot.recalc(1322), PixelAimbot.ChaosBot.recalc(189, false),
+                                            ChaosBot.recalc(544), ChaosBot.recalc(640, false))), ImageFormat.Png);
                             await bot.SendPhotoAsync(chatId, stream);
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         }
@@ -438,10 +427,7 @@ namespace PixelAimbot
                             await bot.SendPhotoAsync(chatId, stream);
                         }
                     }
-                }
-                catch
-                {
-                }
+                } catch {}
             }
         }
 
@@ -453,7 +439,7 @@ namespace PixelAimbot
 
         public Stream ToStream(Image image, ImageFormat format)
         {
-            var stream = new MemoryStream();
+            var stream = new System.IO.MemoryStream();
             image.Save(stream, format);
             stream.Position = 0;
             return stream;
@@ -478,6 +464,9 @@ namespace PixelAimbot
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        private CancellationTokenSource cts = new CancellationTokenSource();
+        private CancellationTokenSource telegramToken = new CancellationTokenSource();
 
         private async void btnPause_Click(object sender, EventArgs e)
 
@@ -580,10 +569,13 @@ namespace PixelAimbot
 
                     await Task.WhenAny(new[] {t1});
                 }
-                catch (Exception ex)
+                catch (OperationCanceledException)
                 {
-                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                    // Handle canceled
+                }
+                catch (Exception)
+                {
+                    // Handle other exceptions
                 }
             }
         }
@@ -592,35 +584,51 @@ namespace PixelAimbot
         {
             try
             {
+              
                 await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRepair.Text) * 1000) * 60);
                 _REPAIR = true;
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void LOGOUTTIMER()
         {
             try
             {
+                
                 await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtLOGOUT.Text) * 1000) * 60);
                 _LOGOUT = true;
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
             // timer.Elapsed += OnTimedEvent2;
             //timer.AutoReset = false;
             //timer.Enabled = true;
             //cts.Cancel();
         }
 
-
+        
         public (int, int) searchImageAndClick(string templateImage, string templateMask, string foundText,
             float threshold = 0.7f, double softMultiplier = 1, double hardMultiplier = 1.2)
         {
@@ -693,7 +701,7 @@ namespace PixelAimbot
         }
 
 
-        /// START SEQUENCES    ///
+        ///    START SEQUENCES    ///
         private async Task START(CancellationToken token)
         {
             try
@@ -711,7 +719,7 @@ namespace PixelAimbot
                 searchSequence2 = 0;
                 fightSequence = 0;
                 fightSequence2 = 0;
-
+                
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -752,11 +760,18 @@ namespace PixelAimbot
                 var t3 = Task.Run(() => MOVE(token));
                 await Task.WhenAny(new[] {t3});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task MOVE(CancellationToken token)
@@ -780,7 +795,7 @@ namespace PixelAimbot
                 VirtualMouse.MoveTo(recalc(1871), recalc(260, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
-
+                
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -788,11 +803,10 @@ namespace PixelAimbot
 
                     var template = new Image<Bgr, byte>(resourceFolder + "/questmarker.png");
 
-                    var detector = new ScreenDetector(template, null, 0.79f, recalc(1890),
-                        recalc(378, false), recalc(28), recalc(31, false));
+                    var detector = new ScreenDetector(template, null, 0.79f, ChaosBot.recalc(1890), ChaosBot.recalc(378, false), ChaosBot.recalc(28), ChaosBot.recalc(31, false));
                     var screenPrinter = new PrintScreen();
-                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
-                    {
+                    using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
+
                         var item = detector.GetBest(screenCapture, true);
                         if (item.HasValue)
                         {
@@ -800,10 +814,9 @@ namespace PixelAimbot
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         }
                     }
+
                 }
-                catch
-                {
-                }
+                catch { }
 
 
                 token.ThrowIfCancellationRequested();
@@ -831,16 +844,23 @@ namespace PixelAimbot
                 PortalIsNotDetected = true;
                 var t16 = Task.Run(() => FLOOR1DETECTIONTIMER(token));
                 var t12 = Task.Run(() => FLOORTIME(token));
-                await Task.WhenAny(new[] {t12, t16});
+                await Task.WhenAny(new[] { t12, t16 });
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
-        /// FIGHT SEQUENCES    ///
+        ///    FIGHT SEQUENCES    ///
         private async Task FLOORTIME(CancellationToken token)
         {
             try
@@ -912,7 +932,6 @@ namespace PixelAimbot
                         var t39 = Task.Run(() => AWAKENINGSKILL(token));
                         await Task.WhenAny(new[] {t39});
                     }
-
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => FLOORFIGHT(token));
                     var t14 = Task.Run(() => ULTIMATE(token));
@@ -973,7 +992,6 @@ namespace PixelAimbot
                         var t36 = Task.Run(() => LEAVETIMERFLOOR3(token));
                         await Task.WhenAny(new[] {t36});
                     }
-
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => FLOORFIGHT(token));
                     var t14 = Task.Run(() => ULTIMATE(token));
@@ -996,26 +1014,35 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] {t11, t12, t14, t16, t20});
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
+
+        private object fight = "1";
 
         public Point calculateFromCenter(int x, int y)
         {
+            
             int centerX = Screen.PrimaryScreen.Bounds.Width / 2;
             int centerY = Screen.PrimaryScreen.Bounds.Height / 2;
             int resultX = centerX;
             int resultY = centerY;
 
             resultX = centerX - recalc(500) + x;
-            resultY = centerY - recalc(390, false) + y;
-
+            resultY = centerY  - recalc(390, false) + y;
+            
             return new Point(resultX, resultY);
         }
-
         private async Task SearchNearEnemys(CancellationToken token)
         {
             try
@@ -1023,19 +1050,19 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = new Image<Bgr, byte>(resourceFolder + "/red_hp.png");
-                var detector = new ScreenDetector(template, null, 0.94f, recalc(460),
-                    recalc(120, false), recalc(1000), recalc(780, false));
-                detector.setMyPosition(new Point(recalc(500), recalc(390, false)));
+                var detector = new ScreenDetector(template, null, 0.94f, ChaosBot.recalc(460), ChaosBot.recalc(120, false), ChaosBot.recalc(1000), ChaosBot.recalc(780, false));
+                detector.setMyPosition(new Point(ChaosBot.recalc(500), ChaosBot.recalc(390, false)));
                 var screenPrinter = new PrintScreen();
 
                 while (_FloorFight && _STOPP == false)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
-                        {
+                        using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
+
                             var item = detector.GetClosest(screenCapture, true);
                             if (item.HasValue)
                             {
@@ -1046,25 +1073,20 @@ namespace PixelAimbot
                                 {
                                     correction = recalc(80, false);
                                 }
-
-                                VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                VirtualMouse.MoveTo(position.X,  position.Y + correction, 10);
                             }
                             else
                             {
                                 // Not found Swirl around with Mouse
-                                VirtualMouse.MoveTo(new Random().Next(recalc(460), recalc(1000)),
-                                    new Random().Next(recalc(120, false), recalc(780, false)), 10);
+                                VirtualMouse.MoveTo(new Random().Next(recalc(460), recalc(1000)), new Random().Next(recalc(120, false), recalc(780, false)), 10);
                             }
                         }
+
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
-            catch
-            {
-            }
+            catch {}
         }
 
         private bool isDoubleKey(byte key)
@@ -1107,7 +1129,6 @@ namespace PixelAimbot
 
             return checkboxState;
         }
-
         private async Task FLOORFIGHT(CancellationToken token)
         {
             try
@@ -1135,7 +1156,7 @@ namespace PixelAimbot
                                 {
                                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
                                     KeyboardWrapper.AlternateHoldKey(skill.Key, casttimeByKey(skill.Key));
-
+                             
                                     if (isDoubleKey(skill.Key))
                                     {
                                         KeyboardWrapper.PressKey(skill.Key);
@@ -1147,28 +1168,29 @@ namespace PixelAimbot
                                 }
                                 else
                                 {
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is autoattacking..."));
 
                                     switch (comboattack)
                                     {
                                         case "FULL":
-                                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "FULL"));
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "FULL"));
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C, 3000);
                                             break;
                                         case "HALF":
-                                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "HALF"));
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "HALF"));
                                             KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C, 1500);
                                             break;
                                         default:
-                                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "NO FUNCTION"));
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "NO FUNCTION"));
                                             break;
+
                                     }
 
                                     walktopUTurn++;
                                 }
                             }
-
-
+                         
+                       
                             if (walktopUTurn == 3 && chBoxAutoMovement.Checked && _Floor1 == true && _STOPP == false)
                             {
                                 token.ThrowIfCancellationRequested();
@@ -1226,24 +1248,37 @@ namespace PixelAimbot
                                 walktopUTurn = 1;
                                 await Task.Delay(1, token);
                             }
-
-                            await Task.Delay(humanizer.Next(10, 240) + 400);
+                            
+                       await Task.Delay(humanizer.Next(10, 240) + 400);
                         }
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
                     }
-                }
-            }
-            catch (Exception ex)
-            {
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+}
+                }
             }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
-
         private async Task FLOOR1DETECTIONTIMER(CancellationToken token)
         {
             try
@@ -1258,7 +1293,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
                     PortalIsNotDetected = false;
 
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
 
                     _STOPP = true;
                     PortalIsNotDetected = false;
@@ -1273,14 +1308,22 @@ namespace PixelAimbot
                     _Floor3 = false;
 
                     var leave = Task.Run(() => LEAVEDUNGEON(token));
-                    await Task.WhenAny(new[] {leave});
+                    await Task.WhenAny(new[] { leave });
+
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task PORTALDETECT(CancellationToken token)
@@ -1301,6 +1344,7 @@ namespace PixelAimbot
                             0xDBC7AC, 7);
                         if (fight.ToString() != "1" && _STOPP == false)
                         {
+                            object[] fightCoord = (object[]) fight;
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Portal detected!"));
 
                             if (chBoxActivateF2.Checked && _STOPP == false)
@@ -1357,18 +1401,32 @@ namespace PixelAimbot
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
                     }
-                }
-            }
-            catch (Exception ex)
-            {
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+}
+                }
             }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
 
         private async Task PORTALISDETECTED(CancellationToken token)
@@ -1393,18 +1451,33 @@ namespace PixelAimbot
 
                         await Task.Delay(humanizer.Next(10, 240) + 100, token);
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
                     }
-                }
-            }
-            catch (Exception ex)
-            {
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+}
+                    
+                }
             }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
 
         private async Task SEARCHPORTAL(CancellationToken token)
@@ -1448,11 +1521,18 @@ namespace PixelAimbot
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] {t12});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task SEARCHBOSS(CancellationToken token)
@@ -1732,15 +1812,22 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] {t12});
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
 
-        /// RUN AT SAME TIME    ///
+        ///    RUN AT SAME TIME    ///
         private async Task ULTIMATE(CancellationToken token)
         {
             try
@@ -1883,18 +1970,32 @@ namespace PixelAimbot
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Soulfist Ultimate"));
                         }
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
                     }
-                }
-            }
-            catch (Exception ex)
-            {
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+}
+                }
             }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
 
         private async Task REVIVE(CancellationToken token)
@@ -1955,19 +2056,32 @@ namespace PixelAimbot
                             var sleepTime = random.Next(450, 555);
                             Thread.Sleep(sleepTime);
                         }
-                        catch (Exception ex)
+                        catch (AggregateException)
                         {
-                            int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                            Debug.WriteLine("[" + line + "]" + ex.Message);
+                            Debug.WriteLine("Expected");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Debug.WriteLine("Bug");
+                        }
+                        catch
+                        {
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task POTIONS(CancellationToken token)
@@ -2023,21 +2137,35 @@ namespace PixelAimbot
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
                         }
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
                     }
-                }
-            }
-            catch (Exception ex)
-            {
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+}
+                }
             }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
 
-        /// BOT COMES TO THE END    ///
+        ///    BOT COMES TO THE END    ///
         private async Task LEAVEDUNGEON(CancellationToken token)
         {
             try
@@ -2068,11 +2196,18 @@ namespace PixelAimbot
                 var t6 = Task.Run(() => LEAVEACCEPT(token));
                 await Task.WhenAny(new[] {t6});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task
@@ -2096,11 +2231,18 @@ namespace PixelAimbot
                 var t6 = Task.Run(() => LEAVEACCEPT(token));
                 await Task.WhenAny(new[] {t6});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task LEAVEACCEPT(CancellationToken token)
@@ -2157,11 +2299,18 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] {t9});
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task LOGOUT(CancellationToken token)
@@ -2188,11 +2337,18 @@ namespace PixelAimbot
                 _start = false;
                 cts.Cancel();
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task REPAIR(CancellationToken token)
@@ -2248,18 +2404,25 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
                 _REPAIR = false;
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair done!"));
-
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Auto-Repair done!"));
+            
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                 var t10 = Task.Run(() => RESTART(token));
                 await Task.WhenAny(new[] {t10});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private async Task RESTART(CancellationToken token)
@@ -2355,7 +2518,7 @@ namespace PixelAimbot
                         _stop = false;
                         _Restart = false;
                         _LOGOUT = false;
-
+                  
 
                         _Gunlancer = false;
                         _Shadowhunter = false;
@@ -2390,10 +2553,13 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
                         _stop = true;
                     }
-                    catch (Exception ex)
+                    catch (AggregateException)
                     {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
                     }
 
                     /*
@@ -2402,12 +2568,21 @@ namespace PixelAimbot
                     await Task.WhenAny(new[] { t1 });*/
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
+
+   
 
 
         private int casttimeByKey(byte key)
@@ -2567,7 +2742,7 @@ namespace PixelAimbot
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
                 F = KeyboardWrapper.VK_F,
-                Y = KeyboardWrapper.VK_Y
+                Y = KeyboardWrapper.VK_Y,
             };
             LAYOUT.Add(QWERTZ);
 
@@ -2582,7 +2757,7 @@ namespace PixelAimbot
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
                 F = KeyboardWrapper.VK_F,
-                Y = KeyboardWrapper.VK_Z
+                Y = KeyboardWrapper.VK_Z,
             };
             LAYOUT.Add(QWERTY);
 
@@ -2597,7 +2772,7 @@ namespace PixelAimbot
                 S = KeyboardWrapper.VK_S,
                 D = KeyboardWrapper.VK_D,
                 F = KeyboardWrapper.VK_F,
-                Y = KeyboardWrapper.VK_Z
+                Y = KeyboardWrapper.VK_Z,
             };
             LAYOUT.Add(AZERTY);
 
@@ -2606,57 +2781,57 @@ namespace PixelAimbot
             currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
-            txtPortalSearch.Text = Settings.Default.txtPortalSearch;
+            txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
 
-            txPQ.Text = Settings.Default.txPQ;
-            txPW.Text = Settings.Default.txPW;
-            txPE.Text = Settings.Default.txPE;
-            txPR.Text = Settings.Default.txPR;
-            txPA.Text = Settings.Default.txPA;
-            txPS.Text = Settings.Default.txPS;
-            txPD.Text = Settings.Default.txPD;
-            txPF.Text = Settings.Default.txPF;
+            txPQ.Text = Properties.Settings.Default.txPQ;
+            txPW.Text = Properties.Settings.Default.txPW;
+            txPE.Text = Properties.Settings.Default.txPE;
+            txPR.Text = Properties.Settings.Default.txPR;
+            txPA.Text = Properties.Settings.Default.txPA;
+            txPS.Text = Properties.Settings.Default.txPS;
+            txPD.Text = Properties.Settings.Default.txPD;
+            txPF.Text = Properties.Settings.Default.txPF;
 
-            txQ.Text = Settings.Default.q;
-            txW.Text = Settings.Default.w;
-            txE.Text = Settings.Default.e;
-            txR.Text = Settings.Default.r;
-            txA.Text = Settings.Default.a;
-            txS.Text = Settings.Default.s;
-            txD.Text = Settings.Default.d;
-            txF.Text = Settings.Default.f;
-            txCoolQ.Text = Settings.Default.cQ;
-            txCoolW.Text = Settings.Default.cW;
-            txCoolE.Text = Settings.Default.cE;
-            txCoolR.Text = Settings.Default.cR;
-            txCoolA.Text = Settings.Default.cA;
-            txCoolS.Text = Settings.Default.cS;
-            txCoolD.Text = Settings.Default.cD;
-            txCoolF.Text = Settings.Default.cF;
-            txtHeal30.Text = Settings.Default.instant;
-            txtHeal70.Text = Settings.Default.potion;
-            checkBoxHeal30.Checked = Settings.Default.chboxinstant;
-            checkBoxHeal70.Checked = Settings.Default.chboxheal;
-            chBoxAutoRepair.Checked = Settings.Default.chBoxAutoRepair;
-            txtRepair.Text = Settings.Default.autorepair;
-            chBoxY.Checked = Settings.Default.chBoxShadowhunter;
-            chBoxPaladin.Checked = Settings.Default.chboxPaladin;
-            chBoxGunlancer.Checked = Settings.Default.chBoxGunlancer;
-            chBoxBerserker.Checked = Settings.Default.chBoxBerserker;
-            chBoxChannelSwap.Checked = Settings.Default.chBoxChannelSwap;
-            chBoxAutoMovement.Checked = Settings.Default.chBoxSaveAll;
-            chBoxActivateF2.Checked = Settings.Default.chBoxActivateF2;
-            txtDungeon2search.Text = Settings.Default.txtDungeon2search;
-            txtDungeon2.Text = Settings.Default.txtDungeon2;
-            txtDungeon3search.Text = Settings.Default.txtDungeon3search;
-            txtDungeon3.Text = Settings.Default.txtDungeon3;
-            chBoxActivateF3.Checked = Settings.Default.chBoxActivateF3;
-            txLeaveTimerFloor3.Text = Settings.Default.txLeaveTimerFloor3;
-            txLeaveTimerFloor2.Text = Settings.Default.txLeaveTimerFloor2;
-            comboBoxAutoAttack.SelectedIndex = int.Parse(Settings.Default.chBoxAutoAttack);
-            chBoxAwakening.Checked = Settings.Default.chBoxAwakening;
-            txtRevive.Text = Settings.Default.txtRevive;
-            chBoxRevive.Checked = Settings.Default.chBoxRevive;
+            txQ.Text = Properties.Settings.Default.q;
+            txW.Text = Properties.Settings.Default.w;
+            txE.Text = Properties.Settings.Default.e;
+            txR.Text = Properties.Settings.Default.r;
+            txA.Text = Properties.Settings.Default.a;
+            txS.Text = Properties.Settings.Default.s;
+            txD.Text = Properties.Settings.Default.d;
+            txF.Text = Properties.Settings.Default.f;
+            txCoolQ.Text = Properties.Settings.Default.cQ;
+            txCoolW.Text = Properties.Settings.Default.cW;
+            txCoolE.Text = Properties.Settings.Default.cE;
+            txCoolR.Text = Properties.Settings.Default.cR;
+            txCoolA.Text = Properties.Settings.Default.cA;
+            txCoolS.Text = Properties.Settings.Default.cS;
+            txCoolD.Text = Properties.Settings.Default.cD;
+            txCoolF.Text = Properties.Settings.Default.cF;
+            txtHeal30.Text = Properties.Settings.Default.instant;
+            txtHeal70.Text = Properties.Settings.Default.potion;
+            checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+            checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
+            chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
+            txtRepair.Text = Properties.Settings.Default.autorepair;
+            chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
+            chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
+            chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
+            chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
+            chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
+            chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
+            chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
+            txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
+            txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+            txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
+            txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
+            chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+            txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
+            txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
+            comboBoxAutoAttack.SelectedIndex = int.Parse(Properties.Settings.Default.chBoxAutoAttack);
+            chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
+            txtRevive.Text = Properties.Settings.Default.txtRevive;
+            chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
         }
 
         private void ChaosBot_MouseDown(object sender, MouseEventArgs e)
@@ -2734,159 +2909,160 @@ namespace PixelAimbot
         {
             try
             {
-                Settings.Default.chBoxGunlancer = false;
-                Settings.Default.chBoxRevive = false;
-                Settings.Default.txtRevive = "85";
-                Settings.Default.txLeaveTimerFloor2 = "150";
-                Settings.Default.txLeaveTimerFloor3 = "180";
+                Properties.Settings.Default.chBoxGunlancer = false;
+                Properties.Settings.Default.chBoxRevive = false;
+                Properties.Settings.Default.txtRevive = "85";
+                Properties.Settings.Default.txLeaveTimerFloor2 = "150";
+                Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 
-                Settings.Default.txtPortalSearch = "20";
-                Settings.Default.instant = "";
-                Settings.Default.potion = "";
-                Settings.Default.heal10 = "";
-                Settings.Default.chboxinstant = false;
-                Settings.Default.chboxheal = false;
-                Settings.Default.chBoxAutoRepair = false;
-                Settings.Default.chBoxLOGOUT = false;
-                Settings.Default.txtLOGOUT = "";
-                Settings.Default.autorepair = "10";
-                Settings.Default.chBoxShadowhunter = false;
-                Settings.Default.chBoxSoulfist = false;
-                Settings.Default.chBoxBerserker = false;
-                Settings.Default.chBoxBard = false;
-                Settings.Default.chBoxGunlancer2 = false;
-                Settings.Default.chboxPaladin = false;
-                Settings.Default.chBoxChannelSwap = false;
-                Settings.Default.chBoxSaveAll = false;
-                Settings.Default.chBoxActivateF2 = false;
-                Settings.Default.txtDungeon2 = "15";
-                Settings.Default.txtDungeon2search = "5";
-                Settings.Default.txtDungeon3 = "20";
-                Settings.Default.txtDungeon3search = "10";
-                Settings.Default.chBoxActivateF3 = false;
-                Settings.Default.chBoxAutoMovement = false;
-                Settings.Default.txtRestart = "15";
+                Properties.Settings.Default.txtPortalSearch = "20";
+                Properties.Settings.Default.instant = "";
+                Properties.Settings.Default.potion = "";
+                Properties.Settings.Default.heal10 = "";
+                Properties.Settings.Default.chboxinstant = false;
+                Properties.Settings.Default.chboxheal = false;
+                Properties.Settings.Default.chBoxAutoRepair = false;
+                Properties.Settings.Default.chBoxLOGOUT = false;
+                Properties.Settings.Default.txtLOGOUT = "";
+                Properties.Settings.Default.autorepair = "10";
+                Properties.Settings.Default.chBoxShadowhunter = false;
+                Properties.Settings.Default.chBoxSoulfist = false;
+                Properties.Settings.Default.chBoxBerserker = false;
+                Properties.Settings.Default.chBoxBard = false;
+                Properties.Settings.Default.chBoxGunlancer2 = false;
+                Properties.Settings.Default.chboxPaladin = false;
+                Properties.Settings.Default.chBoxChannelSwap = false;
+                Properties.Settings.Default.chBoxSaveAll = false;
+                Properties.Settings.Default.chBoxActivateF2 = false;
+                Properties.Settings.Default.txtDungeon2 = "15";
+                Properties.Settings.Default.txtDungeon2search = "5";
+                Properties.Settings.Default.txtDungeon3 = "20";
+                Properties.Settings.Default.txtDungeon3search = "10";
+                Properties.Settings.Default.chBoxActivateF3 = false;
+                Properties.Settings.Default.chBoxAutoMovement = false;
+                Properties.Settings.Default.txtRestart = "15";
 
-                Settings.Default.chBoxGunlancer = false;
-                Settings.Default.chBoxSharpshooter = false;
-                Settings.Default.chBoxSorcerer = false;
-                Settings.Default.chBoxDeathblade = false;
-                Settings.Default.chBoxDeathblade2 = false;
+                Properties.Settings.Default.chBoxGunlancer = false;
+                Properties.Settings.Default.chBoxSharpshooter = false;
+                Properties.Settings.Default.chBoxSorcerer = false;
+                Properties.Settings.Default.chBoxDeathblade = false;
+                Properties.Settings.Default.chBoxDeathblade2 = false;
 
-                Settings.Default.txPQ = "1";
-                Settings.Default.txPW = "2";
-                Settings.Default.txPE = "3";
-                Settings.Default.txPR = "4";
-                Settings.Default.txPA = "5";
-                Settings.Default.txPS = "6";
-                Settings.Default.txPD = "7";
-                Settings.Default.txPF = "8";
+                Properties.Settings.Default.txPQ = "1";
+                Properties.Settings.Default.txPW = "2";
+                Properties.Settings.Default.txPE = "3";
+                Properties.Settings.Default.txPR = "4";
+                Properties.Settings.Default.txPA = "5";
+                Properties.Settings.Default.txPS = "6";
+                Properties.Settings.Default.txPD = "7";
+                Properties.Settings.Default.txPF = "8";
 
-                Settings.Default.cQ = "500";
-                Settings.Default.cW = "500";
-                Settings.Default.cE = "500";
-                Settings.Default.cR = "500";
-                Settings.Default.cA = "500";
-                Settings.Default.cS = "500";
-                Settings.Default.cD = "500";
-                Settings.Default.cF = "500";
-                Settings.Default.q = "500";
-                Settings.Default.w = "500";
-                Settings.Default.e = "500";
-                Settings.Default.r = "500";
-                Settings.Default.a = "500";
-                Settings.Default.s = "500";
-                Settings.Default.d = "500";
-                Settings.Default.f = "500";
+                Properties.Settings.Default.cQ = "500";
+                Properties.Settings.Default.cW = "500";
+                Properties.Settings.Default.cE = "500";
+                Properties.Settings.Default.cR = "500";
+                Properties.Settings.Default.cA = "500";
+                Properties.Settings.Default.cS = "500";
+                Properties.Settings.Default.cD = "500";
+                Properties.Settings.Default.cF = "500";
+                Properties.Settings.Default.q = "500";
+                Properties.Settings.Default.w = "500";
+                Properties.Settings.Default.e = "500";
+                Properties.Settings.Default.r = "500";
+                Properties.Settings.Default.a = "500";
+                Properties.Settings.Default.s = "500";
+                Properties.Settings.Default.d = "500";
+                Properties.Settings.Default.f = "500";
 
-                Settings.Default.chBoxDoubleQ = false;
-                Settings.Default.chBoxDoubleW = false;
-                Settings.Default.chBoxDoubleE = false;
-                Settings.Default.chBoxDoubleR = false;
-                Settings.Default.chBoxDoubleA = false;
-                Settings.Default.chBoxDoubleS = false;
-                Settings.Default.chBoxDoubleD = false;
-                Settings.Default.chBoxDoubleF = false;
-                Settings.Default.chBoxAutoAttack = "0";
-                Settings.Default.chBoxAwakening = false;
+                Properties.Settings.Default.chBoxDoubleQ = false;
+                Properties.Settings.Default.chBoxDoubleW = false;
+                Properties.Settings.Default.chBoxDoubleE = false;
+                Properties.Settings.Default.chBoxDoubleR = false;
+                Properties.Settings.Default.chBoxDoubleA = false;
+                Properties.Settings.Default.chBoxDoubleS = false;
+                Properties.Settings.Default.chBoxDoubleD = false;
+                Properties.Settings.Default.chBoxDoubleF = false;
+                Properties.Settings.Default.chBoxAutoAttack = "0";
+                Properties.Settings.Default.chBoxAwakening = false;
 
-                Settings.Default.Save();
-                chBoxGunlancer.Checked = Settings.Default.chBoxGunlancer;
-                txtRestart.Text = Settings.Default.txtRestart;
-                chBoxRevive.Checked = Settings.Default.chBoxRevive;
-                txtRevive.Text = Settings.Default.txtRevive;
-                chBoxAutoMovement.Checked = Settings.Default.chBoxAutoMovement;
-                txLeaveTimerFloor3.Text = Settings.Default.txLeaveTimerFloor3;
-                txLeaveTimerFloor2.Text = Settings.Default.txLeaveTimerFloor2;
-                txtPortalSearch.Text = Settings.Default.txtPortalSearch;
-                txtHeal10.Text = Settings.Default.instant;
-                chBoxLOGOUT.Checked = Settings.Default.chBoxLOGOUT;
-                txtHeal30.Text = Settings.Default.instant;
-                txtHeal70.Text = Settings.Default.potion;
-                checkBoxHeal30.Checked = Settings.Default.chboxinstant;
-                checkBoxHeal70.Checked = Settings.Default.chboxheal;
-                checkBoxHeal10.Checked = Settings.Default.checkBoxHeal10;
-                chBoxAutoRepair.Checked = Settings.Default.chBoxAutoRepair;
-                txtRepair.Text = Settings.Default.autorepair;
-                chBoxY.Checked = Settings.Default.chBoxShadowhunter;
-                chBoxPaladin.Checked = Settings.Default.chboxPaladin;
-                chBoxBerserker.Checked = Settings.Default.chBoxBerserker;
-                chBoxDeathblade.Checked = Settings.Default.chBoxDeathblade;
-                chBoxDeathblade2.Checked = Settings.Default.chBoxDeathblade2;
-                chBoxSorcerer.Checked = Settings.Default.chBoxSorcerer;
-                chBoxSharpshooter.Checked = Settings.Default.chBoxSharpshooter;
-                chBoxSoulfist.Checked = Settings.Default.chBoxSoulfist;
-                chBoxChannelSwap.Checked = Settings.Default.chBoxChannelSwap;
-                chBoxAutoMovement.Checked = Settings.Default.chBoxSaveAll;
-                chBoxActivateF2.Checked = Settings.Default.chBoxActivateF2;
-                txtDungeon2search.Text = Settings.Default.txtDungeon2search;
-                txtDungeon2.Text = Settings.Default.txtDungeon2;
-                txCoolQ.Text = Settings.Default.cQ;
-                txCoolW.Text = Settings.Default.cW;
-                txCoolE.Text = Settings.Default.cE;
-                txCoolR.Text = Settings.Default.cR;
-                txCoolA.Text = Settings.Default.cA;
-                txCoolS.Text = Settings.Default.cS;
-                txCoolD.Text = Settings.Default.cD;
-                txCoolF.Text = Settings.Default.cF;
-                txtLOGOUT.Text = Settings.Default.txtLOGOUT;
-                txQ.Text = Settings.Default.q;
-                txW.Text = Settings.Default.w;
-                txE.Text = Settings.Default.e;
-                txR.Text = Settings.Default.r;
-                txA.Text = Settings.Default.a;
-                txS.Text = Settings.Default.s;
-                txD.Text = Settings.Default.d;
-                txF.Text = Settings.Default.f;
+                Properties.Settings.Default.Save();
+                chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
+                txtRestart.Text = Properties.Settings.Default.txtRestart;
+                chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
+                txtRevive.Text = Properties.Settings.Default.txtRevive;
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
+                txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
+                txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
+                txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
+                txtHeal10.Text = Properties.Settings.Default.instant;
+                chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
+                txtHeal30.Text = Properties.Settings.Default.instant;
+                txtHeal70.Text = Properties.Settings.Default.potion;
+                checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
+                checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
+                checkBoxHeal10.Checked = Properties.Settings.Default.checkBoxHeal10;
+                chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
+                txtRepair.Text = Properties.Settings.Default.autorepair;
+                chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
+                chBoxPaladin.Checked = Properties.Settings.Default.chboxPaladin;
+                chBoxBerserker.Checked = Properties.Settings.Default.chBoxBerserker;
+                chBoxDeathblade.Checked = Properties.Settings.Default.chBoxDeathblade;
+                chBoxDeathblade2.Checked = Properties.Settings.Default.chBoxDeathblade2;
+                chBoxSorcerer.Checked = Properties.Settings.Default.chBoxSorcerer;
+                chBoxSharpshooter.Checked = Properties.Settings.Default.chBoxSharpshooter;
+                chBoxSoulfist.Checked = Properties.Settings.Default.chBoxSoulfist;
+                chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
+                chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxSaveAll;
+                chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
+                txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
+                txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
+                txCoolQ.Text = Properties.Settings.Default.cQ;
+                txCoolW.Text = Properties.Settings.Default.cW;
+                txCoolE.Text = Properties.Settings.Default.cE;
+                txCoolR.Text = Properties.Settings.Default.cR;
+                txCoolA.Text = Properties.Settings.Default.cA;
+                txCoolS.Text = Properties.Settings.Default.cS;
+                txCoolD.Text = Properties.Settings.Default.cD;
+                txCoolF.Text = Properties.Settings.Default.cF;
+                txtLOGOUT.Text = Properties.Settings.Default.txtLOGOUT;
+                txQ.Text = Properties.Settings.Default.q;
+                txW.Text = Properties.Settings.Default.w;
+                txE.Text = Properties.Settings.Default.e;
+                txR.Text = Properties.Settings.Default.r;
+                txA.Text = Properties.Settings.Default.a;
+                txS.Text = Properties.Settings.Default.s;
+                txD.Text = Properties.Settings.Default.d;
+                txF.Text = Properties.Settings.Default.f;
 
-                txPQ.Text = Settings.Default.txPQ;
-                txPW.Text = Settings.Default.txPW;
-                txPE.Text = Settings.Default.txPE;
-                txPR.Text = Settings.Default.txPR;
-                txPA.Text = Settings.Default.txPA;
-                txPS.Text = Settings.Default.txPS;
-                txPD.Text = Settings.Default.txPD;
-                txPF.Text = Settings.Default.txPF;
-                chBoxDoubleQ.Checked = Settings.Default.chBoxDoubleQ;
-                chBoxDoubleW.Checked = Settings.Default.chBoxDoubleW;
-                chBoxDoubleE.Checked = Settings.Default.chBoxDoubleE;
-                chBoxDoubleR.Checked = Settings.Default.chBoxDoubleR;
-                chBoxDoubleA.Checked = Settings.Default.chBoxDoubleA;
-                chBoxDoubleS.Checked = Settings.Default.chBoxDoubleS;
-                chBoxDoubleD.Checked = Settings.Default.chBoxDoubleD;
-                chBoxDoubleF.Checked = Settings.Default.chBoxDoubleF;
-                txtDungeon3search.Text = Settings.Default.txtDungeon3search;
-                txtDungeon3.Text = Settings.Default.txtDungeon3;
-                chBoxActivateF3.Checked = Settings.Default.chBoxActivateF3;
-                chBoxBard.Checked = Settings.Default.chBoxBard;
-                chBoxGunlancer2.Checked = Settings.Default.chBoxGunlancer2;
-                comboBoxAutoAttack.SelectedIndex = int.Parse(Settings.Default.chBoxAutoAttack);
-
-                chBoxAwakening.Checked = Settings.Default.chBoxAwakening;
+                txPQ.Text = Properties.Settings.Default.txPQ;
+                txPW.Text = Properties.Settings.Default.txPW;
+                txPE.Text = Properties.Settings.Default.txPE;
+                txPR.Text = Properties.Settings.Default.txPR;
+                txPA.Text = Properties.Settings.Default.txPA;
+                txPS.Text = Properties.Settings.Default.txPS;
+                txPD.Text = Properties.Settings.Default.txPD;
+                txPF.Text = Properties.Settings.Default.txPF;
+                chBoxDoubleQ.Checked = Properties.Settings.Default.chBoxDoubleQ;
+                chBoxDoubleW.Checked = Properties.Settings.Default.chBoxDoubleW;
+                chBoxDoubleE.Checked = Properties.Settings.Default.chBoxDoubleE;
+                chBoxDoubleR.Checked = Properties.Settings.Default.chBoxDoubleR;
+                chBoxDoubleA.Checked = Properties.Settings.Default.chBoxDoubleA;
+                chBoxDoubleS.Checked = Properties.Settings.Default.chBoxDoubleS;
+                chBoxDoubleD.Checked = Properties.Settings.Default.chBoxDoubleD;
+                chBoxDoubleF.Checked = Properties.Settings.Default.chBoxDoubleF;
+                txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
+                txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
+                chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+                chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
+                chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
+                comboBoxAutoAttack.SelectedIndex = int.Parse(Properties.Settings.Default.chBoxAutoAttack);
+                
+                chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             }
-            catch
-            {
-            }
+            catch(Exception ex) { 
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+}
         }
 
         private void btnInstructions_Click(object sender, EventArgs e)
@@ -2973,11 +3149,18 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                 _Deathblade = true;
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void AWAKENINGSKILL(CancellationToken token)
@@ -2991,11 +3174,18 @@ namespace PixelAimbot
 
                 KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 1000);
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void LEAVETIMERFLOOR1(CancellationToken token)
@@ -3041,12 +3231,22 @@ namespace PixelAimbot
                     var t12 = Task.Run(() => LEAVEDUNGEON(token));
                     await Task.WhenAny(new[] {t12});
                 }
+                else
+                {
+                }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void LEAVETIMERFLOOR2(CancellationToken token)
@@ -3073,11 +3273,18 @@ namespace PixelAimbot
                 var t12 = Task.Run(() => LEAVEDUNGEON(token));
                 await Task.WhenAny(new[] {t12});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void LEAVETIMERFLOOR3(CancellationToken token)
@@ -3100,11 +3307,18 @@ namespace PixelAimbot
                 var t12 = Task.Run(() => LEAVEDUNGEONCOMPLETE(token));
                 await Task.WhenAny(new[] {t12});
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void SharpshooterSecondPress(CancellationToken token)
@@ -3116,11 +3330,18 @@ namespace PixelAimbot
 
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         public async void SkillCooldown(CancellationToken token, byte key)
@@ -3174,47 +3395,40 @@ namespace PixelAimbot
                             break;
                     }
 
-                    timer = new Timer(cooldownDuration);
+                    timer = new System.Timers.Timer(cooldownDuration);
                     switch (key)
                     {
                         case KeyboardWrapper.VK_A:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _A = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _A = false; };;
                             break;
 
                         case KeyboardWrapper.VK_S:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _S = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _S = false; };;
 
                             break;
 
                         case KeyboardWrapper.VK_D:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _D = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _D = false; };;
 
                             break;
 
                         case KeyboardWrapper.VK_F:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _F = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _F = false; };;
 
                             break;
 
                         case KeyboardWrapper.VK_Q:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _Q = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _Q = false; };;
 
                             break;
 
                         case KeyboardWrapper.VK_W:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _W = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _W = false; };;
 
                             break;
 
                         case KeyboardWrapper.VK_E:
-                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _E = false; };
-                            ;
+                            timer.Elapsed += (object source, ElapsedEventArgs e) => { _E = false; };;
 
                             break;
 
@@ -3227,11 +3441,18 @@ namespace PixelAimbot
                     timer.Enabled = true;
                 }
             }
-            catch (Exception ex)
+            catch (AggregateException)
             {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch(Exception ex) { 
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
+}
         }
 
         private void buttonSaveRotation_Click(object sender, EventArgs e)
@@ -3429,7 +3650,7 @@ namespace PixelAimbot
                     {KeyboardWrapper.VK_Q, int.Parse(txPQ.Text)},
                     {KeyboardWrapper.VK_W, int.Parse(txPW.Text)},
                     {KeyboardWrapper.VK_E, int.Parse(txPE.Text)},
-                    {KeyboardWrapper.VK_R, int.Parse(txPR.Text)}
+                    {KeyboardWrapper.VK_R, int.Parse(txPR.Text)},
                 }.ToList();
         }
 
@@ -3500,29 +3721,33 @@ namespace PixelAimbot
         {
             conf.telegram = textBoxTelegramAPI.Text;
             conf.Save();
+            
         }
-
+        
         private void groupBox4_Enter(object sender, EventArgs e)
         {
         }
 
+     
 
         private void labelSwap_Click_1(object sender, EventArgs e)
         {
+            
             cts.Cancel();
             UnregisterHotKey(this.Handle, 1);
             UnregisterHotKey(this.Handle, 2);
-            if (Application.OpenForms.OfType<FishBot>().Count() == 1)
-                Application.OpenForms.OfType<FishBot>().First().Close();
+            if (Application.OpenForms.OfType<PixelAimbot.FishBot>().Count() == 1)
+                Application.OpenForms.OfType<PixelAimbot.FishBot>().First().Close();
 
             FishBot Form = new FishBot();
             Form.Show();
-            Application.OpenForms.OfType<ChaosBot>().First().Hide();
-            Application.OpenForms.OfType<ChaosBot>().First().Close();
+            Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Hide();
+            Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
 
         private void buttonTestTelegram_Click_1(object sender, EventArgs e)
         {
+            
             var bot = new TelegramBotClient(textBoxTelegramAPI.Text);
             try
             {
@@ -3532,6 +3757,7 @@ namespace PixelAimbot
                 labelTelegramState.ForeColor = Color.Green;
                 conf.telegram = textBoxTelegramAPI.Text;
                 conf.Save();
+                
             }
             catch (Exception ex)
             {
@@ -3539,12 +3765,13 @@ namespace PixelAimbot
                 labelTelegramState.ForeColor = Color.Red;
             }
         }
-
+        
 
         private void buttonConnectTelegram_Click(object sender, EventArgs e)
         {
             if (botIsRun)
             {
+
                 botIsRun = false;
                 labelTelegramState.Text = "State = disconnected";
                 labelTelegramState.ForeColor = Color.White;
@@ -3555,6 +3782,7 @@ namespace PixelAimbot
                 TelegramTask = RunBotAsync(textBoxTelegramAPI.Text, telegramToken.Token);
                 buttonConnectTelegram.Text = "disconnect";
                 buttonTestTelegram_Click_1(null, null);
+
             }
         }
     }
