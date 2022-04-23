@@ -219,9 +219,7 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 _cts.Cancel();
             }
-
-            Debugging debug = new Debugging();
-            debug.Show();
+            
         }
 
         public bool botIsRun = true;
