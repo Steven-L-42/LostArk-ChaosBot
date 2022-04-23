@@ -1062,7 +1062,8 @@ namespace PixelAimbot
             var bot = new TelegramBotClient(textBoxTelegramAPI.Text);
             try
             {
-                bot.TestApiAsync().Wait();
+                bot.GetMeAsync().Wait();
+
                 telegramBotRunning = true;
                 labelTelegramState.Text = "Status = Erfolgreich!";
                 labelTelegramState.ForeColor = Color.Green;

@@ -3707,7 +3707,7 @@ namespace PixelAimbot
             var bot = new TelegramBotClient(textBoxTelegramAPI.Text);
             try
             {
-                bot.TestApiAsync().Wait();
+                bot.GetMeAsync().Wait();
                 telegramBotRunning = true;
                 labelTelegramState.Text = "Status = Erfolgreich!";
                 labelTelegramState.ForeColor = Color.Green;
@@ -3735,7 +3735,7 @@ namespace PixelAimbot
             }
             else
             {
-                TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
+                TelegramTask = RunBotAsync(textBoxTelegramAPI.Text, telegramToken.Token);
                 buttonConnectTelegram.Text = "Verbunden, jetzt Trennen?";
                 buttonTestTelegram_Click_1(null, null);
 
