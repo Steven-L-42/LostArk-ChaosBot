@@ -87,6 +87,7 @@ namespace PixelAimbot
             {
                 cts.Cancel();
                 _formExists = 0;
+                _RepairReset = true;
                 _start = false;
                 _stopp = false;
                 _stop = false;
@@ -161,8 +162,9 @@ namespace PixelAimbot
 
                     var t1 = Task.Run(() => Start(token));
 
-                    if (chBoxAutoRepair.Checked == true && _start == true)
+                    if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
+                        _RepairReset = false;
                         var repair = Task.Run(() => Repairtimer());
                     }
                     else
@@ -170,7 +172,7 @@ namespace PixelAimbot
                         _repair = false;
                     }
 
-                    if (chBoxLOGOUT.Checked == true && _start == true)
+                    if (chBoxLOGOUT.Checked == true)
                     {
                         var logout = Task.Run(() => Logouttimer());
                     }

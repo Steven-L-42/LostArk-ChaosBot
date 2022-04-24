@@ -17,7 +17,9 @@ namespace PixelAimbot
             try
             {
                 await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRepair.Text) * 1000) * 60);
-                _repair = true;
+                for(int i = 0; i < 1; i++)
+                { _repair = true; }
+                
             }
             catch (AggregateException)
             {
@@ -39,7 +41,8 @@ namespace PixelAimbot
             try
             {
                 await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtLOGOUT.Text) * 1000) * 60);
-                _logout = true;
+                for (int i = 0; i < 1; i++)
+                { _logout = true; }
             }
             catch (AggregateException)
             {

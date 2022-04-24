@@ -44,8 +44,8 @@
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.checkBoxEarlyAccess = new System.Windows.Forms.CheckBox();
+            this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -245,18 +245,6 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
-            // progressBar1
-            // 
-            this.progressBar1.BackColor = System.Drawing.Color.Orange;
-            this.progressBar1.CustomText = "Updating...";
-            this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
-            this.progressBar1.ForeColor = System.Drawing.Color.Orange;
-            this.progressBar1.Location = new System.Drawing.Point(171, 328);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(399, 25);
-            this.progressBar1.TabIndex = 18;
-            this.progressBar1.Visible = false;
-            // 
             // checkBoxEarlyAccess
             // 
             this.checkBoxEarlyAccess.AutoSize = true;
@@ -271,6 +259,18 @@
             this.checkBoxEarlyAccess.Text = "Early Access";
             this.checkBoxEarlyAccess.UseVisualStyleBackColor = true;
             this.checkBoxEarlyAccess.CheckedChanged += new System.EventHandler(this.checkBoxEarlyAccess_CheckedChanged);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.BackColor = System.Drawing.Color.Orange;
+            this.progressBar1.CustomText = "Updating...";
+            this.progressBar1.DisplayStyle = PixelAimbot.Classes.Misc.ProgressBarDisplayText.CustomText;
+            this.progressBar1.ForeColor = System.Drawing.Color.Orange;
+            this.progressBar1.Location = new System.Drawing.Point(171, 328);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(399, 25);
+            this.progressBar1.TabIndex = 18;
+            this.progressBar1.Visible = false;
             // 
             // frmLogin
             // 

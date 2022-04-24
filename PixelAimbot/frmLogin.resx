@@ -118,10 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>2.3.7r HOTFIX
+    <value>2.4.0r HOTFIX
 + Fix Skill Rotation
 + Fix AutoAttack
 + Fix Enter Portal
++ Fix Repair
++ Add F1 Unstuck Toggle
 
 2.3.6r
 + Modified Movement
@@ -162,7 +164,7 @@
         2Jn+xfFfrGS0nLBUTk8uu6z8vMesxJbMz4bFd8vqQidEED9OJhkjgI8BRsT66MNLv+yoEe8px89QkFhF
         rMoqGkukyVDELeqyZE+KT4melJll1ez/377qqUFvJbvNDw2PhvHaC42b8FUyjI8Dw/g6BMsDnOer8YV9
         GH4TvVTVevbAvg6nF1Utvg1nG9B5r8a0WFmyyKpPpeDlGFqj0HEFzQuVnv2cc3QHkTX5qkvY2QWX3Lcv
-        fgOtk2gGfo3R+gAAAAlwSFlzAAALEgAACxIB0t1+/AAA/jVJREFUeF7s/Qe4JUd554/XjIRQluamc3Oc
+        fgOtk2gGfo3R+gAAAAlwSFlzAAALDAAACwwBP0AiyAAA/jVJREFUeF7s/Qe4JUd554/XjIRQluamc3Oc
         oBmJZIIJIposmYwiyjlLSCiBQCIKRA4iY5K93sULXlgMOO56f+ts44DX60AwYBOMiIoT7vw/7/t9u06d
         7nPOvXfuvfI+z9/f552equqq6urq8H5udXWftPe8bnZuXztneXZ2tSztrLT3zOXZGZ1WWyvLa0/vbadV
         VkvH8qqXLMNOXYad0kjJxqqTfamAwnlVTqxZzpNNmXN62cK8IzmzEksrdz93Xe7M2iqM44XVDqKsdoh1
