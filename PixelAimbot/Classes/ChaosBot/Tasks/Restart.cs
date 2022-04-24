@@ -15,8 +15,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                lbStatus.Invoke((MethodInvoker) (() =>
-                    lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " sekunden."));
+                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " sekunden."));
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
 
                 _stopp = true;

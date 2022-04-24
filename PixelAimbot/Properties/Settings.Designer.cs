@@ -874,20 +874,6 @@ namespace PixelAimbot.Properties {
                 this["chBoxDeathblade2"] = value;
             }
         }
-
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
-        public string chBoxAutoAttack {
-            get {
-                return ((string)(this["chBoxAutoAttack"]));
-            }
-            set {
-                this["chBoxAutoAttack"] = value;
-            }
-        }
-   
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -910,6 +896,30 @@ namespace PixelAimbot.Properties {
             }
             set {
                 this["txtRevive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
+        public string textBoxAutoAttack {
+            get {
+                return ((string)(this["textBoxAutoAttack"]));
+            }
+            set {
+                this["textBoxAutoAttack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxUnstuckF1 {
+            get {
+                return ((bool)(this["chBoxUnstuckF1"]));
+            }
+            set {
+                this["chBoxUnstuckF1"] = value;
             }
         }
     }

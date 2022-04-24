@@ -16,11 +16,14 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
+       
 
+       
         public ChaosBot()
         {
             InitializeComponent();
             conf = Config.Load();
+          
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -243,7 +246,8 @@ namespace PixelAimbot
             _currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
-            txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
+            chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
+            txtRestart.Text = Properties.Settings.Default.txtRestart;
 
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
@@ -290,10 +294,11 @@ namespace PixelAimbot
             chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
             txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
             txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
-            textBoxAutoAttack.Text = Properties.Settings.Default.chBoxAutoAttack;
+            textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             txtRevive.Text = Properties.Settings.Default.txtRevive;
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
+           
         }
         
         private void lbClose_Click(object sender, EventArgs e)
@@ -374,7 +379,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txLeaveTimerFloor2 = "150";
                 Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 
-                Properties.Settings.Default.txtPortalSearch = "20";
+                Properties.Settings.Default.chBoxUnstuckF1 = false;
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.heal10 = "";
@@ -441,7 +446,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleS = false;
                 Properties.Settings.Default.chBoxDoubleD = false;
                 Properties.Settings.Default.chBoxDoubleF = false;
-                Properties.Settings.Default.chBoxAutoAttack = "0";
+                Properties.Settings.Default.textBoxAutoAttack = "1500";
                 Properties.Settings.Default.chBoxAwakening = false;
 
                 Properties.Settings.Default.Save();
@@ -452,7 +457,7 @@ namespace PixelAimbot
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
                 txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
-                txtPortalSearch.Text = Properties.Settings.Default.txtPortalSearch;
+                chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
                 txtHeal10.Text = Properties.Settings.Default.instant;
                 chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
                 txtHeal30.Text = Properties.Settings.Default.instant;
@@ -514,7 +519,7 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
                 chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                 chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
-                textBoxAutoAttack.Text = Properties.Settings.Default.chBoxAutoAttack;
+                textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
 
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             }
@@ -558,7 +563,7 @@ namespace PixelAimbot
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
                     rotation.txLeaveTimerFloor3 = txLeaveTimerFloor3.Text;
                     rotation.txtRestart = txtRestart.Text;
-                    rotation.txtPortalSearch = txtPortalSearch.Text;
+                    rotation.chBoxUnstuckF1 = chBoxUnstuckF1.Checked;
                     rotation.instant = txtHeal30.Text;
                     rotation.potion = txtHeal70.Text;
                     rotation.txtHeal10 = txtHeal10.Text;
@@ -623,7 +628,7 @@ namespace PixelAimbot
                     rotation.chBoxDoubleS = chBoxDoubleS.Checked;
                     rotation.chBoxDoubleD = chBoxDoubleD.Checked;
                     rotation.chBoxDoubleF = chBoxDoubleF.Checked;
-                    rotation.comboBoxAutoAttack = int.Parse(textBoxAutoAttack.Text);
+                    rotation.textBoxAutoAttack = textBoxAutoAttack.Text;
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
@@ -649,7 +654,7 @@ namespace PixelAimbot
                 chBoxRevive.Checked = rotation.chBoxRevive;
                 txtRestart.Text = rotation.txtRestart;
                 chBoxGunlancer.Checked = rotation.chBoxGunlancer;
-                txtPortalSearch.Text = rotation.txtPortalSearch;
+                chBoxUnstuckF1.Checked = rotation.chBoxUnstuckF1;
                 txtHeal30.Text = rotation.instant;
                 txtHeal70.Text = rotation.potion;
                 checkBoxHeal30.Checked = rotation.chboxinstant;
@@ -674,7 +679,7 @@ namespace PixelAimbot
                 chBoxActivateF3.Checked = rotation.chBoxActivateF3;
                 txtDungeon3search.Text = rotation.txtDungeon3search;
                 txtDungeon3.Text = rotation.txtDungeon3;
-                textBoxAutoAttack.Text = rotation.comboBoxAutoAttack.ToString();
+                textBoxAutoAttack.Text = rotation.textBoxAutoAttack;
                 chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;

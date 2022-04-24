@@ -51,8 +51,16 @@ namespace PixelAimbot
 
                             if (d.ToString() != "0")
                             {
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _shadowhunter = false;
+                                _Q = false;
+                                _W = false;
+                                _E = false;
+                                _R = false;
+                                _A = false;
+                                _S = false;
+                                _D = false;
+                                _F = false;
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
                             }

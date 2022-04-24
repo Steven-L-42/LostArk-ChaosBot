@@ -65,44 +65,59 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 20000, token);
-
-                float threshold = 0.7f;
-
-                var enemyTemplate =
-                    new Image<Bgr, byte>(resourceFolder + "/enemy.png");
-                var enemyMask =
-                    new Image<Bgr, byte>(resourceFolder + "/mask.png");
-
-                var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-
-                var screenPrinter = new PrintScreen();
-
-                var rawScreen = screenPrinter.CaptureScreen();
-                Bitmap bitmapImage = new Bitmap(rawScreen);
-                var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-                var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-
-                if (!enemy.HasValue)
+                await Task.Delay(humanizer.Next(10, 240) + 30000, token);
+                for (int i = 0; i < 1; i++)
                 {
-                    _stopp = true;
-                    _portalIsNotDetected = false;
-                    _floorFight = false;
-                    _searchboss = false;
-                    _revive = false;
-                    _ultimate = false;
-                    _portaldetect = false;
-                    _potions = false;
-                    _floor1 = false;
-                    _floor2 = false;
-                    _floor3 = false;
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Failed to Enter Portal!"));
-                    var t12 = Task.Run(() => Leavedungeon(token));
-                    await Task.WhenAny(new[] {t12});
-                }
-                else
-                {
+                    float threshold = 0.69f;
+
+                    var enemyTemplate =
+                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
+                    var enemyMask =
+                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                    var BossTemplate =
+                                new Image<Bgr, byte>(resourceFolder + "/boss1.png");
+                    var BossMask =
+                        new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
+
+
+                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
+                    var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
+
+                    var screenPrinter = new PrintScreen();
+
+                    var rawScreen = screenPrinter.CaptureScreen();
+                    Bitmap bitmapImage = new Bitmap(rawScreen);
+                    var screenCapture = bitmapImage.ToImage<Bgr, byte>();
+
+                    var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
+                    var Boss = BossDetector.GetClosestEnemy(screenCapture, true);
+
+                    if (enemy.HasValue)
+                    {
+                        continue;
+                    }
+                    else
+                    if (Boss.HasValue)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        _stopp = true;
+                        _portalIsNotDetected = false;
+                        _floorFight = false;
+                        _searchboss = false;
+                        _revive = false;
+                        _ultimate = false;
+                        _portaldetect = false;
+                        _potions = false;
+                        _floor1 = false;
+                        _floor2 = false;
+                        _floor3 = false;
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
+                        var t12 = Task.Run(() => Leavedungeon(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
                 }
             }
             catch (AggregateException)

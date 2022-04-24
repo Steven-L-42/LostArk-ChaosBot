@@ -85,6 +85,7 @@ namespace PixelAimbot
                 _floor1 = true;
                 _stopp = false;
                 _portalIsNotDetected = true;
+                await Task.Delay(3200);
                 var t16 = Task.Run(() => Floor1Detectiontimer(token));
                 var t12 = Task.Run(() => Floortime(token));
                 await Task.WhenAny(new[] {t12, t16});

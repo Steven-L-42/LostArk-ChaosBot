@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.3.6r";
+        public static string version { get; set; } = "2.3.9r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public bool earlyaccess { get; set; } = false;
@@ -72,7 +72,7 @@ namespace PixelAimbot.Classes.Misc
 
     public class Rotations
     {
-        public string txtPortalSearch { get; set; } = "20";
+       
 
         public string q { get; set; } = "500";
         public string w { get; set; } = "500";
@@ -85,7 +85,7 @@ namespace PixelAimbot.Classes.Misc
         public string txtRestart { get; set; } = "15";
         public string txtRevive { get; set; } = "85";
         
-        public int comboBoxAutoAttack { get; set; } = 0;
+        public string textBoxAutoAttack { get; set; } = "1500";
         public bool chBoxAwakening { get; set; } = false;
 
         public bool chBoxRevive { get; set; } = false;
@@ -108,6 +108,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxSoulfist { get; set; } = false;
         public string txLeaveTimerFloor3 { get; set; } = "180";
         public string txLeaveTimerFloor2 { get; set; } = "150";
+        public bool chBoxUnstuckF1 { get; set; } = false;
 
         public bool chBoxBerserker { get; set; } = false;
         public string txtHeal10 { get; set; } = "";

@@ -23,6 +23,15 @@ namespace PixelAimbot
                 _searchSequence = 0;
                 _fightSequence = 0;
                 _fightSequence2 = 0;
+                _Q = false;
+                _W = false;
+                _E = false;
+                _R = false;
+                _A = false;
+                _S = false;
+                _D = false;
+                _F = false;
+
 
 
                 token.ThrowIfCancellationRequested();
