@@ -124,7 +124,7 @@ namespace PixelAimbot
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                 if (_repair == true)
                 {
-                    _repair = false;
+                    
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t7 = Task.Run(() => Repair(token));
                     await Task.WhenAny(t7);

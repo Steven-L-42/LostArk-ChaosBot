@@ -16,7 +16,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair starts in " + int.Parse(txtRestart.Text) * 1000 + " seconds..."));
+                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Repair starts in " + int.Parse(txtRestart.Text) + " seconds..."));
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
@@ -61,7 +61,7 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
 
                 
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair done!"));
+                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Repair done!"));
 
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);

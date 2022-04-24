@@ -10,7 +10,7 @@ namespace PixelAimbot
     partial class ChaosBot
     {
         private bool _start;
-        private bool _RepairReset;
+        private bool _RepairReset = true;
         private bool _botIsRun = true;
         private bool _stopp;
         private bool _stop;

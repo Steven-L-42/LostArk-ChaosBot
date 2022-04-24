@@ -143,8 +143,6 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 1, token);
-
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txLeaveTimerFloor2.Text) * 1000, token);
 
                 _stopp = true;

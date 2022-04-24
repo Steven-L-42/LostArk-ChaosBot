@@ -27,7 +27,7 @@ namespace PixelAimbot
                             au3.Send("{" + txtHeal10.Text + "}");
                             au3.Send("{" + txtHeal10.Text + "}");
                             au3.Send("{" + txtHeal10.Text + "}");
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion at 10%"));
+                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Potion at 10%"));
                         }
                         else
 
@@ -41,7 +41,7 @@ namespace PixelAimbot
                             au3.Send("{" + txtHeal30.Text + "}");
                             au3.Send("{" + txtHeal30.Text + "}");
                             au3.Send("{" + txtHeal30.Text + "}");
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion at 30%"));
+                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Potion at 30%"));
                         }
                         else
 
@@ -55,7 +55,7 @@ namespace PixelAimbot
                             au3.Send("{" + txtHeal70.Text + "}");
                             au3.Send("{" + txtHeal70.Text + "}");
                             au3.Send("{" + txtHeal70.Text + "}");
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion at 70%"));
+                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Potion at 70%"));
                         }
                     }
                     catch (AggregateException)

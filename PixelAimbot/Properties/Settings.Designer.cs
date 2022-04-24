@@ -781,7 +781,7 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        [global::System.Configuration.DefaultSettingValueAttribute("165")]
         public string txLeaveTimerFloor2 {
             get {
                 return ((string)(this["txLeaveTimerFloor2"]));
