@@ -16,10 +16,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair starts in 20 seconds..."));
+                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Auto-Repair starts in " + int.Parse(txtRestart.Text) * 1000 + " seconds..."));
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                await Task.Delay(humanizer.Next(10, 240) + 25000, token);
+                await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
 
                 // KLICK UNTEN RECHTS (RATGEBER)
                 token.ThrowIfCancellationRequested();
