@@ -29,7 +29,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                await Task.Delay(15 * 1000 * 60 * 15, token); // 15 Minutes
+                await Task.Delay(15 * 1000 * 60, token); // 15 Minutes
                 _buff = true;
             }
             catch(Exception ex)
