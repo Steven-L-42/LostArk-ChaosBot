@@ -685,7 +685,6 @@ namespace PixelAimbot
                 chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
                 chBoxChannelSwap.Checked = rotation.chBoxChannelSwap;
-                chBoxAutoMovement.Checked = rotation.chBoxSaveAll;
                 chBoxActivateF2.Checked = rotation.chBoxActivateF2;
                 txtDungeon2search.Text = rotation.txtDungeon2search;
                 txtDungeon2.Text = rotation.txtDungeon2;
@@ -808,7 +807,6 @@ namespace PixelAimbot
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Hide();
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
-
-
+        
     }
 }
