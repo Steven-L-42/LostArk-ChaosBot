@@ -381,7 +381,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txLeaveTimerFloor2 = "165";
                 Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 
-                Properties.Settings.Default.chBoxUnstuckF1 = false;
+                Properties.Settings.Default.chBoxUnstuckF1 = true;
                 Properties.Settings.Default.instant = "";
                 Properties.Settings.Default.potion = "";
                 Properties.Settings.Default.heal10 = "";
