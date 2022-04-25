@@ -191,7 +191,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token); 
                     using (webclient)
                     {
-                        var text = await webclient.UploadStringTaskAsync("https://admin.symbiotic.link/api/getMessages", "inZane#1418");
+                        var text = await webclient.UploadStringTaskAsync("https://admin.symbiotic.link/api/getMessages", discordUsername);
                         
                         values["response"] = "";
                         if (text.Contains("message"))
