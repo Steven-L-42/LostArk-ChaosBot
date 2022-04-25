@@ -51,6 +51,8 @@ namespace PixelAimbot
                 await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                 VirtualMouse.MoveTo(Recalc(1085), Recalc(429, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                VirtualMouse.MoveTo(Recalc(1085), Recalc(429, false), 5);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 

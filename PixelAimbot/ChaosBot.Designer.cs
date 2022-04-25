@@ -169,6 +169,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chBoxUnstuckF1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtRestart = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor3 = new System.Windows.Forms.TextBox();
@@ -201,7 +202,7 @@
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
             this.labelSwap = new System.Windows.Forms.Label();
-            this.chBoxUnstuckF1 = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1400,7 +1401,7 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(104, 13);
             this.label24.TabIndex = 70;
-            this.label24.Text = "EACH 12 SECONDS";
+            this.label24.Text = "EACH 10 SECONDS";
             // 
             // chBoxGunlancer
             // 
@@ -2071,6 +2072,7 @@
             this.label3.Size = new System.Drawing.Size(128, 15);
             this.label3.TabIndex = 65;
             this.label3.Text = "RESTART TIMER (sec):";
+            this.toolTip1.SetToolTip(this.label3, "We recommend to set this not lower then 10 seconds!");
             // 
             // chBoxActivateF2
             // 
@@ -2223,6 +2225,24 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";
             // 
+            // chBoxUnstuckF1
+            // 
+            this.chBoxUnstuckF1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxUnstuckF1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxUnstuckF1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxUnstuckF1.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxUnstuckF1.FlatAppearance.BorderSize = 0;
+            this.chBoxUnstuckF1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxUnstuckF1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.chBoxUnstuckF1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxUnstuckF1.Location = new System.Drawing.Point(6, 22);
+            this.chBoxUnstuckF1.Name = "chBoxUnstuckF1";
+            this.chBoxUnstuckF1.Size = new System.Drawing.Size(169, 24);
+            this.chBoxUnstuckF1.TabIndex = 76;
+            this.chBoxUnstuckF1.Text = "(F1) UNSTUCK DETECT";
+            this.chBoxUnstuckF1.UseMnemonic = false;
+            this.chBoxUnstuckF1.UseVisualStyleBackColor = false;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -2367,6 +2387,7 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.SETTINGS.Controls.Add(this.label18);
             this.SETTINGS.Controls.Add(this.groupBox10);
             this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
@@ -2624,23 +2645,19 @@
             this.labelSwap.Text = "GBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click_1);
             // 
-            // chBoxUnstuckF1
+            // label18
             // 
-            this.chBoxUnstuckF1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxUnstuckF1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxUnstuckF1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxUnstuckF1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxUnstuckF1.FlatAppearance.BorderSize = 0;
-            this.chBoxUnstuckF1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxUnstuckF1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.chBoxUnstuckF1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxUnstuckF1.Location = new System.Drawing.Point(6, 22);
-            this.chBoxUnstuckF1.Name = "chBoxUnstuckF1";
-            this.chBoxUnstuckF1.Size = new System.Drawing.Size(169, 24);
-            this.chBoxUnstuckF1.TabIndex = 76;
-            this.chBoxUnstuckF1.Text = "(F1) UNSTUCK DETECT";
-            this.chBoxUnstuckF1.UseMnemonic = false;
-            this.chBoxUnstuckF1.UseVisualStyleBackColor = false;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Orange;
+            this.label18.Location = new System.Drawing.Point(0, 118);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(287, 30);
+            this.label18.TabIndex = 61;
+            this.label18.Text = "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
+    "itys are on Cooldown!";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label18, "How long the should Bot search!");
             // 
             // ChaosBot
             // 
@@ -2688,6 +2705,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.SETTINGS.ResumeLayout(false);
+            this.SETTINGS.PerformLayout();
             this.groupBoxTelegram.ResumeLayout(false);
             this.groupBoxTelegram.PerformLayout();
             this.HEAL.ResumeLayout(false);
@@ -2884,6 +2902,7 @@
         private System.Windows.Forms.CheckBox chBoxAwakening;
         private System.Windows.Forms.TextBox txtRevive;
         private System.Windows.Forms.CheckBox chBoxUnstuckF1;
+        private System.Windows.Forms.Label label18;
     }
 }
 

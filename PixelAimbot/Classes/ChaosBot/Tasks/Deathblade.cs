@@ -13,9 +13,9 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 12000, token);
+                await Task.Delay(humanizer.Next(10, 240) + 10000, token);
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                await Task.Delay(humanizer.Next(10, 240) + 12000, token);
+                await Task.Delay(humanizer.Next(10, 240) + 10000, token);
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                 _deathblade = true;
             }

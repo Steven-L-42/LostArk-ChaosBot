@@ -24,7 +24,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
 
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Bard try to heal..."));
                         }
@@ -35,7 +35,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                             _gunlancer = false;
 
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Gunlancer Ultimate"));
@@ -74,7 +74,7 @@ namespace PixelAimbot
                                 Recalc(1060, false), 0x75D6FF, 10);
                             if (d.ToString() != "0")
                             {
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _paladin = false;
 
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Paladin Ultimate"));
@@ -91,7 +91,7 @@ namespace PixelAimbot
                             if (d.ToString() != "0")
                             {
 
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _deathblade = false;
 
                                 if (chBoxDeathblade2.Checked)
@@ -115,8 +115,7 @@ namespace PixelAimbot
                                 Recalc(1068, false), 0x09B4EB, 10);
                             if (d.ToString() != "0")
                             {
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
-
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sharpshooter = false;
 
                                 var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
@@ -134,8 +133,7 @@ namespace PixelAimbot
                                 Recalc(1042, false), 0x8993FF, 10);
                             if (d.ToString() != "0")
                             {
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
-
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sorcerer = false;
 
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
@@ -147,8 +145,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
-
+                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                             _soulfist = false;
 
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Soulfist Ultimate"));
