@@ -62,6 +62,7 @@ namespace PixelAimbot.Classes.Auth
                 //                config.Save();
 
                 var responseString = Encoding.Default.GetString(response);
+                
                 PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
                 if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "false")
                 {
@@ -83,6 +84,13 @@ namespace PixelAimbot.Classes.Auth
                     Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
 
                 ChaosBot Form = new ChaosBot();
+                
+                if (PixelAimbot.frmLogin.LicenceInformations["discorduser"].ToString() != "")
+                {
+                    Form.conf.discorduser = PixelAimbot.frmLogin.LicenceInformations["discorduser"].ToString();
+                    Form.conf.Save();
+                }
+
                 Form.Show();
                 Application.OpenForms.OfType<PixelAimbot.frmLogin>().First().Hide();
 

@@ -237,11 +237,7 @@ Windows operating System Settings and inGame
             }
 
         }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         public void CheckForUpdate(bool early_access = false)
         {

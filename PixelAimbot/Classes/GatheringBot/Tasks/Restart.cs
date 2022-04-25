@@ -23,7 +23,7 @@ namespace PixelAimbot
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(43, false), 10);
+                        VirtualMouse.MoveTo(Recalc(1875), Recalc(63, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap++;
                         _restart = false;
@@ -37,7 +37,7 @@ namespace PixelAimbot
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(63, false), 10);
+                        VirtualMouse.MoveTo(Recalc(1875), Recalc(83, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap++;
                         _restart = false;
@@ -51,7 +51,7 @@ namespace PixelAimbot
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(83, false), 10);
+                        VirtualMouse.MoveTo(Recalc(1875), Recalc(103, false), 10);
                         KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap = 0;
                         _restart = false;

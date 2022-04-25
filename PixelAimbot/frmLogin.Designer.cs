@@ -201,7 +201,6 @@
             this.label15.Size = new System.Drawing.Size(53, 17);
             this.label15.TabIndex = 12;
             this.label15.Text = "version";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // chBoxRemember
             // 

@@ -16,14 +16,11 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
-       
-
-       
         public ChaosBot()
         {
             InitializeComponent();
             conf = Config.Load();
-          
+            
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -54,18 +51,24 @@ namespace PixelAimbot
             UnregisterHotKey(this.Handle, SecondHotkeyId);
             Boolean F10Registered = RegisterHotKey(this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey);
             telegramToken = new CancellationTokenSource();
+            discordToken = new CancellationTokenSource();
             if (conf.telegram != "" && !_telegramBotRunning)
             {
                 textBoxTelegramAPI.Text = conf.telegram;
                 try
                 {
                     buttonTestTelegram_Click_1(null, null);
-                    TelegramTask = RunBotAsync(conf.telegram, telegramToken.Token);
+                    TelegramTask = TelegramBotAsync(conf.telegram, telegramToken.Token);
                 }
                 catch
                 {
                 }
             }
+
+            try
+            {
+                DiscordTask = DiscordBotAsync(conf.discorduser, discordToken.Token);
+            } catch {}
 
             // 4. Verify if both hotkeys were succesfully registered, if not, show message in the console
             if (!F9Registered)
@@ -79,6 +82,8 @@ namespace PixelAimbot
                 cts.Cancel();
             }
         }
+
+        
 
 
         private async void btnPause_Click(object sender, EventArgs e)
