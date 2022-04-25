@@ -72,6 +72,7 @@ namespace PixelAimbot
         Random humanizer = new Random();
 
         public Task TelegramTask;
+        public Task DiscordTask;
 
         public string resourceFolder = "";
         private string comboattack = "";
@@ -88,5 +89,6 @@ namespace PixelAimbot
         
         private CancellationTokenSource cts = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
+        private CancellationTokenSource discordToken = new CancellationTokenSource();
     }
 }
