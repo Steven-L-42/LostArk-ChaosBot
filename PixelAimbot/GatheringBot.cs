@@ -245,6 +245,7 @@ namespace PixelAimbot
         private void buttonSelectArea_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Alert.Show("Submit with Enter or Doubleclick\r\nto selected area", frmAlert.enmType.Info);
             SelectArea form1 = new SelectArea(false);
             form1.InstanceRef = this;
             form1.Show();

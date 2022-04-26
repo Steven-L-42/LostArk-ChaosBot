@@ -676,7 +676,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\cancel1.png" />
+    <Content Include="Resources\cancel.png" />
     <Content Include="Resources\ChaosDungeon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -689,12 +689,14 @@
     <Content Include="Resources\check_if_city.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\error.png" />
     <Content Include="Resources\hund.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\hundmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\info.png" />
     <Content Include="Resources\shardtest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -707,6 +709,8 @@
     <Content Include="Resources\siebzehnprozentmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\success.png" />
+    <Content Include="Resources\warning.png" />
     <None Include="Resources\debug.png" />
     <Content Include="Resources\enemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
