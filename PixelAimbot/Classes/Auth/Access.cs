@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Cache;
 using System.Text;
 using System.Windows.Forms;
+using PixelAimbot.Classes.Misc;
 
 namespace PixelAimbot.Classes.Auth
 {
@@ -35,14 +36,14 @@ namespace PixelAimbot.Classes.Auth
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
-                        MessageBox.Show("Webserver currently not Available! Try Again later.");
+                        
+                        Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
                     }
                 };
             }
             catch (Exception)
             {
-                MessageBox.Show("Webserver currently not Available! Try Again later.");
+                Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
             }
         }
 
@@ -66,17 +67,17 @@ namespace PixelAimbot.Classes.Auth
                 PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
                 if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "false")
                 {
-                    MessageBox.Show("Licence is not active. Please contact an Administrator.");
+                    Alert.Show("Licence is not active. Please contact an Administrator.", frmAlert.enmType.Error);
                     return false;
                 }
                 if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "wrong_login")
                 {
-                    MessageBox.Show("Username or Password not known. Please contact an Administrator.");
+                    Alert.Show("Username or Password not known. Please contact an Administrator.", frmAlert.enmType.Error);
                     return false;
                 }
                 if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "hwid")
                 {
-                    MessageBox.Show("Your HWID seems changed, please reset it or contact an Administrator.");
+                    Alert.Show("Your HWID seems changed, please reset it or contact an Administrator.", frmAlert.enmType.Error);
                     return false;
                 }
 
@@ -98,12 +99,12 @@ namespace PixelAimbot.Classes.Auth
             }
             catch (WebException)
             {
-                MessageBox.Show("Server is not reachable, please try again later.");
+                Alert.Show("Server is not reachable, please try again later.", frmAlert.enmType.Error);
                 return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Alert.Show(ex.Message, frmAlert.enmType.Error);
                 return false;
             }
         }

@@ -639,16 +639,16 @@ namespace PixelAimbot
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
-                    MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
+                    Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
                 }
                 else
                 {
-                    MessageBox.Show("Rotation can not be named \"main\"");
+                    Alert.Show("Rotation can not be named \"main\"", frmAlert.enmType.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Please enter a name for your Rotation Config!");
+                Alert.Show("Please enter a name for your Rotation Config!", frmAlert.enmType.Error);
             }
         }
 
@@ -726,7 +726,7 @@ namespace PixelAimbot
                 chBoxDoubleD.Checked = rotation.chBoxDoubleD;
                 chBoxDoubleF.Checked = rotation.chBoxDoubleF;
 
-                MessageBox.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
+                Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
         }
 
@@ -802,6 +802,8 @@ namespace PixelAimbot
         private void labelSwap_Click_1(object sender, EventArgs e)
         {
             cts.Cancel();
+            _botIsRun = false;
+            _discordBotIsRun = false;
             UnregisterHotKey(this.Handle, 1);
             UnregisterHotKey(this.Handle, 2);
             if (Application.OpenForms.OfType<PixelAimbot.GatheringBot>().Count() == 1)

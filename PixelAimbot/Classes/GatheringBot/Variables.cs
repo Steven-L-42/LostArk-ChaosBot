@@ -25,9 +25,9 @@ namespace PixelAimbot
         private int _x, _y, _width, _height;
         private int _rodCounter;
         private bool _telegramBotRunning;
-
+        Random humanizer = new Random();
         PrintScreen _screenPrinter = new PrintScreen();
-
+        public Config conf = new Config();
         private Image _rawScreen;
         private Bitmap _bitmapImage;
         Image<Bgr, byte> _screenCapture;
@@ -41,10 +41,13 @@ namespace PixelAimbot
         static int _screenWidth = Screen.PrimaryScreen.Bounds.Width;
         static int _screenHeight = Screen.PrimaryScreen.Bounds.Height;
         public Task TelegramTask;
+        public Task DiscordTask;
         private CancellationTokenSource _telegramToken = new CancellationTokenSource();
+        private CancellationTokenSource _discordToken = new CancellationTokenSource();
         private CancellationTokenSource _cts = new CancellationTokenSource();
 
         private bool _botIsRun = true;
+        private bool _discordBotIsRun = true;
 
         private string _resourceFolder = "";
 

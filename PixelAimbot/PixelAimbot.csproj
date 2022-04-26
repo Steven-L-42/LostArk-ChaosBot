@@ -485,11 +485,18 @@
     <Compile Include="Classes\GatheringBot\Variables.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\Misc\Alert.cs" />
     <Compile Include="Forms\Debugging.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Debugging.Designer.cs">
       <DependentUpon>Debugging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAlert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAlert.Designer.cs">
+      <DependentUpon>frmAlert.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmMinimized.cs">
       <SubType>Form</SubType>
@@ -561,6 +568,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Debugging.resx">
       <DependentUpon>Debugging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAlert.resx">
+      <DependentUpon>frmAlert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMinimized.resx">
       <DependentUpon>frmMinimized.cs</DependentUpon>
@@ -666,6 +676,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\cancel1.png" />
     <Content Include="Resources\ChaosDungeon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

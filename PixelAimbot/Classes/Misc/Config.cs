@@ -178,7 +178,7 @@ namespace PixelAimbot.Classes.Misc
                 }
             } else
             {
-                MessageBox.Show("File \"" + filename + "\" not found");
+                Alert.Show("File \"" + filename + "\" not found", frmAlert.enmType.Error);
                 return null;
             }
         }

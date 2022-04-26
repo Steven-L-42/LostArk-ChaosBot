@@ -12,6 +12,7 @@ namespace PixelAimbot
         private bool _start;
         private bool _RepairReset = true;
         private bool _botIsRun = true;
+        private bool _discordBotIsRun = true;
         private bool _stopp;
         private bool _stop;
         private bool _restart;

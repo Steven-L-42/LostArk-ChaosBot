@@ -183,7 +183,7 @@ namespace PixelAimbot
                 ["discorduser"] = discordUsername,
                 ["response"] = "",
             };
-            while (true)
+            while (_discordBotIsRun)
             {
                 try
                 {
@@ -196,7 +196,7 @@ namespace PixelAimbot
                         values["response"] = "";
                         if (text.Contains("message"))
                         {
-                            MessageBox.Show(text.Split(':')[1]);
+                            Alert.Show(text.Split(':')[1], frmAlert.enmType.Info);
                         }
                         if (text.Contains("start"))
                         {

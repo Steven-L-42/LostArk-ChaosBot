@@ -158,10 +158,7 @@ namespace PixelAimbot
         {
             if (Screen.PrimaryScreen.Bounds.Width != 1920)
             {
-                MessageBox.Show(@"*ALL RESOLUTIONS IS BETA, If something is not working good
-then set your Resolution back to 1920x1080 on your 
-Windows operating System Settings and inGame
-* *BORDERLESS is NECESSARY");
+                Alert.Show(@"Your Resolution " + Screen.PrimaryScreen.Bounds.Width + "x" + Screen.PrimaryScreen.Bounds.Height + " is Beta\r\nBest Resolution 1920x1080 Borderless", frmAlert.enmType.Warning);
             }
 
             if (chBoxRemember.Checked == true)
@@ -297,7 +294,7 @@ Windows operating System Settings and inGame
             }
             catch (Exception)
             {
-                MessageBox.Show("Cannot check for Application Update. Please contact Developer");
+                Alert.Show("Cannot check for Application Update. Please contact Developer", frmAlert.enmType.Error);
             }
         }
         private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -311,13 +308,13 @@ Windows operating System Settings and inGame
 
             if (e.Cancelled)
             {
-                MessageBox.Show("The download has been cancelled");
+                Alert.Show("The download has been cancelled", frmAlert.enmType.Error);
                 return;
             }
 
             if (e.Error != null) // We have an error! Retry a few times, then abort.
             {
-                MessageBox.Show("An error ocurred while trying to download file");
+                Alert.Show("An error ocurred while trying to download file", frmAlert.enmType.Error);
                 return;
             }
 
