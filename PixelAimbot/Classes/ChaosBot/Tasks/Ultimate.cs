@@ -21,6 +21,7 @@ namespace PixelAimbot
                     {
                         if (chBoxBard.Checked && _bard)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
@@ -32,6 +33,7 @@ namespace PixelAimbot
                         if (chBoxGunlancer.Checked && _gunlancer ||
                             chBoxGunlancer2.Checked && _gunlancer)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
@@ -43,6 +45,7 @@ namespace PixelAimbot
 
                         if (chBoxY.Checked && _shadowhunter)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
@@ -68,6 +71,7 @@ namespace PixelAimbot
 
                         if (chBoxPaladin.Checked && _paladin)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             object d = au3.PixelSearch(Recalc(892), Recalc(1027, false), Recalc(934),
@@ -84,6 +88,7 @@ namespace PixelAimbot
                         if (chBoxDeathblade.Checked && _deathblade ||
                             chBoxDeathblade2.Checked && _deathblade)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             object d = au3.PixelSearch(Recalc(986), Recalc(1029, false), Recalc(1017),
@@ -109,6 +114,7 @@ namespace PixelAimbot
 
                         if (chBoxSharpshooter.Checked && _sharpshooter)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             object d = au3.PixelSearch(Recalc(1006), Recalc(1049, false), Recalc(1019),
@@ -127,6 +133,7 @@ namespace PixelAimbot
 
                         if (chBoxSorcerer.Checked && _sorcerer)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             object d = au3.PixelSearch(Recalc(1006), Recalc(1038, false), Recalc(1010),
@@ -142,6 +149,7 @@ namespace PixelAimbot
 
                         if (chBoxSoulfist.Checked && _soulfist)
                         {
+                            _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
@@ -150,6 +158,7 @@ namespace PixelAimbot
 
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Soulfist Ultimate"));
                         }
+                        _doUltimateAttack = false;
                     }
                     catch (AggregateException)
                     {

@@ -41,7 +41,7 @@ namespace PixelAimbot
         private bool _bard;
         private bool _sorcerer;
         private bool _soulfist;
-
+        private bool _doUltimateAttack;
         private bool _logout;
 
         //SKILL AND COOLDOWN//

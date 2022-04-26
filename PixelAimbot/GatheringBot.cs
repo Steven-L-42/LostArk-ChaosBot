@@ -107,7 +107,7 @@ namespace PixelAimbot
                 _cts.Cancel();
                 _start = false;
                 _stop = false;
-
+                _canrepair = false;
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
                 this.Show();
@@ -205,13 +205,6 @@ namespace PixelAimbot
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
-        }
-
-
-
-        private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
-        {
-            _repair = chBoxAutoRepair.Checked;
         }
 
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)

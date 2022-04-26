@@ -294,7 +294,6 @@
             this.toolTip1.SetToolTip(this.chBoxAutoRepair, "Automaticly repair Fishingrod");
             this.chBoxAutoRepair.UseMnemonic = false;
             this.chBoxAutoRepair.UseVisualStyleBackColor = false;
-            this.chBoxAutoRepair.CheckedChanged += new System.EventHandler(this.chBoxAutoRepair_CheckedChanged);
             // 
             // label27
             // 

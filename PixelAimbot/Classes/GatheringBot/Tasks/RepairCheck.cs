@@ -13,7 +13,7 @@ namespace PixelAimbot
     {
         private async Task Repaircheck(CancellationToken token)
         {
-            while (_repair)
+            while (chBoxAutoRepair.Checked)
             {
                 try
                 {

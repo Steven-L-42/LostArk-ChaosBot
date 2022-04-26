@@ -253,97 +253,102 @@ namespace PixelAimbot
                 {
                     try
                     {
-                        foreach (KeyValuePair<byte, int> skill in _skills.skillset.OrderBy(x => x.Value))
+                        if (!_doUltimateAttack)
                         {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-
-                            if (_floorFight && !_stopp)
+                            foreach (KeyValuePair<byte, int> skill in _skills.skillset.OrderBy(x => x.Value))
                             {
-                                if (!isKeyOnCooldown(skill.Key))
-                                {
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
-                                    KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
 
-                                    if (IsDoubleKey(skill.Key))
+                                if (_floorFight && !_stopp)
+                                {
+                                    if (!isKeyOnCooldown(skill.Key))
                                     {
-                                        KeyboardWrapper.PressKey(skill.Key);
+                                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
+                                        KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
+
+                                        if (IsDoubleKey(skill.Key))
+                                        {
+                                            KeyboardWrapper.PressKey(skill.Key);
+                                        }
+
+                                        SetKeyCooldown(skill.Key); // Set Cooldown
+                                        var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                        await Task.Delay(500);
                                     }
+                                    else if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A &&
+                                             _S && _D && _F)
+                                    {
 
-                                    SetKeyCooldown(skill.Key); // Set Cooldown
-                                    var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                    await Task.Delay(500);
+                                        lbStatus.Invoke(
+                                            (MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
+                                            int.Parse(textBoxAutoAttack.Text));
+                                        _walktopUTurn++;
+                                    }
                                 }
-                                else
-                                if(int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A && _S && _D && _F)
-                                {
 
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,int.Parse(textBoxAutoAttack.Text));
+
+                                if (_walktopUTurn == 3 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    VirtualMouse.MoveTo(Recalc(960), Recalc(240, false), 10);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2500);
+                                    VirtualMouse.MoveTo(Recalc(960), Recalc(566, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
                                     _walktopUTurn++;
                                 }
+
+                                if (_walktopUTurn == 10 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    VirtualMouse.MoveTo(Recalc(523), Recalc(840, false), 10);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
+                                    VirtualMouse.MoveTo(Recalc(1007), Recalc(494, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    await Task.Delay(1, token);
+
+                                    _walktopUTurn++;
+                                }
+
+                                if (_walktopUTurn == 17 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+
+                                    VirtualMouse.MoveTo(Recalc(1578), Recalc(524, false), 10);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2800);
+                                    VirtualMouse.MoveTo(Recalc(905), Recalc(531, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                    _walktopUTurn++;
+                                }
+
+                                if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+
+                                    VirtualMouse.MoveTo(Recalc(523), Recalc(850, false), 10);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
+                                    VirtualMouse.MoveTo(Recalc(960), Recalc(500, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    await Task.Delay(1, token);
+
+                                    _walktopUTurn++;
+                                }
+
+                                if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                {
+                                    _walktopUTurn = 1;
+                                    await Task.Delay(1, token);
+                                }
+
+                                await Task.Delay(humanizer.Next(10, 40));
                             }
-
-
-                            if (_walktopUTurn == 3 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                VirtualMouse.MoveTo(Recalc(960), Recalc(240, false), 10);
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2500);
-                                VirtualMouse.MoveTo(Recalc(960), Recalc(566, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-                                _walktopUTurn++;
-                            }
-
-                            if (_walktopUTurn == 10 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                VirtualMouse.MoveTo(Recalc(523), Recalc(840, false), 10);
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
-                                VirtualMouse.MoveTo(Recalc(1007), Recalc(494, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                await Task.Delay(1, token);
-
-                                _walktopUTurn++;
-                            }
-
-                            if (_walktopUTurn == 17 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-
-                                VirtualMouse.MoveTo(Recalc(1578), Recalc(524, false), 10);
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2800);
-                                VirtualMouse.MoveTo(Recalc(905), Recalc(531, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-                                _walktopUTurn++;
-                            }
-
-                            if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
-                            {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-
-                                VirtualMouse.MoveTo(Recalc(523), Recalc(850, false), 10);
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
-                                VirtualMouse.MoveTo(Recalc(960), Recalc(500, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                await Task.Delay(1, token);
-
-                                _walktopUTurn++;
-                            }
-
-                            if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
-                            {
-                                _walktopUTurn = 1;
-                                await Task.Delay(1, token);
-                            }
-
-                            await Task.Delay(humanizer.Next(10, 40));
                         }
                     }
                     catch (AggregateException)
