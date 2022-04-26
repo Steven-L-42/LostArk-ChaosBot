@@ -62,7 +62,7 @@ namespace PixelAimbot
             //timer.Enabled = true;
             //cts.Cancel();
         }
-
+       
         public async void Leavetimerfloor1(CancellationToken token)
         {
             try
@@ -71,21 +71,15 @@ namespace PixelAimbot
                 await Task.Delay(humanizer.Next(10, 240) + 30000, token);
                 for (int i = 0; i < 1; i++)
                 {
-                    float threshold = 0.69f;
+                    float threshold = 0.65f;
 
                     var enemyTemplate =
                         new Image<Bgr, byte>(resourceFolder + "/enemy.png");
                     var enemyMask =
                         new Image<Bgr, byte>(resourceFolder + "/mask.png");
-                    var BossTemplate =
-                                new Image<Bgr, byte>(resourceFolder + "/boss1.png");
-                    var BossMask =
-                        new Image<Bgr, byte>(resourceFolder + "/bossmask1.png");
-
 
                     var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                    var BossDetector = new EnemyDetector(BossTemplate, BossMask, threshold);
-
+                 
                     var screenPrinter = new PrintScreen();
 
                     var rawScreen = screenPrinter.CaptureScreen();
@@ -93,14 +87,8 @@ namespace PixelAimbot
                     var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
                     var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-                    var Boss = BossDetector.GetClosestEnemy(screenCapture, true);
 
                     if (enemy.HasValue)
-                    {
-                        continue;
-                    }
-                    else
-                    if (Boss.HasValue)
                     {
                         continue;
                     }
@@ -137,7 +125,7 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
-
+        
         public async void Leavetimerfloor2(CancellationToken token)
         {
             try
