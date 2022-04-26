@@ -596,7 +596,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(humanizer.Next(10, 240) + 100, token);
-                   
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
                     var enemyTemplate =
                         new Image<Bgr, byte>(resourceFolder + "/portalenter1.png");
@@ -668,8 +668,8 @@ namespace PixelAimbot
                         }
                     }
 
-                   
 
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                     Random random = new Random();
                     var sleepTime = random.Next(500, 570);
                     await Task.Delay(sleepTime);
