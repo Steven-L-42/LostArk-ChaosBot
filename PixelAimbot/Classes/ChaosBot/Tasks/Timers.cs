@@ -62,53 +62,33 @@ namespace PixelAimbot
             //timer.Enabled = true;
             //cts.Cancel();
         }
-       
+
         public async void Leavetimerfloor1(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 30000, token);
-                for (int i = 0; i < 1; i++)
+                await Task.Delay(humanizer.Next(10, 240) + 25000, token);
+                if (_portalIsDetected == true)
                 {
-                    float threshold = 0.65f;
 
-                    var enemyTemplate =
-                        new Image<Bgr, byte>(resourceFolder + "/enemy.png");
-                    var enemyMask =
-                        new Image<Bgr, byte>(resourceFolder + "/mask.png");
+                    _stopp = true;
+                    _portalIsDetected = false;
+                    _portalIsNotDetected = false;
+                    _floorFight = false;
+                    _searchboss = false;
+                    _revive = false;
+                    _ultimate = false;
+                    _portaldetect = false;
+                    _potions = false;
+                    _floor1 = false;
+                    _floor2 = false;
+                    _floor3 = false;
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
+                    var t12 = Task.Run(() => Leavedungeon(token));
+                    await Task.WhenAny(new[] { t12 });
 
-                    var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, threshold);
-                 
-                    var screenPrinter = new PrintScreen();
 
-                    var rawScreen = screenPrinter.CaptureScreen();
-                    Bitmap bitmapImage = new Bitmap(rawScreen);
-                    var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-                    var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-
-                    if (enemy.HasValue)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        _stopp = true;
-                        _portalIsNotDetected = false;
-                        _floorFight = false;
-                        _searchboss = false;
-                        _revive = false;
-                        _ultimate = false;
-                        _portaldetect = false;
-                        _potions = false;
-                        _floor1 = false;
-                        _floor2 = false;
-                        _floor3 = false;
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
-                        var t12 = Task.Run(() => Leavedungeon(token));
-                        await Task.WhenAny(new[] { t12 });
-                    }
                 }
             }
             catch (AggregateException)
@@ -134,6 +114,8 @@ namespace PixelAimbot
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txLeaveTimerFloor2.Text) * 1000, token);
 
                 _stopp = true;
+                _portalIsDetected = false;
+
                 _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;

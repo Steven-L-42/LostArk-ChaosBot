@@ -393,6 +393,8 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
 
                     _stopp = true;
+                    _portalIsDetected = false;
+
                     _portalIsNotDetected = false;
                     _floorFight = false;
                     _searchboss = false;
@@ -481,6 +483,8 @@ namespace PixelAimbot
                                     (MethodInvoker) (() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
 
                                 _stopp = true;
+                                _portalIsDetected = false;
+
                                 _portalIsNotDetected = false;
                                 _floorFight = false;
                                 _searchboss = false;

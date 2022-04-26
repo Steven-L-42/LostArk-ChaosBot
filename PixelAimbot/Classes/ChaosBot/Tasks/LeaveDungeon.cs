@@ -13,6 +13,8 @@ namespace PixelAimbot
             try
             {
                 _stopp = true;
+                _portalIsDetected = false;
+
                 _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;
