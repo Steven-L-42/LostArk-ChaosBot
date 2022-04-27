@@ -87,6 +87,7 @@ namespace PixelAimbot
                 if (_canrepair)
                 {
                     var t3 = Task.Run(() => RepairTask(token));
+                    _canrepair = false;
                     await Task.WhenAny(new[] {t3});
                 }
                 else if (_buff)

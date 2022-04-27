@@ -30,8 +30,6 @@ namespace PixelAimbot
                         var item = detector.GetBest(_screenCapture, true);
                         if (item.HasValue)
                         {
-                            // Found
-
                             _canrepair = true;
                         }
                     }
