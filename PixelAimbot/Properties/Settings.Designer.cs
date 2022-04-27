@@ -922,5 +922,29 @@ namespace PixelAimbot.Properties {
                 this["chBoxUnstuckF1"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public int HealthSlider {
+            get {
+                return ((int)(this["HealthSlider"]));
+            }
+            set {
+                this["HealthSlider"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F1")]
+        public string txtHeal10 {
+            get {
+                return ((string)(this["txtHeal10"]));
+            }
+            set {
+                this["txtHeal10"] = value;
+            }
+        }
     }
 }

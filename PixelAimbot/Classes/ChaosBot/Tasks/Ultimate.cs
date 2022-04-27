@@ -64,8 +64,10 @@ namespace PixelAimbot
                                 _S = false;
                                 _D = false;
                                 _F = false;
+                                var Deathblade = Task.Run(() => ShadowhunterSecond(token));
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
+                               
                             }
                         }
 

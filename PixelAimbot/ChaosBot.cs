@@ -165,7 +165,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-
+                 
                     var t1 = Task.Run(() => Start(token));
 
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
@@ -256,7 +256,7 @@ namespace PixelAimbot
 
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
-
+            HealthSlider.Value = Properties.Settings.Default.HealthSlider;
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
             txPE.Text = Properties.Settings.Default.txPE;
@@ -282,10 +282,7 @@ namespace PixelAimbot
             txCoolS.Text = Properties.Settings.Default.cS;
             txCoolD.Text = Properties.Settings.Default.cD;
             txCoolF.Text = Properties.Settings.Default.cF;
-            txtHeal30.Text = Properties.Settings.Default.instant;
-            txtHeal70.Text = Properties.Settings.Default.potion;
-            checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
-            checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
+           
             chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
             txtRepair.Text = Properties.Settings.Default.autorepair;
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -306,7 +303,9 @@ namespace PixelAimbot
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             txtRevive.Text = Properties.Settings.Default.txtRevive;
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
-           
+            txtHeal10.Text = Properties.Settings.Default.txtHeal10;
+
+
         }
         
         private void lbClose_Click(object sender, EventArgs e)
@@ -324,32 +323,7 @@ namespace PixelAimbot
             }
         }
 
-        private void checkBoxInstant_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxHeal30.Checked)
-            {
-                txtHeal30.ReadOnly = false;
-            }
-            else if (!checkBoxHeal30.Checked)
-            {
-                txtHeal30.ReadOnly = true;
-                txtHeal30.Text = "";
-            }
-        }
-
-        private void checkBoxHeal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxHeal70.Checked)
-            {
-                txtHeal70.ReadOnly = false;
-            }
-            else if (!checkBoxHeal70.Checked)
-            {
-                txtHeal70.ReadOnly = true;
-                txtHeal70.Text = "";
-            }
-        }
-
+      
 
         private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
         {
@@ -381,6 +355,7 @@ namespace PixelAimbot
         {
             try
             {
+                Properties.Settings.Default.HealthSlider = 800;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
                 Properties.Settings.Default.txtRevive = "85";
@@ -456,8 +431,10 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxDoubleF = false;
                 Properties.Settings.Default.textBoxAutoAttack = "1500";
                 Properties.Settings.Default.chBoxAwakening = false;
+                Properties.Settings.Default.txtHeal10 = "F1";
 
                 Properties.Settings.Default.Save();
+                HealthSlider.Value = Properties.Settings.Default.HealthSlider;
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
@@ -468,11 +445,7 @@ namespace PixelAimbot
                 chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
                 txtHeal10.Text = Properties.Settings.Default.instant;
                 chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
-                txtHeal30.Text = Properties.Settings.Default.instant;
-                txtHeal70.Text = Properties.Settings.Default.potion;
-                checkBoxHeal30.Checked = Properties.Settings.Default.chboxinstant;
-                checkBoxHeal70.Checked = Properties.Settings.Default.chboxheal;
-                checkBoxHeal10.Checked = Properties.Settings.Default.checkBoxHeal10;
+              
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
                 txtRepair.Text = Properties.Settings.Default.autorepair;
                 chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -530,6 +503,7 @@ namespace PixelAimbot
                 textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
 
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
+                txtHeal10.Text = Properties.Settings.Default.txtHeal10;
             }
             catch (Exception ex)
             {
@@ -565,6 +539,7 @@ namespace PixelAimbot
             {
                 if (comboBoxRotations.Text != "main")
                 {
+                    rotation.HealthSlider = HealthSlider.Value;
                     rotation.chBoxGunlancer = (bool) chBoxGunlancer.Checked;
                     rotation.txtRevive = txtRevive.Text;
                     rotation.chBoxRevive = (bool) chBoxRevive.Checked;
@@ -572,12 +547,7 @@ namespace PixelAimbot
                     rotation.txLeaveTimerFloor3 = txLeaveTimerFloor3.Text;
                     rotation.txtRestart = txtRestart.Text;
                     rotation.chBoxUnstuckF1 = chBoxUnstuckF1.Checked;
-                    rotation.instant = txtHeal30.Text;
-                    rotation.potion = txtHeal70.Text;
-                    rotation.txtHeal10 = txtHeal10.Text;
-                    rotation.chboxinstant = (bool) checkBoxHeal30.Checked;
-                    rotation.chboxheal = (bool) checkBoxHeal70.Checked;
-                    rotation.chboxheal10 = (bool) checkBoxHeal10.Checked;
+                  
                     rotation.chBoxAutoRepair = (bool) chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
 
@@ -638,6 +608,7 @@ namespace PixelAimbot
                     rotation.chBoxDoubleF = chBoxDoubleF.Checked;
                     rotation.textBoxAutoAttack = textBoxAutoAttack.Text;
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
+                    rotation.txtHeal10 = txtHeal10.Text;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -658,16 +629,14 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
+                HealthSlider.Value = rotation.HealthSlider;
                 txtRevive.Text = rotation.txtRevive;
                 chBoxRevive.Checked = rotation.chBoxRevive;
                 txtRestart.Text = rotation.txtRestart;
                 chBoxGunlancer.Checked = rotation.chBoxGunlancer;
                 chBoxUnstuckF1.Checked = rotation.chBoxUnstuckF1;
-                txtHeal30.Text = rotation.instant;
-                txtHeal70.Text = rotation.potion;
-                checkBoxHeal30.Checked = rotation.chboxinstant;
-                checkBoxHeal70.Checked = rotation.chboxheal;
-                checkBoxHeal10.Checked = rotation.chboxheal10;
+                txtHeal10.Text = rotation.txtHeal10;
+
                 chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
                 txtRepair.Text = rotation.autorepair;
                 chBoxY.Checked = rotation.chBoxShadowhunter;
@@ -770,18 +739,6 @@ namespace PixelAimbot
             }
         }
 
-        private void checkBoxHeal10_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxHeal10.Checked)
-            {
-                txtHeal10.ReadOnly = false;
-            }
-            else if (!checkBoxHeal10.Checked)
-            {
-                txtHeal10.ReadOnly = true;
-            }
-        }
-
         private void chBoxRevive_CheckedChanged(object sender, EventArgs e)
         {
             if (chBoxRevive.Checked)
@@ -815,6 +772,10 @@ namespace PixelAimbot
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Hide();
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
+
+      
+     
+           
         
     }
 }

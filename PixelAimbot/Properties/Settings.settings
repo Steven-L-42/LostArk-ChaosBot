@@ -227,5 +227,11 @@
     <Setting Name="chBoxUnstuckF1" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="HealthSlider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="txtHeal10" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

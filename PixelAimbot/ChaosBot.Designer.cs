@@ -57,17 +57,14 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.labelheal = new System.Windows.Forms.Label();
+            this.HealthSlider = new System.Windows.Forms.TrackBar();
             this.txtRevive = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.chBoxRevive = new System.Windows.Forms.CheckBox();
             this.txtHeal10 = new System.Windows.Forms.TextBox();
-            this.checkBoxHeal10 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtHeal70 = new System.Windows.Forms.TextBox();
-            this.checkBoxHeal70 = new System.Windows.Forms.CheckBox();
-            this.txtHeal30 = new System.Windows.Forms.TextBox();
-            this.checkBoxHeal30 = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lbF = new System.Windows.Forms.Label();
             this.lbD = new System.Windows.Forms.Label();
@@ -157,9 +154,10 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -202,10 +200,10 @@
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
             this.labelSwap = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HealthSlider)).BeginInit();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -592,17 +590,14 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.labelheal);
+            this.groupBox4.Controls.Add(this.HealthSlider);
             this.groupBox4.Controls.Add(this.txtRevive);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.chBoxRevive);
             this.groupBox4.Controls.Add(this.txtHeal10);
-            this.groupBox4.Controls.Add(this.checkBoxHeal10);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.txtHeal70);
-            this.groupBox4.Controls.Add(this.checkBoxHeal70);
-            this.groupBox4.Controls.Add(this.txtHeal30);
-            this.groupBox4.Controls.Add(this.checkBoxHeal30);
             this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox4.Location = new System.Drawing.Point(6, 5);
@@ -613,16 +608,40 @@
             this.groupBox4.Text = "Heal and Potion";
             this.toolTip1.SetToolTip(this.groupBox4, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
             // 
+            // labelheal
+            // 
+            this.labelheal.AutoSize = true;
+            this.labelheal.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.labelheal.Location = new System.Drawing.Point(37, 63);
+            this.labelheal.Name = "labelheal";
+            this.labelheal.Size = new System.Drawing.Size(105, 17);
+            this.labelheal.TabIndex = 63;
+            this.labelheal.Text = "Heal at: 0% Life";
+            // 
+            // HealthSlider
+            // 
+            this.HealthSlider.Location = new System.Drawing.Point(6, 37);
+            this.HealthSlider.Maximum = 852;
+            this.HealthSlider.Minimum = 651;
+            this.HealthSlider.Name = "HealthSlider";
+            this.HealthSlider.Size = new System.Drawing.Size(165, 45);
+            this.HealthSlider.SmallChange = 20;
+            this.HealthSlider.TabIndex = 62;
+            this.HealthSlider.TickFrequency = 20;
+            this.HealthSlider.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.HealthSlider.Value = 651;
+            this.HealthSlider.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
             // txtRevive
             // 
             this.txtRevive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtRevive.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRevive.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRevive.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRevive.Location = new System.Drawing.Point(170, 106);
+            this.txtRevive.Location = new System.Drawing.Point(177, 103);
             this.txtRevive.Name = "txtRevive";
             this.txtRevive.ReadOnly = true;
-            this.txtRevive.Size = new System.Drawing.Size(35, 16);
+            this.txtRevive.Size = new System.Drawing.Size(35, 18);
             this.txtRevive.TabIndex = 61;
             this.txtRevive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRevive.WordWrap = false;
@@ -646,10 +665,10 @@
             this.chBoxRevive.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxRevive.FlatAppearance.BorderSize = 0;
             this.chBoxRevive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxRevive.Location = new System.Drawing.Point(5, 97);
+            this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxRevive.Location = new System.Drawing.Point(1, 97);
             this.chBoxRevive.Name = "chBoxRevive";
-            this.chBoxRevive.Size = new System.Drawing.Size(159, 31);
+            this.chBoxRevive.Size = new System.Drawing.Size(172, 31);
             this.chBoxRevive.TabIndex = 59;
             this.chBoxRevive.Text = "AUTO-REVIVE (ON/OFF)";
             this.toolTip1.SetToolTip(this.chBoxRevive, "Detectionrate:\r\n\r\nHigh Value = less likely\r\nLess Value = more likely");
@@ -661,33 +680,14 @@
             // 
             this.txtHeal10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txtHeal10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHeal10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHeal10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal10.Location = new System.Drawing.Point(170, 28);
+            this.txtHeal10.Location = new System.Drawing.Point(177, 37);
             this.txtHeal10.Name = "txtHeal10";
-            this.txtHeal10.ReadOnly = true;
-            this.txtHeal10.Size = new System.Drawing.Size(35, 16);
+            this.txtHeal10.Size = new System.Drawing.Size(35, 18);
             this.txtHeal10.TabIndex = 58;
             this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal10.WordWrap = false;
-            // 
-            // checkBoxHeal10
-            // 
-            this.checkBoxHeal10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.checkBoxHeal10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.checkBoxHeal10.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxHeal10.Cursor = System.Windows.Forms.Cursors.Help;
-            this.checkBoxHeal10.FlatAppearance.BorderSize = 0;
-            this.checkBoxHeal10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal10.Location = new System.Drawing.Point(5, 20);
-            this.checkBoxHeal10.Name = "checkBoxHeal10";
-            this.checkBoxHeal10.Size = new System.Drawing.Size(159, 31);
-            this.checkBoxHeal10.TabIndex = 57;
-            this.checkBoxHeal10.Text = "HEAL POTION 10%";
-            this.checkBoxHeal10.UseMnemonic = false;
-            this.checkBoxHeal10.UseVisualStyleBackColor = false;
-            this.checkBoxHeal10.CheckedChanged += new System.EventHandler(this.checkBoxHeal10_CheckedChanged);
             // 
             // label7
             // 
@@ -711,70 +711,6 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Give the potion you \r\nwant to use. F1, 5 - 9 \r\nfor a normal Health\r\npotion and 1-" +
     "4 for\r\nInstant healing potion.";
-            // 
-            // txtHeal70
-            // 
-            this.txtHeal70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtHeal70.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal70.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeal70.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal70.Location = new System.Drawing.Point(170, 79);
-            this.txtHeal70.Name = "txtHeal70";
-            this.txtHeal70.ReadOnly = true;
-            this.txtHeal70.Size = new System.Drawing.Size(35, 16);
-            this.txtHeal70.TabIndex = 9;
-            this.txtHeal70.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtHeal70.WordWrap = false;
-            // 
-            // checkBoxHeal70
-            // 
-            this.checkBoxHeal70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.checkBoxHeal70.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.checkBoxHeal70.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxHeal70.Cursor = System.Windows.Forms.Cursors.Help;
-            this.checkBoxHeal70.FlatAppearance.BorderSize = 0;
-            this.checkBoxHeal70.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal70.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal70.Location = new System.Drawing.Point(5, 71);
-            this.checkBoxHeal70.Name = "checkBoxHeal70";
-            this.checkBoxHeal70.Size = new System.Drawing.Size(159, 31);
-            this.checkBoxHeal70.TabIndex = 8;
-            this.checkBoxHeal70.Text = "HEAL POTION 70%";
-            this.checkBoxHeal70.UseMnemonic = false;
-            this.checkBoxHeal70.UseVisualStyleBackColor = false;
-            this.checkBoxHeal70.CheckedChanged += new System.EventHandler(this.checkBoxHeal_CheckedChanged);
-            // 
-            // txtHeal30
-            // 
-            this.txtHeal30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtHeal30.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal30.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeal30.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal30.Location = new System.Drawing.Point(170, 53);
-            this.txtHeal30.Name = "txtHeal30";
-            this.txtHeal30.ReadOnly = true;
-            this.txtHeal30.Size = new System.Drawing.Size(35, 16);
-            this.txtHeal30.TabIndex = 1;
-            this.txtHeal30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtHeal30.WordWrap = false;
-            // 
-            // checkBoxHeal30
-            // 
-            this.checkBoxHeal30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.checkBoxHeal30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.checkBoxHeal30.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxHeal30.Cursor = System.Windows.Forms.Cursors.Help;
-            this.checkBoxHeal30.FlatAppearance.BorderSize = 0;
-            this.checkBoxHeal30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxHeal30.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxHeal30.Location = new System.Drawing.Point(5, 45);
-            this.checkBoxHeal30.Name = "checkBoxHeal30";
-            this.checkBoxHeal30.Size = new System.Drawing.Size(159, 31);
-            this.checkBoxHeal30.TabIndex = 0;
-            this.checkBoxHeal30.Text = "HEAL POTION 30%";
-            this.checkBoxHeal30.UseMnemonic = false;
-            this.checkBoxHeal30.UseVisualStyleBackColor = false;
-            this.checkBoxHeal30.CheckedChanged += new System.EventHandler(this.checkBoxInstant_CheckedChanged);
             // 
             // groupBox9
             // 
@@ -2035,6 +1971,33 @@
             this.textBoxAutoAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxAutoAttack.WordWrap = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(225, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(128, 15);
+            this.label3.TabIndex = 65;
+            this.label3.Text = "RESTART TIMER (sec):";
+            this.toolTip1.SetToolTip(this.label3, "We recommend to set this not lower then 10 seconds!");
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.Orange;
+            this.label18.Location = new System.Drawing.Point(0, 118);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(287, 30);
+            this.label18.TabIndex = 61;
+            this.label18.Text = "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
+    "itys are on Cooldown!";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label18, "How long the should Bot search!");
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -2060,19 +2023,6 @@
             this.label14.TabIndex = 74;
             this.label14.Text = "LEAVETIMER in seconds:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(225, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 15);
-            this.label3.TabIndex = 65;
-            this.label3.Text = "RESTART TIMER (sec):";
-            this.toolTip1.SetToolTip(this.label3, "We recommend to set this not lower then 10 seconds!");
             // 
             // chBoxActivateF2
             // 
@@ -2645,20 +2595,6 @@
             this.labelSwap.Text = "GBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click_1);
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Orange;
-            this.label18.Location = new System.Drawing.Point(0, 118);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(287, 30);
-            this.label18.TabIndex = 61;
-            this.label18.Text = "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
-    "itys are on Cooldown!";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label18, "How long the should Bot search!");
-            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2687,6 +2623,7 @@
             this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HealthSlider)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -2747,10 +2684,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TabPage HEAL;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox txtHeal70;
-        private System.Windows.Forms.CheckBox checkBoxHeal70;
-        private System.Windows.Forms.TextBox txtHeal30;
-        private System.Windows.Forms.CheckBox checkBoxHeal30;
         private System.Windows.Forms.TabPage Info;
         private System.Windows.Forms.TabPage SETTINGS;
         private System.Windows.Forms.Label label17;
@@ -2862,7 +2795,6 @@
         private System.Windows.Forms.Label labelComboxRotation;
         private System.Windows.Forms.CheckBox chBoxDeathblade;
         private System.Windows.Forms.TextBox txtHeal10;
-        private System.Windows.Forms.CheckBox checkBoxHeal10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chBoxSorcerer;
         private System.Windows.Forms.CheckBox chBoxSharpshooter;
@@ -2903,6 +2835,8 @@
         private System.Windows.Forms.TextBox txtRevive;
         private System.Windows.Forms.CheckBox chBoxUnstuckF1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TrackBar HealthSlider;
+        private System.Windows.Forms.Label labelheal;
     }
 }
 

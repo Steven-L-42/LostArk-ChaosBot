@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.4.7r";
+        public static string version { get; set; } = "2.4.9r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -85,18 +85,15 @@ namespace PixelAimbot.Classes.Misc
         public string f { get; set; } = "500";
         public string txtRestart { get; set; } = "15";
         public string txtRevive { get; set; } = "85";
-        
+        public string txtHeal10 { get; set; } = "F1";
         public string textBoxAutoAttack { get; set; } = "1500";
         public bool chBoxAwakening { get; set; } = false;
 
         public bool chBoxRevive { get; set; } = false;
 
         public bool chBoxAutoMovement { get; set; } = false;
-        public string instant { get; set; }
-        public string potion { get; set; }
-        public bool chboxinstant { get; set; } = false;
-        public bool chboxheal { get; set; } = false;
-        public bool chboxheal10 { get; set; } = false;
+   
+        public int HealthSlider { get; set; } = 800;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";
@@ -112,7 +109,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxUnstuckF1 { get; set; } = true;
 
         public bool chBoxBerserker { get; set; } = false;
-        public string txtHeal10 { get; set; } = "";
+
         public bool chBoxDeathblade { get; set; } = false;
         public bool chBoxDeathblade2 { get; set; } = false;
         public bool chBoxSorcerer { get; set; } = false;

@@ -396,5 +396,7 @@ namespace PixelAimbot
 
             debugDetector.setMatchingMethod(type);
         }
+
+      
     }
 }
