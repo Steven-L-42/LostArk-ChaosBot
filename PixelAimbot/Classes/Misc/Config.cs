@@ -19,7 +19,7 @@ namespace PixelAimbot.Classes.Misc
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
-        public bool earlyaccess { get; set; } = false;
+        public bool oldversion { get; set; } = false;
 
         public string telegram { get; set; } = "";
 
@@ -88,6 +88,7 @@ namespace PixelAimbot.Classes.Misc
         public string txtHeal10 { get; set; } = "F1";
         public string textBoxAutoAttack { get; set; } = "1500";
         public bool chBoxAwakening { get; set; } = false;
+        public bool chBoxCrashDetection { get; set; } = true;
 
         public bool chBoxRevive { get; set; } = false;
 

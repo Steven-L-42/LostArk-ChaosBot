@@ -118,7 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>2.4.1r HOTFIX
+    <value>2.5.1r
++Add Game CrashDetection
++Add Berserker Ultimate Improvement
++Small fixes
+
+2.4.1r HOTFIX
 + Fix Skill Rotation
 + Fix AutoAttack
 + Fix Enter Portal

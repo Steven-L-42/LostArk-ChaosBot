@@ -146,6 +146,14 @@ namespace PixelAimbot
             {
                 try
                 {
+                    Process[] processName = Process.GetProcessesByName("LostArk");
+                    if (processName.Length == 0)
+                    {
+
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
+                        await Task.Delay(5000);
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
+                    }
                     _formExists++;
                     if (_formExists == 1)
                     {
@@ -167,7 +175,7 @@ namespace PixelAimbot
                     var token = cts.Token;
                  
                     var t1 = Task.Run(() => Start(token));
-
+                   
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
                         _RepairReset = false;
@@ -256,6 +264,7 @@ namespace PixelAimbot
 
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
+            chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
             HealthSlider.Value = Properties.Settings.Default.HealthSlider;
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
@@ -355,6 +364,7 @@ namespace PixelAimbot
         {
             try
             {
+                Properties.Settings.Default.chBoxCrashDetection = true;
                 Properties.Settings.Default.HealthSlider = 800;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
@@ -434,6 +444,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.txtHeal10 = "F1";
 
                 Properties.Settings.Default.Save();
+                chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
                 HealthSlider.Value = Properties.Settings.Default.HealthSlider;
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
@@ -539,6 +550,7 @@ namespace PixelAimbot
             {
                 if (comboBoxRotations.Text != "main")
                 {
+                    rotation.chBoxCrashDetection = chBoxCrashDetection.Checked;
                     rotation.HealthSlider = HealthSlider.Value;
                     rotation.chBoxGunlancer = (bool) chBoxGunlancer.Checked;
                     rotation.txtRevive = txtRevive.Text;
@@ -629,6 +641,7 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
+                chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
                 HealthSlider.Value = rotation.HealthSlider;
                 txtRevive.Text = rotation.txtRevive;
                 chBoxRevive.Checked = rotation.chBoxRevive;

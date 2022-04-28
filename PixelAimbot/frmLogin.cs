@@ -67,9 +67,9 @@ namespace PixelAimbot
                 }
             }
 
-            checkBoxEarlyAccess.Checked = config.earlyaccess;
+            checkBoxOldVersion.Checked = config.oldversion;
             //Check for a Update
-            CheckForUpdate(config.earlyaccess);
+            CheckForUpdate(config.oldversion);
 
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -236,18 +236,18 @@ namespace PixelAimbot
         }
         
 
-        public void CheckForUpdate(bool early_access = false)
+        public void CheckForUpdate(bool old_version = false)
         {
 
             try
             {
-                if (early_access)
+                if (old_version)
                 {
-                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version_earlyaccess.php");
+                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version_old.php");
                 }
                 else
                 {
-                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version.php");
+                    currentLauncherVersion = new WebClient().DownloadString("https://files.symbiotic.link/version_new.php");
                 }
 
                 // Search old Shit
@@ -279,9 +279,9 @@ namespace PixelAimbot
                         wc.Proxy = null;
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                         wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                        if (early_access)
+                        if (old_version)
                         {
-                            wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot-Early.exe"),
+                            wc.DownloadFileAsync(new Uri("https://files.symbiotic.link/Chaos-Bot-Old.exe"),
                                 Directory.GetCurrentDirectory() + "\\Chaos-Bot_" + currentLauncherVersion + ".exe");
                         }
                         else
@@ -327,17 +327,17 @@ namespace PixelAimbot
 
         private void checkBoxEarlyAccess_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxEarlyAccess.Checked)
+            if (checkBoxOldVersion.Checked)
             {
-                config.earlyaccess = true;
+                config.oldversion = true;
                 config.Save();
             }
             else
             {
-                config.earlyaccess = false;
+                config.oldversion = false;
                 config.Save();
             }
-            CheckForUpdate(config.earlyaccess);
+            CheckForUpdate(config.oldversion);
 
         }
         

@@ -155,7 +155,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
@@ -200,6 +199,8 @@
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
             this.labelSwap = new System.Windows.Forms.Label();
+            this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1946,7 +1947,8 @@
             this.groupBox10.TabIndex = 42;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Auto-Attack";
-            this.toolTip1.SetToolTip(this.groupBox10, "Only change if your ingame settings \r\nare different than those given here!");
+            this.toolTip1.SetToolTip(this.groupBox10, "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
+        "itys are on Cooldown!");
             // 
             // label2
             // 
@@ -1969,6 +1971,8 @@
             this.textBoxAutoAttack.Size = new System.Drawing.Size(73, 22);
             this.textBoxAutoAttack.TabIndex = 41;
             this.textBoxAutoAttack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.textBoxAutoAttack, "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
+        "itys are on Cooldown!");
             this.textBoxAutoAttack.WordWrap = false;
             // 
             // label3
@@ -1983,20 +1987,6 @@
             this.label3.TabIndex = 65;
             this.label3.Text = "RESTART TIMER (sec):";
             this.toolTip1.SetToolTip(this.label3, "We recommend to set this not lower then 10 seconds!");
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Orange;
-            this.label18.Location = new System.Drawing.Point(0, 118);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(287, 30);
-            this.label18.TabIndex = 61;
-            this.label18.Text = "Auto-Attack: you can set how long the Bot should \r\nuse Auto-Attack after all Abil" +
-    "itys are on Cooldown!";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label18, "How long the should Bot search!");
             // 
             // label9
             // 
@@ -2337,7 +2327,8 @@
             // SETTINGS
             // 
             this.SETTINGS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.SETTINGS.Controls.Add(this.label18);
+            this.SETTINGS.Controls.Add(this.label10);
+            this.SETTINGS.Controls.Add(this.chBoxCrashDetection);
             this.SETTINGS.Controls.Add(this.groupBox10);
             this.SETTINGS.Controls.Add(this.groupBoxTelegram);
             this.SETTINGS.Controls.Add(this.groupBox6);
@@ -2595,6 +2586,37 @@
             this.labelSwap.Text = "GBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click_1);
             // 
+            // chBoxCrashDetection
+            // 
+            this.chBoxCrashDetection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxCrashDetection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxCrashDetection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxCrashDetection.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxCrashDetection.FlatAppearance.BorderSize = 0;
+            this.chBoxCrashDetection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxCrashDetection.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxCrashDetection.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxCrashDetection.Location = new System.Drawing.Point(3, 122);
+            this.chBoxCrashDetection.Name = "chBoxCrashDetection";
+            this.chBoxCrashDetection.Size = new System.Drawing.Size(124, 24);
+            this.chBoxCrashDetection.TabIndex = 77;
+            this.chBoxCrashDetection.Text = "CRASH-DETECTION";
+            this.toolTip1.SetToolTip(this.chBoxCrashDetection, "Bot stopps after LostArk Process is canceled.\r\n\r\nExample: Game is crashed or Conn" +
+        "ection is lost.\r\nBot will stop!");
+            this.chBoxCrashDetection.UseMnemonic = false;
+            this.chBoxCrashDetection.UseVisualStyleBackColor = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Orange;
+            this.label10.Location = new System.Drawing.Point(131, 126);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(248, 15);
+            this.label10.TabIndex = 78;
+            this.label10.Text = "<-- CHECK IF LOST ARK PROCESS IS ACTIVE";
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2834,9 +2856,10 @@
         private System.Windows.Forms.CheckBox chBoxAwakening;
         private System.Windows.Forms.TextBox txtRevive;
         private System.Windows.Forms.CheckBox chBoxUnstuckF1;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TrackBar HealthSlider;
         private System.Windows.Forms.Label labelheal;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox chBoxCrashDetection;
     }
 }
 

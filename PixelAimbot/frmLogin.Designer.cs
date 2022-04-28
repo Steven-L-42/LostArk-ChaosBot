@@ -44,7 +44,7 @@
             this.chBoxRemember = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.checkBoxEarlyAccess = new System.Windows.Forms.CheckBox();
+            this.checkBoxOldVersion = new System.Windows.Forms.CheckBox();
             this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -244,20 +244,20 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
-            // checkBoxEarlyAccess
+            // checkBoxOldVersion
             // 
-            this.checkBoxEarlyAccess.AutoSize = true;
-            this.checkBoxEarlyAccess.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxEarlyAccess.FlatAppearance.BorderSize = 0;
-            this.checkBoxEarlyAccess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxEarlyAccess.ForeColor = System.Drawing.Color.Orange;
-            this.checkBoxEarlyAccess.Location = new System.Drawing.Point(472, 229);
-            this.checkBoxEarlyAccess.Name = "checkBoxEarlyAccess";
-            this.checkBoxEarlyAccess.Size = new System.Drawing.Size(98, 21);
-            this.checkBoxEarlyAccess.TabIndex = 20;
-            this.checkBoxEarlyAccess.Text = "Early Access";
-            this.checkBoxEarlyAccess.UseVisualStyleBackColor = true;
-            this.checkBoxEarlyAccess.CheckedChanged += new System.EventHandler(this.checkBoxEarlyAccess_CheckedChanged);
+            this.checkBoxOldVersion.AutoSize = true;
+            this.checkBoxOldVersion.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxOldVersion.FlatAppearance.BorderSize = 0;
+            this.checkBoxOldVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxOldVersion.ForeColor = System.Drawing.Color.Orange;
+            this.checkBoxOldVersion.Location = new System.Drawing.Point(460, 229);
+            this.checkBoxOldVersion.Name = "checkBoxOldVersion";
+            this.checkBoxOldVersion.Size = new System.Drawing.Size(110, 21);
+            this.checkBoxOldVersion.TabIndex = 20;
+            this.checkBoxOldVersion.Text = "OLD VERSION";
+            this.checkBoxOldVersion.UseVisualStyleBackColor = true;
+            this.checkBoxOldVersion.CheckedChanged += new System.EventHandler(this.checkBoxEarlyAccess_CheckedChanged);
             // 
             // progressBar1
             // 
@@ -278,7 +278,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(741, 447);
-            this.Controls.Add(this.checkBoxEarlyAccess);
+            this.Controls.Add(this.checkBoxOldVersion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.chBoxRemember);
@@ -309,7 +309,7 @@
 
         }
 
-        private System.Windows.Forms.CheckBox checkBoxEarlyAccess;
+        private System.Windows.Forms.CheckBox checkBoxOldVersion;
 
         #endregion
 

@@ -77,9 +77,10 @@ namespace PixelAimbot
                 {
                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-
+                  
                     _berserker = false;
                     await Task.Delay(humanizer.Next(10, 240) + 1000);
+                    var Bersi = Task.Run(() => BerserkerSecond(token));
                 }
 
                 _floor1 = true;
