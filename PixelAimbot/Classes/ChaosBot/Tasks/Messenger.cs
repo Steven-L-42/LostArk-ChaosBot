@@ -212,7 +212,7 @@ namespace PixelAimbot
                                     picture.CaptureScreen().Save(m, System.Drawing.Imaging.ImageFormat.Jpeg);
                                     byte[] imageBytes = m.ToArray();
                                     values["discorduser"] = adminname;
-                                    values["response"] = adminname + "_" + Convert.ToBase64String(imageBytes);
+                                    values["response"] = Convert.ToBase64String(imageBytes);
                                 }
 
                             }
