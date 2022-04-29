@@ -6,6 +6,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Emgu.CV.CvEnum;
 
@@ -89,8 +90,12 @@ namespace PixelAimbot
 
         private void cap(byte[] buffer)
         {
-            enemyTemplate =
-                new Image<Bgr, byte>(this.picturePath); // icon of the enemy
+            if (this.picturePath != "")
+            {
+                enemyTemplate =
+                    new Image<Bgr, byte>(this.picturePath); // icon of the enemy
+            }
+
             if (this.maskPath != "")
             {
                 enemyMask =
@@ -115,56 +120,71 @@ namespace PixelAimbot
             testform.TransparencyKey = Color.White;
             testform.Show();
             Application.EnableVisualStyles();
-            try
-            {
-                while (true)
+
+                try
                 {
-                    Thread.Sleep(threadSleep);
-                    testform.Refresh();
-                    var rawScreen = screenPrinter.CaptureScreen();
-                    if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
+                    while (true)
                     {
-                        using (bitmapImage = new Bitmap(rawScreen))
+                        Thread.Sleep(threadSleep);
+                        testform.Refresh();
+                        var rawScreen = screenPrinter.CaptureScreen();
+                        if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
                         {
-                            rawScreen.Dispose();
-                            Point? enemy;
-                            using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                            using (bitmapImage = new Bitmap(rawScreen))
                             {
-                                enemy = null;
-                                screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                                if (radioButtonGetBest.Checked)
+                                rawScreen.Dispose();
+                                Point? enemy;
+                                using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                                 {
-                                    enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked,
-                                        testform);
-                                }
+                                    enemy = null;
+                                    screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
+                                    if (radioButtonGetText.Checked)
+                                    {
 
-                                if (radioButtonGetClosest.Checked)
-                                {
-                                    enemy = debugDetector.GetClosestEnemy(screenCapture, !checkBoxShowAll.Checked,
-                                        testform);
-                                }
+                                        labelDetectedText.Invoke((MethodInvoker) (() =>
+                                            labelDetectedText.Text = ChaosBot.ReadArea(screenCapture, x, y, width * -1,
+                                                height * -1, "123456789/")));
+                                    }
+                                    else
+                                    {
+                                        if (radioButtonGetBest.Checked)
+                                        {
+                                            enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked,
+                                                testform);
+                                        }
 
-                                if (radioButtonGetClosestBest.Checked)
-                                {
-                                    enemy = debugDetector.GetClosestBest(screenCapture, !checkBoxShowAll.Checked,
-                                        testform);
-                                }
+                                        if (radioButtonGetClosest.Checked)
+                                        {
+                                            enemy = debugDetector.GetClosestEnemy(screenCapture,
+                                                !checkBoxShowAll.Checked,
+                                                testform);
+                                        }
 
-                                if (enemy.HasValue)
-                                {
-                                    screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
-                                        ChaosBot.Recalc(enemyTemplate.Size.Width),
-                                        ChaosBot.Recalc(enemyTemplate.Size.Height, false), new Pen(Color.Blue, 3));
+                                        if (radioButtonGetClosestBest.Checked)
+                                        {
+                                            enemy = debugDetector.GetClosestBest(screenCapture,
+                                                !checkBoxShowAll.Checked,
+                                                testform);
+                                        }
+
+                                        if (enemy.HasValue)
+                                        {
+                                            screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
+                                                ChaosBot.Recalc(enemyTemplate.Size.Width),
+                                                ChaosBot.Recalc(enemyTemplate.Size.Height, false),
+                                                new Pen(Color.Blue, 3));
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                //  MessageBox.Show(ex.Message);
-            }
+                catch (Exception ex)
+                {
+                    //  MessageBox.Show(ex.Message);
+                }
+
             // throw new NotImplementedException();
         }
 
@@ -306,9 +326,9 @@ namespace PixelAimbot
 
 
                 var detector = new ScreenDetector(template, " + maskBool + @", " + treshold.ToString().Replace(",", ".") +
-                          @"f, ChaosBot.recalc(" + x + @"), ChaosBot.recalc(" + y + @", false), ChaosBot.recalc(" +
+                          @"f, ChaosBot.Recalc(" + x + @"), ChaosBot.Recalc(" + y + @", false), ChaosBot.Recalc(" +
                           width * -1 +
-                          @"), ChaosBot.recalc(" + height * -1 + @", false));
+                          @"), ChaosBot.Recalc(" + height * -1 + @", false));
                 var screenPrinter = new PrintScreen();
                 using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
 
@@ -397,6 +417,10 @@ namespace PixelAimbot
             debugDetector.setMatchingMethod(type);
         }
 
-      
+
+        private void radioButtonGetText_CheckedChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = true;
+        }
     }
 }

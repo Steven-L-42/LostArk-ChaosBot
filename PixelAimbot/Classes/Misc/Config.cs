@@ -1,13 +1,9 @@
 using System;
-using System.Dynamic;
+using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Forms;
+using System.Net;
+using System.Net.Cache;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace PixelAimbot.Classes.Misc
 {
@@ -94,7 +90,7 @@ namespace PixelAimbot.Classes.Misc
 
         public bool chBoxAutoMovement { get; set; } = false;
    
-        public int HealthSlider { get; set; } = 800;
+        public int HealthSlider { get; set; } = 70;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";
@@ -162,11 +158,39 @@ namespace PixelAimbot.Classes.Misc
             {
                 writer.Write(PixelAimbot.frmLogin.blow1.Encrypt_CTR(output));
             }
-       
+            
+            /* Save all Configurations additional within Database for future changes */
+            var config = Config.Load();
+            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            var webclient = new WebClient();
+            webclient.CachePolicy = noCachePolicy;
+            var values = new NameValueCollection
+            {
+                ["user"] = config.username,
+                ["settings"] = PixelAimbot.frmLogin.blow1.Encrypt_CTR(output),
+                ["name"] = filename,
+            };
+            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/updateOrCreateRotation"), "POST", values);
         }
 
         public static Rotations Load(string filename)
         {
+            
+            var config = Config.Load();
+            /*
+            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            var webclient = new WebClient();
+            webclient.CachePolicy = noCachePolicy;
+            var values = new NameValueCollection
+            {
+                ["user"] = config.username,
+                ["name"] = filename,
+            };
+            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            var result = webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/getRotation"), "POST", values);
+            return JsonConvert.DeserializeObject<Rotations>(PixelAimbot.frmLogin.blow1.Decrypt_CTR(Encoding.Default.GetString(result)));
+            */
             if (File.Exists(Path.Combine(ConfigPath, filename)))
             {
                 using (StreamReader reader = new StreamReader(Path.Combine(ConfigPath, filename)))

@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SharpDX;
-using SharpDX.Direct3D11;
-using SharpDX.DXGI;
-using Device = SharpDX.Direct3D11.Device;
-using MapFlags = SharpDX.Direct3D11.MapFlags;
 using Point = System.Windows.Point;
-using ResultCode = SharpDX.DXGI.ResultCode;
 
 namespace PixelAimbot.Classes.Misc
 {

@@ -174,7 +174,7 @@ namespace PixelAimbot
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
                  
-                    var t1 = Task.Run(() => Start(token));
+                    var t1 = Task.Run(() => Potions(token));
                    
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
@@ -365,7 +365,7 @@ namespace PixelAimbot
             try
             {
                 Properties.Settings.Default.chBoxCrashDetection = true;
-                Properties.Settings.Default.HealthSlider = 800;
+                Properties.Settings.Default.HealthSlider = 70;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
                 Properties.Settings.Default.txtRevive = "85";

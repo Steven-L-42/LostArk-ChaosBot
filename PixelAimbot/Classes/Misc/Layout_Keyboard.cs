@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using WindowsInput.Native;
-
-namespace PixelAimbot.Classes.Misc
+﻿namespace PixelAimbot.Classes.Misc
 {
     public class Layout_Keyboard
     {

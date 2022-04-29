@@ -228,7 +228,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="HealthSlider" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">800</Value>
+      <Value Profile="(Default)">70</Value>
     </Setting>
     <Setting Name="txtHeal10" Type="System.String" Scope="User">
       <Value Profile="(Default)">F1</Value>

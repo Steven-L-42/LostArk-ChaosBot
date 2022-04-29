@@ -9,6 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using IronOcr;
 using PixelAimbot.Classes.Misc;
 
 namespace PixelAimbot
@@ -37,6 +40,40 @@ namespace PixelAimbot
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        public static string ReadArea(Image<Bgr, byte> screenCapture, int x, int y, int width, int height, string whitelist = "")
+        {
+            tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
+            tess.Language = OcrLanguage.EnglishFast;
+            tess.MultiThreaded = true;
+            if (whitelist != "")
+            {
+                tess.Configuration.WhiteListCharacters = whitelist;
+            }
+
+            
+            string result = "";
+            try
+            {
+                
+                using (var input = new OcrInput())
+                {
+                    var contentArea = new Rectangle() { X = x, Y = y, Height = height, Width = width };
+                    input.AddImage(screenCapture.ToBitmap(), contentArea);
+                    result = tess.Read(input).Text;
+                    
+                    return result;
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+
+            return null;
+        }
         private string translateKey(int key)
         {
             string translate;
@@ -447,6 +484,27 @@ namespace PixelAimbot
 
         private void RefreshRotationCombox()
         {
+        /*    
+            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            var webclient = new WebClient();
+            var config = Config.Load();
+            webclient.CachePolicy = noCachePolicy;
+            var values = new NameValueCollection
+            {
+                ["user"] = config.username,
+            };
+            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
+            webclient.UploadValuesCompleted += (s, e) =>
+            {
+                comboBoxRotations.Items.Clear();
+                foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
+                {
+                    comboBoxRotations.Items.Add(entries["name"]);
+                    //MessageBox.Show(entries.ToString());
+                }
+            };*/
+            
             var files = Directory.GetFiles(ConfigPath);
             comboBoxRotations.Items.Clear();
             foreach (var file in files)

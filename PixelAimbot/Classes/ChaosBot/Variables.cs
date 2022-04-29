@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using IronOcr;
 using PixelAimbot.Classes.Misc;
 using Timer = System.Timers.Timer;
 
@@ -67,7 +68,7 @@ namespace PixelAimbot
         private int _swap;
         private int _formExists;
 
-        public static int healthPercent = 700;
+        public static int healthPercent = 70;
 
         public frmMinimized FormMinimized = new frmMinimized();
         public Config conf = new Config();
@@ -76,7 +77,8 @@ namespace PixelAimbot
 
         public Task TelegramTask;
         public Task DiscordTask;
-
+        public static IronTesseract tess = new IronTesseract();
+        
         public string resourceFolder = "";
         private string comboattack = "";
         private Priorized_Skills _skills = new Priorized_Skills();

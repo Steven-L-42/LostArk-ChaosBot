@@ -57,16 +57,18 @@
             this.buttonRecalcToBotresolution = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxMethod = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
+            this.radioButtonGetText = new System.Windows.Forms.RadioButton();
+            this.labelDetectedText = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(11, 377);
+            this.button2.Location = new System.Drawing.Point(10, 425);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(314, 27);
             this.button2.TabIndex = 2;
@@ -144,7 +146,7 @@
             // 
             // btnGetMinimap
             // 
-            this.btnGetMinimap.Location = new System.Drawing.Point(14, 281);
+            this.btnGetMinimap.Location = new System.Drawing.Point(14, 326);
             this.btnGetMinimap.Name = "btnGetMinimap";
             this.btnGetMinimap.Size = new System.Drawing.Size(148, 27);
             this.btnGetMinimap.TabIndex = 11;
@@ -158,7 +160,7 @@
             // 
             // buttonSelectPicture
             // 
-            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 314);
+            this.buttonSelectPicture.Location = new System.Drawing.Point(63, 359);
             this.buttonSelectPicture.Name = "buttonSelectPicture";
             this.buttonSelectPicture.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectPicture.TabIndex = 12;
@@ -168,7 +170,7 @@
             // 
             // buttonSelectMask
             // 
-            this.buttonSelectMask.Location = new System.Drawing.Point(63, 347);
+            this.buttonSelectMask.Location = new System.Drawing.Point(63, 392);
             this.buttonSelectMask.Name = "buttonSelectMask";
             this.buttonSelectMask.Size = new System.Drawing.Size(262, 27);
             this.buttonSelectMask.TabIndex = 13;
@@ -197,7 +199,7 @@
             // 
             // buttonSelectArea
             // 
-            this.buttonSelectArea.Location = new System.Drawing.Point(178, 281);
+            this.buttonSelectArea.Location = new System.Drawing.Point(171, 326);
             this.buttonSelectArea.Name = "buttonSelectArea";
             this.buttonSelectArea.Size = new System.Drawing.Size(147, 27);
             this.buttonSelectArea.TabIndex = 19;
@@ -207,7 +209,7 @@
             // 
             // pictureBoxMask
             // 
-            this.pictureBoxMask.Location = new System.Drawing.Point(14, 347);
+            this.pictureBoxMask.Location = new System.Drawing.Point(14, 392);
             this.pictureBoxMask.Name = "pictureBoxMask";
             this.pictureBoxMask.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxMask.TabIndex = 15;
@@ -215,7 +217,7 @@
             // 
             // pictureBoxPicture
             // 
-            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 314);
+            this.pictureBoxPicture.Location = new System.Drawing.Point(14, 359);
             this.pictureBoxPicture.Name = "pictureBoxPicture";
             this.pictureBoxPicture.Size = new System.Drawing.Size(43, 27);
             this.pictureBoxPicture.TabIndex = 14;
@@ -268,7 +270,7 @@
             // radioButtonGetClosest
             // 
             this.radioButtonGetClosest.AutoSize = true;
-            this.radioButtonGetClosest.Location = new System.Drawing.Point(86, 258);
+            this.radioButtonGetClosest.Location = new System.Drawing.Point(15, 281);
             this.radioButtonGetClosest.Name = "radioButtonGetClosest";
             this.radioButtonGetClosest.Size = new System.Drawing.Size(79, 17);
             this.radioButtonGetClosest.TabIndex = 25;
@@ -279,7 +281,7 @@
             // radioButtonGetClosestBest
             // 
             this.radioButtonGetClosestBest.AutoSize = true;
-            this.radioButtonGetClosestBest.Location = new System.Drawing.Point(171, 258);
+            this.radioButtonGetClosestBest.Location = new System.Drawing.Point(116, 281);
             this.radioButtonGetClosestBest.Name = "radioButtonGetClosestBest";
             this.radioButtonGetClosestBest.Size = new System.Drawing.Size(103, 17);
             this.radioButtonGetClosestBest.TabIndex = 26;
@@ -290,7 +292,7 @@
             // buttonGenerateCode
             // 
             this.buttonGenerateCode.Enabled = false;
-            this.buttonGenerateCode.Location = new System.Drawing.Point(11, 410);
+            this.buttonGenerateCode.Location = new System.Drawing.Point(11, 458);
             this.buttonGenerateCode.Name = "buttonGenerateCode";
             this.buttonGenerateCode.Size = new System.Drawing.Size(314, 27);
             this.buttonGenerateCode.TabIndex = 27;
@@ -330,25 +332,39 @@
             // comboBoxMethod
             // 
             this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Items.AddRange(new object[] {
-            "TemplateMatchingType.SqdiffNormed",
-            "TemplateMatchingType.Sqdiff",
-            "TemplateMatchingType.Ccoeff",
-            "TemplateMatchingType.CcoeffNormed",
-            "TemplateMatchingType.Ccorr",
-            "TemplateMatchingType.CcorrNormed",
-            "            "});
+            this.comboBoxMethod.Items.AddRange(new object[] {"TemplateMatchingType.SqdiffNormed", "TemplateMatchingType.Sqdiff", "TemplateMatchingType.Ccoeff", "TemplateMatchingType.CcoeffNormed", "TemplateMatchingType.Ccorr", "TemplateMatchingType.CcorrNormed", "            "});
             this.comboBoxMethod.Location = new System.Drawing.Point(131, 116);
             this.comboBoxMethod.Name = "comboBoxMethod";
             this.comboBoxMethod.Size = new System.Drawing.Size(194, 21);
             this.comboBoxMethod.TabIndex = 31;
             this.comboBoxMethod.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethod_SelectedIndexChanged);
             // 
+            // radioButtonGetText
+            // 
+            this.radioButtonGetText.AutoSize = true;
+            this.radioButtonGetText.Location = new System.Drawing.Point(116, 257);
+            this.radioButtonGetText.Name = "radioButtonGetText";
+            this.radioButtonGetText.Size = new System.Drawing.Size(66, 17);
+            this.radioButtonGetText.TabIndex = 32;
+            this.radioButtonGetText.TabStop = true;
+            this.radioButtonGetText.Text = "Get Text";
+            this.radioButtonGetText.UseVisualStyleBackColor = true;
+            this.radioButtonGetText.CheckedChanged += new System.EventHandler(this.radioButtonGetText_CheckedChanged);
+            // 
+            // labelDetectedText
+            // 
+            this.labelDetectedText.Location = new System.Drawing.Point(186, 259);
+            this.labelDetectedText.Name = "labelDetectedText";
+            this.labelDetectedText.Size = new System.Drawing.Size(139, 18);
+            this.labelDetectedText.TabIndex = 33;
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 449);
+            this.ClientSize = new System.Drawing.Size(339, 497);
+            this.Controls.Add(this.labelDetectedText);
+            this.Controls.Add(this.radioButtonGetText);
             this.Controls.Add(this.comboBoxMethod);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonRecalcToBotresolution);
@@ -380,14 +396,16 @@
             this.Name = "Debugging";
             this.Text = "Debugging";
             this.Load += new System.EventHandler(this.Debugging_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.RadioButton radioButtonGetText;
+        private System.Windows.Forms.Label labelDetectedText;
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxMethod;
