@@ -147,7 +147,7 @@ namespace PixelAimbot
                 try
                 {
                     Process[] processName = Process.GetProcessesByName("LostArk");
-                    if (processName.Length == 0)
+                    if (processName.Length == 0 && chBoxCrashDetection.Checked)
                     {
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);

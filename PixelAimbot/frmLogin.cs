@@ -214,7 +214,7 @@ namespace PixelAimbot
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://discord.gg/XDYkVKXxCS");
+            System.Diagnostics.Process.Start("https://discord.gg/fVVES97Z7q");
         }
 
         private void frmLogin_Load(object sender, EventArgs e)

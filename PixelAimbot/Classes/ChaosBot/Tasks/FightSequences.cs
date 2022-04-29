@@ -20,7 +20,7 @@ namespace PixelAimbot
             try
             {
                 Process[] process1Name = Process.GetProcessesByName("LostArk");
-                if (process1Name.Length == 0)
+                if (process1Name.Length == 0 && chBoxCrashDetection.Checked)
                 {
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                     await Task.Delay(5000);
@@ -135,7 +135,7 @@ namespace PixelAimbot
                 if (_floor3 && _stopp == false)
                 {
                     Process[] process3Name = Process.GetProcessesByName("LostArk");
-                    if (process3Name.Length == 0)
+                    if (process3Name.Length == 0 && chBoxCrashDetection.Checked)
                     {
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                         await Task.Delay(5000);
