@@ -155,6 +155,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
@@ -179,6 +180,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.txtDungeon2 = new System.Windows.Forms.TextBox();
             this.SETTINGS = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
             this.buttonConnectTelegram = new System.Windows.Forms.Button();
             this.buttonTestTelegram = new System.Windows.Forms.Button();
@@ -199,8 +201,6 @@
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
             this.labelSwap = new System.Windows.Forms.Label();
-            this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -529,7 +529,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Orange;
-            this.label25.Location = new System.Drawing.Point(28, 126);
+            this.label25.Location = new System.Drawing.Point(28, 125);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(357, 15);
             this.label25.TabIndex = 60;
@@ -622,13 +622,13 @@
             // HealthSlider
             // 
             this.HealthSlider.Location = new System.Drawing.Point(6, 37);
-            this.HealthSlider.Maximum = 852;
-            this.HealthSlider.Minimum = 651;
+            this.HealthSlider.Maximum = 853;
+            this.HealthSlider.Minimum = 631;
             this.HealthSlider.Name = "HealthSlider";
             this.HealthSlider.Size = new System.Drawing.Size(165, 45);
-            this.HealthSlider.SmallChange = 20;
-            this.HealthSlider.TabIndex = 62;
-            this.HealthSlider.TickFrequency = 20;
+            this.HealthSlider.SmallChange = 5;
+            this.HealthSlider.TabIndex = 57;
+            this.HealthSlider.TickFrequency = 999;
             this.HealthSlider.TickStyle = System.Windows.Forms.TickStyle.None;
             this.HealthSlider.Value = 651;
             this.HealthSlider.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
@@ -643,7 +643,7 @@
             this.txtRevive.Name = "txtRevive";
             this.txtRevive.ReadOnly = true;
             this.txtRevive.Size = new System.Drawing.Size(35, 18);
-            this.txtRevive.TabIndex = 61;
+            this.txtRevive.TabIndex = 60;
             this.txtRevive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRevive.WordWrap = false;
             // 
@@ -1988,6 +1988,26 @@
             this.label3.Text = "RESTART TIMER (sec):";
             this.toolTip1.SetToolTip(this.label3, "We recommend to set this not lower then 10 seconds!");
             // 
+            // chBoxCrashDetection
+            // 
+            this.chBoxCrashDetection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxCrashDetection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxCrashDetection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxCrashDetection.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxCrashDetection.FlatAppearance.BorderSize = 0;
+            this.chBoxCrashDetection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxCrashDetection.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxCrashDetection.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxCrashDetection.Location = new System.Drawing.Point(3, 122);
+            this.chBoxCrashDetection.Name = "chBoxCrashDetection";
+            this.chBoxCrashDetection.Size = new System.Drawing.Size(124, 24);
+            this.chBoxCrashDetection.TabIndex = 77;
+            this.chBoxCrashDetection.Text = "CRASH-DETECTION";
+            this.toolTip1.SetToolTip(this.chBoxCrashDetection, "Bot stopps after LostArk Process is canceled.\r\n\r\nExample: Game is crashed or Conn" +
+        "ection is lost.\r\nBot will stop!");
+            this.chBoxCrashDetection.UseMnemonic = false;
+            this.chBoxCrashDetection.UseVisualStyleBackColor = false;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -2338,6 +2358,17 @@
             this.SETTINGS.TabIndex = 4;
             this.SETTINGS.Text = "GameSettings";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Orange;
+            this.label10.Location = new System.Drawing.Point(131, 126);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(248, 15);
+            this.label10.TabIndex = 78;
+            this.label10.Text = "<-- CHECK IF LOST ARK PROCESS IS ACTIVE";
+            // 
             // groupBoxTelegram
             // 
             this.groupBoxTelegram.Controls.Add(this.buttonConnectTelegram);
@@ -2585,37 +2616,6 @@
             this.labelSwap.TabIndex = 13;
             this.labelSwap.Text = "GBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click_1);
-            // 
-            // chBoxCrashDetection
-            // 
-            this.chBoxCrashDetection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxCrashDetection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxCrashDetection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxCrashDetection.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxCrashDetection.FlatAppearance.BorderSize = 0;
-            this.chBoxCrashDetection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxCrashDetection.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxCrashDetection.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxCrashDetection.Location = new System.Drawing.Point(3, 122);
-            this.chBoxCrashDetection.Name = "chBoxCrashDetection";
-            this.chBoxCrashDetection.Size = new System.Drawing.Size(124, 24);
-            this.chBoxCrashDetection.TabIndex = 77;
-            this.chBoxCrashDetection.Text = "CRASH-DETECTION";
-            this.toolTip1.SetToolTip(this.chBoxCrashDetection, "Bot stopps after LostArk Process is canceled.\r\n\r\nExample: Game is crashed or Conn" +
-        "ection is lost.\r\nBot will stop!");
-            this.chBoxCrashDetection.UseMnemonic = false;
-            this.chBoxCrashDetection.UseVisualStyleBackColor = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Orange;
-            this.label10.Location = new System.Drawing.Point(131, 126);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(248, 15);
-            this.label10.TabIndex = 78;
-            this.label10.Text = "<-- CHECK IF LOST ARK PROCESS IS ACTIVE";
             // 
             // ChaosBot
             // 

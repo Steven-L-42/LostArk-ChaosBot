@@ -12,7 +12,7 @@ namespace PixelAimbot
         {
             healthPercent = HealthSlider.Value;
             
-            labelheal.Text = "Heal at: " + ((ChaosBot.healthPercent - 651) * 100) / (852 - 651) + "% Life";
+            labelheal.Text = "Heal at: " + ((ChaosBot.healthPercent - 631) * 100) / (853 - 631) + "% Life";
          
         }
         private async Task Potions(CancellationToken token)
@@ -30,9 +30,9 @@ namespace PixelAimbot
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        object health10 = au3.PixelSearch(Recalc(633), Recalc(962, false), Recalc(ChaosBot.healthPercent),
-                            Recalc(969, false), 0x050405, 15);
+                        await Task.Delay(1, token); 
+                        object health10 = au3.PixelSearch(Recalc(631), Recalc(962, false), Recalc(ChaosBot.healthPercent),
+                            Recalc(968, false), 0x050405, 15);
                         if (health10.ToString() != "0")
                         {
                             au3.Send("{" + txtHeal10.Text + "}");

@@ -53,13 +53,13 @@ namespace PixelAimbot
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
                                 _floorFight = false;
-                                _portaldetect = false;
+                            
                                 _potions = false;
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "REVIVE!"));
                                 VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 10);
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                 _floorFight = true;
-                                _portaldetect = true;
+                        
                                 _potions = false;
                             }
                             var sleepTime = new Random().Next(450, 555);
