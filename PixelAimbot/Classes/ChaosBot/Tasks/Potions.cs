@@ -32,7 +32,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token); 
                         object health10 = au3.PixelSearch(Recalc(631), Recalc(962, false), Recalc(ChaosBot.healthPercent),
-                            Recalc(968, false), 0x050405, 15);
+                            Recalc(968, false), 0x050405, 10); // TEST:     "0x050405, 15"      changed to:     "0x050405, 10"
                         if (health10.ToString() != "0")
                         {
                             au3.Send("{" + txtHeal10.Text + "}");
