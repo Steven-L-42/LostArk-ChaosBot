@@ -29,14 +29,8 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                _potions = true;
-                _floorFight = true;
-                _stopp = false;
                 while (_potions && _floorFight && _stopp == false)
                 {
-                    
-                        
-                        
                     try
                     {
                         token.ThrowIfCancellationRequested();

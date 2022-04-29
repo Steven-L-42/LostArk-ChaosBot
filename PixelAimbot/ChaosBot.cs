@@ -174,7 +174,7 @@ namespace PixelAimbot
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
                  
-                    var t1 = Task.Run(() => Potions(token));
+                    var t1 = Task.Run(() => Start(token));
                    
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
