@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>2.5.1r
+    <value>2.5.3r
++Fix Bug with Potion
++small adjustments
+
+2.5.1r
 +Add Game CrashDetection
 +Add Berserker Ultimate Improvement
 +Small fixes
