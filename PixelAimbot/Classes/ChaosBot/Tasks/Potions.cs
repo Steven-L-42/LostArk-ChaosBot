@@ -40,15 +40,21 @@ namespace PixelAimbot
                         var screenPrinter = new PrintScreen();
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            var healthText = ReadArea(screenCapture, Recalc(631), Recalc(962, false), Recalc(222), Recalc(22, false));
-                            var healthSplit = healthText.Split('/');
-
-                            if (int.Parse(healthSplit[0]) / int.Parse(healthSplit[1]) * 100 < healthPercent)
+                            var healthText = ReadArea(screenCapture, Recalc(675), Recalc(957, false), Recalc(135), Recalc(16, false), "1234567890/");
+                            
+                            if (healthText.Contains('/'))
                             {
-                                au3.Send("{" + txtHeal10.Text + "}");
-                                au3.Send("{" + txtHeal10.Text + "}");
-                                au3.Send("{" + txtHeal10.Text + "}");
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion..."));
+                                var healthSplit = healthText.Split('/');
+                                decimal currentHealth = int.Parse(healthSplit[0]);
+                                decimal maxHealth = int.Parse(healthSplit[1]);
+                                Debug.WriteLine((currentHealth / maxHealth) * 100 + " < " + healthPercent);
+                                if ((currentHealth / maxHealth) * 100 < healthPercent)
+                                {
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    au3.Send("{" + txtHeal10.Text + "}");
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion..."));
+                                }
                             }
                         }
                         

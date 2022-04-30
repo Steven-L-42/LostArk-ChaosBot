@@ -20,7 +20,6 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -641,6 +640,10 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
+                if (rotation.HealthSlider > 100)
+                {
+                    rotation.HealthSlider = 100;
+                }
                 chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
                 HealthSlider.Value = rotation.HealthSlider;
                 txtRevive.Text = rotation.txtRevive;
