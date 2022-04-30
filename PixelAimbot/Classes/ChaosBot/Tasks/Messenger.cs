@@ -333,6 +333,23 @@ namespace PixelAimbot
             }
         }
 
+        public static void DiscordSendMessage(string message)
+        {
+            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            var webclient = new WebClient();
+            webclient.CachePolicy = noCachePolicy;
+            var values = new NameValueCollection
+            {
+                ["discorduser"] = Config.Load().discorduser,
+                ["response"] = message,
+            };
+            using (webclient)
+            {
+                webclient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/respondMessage"), "POST", values);
+            }
+        }
+
         private void buttonTestTelegram_Click_1(object sender, EventArgs e)
         {
             var bot = new TelegramBotClient(textBoxTelegramAPI.Text);

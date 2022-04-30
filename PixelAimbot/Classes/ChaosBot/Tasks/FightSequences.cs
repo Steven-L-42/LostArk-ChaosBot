@@ -24,6 +24,7 @@ namespace PixelAimbot
                 {
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                     await Task.Delay(5000);
+                    DiscordSendMessage("Game Crashed - Bot Stopped!");
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
                 }
                 token.ThrowIfCancellationRequested();
@@ -65,6 +66,7 @@ namespace PixelAimbot
                     {
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                         await Task.Delay(5000);
+                        DiscordSendMessage("Game Crashed - Bot Stopped!");
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
                     }
                     token.ThrowIfCancellationRequested();
@@ -139,6 +141,7 @@ namespace PixelAimbot
                     {
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                         await Task.Delay(5000);
+                        DiscordSendMessage("Game Crashed - Bot Stopped!");
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
                     }
                     token.ThrowIfCancellationRequested();
