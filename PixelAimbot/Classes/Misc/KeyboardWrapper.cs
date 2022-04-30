@@ -163,6 +163,8 @@ namespace PixelAimbot.Classes.Misc
         private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
         private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
         private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        private const int MOUSEEVENTF_WHEEL = 0x0800;
+
 
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(out POINT lpPoint);
@@ -262,6 +264,11 @@ namespace PixelAimbot.Classes.Misc
 
         // simulates a click-and-release action of the left mouse
         // button at its current position
+        public static void Scroll(int scroll)
+        {
+            mouse_event(MOUSEEVENTF_WHEEL, 0, 0, scroll, 0);  // -Value für ScrollDown und +Value für ScrollUp 
+                                                              // Bsp.: VirtualMouse.Scroll(-120); VirtualMouse.Scroll(+120);
+        }
         public static void LeftClick()
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);

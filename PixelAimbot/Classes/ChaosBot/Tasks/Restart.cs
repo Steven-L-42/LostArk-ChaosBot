@@ -35,18 +35,25 @@ namespace PixelAimbot
                 {
                     if (_swap == 3)
                     {
+
+
                         token.ThrowIfCancellationRequested();
+                        Random random = new Random();
                         await Task.Delay(1, token);
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(humanizer.Next(10, 240) + 1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(123, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
-                        VirtualMouse.MoveTo(Recalc(1845), Recalc(124, false), 10);
+                        VirtualMouse.MoveTo(Recalc(1844), Recalc(44, false), 10);
+
+                        for (int i = 0; i < random.Next(2, 10); i++)
+                        {
+                            VirtualMouse.Scroll(-120);
+                            await Task.Delay(100);
+                        }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap++;
                         _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
                         var t9 = Task.Run(() => Restart(token));
                         await Task.WhenAny(t9);
@@ -55,34 +62,21 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
+                        Random random = new Random();
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(humanizer.Next(10, 240) + 1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(123, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
-                        VirtualMouse.MoveTo(Recalc(1845), Recalc(103, false), 10);
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        _swap++;
-                        _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(humanizer.Next(10, 240) + 2000);
-                        var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
-                    }
-                    else if (_swap == 9)
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(humanizer.Next(10, 240) + 1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(123, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
-                        VirtualMouse.MoveTo(Recalc(1845), Recalc(84, false), 10);
+                        VirtualMouse.MoveTo(Recalc(1844), Recalc(64, false), 10);
+
+                        for (int i = 0; i < random.Next(2, 10); i++)
+                        {
+                            VirtualMouse.Scroll(-120);
+                            await Task.Delay(100);
+                        }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap = 0;
                         _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
                         var t9 = Task.Run(() => Restart(token));
                         await Task.WhenAny(t9);
