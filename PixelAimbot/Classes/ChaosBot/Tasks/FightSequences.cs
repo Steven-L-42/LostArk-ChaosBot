@@ -49,9 +49,9 @@ namespace PixelAimbot
                     _sharpshooter = true;
                     _sorcerer = true;
                     _soulfist = true;
+                    var t14 = Task.Run(() => UltimateAttack(token));
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => Floorfight(token));
-                    var t14 = Task.Run(() => UltimateAttack(token));
                     var t16 = Task.Run(() => Revive(token));
                     var t18 = Task.Run(() => Portaldetect(token));
                     var t20 = Task.Run(() => Potions(token));
@@ -102,7 +102,6 @@ namespace PixelAimbot
 
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => Floorfight(token));
-                    var t14 = Task.Run(() => UltimateAttack(token));
                     var t16 = Task.Run(() => Revive(token));
                     var t20 = Task.Run(() => Potions(token));
 
@@ -129,7 +128,7 @@ namespace PixelAimbot
                         await Task.WhenAny(t13);
                     }
 
-                    await Task.WhenAny(t11, t12, t14, t16, t20);
+                    await Task.WhenAny(t11, t12, t16, t20);
                 }
 
                 if (_floor3 && _stopp == false)
@@ -170,7 +169,6 @@ namespace PixelAimbot
 
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => Floorfight(token));
-                    var t14 = Task.Run(() => UltimateAttack(token));
                     var t16 = Task.Run(() => Revive(token));
                     var t20 = Task.Run(() => Potions(token));
                     await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon3.Text) * 1000, token);
@@ -187,7 +185,7 @@ namespace PixelAimbot
                         await Task.WhenAny(t13);
                     }
 
-                    await Task.WhenAny(t11, t12, t14, t16, t20);
+                    await Task.WhenAny(t11, t12, t16, t20);
                 }
             }
             catch (AggregateException)
@@ -996,9 +994,9 @@ namespace PixelAimbot
                     }
 
                     _searchboss = false;
-                   
+                    var t14 = Task.Run(() => UltimateAttack(token));
                     var t12 = Task.Run(() => Floortime(token));
-                    await Task.WhenAny(new[] {t12});
+                    await Task.WhenAny(new[] {t12,t14});
                 }
             }
             catch (AggregateException)
