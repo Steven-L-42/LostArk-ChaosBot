@@ -239,8 +239,8 @@ namespace PixelAimbot
                             else
                             {
                                 // Not found Swirl around with Mouse
-                                VirtualMouse.MoveTo(new Random().Next(Recalc(460), Recalc(1000)),
-                                    new Random().Next(Recalc(120, false), Recalc(780, false)), 10);
+                                VirtualMouse.MoveTo(Between(Recalc(460), Recalc(1000)),
+                                    Between(Recalc(120, false), Recalc(780, false)), 10);
                             }
                         }
                     }

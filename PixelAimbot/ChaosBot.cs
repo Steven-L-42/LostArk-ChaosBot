@@ -1,7 +1,4 @@
-﻿using Emgu.CV;
-using Emgu.CV.Structure;
-using PixelAimbot.Classes.Misc;
-using PixelAimbot.Classes.OpenCV;
+﻿using PixelAimbot.Classes.Misc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +20,6 @@ namespace PixelAimbot
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
 
