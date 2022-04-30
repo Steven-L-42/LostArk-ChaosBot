@@ -640,9 +640,9 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
-                if (rotation.HealthSlider > 100)
+                if (rotation.HealthSlider2 > 100)
                 {
-                    rotation.HealthSlider = 100;
+                    rotation.HealthSlider2 = 100;
                 }
                 chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
                 HealthSlider2.Value = rotation.HealthSlider2;
