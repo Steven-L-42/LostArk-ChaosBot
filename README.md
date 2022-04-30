@@ -6,8 +6,8 @@
 
 ### What needs/should to be integrated?
 
-- [X] HWID Check (2 HWID's per User)
-- [ ] Is Game Running check (restart game or stop bot?)
-- [ ] Telegram / Discord Messages
-- [X] Virtualisation and Obfuscation to secure everything
-- [X] Integrate API instead of MySQL Connection
+- [Y] HWID Check (2 HWID's per User)
+- [Y] Is Game Running check (restart game or stop bot?)
+- [Y] Telegram / Discord Messages
+- [Y] Virtualisation and Obfuscation to secure everything
+- [Y] Integrate API instead of MySQL Connection
