@@ -40,13 +40,15 @@ namespace PixelAimbot
                         var screenPrinter = new PrintScreen();
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            var healthText = ReadArea(screenCapture, Recalc(675), Recalc(957, false), Recalc(135), Recalc(16, false), "1234567890/");
+                            var healthText = ReadArea(screenCapture, Recalc(643), Recalc(953, false), Recalc(201), Recalc(24, false), "1234567890/");
                             
                             if (healthText.Contains('/'))
                             {
                                 var healthSplit = healthText.Split('/');
                                 decimal currentHealth = int.Parse(healthSplit[0]);
                                 decimal maxHealth = int.Parse(healthSplit[1]);
+                                Debug.WriteLine("CurrentHealth: " + currentHealth);
+                                Debug.WriteLine("maxHealth: " + maxHealth);
                                 Debug.WriteLine((currentHealth / maxHealth) * 100 + " < " + healthPercent);
                                 if ((currentHealth / maxHealth) * 100 < healthPercent)
                                 {
