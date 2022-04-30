@@ -309,7 +309,7 @@ namespace PixelAimbot
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
             txtHeal10.Text = Properties.Settings.Default.txtHeal10;
 
-
+            labelheal.Text = "Heal at: " + ChaosBot.healthPercent + "% Life";
         }
         
         private void lbClose_Click(object sender, EventArgs e)
