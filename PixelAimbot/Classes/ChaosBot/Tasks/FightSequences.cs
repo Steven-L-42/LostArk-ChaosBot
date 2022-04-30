@@ -88,6 +88,7 @@ namespace PixelAimbot
                     _sorcerer = true;
                     _soulfist = true;
 
+
                     if (_leavetimer == 1 && chBoxActivateF3.Checked == false)
                     {
                         var t36 = Task.Run(() => Leavetimerfloor2(token));
@@ -994,6 +995,16 @@ namespace PixelAimbot
                     }
 
                     _searchboss = false;
+                    _gunlancer = true;
+                    _shadowhunter = true;
+                    _berserker = true;
+                    _paladin = true;
+                    _sharpshooter = true;
+                    _bard = true;
+                    _sorcerer = true;
+                    _soulfist = true;
+                    _ultimate = true;
+                    _floorFight = true;
                     var t14 = Task.Run(() => UltimateAttack(token));
                     var t12 = Task.Run(() => Floortime(token));
                     await Task.WhenAny(new[] {t12,t14});
