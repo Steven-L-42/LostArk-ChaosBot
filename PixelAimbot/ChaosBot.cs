@@ -261,11 +261,11 @@ namespace PixelAimbot
             comboBox1.DisplayMember = "LAYOUTS";
             _currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
-
+           
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
             chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
-            HealthSlider.Value = Properties.Settings.Default.HealthSlider;
+            HealthSlider2.Value = Properties.Settings.Default.HealthSlider2;
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
             txPE.Text = Properties.Settings.Default.txPE;
@@ -365,7 +365,7 @@ namespace PixelAimbot
             try
             {
                 Properties.Settings.Default.chBoxCrashDetection = true;
-                Properties.Settings.Default.HealthSlider = 70;
+                Properties.Settings.Default.HealthSlider2 = 70;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
                 Properties.Settings.Default.txtRevive = "85";
@@ -445,7 +445,7 @@ namespace PixelAimbot
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
-                HealthSlider.Value = Properties.Settings.Default.HealthSlider;
+                HealthSlider2.Value = Properties.Settings.Default.HealthSlider2;
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
@@ -551,7 +551,7 @@ namespace PixelAimbot
                 if (comboBoxRotations.Text != "main")
                 {
                     rotation.chBoxCrashDetection = chBoxCrashDetection.Checked;
-                    rotation.HealthSlider = HealthSlider.Value;
+                    rotation.HealthSlider2 = HealthSlider2.Value;
                     rotation.chBoxGunlancer = (bool) chBoxGunlancer.Checked;
                     rotation.txtRevive = txtRevive.Text;
                     rotation.chBoxRevive = (bool) chBoxRevive.Checked;
@@ -642,7 +642,7 @@ namespace PixelAimbot
             if (rotation != null)
             {
                 chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
-                HealthSlider.Value = rotation.HealthSlider;
+                HealthSlider2.Value = rotation.HealthSlider2;
                 txtRevive.Text = rotation.txtRevive;
                 chBoxRevive.Checked = rotation.chBoxRevive;
                 txtRestart.Text = rotation.txtRestart;

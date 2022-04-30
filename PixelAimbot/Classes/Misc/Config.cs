@@ -90,7 +90,7 @@ namespace PixelAimbot.Classes.Misc
 
         public bool chBoxAutoMovement { get; set; } = false;
    
-        public int HealthSlider { get; set; } = 70;
+        public int HealthSlider2 { get; set; } = 70;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";

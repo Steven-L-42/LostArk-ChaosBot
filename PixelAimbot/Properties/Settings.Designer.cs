@@ -926,12 +926,12 @@ namespace PixelAimbot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("70")]
-        public int HealthSlider {
+        public int HealthSlider2 {
             get {
-                return ((int)(this["HealthSlider"]));
+                return ((int)(this["HealthSlider2"]));
             }
             set {
-                this["HealthSlider"] = value;
+                this["HealthSlider2"] = value;
             }
         }
         

@@ -17,7 +17,7 @@ namespace PixelAimbot
     {
         public void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            healthPercent = HealthSlider.Value;
+            healthPercent = HealthSlider2.Value;
             
             labelheal.Text = "Heal at: " + ChaosBot.healthPercent + "% Life";
          
