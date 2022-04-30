@@ -46,6 +46,9 @@ namespace PixelAimbot
             tess.Configuration.EngineMode = TesseractEngineMode.LstmOnly;
             tess.Language = OcrLanguage.EnglishFast;
             tess.MultiThreaded = true;
+            tess.Configuration.ReadBarCodes = false;
+            tess.Configuration.RenderSearchablePdfsAndHocr = false;
+            tess.Configuration.PageSegmentationMode = TesseractPageSegmentationMode.Auto;
             if (whitelist != "")
             {
                 tess.Configuration.WhiteListCharacters = whitelist;
