@@ -46,9 +46,9 @@ namespace PixelAimbot
                 /////////////// ANTI KICK ///////////////////
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(humanizer.Next(10, 240) + 1500, token);
-                VirtualMouse.MoveTo(Recalc(screenWidth/2+3), Recalc(screenHeight/2-11, false), 10);
+                VirtualMouse.MoveTo((screenWidth/2+3), (screenHeight/2-11), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                VirtualMouse.MoveTo(Recalc(screenWidth/2-1), Recalc(screenHeight/2-8, false), 10);
+                VirtualMouse.MoveTo((screenWidth/2-1), (screenHeight/2-8), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
 

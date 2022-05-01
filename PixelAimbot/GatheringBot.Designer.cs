@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GatheringBot));
             this.lbClose = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -128,19 +127,6 @@
             this.lbStatus.Text = "READY";
             this.lbStatus.TextChanged += new System.EventHandler(this.lbStatus_TextChanged);
             this.lbStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label1.ForeColor = System.Drawing.Color.Orange;
-            this.label1.Location = new System.Drawing.Point(67, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 25);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Gatheringbot";
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
             // 
             // label15
             // 
@@ -709,7 +695,7 @@
             this.STARTEXIT.Padding = new System.Windows.Forms.Padding(3);
             this.STARTEXIT.Size = new System.Drawing.Size(418, 150);
             this.STARTEXIT.TabIndex = 0;
-            this.STARTEXIT.Text = "Fishbot";
+            this.STARTEXIT.Text = "Fishing";
             // 
             // groupBox2
             // 
@@ -911,7 +897,7 @@
             this.labelSwap.Text = "CBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click);
             // 
-            // FishBot
+            // GatheringBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -921,7 +907,6 @@
             this.ClientSize = new System.Drawing.Size(450, 237);
             this.Controls.Add(this.labelSwap);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.lbClose);
             this.Controls.Add(this.tabControl1);
@@ -929,7 +914,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Name = "FishBot";
+            this.Name = "GatheringBot";
             this.Text = "FishBot";
             this.Load += new System.EventHandler(this.FishBot_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FishBot_MouseDown);
@@ -962,7 +947,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage SETTINGS;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label15;

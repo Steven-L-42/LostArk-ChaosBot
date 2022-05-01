@@ -163,7 +163,6 @@ namespace PixelAimbot
                         this.Hide();
                     }
 
-                    DiscordSendMessage("Bot started!");
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
