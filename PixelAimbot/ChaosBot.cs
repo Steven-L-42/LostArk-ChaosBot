@@ -35,14 +35,14 @@ namespace PixelAimbot
             // Set the Hotkey triggerer the F9 key
             // Expected an integer value for F9: 0x78, but you can convert the Keys.KEY to its int value
             // See: https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
-            int FirstHotKeyKey = (int) Keys.F9;
+            int FirstHotKeyKey = (int)Keys.F9;
             // Register the "F9" hotkey
             UnregisterHotKey(this.Handle, FirstHotkeyId);
             Boolean F9Registered = RegisterHotKey(this.Handle, FirstHotkeyId, 0x0000, FirstHotKeyKey);
 
             // Repeat the same process but with F10
             int SecondHotkeyId = 2;
-            int SecondHotKeyKey = (int) Keys.F10;
+            int SecondHotKeyKey = (int)Keys.F10;
             UnregisterHotKey(this.Handle, SecondHotkeyId);
             Boolean F10Registered = RegisterHotKey(this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey);
             telegramToken = new CancellationTokenSource();
@@ -63,7 +63,8 @@ namespace PixelAimbot
             try
             {
                 DiscordTask = DiscordBotAsync(conf.discorduser, discordToken.Token);
-            } catch {}
+            }
+            catch { }
 
             // 4. Verify if both hotkeys were succesfully registered, if not, show message in the console
             if (!F9Registered)
@@ -78,7 +79,7 @@ namespace PixelAimbot
             }
         }
 
-        
+
 
 
         private async void btnPause_Click(object sender, EventArgs e)
@@ -129,9 +130,9 @@ namespace PixelAimbot
                 this.Show();
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "STOPPED!"));
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "READY!"));
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
             }
         }
 
@@ -163,14 +164,15 @@ namespace PixelAimbot
                         this.Hide();
                     }
 
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "READY!"));
+                    DiscordSendMessage("Bot started!");
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                 
+
                     var t1 = Task.Run(() => Start(token));
-                   
+
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
                         _RepairReset = false;
@@ -190,7 +192,7 @@ namespace PixelAimbot
                         _logout = false;
                     }
 
-                    await Task.WhenAny(new[] {t1});
+                    await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
                 {
@@ -203,7 +205,7 @@ namespace PixelAimbot
             }
         }
 
-        
+
         public void ChaosBot_Load(object sender, EventArgs e)
         {
             List<Layout_Keyboard> LAYOUT = new List<Layout_Keyboard>();
@@ -256,11 +258,11 @@ namespace PixelAimbot
             comboBox1.DisplayMember = "LAYOUTS";
             _currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
-           
+
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
             chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
-            HealthSlider2.Value = Properties.Settings.Default.HealthSlider2;
+            HealthSlider1.Value = Properties.Settings.Default.HealthSlider1;
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
             txPE.Text = Properties.Settings.Default.txPE;
@@ -286,7 +288,7 @@ namespace PixelAimbot
             txCoolS.Text = Properties.Settings.Default.cS;
             txCoolD.Text = Properties.Settings.Default.cD;
             txCoolF.Text = Properties.Settings.Default.cF;
-           
+
             chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
             txtRepair.Text = Properties.Settings.Default.autorepair;
             chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -309,9 +311,13 @@ namespace PixelAimbot
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
             txtHeal10.Text = Properties.Settings.Default.txtHeal10;
 
-            labelheal.Text = "Heal at: " + ChaosBot.healthPercent + "% Life";
+            healthPercent = HealthSlider1.Value;
+            double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
+            double sliderRange = (HealthSlider1.Maximum - HealthSlider1.Minimum);
+            double sliderPercent = 100 * (distanceFromMin / sliderRange);
+            labelheal.Text = "Heal at: " + Convert.ToInt32(sliderPercent) + "% Life";
         }
-        
+
         private void lbClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -327,7 +333,7 @@ namespace PixelAimbot
             }
         }
 
-      
+
 
         private void chBoxAutoRepair_CheckedChanged(object sender, EventArgs e)
         {
@@ -360,7 +366,7 @@ namespace PixelAimbot
             try
             {
                 Properties.Settings.Default.chBoxCrashDetection = true;
-                Properties.Settings.Default.HealthSlider2 = 70;
+                Properties.Settings.Default.HealthSlider1 = 801;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
                 Properties.Settings.Default.txtRevive = "85";
@@ -440,7 +446,7 @@ namespace PixelAimbot
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
-                HealthSlider2.Value = Properties.Settings.Default.HealthSlider2;
+                HealthSlider1.Value = Properties.Settings.Default.HealthSlider1;
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
                 chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
@@ -451,7 +457,7 @@ namespace PixelAimbot
                 chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
                 txtHeal10.Text = Properties.Settings.Default.instant;
                 chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
-              
+
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
                 txtRepair.Text = Properties.Settings.Default.autorepair;
                 chBoxY.Checked = Properties.Settings.Default.chBoxShadowhunter;
@@ -546,33 +552,33 @@ namespace PixelAimbot
                 if (comboBoxRotations.Text != "main")
                 {
                     rotation.chBoxCrashDetection = chBoxCrashDetection.Checked;
-                    rotation.HealthSlider2 = HealthSlider2.Value;
-                    rotation.chBoxGunlancer = (bool) chBoxGunlancer.Checked;
+                    rotation.HealthSlider1 = HealthSlider1.Value;
+                    rotation.chBoxGunlancer = (bool)chBoxGunlancer.Checked;
                     rotation.txtRevive = txtRevive.Text;
-                    rotation.chBoxRevive = (bool) chBoxRevive.Checked;
+                    rotation.chBoxRevive = (bool)chBoxRevive.Checked;
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
                     rotation.txLeaveTimerFloor3 = txLeaveTimerFloor3.Text;
                     rotation.txtRestart = txtRestart.Text;
                     rotation.chBoxUnstuckF1 = chBoxUnstuckF1.Checked;
-                  
-                    rotation.chBoxAutoRepair = (bool) chBoxAutoRepair.Checked;
+
+                    rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
 
                     rotation.autologout = txtLOGOUT.Text;
                     rotation.chBoxautologout = chBoxLOGOUT.Checked;
                     rotation.chBoxAutoMovement = chBoxAutoMovement.Checked;
                     rotation.autorepair = txtRepair.Text;
-                    rotation.chBoxShadowhunter = (bool) chBoxY.Checked;
-                    rotation.chboxPaladin = (bool) chBoxPaladin.Checked;
-                    rotation.chBoxBerserker = (bool) chBoxBerserker.Checked;
-                    rotation.chBoxDeathblade = (bool) chBoxDeathblade.Checked;
-                    rotation.chBoxDeathblade2 = (bool) chBoxDeathblade2.Checked;
-                    rotation.chBoxSharpshooter = (bool) chBoxSharpshooter.Checked;
-                    rotation.chBoxSoulfist = (bool) chBoxSoulfist.Checked;
-                    rotation.chBoxSorcerer = (bool) chBoxSorcerer.Checked;
-                    rotation.chBoxBard = (bool) chBoxBard.Checked;
-                    rotation.chBoxGunlancer2 = (bool) chBoxGunlancer2.Checked;
-                    rotation.chBoxChannelSwap = (bool) chBoxChannelSwap.Checked;
+                    rotation.chBoxShadowhunter = (bool)chBoxY.Checked;
+                    rotation.chboxPaladin = (bool)chBoxPaladin.Checked;
+                    rotation.chBoxBerserker = (bool)chBoxBerserker.Checked;
+                    rotation.chBoxDeathblade = (bool)chBoxDeathblade.Checked;
+                    rotation.chBoxDeathblade2 = (bool)chBoxDeathblade2.Checked;
+                    rotation.chBoxSharpshooter = (bool)chBoxSharpshooter.Checked;
+                    rotation.chBoxSoulfist = (bool)chBoxSoulfist.Checked;
+                    rotation.chBoxSorcerer = (bool)chBoxSorcerer.Checked;
+                    rotation.chBoxBard = (bool)chBoxBard.Checked;
+                    rotation.chBoxGunlancer2 = (bool)chBoxGunlancer2.Checked;
+                    rotation.chBoxChannelSwap = (bool)chBoxChannelSwap.Checked;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
                     rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
@@ -636,12 +642,14 @@ namespace PixelAimbot
             rotation = Rotations.Load(comboBoxRotations.Text + ".ini");
             if (rotation != null)
             {
-                if (rotation.HealthSlider2 > 100)
+                /*
+                if (rotation.HealthSlider1 > 100)
                 {
-                    rotation.HealthSlider2 = 100;
+                    rotation.HealthSlider1 = 100;
                 }
+                */
                 chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
-                HealthSlider2.Value = rotation.HealthSlider2;
+                HealthSlider1.Value = rotation.HealthSlider1;
                 txtRevive.Text = rotation.txtRevive;
                 chBoxRevive.Checked = rotation.chBoxRevive;
                 txtRestart.Text = rotation.txtRestart;
@@ -768,7 +776,7 @@ namespace PixelAimbot
             FormMinimized.labelMinimizedState.Text = lbStatus.Text;
         }
 
-        
+
         private void labelSwap_Click_1(object sender, EventArgs e)
         {
             cts.Cancel();
@@ -785,9 +793,9 @@ namespace PixelAimbot
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
 
-      
-     
-           
-        
+
+
+
+
     }
 }

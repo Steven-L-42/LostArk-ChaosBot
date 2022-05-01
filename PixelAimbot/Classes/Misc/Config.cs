@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace PixelAimbot.Classes.Misc
 {
-    
-    
+
+
     public class Config
     {
-        public static string version { get; set; } = "2.5.6r";
+        public static string version { get; set; } = "2.5.8r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -60,7 +60,7 @@ namespace PixelAimbot.Classes.Misc
                 {
                     return JsonConvert.DeserializeObject<Config>(PixelAimbot.frmLogin.blow1.Decrypt_CTR(output));
                 }
-                
+
             }
             return new Config();
         }
@@ -69,7 +69,7 @@ namespace PixelAimbot.Classes.Misc
 
     public class Rotations
     {
-       
+
 
         public string q { get; set; } = "500";
         public string w { get; set; } = "500";
@@ -89,8 +89,8 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxRevive { get; set; } = false;
 
         public bool chBoxAutoMovement { get; set; } = false;
-   
-        public int HealthSlider2 { get; set; } = 70;
+
+        public int HealthSlider1 { get; set; } = 801;
         public bool chboxdungeontimer { get; set; } = false;
         public bool chBoxAutoRepair { get; set; } = false;
         public string autorepair { get; set; } = "10";
@@ -158,7 +158,7 @@ namespace PixelAimbot.Classes.Misc
             {
                 writer.Write(PixelAimbot.frmLogin.blow1.Encrypt_CTR(output));
             }
-            
+
             /* Save all Configurations additional within Database for future changes */
             var config = Config.Load();
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
@@ -170,13 +170,13 @@ namespace PixelAimbot.Classes.Misc
                 ["settings"] = PixelAimbot.frmLogin.blow1.Encrypt_CTR(output),
                 ["name"] = filename,
             };
-            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            webclient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/updateOrCreateRotation"), "POST", values);
         }
 
         public static Rotations Load(string filename)
         {
-            
+
             var config = Config.Load();
             /*
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
@@ -195,10 +195,11 @@ namespace PixelAimbot.Classes.Misc
             {
                 using (StreamReader reader = new StreamReader(Path.Combine(ConfigPath, filename)))
                 {
-                    string output = reader.ReadToEnd(); 
+                    string output = reader.ReadToEnd();
                     return JsonConvert.DeserializeObject<Rotations>(PixelAimbot.frmLogin.blow1.Decrypt_CTR(output));
                 }
-            } else
+            }
+            else
             {
                 Alert.Show("File \"" + filename + "\" not found", frmAlert.enmType.Error);
                 return null;

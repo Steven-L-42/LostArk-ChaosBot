@@ -17,20 +17,55 @@ namespace PixelAimbot
     {
         public void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            healthPercent = HealthSlider2.Value;
-            
-            labelheal.Text = "Heal at: " + ChaosBot.healthPercent + "% Life";
-         
+            healthPercent = HealthSlider1.Value;
+            double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
+            double sliderRange = (HealthSlider1.Maximum - HealthSlider1.Minimum);
+            double sliderPercent = 100 * (distanceFromMin / sliderRange);
+            labelheal.Text = "Heal at: " + Convert.ToInt32(sliderPercent) + "% Life";
+
         }
         private async Task Potions(CancellationToken token)
         {
-           
+
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 while (_potions && _floorFight && _stopp == false)
                 {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        object health10 = au3.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
+                            Recalc(968, false), 0x050405, 15); // TEST:     "0x050405, 15"      changed to:     "0x050405, 10"
+                        if (health10.ToString() != "0")
+                        {
+                            au3.Send("{" + txtHeal10.Text + "}");
+                            au3.Send("{" + txtHeal10.Text + "}");
+                            au3.Send("{" + txtHeal10.Text + "}");
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion..."));
+                        }
+
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(500, 570);
+                    await Task.Delay(sleepTime);
+                    /*
                     try
                     {
                         token.ThrowIfCancellationRequested();
@@ -67,35 +102,8 @@ namespace PixelAimbot
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    /*
-                 try
-                 {
-                     token.ThrowIfCancellationRequested();
-                     await Task.Delay(1, token); 
-                     object health10 = au3.PixelSearch(Recalc(631), Recalc(962, false), Recalc(ChaosBot.healthPercent),
-                         Recalc(968, false), 0x050405, 10); // TEST:     "0x050405, 15"      changed to:     "0x050405, 10"
-                     if (health10.ToString() != "0")
-                     {
-                         au3.Send("{" + txtHeal10.Text + "}");
-                         au3.Send("{" + txtHeal10.Text + "}");
-                         au3.Send("{" + txtHeal10.Text + "}");
-                         lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Heal-Potion..."));
-                     }
+                    */
 
-                 }
-                 catch (AggregateException)
-                 {
-                     Debug.WriteLine("Expected");
-                 }
-                 catch (ObjectDisposedException)
-                 {
-                     Debug.WriteLine("Bug");
-                 }
-                 catch (Exception ex)
-                 {
-                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                     Debug.WriteLine("[" + line + "]" + ex.Message);
-                 }*/
                 }
             }
             catch (AggregateException)
