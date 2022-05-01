@@ -19,6 +19,7 @@ namespace PixelAimbot
         private bool _logout;
         private bool _fishing = false;
         private bool _buff;
+        private bool _checkEnergy = true;
         private bool _canFish = true;
         private bool _restart;
         private int _swap;

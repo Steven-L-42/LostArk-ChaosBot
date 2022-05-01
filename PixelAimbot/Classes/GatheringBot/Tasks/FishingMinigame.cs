@@ -33,6 +33,7 @@ namespace PixelAimbot
                             if (item.HasValue)
                             {
                                 _minigameFound = true;
+                                _checkEnergy = false;
                             }
                         }
 

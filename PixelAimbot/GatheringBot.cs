@@ -96,6 +96,7 @@ namespace PixelAimbot
             {
                 _cts.Cancel();
                 _minigameFound = false;
+                _checkEnergy = true;
                 _start = false;
                 _stop = false;
                 _canrepair = false;
@@ -124,6 +125,7 @@ namespace PixelAimbot
                     FormMinimized.Size = new Size(594, 28);
 
                     this.Hide();
+                    _checkEnergy = true;
                     _minigameFound = false;
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
                     _start = true;

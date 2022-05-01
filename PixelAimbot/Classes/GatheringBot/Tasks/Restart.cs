@@ -11,6 +11,7 @@ namespace PixelAimbot
     {
         private async Task Restart(CancellationToken token)
         {
+            _checkEnergy = false;
             try
             {
                 token.ThrowIfCancellationRequested();

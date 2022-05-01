@@ -31,6 +31,7 @@ namespace PixelAimbot
                         if (item.HasValue)
                         {
                             _canrepair = true;
+                            _checkEnergy = false;
                         }
                     }
                 }

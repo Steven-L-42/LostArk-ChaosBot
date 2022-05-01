@@ -50,6 +50,7 @@ namespace PixelAimbot
                     var bufftimer = Task.Run(() => BUFFTIMER(token));
                 }
 
+                _checkEnergy = true;
                 var t3 = Task.Run(() => ThrowFishingRod(token));
                 await Task.WhenAny(new[] {t3});
             }

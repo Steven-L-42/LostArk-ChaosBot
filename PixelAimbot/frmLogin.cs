@@ -269,7 +269,7 @@ namespace PixelAimbot
 
                 if (currentLauncherVersion != versionId)
                 {
-                    MessageBox.Show("New Version found. Process is Updating now. Please press Ok");
+                    Alert.Show("New Version found. Updating...", frmAlert.enmType.Info);
                     btnLogin.Enabled = false;
                     progressBar1.Visible = true;
                     using (WebClient wc = new WebClient())

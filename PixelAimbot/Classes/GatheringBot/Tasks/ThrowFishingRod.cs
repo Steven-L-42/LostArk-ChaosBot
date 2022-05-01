@@ -128,8 +128,10 @@ namespace PixelAimbot
                                 var item = minigamedetector.GetBest(screenCapture, false);
                                 if (item.HasValue)
                                 {
+                                    
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_SPACE);
-                                    await Task.Delay(60);
+                                    await Task.Delay(65);
+                                    
                                 }
                             }
 
