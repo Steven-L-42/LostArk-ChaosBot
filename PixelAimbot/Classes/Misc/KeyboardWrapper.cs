@@ -18,12 +18,14 @@ namespace PixelAimbot.Classes.Misc
         private const int PauseBetweenStrokes = 50;
         public const int MOUSEEVENTF_WHEEL = 2048;
         public const byte VK_LBUTTON = 0x01;
+        public const byte VK_ALT = 0xA4;
         public const byte VK_RBUTTON = 0x02;
         public const byte VK_SPACE = 0x20;
         public const byte VK_ESCAPE = 0x1B;
         public const byte VK_RETURN = 0x0D;
         public const byte VK_C = 0x43;
         public const byte VK_B = 0x42;
+        public const byte VK_P = 0x50;
 
         public const byte VK_G = 0x47;
         public const byte VK_L = 0x4C;

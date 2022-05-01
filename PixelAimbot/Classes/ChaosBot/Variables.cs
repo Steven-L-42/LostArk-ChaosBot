@@ -67,7 +67,7 @@ namespace PixelAimbot
         private int _floorint3 = 1;
         private int _swap;
         private int _formExists;
-
+        private bool _canSearchEnemys = true;
         public static int healthPercent = 70;
 
         public frmMinimized FormMinimized = new frmMinimized();

@@ -55,6 +55,7 @@ namespace PixelAimbot
                                 _floorFight = false;
                             
                                 _potions = false;
+                                DiscordSendMessage("Bot is reviving!");
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "REVIVE!"));
                                 VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 10);
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);

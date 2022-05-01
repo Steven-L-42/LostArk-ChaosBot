@@ -18,47 +18,51 @@ namespace PixelAimbot
                 _restart = true;
                 if (chBoxChannelSwap.Checked == true)
                 {
-                    if (_swap == 15)
+                     if (_swap == 15)
                     {
+                        token.ThrowIfCancellationRequested();
+                        Random random = new Random();
+                        await Task.Delay(1, token);
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(63, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
+                        await Task.Delay(humanizer.Next(10, 240) + 1000);
+                        VirtualMouse.MoveTo(Recalc(1844), Recalc(44, false), 10);
+
+                        for (int i = 0; i < random.Next(2, 10); i++)
+                        {
+                            VirtualMouse.Scroll(-120);
+                            await Task.Delay(100);
+                        }
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap++;
                         _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(2000);
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
+                        await Task.Delay(humanizer.Next(10, 240) + 2000);
                         var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(new[] {t9});
+                        await Task.WhenAny(t9);
                     }
                     else if (_swap == 30)
                     {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        Random random = new Random();
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(83, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
-                        _swap++;
-                        _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(2000);
-                        var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(new[] {t9});
-                    }
-                    else if (_swap == 45)
-                    {
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
+                        await Task.Delay(humanizer.Next(10, 240) + 1000);
+                        VirtualMouse.MoveTo(Recalc(1844), Recalc(64, false), 10);
+
+                        for (int i = 0; i < random.Next(2, 10); i++)
+                        {
+                            VirtualMouse.Scroll(-120);
+                            await Task.Delay(100);
+                        }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(1000);
-                        VirtualMouse.MoveTo(Recalc(1875), Recalc(103, false), 10);
-                        KeyboardWrapper.HoldKey(KeyboardWrapper.VK_LBUTTON, 2000);
                         _swap = 0;
                         _restart = false;
-                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(2000);
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
+                        await Task.Delay(humanizer.Next(10, 240) + 2000);
                         var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(new[] {t9});
+                        await Task.WhenAny(t9);
                     }
                 }
 

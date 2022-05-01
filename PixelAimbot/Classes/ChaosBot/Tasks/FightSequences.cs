@@ -221,37 +221,40 @@ namespace PixelAimbot
 
                 while (_floorFight && _stopp == false)
                 {
-                    try
+                    if (_canSearchEnemys)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                        try
                         {
-                            var item = detector.GetClosest(screenCapture, true);
-                            if (item.HasValue)
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                             {
-                                Point position = calculateFromCenter(item.Value.X, item.Value.Y);
-                                // correct mouse down
-                                int correction = 0;
-                                if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                var item = detector.GetClosest(screenCapture, true);
+                                if (item.HasValue)
                                 {
-                                    correction = Recalc(80, false);
-                                }
+                                    Point position = calculateFromCenter(item.Value.X, item.Value.Y);
+                                    // correct mouse down
+                                    int correction = 0;
+                                    if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                    {
+                                        correction = Recalc(80, false);
+                                    }
 
-                                VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
-                            }
-                            else
-                            {
-                                // Not found Swirl around with Mouse
-                                VirtualMouse.MoveTo(Between(Recalc(460), Recalc(1000)),
-                                    Between(Recalc(120, false), Recalc(780, false)), 10);
+                                    VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                }
+                                else
+                                {
+                                    // Not found Swirl around with Mouse
+                                    VirtualMouse.MoveTo(Between(Recalc(460), Recalc(1000)),
+                                        Between(Recalc(120, false), Recalc(780, false)), 10);
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                        catch (Exception ex)
+                        {
+                            int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                            Debug.WriteLine("[" + line + "]" + ex.Message);
+                        }
                     }
                 }
             }
@@ -282,7 +285,6 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-
                                 if (_floorFight && !_stopp)
                                 {
                                     if (!isKeyOnCooldown(skill.Key))
@@ -297,35 +299,39 @@ namespace PixelAimbot
 
                                         SetKeyCooldown(skill.Key); // Set Cooldown
                                         var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                        await Task.Delay(500);
-                                    }
-                                    else if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A &&
-                                             _S && _D && _F)
-                                    {
-
-                                        lbStatus.Invoke(
-                                            (MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
-                                            int.Parse(textBoxAutoAttack.Text));
+                                        await Task.Delay(humanizer.Next(10, 40), token);
                                         _walktopUTurn++;
+                                    }
+                                    else
+                                    {
+                                        if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A && _S && _D && _F )
+                                        { 
+                                            lbStatus.Invoke(
+                                                (MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
+                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
+                                                int.Parse(textBoxAutoAttack.Text));
+                                            _walktopUTurn++;
+                                        }
                                     }
                                 }
 
 
                                 if (_walktopUTurn == 3 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
+                                    _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(240, false), 10);
                                     KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2500);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(566, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
+                                    _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
                                 if (_walktopUTurn == 10 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
+                                    _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(523), Recalc(840, false), 10);
@@ -333,12 +339,13 @@ namespace PixelAimbot
                                     VirtualMouse.MoveTo(Recalc(1007), Recalc(494, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     await Task.Delay(1, token);
-
+                                    _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
                                 if (_walktopUTurn == 17 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
+                                    _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
 
@@ -346,12 +353,13 @@ namespace PixelAimbot
                                     KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2800);
                                     VirtualMouse.MoveTo(Recalc(905), Recalc(531, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
+                                    _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
                                 if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
+                                    _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
 
@@ -360,7 +368,7 @@ namespace PixelAimbot
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(500, false), 10);
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                                     await Task.Delay(1, token);
-
+                                    _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
@@ -370,7 +378,7 @@ namespace PixelAimbot
                                     await Task.Delay(1, token);
                                 }
 
-                                await Task.Delay(humanizer.Next(10, 40));
+                       //         await Task.Delay(humanizer.Next(10, 40), token);
                             }
                         }
                     }

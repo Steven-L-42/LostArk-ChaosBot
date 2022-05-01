@@ -15,7 +15,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-
+                DiscordSendMessage("Bot Repairs now!");
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Repair starts in " + int.Parse(txtRestart.Text) + " seconds..."));
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);

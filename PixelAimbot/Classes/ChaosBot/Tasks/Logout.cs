@@ -28,7 +28,7 @@ namespace PixelAimbot
                 VirtualMouse.MoveTo(Recalc(906), Recalc(575, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
                 await Task.Delay(humanizer.Next(10, 240) + 1000, token);
-
+                DiscordSendMessage("Bot logged you out!");
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "You are logged out!"));
                 _start = false;
                 cts.Cancel();

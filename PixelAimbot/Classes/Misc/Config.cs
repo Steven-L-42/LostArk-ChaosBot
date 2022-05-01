@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace PixelAimbot.Classes.Misc
 {
-
-
+    
+    
     public class Config
     {
-        public static string version { get; set; } = "2.5.8r";
+        public static string version { get; set; } = "2.5.9r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";

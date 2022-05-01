@@ -18,25 +18,26 @@ namespace PixelAimbot
             {
                 while (true)
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-
-                    var template = new Image<Bgr, byte>(_resourceFolder + "/energy_fish.png");
-                    var mask = new Image<Bgr, byte>(_resourceFolder + "/energy_fish.png");
-
-
-                    var detector = new ScreenDetector(template, mask, 0.9f, ChaosBot.Recalc(683),
-                        ChaosBot.Recalc(979, false), ChaosBot.Recalc(45), ChaosBot.Recalc(33, false));
-
-
-                    using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                    if (!_canrepair)
                     {
-                        var item = detector.GetBest(_screenCapture, true);
-                        if (item.HasValue)
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+
+                        var template = new Image<Bgr, byte>(_resourceFolder + "/energy_fish.png");
+                        
+                        var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(683),
+                            ChaosBot.Recalc(979, false), ChaosBot.Recalc(45), ChaosBot.Recalc(33, false));
+
+
+                        using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            ChaosBot.DiscordSendMessage("No more Energy, Bot stopped!");
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
-                            btnPause_Click(null, null);
+                            var item = detector.GetBest(_screenCapture, true);
+                            if (item.HasValue)
+                            {
+                                ChaosBot.DiscordSendMessage("No more Energy, Bot stopped!");
+                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
+                                btnPause_Click(null, null);
+                            }
                         }
                     }
                 }

@@ -341,7 +341,7 @@ namespace PixelAimbot
             var values = new NameValueCollection
             {
                 ["discorduser"] = Config.Load().discorduser,
-                ["response"] = message,
+                ["response"] = "[" + DateTime.Now.ToString("HH:mm:ss") + "] " + message,
             };
             using (webclient)
             {
