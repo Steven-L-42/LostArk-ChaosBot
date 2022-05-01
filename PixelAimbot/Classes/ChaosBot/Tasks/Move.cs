@@ -47,7 +47,7 @@ namespace PixelAimbot
                     var screenPrinter = new PrintScreen();
                     using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
-                        var item = detector.GetBest(screenCapture, true);
+                        var item = detector.GetBest(screenCapture, false);
                         if (item.HasValue)
                         {
                             VirtualMouse.MoveTo(Recalc(1901), Recalc(389, false), 10);

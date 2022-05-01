@@ -30,7 +30,7 @@ namespace PixelAimbot
                 {
 
 
-                    var item = Detector.GetBest(_screenCapture, true);
+                    var item = Detector.GetBest(_screenCapture, false);
                     if (item.HasValue)
                     {
                         lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Switch to Gathering"));

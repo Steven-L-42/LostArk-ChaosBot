@@ -27,7 +27,7 @@ namespace PixelAimbot
                         ChaosBot.Recalc(65, false), ChaosBot.Recalc(13), ChaosBot.Recalc(11, false));
                     using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
-                        var item = detector.GetBest(_screenCapture, true);
+                        var item = detector.GetBest(_screenCapture, false);
                         if (item.HasValue)
                         {
                             _canrepair = true;

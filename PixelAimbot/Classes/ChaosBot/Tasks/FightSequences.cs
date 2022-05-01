@@ -229,7 +229,7 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
                             using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                             {
-                                var item = detector.GetClosest(screenCapture, true);
+                                var item = detector.GetClosest(screenCapture, false);
                                 if (item.HasValue)
                                 {
                                     Point position = calculateFromCenter(item.Value.X, item.Value.Y);
@@ -646,7 +646,7 @@ namespace PixelAimbot
                     
                     using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
+                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, false);
                         if (enemy.HasValue)
                         {
                             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 1: Portal found..."));
@@ -806,10 +806,10 @@ namespace PixelAimbot
                         Bitmap bitmapImage = new Bitmap(rawScreen);
                         var screenCapture = bitmapImage.ToImage<Bgr, byte>();
 
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, true);
-                        var Boss = BossDetector.GetClosestEnemy(screenCapture, true);
-                        var mob = mobDetector.GetClosestEnemy(screenCapture, true);
-                        var portal = portalDetector.GetClosestEnemy(screenCapture, true);
+                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, false);
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+                        var mob = mobDetector.GetClosestEnemy(screenCapture, false);
+                        var portal = portalDetector.GetClosestEnemy(screenCapture, false);
 
                         if (Boss.HasValue && _searchboss == true)
                         {

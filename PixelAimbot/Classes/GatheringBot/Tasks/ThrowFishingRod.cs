@@ -50,7 +50,7 @@ namespace PixelAimbot
                         _bitmapImage = new Bitmap(_rawScreen);
                         using (_screenCapture = _bitmapImage.ToImage<Bgr, byte>())
                         {
-                            var item = detector.GetClosest(_screenCapture, true);
+                            var item = detector.GetClosest(_screenCapture, false);
                             if (item.HasValue)
                             {
                                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
@@ -125,7 +125,7 @@ namespace PixelAimbot
                             using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                             {
 
-                                var item = minigamedetector.GetBest(screenCapture, true);
+                                var item = minigamedetector.GetBest(screenCapture, false);
                                 if (item.HasValue)
                                 {
                                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_SPACE);

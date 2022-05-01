@@ -273,7 +273,7 @@ namespace PixelAimbot
                 ChaosBot.Recalc(997, false), ChaosBot.Recalc(56), ChaosBot.Recalc(54, false));
             using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
             {
-                var item = detector.GetBest(_screenCapture, true);
+                var item = detector.GetBest(_screenCapture, false);
                 if (item.HasValue)
                 {
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_B);

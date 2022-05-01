@@ -31,7 +31,7 @@ namespace PixelAimbot
 
                         using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            var item = detector.GetBest(_screenCapture, true);
+                            var item = detector.GetBest(_screenCapture, false);
                             if (item.HasValue)
                             {
                                 ChaosBot.DiscordSendMessage("No more Energy, Bot stopped!");
