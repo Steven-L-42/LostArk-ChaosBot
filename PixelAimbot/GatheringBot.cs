@@ -95,6 +95,7 @@ namespace PixelAimbot
             if (_stop == true)
             {
                 _cts.Cancel();
+                _minigameFound = false;
                 _start = false;
                 _stop = false;
                 _canrepair = false;
@@ -123,7 +124,7 @@ namespace PixelAimbot
                     FormMinimized.Size = new Size(594, 28);
 
                     this.Hide();
-
+                    _minigameFound = false;
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
@@ -290,6 +291,11 @@ namespace PixelAimbot
             VirtualMouse.MoveTo(ChaosBot.Recalc(666), ChaosBot.Recalc(588, false), 5);
             KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
             VirtualMouse.MoveTo(ChaosBot.Recalc(744), ChaosBot.Recalc(998, false), 5);
+            KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
+            // Lvl 30
+            VirtualMouse.MoveTo(ChaosBot.Recalc(666), ChaosBot.Recalc(780, false), 5);
+            KeyboardWrapper.KeyDown(KeyboardWrapper.VK_LBUTTON);
+            VirtualMouse.MoveTo(ChaosBot.Recalc(799), ChaosBot.Recalc(998, false), 5);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
             lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));

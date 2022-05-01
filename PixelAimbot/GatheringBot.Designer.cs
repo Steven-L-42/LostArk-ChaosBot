@@ -90,6 +90,7 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.labelSwap = new System.Windows.Forms.Label();
+            this.checkBoxMiniGame = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -143,6 +144,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxMiniGame);
             this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.chBoxChannelSwap);
             this.groupBox1.Controls.Add(this.label34);
@@ -170,7 +172,7 @@
             this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInstructions.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnInstructions.ForeColor = System.Drawing.Color.Peru;
-            this.btnInstructions.Location = new System.Drawing.Point(6, 111);
+            this.btnInstructions.Location = new System.Drawing.Point(175, 111);
             this.btnInstructions.Name = "btnInstructions";
             this.btnInstructions.Size = new System.Drawing.Size(59, 22);
             this.btnInstructions.TabIndex = 62;
@@ -897,6 +899,24 @@
             this.labelSwap.Text = "CBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click);
             // 
+            // checkBoxMiniGame
+            // 
+            this.checkBoxMiniGame.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxMiniGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxMiniGame.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxMiniGame.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxMiniGame.FlatAppearance.BorderSize = 0;
+            this.checkBoxMiniGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxMiniGame.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxMiniGame.Location = new System.Drawing.Point(4, 111);
+            this.checkBoxMiniGame.Name = "checkBoxMiniGame";
+            this.checkBoxMiniGame.Size = new System.Drawing.Size(154, 22);
+            this.checkBoxMiniGame.TabIndex = 63;
+            this.checkBoxMiniGame.Text = "Minigame (lvl30)";
+            this.toolTip1.SetToolTip(this.checkBoxMiniGame, "Do lvl 30 Minigame");
+            this.checkBoxMiniGame.UseMnemonic = false;
+            this.checkBoxMiniGame.UseVisualStyleBackColor = false;
+            // 
             // GatheringBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -933,6 +953,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox checkBoxMiniGame;
 
         private System.Windows.Forms.Label labelSwap;
 

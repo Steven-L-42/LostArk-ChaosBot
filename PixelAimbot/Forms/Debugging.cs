@@ -143,7 +143,7 @@ namespace PixelAimbot
 
                                         labelDetectedText.Invoke((MethodInvoker) (() =>
                                             labelDetectedText.Text = ChaosBot.ReadArea(screenCapture, x, y, width * -1,
-                                                height * -1, "123456789/")));
+                                                height * -1, "")));
                                     }
                                     else
                                     {

@@ -22,16 +22,16 @@ namespace PixelAimbot
 
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Set Transparency and Scale..."));
 
-                VirtualMouse.MoveTo(Recalc(1900), Recalc(50, false), 10);
+                VirtualMouse.MoveTo(Recalc(1900), Recalc(50, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
-                VirtualMouse.MoveTo(Recalc(1871), Recalc(260, false), 10);
+                VirtualMouse.MoveTo(Recalc(1871), Recalc(260, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
-                VirtualMouse.MoveTo(Recalc(1902), Recalc(87, false), 10);
+                VirtualMouse.MoveTo(Recalc(1902), Recalc(87, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
-                VirtualMouse.MoveTo(Recalc(1871), Recalc(260, false), 10);
+                VirtualMouse.MoveTo(Recalc(1871), Recalc(260, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 token.ThrowIfCancellationRequested();
 

@@ -18,7 +18,7 @@ namespace PixelAimbot
             {
                 while (true)
                 {
-                    if (!_canrepair)
+                    if (!_canrepair && !_minigameFound )
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);

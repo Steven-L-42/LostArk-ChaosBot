@@ -106,7 +106,9 @@ namespace PixelAimbot
                 "gatheringRepair.png",
                 "gathering.png",
                 "red_hp.png",
-                "questmarker.png"
+                "questmarker.png",
+                "minigame.png",
+                "fishing_minigame.png"
             };
 
             if (!File.Exists("cvextern.dll"))

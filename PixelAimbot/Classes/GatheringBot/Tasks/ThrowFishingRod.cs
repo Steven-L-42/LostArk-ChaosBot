@@ -20,20 +20,19 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-
                 if (_logout)
                 {
                     var t3 = Task.Run(() => Logout(token));
                     await Task.WhenAny(new[] {t3});
                 }
-
+                var fishing = true;
                 _rodCounter++;
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Fishing (" + _rodCounter + ")..."));
 
                 VirtualMouse.MoveTo(_x + (_width / 2), _y + (_height / 2), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_Q);
                 await Task.Delay(3000, token);
-                var fishing = true;
+                
                 int failCounter = 0;
 
                 var template = new Image<Bgr, byte>(_resourceFolder + "/attention2.png");
@@ -80,7 +79,6 @@ namespace PixelAimbot
 
                     await Task.Delay(100, token);
                 }
-
                 Random rnd = new Random();
 
                 await Task.Delay((5500 + rnd.Next(10, 200)), token);
@@ -101,6 +99,48 @@ namespace PixelAimbot
                     _buff = false;
                     var t3 = Task.Run(() => Restart(token));
                     await Task.WhenAny(new[] {t3});
+                }
+                else if (_minigameFound)
+                {
+                    _minigameFound = false;
+                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Do Minigame ..."));
+                    VirtualMouse.MoveTo(_x + (_width / 2), _y + (_height / 2), 5);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_E);
+                    await Task.Delay(4000);
+                    
+                    var runTime = DateTime.Now.AddSeconds(10);
+                    while (runTime > DateTime.Now)
+                    {
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+
+                            var minigametemplate = new Image<Bgr, byte>(_resourceFolder + "/minigame.png");
+
+                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.95f,
+                                ChaosBot.Recalc(488), ChaosBot.Recalc(109, false), ChaosBot.Recalc(71),
+                                ChaosBot.Recalc(439, false));
+                            var screenPrinter = new PrintScreen();
+                            using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                            {
+
+                                var item = minigamedetector.GetBest(screenCapture, true);
+                                if (item.HasValue)
+                                {
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_SPACE);
+                                    await Task.Delay(60);
+                                }
+                            }
+
+                        }
+                        catch
+                        {
+                        }
+                    }
+                       var t3 = Task.Run(() => Restart(token));
+                    await Task.WhenAny(new[] {t3});
+
                 }
                 else
                 {

@@ -22,6 +22,7 @@ namespace PixelAimbot
         private bool _canFish = true;
         private bool _restart;
         private int _swap;
+        private bool _minigameFound = false;
         private int _x, _y, _width, _height;
         private int _rodCounter;
         private bool _telegramBotRunning;

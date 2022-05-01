@@ -64,7 +64,7 @@ namespace PixelAimbot
                     var contentArea = new Rectangle() { X = x, Y = y, Height = height, Width = width };
                     input.AddImage(screenCapture.ToBitmap(), contentArea);
                     result = tess.Read(input).Text;
-                    
+                    Debug.WriteLine(result);
                     return result;
                 }
 
