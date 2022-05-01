@@ -102,7 +102,7 @@ namespace PixelAimbot
                 }
                 else if (_minigameFound)
                 {
-                    _minigameFound = false;
+                    
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Do Minigame ..."));
                     VirtualMouse.MoveTo(_x + (_width / 2), _y + (_height / 2), 5);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_E);
@@ -138,7 +138,7 @@ namespace PixelAimbot
                         {
                         }
                     }
-                       var t3 = Task.Run(() => Restart(token));
+                    var t3 = Task.Run(() => Restart(token));
                     await Task.WhenAny(new[] {t3});
 
                 }

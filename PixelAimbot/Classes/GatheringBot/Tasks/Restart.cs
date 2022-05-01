@@ -69,6 +69,7 @@ namespace PixelAimbot
                 if (_restart == true)
                 {
                     await Task.Delay(1000, token);
+                    _minigameFound = false;
                     var t1 = Task.Run(() => CheckGathering(token));
                     await Task.WhenAny(new[] {t1});
                 }
