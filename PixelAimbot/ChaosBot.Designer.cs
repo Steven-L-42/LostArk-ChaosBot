@@ -54,7 +54,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.MouseLabel = new System.Windows.Forms.Label();
+            this.txtMouse = new System.Windows.Forms.TextBox();
+            this.comboBoxMouse = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.labelheal = new System.Windows.Forms.Label();
             this.HealthSlider1 = new System.Windows.Forms.TrackBar();
@@ -155,7 +156,6 @@
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
-            this.comboBoxMouse = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
@@ -555,28 +555,46 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.MouseLabel);
+            this.groupBox6.Controls.Add(this.txtMouse);
             this.groupBox6.Controls.Add(this.comboBoxMouse);
             this.groupBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.groupBox6.Location = new System.Drawing.Point(3, 3);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(124, 57);
+            this.groupBox6.Size = new System.Drawing.Size(124, 64);
             this.groupBox6.TabIndex = 41;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Mouse";
             this.toolTip1.SetToolTip(this.groupBox6, "Only change if your ingame settings \r\nare different than those given here!");
             // 
-            // MouseLabel
+            // txtMouse
             // 
-            this.MouseLabel.AutoSize = true;
-            this.MouseLabel.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MouseLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.MouseLabel.Location = new System.Drawing.Point(27, 42);
-            this.MouseLabel.Name = "MouseLabel";
-            this.MouseLabel.Size = new System.Drawing.Size(72, 17);
-            this.MouseLabel.TabIndex = 62;
-            this.MouseLabel.Text = "LEFT WALK";
-            this.MouseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.txtMouse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtMouse.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMouse.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMouse.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtMouse.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtMouse.Location = new System.Drawing.Point(18, 44);
+            this.txtMouse.Name = "txtMouse";
+            this.txtMouse.ReadOnly = true;
+            this.txtMouse.Size = new System.Drawing.Size(87, 16);
+            this.txtMouse.TabIndex = 67;
+            this.txtMouse.Text = "LEFT WALK";
+            this.txtMouse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMouse.WordWrap = false;
+            // 
+            // comboBoxMouse
+            // 
+            this.comboBoxMouse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.comboBoxMouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxMouse.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxMouse.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBoxMouse.FormattingEnabled = true;
+            this.comboBoxMouse.Location = new System.Drawing.Point(5, 13);
+            this.comboBoxMouse.Name = "comboBoxMouse";
+            this.comboBoxMouse.Size = new System.Drawing.Size(114, 29);
+            this.comboBoxMouse.TabIndex = 22;
+            this.comboBoxMouse.SelectedIndexChanged += new System.EventHandler(this.comboBoxMouse_SelectedIndexChanged);
             // 
             // groupBox4
             // 
@@ -1997,20 +2015,6 @@
             this.chBoxCrashDetection.UseMnemonic = false;
             this.chBoxCrashDetection.UseVisualStyleBackColor = false;
             // 
-            // comboBoxMouse
-            // 
-            this.comboBoxMouse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.comboBoxMouse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxMouse.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxMouse.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.comboBoxMouse.FormattingEnabled = true;
-            this.comboBoxMouse.Location = new System.Drawing.Point(5, 13);
-            this.comboBoxMouse.Name = "comboBoxMouse";
-            this.comboBoxMouse.Size = new System.Drawing.Size(114, 29);
-            this.comboBoxMouse.TabIndex = 22;
-            this.comboBoxMouse.SelectedIndexChanged += new System.EventHandler(this.comboBoxMouse_SelectedIndexChanged);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -2861,7 +2865,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chBoxCrashDetection;
         private System.Windows.Forms.ComboBox comboBoxMouse;
-        private System.Windows.Forms.Label MouseLabel;
+        private System.Windows.Forms.TextBox txtMouse;
     }
 }
 

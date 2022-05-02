@@ -225,6 +225,22 @@ namespace PixelAimbot
 
             return foundkey;
         }
+        private byte MouseKey(string text)
+        {
+            byte foundkey = 0x0;
+            switch (text)
+            {
+                case "LEFT":
+                    foundkey = KeyboardWrapper.VK_LBUTTON;
+                    break;
+
+                case "RIGHT":
+                    foundkey = KeyboardWrapper.VK_RBUTTON;
+                    break;
+            }
+
+            return foundkey;
+        }
         public static int Recalc(int value, bool horizontal = true)
         {
             decimal oldResolution;

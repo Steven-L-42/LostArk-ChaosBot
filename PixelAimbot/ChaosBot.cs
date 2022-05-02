@@ -222,8 +222,8 @@ namespace PixelAimbot
         {
 
             Layout_MouseKeyboard currentMouseLayout = comboBoxMouse.SelectedItem as Layout_MouseKeyboard;
-            MouseLabel.Text = translateKey(currentMouseLayout.LEFT);
-            MouseLabel.Text = translateKey(currentMouseLayout.RIGHT);
+            txtMouse.Text = translateKey(currentMouseLayout.LEFT);
+            txtMouse.Text = translateKey(currentMouseLayout.RIGHT);
 
         }
 
