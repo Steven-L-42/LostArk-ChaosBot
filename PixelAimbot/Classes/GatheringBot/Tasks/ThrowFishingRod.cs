@@ -35,10 +35,10 @@ namespace PixelAimbot
                 
                 int failCounter = 0;
 
-                var template = new Image<Bgr, byte>(_resourceFolder + "/attention2.png");
+                var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.attention2);
 
                 var detector = new ScreenDetector(template, null, 0.91f, ChaosBot.Recalc(950),
-                    ChaosBot.Recalc(465, false), ChaosBot.Recalc(20), ChaosBot.Recalc(44, false));
+                    ChaosBot.Recalc(465, false), ChaosBot.Recalc(20, true, true), ChaosBot.Recalc(44, false, true));
                 detector.setMatchingMethod(TemplateMatchingType.SqdiffNormed);
                 while (fishing)
                 {
@@ -116,11 +116,11 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            var minigametemplate = new Image<Bgr, byte>(_resourceFolder + "/minigame.png");
+                            var minigametemplate = ChaosBot.byteArrayToImage(PixelAimbot.Images.minigame);
 
-                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.95f,
-                                ChaosBot.Recalc(488), ChaosBot.Recalc(109, false), ChaosBot.Recalc(71),
-                                ChaosBot.Recalc(439, false));
+                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.92f,
+                                ChaosBot.Recalc(488), ChaosBot.Recalc(109, false), ChaosBot.Recalc(71, true, true),
+                                ChaosBot.Recalc(439, false, true));
                             var screenPrinter = new PrintScreen();
                             using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                             {

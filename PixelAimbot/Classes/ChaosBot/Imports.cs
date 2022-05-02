@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AutoItX3Lib;
@@ -7,6 +8,10 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
+
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
@@ -58,6 +63,7 @@ namespace PixelAimbot
         public static extern bool ReleaseCapture();
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
 
         private const UInt32 SWP_NOSIZE = 0x0001;
 

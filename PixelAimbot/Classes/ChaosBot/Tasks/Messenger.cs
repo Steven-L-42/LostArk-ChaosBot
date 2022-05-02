@@ -95,7 +95,7 @@ namespace PixelAimbot
                         {
                             if (_stop)
                             {
-                                btnPause_Click(null, null);
+                                Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
                                 cts.Cancel();
                                 await bot.SendTextMessageAsync(chatId, "Bot stopped!");
                             }
@@ -240,7 +240,7 @@ namespace PixelAimbot
                         {
                             if (_stop)
                             {
-                                btnPause_Click(null, null);
+                                Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
                                 cts.Cancel();
                                 values["response"] = "Bot stopped!";
                             }

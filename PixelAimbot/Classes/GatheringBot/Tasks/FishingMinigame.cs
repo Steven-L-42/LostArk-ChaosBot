@@ -21,11 +21,9 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
-                        var template = new Image<Bgr, byte>(_resourceFolder + "/fishing_minigame.png");
-                
-
-
-                        var detector = new ScreenDetector(template, null, 0.98f, ChaosBot.Recalc(844), ChaosBot.Recalc(499, false), ChaosBot.Recalc(219), ChaosBot.Recalc(215, false));
+                        var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.fishing_minigame);
+                        
+                        var detector = new ScreenDetector(template, null, 0.98f, ChaosBot.Recalc(844), ChaosBot.Recalc(499, false), ChaosBot.Recalc(219, true,true), ChaosBot.Recalc(215, false, true));
                         var screenPrinter = new PrintScreen();
                         using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
 

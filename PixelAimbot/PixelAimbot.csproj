@@ -364,6 +364,18 @@
     <Compile Include="Classes\ChaosBot\Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\ChaosBot\Images\boss1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\bossmask1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\enemy.cs" />
+    <Compile Include="Classes\ChaosBot\Images\mask.cs" />
+    <Compile Include="Classes\ChaosBot\Images\mob1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\mobmask1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\portalenter1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\portalentermask1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\questmarker.cs" />
+    <Compile Include="Classes\ChaosBot\Images\red_hp.cs" />
+    <Compile Include="Classes\ChaosBot\Images\revive1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\reviveEnglish.cs" />
     <Compile Include="Classes\ChaosBot\Imports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -424,6 +436,12 @@
     <Compile Include="Classes\GatheringBot\Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\GatheringBot\Images\attention2.cs" />
+    <Compile Include="Classes\GatheringBot\Images\energy_fish.cs" />
+    <Compile Include="Classes\GatheringBot\Images\fishing_minigame.cs" />
+    <Compile Include="Classes\GatheringBot\Images\gathering.cs" />
+    <Compile Include="Classes\GatheringBot\Images\gatheringRepair.cs" />
+    <Compile Include="Classes\GatheringBot\Images\minigame.cs" />
     <Compile Include="Classes\GatheringBot\Imports.cs">
       <SubType>Form</SubType>
     </Compile>

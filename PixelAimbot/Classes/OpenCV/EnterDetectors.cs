@@ -25,9 +25,13 @@ namespace PixelAimbot.Classes.OpenCV
         
         private List<(Point position, double matchValue)> DetectEnter(Image<Bgr, byte> screenCapture)
         {
-
-            this._EnterTemplate.Resize(ChaosBot.Recalc(this._EnterTemplate.Size.Width), ChaosBot.Recalc(this._EnterTemplate.Size.Height), Inter.Linear);
-            this._EnterMask.Resize(ChaosBot.Recalc(this._EnterMask.Size.Width), ChaosBot.Recalc(this._EnterMask.Size.Height), Inter.Linear);
+            if (!ChaosBot.isWindowed)
+            {
+                this._EnterTemplate.Resize(ChaosBot.Recalc(this._EnterTemplate.Size.Width),
+                    ChaosBot.Recalc(this._EnterTemplate.Size.Height), Inter.Linear);
+                this._EnterMask.Resize(ChaosBot.Recalc(this._EnterMask.Size.Width),
+                    ChaosBot.Recalc(this._EnterMask.Size.Height), Inter.Linear);
+            }
 
             List<(Point minPoint, double)> Enters = new List<(Point position, double matchValue)>();
             screenCapture.ROI = new Rectangle(ChaosBot.Recalc(1259), ChaosBot.Recalc(430, false), ChaosBot.Recalc(1501), ChaosBot.Recalc(499, false));

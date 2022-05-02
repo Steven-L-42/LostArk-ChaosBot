@@ -27,7 +27,7 @@ namespace PixelAimbot
 
             // KLICK AUF AMBOSS
             await Task.Delay(500, token);
-            VirtualMouse.MoveTo(Recalc(1291), Recalc(693, false), 5);
+            VirtualMouse.MoveTo(ChaosBot.Recalc(1291), ChaosBot.Recalc(693, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
             token.ThrowIfCancellationRequested();
@@ -35,7 +35,7 @@ namespace PixelAimbot
 
             // KLICK AUF REPARIEREN
             await Task.Delay(500, token);
-            VirtualMouse.MoveTo(Recalc(717), Recalc(745, false), 5);
+            VirtualMouse.MoveTo(ChaosBot.Recalc(717), ChaosBot.Recalc(745, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
             token.ThrowIfCancellationRequested();
             await Task.Delay(1, token);
@@ -44,11 +44,11 @@ namespace PixelAimbot
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
             await Task.Delay(500, token);
-            VirtualMouse.MoveTo(Recalc(1785), Recalc(1024, false), 5);
+            VirtualMouse.MoveTo(ChaosBot.Recalc(1785), ChaosBot.Recalc(1024, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
             
             await Task.Delay(500, token);
-            VirtualMouse.MoveTo(Recalc(1383), Recalc(205, false), 5);
+            VirtualMouse.MoveTo(ChaosBot.Recalc(1383), ChaosBot.Recalc(205, false), 5);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
 

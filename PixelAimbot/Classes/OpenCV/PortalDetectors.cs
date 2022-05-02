@@ -24,8 +24,13 @@ namespace PixelAimbot.Classes.OpenCV
         }
         private List<(Point position, double matchValue)> DetectPortal(Image<Bgr, byte> screenCapture)
         {
-            this._PortalTemplate.Resize(ChaosBot.Recalc(this._PortalTemplate.Size.Width), ChaosBot.Recalc(this._PortalTemplate.Size.Height), Inter.Linear);
-            this._PortalMask.Resize(ChaosBot.Recalc(this._PortalMask.Size.Width), ChaosBot.Recalc(this._PortalMask.Size.Height), Inter.Linear);
+            if (!ChaosBot.isWindowed)
+            {
+                this._PortalTemplate.Resize(ChaosBot.Recalc(this._PortalTemplate.Size.Width),
+                    ChaosBot.Recalc(this._PortalTemplate.Size.Height), Inter.Linear);
+                this._PortalMask.Resize(ChaosBot.Recalc(this._PortalMask.Size.Width),
+                    ChaosBot.Recalc(this._PortalMask.Size.Height), Inter.Linear);
+            }
 
             List<(Point minPoint, double)> Portals = new List<(Point position, double matchValue)>();
 

@@ -29,14 +29,14 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
                             float thresh = int.Parse(txtRevive.Text) * 0.01f;
                             var ReviveDeutschTemplate =
-                                new Image<Bgr, byte>(resourceFolder + "/revive1.png");
+                                ChaosBot.byteArrayToImage(PixelAimbot.Images.revive1);
                             var ReviveDeutschMask =
-                                new Image<Bgr, byte>(resourceFolder + "/revivemask1.png");
+                                ChaosBot.byteArrayToImage(PixelAimbot.Images.revive1);
 
                             var ReviveEnglishTemplate =
-                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglish.png");
+                                ChaosBot.byteArrayToImage(PixelAimbot.Images.reviveEnglish);
                             var ReviveEnglishMask =
-                                new Image<Bgr, byte>(resourceFolder + "/reviveEnglishmask.png");
+                                ChaosBot.byteArrayToImage(PixelAimbot.Images.reviveEnglish);
 
                             var ReviveDeutschDetector =
                                 new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);

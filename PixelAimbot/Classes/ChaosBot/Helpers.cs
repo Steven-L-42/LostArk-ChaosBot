@@ -241,28 +241,63 @@ namespace PixelAimbot
 
             return foundkey;
         }
-        public static int Recalc(int value, bool horizontal = true)
+        
+        public static Image<Bgr, Byte> byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Bitmap returnImage = (Bitmap) Image.FromStream(ms);
+
+            return returnImage.ToImage<Bgr, byte>();
+        }
+
+        
+        public static int Recalc(int value, bool horizontal = true, bool ignoreWindowed = false)
         {
             decimal oldResolution;
             decimal newResolution;
-            if (horizontal)
+            int returnValue = value;
+            if (isWindowed)
             {
-                oldResolution = 1920;
-                newResolution = screenWidth;
+                if (horizontal)
+                {
+                    if (ignoreWindowed)
+                    {
+                        return value;
+                    }
+                    return value + windowX;
+                }
+                else
+                {
+                    if (ignoreWindowed)
+                    {
+                        return value;
+                    }
+                    return value + windowY;
+                }
             }
             else
             {
-                oldResolution = 1080;
-                newResolution = screenHeight;
-            }
 
-            int returnValue = value;
-            if (oldResolution != newResolution)
-            {
-                decimal normalized = (decimal) value * newResolution;
-                decimal rescaledPosition = (decimal) normalized / oldResolution;
+                if (horizontal)
+                {
+                    oldResolution = 1920;
+                    newResolution = screenWidth;
 
-                returnValue = Decimal.ToInt32(rescaledPosition);
+                }
+                else
+                {
+                    oldResolution = 1080;
+                    newResolution = screenHeight;
+
+                }
+                
+                if (oldResolution != newResolution)
+                {
+                    decimal normalized = (decimal) value * newResolution;
+                    decimal rescaledPosition = (decimal) normalized / oldResolution;
+
+                    returnValue = Decimal.ToInt32(rescaledPosition);
+                }
             }
 
             return returnValue;
@@ -466,8 +501,8 @@ namespace PixelAimbot
 
         private Point calculateFromCenter(int x, int y)
         {
-            var centerX = Screen.PrimaryScreen.Bounds.Width / 2;
-            var centerY = Screen.PrimaryScreen.Bounds.Height / 2;
+            var centerX = screenWidth / 2;
+            var centerY = screenHeight / 2;
             int resultX;
             int resultY;
 

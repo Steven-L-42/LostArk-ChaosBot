@@ -20,12 +20,9 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                var template = new Image<Bgr, byte>(_resourceFolder + "/gathering.png");
-                var mask = new Image<Bgr, byte>(_resourceFolder + "/gathering.png");
-
-
+                var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.gathering);
                 var Detector = new ScreenDetector(template, null, 0.78f, ChaosBot.Recalc(550),
-                    ChaosBot.Recalc(997, false), ChaosBot.Recalc(56), ChaosBot.Recalc(54, false));
+                    ChaosBot.Recalc(997, false), ChaosBot.Recalc(56, true, true), ChaosBot.Recalc(54, false, true));
                 using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                 {
 

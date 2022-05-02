@@ -40,10 +40,10 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    var template = new Image<Bgr, byte>(resourceFolder + "/questmarker.png");
+                    var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.questmarker);
 
-                    var detector = new ScreenDetector(template, null, 0.79f, ChaosBot.Recalc(1890),
-                        ChaosBot.Recalc(378, false), ChaosBot.Recalc(28), ChaosBot.Recalc(31, false));
+                    var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.Recalc(1890),
+                        ChaosBot.Recalc(378, false), ChaosBot.Recalc(28, true, true), ChaosBot.Recalc(31, false, true));
                     var screenPrinter = new PrintScreen();
                     using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {

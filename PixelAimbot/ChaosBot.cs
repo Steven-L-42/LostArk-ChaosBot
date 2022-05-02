@@ -17,13 +17,40 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(Recalc(0), Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
+            new Debugging().Show();
+            Process[] processName = Process.GetProcessesByName("LostArk");
+            if (processName.Length == 1)
+            {
+                handle = processName[0].MainWindowHandle;
+            }
+
+            Rectangle rect;
+            GetWindowRect(handle , out rect);
 
             resourceFolder = applicationFolder;
+            if (rect.Width != Screen.PrimaryScreen.Bounds.Width && rect.Height != Screen.PrimaryScreen.Bounds.Height)
+            {
+                SetWindowPos(handle, HWND_BOTTOM, 0, 0, 1922, 1107, 0);
+                GetWindowRect(handle , out rect);
+
+                Task.Delay(5000);
+                isWindowed = true;
+                windowX = rect.X + 2;
+                windowY = rect.Y + 26;
+                windowWidth = 1920;
+                windowHeight = 1080;
+                screenWidth = 1920;
+                screenHeight = 1080;
+            } 
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(Recalc(0), Recalc(842, false));
+            this.TopMost = true;
+            
+        
+            
             this.FormBorderStyle = FormBorderStyle.None;
             RefreshRotationCombox();
             this.Text = RandomString(15);
@@ -155,7 +182,7 @@ namespace PixelAimbot
                     if (_formExists == 1)
                     {
                         FormMinimized.StartPosition = FormStartPosition.Manual;
-                        FormMinimized.Location = new Point(0, Recalc(28, false));
+                        FormMinimized.Location = new Point(Recalc(0), Recalc(28, false));
                         FormMinimized.timerRuntimer.Enabled = true;
                         FormMinimized.sw.Reset();
                         FormMinimized.sw.Start();

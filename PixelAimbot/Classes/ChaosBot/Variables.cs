@@ -55,6 +55,14 @@ namespace PixelAimbot
         private bool _D;
         private bool _F;
 
+
+        public static bool isWindowed = false;
+        private static int windowX = 0;
+        private static int windowY = 0;
+        private static int windowWidth = 0;
+        private static int windowHeight = 0;
+        
+        
         private Timer _timer;
         private int _fightSequence;
         private int _fightSequence2;
@@ -88,7 +96,7 @@ namespace PixelAimbot
         
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
 
-        private static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        public static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         private static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         private Layout_Keyboard _currentLayout;
         private byte currentMouseButton;

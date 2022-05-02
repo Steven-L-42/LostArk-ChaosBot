@@ -23,7 +23,7 @@ namespace PixelAimbot
             _conf = Config.Load();
 
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(Recalc(0), Recalc(842, false));
+            this.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
@@ -116,12 +116,12 @@ namespace PixelAimbot
                 {
                     FormMinimized.StartPosition = FormStartPosition.Manual;
                     FormMinimized.updateLabel("Gatheringbot");
-                    FormMinimized.Location = new Point(0, Recalc(28, false));
+                    FormMinimized.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(28, false));
                     FormMinimized.timerRuntimer.Enabled = true;
                     FormMinimized.sw.Reset();
                     FormMinimized.sw.Start();
                     FormMinimized.Show();
-                    FormMinimized.Location = new Point(0, Recalc(28, false));
+                    FormMinimized.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(28, false));
                     FormMinimized.Size = new Size(594, 28);
 
                     this.Hide();
@@ -267,12 +267,12 @@ namespace PixelAimbot
             }
 
             Thread.Sleep(500);
-            var template = new Image<Bgr, byte>(_resourceFolder + "/gathering.png");
-            var mask = new Image<Bgr, byte>(_resourceFolder + "/gathering.png");
+            var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.gathering);
+            var mask = ChaosBot.byteArrayToImage(PixelAimbot.Images.gathering);
 
 
             var detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.Recalc(550),
-                ChaosBot.Recalc(997, false), ChaosBot.Recalc(56), ChaosBot.Recalc(54, false));
+                ChaosBot.Recalc(997, false), ChaosBot.Recalc(56, true, true), ChaosBot.Recalc(54, false, true));
             using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
             {
                 var item = detector.GetBest(_screenCapture, false);
@@ -315,7 +315,7 @@ namespace PixelAimbot
 
         private void checkBoxMiniGame_CheckedChanged(object sender, EventArgs e)
         {
-            if (Screen.PrimaryScreen.Bounds.Width != 1920)
+            if (ChaosBot.screenWidth != 1920)
             {
                 Alert.Show("Only working on 1920x1080!", frmAlert.enmType.Error);
             }

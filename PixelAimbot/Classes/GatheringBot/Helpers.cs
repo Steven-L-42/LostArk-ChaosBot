@@ -31,28 +31,6 @@ namespace PixelAimbot
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
         
-        public static int Recalc(int value, bool horizontal = true)
-        {
-            decimal oldResolution;
-            decimal newResolution;
-            if (horizontal)
-            {
-                oldResolution = 1920;
-                newResolution = _screenWidth;
-            }
-            else
-            {
-                oldResolution = 1080;
-                newResolution = _screenHeight;
-            }
-
-
-            decimal normalized = (decimal) value * newResolution;
-            decimal rescaledPosition = (decimal) normalized / oldResolution;
-
-            int returnValue = Decimal.ToInt32(rescaledPosition);
-            return returnValue;
-        }
         
 
         private void CheckIsDigit(object sender, KeyPressEventArgs e)

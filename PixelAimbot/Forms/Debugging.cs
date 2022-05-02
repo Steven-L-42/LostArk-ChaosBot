@@ -170,8 +170,8 @@ namespace PixelAimbot
                                         if (enemy.HasValue)
                                         {
                                             screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
-                                                ChaosBot.Recalc(enemyTemplate.Size.Width),
-                                                ChaosBot.Recalc(enemyTemplate.Size.Height, false),
+                                                enemyTemplate.Size.Width,
+                                                enemyTemplate.Size.Height,
                                                 new Pen(Color.Blue, 3));
                                         }
                                     }

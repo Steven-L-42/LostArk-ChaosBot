@@ -25,10 +25,10 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "LOGOUT Process starts..."));
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                     await Task.Delay(2000, token);
-                    VirtualMouse.MoveTo(Recalc(1238), Recalc(728, false), 5);
+                    VirtualMouse.MoveTo(ChaosBot.Recalc(1238), ChaosBot.Recalc(728, false), 5);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     await Task.Delay(2000, token);
-                    VirtualMouse.MoveTo(Recalc(906), Recalc(575, false), 5);
+                    VirtualMouse.MoveTo(ChaosBot.Recalc(906), ChaosBot.Recalc(575, false), 5);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                     await Task.Delay(1000, token);
 

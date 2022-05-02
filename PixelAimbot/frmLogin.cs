@@ -77,39 +77,7 @@ namespace PixelAimbot
 
         public static void downloadResources()
         {
-            string[] picturesDownload =
-            {
-                "boss1.png",
-                "bossmask1.png",
-                "enemy.png",
-                "mask.png",
-                "hand.png",
-                "handmask.png",
-                "portalenter1.png",
-                "portalentermask1.png",
-                "revive1.png",
-                "revivemask1.png",
-                "mob1.png",
-                "reviveEnglishmask.png",
-                "reviveEnglish.png",
-                "mobmask1.png",
-                "shard.png",
-                "shardmask.png",
-                "ChaosDungeonmask.png",
-                "ChaosDungeon.png",
-                "check_if_citymask.png",
-                "check_if_city.png",
-                "attention2.png",
-                "attention.png",
-                "attention_mask.png",
-                "energy_fish.png",
-                "gatheringRepair.png",
-                "gathering.png",
-                "red_hp.png",
-                "questmarker.png",
-                "minigame.png",
-                "fishing_minigame.png"
-            };
+        
 
             if (!File.Exists("cvextern.dll"))
             {
@@ -119,32 +87,12 @@ namespace PixelAimbot
                 }
             }
 
-            foreach(string picture in picturesDownload)
+            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string applicationFolder = Path.Combine(folder, "cb_res");
+            if (Directory.Exists(applicationFolder))
             {
-                // The folder for the roaming current user 
-                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-                // Combine the base folder with your specific folder....
-                string applicationFolder = Path.Combine(folder, "cb_res");
-
-                // CreateDirectory will check if every folder in path exists and, if not, create them.
-                // If all folders exist then CreateDirectory will do nothing.
-                
-
-                if (!Directory.Exists(applicationFolder))
-                {
-                    Directory.CreateDirectory(applicationFolder);
-                }
-
-                if(!File.Exists(applicationFolder + "\\" + picture))
-                {
-                    using(WebClient client = new WebClient())
-                    {
-                        client.DownloadFile("https://files.symbiotic.link/resources/" + picture, applicationFolder + "\\" + picture);
-                    }
-                }
+                Directory.Delete(applicationFolder, true);
             }
-            
         }
         public static string RandomString(int length)
         {

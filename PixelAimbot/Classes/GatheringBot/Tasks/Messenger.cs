@@ -86,7 +86,7 @@ namespace PixelAimbot
                     {
                         if (_stop)
                         {
-                            btnPause_Click(null, null);
+                            Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
                             _cts.Cancel();
                             await bot.SendTextMessageAsync(chatId, "Bot stopped!");
                         }
@@ -117,9 +117,9 @@ namespace PixelAimbot
                         Stream stream =
                             ToStream(
                                 CropImage(screen,
-                                    new Rectangle(GatheringBot.Recalc(1322),
-                                        PixelAimbot.GatheringBot.Recalc(189, false),
-                                        GatheringBot.Recalc(544), GatheringBot.Recalc(640, false))), ImageFormat.Png);
+                                    new Rectangle(ChaosBot.Recalc(1322),
+                                        PixelAimbot.ChaosBot.Recalc(189, false),
+                                        ChaosBot.Recalc(544), ChaosBot.Recalc(640, false))), ImageFormat.Png);
                         await bot.SendPhotoAsync(chatId, stream);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                     }
@@ -178,7 +178,7 @@ namespace PixelAimbot
                         {
                             if (_stop)
                             {
-                                btnPause_Click(null, null);
+                                Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
                                 _cts.Cancel();
                                 values["response"] = "Bot stopped!";
                             }
