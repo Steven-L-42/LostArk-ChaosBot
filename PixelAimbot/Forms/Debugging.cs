@@ -313,7 +313,7 @@ namespace PixelAimbot
 
             if (maskPath != "")
             {
-                mask = "var mask = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(maskPath) + @"');";
+                mask = "var mask = ChaosBot.byteArrayToImage(PixelAimbot.Images." + Path.GetFileName(maskPath) + ");";
                 maskBool = "mask";
             }
             String text = @"try
@@ -321,7 +321,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                var template = new Image<Bgr, byte>(resourceFolder + '/" + Path.GetFileName(picturePath) + @"');
+                var template = ChaosBot.byteArrayToImage(PixelAimbot.Images." + Path.GetFileName(picturePath) + @");
                 " + mask + @"
 
 

@@ -87,7 +87,6 @@ namespace PixelAimbot
         public Task DiscordTask;
         public static IronTesseract tess = new IronTesseract();
         
-        public string resourceFolder = "";
         private string comboattack = "";
         private Priorized_Skills _skills = new Priorized_Skills();
         

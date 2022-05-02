@@ -29,7 +29,6 @@ namespace PixelAimbot
             // Combine the base folder with your specific folder....
             string applicationFolder = Path.Combine(folder, "cb_res");
             _GatheringBot = this;
-            _resourceFolder = applicationFolder;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = RandomString(15);
             _telegramToken = new CancellationTokenSource();

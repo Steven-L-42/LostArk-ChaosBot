@@ -30,7 +30,6 @@ namespace PixelAimbot
             Rectangle rect;
             GetWindowRect(handle , out rect);
 
-            resourceFolder = applicationFolder;
             if (rect.Width != Screen.PrimaryScreen.Bounds.Width && rect.Height != Screen.PrimaryScreen.Bounds.Height)
             {
                 SetWindowPos(handle, HWND_BOTTOM, 0, 0, 1922, 1107, 0);

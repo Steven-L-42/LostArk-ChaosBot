@@ -51,7 +51,6 @@ namespace PixelAimbot
         private bool _botIsRun = true;
         private bool _discordBotIsRun = true;
 
-        private string _resourceFolder = "";
 
         private static readonly Random random = new Random();
     }
