@@ -312,6 +312,13 @@ namespace PixelAimbot
             frmGuideFishbot fishbotGuide = new frmGuideFishbot();
             fishbotGuide.Show();
         }
-   
+
+        private void checkBoxMiniGame_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Screen.PrimaryScreen.Bounds.Width != 1920)
+            {
+                Alert.Show("Only working on 1920x1080!", frmAlert.enmType.Error);
+            }
+        }
     }
 }

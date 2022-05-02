@@ -125,7 +125,7 @@ namespace PixelAimbot
                             using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                             {
 
-                                var item = minigamedetector.GetBest(screenCapture, false);
+                                var item = minigamedetector.GetBest(screenCapture, false, false);
                                 if (item.HasValue)
                                 {
                                     

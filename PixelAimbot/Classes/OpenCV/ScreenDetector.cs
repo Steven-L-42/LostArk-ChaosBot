@@ -44,13 +44,17 @@ namespace PixelAimbot.Classes.OpenCV
         {
             this.method = type;
         }
-        private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
+        private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture, bool rescaleImage = true)
         {
-            this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width), ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
-            if (this._enemyMask != null)
+            if (rescaleImage)
             {
-                this._enemyMask.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
+                this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                if (this._enemyMask != null)
+                {
+                    this._enemyMask.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
+                        ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                }
             }
 
             List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();
@@ -98,7 +102,7 @@ namespace PixelAimbot.Classes.OpenCV
 
 
 
-        public Point? GetBest(Image<Bgr, byte> screenCapture, bool showDetections = false)
+        public Point? GetBest(Image<Bgr, byte> screenCapture, bool showDetections = false, bool rescaleImage = true)
         {
             var enemies = DetectEnemies(screenCapture);
             if (enemies.Any())

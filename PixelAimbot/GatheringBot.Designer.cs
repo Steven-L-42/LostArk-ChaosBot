@@ -35,6 +35,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxMiniGame = new System.Windows.Forms.CheckBox();
             this.btnInstructions = new System.Windows.Forms.Button();
             this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -90,7 +91,6 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.labelSwap = new System.Windows.Forms.Label();
-            this.checkBoxMiniGame = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -164,6 +164,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
+            // 
+            // checkBoxMiniGame
+            // 
+            this.checkBoxMiniGame.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxMiniGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxMiniGame.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxMiniGame.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxMiniGame.FlatAppearance.BorderSize = 0;
+            this.checkBoxMiniGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxMiniGame.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxMiniGame.Location = new System.Drawing.Point(4, 111);
+            this.checkBoxMiniGame.Name = "checkBoxMiniGame";
+            this.checkBoxMiniGame.Size = new System.Drawing.Size(154, 22);
+            this.checkBoxMiniGame.TabIndex = 63;
+            this.checkBoxMiniGame.Text = "Minigame (lvl30)";
+            this.toolTip1.SetToolTip(this.checkBoxMiniGame, "Do lvl 30 Minigame");
+            this.checkBoxMiniGame.UseMnemonic = false;
+            this.checkBoxMiniGame.UseVisualStyleBackColor = false;
+            this.checkBoxMiniGame.CheckedChanged += new System.EventHandler(this.checkBoxMiniGame_CheckedChanged);
             // 
             // btnInstructions
             // 
@@ -898,24 +917,6 @@
             this.labelSwap.TabIndex = 12;
             this.labelSwap.Text = "CBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click);
-            // 
-            // checkBoxMiniGame
-            // 
-            this.checkBoxMiniGame.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
-            this.checkBoxMiniGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.checkBoxMiniGame.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxMiniGame.Cursor = System.Windows.Forms.Cursors.Help;
-            this.checkBoxMiniGame.FlatAppearance.BorderSize = 0;
-            this.checkBoxMiniGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBoxMiniGame.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.checkBoxMiniGame.Location = new System.Drawing.Point(4, 111);
-            this.checkBoxMiniGame.Name = "checkBoxMiniGame";
-            this.checkBoxMiniGame.Size = new System.Drawing.Size(154, 22);
-            this.checkBoxMiniGame.TabIndex = 63;
-            this.checkBoxMiniGame.Text = "Minigame (lvl30)";
-            this.toolTip1.SetToolTip(this.checkBoxMiniGame, "Do lvl 30 Minigame");
-            this.checkBoxMiniGame.UseMnemonic = false;
-            this.checkBoxMiniGame.UseVisualStyleBackColor = false;
             // 
             // GatheringBot
             // 
