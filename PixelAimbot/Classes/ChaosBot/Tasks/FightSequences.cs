@@ -322,9 +322,9 @@ namespace PixelAimbot
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(240, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2500);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2500);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(566, false), 10);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    KeyboardWrapper.PressKey(currentMouseButton);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
@@ -335,9 +335,9 @@ namespace PixelAimbot
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(523), Recalc(840, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2400);
                                     VirtualMouse.MoveTo(Recalc(1007), Recalc(494, false), 10);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    KeyboardWrapper.PressKey(currentMouseButton);
                                     await Task.Delay(1, token);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
@@ -350,9 +350,9 @@ namespace PixelAimbot
                                     await Task.Delay(1, token);
 
                                     VirtualMouse.MoveTo(Recalc(1578), Recalc(524, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2800);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2800);
                                     VirtualMouse.MoveTo(Recalc(905), Recalc(531, false), 10);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    KeyboardWrapper.PressKey(currentMouseButton);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
@@ -364,9 +364,9 @@ namespace PixelAimbot
                                     await Task.Delay(1, token);
 
                                     VirtualMouse.MoveTo(Recalc(523), Recalc(850, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 2400);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2400);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(500, false), 10);
-                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    KeyboardWrapper.PressKey(currentMouseButton);
                                     await Task.Delay(1, token);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
@@ -698,7 +698,7 @@ namespace PixelAimbot
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                            KeyboardWrapper.PressKey(currentMouseButton);
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         }
@@ -755,7 +755,7 @@ namespace PixelAimbot
                     {
                         await Task.Delay(humanizer.Next(10, 240) + 1500);
                         VirtualMouse.MoveTo(Recalc(960), Recalc(529, false), 10);
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                        KeyboardWrapper.PressKey(currentMouseButton);
 
                         _searchSequence = 2;
                     }
@@ -866,7 +866,7 @@ namespace PixelAimbot
 
                             VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
-                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+                            KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
                         }
                         else
                         {
@@ -924,7 +924,7 @@ namespace PixelAimbot
 
                                 VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
-                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+                                KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
                             }
                             else
                             {
@@ -982,7 +982,7 @@ namespace PixelAimbot
 
                                     VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
-                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_LBUTTON, 1000);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
                                 }
                             }
                         }

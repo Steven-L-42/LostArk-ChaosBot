@@ -221,9 +221,17 @@ namespace PixelAimbot
         private void comboBoxMouse_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            Layout_MouseKeyboard currentMouseLayout = comboBoxMouse.SelectedItem as Layout_MouseKeyboard;
-            txtMouse.Text = translateKey(currentMouseLayout.LEFT);
-            txtMouse.Text = translateKey(currentMouseLayout.RIGHT);
+            if (comboBoxMouse.SelectedIndex == 0)
+            {
+                currentMouseButton = KeyboardWrapper.VK_LBUTTON;
+            }
+            else
+            {
+                currentMouseButton = KeyboardWrapper.VK_RBUTTON;
+            }            
+            
+        //    txtMouse.Text = translateKey(comboBoxMouse.SelectedItem);
+            
 
         }
 
@@ -275,32 +283,8 @@ namespace PixelAimbot
             };
             LAYOUT.Add(AZERTY);
 
-            comboBox1.DataSource = LAYOUT;
-            comboBox1.DisplayMember = "LAYOUTS";
-            _currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
-
-            // MOUSE
-
-            List<Layout_MouseKeyboard> MOUSE = new List<Layout_MouseKeyboard>();
-            Layout_MouseKeyboard LEFT = new Layout_MouseKeyboard
-            {
-                LAYOUTS = "LEFT WALK",
-                LEFT = KeyboardWrapper.VK_RBUTTON,
-               
-            };
-            MOUSE.Add(LEFT);
-
-            Layout_MouseKeyboard RIGHT = new Layout_MouseKeyboard
-            {
-                LAYOUTS = "RIGHT WALK",
-                RIGHT = KeyboardWrapper.VK_LBUTTON,
-               
-            };
-            MOUSE.Add(RIGHT);
-            comboBoxMouse.DataSource = MOUSE;
-            comboBoxMouse.DisplayMember = "MOUSE";
-            _currentMouseLayout = comboBoxMouse.SelectedItem as Layout_MouseKeyboard;
-
+            comboBoxMouse.SelectedIndex = 0;
+            
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
@@ -653,7 +637,7 @@ namespace PixelAimbot
                     rotation.textBoxAutoAttack = textBoxAutoAttack.Text;
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
                     rotation.txtHeal10 = txtHeal10.Text;
-
+                    rotation.mouseButton = comboBoxMouse.SelectedIndex;
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
                 }
@@ -746,7 +730,15 @@ namespace PixelAimbot
                 chBoxDoubleS.Checked = rotation.chBoxDoubleS;
                 chBoxDoubleD.Checked = rotation.chBoxDoubleD;
                 chBoxDoubleF.Checked = rotation.chBoxDoubleF;
-
+                comboBoxMouse.SelectedIndex = rotation.mouseButton;
+                if (comboBoxMouse.SelectedIndex == 0)
+                {
+                    currentMouseButton = KeyboardWrapper.VK_LBUTTON;
+                }
+                else
+                {
+                    currentMouseButton = KeyboardWrapper.VK_RBUTTON;
+                }        
                 Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
         }

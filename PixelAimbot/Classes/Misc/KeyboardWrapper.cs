@@ -91,6 +91,9 @@ namespace PixelAimbot.Classes.Misc
                 if (key == KeyboardWrapper.VK_LBUTTON)
                 {
                     VirtualMouse.LeftDown();
+                } else if (key == KeyboardWrapper.VK_RBUTTON)
+                {
+                    VirtualMouse.RightDown();
                 }
                 else
                 {
@@ -289,6 +292,16 @@ namespace PixelAimbot.Classes.Misc
         {
             mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
             mouse_event(MOUSEEVENTF_RIGHTUP, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+        }    
+        public static void RightDown()
+        {
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+            
+        }
+        public static void RightUp()
+        {
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, Control.MousePosition.X, Control.MousePosition.Y, 0, 0);
+            
         }
 
         [StructLayout(LayoutKind.Sequential)]

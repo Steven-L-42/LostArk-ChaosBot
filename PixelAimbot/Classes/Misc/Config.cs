@@ -147,6 +147,8 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxDoubleD { get; set; } = false;
         public bool chBoxDoubleF { get; set; } = false;
 
+        public int mouseButton { get; set; } = 0;
+
 
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
         public static string ConfigFileName { get; set; }
