@@ -19,8 +19,6 @@ namespace PixelAimbot
             conf = Config.Load();
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Combine the base folder with your specific folder....
-            string applicationFolder = Path.Combine(folder, "cb_res");
-            new Debugging().Show();
             Process[] processName = Process.GetProcessesByName("LostArk");
             if (processName.Length == 1)
             {
