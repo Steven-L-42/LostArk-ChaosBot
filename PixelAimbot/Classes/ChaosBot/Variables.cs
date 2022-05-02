@@ -91,7 +91,8 @@ namespace PixelAimbot
         private static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         private static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         private Layout_Keyboard _currentLayout;
-        
+        private Layout_MouseKeyboard _currentMouseLayout;
+
         private CancellationTokenSource cts = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();

@@ -433,7 +433,9 @@
     <Compile Include="Classes\GatheringBot\Tasks\CheckGathering.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\GatheringBot\Tasks\FishingMinigame.cs" />
+    <Compile Include="Classes\GatheringBot\Tasks\FishingMinigame.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Classes\GatheringBot\Tasks\Logout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -462,6 +464,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Classes\Misc\Alert.cs" />
+    <Compile Include="Classes\Misc\Layout_MouseKeyboard.cs" />
     <Compile Include="Forms\Debugging.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -204,7 +204,28 @@ namespace PixelAimbot
                 }
             }
         }
+        public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Layout_Keyboard currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
+            lbPQ.Text = lb2Q.Text = lbQ.Text = translateKey(currentLayout.Q);
+            lbPW.Text = lb2W.Text = lbW.Text = translateKey(currentLayout.W);
+            lbPE.Text = lb2E.Text = lbE.Text = translateKey(currentLayout.E);
+            lbPR.Text = lb2R.Text = lbR.Text = translateKey(currentLayout.R);
+            lbPA.Text = lb2A.Text = lbA.Text = translateKey(currentLayout.A);
+            lbPS.Text = lb2S.Text = lbS.Text = translateKey(currentLayout.S);
+            lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
+            lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
+            txBoxUltimateKey.Text = translateKey(currentLayout.Y);
+        }
 
+        private void comboBoxMouse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            Layout_MouseKeyboard currentMouseLayout = comboBoxMouse.SelectedItem as Layout_MouseKeyboard;
+            MouseLabel.Text = translateKey(currentMouseLayout.LEFT);
+            MouseLabel.Text = translateKey(currentMouseLayout.RIGHT);
+
+        }
 
         public void ChaosBot_Load(object sender, EventArgs e)
         {
@@ -257,6 +278,29 @@ namespace PixelAimbot
             comboBox1.DataSource = LAYOUT;
             comboBox1.DisplayMember = "LAYOUTS";
             _currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
+
+            // MOUSE
+
+            List<Layout_MouseKeyboard> MOUSE = new List<Layout_MouseKeyboard>();
+            Layout_MouseKeyboard LEFT = new Layout_MouseKeyboard
+            {
+                LAYOUTS = "LEFT WALK",
+                LEFT = KeyboardWrapper.VK_RBUTTON,
+               
+            };
+            MOUSE.Add(LEFT);
+
+            Layout_MouseKeyboard RIGHT = new Layout_MouseKeyboard
+            {
+                LAYOUTS = "RIGHT WALK",
+                RIGHT = KeyboardWrapper.VK_LBUTTON,
+               
+            };
+            MOUSE.Add(RIGHT);
+            comboBoxMouse.DataSource = MOUSE;
+            comboBoxMouse.DisplayMember = "MOUSE";
+            _currentMouseLayout = comboBoxMouse.SelectedItem as Layout_MouseKeyboard;
+
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
@@ -531,20 +575,7 @@ namespace PixelAimbot
         }
 
 
-        public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Layout_Keyboard currentLayout = comboBox1.SelectedItem as Layout_Keyboard;
-            lbPQ.Text = lb2Q.Text = lbQ.Text = translateKey(currentLayout.Q);
-            lbPW.Text = lb2W.Text = lbW.Text = translateKey(currentLayout.W);
-            lbPE.Text = lb2E.Text = lbE.Text = translateKey(currentLayout.E);
-            lbPR.Text = lb2R.Text = lbR.Text = translateKey(currentLayout.R);
-            lbPA.Text = lb2A.Text = lbA.Text = translateKey(currentLayout.A);
-            lbPS.Text = lb2S.Text = lbS.Text = translateKey(currentLayout.S);
-            lbPD.Text = lb2D.Text = lbD.Text = translateKey(currentLayout.D);
-            lbPF.Text = lb2F.Text = lbF.Text = translateKey(currentLayout.F);
-            txBoxUltimateKey.Text = translateKey(currentLayout.Y);
-        }
-
+       
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
             if (comboBoxRotations.Text != "")
@@ -793,9 +824,6 @@ namespace PixelAimbot
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
 
-
-
-
-
+        
     }
 }

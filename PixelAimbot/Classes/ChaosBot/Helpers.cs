@@ -145,6 +145,14 @@ namespace PixelAimbot
                     translate = "Z";
                     break;
 
+                case 0:
+                    translate = "LEFT WALK";
+                    break;
+
+                case 1:
+                    translate = "RIGHT WALK";
+                    break;
+
                 default:
                     translate = key.ToString();
                     break;
