@@ -306,7 +306,8 @@ namespace PixelAimbot
                 Y = KeyboardWrapper.VK_Z,
             };
             LAYOUT.Add(AZERTY);
-
+            comboBox1.DataSource = LAYOUT;
+            comboBox1.DisplayMember = "LAYOUTS";
             comboBoxMouse.SelectedIndex = 0;
             
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
