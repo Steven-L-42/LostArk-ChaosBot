@@ -35,7 +35,7 @@ namespace PixelAimbot
                 
                 int failCounter = 0;
 
-                var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.attention2);
+                var template = Image_attention2;
 
                 var detector = new ScreenDetector(template, null, 0.91f, ChaosBot.Recalc(950),
                     ChaosBot.Recalc(465, false), ChaosBot.Recalc(20, true, true), ChaosBot.Recalc(44, false, true));
@@ -116,9 +116,9 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
 
-                            var minigametemplate = ChaosBot.byteArrayToImage(PixelAimbot.Images.minigame);
+                            var minigametemplate = Image_minigame;
 
-                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.92f,
+                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.90f,
                                 ChaosBot.Recalc(488), ChaosBot.Recalc(109, false), ChaosBot.Recalc(71, true, true),
                                 ChaosBot.Recalc(439, false, true));
                             var screenPrinter = new PrintScreen();

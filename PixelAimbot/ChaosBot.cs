@@ -27,8 +27,9 @@ namespace PixelAimbot
 
             Rectangle rect;
             GetWindowRect(handle , out rect);
+            System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.PrimaryScreen;
 
-            if (rect.Width != Screen.PrimaryScreen.Bounds.Width && rect.Height != Screen.PrimaryScreen.Bounds.Height)
+            if (screen.Bounds.Width != (rect.Right - rect.Left) && screen.Bounds.Height != (rect.Bottom - rect.Top))
             {
                 SetWindowPos(handle, HWND_BOTTOM, 0, 0, 1922, 1107, 0);
                 GetWindowRect(handle , out rect);

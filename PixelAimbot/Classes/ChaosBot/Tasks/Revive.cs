@@ -28,15 +28,11 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             float thresh = int.Parse(txtRevive.Text) * 0.01f;
-                            var ReviveDeutschTemplate =
-                                ChaosBot.byteArrayToImage(PixelAimbot.Images.revive1);
-                            var ReviveDeutschMask =
-                                ChaosBot.byteArrayToImage(PixelAimbot.Images.revive1);
+                            var ReviveDeutschTemplate = Image_revive1;
+                            var ReviveDeutschMask = Image_revive1;
 
-                            var ReviveEnglishTemplate =
-                                ChaosBot.byteArrayToImage(PixelAimbot.Images.reviveEnglish);
-                            var ReviveEnglishMask =
-                                ChaosBot.byteArrayToImage(PixelAimbot.Images.reviveEnglish);
+                            var ReviveEnglishTemplate = Image_reviveEnglish;
+                            var ReviveEnglishMask = Image_reviveEnglish;
 
                             var ReviveDeutschDetector =
                                 new EnterDetectors(ReviveDeutschTemplate, ReviveDeutschMask, thresh);

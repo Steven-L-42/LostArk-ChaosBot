@@ -24,7 +24,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
-                        var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.energy_fish);
+                        var template = Image_energy_fish;
                         
                         var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(683),
                             ChaosBot.Recalc(979, false), ChaosBot.Recalc(45, true, true), ChaosBot.Recalc(33, false, true));

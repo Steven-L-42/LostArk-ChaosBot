@@ -53,5 +53,12 @@ namespace PixelAimbot
 
 
         private static readonly Random random = new Random();
+        
+        public Image<Bgr, Byte> Image_attention2 = ChaosBot.byteArrayToImage(Images.attention2);
+        public Image<Bgr, Byte> Image_energy_fish = ChaosBot.byteArrayToImage(Images.energy_fish);
+        public Image<Bgr, Byte> Image_fishing_minigame = ChaosBot.byteArrayToImage(Images.fishing_minigame);
+        public Image<Bgr, Byte> Image_gathering = ChaosBot.byteArrayToImage(Images.gathering);
+        public Image<Bgr, Byte> Image_gatheringRepair = ChaosBot.byteArrayToImage(Images.gatheringRepair);
+        public Image<Bgr, Byte> Image_minigame = ChaosBot.byteArrayToImage(Images.minigame);
     }
 }

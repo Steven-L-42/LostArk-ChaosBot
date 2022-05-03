@@ -20,7 +20,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.gatheringRepair);
+                    var template = Image_gatheringRepair;
 
 
                     var detector = new ScreenDetector(template, null, 0.85f, ChaosBot.Recalc(1456),

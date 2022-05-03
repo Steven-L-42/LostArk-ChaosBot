@@ -40,7 +40,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.questmarker);
+                    var template = Image_questmarker;
 
                     var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.Recalc(1890),
                         ChaosBot.Recalc(378, false), ChaosBot.Recalc(28, true, true), ChaosBot.Recalc(31, false, true));

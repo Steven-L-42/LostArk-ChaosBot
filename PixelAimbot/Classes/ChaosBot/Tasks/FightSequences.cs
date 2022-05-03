@@ -213,7 +213,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.red_hp);
+                var template = Image_red_hp;
                 var detector = new ScreenDetector(template, null, 0.93f, ChaosBot.Recalc(460),
                     ChaosBot.Recalc(120, false), ChaosBot.Recalc(1000, true, true), ChaosBot.Recalc(780, false, true));
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
@@ -634,10 +634,8 @@ namespace PixelAimbot
                     await Task.Delay(humanizer.Next(10, 240) + 100, token);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                    var enemyTemplate =
-                        ChaosBot.byteArrayToImage(PixelAimbot.Images.portalenter1);
-                    var enemyMask =
-                        ChaosBot.byteArrayToImage(PixelAimbot.Images.portalentermask1);
+                    var enemyTemplate = Image_portalenter1;
+                    var enemyMask = Image_portalentermask1;
                     Point screenResolution = new Point(screenWidth, screenHeight);
 
                     // Main program loop
@@ -777,22 +775,14 @@ namespace PixelAimbot
                         await Task.Delay(humanizer.Next(10, 240) + 100, token);
                         float threshold = 0.7f;
 
-                        var enemyTemplate =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.enemy);
-                        var enemyMask =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.mask);
-                        var BossTemplate =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.boss1);
-                        var BossMask =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.bossmask1);
-                        var mobTemplate =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.mob1);
-                        var mobMask =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.mobmask1);
-                        var portalTemplate =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.portalenter1);
-                        var portalMask =
-                            ChaosBot.byteArrayToImage(PixelAimbot.Images.portalentermask1);
+                        var enemyTemplate = Image_enemy;
+                        var enemyMask = Image_mask;
+                        var BossTemplate = Image_boss1;
+                        var BossMask = Image_bossmask1;
+                        var mobTemplate = Image_mob1;
+                        var mobMask =  Image_mobmask1;
+                        var portalTemplate = Image_portalenter1;
+                        var portalMask = Image_portalentermask1;
 
                         Point myPosition = new Point(Recalc(148), Recalc(127, false));
                         Point screenResolution = new Point(screenWidth, screenHeight);
