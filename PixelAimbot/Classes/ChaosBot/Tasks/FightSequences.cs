@@ -218,14 +218,14 @@ namespace PixelAimbot
                     ChaosBot.Recalc(120, false), ChaosBot.Recalc(1000, true, true), ChaosBot.Recalc(780, false, true));
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
+ /*               if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
                 {
                     VirtualMouse.LeftDown();
                 }
                 else
                 {
                     VirtualMouse.RightDown();
-                }
+                }*/
                 while (_floorFight && _stopp == false)
                 {
                     if (_canSearchEnemys)
@@ -264,14 +264,14 @@ namespace PixelAimbot
                         }
                     }
                 }
-                if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
+            /*    if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
                 {
                     VirtualMouse.LeftUp();
                 }
                 else
                 {
                     VirtualMouse.RightUp();
-                }
+                }*/
             }
             catch (Exception ex)
             {
