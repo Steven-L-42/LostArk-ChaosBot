@@ -28,11 +28,11 @@ namespace PixelAimbot
             Rectangle rect;
             GetWindowRect(handle , out rect);
             System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.PrimaryScreen;
-
-            if (screen.Bounds.Width != (rect.Right - rect.Left) && screen.Bounds.Height != (rect.Bottom - rect.Top))
+            
+            if (screen.Bounds.Width > 2000 && screen.Bounds.Height > 1200 && screen.Bounds.Width > (rect.Right - rect.Left) && screen.Bounds.Height > (rect.Bottom - rect.Top))
             {
-                SetWindowPos(handle, HWND_BOTTOM, 0, 0, 1922, 1107, 0);
-                GetWindowRect(handle , out rect);
+                SetWindowPos(handle, HWND_BOTTOM, 0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top, 0);
+                GetWindowRect(handle, out rect);
 
                 Task.Delay(5000);
                 isWindowed = true;
@@ -42,7 +42,9 @@ namespace PixelAimbot
                 windowHeight = 1080;
                 screenWidth = 1920;
                 screenHeight = 1080;
-            } 
+            }
+            
+
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             this.TopMost = true;
