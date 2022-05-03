@@ -35,12 +35,12 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.btnInstructions = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.txtLOGOUT = new System.Windows.Forms.TextBox();
             this.chBoxLOGOUT = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -268,12 +268,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.chBoxChannelSwap);
             this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.label34);
             this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.txtLOGOUT);
             this.groupBox1.Controls.Add(this.chBoxLOGOUT);
             this.groupBox1.Controls.Add(this.label30);
@@ -292,6 +292,16 @@
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.Location = new System.Drawing.Point(204, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 17);
+            this.label1.TabIndex = 62;
+            this.label1.Text = "min.";
+            // 
             // chBoxChannelSwap
             // 
             this.chBoxChannelSwap.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
@@ -303,7 +313,7 @@
             this.chBoxChannelSwap.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.chBoxChannelSwap.Location = new System.Drawing.Point(4, 89);
             this.chBoxChannelSwap.Name = "chBoxChannelSwap";
-            this.chBoxChannelSwap.Size = new System.Drawing.Size(135, 22);
+            this.chBoxChannelSwap.Size = new System.Drawing.Size(154, 22);
             this.chBoxChannelSwap.TabIndex = 61;
             this.chBoxChannelSwap.Text = "Channel-Swap";
             this.toolTip1.SetToolTip(this.chBoxChannelSwap, "adjust your time from when to activate Auto-Logout, \r\nspecify in minutes. Do not " + "enter the same time as for Auto-Repair!\r\nLogout means = character selection.\r\n");
@@ -364,16 +374,6 @@
             this.label33.TabIndex = 47;
             this.label33.Visible = false;
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label31.Location = new System.Drawing.Point(204, 42);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(32, 17);
-            this.label31.TabIndex = 46;
-            this.label31.Text = "min.";
-            // 
             // txtLOGOUT
             // 
             this.txtLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
@@ -412,11 +412,11 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.label30.Location = new System.Drawing.Point(145, 91);
+            this.label30.Location = new System.Drawing.Point(166, 89);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(89, 17);
+            this.label30.Size = new System.Drawing.Size(66, 17);
             this.label30.TabIndex = 43;
-            this.label30.Text = "each third run";
+            this.label30.Text = "each third";
             // 
             // label28
             // 
@@ -434,7 +434,7 @@
             this.txtRepair.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRepair.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txtRepair.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRepair.Location = new System.Drawing.Point(166, 40);
+            this.txtRepair.Location = new System.Drawing.Point(166, 39);
             this.txtRepair.Name = "txtRepair";
             this.txtRepair.ReadOnly = true;
             this.txtRepair.Size = new System.Drawing.Size(35, 22);
@@ -467,7 +467,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.label27.ForeColor = System.Drawing.Color.Peru;
-            this.label27.Location = new System.Drawing.Point(162, 20);
+            this.label27.Location = new System.Drawing.Point(164, 21);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(45, 15);
             this.label27.TabIndex = 35;
@@ -2658,6 +2658,8 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Label label1;
+
         private System.Windows.Forms.TextBox textBoxAutoAttack;
         private System.Windows.Forms.Label label2;
 
@@ -2695,7 +2697,6 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.CheckBox chBoxLOGOUT;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox txtLOGOUT;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label34;

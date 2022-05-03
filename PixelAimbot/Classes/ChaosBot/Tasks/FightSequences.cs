@@ -214,11 +214,18 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = Image_red_hp;
-                var detector = new ScreenDetector(template, null, 0.93f, ChaosBot.Recalc(460),
+                var detector = new ScreenDetector(template, null, 0.92f, ChaosBot.Recalc(460),
                     ChaosBot.Recalc(120, false), ChaosBot.Recalc(1000, true, true), ChaosBot.Recalc(780, false, true));
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-
+                if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
+                {
+                    VirtualMouse.LeftDown();
+                }
+                else
+                {
+                    VirtualMouse.RightDown();
+                }
                 while (_floorFight && _stopp == false)
                 {
                     if (_canSearchEnemys)
@@ -257,6 +264,14 @@ namespace PixelAimbot
                         }
                     }
                 }
+                if (currentMouseButton == KeyboardWrapper.VK_LBUTTON)
+                {
+                    VirtualMouse.LeftUp();
+                }
+                else
+                {
+                    VirtualMouse.RightUp();
+                }
             }
             catch (Exception ex)
             {
@@ -273,7 +288,6 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-
 
                 while (_floorFight && _stopp == false)
                 {

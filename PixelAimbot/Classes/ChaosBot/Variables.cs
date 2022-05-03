@@ -78,8 +78,10 @@ namespace PixelAimbot
         private int _swap;
         private int _formExists;
         private bool _canSearchEnemys = true;
+        private DateTime _repairTimer;
+        
         public static int healthPercent = 70;
-
+    
         public frmMinimized FormMinimized = new frmMinimized();
         public Config conf = new Config();
         private bool _telegramBotRunning;
