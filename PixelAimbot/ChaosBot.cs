@@ -25,6 +25,13 @@ namespace PixelAimbot
                 handle = processName[0].MainWindowHandle;
             }
 
+            if (conf.username == "Mentalill" || conf.username == "ShiiikK" && Debugger.IsAttached)
+            {
+                if (Application.OpenForms["Debugging"] == null) {
+                    new Debugging().Show();
+                }
+            }
+
             Rectangle rect;
             GetWindowRect(handle , out rect);
             System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.PrimaryScreen;
@@ -199,7 +206,6 @@ namespace PixelAimbot
                     var token = cts.Token;
 
                     var t1 = Task.Run(() => Start(token));
-
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
                         _RepairReset = false;

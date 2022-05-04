@@ -27,6 +27,38 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
+                            try
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+
+                                var template = Image_revive_new;
+                                var detector = new ScreenDetector(template, null, 0.93f, ChaosBot.Recalc(1267), ChaosBot.Recalc(434, false), ChaosBot.Recalc(226), ChaosBot.Recalc(62, false));
+                                var screenPrinter = new PrintScreen();
+                                using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
+
+                                    var item = detector.GetBest(screenCapture, true);
+                                    if (item.HasValue && _floorFight)
+                                    {
+                                        token.ThrowIfCancellationRequested();
+                                        await Task.Delay(1, token);
+                                        _floorFight = false;
+
+                                        _potions = false;
+                                        DiscordSendMessage("Bot is reviving!");
+                                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "REVIVE!"));
+                                        VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 10);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                        _floorFight = true;
+
+                                        _potions = false;
+                                    }
+                                }
+
+                            }
+                            catch { }
+                            
+                            /*
                             float thresh = int.Parse(txtRevive.Text) * 0.01f;
                             var ReviveDeutschTemplate = Image_revive1;
                             var ReviveDeutschMask = Image_revive1;
@@ -41,24 +73,27 @@ namespace PixelAimbot
                             var screenPrinter = new PrintScreen();
                             var rawScreen = screenPrinter.CaptureScreen();
                             Bitmap bitmapImage = new Bitmap(rawScreen);
-                            var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-                            var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
-                            var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
-                            if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue && _floorFight == true)
+                            using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                             {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                _floorFight = false;
-                            
-                                _potions = false;
-                                DiscordSendMessage("Bot is reviving!");
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "REVIVE!"));
-                                VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 10);
-                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                _floorFight = true;
-                        
-                                _potions = false;
+                                var ReviveDeutsch = ReviveDeutschDetector.GetClosestEnter(screenCapture);
+                                var ReviveEnglish = ReviveEnglishDetector.GetClosestEnter(screenCapture);
+                                if (ReviveDeutsch.HasValue || ReviveEnglish.HasValue && _floorFight == true)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+                                    _floorFight = false;
+
+                                    _potions = false;
+                                    DiscordSendMessage("Bot is reviving!");
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "REVIVE!"));
+                                    VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 10);
+                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                                    _floorFight = true;
+
+                                    _potions = false;
+                                }
                             }
+*/
                             var sleepTime = new Random().Next(450, 555);
                             Thread.Sleep(sleepTime);
                         }

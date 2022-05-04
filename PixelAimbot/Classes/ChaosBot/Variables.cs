@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -106,8 +107,7 @@ namespace PixelAimbot
         private CancellationTokenSource cts = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
-        
-        
+
         public Image<Bgr, Byte> Image_boss1 = byteArrayToImage(Images.boss1);
         public Image<Bgr, Byte> Image_bossmask1 = byteArrayToImage(Images.bossmask1);
         public Image<Bgr, Byte> Image_enemy = byteArrayToImage(Images.enemy);
@@ -118,6 +118,8 @@ namespace PixelAimbot
         public Image<Bgr, Byte> Image_portalentermask1 = byteArrayToImage(Images.portalentermask1);
         public Image<Bgr, Byte> Image_questmarker = byteArrayToImage(Images.questmarker);
         public Image<Bgr, Byte> Image_red_hp = byteArrayToImage(Images.red_hp);
+        public Image<Bgr, Byte> Image_revive_new = byteArrayToImage(Images.revive_new);
+        
         public Image<Bgr, Byte> Image_revive1 = byteArrayToImage(Images.revive1);
         public Image<Bgr, Byte> Image_reviveEnglish = byteArrayToImage(Images.reviveEnglish);
         

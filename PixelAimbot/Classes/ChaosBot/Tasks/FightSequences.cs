@@ -214,7 +214,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = Image_red_hp;
-                var detector = new ScreenDetector(template, null, 0.93f, ChaosBot.Recalc(460),
+                var detector = new ScreenDetector(template, null, 0.94f, ChaosBot.Recalc(460),
                     ChaosBot.Recalc(120, false), ChaosBot.Recalc(1000, true, true), ChaosBot.Recalc(780, false, true));
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
@@ -808,87 +808,29 @@ namespace PixelAimbot
 
                         var rawScreen = screenPrinter.CaptureScreen();
                         Bitmap bitmapImage = new Bitmap(rawScreen);
-                        var screenCapture = bitmapImage.ToImage<Bgr, byte>();
-
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, false);
-                        var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
-                        var mob = mobDetector.GetClosestEnemy(screenCapture, false);
-                        var portal = portalDetector.GetClosestEnemy(screenCapture, false);
-
-                        if (Boss.HasValue && _searchboss == true)
+                        using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                         {
-                            CvInvoke.Rectangle(screenCapture,
-                                new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
-                                new MCvScalar(255));
-                            double distance_x = (screenWidth - Recalc(296)) / 2;
-                            double distance_y = (screenHeight - Recalc(255, false)) / 2;
 
-                            var boss_position = ((Boss.Value.X + distance_x), (Boss.Value.Y + distance_y));
-                            double multiplier = 1;
-                            var boss_position_on_minimap = ((Boss.Value.X), (Boss.Value.Y));
-                            var my_position_on_minimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
-                            var dist = Math.Sqrt(
-                                Math.Pow((my_position_on_minimap.Item1 - boss_position_on_minimap.Item1), 2) +
-                                Math.Pow((my_position_on_minimap.Item2 - boss_position_on_minimap.Item2), 2));
+                            var enemy = enemyDetector.GetClosestEnemy(screenCapture, false);
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+                            var mob = mobDetector.GetClosestEnemy(screenCapture, false);
+                            var portal = portalDetector.GetClosestEnemy(screenCapture, false);
 
-                            if (dist < 180 && _searchboss == true)
-                            {
-                                multiplier = 1.2;
-                            }
-
-                            double posx;
-                            double posy;
-                            if (boss_position.Item1 < (screenWidth / 2) && _searchboss == true)
-                            {
-                                posx = boss_position.Item1 * (2 - multiplier);
-                            }
-                            else
-                            {
-                                posx = boss_position.Item1 * multiplier;
-                            }
-
-                            if (boss_position.Item2 < (screenHeight / 2) && _searchboss == true)
-                            {
-                                posy = boss_position.Item2 * (2 - multiplier);
-                            }
-                            else
-                            {
-                                posy = boss_position.Item2 * multiplier;
-                            }
-
-                            var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-
-                            if (_floorint2 == 1 && _searchboss == true)
-                            {
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 2: Big-Boss found!"));
-                            }
-
-                            if (_floorint2 == 2 && _searchboss == true)
-                            {
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 3: Big-Boss found!"));
-                            }
-
-                            VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
-
-                            KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
-                        }
-                        else
-                        {
-                            if (enemy.HasValue && _searchboss == true)
+                            if (Boss.HasValue && _searchboss == true)
                             {
                                 CvInvoke.Rectangle(screenCapture,
-                                    new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
+                                    new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
                                     new MCvScalar(255));
                                 double distance_x = (screenWidth - Recalc(296)) / 2;
                                 double distance_y = (screenHeight - Recalc(255, false)) / 2;
 
-                                var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                                var boss_position = ((Boss.Value.X + distance_x), (Boss.Value.Y + distance_y));
                                 double multiplier = 1;
-                                var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
+                                var boss_position_on_minimap = ((Boss.Value.X), (Boss.Value.Y));
                                 var my_position_on_minimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
                                 var dist = Math.Sqrt(
-                                    Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) +
-                                    Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
+                                    Math.Pow((my_position_on_minimap.Item1 - boss_position_on_minimap.Item1), 2) +
+                                    Math.Pow((my_position_on_minimap.Item2 - boss_position_on_minimap.Item2), 2));
 
                                 if (dist < 180 && _searchboss == true)
                                 {
@@ -897,33 +839,34 @@ namespace PixelAimbot
 
                                 double posx;
                                 double posy;
-                                if (enemy_position.Item1 < (screenWidth / 2) && _searchboss == true)
+                                if (boss_position.Item1 < (screenWidth / 2) && _searchboss == true)
                                 {
-                                    posx = enemy_position.Item1 * (2 - multiplier);
+                                    posx = boss_position.Item1 * (2 - multiplier);
                                 }
                                 else
                                 {
-                                    posx = enemy_position.Item1 * multiplier;
+                                    posx = boss_position.Item1 * multiplier;
                                 }
 
-                                if (enemy_position.Item2 < (screenHeight / 2) && _searchboss == true)
+                                if (boss_position.Item2 < (screenHeight / 2) && _searchboss == true)
                                 {
-                                    posy = enemy_position.Item2 * (2 - multiplier);
+                                    posy = boss_position.Item2 * (2 - multiplier);
                                 }
                                 else
                                 {
-                                    posy = enemy_position.Item2 * multiplier;
+                                    posy = boss_position.Item2 * multiplier;
                                 }
 
                                 var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+
                                 if (_floorint2 == 1 && _searchboss == true)
                                 {
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 2: Mid-Boss found!"));
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 2: Big-Boss found!"));
                                 }
 
                                 if (_floorint2 == 2 && _searchboss == true)
                                 {
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 3: Mid-Boss found!"));
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 3: Big-Boss found!"));
                                 }
 
                                 VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
@@ -932,21 +875,21 @@ namespace PixelAimbot
                             }
                             else
                             {
-                                if (mob.HasValue && _searchboss == true)
+                                if (enemy.HasValue && _searchboss == true)
                                 {
                                     CvInvoke.Rectangle(screenCapture,
-                                        new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                        new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                         new MCvScalar(255));
                                     double distance_x = (screenWidth - Recalc(296)) / 2;
                                     double distance_y = (screenHeight - Recalc(255, false)) / 2;
 
-                                    var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
+                                    var enemy_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
                                     double multiplier = 1;
-                                    var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
+                                    var enemy_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
                                     var my_position_on_minimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
                                     var dist = Math.Sqrt(
-                                        Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1), 2) +
-                                        Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2), 2));
+                                        Math.Pow((my_position_on_minimap.Item1 - enemy_position_on_minimap.Item1), 2) +
+                                        Math.Pow((my_position_on_minimap.Item2 - enemy_position_on_minimap.Item2), 2));
 
                                     if (dist < 180 && _searchboss == true)
                                     {
@@ -955,38 +898,103 @@ namespace PixelAimbot
 
                                     double posx;
                                     double posy;
-                                    if (mob_position.Item1 < (screenWidth / 2) && _searchboss == true)
+                                    if (enemy_position.Item1 < (screenWidth / 2) && _searchboss == true)
                                     {
-                                        posx = mob_position.Item1 * (2 - multiplier);
+                                        posx = enemy_position.Item1 * (2 - multiplier);
                                     }
                                     else
                                     {
-                                        posx = mob_position.Item1 * multiplier;
+                                        posx = enemy_position.Item1 * multiplier;
                                     }
 
-                                    if (mob_position.Item2 < (screenHeight / 2) && _searchboss == true)
+                                    if (enemy_position.Item2 < (screenHeight / 2) && _searchboss == true)
                                     {
-                                        posy = mob_position.Item2 * (2 - multiplier);
+                                        posy = enemy_position.Item2 * (2 - multiplier);
                                     }
                                     else
                                     {
-                                        posy = mob_position.Item2 * multiplier;
+                                        posy = enemy_position.Item2 * multiplier;
                                     }
 
                                     var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
                                     if (_floorint2 == 1 && _searchboss == true)
                                     {
-                                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 2: Mob found!"));
+                                        lbStatus.Invoke((MethodInvoker) (() =>
+                                            lbStatus.Text = "Floor 2: Mid-Boss found!"));
                                     }
 
                                     if (_floorint2 == 2 && _searchboss == true)
                                     {
-                                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 3: Mob found!"));
+                                        lbStatus.Invoke((MethodInvoker) (() =>
+                                            lbStatus.Text = "Floor 3: Mid-Boss found!"));
                                     }
 
                                     VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
                                     KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
+                                }
+                                else
+                                {
+                                    if (mob.HasValue && _searchboss == true)
+                                    {
+                                        CvInvoke.Rectangle(screenCapture,
+                                            new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
+                                            new MCvScalar(255));
+                                        double distance_x = (screenWidth - Recalc(296)) / 2;
+                                        double distance_y = (screenHeight - Recalc(255, false)) / 2;
+
+                                        var mob_position = ((mob.Value.X + distance_x), (mob.Value.Y + distance_y));
+                                        double multiplier = 1;
+                                        var mob_position_on_minimap = ((mob.Value.X), (mob.Value.Y));
+                                        var my_position_on_minimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
+                                        var dist = Math.Sqrt(
+                                            Math.Pow((my_position_on_minimap.Item1 - mob_position_on_minimap.Item1),
+                                                2) +
+                                            Math.Pow((my_position_on_minimap.Item2 - mob_position_on_minimap.Item2),
+                                                2));
+
+                                        if (dist < 180 && _searchboss == true)
+                                        {
+                                            multiplier = 1.2;
+                                        }
+
+                                        double posx;
+                                        double posy;
+                                        if (mob_position.Item1 < (screenWidth / 2) && _searchboss == true)
+                                        {
+                                            posx = mob_position.Item1 * (2 - multiplier);
+                                        }
+                                        else
+                                        {
+                                            posx = mob_position.Item1 * multiplier;
+                                        }
+
+                                        if (mob_position.Item2 < (screenHeight / 2) && _searchboss == true)
+                                        {
+                                            posy = mob_position.Item2 * (2 - multiplier);
+                                        }
+                                        else
+                                        {
+                                            posy = mob_position.Item2 * multiplier;
+                                        }
+
+                                        var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
+                                        if (_floorint2 == 1 && _searchboss == true)
+                                        {
+                                            lbStatus.Invoke(
+                                                (MethodInvoker) (() => lbStatus.Text = "Floor 2: Mob found!"));
+                                        }
+
+                                        if (_floorint2 == 2 && _searchboss == true)
+                                        {
+                                            lbStatus.Invoke(
+                                                (MethodInvoker) (() => lbStatus.Text = "Floor 3: Mob found!"));
+                                        }
+
+                                        VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
+
+                                        KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
+                                    }
                                 }
                             }
                         }

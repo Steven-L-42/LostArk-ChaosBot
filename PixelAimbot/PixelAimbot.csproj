@@ -376,6 +376,7 @@
     <Compile Include="Classes\ChaosBot\Images\red_hp.cs" />
     <Compile Include="Classes\ChaosBot\Images\revive1.cs" />
     <Compile Include="Classes\ChaosBot\Images\reviveEnglish.cs" />
+    <Compile Include="Classes\ChaosBot\Images\revive_new.cs" />
     <Compile Include="Classes\ChaosBot\Imports.cs">
       <SubType>Form</SubType>
     </Compile>
