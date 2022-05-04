@@ -151,7 +151,8 @@ namespace PixelAimbot
                 _ultimate = false;
                 _doUltimateAttack = false;
                 _potions = false;
-
+                _firstSetupTransparency = true;
+                
                 _Q = true;
                 _W = true;
                 _E = true;

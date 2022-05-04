@@ -79,6 +79,7 @@ namespace PixelAimbot
         private int _swap;
         private int _formExists;
         private bool _canSearchEnemys = true;
+        private bool _firstSetupTransparency = true;
         private DateTime _repairTimer;
         
         public static int healthPercent = 70;
