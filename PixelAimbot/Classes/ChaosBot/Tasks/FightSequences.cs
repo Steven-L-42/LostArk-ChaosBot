@@ -110,87 +110,87 @@ namespace PixelAimbot
 
                     await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon2.Text) * 1000);
 
-                    _floorFight = false;
+                  
 
-                    if (_fightSequence >= 8 && chBoxActivateF3.Checked && _floor3 == false)
-                    {
-                        _fightSequence2 = 1;
-                        _portaldetect = true;
-                        _floorint2 = 2;
-                        _floorint3 = 2;
-                        var t18 = Task.Run(() => Portaldetect(token));
-                        await Task.WhenAny(t18);
-                    }
-                    else if (_fightSequence < 8 && _stopp == false)
-                    {
+                    //if (_fightSequence >= 8 && chBoxActivateF3.Checked && _floor3 == false)
+                    //{
+                    //    _fightSequence2 = 1;
+                    //    _portaldetect = true;
+                    //    _floorint2 = 2;
+                    //    _floorint3 = 2;
+                    //    var t18 = Task.Run(() => Portaldetect(token));
+                    //    await Task.WhenAny(t18);
+                    //}
+                    //else if (_fightSequence < 8 && _stopp == false)
+                    //{
                         _floorFight = false;
                         _potions = false;
                         _revive = false;
                         _searchboss = true;
                         var t13 = Task.Run(() => SEARCHBOSS(token));
                         await Task.WhenAny(t13);
-                    }
+                    //}
 
                     await Task.WhenAny(t11, t12, t16, t20);
                 }
 
-                if (_floor3 && _stopp == false)
-                {
-                    Process[] process3Name = Process.GetProcessesByName("LostArk");
-                    if (process3Name.Length == 0 && chBoxCrashDetection.Checked)
-                    {
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
-                        await Task.Delay(5000);
-                        DiscordSendMessage("Game Crashed - Bot Stopped!");
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
-                    }
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                //if (_floor3 && _stopp == false)
+                //{
+                //    Process[] process3Name = Process.GetProcessesByName("LostArk");
+                //    if (process3Name.Length == 0 && chBoxCrashDetection.Checked)
+                //    {
+                //        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
+                //        await Task.Delay(5000);
+                //        DiscordSendMessage("Game Crashed - Bot Stopped!");
+                //        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
+                //    }
+                //    token.ThrowIfCancellationRequested();
+                //    await Task.Delay(1, token);
 
-                    _leavetimer2++;
-                    _fightSequence2++;
-                    // START TASK BOOLS //
-                    _floorFight = true;
-                    _revive = true;
-                    _ultimate = true;
-                    _potions = true;
-                    // CLASSES //
-                    _gunlancer = true;
-                    _shadowhunter = true;
-                    _berserker = true;
-                    _paladin = true;
-                    _deathblade = true;
-                    _sharpshooter = true;
-                    _bard = true;
-                    _sorcerer = true;
-                    _soulfist = true;
+                //    _leavetimer2++;
+                //    _fightSequence2++;
+                //    // START TASK BOOLS //
+                //    _floorFight = true;
+                //    _revive = true;
+                //    _ultimate = true;
+                //    _potions = true;
+                //    // CLASSES //
+                //    _gunlancer = true;
+                //    _shadowhunter = true;
+                //    _berserker = true;
+                //    _paladin = true;
+                //    _deathblade = true;
+                //    _sharpshooter = true;
+                //    _bard = true;
+                //    _sorcerer = true;
+                //    _soulfist = true;
 
-                    if (_leavetimer2 == 1)
-                    {
-                        var t36 = Task.Run(() => Leavetimerfloor3(token));
-                        await Task.WhenAny(t36);
-                    }
+                //    if (_leavetimer2 == 1)
+                //    {
+                //        var t36 = Task.Run(() => Leavetimerfloor3(token));
+                //        await Task.WhenAny(t36);
+                //    }
 
-                    var t11 = Task.Run(() => SearchNearEnemys(token));
-                    var t12 = Task.Run(() => Floorfight(token));
-                    var t16 = Task.Run(() => Revive(token));
-                    var t20 = Task.Run(() => Potions(token));
-                    await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon3.Text) * 1000, token);
+                //    var t11 = Task.Run(() => SearchNearEnemys(token));
+                //    var t12 = Task.Run(() => Floorfight(token));
+                //    var t16 = Task.Run(() => Revive(token));
+                //    var t20 = Task.Run(() => Potions(token));
+                //    await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon3.Text) * 1000, token);
 
-                    _floorFight = false;
+                //    _floorFight = false;
 
-                    if (_fightSequence2 < 7 && _stopp == false)
-                    {
-                        _floorFight = false;
-                        _potions = false;
-                        _revive = false;
-                        _searchboss = true;
-                        var t13 = Task.Run(() => SEARCHBOSS(token));
-                        await Task.WhenAny(t13);
-                    }
+                //    if (_fightSequence2 < 7 && _stopp == false)
+                //    {
+                //        _floorFight = false;
+                //        _potions = false;
+                //        _revive = false;
+                //        _searchboss = true;
+                //        var t13 = Task.Run(() => SEARCHBOSS(token));
+                //        await Task.WhenAny(t13);
+                //    }
 
-                    await Task.WhenAny(t11, t12, t16, t20);
-                }
+                //    await Task.WhenAny(t11, t12, t16, t20);
+                //}
             }
             catch (AggregateException)
             {
@@ -330,26 +330,26 @@ namespace PixelAimbot
                                 }
 
 
-                                if (_walktopUTurn == 3 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                if (_walktopUTurn == 4 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
                                     _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(240, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2500);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1500);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(566, false), 10);
                                     KeyboardWrapper.PressKey(currentMouseButton);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
-                                if (_walktopUTurn == 10 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                if (_walktopUTurn == 11 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
                                     _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
                                     VirtualMouse.MoveTo(Recalc(523), Recalc(840, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2400);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2200);
                                     VirtualMouse.MoveTo(Recalc(1007), Recalc(494, false), 10);
                                     KeyboardWrapper.PressKey(currentMouseButton);
                                     await Task.Delay(1, token);
@@ -357,28 +357,28 @@ namespace PixelAimbot
                                     _walktopUTurn++;
                                 }
 
-                                if (_walktopUTurn == 17 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                if (_walktopUTurn == 18 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
                                     _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
 
                                     VirtualMouse.MoveTo(Recalc(1578), Recalc(524, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2800);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2000);
                                     VirtualMouse.MoveTo(Recalc(905), Recalc(531, false), 10);
                                     KeyboardWrapper.PressKey(currentMouseButton);
                                     _canSearchEnemys = true;
                                     _walktopUTurn++;
                                 }
 
-                                if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                if (_walktopUTurn == 24 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
                                     _canSearchEnemys = false;
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token);
 
                                     VirtualMouse.MoveTo(Recalc(523), Recalc(850, false), 10);
-                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2400);
+                                    KeyboardWrapper.AlternateHoldKey(currentMouseButton, 2200);
                                     VirtualMouse.MoveTo(Recalc(960), Recalc(500, false), 10);
                                     KeyboardWrapper.PressKey(currentMouseButton);
                                     await Task.Delay(1, token);
@@ -386,7 +386,7 @@ namespace PixelAimbot
                                     _walktopUTurn++;
                                 }
 
-                                if (_walktopUTurn == 23 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
+                                if (_walktopUTurn == 24 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)
                                 {
                                     _walktopUTurn = 1;
                                     await Task.Delay(1, token);
@@ -787,7 +787,7 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(humanizer.Next(10, 240) + 100, token);
-                        float threshold = 0.7f;
+                        float threshold = 0.705f;
 
                         var enemyTemplate = Image_enemy;
                         var enemyMask = Image_mask;

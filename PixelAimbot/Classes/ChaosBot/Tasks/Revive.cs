@@ -33,7 +33,7 @@ namespace PixelAimbot
                                 await Task.Delay(1, token);
 
                                 var template = Image_revive_new;
-                                var detector = new ScreenDetector(template, null, 0.93f, ChaosBot.Recalc(1267), ChaosBot.Recalc(434, false), ChaosBot.Recalc(226), ChaosBot.Recalc(62, false));
+                                var detector = new ScreenDetector(template, null, 0.96f, ChaosBot.Recalc(1267), ChaosBot.Recalc(434, false), ChaosBot.Recalc(226), ChaosBot.Recalc(62, false));
                                 var screenPrinter = new PrintScreen();
                                 using(var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>()) {
 
@@ -59,7 +59,8 @@ namespace PixelAimbot
                             catch { }
                             
                             /*
-                            float thresh = int.Parse(txtRevive.Text) * 0.01f;
+                            float thresh = int.Parse(
+                            .Text) * 0.01f;
                             var ReviveDeutschTemplate = Image_revive1;
                             var ReviveDeutschMask = Image_revive1;
 

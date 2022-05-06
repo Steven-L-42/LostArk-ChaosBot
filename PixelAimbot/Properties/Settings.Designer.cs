@@ -958,5 +958,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxCrashDetection"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int comboBox1 {
+            get {
+                return ((int)(this["comboBox1"]));
+            }
+            set {
+                this["comboBox1"] = value;
+            }
+        }
     }
 }

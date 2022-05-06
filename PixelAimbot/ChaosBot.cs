@@ -209,12 +209,15 @@ namespace PixelAimbot
                     var t1 = Task.Run(() => Start(token));
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
-                        _RepairReset = false;
+                        
                         _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
+                        
                     }
                     else
                     {
+                       
                         _repair = false;
+
                     }
 
                     if (chBoxLOGOUT.Checked == true)
@@ -373,6 +376,7 @@ namespace PixelAimbot
             txtRevive.Text = Properties.Settings.Default.txtRevive;
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
             txtHeal10.Text = Properties.Settings.Default.txtHeal10;
+            comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -506,6 +510,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.textBoxAutoAttack = "1500";
                 Properties.Settings.Default.chBoxAwakening = false;
                 Properties.Settings.Default.txtHeal10 = "F1";
+                Properties.Settings.Default.comboBox1 = 0;
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
@@ -579,6 +584,7 @@ namespace PixelAimbot
 
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
                 txtHeal10.Text = Properties.Settings.Default.txtHeal10;
+                comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
             }
             catch (Exception ex)
             {
@@ -673,6 +679,7 @@ namespace PixelAimbot
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
                     rotation.txtHeal10 = txtHeal10.Text;
                     rotation.mouseButton = comboBoxMouse.SelectedIndex;
+                    rotation.comboBox1 = comboBox1.SelectedIndex;
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
                 }
@@ -766,6 +773,7 @@ namespace PixelAimbot
                 chBoxDoubleD.Checked = rotation.chBoxDoubleD;
                 chBoxDoubleF.Checked = rotation.chBoxDoubleF;
                 comboBoxMouse.SelectedIndex = rotation.mouseButton;
+                comboBox1.SelectedIndex = rotation.comboBox1;
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
                     currentMouseButton = KeyboardWrapper.VK_LBUTTON;

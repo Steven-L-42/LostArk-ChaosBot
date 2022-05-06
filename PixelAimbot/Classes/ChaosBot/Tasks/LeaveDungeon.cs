@@ -124,7 +124,7 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                if (_repairTimer <= DateTime.Now)
+                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked == true)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
