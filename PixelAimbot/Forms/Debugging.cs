@@ -3,6 +3,7 @@ using Emgu.CV.Structure;
 using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
@@ -65,10 +66,7 @@ namespace PixelAimbot
             debugDetector.rectangleWidth = width * -1;
             debugDetector.rectangleHeight = height * -1;
         }
-
-        private void Debugging_Load(object sender, EventArgs e)
-        {
-        }
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -99,8 +97,7 @@ namespace PixelAimbot
             if (this.maskPath != "")
             {
                 enemyMask =
-                    new Image<Bgr, byte>(this
-                        .maskPath); // make white what the important parts are, other parts should be black
+                    new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
             }
 
             debugDetector._enemyTemplate = enemyTemplate;
@@ -183,6 +180,7 @@ namespace PixelAimbot
                 catch (Exception ex)
                 {
                     //  MessageBox.Show(ex.Message);
+                    Debug.WriteLine(ex.Message);
                 }
 
             // throw new NotImplementedException();

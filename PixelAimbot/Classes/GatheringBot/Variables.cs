@@ -60,5 +60,6 @@ namespace PixelAimbot
         public Image<Bgr, Byte> Image_gathering = ChaosBot.byteArrayToImage(Images.gathering);
         public Image<Bgr, Byte> Image_gatheringRepair = ChaosBot.byteArrayToImage(Images.gatheringRepair);
         public Image<Bgr, Byte> Image_minigame = ChaosBot.byteArrayToImage(Images.minigame);
+        public Image<Bgr, Byte> Image_minigame_mask = ChaosBot.byteArrayToImage(Images.minigame_mask);
     }
 }

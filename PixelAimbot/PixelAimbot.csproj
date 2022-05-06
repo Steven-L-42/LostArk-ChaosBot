@@ -443,6 +443,7 @@
     <Compile Include="Classes\GatheringBot\Images\gathering.cs" />
     <Compile Include="Classes\GatheringBot\Images\gatheringRepair.cs" />
     <Compile Include="Classes\GatheringBot\Images\minigame.cs" />
+    <Compile Include="Classes\GatheringBot\Images\minigame_mask.cs" />
     <Compile Include="Classes\GatheringBot\Imports.cs">
       <SubType>Form</SubType>
     </Compile>

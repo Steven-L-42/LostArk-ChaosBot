@@ -48,8 +48,8 @@ namespace PixelAimbot.Classes.OpenCV
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
                 if (this._enemyMask != null)
                 {
-                    this._enemyMask.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
-                        ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                    this._enemyMask.Resize(ChaosBot.Recalc(this._enemyMask.Size.Width),
+                        ChaosBot.Recalc(this._enemyMask.Size.Height), Inter.Linear);
                 }
             }
 

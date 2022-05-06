@@ -117,8 +117,9 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
 
                             var minigametemplate = Image_minigame;
+                            var minigamemask = Image_minigame_mask;
 
-                            var minigamedetector = new ScreenDetector(minigametemplate, null, 0.90f,
+                            var minigamedetector = new ScreenDetector(minigametemplate, minigamemask, 0.85f,
                                 ChaosBot.Recalc(488), ChaosBot.Recalc(109, false), ChaosBot.Recalc(71, true, true),
                                 ChaosBot.Recalc(439, false, true));
                             var screenPrinter = new PrintScreen();

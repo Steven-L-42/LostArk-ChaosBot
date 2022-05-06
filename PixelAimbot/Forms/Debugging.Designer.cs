@@ -70,7 +70,7 @@
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(10, 425);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(314, 27);
+            this.button2.Size = new System.Drawing.Size(317, 27);
             this.button2.TabIndex = 2;
             this.button2.Text = "Live";
             this.button2.UseVisualStyleBackColor = true;
@@ -162,7 +162,7 @@
             // 
             this.buttonSelectPicture.Location = new System.Drawing.Point(63, 359);
             this.buttonSelectPicture.Name = "buttonSelectPicture";
-            this.buttonSelectPicture.Size = new System.Drawing.Size(262, 27);
+            this.buttonSelectPicture.Size = new System.Drawing.Size(264, 27);
             this.buttonSelectPicture.TabIndex = 12;
             this.buttonSelectPicture.Text = "Select Picture";
             this.buttonSelectPicture.UseVisualStyleBackColor = true;
@@ -170,9 +170,9 @@
             // 
             // buttonSelectMask
             // 
-            this.buttonSelectMask.Location = new System.Drawing.Point(63, 392);
+            this.buttonSelectMask.Location = new System.Drawing.Point(72, 392);
             this.buttonSelectMask.Name = "buttonSelectMask";
-            this.buttonSelectMask.Size = new System.Drawing.Size(262, 27);
+            this.buttonSelectMask.Size = new System.Drawing.Size(255, 27);
             this.buttonSelectMask.TabIndex = 13;
             this.buttonSelectMask.Text = "Select Mask";
             this.buttonSelectMask.UseVisualStyleBackColor = true;
@@ -201,7 +201,7 @@
             // 
             this.buttonSelectArea.Location = new System.Drawing.Point(171, 326);
             this.buttonSelectArea.Name = "buttonSelectArea";
-            this.buttonSelectArea.Size = new System.Drawing.Size(147, 27);
+            this.buttonSelectArea.Size = new System.Drawing.Size(156, 27);
             this.buttonSelectArea.TabIndex = 19;
             this.buttonSelectArea.Text = "Select Area";
             this.buttonSelectArea.UseVisualStyleBackColor = true;
@@ -294,7 +294,7 @@
             this.buttonGenerateCode.Enabled = false;
             this.buttonGenerateCode.Location = new System.Drawing.Point(11, 458);
             this.buttonGenerateCode.Name = "buttonGenerateCode";
-            this.buttonGenerateCode.Size = new System.Drawing.Size(314, 27);
+            this.buttonGenerateCode.Size = new System.Drawing.Size(316, 27);
             this.buttonGenerateCode.TabIndex = 27;
             this.buttonGenerateCode.Text = "Generate Code to Clipboard";
             this.buttonGenerateCode.UseVisualStyleBackColor = true;
@@ -362,7 +362,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 497);
+            this.ClientSize = new System.Drawing.Size(337, 497);
             this.Controls.Add(this.labelDetectedText);
             this.Controls.Add(this.radioButtonGetText);
             this.Controls.Add(this.comboBoxMethod);
@@ -395,7 +395,6 @@
             this.Controls.Add(this.button2);
             this.Name = "Debugging";
             this.Text = "Debugging";
-            this.Load += new System.EventHandler(this.Debugging_Load);
             ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).EndInit();
