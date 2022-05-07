@@ -3,13 +3,19 @@ using Emgu.CV.Structure;
 using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
+using Cyotek.Windows.Forms;
 using Emgu.CV.CvEnum;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace PixelAimbot
 {
@@ -66,7 +72,7 @@ namespace PixelAimbot
             debugDetector.rectangleWidth = width * -1;
             debugDetector.rectangleHeight = height * -1;
         }
-        
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -85,7 +91,7 @@ namespace PixelAimbot
                 th.Abort();
             }
         }
-
+        public int TrackbartresholdValue = 1;
         private void cap(byte[] buffer)
         {
             if (this.picturePath != "")
@@ -97,7 +103,8 @@ namespace PixelAimbot
             if (this.maskPath != "")
             {
                 enemyMask =
-                    new Image<Bgr, byte>(this.maskPath); // make white what the important parts are, other parts should be black
+                    new Image<Bgr, byte>(this
+                        .maskPath); // make white what the important parts are, other parts should be black
             }
 
             debugDetector._enemyTemplate = enemyTemplate;
@@ -117,15 +124,29 @@ namespace PixelAimbot
             testform.TransparencyKey = Color.White;
             testform.Show();
             Application.EnableVisualStyles();
-
-                try
+            int selectedIndex = 0;
+            
+            tabControl1.Invoke((MethodInvoker) (() => { selectedIndex = tabControl1.SelectedIndex; }));
+            trackBarVariant.Invoke((MethodInvoker) (() => { TrackbartresholdValue = trackBarVariant.Value; }));
+            try
+            {
+                while (true)
                 {
-                    while (true)
+                    Thread.Sleep(threadSleep);
+                    testform.Refresh();
+                    var rawScreen = screenPrinter.CaptureScreen();
+                    if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
                     {
-                        Thread.Sleep(threadSleep);
-                        testform.Refresh();
-                        var rawScreen = screenPrinter.CaptureScreen();
-                        if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
+                        if (selectedIndex == 2)
+                        {
+                            var result = Pixel.PixelSearch(new Rectangle(x, y, width * -1, height * -1),
+                                screenColorPicker1.Color.ToArgb(), TrackbartresholdValue);
+                            Debug.WriteLine(result);
+                            screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
+
+                            screenDrawer.Draw(testform, result.X - x, result.Y - y, 5, 5, new Pen(Color.Red, 3));
+                        }
+                        else
                         {
                             using (bitmapImage = new Bitmap(rawScreen))
                             {
@@ -135,11 +156,10 @@ namespace PixelAimbot
                                 {
                                     enemy = null;
                                     screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                                    if (radioButtonGetText.Checked)
+                                    if (selectedIndex == 1)
                                     {
-
-                                        labelDetectedText.Invoke((MethodInvoker) (() =>
-                                            labelDetectedText.Text = ChaosBot.ReadArea(screenCapture, x, y, width * -1,
+                                        textBoxTextSearch.Invoke((MethodInvoker) (() =>
+                                            textBoxTextSearch.Text = ChaosBot.ReadArea(screenCapture, x, y, width * -1,
                                                 height * -1, "")));
                                     }
                                     else
@@ -177,11 +197,12 @@ namespace PixelAimbot
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    //  MessageBox.Show(ex.Message);
-                    Debug.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                //  MessageBox.Show(ex.Message);
+                Debug.WriteLine(ex.Message);
+            }
 
             // throw new NotImplementedException();
         }
@@ -314,6 +335,7 @@ namespace PixelAimbot
                 mask = "var mask = ChaosBot.byteArrayToImage(PixelAimbot.Images." + Path.GetFileName(maskPath) + ");";
                 maskBool = "mask";
             }
+
             String text = @"try
             {
                 token.ThrowIfCancellationRequested();
@@ -323,7 +345,8 @@ namespace PixelAimbot
                 " + mask + @"
 
 
-                var detector = new ScreenDetector(template, " + maskBool + @", " + treshold.ToString().Replace(",", ".") +
+                var detector = new ScreenDetector(template, " + maskBool + @", " +
+                          treshold.ToString().Replace(",", ".") +
                           @"f, ChaosBot.Recalc(" + x + @"), ChaosBot.Recalc(" + y + @", false), ChaosBot.Recalc(" +
                           width * -1 +
                           @"), ChaosBot.Recalc(" + height * -1 + @", false));
@@ -419,6 +442,41 @@ namespace PixelAimbot
         private void radioButtonGetText_CheckedChanged(object sender, EventArgs e)
         {
             button2.Enabled = true;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = true;
+            //        colorDialog1.ShowDialog();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+            {
+            }
+            else if (tabControl1.SelectedIndex == 1)
+            {
+                button2.Enabled = true;
+            }
+            else
+            {
+                button2.Enabled = true;
+            }
+        }
+
+        private void screenColorPicker1_ColorChanged(object sender, EventArgs e)
+        {
+            pictureBox1.BackColor = screenColorPicker1.Color;
+            labelColorARGB.Text = "#" + pictureBox1.BackColor.R.ToString("X2") +
+                                  pictureBox1.BackColor.G.ToString("X2") + pictureBox1.BackColor.B.ToString("X2");
+            ;
+        }
+
+        private void trackBarVariant_ValueChanged(object sender, EventArgs e)
+        {
+            labelVariantShade.Text = "Variant Shade (" + trackBarVariant.Value + ")";
+            TrackbartresholdValue = trackBarVariant.Value;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace PixelAimbot
         public static string ReadArea(Image<Bgr, byte> screenCapture, int x, int y, int width, int height, string whitelist = "")
         {
             tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
-            tess.Language = OcrLanguage.EnglishFast;
+            tess.Language = OcrLanguage.EnglishBest;
             tess.MultiThreaded = true;
             tess.Configuration.ReadBarCodes = false;
             tess.Configuration.RenderSearchablePdfsAndHocr = false;
