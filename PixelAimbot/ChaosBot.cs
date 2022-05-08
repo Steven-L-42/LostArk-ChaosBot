@@ -209,9 +209,9 @@ namespace PixelAimbot
                     var t1 = Task.Run(() => Start(token));
                     if (chBoxAutoRepair.Checked == true && _RepairReset == true)
                     {
-                        
+
+                        _RepairReset = false;
                         _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
-                        
                     }
                     else
                     {
