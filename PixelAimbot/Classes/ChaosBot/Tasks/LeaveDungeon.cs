@@ -133,7 +133,6 @@ namespace PixelAimbot
                     var t7 = Task.Run(() => Repair(token));
                     await Task.WhenAny(t7);
                 }
-
                 else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked)
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
