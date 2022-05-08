@@ -35,16 +35,16 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbMINUTE = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbHOUR = new System.Windows.Forms.ComboBox();
             this.chBoxChannelSwap = new System.Windows.Forms.CheckBox();
             this.btnInstructions = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.txtLOGOUT = new System.Windows.Forms.TextBox();
             this.chBoxLOGOUT = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.txtRepair = new System.Windows.Forms.TextBox();
             this.chBoxAutoRepair = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -201,6 +201,9 @@
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
             this.labelSwap = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -269,16 +272,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cmbMINUTE);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbHOUR);
             this.groupBox1.Controls.Add(this.chBoxChannelSwap);
             this.groupBox1.Controls.Add(this.btnInstructions);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.label34);
             this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.txtLOGOUT);
             this.groupBox1.Controls.Add(this.chBoxLOGOUT);
             this.groupBox1.Controls.Add(this.label30);
-            this.groupBox1.Controls.Add(this.label28);
             this.groupBox1.Controls.Add(this.txtRepair);
             this.groupBox1.Controls.Add(this.chBoxAutoRepair);
             this.groupBox1.Controls.Add(this.label27);
@@ -293,6 +296,79 @@
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
             // 
+            // cmbMINUTE
+            // 
+            this.cmbMINUTE.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.cmbMINUTE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMINUTE.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMINUTE.ForeColor = System.Drawing.Color.Peru;
+            this.cmbMINUTE.FormattingEnabled = true;
+            this.cmbMINUTE.Items.AddRange(new object[] {
+            "M",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58",
+            "59"});
+            this.cmbMINUTE.Location = new System.Drawing.Point(198, 65);
+            this.cmbMINUTE.Name = "cmbMINUTE";
+            this.cmbMINUTE.Size = new System.Drawing.Size(38, 25);
+            this.cmbMINUTE.TabIndex = 64;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -302,6 +378,43 @@
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 62;
             this.label1.Text = "min.";
+            // 
+            // cmbHOUR
+            // 
+            this.cmbHOUR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.cmbHOUR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHOUR.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbHOUR.ForeColor = System.Drawing.Color.Peru;
+            this.cmbHOUR.FormattingEnabled = true;
+            this.cmbHOUR.Items.AddRange(new object[] {
+            "H",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cmbHOUR.Location = new System.Drawing.Point(161, 65);
+            this.cmbHOUR.Name = "cmbHOUR";
+            this.cmbHOUR.Size = new System.Drawing.Size(38, 25);
+            this.cmbHOUR.TabIndex = 63;
             // 
             // chBoxChannelSwap
             // 
@@ -376,21 +489,6 @@
             this.label33.TabIndex = 47;
             this.label33.Visible = false;
             // 
-            // txtLOGOUT
-            // 
-            this.txtLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtLOGOUT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLOGOUT.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLOGOUT.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtLOGOUT.Location = new System.Drawing.Point(166, 64);
-            this.txtLOGOUT.Name = "txtLOGOUT";
-            this.txtLOGOUT.ReadOnly = true;
-            this.txtLOGOUT.Size = new System.Drawing.Size(35, 22);
-            this.txtLOGOUT.TabIndex = 45;
-            this.txtLOGOUT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtLOGOUT.WordWrap = false;
-            this.txtLOGOUT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
-            // 
             // chBoxLOGOUT
             // 
             this.chBoxLOGOUT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -405,9 +503,7 @@
             this.chBoxLOGOUT.Size = new System.Drawing.Size(154, 22);
             this.chBoxLOGOUT.TabIndex = 44;
             this.chBoxLOGOUT.Text = "Auto-Close Game";
-            this.toolTip1.SetToolTip(this.chBoxLOGOUT, "adjust your time from when to activate Auto-Close Game, \r\nspecify in minutes. Do " +
-        "not enter the same time as for Auto-Repair!\r\nClose Game means = Game will be ful" +
-        "ly closed and Bot shutsdown.\r\n");
+            this.toolTip1.SetToolTip(this.chBoxLOGOUT, resources.GetString("chBoxLOGOUT.ToolTip"));
             this.chBoxLOGOUT.UseMnemonic = false;
             this.chBoxLOGOUT.UseVisualStyleBackColor = false;
             this.chBoxLOGOUT.CheckedChanged += new System.EventHandler(this.chBoxLOGOUT_CheckedChanged);
@@ -421,16 +517,6 @@
             this.label30.Size = new System.Drawing.Size(66, 17);
             this.label30.TabIndex = 43;
             this.label30.Text = "each third";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(204, 67);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(32, 17);
-            this.label28.TabIndex = 38;
-            this.label28.Text = "min.";
             // 
             // txtRepair
             // 
@@ -2632,6 +2718,36 @@
             this.labelSwap.Text = "GBOT";
             this.labelSwap.Click += new System.EventHandler(this.labelSwap_Click_1);
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label18.Location = new System.Drawing.Point(332, 212);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(58, 17);
+            this.label18.TabIndex = 14;
+            this.label18.Text = "12:50:50";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.Peru;
+            this.label23.Location = new System.Drawing.Point(289, 211);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(46, 17);
+            this.label23.TabIndex = 15;
+            this.label23.Text = "Clock:";
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2640,6 +2756,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(450, 237);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.labelSwap);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lbStatus);
@@ -2725,7 +2843,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtRepair;
         private System.Windows.Forms.CheckBox chBoxAutoRepair;
         private System.Windows.Forms.CheckBox chBoxBerserker;
@@ -2734,7 +2851,6 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.CheckBox chBoxLOGOUT;
-        private System.Windows.Forms.TextBox txtLOGOUT;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -2874,6 +2990,11 @@
         private System.Windows.Forms.CheckBox chBoxCrashDetection;
         private System.Windows.Forms.ComboBox comboBoxMouse;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox cmbHOUR;
+        private System.Windows.Forms.ComboBox cmbMINUTE;
     }
 }
 

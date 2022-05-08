@@ -207,7 +207,7 @@ namespace PixelAimbot
                     var token = cts.Token;
 
                     var t1 = Task.Run(() => Start(token));
-                    if (chBoxAutoRepair.Checked == true && _RepairReset == true)
+                    if (chBoxAutoRepair.Checked && _RepairReset == true)
                     {
 
                         _RepairReset = false;
@@ -219,15 +219,24 @@ namespace PixelAimbot
                         _repair = false;
 
                     }
+                    if (chBoxLOGOUT.Checked)
+                    {
+                        
+                        var dateNow = DateTime.Now;
+                        if(cmbHOUR.SelectedIndex < dateNow.Hour)
+                        {
+                            _Logout = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day+1, cmbHOUR.SelectedIndex, cmbMINUTE.SelectedIndex, 00);
 
-                    if (chBoxLOGOUT.Checked == true)
-                    {
-                        var logout = Task.Run(() => Logouttimer());
+                        }
+                        else
+                        {
+                            _Logout = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, cmbHOUR.SelectedIndex, cmbMINUTE.SelectedIndex, 00);
+
+                        }
+
                     }
-                    else
-                    {
-                        _logout = false;
-                    }
+                   
+                   
 
                     await Task.WhenAny(new[] { t1 });
                 }
@@ -417,13 +426,9 @@ namespace PixelAimbot
 
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxLOGOUT.Checked)
+            
+           if (!chBoxLOGOUT.Checked)
             {
-                txtLOGOUT.ReadOnly = false;
-            }
-            else if (!chBoxLOGOUT.Checked)
-            {
-                txtLOGOUT.ReadOnly = true;
                 _logout = false;
             }
         }
@@ -549,7 +554,7 @@ namespace PixelAimbot
                 txCoolS.Text = Properties.Settings.Default.cS;
                 txCoolD.Text = Properties.Settings.Default.cD;
                 txCoolF.Text = Properties.Settings.Default.cF;
-                txtLOGOUT.Text = Properties.Settings.Default.txtLOGOUT;
+                cmbHOUR.Text = Properties.Settings.Default.txtLOGOUT;
                 txQ.Text = Properties.Settings.Default.q;
                 txW.Text = Properties.Settings.Default.w;
                 txE.Text = Properties.Settings.Default.e;
@@ -620,7 +625,7 @@ namespace PixelAimbot
                     rotation.chBoxAutoRepair = (bool)chBoxAutoRepair.Checked;
                     rotation.autorepair = txtRepair.Text;
 
-                    rotation.autologout = txtLOGOUT.Text;
+                    rotation.autologout = cmbHOUR.Text;
                     rotation.chBoxautologout = chBoxLOGOUT.Checked;
                     rotation.chBoxAutoMovement = chBoxAutoMovement.Checked;
                     rotation.autorepair = txtRepair.Text;
@@ -724,7 +729,7 @@ namespace PixelAimbot
                 chBoxDeathblade2.Checked = rotation.chBoxDeathblade2;
                 chBoxSharpshooter.Checked = rotation.chBoxSharpshooter;
                 chBoxSoulfist.Checked = rotation.chBoxSoulfist;
-                txtLOGOUT.Text = rotation.autologout;
+                cmbHOUR.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txtHeal10.Text = rotation.txtHeal10;
                 txLeaveTimerFloor2.Text = rotation.txLeaveTimerFloor2;
@@ -859,6 +864,9 @@ namespace PixelAimbot
             Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
         }
 
-        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label18.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
     }
 }

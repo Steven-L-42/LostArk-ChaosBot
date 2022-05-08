@@ -15,7 +15,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "LOGOUT starts in 20 Seconds..."));
                 await Task.Delay(humanizer.Next(10, 240) + 20000, token);
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);

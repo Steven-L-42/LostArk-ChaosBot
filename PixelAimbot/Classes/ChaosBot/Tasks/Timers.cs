@@ -36,32 +36,7 @@ namespace PixelAimbot
             }
         }
 
-        public async void Logouttimer()
-        {
-            try
-            {
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtLOGOUT.Text) * 1000) * 60);
-                for (int i = 0; i < 1; i++)
-                { _logout = true; }
-            }
-            catch (AggregateException)
-            {
-                Debug.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Debug.WriteLine("Bug");
-            }
-            catch (Exception ex)
-            {
-                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
-            // timer.Elapsed += OnTimedEvent2;
-            //timer.AutoReset = false;
-            //timer.Enabled = true;
-            //cts.Cancel();
-        }
+       
 
         public async void Leavetimerfloor1(CancellationToken token)
         {

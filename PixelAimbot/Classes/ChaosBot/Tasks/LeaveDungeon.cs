@@ -96,6 +96,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
+              
 
                 _stopp = true;
 
@@ -124,14 +125,16 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked == true)
+               
+                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t7 = Task.Run(() => Repair(token));
                     await Task.WhenAny(t7);
                 }
-                else if (_logout == true)
+
+                else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked)
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t11 = Task.Run(() => Logout(token));

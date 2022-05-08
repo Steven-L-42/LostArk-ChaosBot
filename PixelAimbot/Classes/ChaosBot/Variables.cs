@@ -81,6 +81,7 @@ namespace PixelAimbot
         private bool _canSearchEnemys = true;
         private bool _firstSetupTransparency = true;
         private DateTime _repairTimer;
+        private DateTime _Logout;
         
         public static int healthPercent = 70;
     
