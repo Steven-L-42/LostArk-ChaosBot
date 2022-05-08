@@ -489,7 +489,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
 
-                        object fight = au3.PixelSearch(Recalc(114), Recalc(208, false), Recalc(168), Recalc(220, false),
+                        object fight = Pixel.PixelSearch(Recalc(114), Recalc(208, false), Recalc(168), Recalc(220, false),
                             0xDBC7AC, 7);
                         if (fight.ToString() != "0" && _stopp == false)
                         {
@@ -591,7 +591,7 @@ namespace PixelAimbot
                 {
                     try
                     {
-                        object health10 = au3.PixelSearch(Recalc(1898), Recalc(10, false), Recalc(1911),
+                        object health10 = Pixel.PixelSearch(Recalc(1898), Recalc(10, false), Recalc(1911),
                             Recalc(22, false), 0x000000,15);
 
                         if (health10.ToString() != "0")

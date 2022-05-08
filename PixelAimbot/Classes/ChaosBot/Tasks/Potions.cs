@@ -9,6 +9,7 @@ using Emgu.CV;
 using Emgu.CV.OCR;
 using Emgu.CV.Structure;
 using Microsoft.IO;
+using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
@@ -37,7 +38,7 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        object health10 = au3.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
+                        object health10 = Pixel.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
                             Recalc(968, false), 0x050405, 15); // TEST:     "0x050405, 15"      changed to:     "0x050405, 10"
                         if (health10.ToString() != "0")
                         {

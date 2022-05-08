@@ -139,12 +139,15 @@ namespace PixelAimbot
                     {
                         if (selectedIndex == 2)
                         {
-                            var result = Pixel.PixelSearch(new Rectangle(x, y, width * -1, height * -1),
+                            object result = Pixel.PixelSearch(x, y, width * -1, height * -1,
                                 screenColorPicker1.Color.ToArgb(), TrackbartresholdValue);
                             Debug.WriteLine(result);
-                            screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-
-                            screenDrawer.Draw(testform, result.X - x, result.Y - y, 5, 5, new Pen(Color.Red, 3));
+                            if (result.ToString() != "0")
+                            {
+                                object[] resultCoord = (object[]) result;
+                                screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
+                                screenDrawer.Draw(testform, (int) resultCoord[0] - x, (int) resultCoord[1] - y, 5, 5, new Pen(Color.Red, 3));
+                            }
                         }
                         else
                         {

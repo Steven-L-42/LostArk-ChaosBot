@@ -62,10 +62,10 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                object walk = au3.PixelSearch(Recalc(141), Recalc(274, false), Recalc(245), Recalc(294, false),
+                object walk = Pixel.PixelSearch(Recalc(141), Recalc(274, false), Recalc(245), Recalc(294, false),
                     0x29343F, 10);
 
-                if (walk.ToString() != "1")
+                if (walk.ToString() != "0")
                 {
                     object[] walkCoord = (object[]) walk;
                     VirtualMouse.MoveTo((int) walkCoord[0], (int) walkCoord[1], 5);

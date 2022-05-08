@@ -49,7 +49,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
-                            object d = au3.PixelSearch(Recalc(948), Recalc(969, false), Recalc(968), Recalc(979, false),
+                            object d = Pixel.PixelSearch(Recalc(948), Recalc(969, false), Recalc(968), Recalc(979, false),
                                 0xBC08F0, 5);
 
                             if (d.ToString() != "0")
@@ -77,7 +77,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
-                            object d = au3.PixelSearch(Recalc(892), Recalc(1027, false), Recalc(934),
+                            object d = Pixel.PixelSearch(Recalc(892), Recalc(1027, false), Recalc(934),
                                 Recalc(1060, false), 0x75D6FF, 10);
                             if (d.ToString() != "0")
                             {
@@ -95,7 +95,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
-                            object d = au3.PixelSearch(Recalc(986), Recalc(1029, false), Recalc(1017),
+                            object d = Pixel.PixelSearch(Recalc(986), Recalc(1029, false), Recalc(1017),
                                 Recalc(1035, false), 0xDAE7F3, 10);
                             if (d.ToString() != "0")
                             {
@@ -122,7 +122,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
-                            object d = au3.PixelSearch(Recalc(1006), Recalc(1049, false), Recalc(1019),
+                            object d = Pixel.PixelSearch(Recalc(1006), Recalc(1049, false), Recalc(1019),
                                 Recalc(1068, false), 0x09B4EB, 10);
                             if (d.ToString() != "0")
                             {
@@ -142,7 +142,7 @@ namespace PixelAimbot
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
-                            object d = au3.PixelSearch(Recalc(1006), Recalc(1038, false), Recalc(1010),
+                            object d = Pixel.PixelSearch(Recalc(1006), Recalc(1038, false), Recalc(1010),
                                 Recalc(1042, false), 0x8993FF, 10);
                             if (d.ToString() != "0")
                             {
