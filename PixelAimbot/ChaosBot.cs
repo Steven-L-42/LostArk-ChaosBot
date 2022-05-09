@@ -386,12 +386,17 @@ namespace PixelAimbot
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
             txtHeal10.Text = Properties.Settings.Default.txtHeal10;
             comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
+            cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
+            cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
+
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
             double sliderRange = (HealthSlider1.Maximum - HealthSlider1.Minimum);
             double sliderPercent = 100 * (distanceFromMin / sliderRange);
             labelheal.Text = "Heal at: " + Convert.ToInt32(sliderPercent) + "% Life";
+
+          
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -516,6 +521,9 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxAwakening = false;
                 Properties.Settings.Default.txtHeal10 = "F1";
                 Properties.Settings.Default.comboBox1 = 0;
+                Properties.Settings.Default.cmbHOUR = DateTime.Now.Hour;
+                Properties.Settings.Default.cmbMINUTE = DateTime.Now.Minute;
+
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
@@ -590,6 +598,9 @@ namespace PixelAimbot
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
                 txtHeal10.Text = Properties.Settings.Default.txtHeal10;
                 comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
+                cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
+                cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
+
             }
             catch (Exception ex)
             {
@@ -685,6 +696,9 @@ namespace PixelAimbot
                     rotation.txtHeal10 = txtHeal10.Text;
                     rotation.mouseButton = comboBoxMouse.SelectedIndex;
                     rotation.comboBox1 = comboBox1.SelectedIndex;
+                    rotation.cmbMINUTE = cmbMINUTE.SelectedIndex;
+                    rotation.cmbHOUR = cmbHOUR.SelectedIndex;
+
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
                 }
@@ -779,6 +793,8 @@ namespace PixelAimbot
                 chBoxDoubleF.Checked = rotation.chBoxDoubleF;
                 comboBoxMouse.SelectedIndex = rotation.mouseButton;
                 comboBox1.SelectedIndex = rotation.comboBox1;
+                cmbHOUR.SelectedIndex = rotation.cmbHOUR;
+                cmbMINUTE.SelectedIndex = rotation.cmbMINUTE;
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
                     currentMouseButton = KeyboardWrapper.VK_LBUTTON;

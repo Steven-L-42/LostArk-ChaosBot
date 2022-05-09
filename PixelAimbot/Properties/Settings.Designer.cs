@@ -970,5 +970,29 @@ namespace PixelAimbot.Properties {
                 this["comboBox1"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmbHOUR {
+            get {
+                return ((int)(this["cmbHOUR"]));
+            }
+            set {
+                this["cmbHOUR"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmbMINUTE {
+            get {
+                return ((int)(this["cmbMINUTE"]));
+            }
+            set {
+                this["cmbMINUTE"] = value;
+            }
+        }
     }
 }

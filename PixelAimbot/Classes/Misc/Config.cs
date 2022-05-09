@@ -149,7 +149,8 @@ namespace PixelAimbot.Classes.Misc
 
         public int mouseButton { get; set; } = 0;
         public int comboBox1 { get; set; } = 0;
-
+        public int cmbHOUR { get; set; } = DateTime.Now.Hour;
+        public int cmbMINUTE { get; set; } = DateTime.Now.Minute;
 
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
         public static string ConfigFileName { get; set; }
