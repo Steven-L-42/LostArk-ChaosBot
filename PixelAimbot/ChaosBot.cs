@@ -446,7 +446,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.HealthSlider1 = 801;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
-                Properties.Settings.Default.txtRevive = "85";
+                Properties.Settings.Default.txtRevive = "96";
                 Properties.Settings.Default.txLeaveTimerFloor2 = "165";
                 Properties.Settings.Default.txLeaveTimerFloor3 = "180";
 

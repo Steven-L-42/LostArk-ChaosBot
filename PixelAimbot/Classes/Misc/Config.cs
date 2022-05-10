@@ -80,7 +80,7 @@ namespace PixelAimbot.Classes.Misc
         public string d { get; set; } = "500";
         public string f { get; set; } = "500";
         public string txtRestart { get; set; } = "15";
-        public string txtRevive { get; set; } = "85";
+        public string txtRevive { get; set; } = "96";
         public string txtHeal10 { get; set; } = "F1";
         public string textBoxAutoAttack { get; set; } = "1500";
         public bool chBoxAwakening { get; set; } = false;
