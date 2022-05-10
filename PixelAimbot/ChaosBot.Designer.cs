@@ -62,7 +62,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.chBoxRevive = new System.Windows.Forms.CheckBox();
             this.txtHeal10 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lbF = new System.Windows.Forms.Label();
@@ -676,7 +675,6 @@
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.chBoxRevive);
             this.groupBox4.Controls.Add(this.txtHeal10);
-            this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -724,6 +722,7 @@
             this.txtRevive.Size = new System.Drawing.Size(35, 18);
             this.txtRevive.TabIndex = 60;
             this.txtRevive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRevive, "Type only numbers from 1-100!");
             this.txtRevive.WordWrap = false;
             // 
             // label16
@@ -751,7 +750,8 @@
             this.chBoxRevive.Size = new System.Drawing.Size(172, 31);
             this.chBoxRevive.TabIndex = 59;
             this.chBoxRevive.Text = "AUTO-REVIVE (ON/OFF)";
-            this.toolTip1.SetToolTip(this.chBoxRevive, "Detectionrate:\r\n\r\nHigh Value = less likely\r\nLess Value = more likely");
+            this.toolTip1.SetToolTip(this.chBoxRevive, "Detectionrate:\r\n\r\nRecommend = 95\r\n\r\nHigh Value(100) = less likely\r\nLess Value(1) " +
+        "= more likely");
             this.chBoxRevive.UseMnemonic = false;
             this.chBoxRevive.UseVisualStyleBackColor = false;
             this.chBoxRevive.CheckedChanged += new System.EventHandler(this.chBoxRevive_CheckedChanged);
@@ -768,17 +768,6 @@
             this.txtHeal10.TabIndex = 58;
             this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtHeal10.WordWrap = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label7.ForeColor = System.Drawing.Color.Coral;
-            this.label7.Location = new System.Drawing.Point(167, 2);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(239, 15);
-            this.label7.TabIndex = 53;
-            this.label7.Text = "To activate: you have to check this Boxes!";
             // 
             // label6
             // 
@@ -2278,8 +2267,8 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(170, 75);
             this.label17.TabIndex = 77;
-            this.label17.Text = "WE DISABLED FLOOR 3\r\nStatistics have shown that \r\nFloor 3 is a complete waste \r\no" +
-    "f time. Most shards are \r\nfarmed in less time in Floor 2.";
+            this.label17.Text = "WE DISABLED FLOOR 3:\r\nStatistics have shown that \r\nFloor 3 is a complete waste \r\n" +
+    "of time. Most shards are \r\nfarmed in less time in Floor 2.";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chBoxUnstuckF1
@@ -2854,7 +2843,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDungeon2;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
