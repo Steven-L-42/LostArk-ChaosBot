@@ -45,23 +45,23 @@ namespace PixelAimbot
 
               //  KeyboardWrapper.PressKey(MouseKey(txtMouse.Text));
 
-                /////////////// ANTI KICK ///////////////////
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 1500, token);
-                if (ChaosBot.isWindowed)
-                {
-                    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 + 3), ((screenHeight + windowY) / 2 - 11), 10);
-                    KeyboardWrapper.PressKey(currentMouseButton);
-                    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 - 1), ((screenHeight + windowY) / 2 - 8), 10);
-                    KeyboardWrapper.PressKey(currentMouseButton);
-                }
-                else
-                {
-                    VirtualMouse.MoveTo((screenWidth / 2 + 3), (screenHeight / 2 - 11), 10);
-                    KeyboardWrapper.PressKey(currentMouseButton);
-                    VirtualMouse.MoveTo((screenWidth / 2 - 1), (screenHeight / 2 - 8), 10);
-                    KeyboardWrapper.PressKey(currentMouseButton);
-                }
+                ///////////////// ANTI KICK ///////////////////
+                //token.ThrowIfCancellationRequested();
+                //await Task.Delay(humanizer.Next(10, 240) + 1500, token);
+                //if (ChaosBot.isWindowed)
+                //{
+                //    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 + 3), ((screenHeight + windowY) / 2 - 11), 10);
+                //    KeyboardWrapper.PressKey(currentMouseButton);
+                //    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 - 1), ((screenHeight + windowY) / 2 - 8), 10);
+                //    KeyboardWrapper.PressKey(currentMouseButton);
+                //}
+                //else
+                //{
+                //    VirtualMouse.MoveTo((screenWidth / 2 + 3), (screenHeight / 2 - 11), 10);
+                //    KeyboardWrapper.PressKey(currentMouseButton);
+                //    VirtualMouse.MoveTo((screenWidth / 2 - 1), (screenHeight / 2 - 8), 10);
+                //    KeyboardWrapper.PressKey(currentMouseButton);
+                //}
 
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
 
