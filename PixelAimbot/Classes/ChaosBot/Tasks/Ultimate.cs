@@ -48,8 +48,8 @@ namespace PixelAimbot
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
-                            object d = Pixel.PixelSearch(Recalc(948), Recalc(969, false), Recalc(968), Recalc(979, false),
+                            await Task.Delay(1000); 
+                            object d = Pixel.PixelSearch(Recalc(982), Recalc(1014, false), Recalc(1000), Recalc(1029, false),
                                 0xBC08F0, 7);
 
                             if (d.ToString() != "0")

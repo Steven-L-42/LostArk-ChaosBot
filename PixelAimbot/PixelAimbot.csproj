@@ -585,6 +585,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChaosBot.resx">
       <DependentUpon>ChaosBot.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\Misc\SelectArea.resx">
       <DependentUpon>SelectArea.cs</DependentUpon>
