@@ -50,7 +50,7 @@ namespace PixelAimbot
                             await Task.Delay(1, token);
                             await Task.Delay(1000);
                             object d = Pixel.PixelSearch(Recalc(948), Recalc(969, false), Recalc(968), Recalc(979, false),
-                                0xBC08F0, 5);
+                                0xBC08F0, 7);
 
                             if (d.ToString() != "0")
                             {
