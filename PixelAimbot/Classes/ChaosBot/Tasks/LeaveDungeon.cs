@@ -14,7 +14,8 @@ namespace PixelAimbot
             {
                 _stopp = true;
                 _portalIsDetected = false;
-              
+                starten = false;
+                gefunden = false;
 
                 _portalIsNotDetected = false;
                 _floorFight = false;

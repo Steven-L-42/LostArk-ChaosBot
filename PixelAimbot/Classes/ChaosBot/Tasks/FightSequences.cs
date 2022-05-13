@@ -100,6 +100,11 @@ namespace PixelAimbot
                         var t36 = Task.Run(() => Leavetimerfloor2(token));
                         await Task.WhenAny(t36);
                     }
+                    if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
+                    {
+                        var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
+                        await Task.WhenAny(t36);
+                    }
 
                     if (_leavetimer == 1 && chBoxAwakening.Checked)
                     {

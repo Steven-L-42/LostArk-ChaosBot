@@ -1085,21 +1085,43 @@ namespace PixelAimbot
         {
             if(chBoxLeavetimer.Checked)
             {
-                MessageBox.Show("You activated manual Dungeon Leave\n\n" +
-                                "By activating the checkbox, you can\n" +
-                                "determine when the bot should leave the dungeon\n"+
+                
+                DialogResult dialogResult = MessageBox.Show("By activating the checkbox, you can\n" +
+                                "determine when the bot should leave the dungeon\n" +
                                 "However, this means that the bot may not be able\n" +
                                 "to defeat the boss in time!\n\n" +
                                 "If you want to activate the Auto Leave after\n" +
-                                "Defeat the Boss, then 'deactivate' the checkbox!");
+                                "Defeat the Boss, then 'deactivate' the checkbox!\n\n" +
+                                "Do you really want to 'Activate' the Manual Leavetimer?\n" +
+                                "Then press Yes, otherwise press No.",
+                                "You activated manual Dungeon Leave!", MessageBoxButtons.YesNo);
 
-
+                if(dialogResult == DialogResult.Yes)
+                {
+                    chBoxLeavetimer.Checked = true;
+                }
+                else if(dialogResult == DialogResult.No)
+                {
+                    chBoxLeavetimer.Checked = false;
+                }
             }
             else if(!chBoxLeavetimer.Checked)
             {
-                MessageBox.Show("Bot now exits the dungeon after killing the boss.\n\n" +
-                                "If you have difficulties with this, please activate\n" +
-                                "the LEAVETIMER checkbox until we have provided an update.");
+                
+                DialogResult dialogResult = MessageBox.Show("If you have difficulties with this, please activate\n" +
+                                "the LEAVETIMER checkbox until we have provided an update.\n\n" +
+                                "Do you really want to 'Deactivate' the Manual Leavetimer?\n" +
+                                "Then press Yes, otherwise press No.",
+                                "You activated auto Dungeon Leave!", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    chBoxLeavetimer.Checked = false;
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    chBoxLeavetimer.Checked = true;
+                }
             }
         }
     }

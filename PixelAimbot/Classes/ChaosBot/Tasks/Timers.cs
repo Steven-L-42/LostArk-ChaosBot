@@ -121,6 +121,46 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
+        public async void GlobalLeavetimerfloor2(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(humanizer.Next(10, 240) + 240 * 1000, token);
+
+                _stopp = true;
+                _portalIsDetected = false;
+                starten = false;
+                gefunden = false;
+                _portalIsNotDetected = false;
+                _floorFight = false;
+                _searchboss = false;
+                _revive = false;
+                _ultimate = false;
+                _portaldetect = false;
+                _portaldetect2 = false;
+                _potions = false;
+                _floor1 = false;
+                _floor2 = false;
+                _floor3 = false;
+
+                var t12 = Task.Run(() => Leavedungeon(token));
+                await Task.WhenAny(new[] { t12 });
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
 
         public async void Leavetimerfloor3(CancellationToken token)
         {
