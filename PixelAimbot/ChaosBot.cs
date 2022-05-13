@@ -1081,11 +1081,13 @@ namespace PixelAimbot
             }
         }
 
-        private void chBoxLeavetimer_CheckedChanged(object sender, EventArgs e)
+       
+
+        private void chBoxLeavetimer_MouseClick(object sender, MouseEventArgs e)
         {
-            if(chBoxLeavetimer.Checked)
+            if (chBoxLeavetimer.Checked)
             {
-                
+
                 DialogResult dialogResult = MessageBox.Show("By activating the checkbox, you can\n" +
                                 "determine when the bot should leave the dungeon\n" +
                                 "However, this means that the bot may not be able\n" +
@@ -1096,18 +1098,18 @@ namespace PixelAimbot
                                 "Then press Yes, otherwise press No.",
                                 "You activated manual Dungeon Leave!", MessageBoxButtons.YesNo);
 
-                if(dialogResult == DialogResult.Yes)
+                if (dialogResult == DialogResult.Yes)
                 {
                     chBoxLeavetimer.Checked = true;
                 }
-                else if(dialogResult == DialogResult.No)
+                else if (dialogResult == DialogResult.No)
                 {
                     chBoxLeavetimer.Checked = false;
                 }
             }
-            else if(!chBoxLeavetimer.Checked)
+            else if (!chBoxLeavetimer.Checked)
             {
-                
+
                 DialogResult dialogResult = MessageBox.Show("If you have difficulties with this, please activate\n" +
                                 "the LEAVETIMER checkbox until we have provided an update.\n\n" +
                                 "Do you really want to 'Deactivate' the Manual Leavetimer?\n" +

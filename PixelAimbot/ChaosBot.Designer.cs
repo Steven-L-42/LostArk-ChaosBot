@@ -304,7 +304,7 @@
             this.cmbMINUTE.ForeColor = System.Drawing.Color.Peru;
             this.cmbMINUTE.FormattingEnabled = true;
             this.cmbMINUTE.Items.AddRange(new object[] {
-            "M",
+            "00",
             "01",
             "02",
             "03",
@@ -387,7 +387,7 @@
             this.cmbHOUR.ForeColor = System.Drawing.Color.Peru;
             this.cmbHOUR.FormattingEnabled = true;
             this.cmbHOUR.Items.AddRange(new object[] {
-            "H",
+            "00",
             "01",
             "02",
             "03",
@@ -2280,7 +2280,7 @@
             this.chBoxLeavetimer.Text = "LEAVETIMER in seconds:";
             this.chBoxLeavetimer.UseMnemonic = false;
             this.chBoxLeavetimer.UseVisualStyleBackColor = false;
-            this.chBoxLeavetimer.CheckedChanged += new System.EventHandler(this.chBoxLeavetimer_CheckedChanged);
+            this.chBoxLeavetimer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chBoxLeavetimer_MouseClick);
             // 
             // label17
             // 
