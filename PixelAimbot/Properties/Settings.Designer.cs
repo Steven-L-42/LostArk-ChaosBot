@@ -994,5 +994,17 @@ namespace PixelAimbot.Properties {
                 this["cmbMINUTE"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxLeavetimer {
+            get {
+                return ((bool)(this["chBoxLeavetimer"]));
+            }
+            set {
+                this["chBoxLeavetimer"] = value;
+            }
+        }
     }
 }

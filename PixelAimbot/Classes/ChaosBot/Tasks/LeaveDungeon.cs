@@ -14,6 +14,7 @@ namespace PixelAimbot
             {
                 _stopp = true;
                 _portalIsDetected = false;
+              
 
                 _portalIsNotDetected = false;
                 _floorFight = false;
@@ -21,6 +22,7 @@ namespace PixelAimbot
                 _revive = false;
                 _ultimate = false;
                 _portaldetect = false;
+                _portaldetect2 = false;
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
@@ -105,6 +107,7 @@ namespace PixelAimbot
                 _revive = false;
                 _ultimate = false;
                 _portaldetect = false;
+                _portaldetect2 = false;
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;

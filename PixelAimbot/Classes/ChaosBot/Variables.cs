@@ -32,6 +32,8 @@ namespace PixelAimbot
 
         private bool _revive;
         private bool _portaldetect;
+        private bool _portaldetect2;
+
         private bool _ultimate;
         private bool _potions;
 
@@ -109,6 +111,9 @@ namespace PixelAimbot
         private CancellationTokenSource cts = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
+
+        public Image<Bgr, Byte> Image_bossHP = byteArrayToImage(Images.bosshp);
+        public Image<Bgr, Byte> Image_bossHPmask = byteArrayToImage(Images.bosshpmask);
 
         public Image<Bgr, Byte> Image_boss1 = byteArrayToImage(Images.boss1);
         public Image<Bgr, Byte> Image_bossmask1 = byteArrayToImage(Images.bossmask1);

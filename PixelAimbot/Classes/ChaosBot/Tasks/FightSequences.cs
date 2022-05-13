@@ -29,6 +29,7 @@ namespace PixelAimbot
                 }
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
+                #region Floor1
                 if (_floor1 && _stopp == false)
                 {
                     token.ThrowIfCancellationRequested();
@@ -58,7 +59,8 @@ namespace PixelAimbot
                     var t20 = Task.Run(() => Potions(token));
                     await Task.WhenAny(t11, t12, t14, t16, t18, t20);
                 }
-
+                #endregion
+                #region Floor2
                 if (_floor2 && _stopp == false)
                 {
                     Process[] process2Name = Process.GetProcessesByName("LostArk");
@@ -77,6 +79,8 @@ namespace PixelAimbot
                     _floorFight = true;
                     _revive = true;
                     _ultimate = true;
+                    _portaldetect2 = true;
+
                     _potions = true;
 
                     // PORTAL DETECT BOOL is on a lower place
@@ -91,7 +95,7 @@ namespace PixelAimbot
                     _soulfist = true;
 
 
-                    if (_leavetimer == 1 && chBoxActivateF3.Checked == false)
+                    if (_leavetimer == 1 && chBoxLeavetimer.Checked)
                     {
                         var t36 = Task.Run(() => Leavetimerfloor2(token));
                         await Task.WhenAny(t36);
@@ -106,6 +110,8 @@ namespace PixelAimbot
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => Floorfight(token));
                     var t16 = Task.Run(() => Revive(token));
+                    var t18 = Task.Run(() => Portaldetect2(token));
+
                     var t20 = Task.Run(() => Potions(token));
 
                     await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon2.Text) * 1000);
@@ -131,9 +137,10 @@ namespace PixelAimbot
                         await Task.WhenAny(t13);
                     //}
 
-                    await Task.WhenAny(t11, t12, t16, t20);
+                    await Task.WhenAny(t11, t12, t16, t18, t20);
                 }
-
+                #endregion
+                #region Floor3
                 //if (_floor3 && _stopp == false)
                 //{
                 //    Process[] process3Name = Process.GetProcessesByName("LostArk");
@@ -191,6 +198,7 @@ namespace PixelAimbot
 
                 //    await Task.WhenAny(t11, t12, t16, t20);
                 //}
+                #endregion
             }
             catch (AggregateException)
             {
@@ -488,8 +496,7 @@ namespace PixelAimbot
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-
-                        object fight = Pixel.PixelSearch(Recalc(114), Recalc(208, false), Recalc(168), Recalc(220, false),
+                       object fight = Pixel.PixelSearch(Recalc(114), Recalc(208, false), Recalc(168), Recalc(220, false), 
                             0xDBC7AC, 7);
                         if (fight.ToString() != "0" && _stopp == false)
                         {
@@ -580,6 +587,134 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
+        public bool starten;
+        public bool gefunden;
+        private async Task Portaldetect2(CancellationToken token)
+        {
+            if (chBoxLeavetimer.Checked == false)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    starten = true;
+
+                    while (starten == true)
+                    {
+
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        float threshold = 0.75f;
+
+                        var BossTemplate = Image_bossHP;
+                        var BossMask = Image_bossHPmask;
+
+                        Point myPosition = new Point(Recalc(148), Recalc(127, false));
+                        Point screenResolution = new Point(screenWidth, screenHeight);
+
+                        var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
+                        var screenPrinter = new PrintScreen();
+
+                        var rawScreen = screenPrinter.CaptureScreen();
+                        Bitmap bitmapImage = new Bitmap(rawScreen);
+                        using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                        {
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+
+                            if (Boss.HasValue)
+                            {
+                                lbStatus.Invoke(
+                 (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
+                                gefunden = true;
+
+                            }
+                            else if(!Boss.HasValue && gefunden == true)
+                            {
+                                lbStatus.Invoke(
+                         (MethodInvoker)(() => lbStatus.Text = "Floor Complete!"));
+                                starten = false;
+                                gefunden = false;
+                                _stopp = true;
+                                _portalIsDetected = false;
+
+                                _portalIsNotDetected = false;
+                                _floorFight = false;
+                                _searchboss = false;
+                                _revive = false;
+                                _ultimate = false;
+                                _portaldetect = false;
+                                _portaldetect2 = false;
+                                _potions = false;
+                                _floor1 = false;
+                                _floor2 = false;
+                                _floor3 = false;
+
+                                var leave = Task.Run(() => Leavedungeon(token));
+                                await Task.WhenAny(leave);
+                            }
+
+                        }
+
+                        Random random = new Random();
+                        var sleepTime = random.Next(100, 150);
+                        Thread.Sleep(sleepTime);
+                    }
+
+
+
+                    //while (gefunden == true)
+                    //{
+
+                    //    token.ThrowIfCancellationRequested();
+                    //    await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                    //    float threshold = 0.75f;
+
+                    //    var BossTemplate = Image_bossHP;
+                    //    var BossMask = Image_bossHPmask;
+
+                    //    Point myPosition = new Point(Recalc(148), Recalc(127, false));
+                    //    Point screenResolution = new Point(screenWidth, screenHeight);
+
+                    //    var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
+                    //    var screenPrinter = new PrintScreen();
+
+                    //    var rawScreen = screenPrinter.CaptureScreen();
+                    //    Bitmap bitmapImage = new Bitmap(rawScreen);
+                    //    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                    //    {
+                    //        var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+
+                    //        if (!Boss.HasValue)
+                    //        {
+                             
+                    //        }
+
+                    //    }
+
+                    //    Random random = new Random();
+                    //    var sleepTime = random.Next(100, 150);
+                    //    Thread.Sleep(sleepTime);
+                    //}
+
+
+
+                   
+                }
+                catch (AggregateException)
+                {
+                    Debug.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Debug.WriteLine("Bug");
+                }
+                catch (Exception ex)
+                {
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                }
+            }
+        }
 
         private async Task PORTALISDETECTED(CancellationToken token)
         {
@@ -631,6 +766,7 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
+     
 
         private async Task SEARCHPORTAL(CancellationToken token)
         {

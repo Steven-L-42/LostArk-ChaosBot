@@ -367,6 +367,8 @@
     <Compile Include="Classes\ChaosBot\Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Classes\ChaosBot\Images\bosshpmask.cs" />
+    <Compile Include="Classes\ChaosBot\Images\bosshp.cs" />
     <Compile Include="Classes\ChaosBot\Images\boss1.cs" />
     <Compile Include="Classes\ChaosBot\Images\bossmask1.cs" />
     <Compile Include="Classes\ChaosBot\Images\enemy.cs" />
@@ -488,6 +490,7 @@
     </Compile>
     <Compile Include="Classes\Misc\Alert.cs" />
     <Compile Include="Classes\Misc\Pixel.cs" />
+    <Compile Include="Classes\OpenCV\BossDetector.cs" />
     <Compile Include="Forms\Debugging.cs">
       <SubType>Form</SubType>
     </Compile>

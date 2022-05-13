@@ -1,4 +1,6 @@
-﻿using PixelAimbot.Classes.Misc;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using PixelAimbot.Classes.Misc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
 {
@@ -29,6 +32,7 @@ namespace PixelAimbot
             {
                 if (Application.OpenForms["Debugging"] == null) {
                     new Debugging().Show();
+                    btnHidden.Visible = true;
                 }
             }
 
@@ -148,6 +152,8 @@ namespace PixelAimbot
 
                 _revive = false;
                 _portaldetect = false;
+                _portaldetect2 = false;
+
                 _ultimate = false;
                 _doUltimateAttack = false;
                 _potions = false;
@@ -388,6 +394,7 @@ namespace PixelAimbot
             comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
             cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
             cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
+            chBoxLeavetimer.Checked = Properties.Settings.Default.chBoxLeavetimer;
 
 
             healthPercent = HealthSlider1.Value;
@@ -523,6 +530,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.comboBox1 = 0;
                 Properties.Settings.Default.cmbHOUR = DateTime.Now.Hour;
                 Properties.Settings.Default.cmbMINUTE = DateTime.Now.Minute;
+                Properties.Settings.Default.chBoxLeavetimer = false;
 
 
                 Properties.Settings.Default.Save();
@@ -600,6 +608,7 @@ namespace PixelAimbot
                 comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
                 cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
                 cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
+                chBoxLeavetimer.Checked = Properties.Settings.Default.chBoxLeavetimer;
 
             }
             catch (Exception ex)
@@ -698,6 +707,7 @@ namespace PixelAimbot
                     rotation.comboBox1 = comboBox1.SelectedIndex;
                     rotation.cmbMINUTE = cmbMINUTE.SelectedIndex;
                     rotation.cmbHOUR = cmbHOUR.SelectedIndex;
+                    rotation.chBoxLeavetimer = chBoxLeavetimer.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -795,6 +805,7 @@ namespace PixelAimbot
                 comboBox1.SelectedIndex = rotation.comboBox1;
                 cmbHOUR.SelectedIndex = rotation.cmbHOUR;
                 cmbMINUTE.SelectedIndex = rotation.cmbMINUTE;
+                chBoxLeavetimer.Checked = rotation.chBoxLeavetimer;
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
                     currentMouseButton = KeyboardWrapper.VK_LBUTTON;
@@ -885,6 +896,211 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-      
+        private void button1_Click(object sender, EventArgs e)
+        {
+            starten = true;
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
+
+            var leave = Task.Run(() => TEST(token));
+
+        }
+
+        private async Task TEST(CancellationToken token)
+        {
+
+            // 'HIER WURDE DIE BOSS DETECTION GETESTET'
+            //
+            //
+
+
+            if (chBoxLeavetimer.Checked == false)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+
+                    while (starten == true)
+                    {
+
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        float threshold = 0.75f;
+
+                        var BossTemplate = Image_bossHP;
+                        var BossMask = Image_bossHPmask;
+
+                        Point myPosition = new Point(Recalc(148), Recalc(127, false));
+                        Point screenResolution = new Point(screenWidth, screenHeight);
+
+                        var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
+                        var screenPrinter = new PrintScreen();
+
+                        var rawScreen = screenPrinter.CaptureScreen();
+                        Bitmap bitmapImage = new Bitmap(rawScreen);
+                        using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                        {
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+
+                            if (Boss.HasValue)
+                            {
+                                lbStatus.Invoke(
+                 (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
+                                starten = false;
+                                gefunden = true;
+
+                            }
+
+                        }
+
+                        Random random = new Random();
+                        var sleepTime = random.Next(100, 150);
+                        Thread.Sleep(sleepTime);
+                    } while (gefunden == true)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        float threshold = 0.85f;
+
+                        var BossTemplate = Image_bossHP;
+                        var BossMask = Image_bossHPmask;
+
+                        Point myPosition = new Point(Recalc(148), Recalc(127, false));
+                        Point screenResolution = new Point(screenWidth, screenHeight);
+
+                        var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
+                        var screenPrinter = new PrintScreen();
+
+                        var rawScreen = screenPrinter.CaptureScreen();
+                        Bitmap bitmapImage = new Bitmap(rawScreen);
+                        using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                        {
+                            var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+
+
+
+                            if (!Boss.HasValue)
+                            {
+                                lbStatus.Invoke(
+                            (MethodInvoker)(() => lbStatus.Text = "Floor Complete!"));
+                                gefunden = false;
+                                //_stopp = true;
+                                //_portalIsDetected = false;
+
+                                //_portalIsNotDetected = false;
+                                //_floorFight = false;
+                                //_searchboss = false;
+                                //_revive = false;
+                                //_ultimate = false;
+                                //_portaldetect = false;
+                                //_portaldetect2 = false;
+                                //_potions = false;
+                                //_floor1 = false;
+                                //_floor2 = false;
+                                //_floor3 = false;
+
+                                //var leave = Task.Run(() => Leavedungeon(token));
+                                //await Task.WhenAny(leave);
+                            }
+                        }
+
+
+                        Random random2 = new Random();
+                        var sleepTime2 = random2.Next(100, 150);
+                        Thread.Sleep(sleepTime2);
+                    }
+
+
+
+                    //while (_portaldetect2 && _stopp == false)
+                    //{
+                    //    try
+                    //    {
+                    //        token.ThrowIfCancellationRequested();
+                    //        await Task.Delay(1, token);
+                    //        object fight = Pixel.PixelSearch(Recalc(114), Recalc(175, false), Recalc(157), Recalc(190, false), 0xF3D8BA, 7);
+
+                    //        if (fight.ToString() != "0" && _stopp == false)
+                    //        {
+                    //            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portal detected!"));
+
+
+                    //            token.ThrowIfCancellationRequested();
+                    //            await Task.Delay(1, token);
+                    //            lbStatus.Invoke(
+                    //                (MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 2 Complete!"));
+
+                    //            _stopp = true;
+                    //            _portalIsDetected = false;
+
+                    //            _portalIsNotDetected = false;
+                    //            _floorFight = false;
+                    //            _searchboss = false;
+                    //            _revive = false;
+                    //            _ultimate = false;
+                    //            _portaldetect = false;
+                    //            _portaldetect2 = false;
+                    //            _potions = false;
+                    //            _floor1 = false;
+                    //            _floor2 = false;
+                    //            _floor3 = false;
+
+                    //            var leave = Task.Run(() => Leavedungeon(token));
+                    //            await Task.WhenAny(leave);
+                    //        }
+                    //    }
+                    //    catch (AggregateException)
+                    //    {
+                    //        Debug.WriteLine("Expected");
+                    //    }
+                    //    catch (ObjectDisposedException)
+                    //    {
+                    //        Debug.WriteLine("Bug");
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    //        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    //    }
+                    //}
+                }
+                catch (AggregateException)
+                {
+                    Debug.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Debug.WriteLine("Bug");
+                }
+                catch (Exception ex)
+                {
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                }
+            }
+        }
+
+        private void chBoxLeavetimer_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chBoxLeavetimer.Checked)
+            {
+                MessageBox.Show("You activated manual Dungeon Leave\n\n" +
+                                "By activating the checkbox, you can\n" +
+                                "determine when the bot should leave the dungeon\n"+
+                                "However, this means that the bot may not be able\n" +
+                                "to defeat the boss in time!\n\n" +
+                                "If you want to activate the Auto Leave after\n" +
+                                "Defeat the Boss, then 'deactivate' the checkbox!");
+
+
+            }
+            else if(!chBoxLeavetimer.Checked)
+            {
+                MessageBox.Show("Bot now exits the dungeon after killing the boss.\n\n" +
+                                "If you have difficulties with this, please activate\n" +
+                                "the LEAVETIMER checkbox until we have provided an update.");
+            }
+        }
     }
 }

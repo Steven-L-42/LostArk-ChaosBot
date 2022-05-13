@@ -11,7 +11,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.7.5r";
+        public static string version { get; set; } = "2.7.6r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -85,7 +85,7 @@ namespace PixelAimbot.Classes.Misc
         public string textBoxAutoAttack { get; set; } = "1500";
         public bool chBoxAwakening { get; set; } = false;
         public bool chBoxCrashDetection { get; set; } = true;
-
+        public bool chBoxLeavetimer { get; set; } = false;
         public bool chBoxRevive { get; set; } = false;
 
         public bool chBoxAutoMovement { get; set; } = false;

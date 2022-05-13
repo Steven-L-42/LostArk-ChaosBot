@@ -154,17 +154,18 @@
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnHidden = new System.Windows.Forms.Button();
             this.comboBoxRotations = new System.Windows.Forms.ComboBox();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chBoxLeavetimer = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.chBoxUnstuckF1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -2079,19 +2080,6 @@
             this.chBoxCrashDetection.UseMnemonic = false;
             this.chBoxCrashDetection.UseVisualStyleBackColor = false;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label9.Location = new System.Drawing.Point(7, 107);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(139, 15);
-            this.label9.TabIndex = 72;
-            this.label9.Text = "LEAVETIMER in seconds:\r\n";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -2157,6 +2145,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnHidden);
             this.groupBox2.Controls.Add(this.labelComboxRotation);
             this.groupBox2.Controls.Add(this.comboBoxRotations);
             this.groupBox2.Controls.Add(this.buttonLoadRotation);
@@ -2171,6 +2160,22 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Main";
+            // 
+            // btnHidden
+            // 
+            this.btnHidden.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnHidden.FlatAppearance.BorderSize = 0;
+            this.btnHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHidden.Font = new System.Drawing.Font("Nirmala UI", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHidden.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnHidden.Location = new System.Drawing.Point(9, 57);
+            this.btnHidden.Name = "btnHidden";
+            this.btnHidden.Size = new System.Drawing.Size(144, 21);
+            this.btnHidden.TabIndex = 65;
+            this.btnHidden.Text = "TEST: NUR FÜR UNS SICHTBAR";
+            this.btnHidden.UseVisualStyleBackColor = false;
+            this.btnHidden.Visible = false;
+            this.btnHidden.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBoxRotations
             // 
@@ -2226,6 +2231,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.chBoxLeavetimer);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.chBoxUnstuckF1);
             this.groupBox5.Controls.Add(this.label8);
@@ -2233,7 +2239,6 @@
             this.groupBox5.Controls.Add(this.txtRestart);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.txLeaveTimerFloor3);
-            this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.txLeaveTimerFloor2);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.txtDungeon3);
@@ -2258,12 +2263,31 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";
             // 
+            // chBoxLeavetimer
+            // 
+            this.chBoxLeavetimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxLeavetimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxLeavetimer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxLeavetimer.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxLeavetimer.FlatAppearance.BorderSize = 0;
+            this.chBoxLeavetimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxLeavetimer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.chBoxLeavetimer.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxLeavetimer.Location = new System.Drawing.Point(5, 102);
+            this.chBoxLeavetimer.Name = "chBoxLeavetimer";
+            this.chBoxLeavetimer.Size = new System.Drawing.Size(155, 24);
+            this.chBoxLeavetimer.TabIndex = 78;
+            this.chBoxLeavetimer.Text = "LEAVETIMER in seconds:";
+            this.chBoxLeavetimer.UseMnemonic = false;
+            this.chBoxLeavetimer.UseVisualStyleBackColor = false;
+            this.chBoxLeavetimer.CheckedChanged += new System.EventHandler(this.chBoxLeavetimer_CheckedChanged);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Orange;
-            this.label17.Location = new System.Drawing.Point(225, 46);
+            this.label17.Location = new System.Drawing.Point(232, 48);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(170, 75);
             this.label17.TabIndex = 77;
@@ -2293,7 +2317,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(192, 106);
+            this.label8.Location = new System.Drawing.Point(204, 106);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 17);
             this.label8.TabIndex = 75;
@@ -2333,7 +2357,7 @@
             this.txLeaveTimerFloor2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txLeaveTimerFloor2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txLeaveTimerFloor2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txLeaveTimerFloor2.Location = new System.Drawing.Point(153, 107);
+            this.txLeaveTimerFloor2.Location = new System.Drawing.Point(165, 107);
             this.txLeaveTimerFloor2.Name = "txLeaveTimerFloor2";
             this.txLeaveTimerFloor2.ReadOnly = true;
             this.txLeaveTimerFloor2.Size = new System.Drawing.Size(35, 16);
@@ -2388,7 +2412,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(192, 66);
+            this.label21.Location = new System.Drawing.Point(204, 66);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(30, 17);
             this.label21.TabIndex = 56;
@@ -2400,7 +2424,7 @@
             this.txtDungeon2search.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDungeon2search.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtDungeon2search.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon2search.Location = new System.Drawing.Point(153, 67);
+            this.txtDungeon2search.Location = new System.Drawing.Point(165, 67);
             this.txtDungeon2search.Name = "txtDungeon2search";
             this.txtDungeon2search.ReadOnly = true;
             this.txtDungeon2search.Size = new System.Drawing.Size(35, 16);
@@ -2413,7 +2437,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(192, 86);
+            this.label19.Location = new System.Drawing.Point(204, 86);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 17);
             this.label19.TabIndex = 52;
@@ -2425,7 +2449,7 @@
             this.txtDungeon2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDungeon2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtDungeon2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon2.Location = new System.Drawing.Point(153, 87);
+            this.txtDungeon2.Location = new System.Drawing.Point(165, 87);
             this.txtDungeon2.Name = "txtDungeon2";
             this.txtDungeon2.ReadOnly = true;
             this.txtDungeon2.Size = new System.Drawing.Size(35, 16);
@@ -2942,7 +2966,6 @@
         private System.Windows.Forms.TextBox txtDungeon3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txLeaveTimerFloor2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txLeaveTimerFloor3;
@@ -2983,6 +3006,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ComboBox cmbHOUR;
         private System.Windows.Forms.ComboBox cmbMINUTE;
+        private System.Windows.Forms.Button btnHidden;
+        private System.Windows.Forms.CheckBox chBoxLeavetimer;
     }
 }
 
