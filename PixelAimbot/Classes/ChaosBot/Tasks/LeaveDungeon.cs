@@ -59,39 +59,39 @@ namespace PixelAimbot
         }
 
         // ITS A DIFFERENT CLICK LOCATION BECAUSE OF SMALLER LEAVE BUTTON FOR FLOOR 3
-        private async Task Leavedungeoncomplete(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                object walk = Pixel.PixelSearch(Recalc(141), Recalc(274, false), Recalc(245), Recalc(294, false),
-                    0x29343F, 10);
+        //private async Task Leavedungeoncomplete(CancellationToken token)
+        //{
+        //    try
+        //    {
+        //        token.ThrowIfCancellationRequested();
+        //        await Task.Delay(1, token);
+        //        object walk = Pixel.PixelSearch(Recalc(141), Recalc(274, false), Recalc(245), Recalc(294, false),
+        //            0x29343F, 10);
 
-                if (walk.ToString() != "0")
-                {
-                    object[] walkCoord = (object[]) walk;
-                    VirtualMouse.MoveTo((int) walkCoord[0], (int) walkCoord[1], 5);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                }
+        //        if (walk.ToString() != "0")
+        //        {
+        //            object[] walkCoord = (object[]) walk;
+        //            VirtualMouse.MoveTo((int) walkCoord[0], (int) walkCoord[1], 5);
+        //            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+        //        }
 
-                var t6 = Task.Run(() => Leaveaccept(token));
-                await Task.WhenAny(new[] {t6});
-            }
-            catch (AggregateException)
-            {
-                Debug.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Debug.WriteLine("Bug");
-            }
-            catch (Exception ex)
-            {
-                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
-        }
+        //        var t6 = Task.Run(() => Leaveaccept(token));
+        //        await Task.WhenAny(new[] {t6});
+        //    }
+        //    catch (AggregateException)
+        //    {
+        //        Debug.WriteLine("Expected");
+        //    }
+        //    catch (ObjectDisposedException)
+        //    {
+        //        Debug.WriteLine("Bug");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+        //        Debug.WriteLine("[" + line + "]" + ex.Message);
+        //    }
+        //}
 
         private async Task Leaveaccept(CancellationToken token)
         {
@@ -102,7 +102,8 @@ namespace PixelAimbot
               
 
                 _stopp = true;
-
+                starten = false;
+                gefunden = false;
                 _floorFight = false;
                 _searchboss = false;
                 _revive = false;
@@ -143,7 +144,7 @@ namespace PixelAimbot
                     var t11 = Task.Run(() => Logout(token));
                     await Task.WhenAny(t11);
                 }
-                else if (_repair == false && _logout == false)
+                else if (_logout == false && _repairTimer <= DateTime.Now == false)
                 {
                     _swap++;
 

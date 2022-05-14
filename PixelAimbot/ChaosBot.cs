@@ -128,11 +128,11 @@ namespace PixelAimbot
                 _formExists = 0;
                 _RepairReset = true;
                 _start = false;
-                _stopp = false;
+                _stopp = true;
                 _stop = false;
                 _restart = false;
                 _logout = false;
-                _repair = false;
+             
 
                 _gunlancer = false;
                 _shadowhunter = false;
@@ -219,12 +219,7 @@ namespace PixelAimbot
                         _RepairReset = false;
                         _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     }
-                    else
-                    {
-                       
-                        _repair = false;
-
-                    }
+                   
                     if (chBoxLOGOUT.Checked)
                     {
                         
@@ -432,7 +427,7 @@ namespace PixelAimbot
             else if (!chBoxAutoRepair.Checked)
             {
                 txtRepair.ReadOnly = true;
-                _repair = false;
+                
             }
         }
 
@@ -896,19 +891,23 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            starten = true;
             cts = new CancellationTokenSource();
             var token = cts.Token;
+            var t10 = Task.Run(() => Leaveaccept(token));
+            await Task.WhenAny(t10);
 
-            var leave = Task.Run(() => TEST(token));
+            //starten = true;
+
+
+            //var leave = Task.Run(() => TEST(token));
 
         }
 
         private async Task TEST(CancellationToken token)
         {
-
+           
             // 'HIER WURDE DIE BOSS DETECTION GETESTET'
             //
             //

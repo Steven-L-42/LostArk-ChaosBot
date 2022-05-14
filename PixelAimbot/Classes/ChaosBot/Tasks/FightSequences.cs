@@ -97,26 +97,26 @@ namespace PixelAimbot
 
                     if (_leavetimer == 1 && chBoxLeavetimer.Checked)
                     {
-                        var t36 = Task.Run(() => Leavetimerfloor2(token));
-                        await Task.WhenAny(t36);
+                        var t36 = Task.Run(() => Leavetimerfloor2(token)); 
                     }
                     if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
-                        await Task.WhenAny(t36);
                     }
 
-                    if (_leavetimer == 1 && chBoxAwakening.Checked)
+                    if (_leavetimer == 1 && chBoxAwakening.Checked && chBoxLeavetimer.Checked)
                     {
                         var t39 = Task.Run(() => Awakeningskill(token));
-                        await Task.WhenAny(t39);
+                    }
+                   
+                    if (_leavetimer == 1)
+                    {
+                       var t18 = Task.Run(() => Portaldetect2(token)); 
                     }
 
                     var t11 = Task.Run(() => SearchNearEnemys(token));
                     var t12 = Task.Run(() => Floorfight(token));
                     var t16 = Task.Run(() => Revive(token));
-                    var t18 = Task.Run(() => Portaldetect2(token));
-
                     var t20 = Task.Run(() => Potions(token));
 
                     await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon2.Text) * 1000);
@@ -142,7 +142,7 @@ namespace PixelAimbot
                         await Task.WhenAny(t13);
                     //}
 
-                    await Task.WhenAny(t11, t12, t16, t18, t20);
+                    await Task.WhenAny(t11, t12, t16, t20);
                 }
                 #endregion
                 #region Floor3
@@ -468,7 +468,8 @@ namespace PixelAimbot
                     _floor1 = false;
                     _floor2 = false;
                     _floor3 = false;
-
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
                     var leave = Task.Run(() => Leavedungeon(token));
                     await Task.WhenAny(leave);
                 }
@@ -558,7 +559,8 @@ namespace PixelAimbot
                                 _floor1 = false;
                                 _floor2 = false;
                                 _floor3 = false;
-
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
                                 var leave = Task.Run(() => Leavedungeon(token));
                                 await Task.WhenAny(leave);
                             }
@@ -658,7 +660,8 @@ namespace PixelAimbot
                                 _floor1 = false;
                                 _floor2 = false;
                                 _floor3 = false;
-
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
                                 var leave = Task.Run(() => Leavedungeon(token));
                                 await Task.WhenAny(leave);
                             }

@@ -67,7 +67,7 @@ namespace PixelAimbot
 
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                _repair = false;
+                
                 _RepairReset = true;
 
                 var t10 = Task.Run(() => Restart(token));
