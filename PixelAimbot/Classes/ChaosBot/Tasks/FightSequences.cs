@@ -541,8 +541,9 @@ namespace PixelAimbot
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
+
                                 lbStatus.Invoke(
-                                    (MethodInvoker) (() => lbStatus.Text = "ChaosDungeon Floor 1 Complete!"));
+                                    (MethodInvoker) (() => lbStatus.Text = "Floor 1 Complete..."));
 
                                 _stopp = true;
                                 _portalIsDetected = false;
@@ -596,7 +597,7 @@ namespace PixelAimbot
         public bool gefunden;
         private async Task Portaldetect2(CancellationToken token)
         {
-            if (chBoxLeavetimer.Checked == false)
+            if (chBoxLeavetimer.Checked == false && _stopp == false)
             {
                 try
                 {
@@ -604,12 +605,12 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
                     starten = true;
 
-                    while (starten == true)
+                    while (starten == true && _stopp == false)
                     {
 
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(humanizer.Next(10, 240) + 100, token);
-                        float threshold = 0.75f;
+                        float threshold = 0.8f;
 
                         var BossTemplate = Image_bossHP;
                         var BossMask = Image_bossHPmask;
@@ -626,17 +627,21 @@ namespace PixelAimbot
                         {
                             var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
 
-                            if (Boss.HasValue)
+                            if (Boss.HasValue && _stopp == false)
                             {
                                 lbStatus.Invoke(
                  (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
                                 gefunden = true;
 
                             }
-                            else if(!Boss.HasValue && gefunden == true)
+                            else if(!Boss.HasValue && gefunden == true && _stopp == false)
                             {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                await Task.Delay(humanizer.Next(10, 240) + 3000, token);
+
                                 lbStatus.Invoke(
-                         (MethodInvoker)(() => lbStatus.Text = "Floor Complete!"));
+                                (MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
                                 starten = false;
                                 gefunden = false;
                                 _stopp = true;
@@ -664,46 +669,6 @@ namespace PixelAimbot
                         var sleepTime = random.Next(100, 150);
                         Thread.Sleep(sleepTime);
                     }
-
-
-
-                    //while (gefunden == true)
-                    //{
-
-                    //    token.ThrowIfCancellationRequested();
-                    //    await Task.Delay(humanizer.Next(10, 240) + 100, token);
-                    //    float threshold = 0.75f;
-
-                    //    var BossTemplate = Image_bossHP;
-                    //    var BossMask = Image_bossHPmask;
-
-                    //    Point myPosition = new Point(Recalc(148), Recalc(127, false));
-                    //    Point screenResolution = new Point(screenWidth, screenHeight);
-
-                    //    var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
-                    //    var screenPrinter = new PrintScreen();
-
-                    //    var rawScreen = screenPrinter.CaptureScreen();
-                    //    Bitmap bitmapImage = new Bitmap(rawScreen);
-                    //    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
-                    //    {
-                    //        var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
-
-                    //        if (!Boss.HasValue)
-                    //        {
-                             
-                    //        }
-
-                    //    }
-
-                    //    Random random = new Random();
-                    //    var sleepTime = random.Next(100, 150);
-                    //    Thread.Sleep(sleepTime);
-                    //}
-
-
-
-                   
                 }
                 catch (AggregateException)
                 {
