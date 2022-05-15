@@ -50,7 +50,6 @@
             this.label27 = new System.Windows.Forms.Label();
             this.chBoxAutoMovement = new System.Windows.Forms.CheckBox();
             this.buttonSaveRotation = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -147,15 +146,11 @@
             this.txPR = new System.Windows.Forms.TextBox();
             this.buttonLoadRotation = new System.Windows.Forms.Button();
             this.labelComboxRotation = new System.Windows.Forms.Label();
-            this.chBoxActivateF3 = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxAutoAttack = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -171,11 +166,7 @@
             this.chBoxUnstuckF1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtRestart = new System.Windows.Forms.TextBox();
-            this.txLeaveTimerFloor3 = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor2 = new System.Windows.Forms.TextBox();
-            this.txtDungeon3 = new System.Windows.Forms.TextBox();
-            this.txtDungeon3search = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtDungeon2search = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -205,6 +196,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -598,19 +590,6 @@
             this.buttonSaveRotation.UseVisualStyleBackColor = false;
             this.buttonSaveRotation.Click += new System.EventHandler(this.buttonSaveRotation_Click);
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Orange;
-            this.label25.Location = new System.Drawing.Point(28, 125);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(357, 15);
-            this.label25.TabIndex = 60;
-            this.label25.Text = "Time to search for a enemy and time to fight after find enemy!";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label25, "How long the should Bot search!");
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -671,6 +650,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.radioEnglish);
             this.groupBox4.Controls.Add(this.radioGerman);
             this.groupBox4.Controls.Add(this.labelheal);
@@ -788,14 +768,14 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Orange;
             this.label6.Location = new System.Drawing.Point(233, 20);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(131, 75);
+            this.label6.Size = new System.Drawing.Size(151, 60);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Give the potion you \r\nwant to use. F1, 5 - 9 \r\nfor a normal Health\r\npotion and 1-" +
-    "4 for\r\nInstant healing potion.";
+            this.label6.Text = "Type : F1, 5 - 9 \r\nfor a normal Health potion.\r\nOr type: 1-4 \r\nfor Instant healin" +
+    "g potion.";
             // 
             // groupBox9
             // 
@@ -1353,11 +1333,11 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.Coral;
             this.label36.Location = new System.Drawing.Point(294, 80);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(108, 13);
+            this.label36.Size = new System.Drawing.Size(103, 13);
             this.label36.TabIndex = 75;
             this.label36.Text = "ALWAYS ON MODE";
             // 
@@ -1379,7 +1359,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.Coral;
             this.label35.Location = new System.Drawing.Point(294, 62);
             this.label35.Name = "label35";
@@ -1390,11 +1370,11 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.Coral;
             this.label26.Location = new System.Drawing.Point(294, 44);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(83, 13);
+            this.label26.Size = new System.Drawing.Size(81, 13);
             this.label26.TabIndex = 72;
             this.label26.Text = "DOUBLE CLICK";
             // 
@@ -1416,11 +1396,11 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.Coral;
             this.label24.Location = new System.Drawing.Point(294, 26);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(104, 13);
+            this.label24.Size = new System.Drawing.Size(103, 13);
             this.label24.TabIndex = 70;
             this.label24.Text = "EACH 10 SECONDS";
             // 
@@ -1972,57 +1952,6 @@
             this.labelComboxRotation.Text = "Rotation ( ? )";
             this.toolTip1.SetToolTip(this.labelComboxRotation, "Select Config from list or write a Filename into Listbox and press Save!");
             // 
-            // chBoxActivateF3
-            // 
-            this.chBoxActivateF3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxActivateF3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxActivateF3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxActivateF3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxActivateF3.FlatAppearance.BorderSize = 0;
-            this.chBoxActivateF3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxActivateF3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.chBoxActivateF3.ForeColor = System.Drawing.Color.Coral;
-            this.chBoxActivateF3.Location = new System.Drawing.Point(225, 42);
-            this.chBoxActivateF3.Name = "chBoxActivateF3";
-            this.chBoxActivateF3.Size = new System.Drawing.Size(160, 24);
-            this.chBoxActivateF3.TabIndex = 66;
-            this.chBoxActivateF3.Text = "ACTIVATE FLOOR 3 --->";
-            this.toolTip1.SetToolTip(this.chBoxActivateF3, "ALPHA VERSION. JUST TEST!");
-            this.chBoxActivateF3.UseMnemonic = false;
-            this.chBoxActivateF3.UseVisualStyleBackColor = false;
-            this.chBoxActivateF3.Visible = false;
-            this.chBoxActivateF3.CheckedChanged += new System.EventHandler(this.chBoxActivateF3_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label4.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label4.Location = new System.Drawing.Point(222, 68);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 15);
-            this.label4.TabIndex = 68;
-            this.label4.Text = "(F3) Search Time:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label4, "ALPHA VERSION. JUST TEST!");
-            this.label4.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(222, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 15);
-            this.label5.TabIndex = 69;
-            this.label5.Text = "(F3) Fight Time:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label5, "ALPHA VERSION. JUST TEST!");
-            this.label5.Visible = false;
-            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.label2);
@@ -2095,20 +2024,6 @@
             this.chBoxCrashDetection.UseMnemonic = false;
             this.chBoxCrashDetection.UseVisualStyleBackColor = false;
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label14.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label14.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label14.Location = new System.Drawing.Point(222, 108);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(139, 15);
-            this.label14.TabIndex = 74;
-            this.label14.Text = "LEAVETIMER in seconds:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label14.Visible = false;
-            // 
             // chBoxActivateF2
             // 
             this.chBoxActivateF2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -2121,7 +2036,7 @@
             this.chBoxActivateF2.ForeColor = System.Drawing.Color.Coral;
             this.chBoxActivateF2.Location = new System.Drawing.Point(9, 42);
             this.chBoxActivateF2.Name = "chBoxActivateF2";
-            this.chBoxActivateF2.Size = new System.Drawing.Size(166, 24);
+            this.chBoxActivateF2.Size = new System.Drawing.Size(183, 24);
             this.chBoxActivateF2.TabIndex = 65;
             this.chBoxActivateF2.Text = "ACTIVATE FLOOR 2 --->";
             this.chBoxActivateF2.UseMnemonic = false;
@@ -2252,17 +2167,8 @@
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.txtRestart);
-            this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.txLeaveTimerFloor3);
             this.groupBox5.Controls.Add(this.txLeaveTimerFloor2);
-            this.groupBox5.Controls.Add(this.label25);
-            this.groupBox5.Controls.Add(this.txtDungeon3);
-            this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.chBoxActivateF3);
-            this.groupBox5.Controls.Add(this.txtDungeon3search);
             this.groupBox5.Controls.Add(this.chBoxActivateF2);
-            this.groupBox5.Controls.Add(this.label29);
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.txtDungeon2search);
@@ -2290,9 +2196,9 @@
             this.chBoxLeavetimer.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxLeavetimer.Location = new System.Drawing.Point(5, 102);
             this.chBoxLeavetimer.Name = "chBoxLeavetimer";
-            this.chBoxLeavetimer.Size = new System.Drawing.Size(155, 24);
+            this.chBoxLeavetimer.Size = new System.Drawing.Size(161, 24);
             this.chBoxLeavetimer.TabIndex = 78;
-            this.chBoxLeavetimer.Text = "LEAVETIMER in seconds:";
+            this.chBoxLeavetimer.Text = "(F2) Manuel Leavetimer:";
             this.chBoxLeavetimer.UseMnemonic = false;
             this.chBoxLeavetimer.UseVisualStyleBackColor = false;
             this.chBoxLeavetimer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chBoxLeavetimer_MouseClick);
@@ -2300,11 +2206,11 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Orange;
-            this.label17.Location = new System.Drawing.Point(232, 48);
+            this.label17.Location = new System.Drawing.Point(236, 48);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(170, 75);
+            this.label17.Size = new System.Drawing.Size(162, 75);
             this.label17.TabIndex = 77;
             this.label17.Text = "WE DISABLED FLOOR 3:\r\nStatistics have shown that \r\nFloor 3 is a complete waste \r\n" +
     "of time. Most shards are \r\nfarmed in less time in Floor 2.";
@@ -2322,7 +2228,7 @@
             this.chBoxUnstuckF1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxUnstuckF1.Location = new System.Drawing.Point(6, 22);
             this.chBoxUnstuckF1.Name = "chBoxUnstuckF1";
-            this.chBoxUnstuckF1.Size = new System.Drawing.Size(169, 24);
+            this.chBoxUnstuckF1.Size = new System.Drawing.Size(186, 24);
             this.chBoxUnstuckF1.TabIndex = 76;
             this.chBoxUnstuckF1.Text = "(F1) UNSTUCK DETECT";
             this.chBoxUnstuckF1.UseMnemonic = false;
@@ -2332,7 +2238,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(204, 106);
+            this.label8.Location = new System.Drawing.Point(208, 106);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 17);
             this.label8.TabIndex = 75;
@@ -2351,28 +2257,13 @@
             this.txtRestart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtRestart.WordWrap = false;
             // 
-            // txLeaveTimerFloor3
-            // 
-            this.txLeaveTimerFloor3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txLeaveTimerFloor3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txLeaveTimerFloor3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txLeaveTimerFloor3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txLeaveTimerFloor3.Location = new System.Drawing.Point(362, 108);
-            this.txLeaveTimerFloor3.Name = "txLeaveTimerFloor3";
-            this.txLeaveTimerFloor3.ReadOnly = true;
-            this.txLeaveTimerFloor3.Size = new System.Drawing.Size(35, 16);
-            this.txLeaveTimerFloor3.TabIndex = 73;
-            this.txLeaveTimerFloor3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txLeaveTimerFloor3.Visible = false;
-            this.txLeaveTimerFloor3.WordWrap = false;
-            // 
             // txLeaveTimerFloor2
             // 
             this.txLeaveTimerFloor2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.txLeaveTimerFloor2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txLeaveTimerFloor2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txLeaveTimerFloor2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txLeaveTimerFloor2.Location = new System.Drawing.Point(165, 107);
+            this.txLeaveTimerFloor2.Location = new System.Drawing.Point(169, 107);
             this.txLeaveTimerFloor2.Name = "txLeaveTimerFloor2";
             this.txLeaveTimerFloor2.ReadOnly = true;
             this.txLeaveTimerFloor2.Size = new System.Drawing.Size(35, 16);
@@ -2380,54 +2271,11 @@
             this.txLeaveTimerFloor2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txLeaveTimerFloor2.WordWrap = false;
             // 
-            // txtDungeon3
-            // 
-            this.txtDungeon3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtDungeon3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDungeon3.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDungeon3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon3.Location = new System.Drawing.Point(362, 88);
-            this.txtDungeon3.Name = "txtDungeon3";
-            this.txtDungeon3.ReadOnly = true;
-            this.txtDungeon3.Size = new System.Drawing.Size(35, 16);
-            this.txtDungeon3.TabIndex = 70;
-            this.txtDungeon3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDungeon3.Visible = false;
-            this.txtDungeon3.WordWrap = false;
-            // 
-            // txtDungeon3search
-            // 
-            this.txtDungeon3search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtDungeon3search.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDungeon3search.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtDungeon3search.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon3search.Location = new System.Drawing.Point(362, 68);
-            this.txtDungeon3search.Name = "txtDungeon3search";
-            this.txtDungeon3search.ReadOnly = true;
-            this.txtDungeon3search.Size = new System.Drawing.Size(35, 16);
-            this.txtDungeon3search.TabIndex = 67;
-            this.txtDungeon3search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDungeon3search.Visible = false;
-            this.txtDungeon3search.WordWrap = false;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.Orange;
-            this.label29.Location = new System.Drawing.Point(172, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(233, 15);
-            this.label29.TabIndex = 62;
-            this.label29.Text = "{ Floor 3 = ALPHA Version NO SUPPORT }";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label29.Visible = false;
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(204, 66);
+            this.label21.Location = new System.Drawing.Point(208, 66);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(30, 17);
             this.label21.TabIndex = 56;
@@ -2439,7 +2287,7 @@
             this.txtDungeon2search.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDungeon2search.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtDungeon2search.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon2search.Location = new System.Drawing.Point(165, 67);
+            this.txtDungeon2search.Location = new System.Drawing.Point(169, 67);
             this.txtDungeon2search.Name = "txtDungeon2search";
             this.txtDungeon2search.ReadOnly = true;
             this.txtDungeon2search.Size = new System.Drawing.Size(35, 16);
@@ -2452,7 +2300,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(204, 86);
+            this.label19.Location = new System.Drawing.Point(208, 86);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 17);
             this.label19.TabIndex = 52;
@@ -2464,7 +2312,7 @@
             this.txtDungeon2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDungeon2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.txtDungeon2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtDungeon2.Location = new System.Drawing.Point(165, 87);
+            this.txtDungeon2.Location = new System.Drawing.Point(169, 87);
             this.txtDungeon2.Name = "txtDungeon2";
             this.txtDungeon2.ReadOnly = true;
             this.txtDungeon2.Size = new System.Drawing.Size(35, 16);
@@ -2490,11 +2338,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Orange;
             this.label10.Location = new System.Drawing.Point(131, 126);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(248, 15);
+            this.label10.Size = new System.Drawing.Size(240, 15);
             this.label10.TabIndex = 78;
             this.label10.Text = "<-- CHECK IF LOST ARK PROCESS IS ACTIVE";
             // 
@@ -2628,11 +2476,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Orange;
             this.label12.Location = new System.Drawing.Point(5, 46);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 75);
+            this.label12.Size = new System.Drawing.Size(121, 75);
             this.label12.TabIndex = 37;
             this.label12.Text = "How long should the \r\nbutton be pressed?\r\nType in milliseconds!\r\n\r\n500 ms is mini" +
     "mum!";
@@ -2666,11 +2514,11 @@
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label48.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label48.ForeColor = System.Drawing.Color.Orange;
             this.label48.Location = new System.Drawing.Point(5, 47);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(126, 75);
+            this.label48.Size = new System.Drawing.Size(118, 75);
             this.label48.TabIndex = 49;
             this.label48.Text = "Set your own \r\nSkill Rotation!\r\nprioritize by Nr\'s...\r\n\r\n1 , 2 , 3 , 4 , 5 , 6 , " +
     "7 , 8";
@@ -2702,11 +2550,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Orange;
             this.label13.Location = new System.Drawing.Point(5, 46);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(118, 60);
+            this.label13.Size = new System.Drawing.Size(114, 60);
             this.label13.TabIndex = 48;
             this.label13.Text = "Set your Cooldown \r\nin ms...\r\n\r\n500 ms is minimum!";
             // 
@@ -2775,6 +2623,17 @@
             this.label23.Size = new System.Drawing.Size(46, 17);
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Orange;
+            this.label4.Location = new System.Drawing.Point(231, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(160, 15);
+            this.label4.TabIndex = 67;
+            this.label4.Text = "Choice your Game Language";
             // 
             // ChaosBot
             // 
@@ -2888,8 +2747,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txtDungeon2search;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.CheckBox chBoxActivateF2;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnInstructions;
@@ -2976,14 +2833,7 @@
         private System.Windows.Forms.CheckBox chBoxSorcerer;
         private System.Windows.Forms.CheckBox chBoxSharpshooter;
         private System.Windows.Forms.CheckBox chBoxSoulfist;
-        private System.Windows.Forms.TextBox txtDungeon3search;
-        private System.Windows.Forms.CheckBox chBoxActivateF3;
-        private System.Windows.Forms.TextBox txtDungeon3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txLeaveTimerFloor2;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txLeaveTimerFloor3;
         private System.Windows.Forms.CheckBox chBoxBard;
         private System.Windows.Forms.TextBox txBoxUltimateKey;
         private System.Windows.Forms.Label label27;
@@ -3024,6 +2874,7 @@
         private System.Windows.Forms.CheckBox chBoxLeavetimer;
         private System.Windows.Forms.RadioButton radioEnglish;
         private System.Windows.Forms.RadioButton radioGerman;
+        private System.Windows.Forms.Label label4;
     }
 }
 

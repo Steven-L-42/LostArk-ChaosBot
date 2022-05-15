@@ -76,5 +76,7 @@ namespace PixelAimbot
             frmSettings Form = new frmSettings();
             Form.Show();
         }
+
+    
     }
 }

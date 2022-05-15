@@ -45,6 +45,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.checkBoxOldVersion = new System.Windows.Forms.CheckBox();
+            this.lbVersionOld = new System.Windows.Forms.Label();
             this.progressBar1 = new PixelAimbot.Classes.Misc.CustomProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -223,9 +224,9 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Orange;
-            this.groupBox1.Location = new System.Drawing.Point(592, 107);
+            this.groupBox1.Location = new System.Drawing.Point(592, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(139, 298);
+            this.groupBox1.Size = new System.Drawing.Size(139, 209);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Patchnotes";
@@ -240,9 +241,10 @@
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(140, 272);
+            this.richTextBox1.Size = new System.Drawing.Size(140, 183);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.Text = "~2.8.6r~\n+ New Revive\n+ New Awakening\n+ Boss Kill Detection\n+ Auto Leave Floor 2\n" +
+    "+ minor fixes";
             // 
             // checkBoxOldVersion
             // 
@@ -251,13 +253,24 @@
             this.checkBoxOldVersion.FlatAppearance.BorderSize = 0;
             this.checkBoxOldVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxOldVersion.ForeColor = System.Drawing.Color.Orange;
-            this.checkBoxOldVersion.Location = new System.Drawing.Point(460, 229);
+            this.checkBoxOldVersion.Location = new System.Drawing.Point(460, 222);
             this.checkBoxOldVersion.Name = "checkBoxOldVersion";
             this.checkBoxOldVersion.Size = new System.Drawing.Size(110, 21);
             this.checkBoxOldVersion.TabIndex = 20;
             this.checkBoxOldVersion.Text = "OLD VERSION";
             this.checkBoxOldVersion.UseVisualStyleBackColor = true;
             this.checkBoxOldVersion.CheckedChanged += new System.EventHandler(this.checkBoxEarlyAccess_CheckedChanged);
+            // 
+            // lbVersionOld
+            // 
+            this.lbVersionOld.AutoSize = true;
+            this.lbVersionOld.BackColor = System.Drawing.Color.Transparent;
+            this.lbVersionOld.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbVersionOld.Location = new System.Drawing.Point(477, 238);
+            this.lbVersionOld.Name = "lbVersionOld";
+            this.lbVersionOld.Size = new System.Drawing.Size(90, 17);
+            this.lbVersionOld.TabIndex = 21;
+            this.lbVersionOld.Text = "Version: 2.8.6r";
             // 
             // progressBar1
             // 
@@ -278,6 +291,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(741, 447);
+            this.Controls.Add(this.lbVersionOld);
             this.Controls.Add(this.checkBoxOldVersion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.progressBar1);
@@ -329,5 +343,6 @@
         private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lbVersionOld;
     }
 }

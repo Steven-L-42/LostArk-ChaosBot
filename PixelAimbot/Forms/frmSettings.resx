@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label13.Text" xml:space="preserve">
+    <value>1. Set your cooldown - otherwise Bot is still standing!
+    You have to press the Ability one time to see the "correct"
+    Cooldown time. 
+    Hovering over the Ability shows allways a wrong number!</value>
+  </data>
+  <data name="label34.Text" xml:space="preserve">
+    <value>2. Auto Revive: Activate and test it with the default Value "70". If Bot 
+    try to Revive while he is still alive, then set a Higher Value like "75".
+    If Bot dont Revive but your are Dead, then set lower Value like "65".</value>
+  </data>
 </root>

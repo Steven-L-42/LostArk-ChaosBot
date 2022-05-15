@@ -705,6 +705,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\info.png" />
+    <None Include="Resources\scale.jpg" />
     <Content Include="Resources\shardtest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -717,6 +718,13 @@
     <Content Include="Resources\siebzehnprozentmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\start.png" />
+    <None Include="Resources\start2.png" />
+    <None Include="Resources\start1.png" />
+    <None Include="Resources\start21.png" />
+    <None Include="Resources\start3.png" />
+    <None Include="Resources\start4.png" />
+    <None Include="Resources\start5.png" />
     <Content Include="Resources\success.png" />
     <Content Include="Resources\warning.png" />
     <None Include="Resources\debug.png" />

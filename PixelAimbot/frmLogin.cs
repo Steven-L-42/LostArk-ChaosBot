@@ -279,11 +279,13 @@ namespace PixelAimbot
         {
             if (checkBoxOldVersion.Checked)
             {
+                
                 config.oldversion = true;
                 config.Save();
             }
             else
             {
+                
                 config.oldversion = false;
                 config.Save();
             }

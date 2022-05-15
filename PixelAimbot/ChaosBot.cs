@@ -375,10 +375,7 @@ namespace PixelAimbot
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
             txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
-            txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
-            txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
-            chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
-            txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
+            
             txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
             textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
@@ -539,7 +536,6 @@ namespace PixelAimbot
                 chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
                 txtDeath.Text = Properties.Settings.Default.txtDeath;
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
-                txLeaveTimerFloor3.Text = Properties.Settings.Default.txLeaveTimerFloor3;
                 txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
                 chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
                 txtHeal10.Text = Properties.Settings.Default.instant;
@@ -594,9 +590,7 @@ namespace PixelAimbot
                 chBoxDoubleS.Checked = Properties.Settings.Default.chBoxDoubleS;
                 chBoxDoubleD.Checked = Properties.Settings.Default.chBoxDoubleD;
                 chBoxDoubleF.Checked = Properties.Settings.Default.chBoxDoubleF;
-                txtDungeon3search.Text = Properties.Settings.Default.txtDungeon3search;
-                txtDungeon3.Text = Properties.Settings.Default.txtDungeon3;
-                chBoxActivateF3.Checked = Properties.Settings.Default.chBoxActivateF3;
+               
                 chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                 chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
                 textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
@@ -638,7 +632,7 @@ namespace PixelAimbot
                     rotation.txtDeath = txtDeath.Text;
                     rotation.chBoxRevive = (bool)chBoxRevive.Checked;
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
-                    rotation.txLeaveTimerFloor3 = txLeaveTimerFloor3.Text;
+              
                     rotation.txtRestart = txtRestart.Text;
                     rotation.chBoxUnstuckF1 = chBoxUnstuckF1.Checked;
 
@@ -662,9 +656,7 @@ namespace PixelAimbot
                     rotation.chBoxChannelSwap = (bool)chBoxChannelSwap.Checked;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
-                    rotation.chBoxActivateF3 = chBoxActivateF3.Checked;
-                    rotation.txtDungeon3search = txtDungeon3search.Text;
-                    rotation.txtDungeon3 = txtDungeon3.Text;
+                
 
                     rotation.txtDungeon2search = txtDungeon2search.Text;
                     rotation.txtDungeon2 = txtDungeon2.Text;
@@ -759,11 +751,9 @@ namespace PixelAimbot
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txtHeal10.Text = rotation.txtHeal10;
                 txLeaveTimerFloor2.Text = rotation.txLeaveTimerFloor2;
-                txLeaveTimerFloor3.Text = rotation.txLeaveTimerFloor3;
+          
                 chBoxAutoMovement.Checked = rotation.chBoxAutoMovement;
-                chBoxActivateF3.Checked = rotation.chBoxActivateF3;
-                txtDungeon3search.Text = rotation.txtDungeon3search;
-                txtDungeon3.Text = rotation.txtDungeon3;
+               
                 textBoxAutoAttack.Text = rotation.textBoxAutoAttack;
                 chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
@@ -841,26 +831,11 @@ namespace PixelAimbot
                 txtDungeon2search.ReadOnly = true;
                 txtDungeon2.ReadOnly = true;
                 txLeaveTimerFloor2.ReadOnly = true;
-                chBoxActivateF3.Checked = false;
+               
             }
         }
 
-        private void chBoxActivateF3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chBoxActivateF3.Checked)
-            {
-                txtDungeon3search.ReadOnly = false;
-                txtDungeon3.ReadOnly = false;
-                txLeaveTimerFloor3.ReadOnly = false;
-                chBoxActivateF2.Checked = true;
-            }
-            else if (!chBoxActivateF3.Checked)
-            {
-                txtDungeon3search.ReadOnly = true;
-                txtDungeon3.ReadOnly = true;
-                txLeaveTimerFloor3.ReadOnly = true;
-            }
-        }
+        
 
         private void chBoxRevive_CheckedChanged(object sender, EventArgs e)
         {
@@ -903,11 +878,12 @@ namespace PixelAimbot
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            //cts = new CancellationTokenSource();
-            //var token = cts.Token;
-           
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
 
-       
+            token.ThrowIfCancellationRequested();
+            await Task.Delay(1, token);
+
 
 
             //var leave = Task.Run(() => TEST(token));
