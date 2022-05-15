@@ -152,7 +152,6 @@ namespace PixelAimbot
 
                 _revive = false;
                 _portaldetect = false;
-                _portaldetect2 = false;
 
                 _ultimate = false;
                 _doUltimateAttack = false;

@@ -32,7 +32,6 @@ namespace PixelAimbot
 
         private bool _revive;
         private bool _portaldetect;
-        private bool _portaldetect2;
 
         private bool _ultimate;
         private bool _potions;

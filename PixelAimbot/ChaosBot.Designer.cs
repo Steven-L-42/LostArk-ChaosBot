@@ -438,14 +438,14 @@
             // 
             // btnInstructions
             // 
-            this.btnInstructions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnInstructions.BackColor = System.Drawing.Color.Peru;
             this.btnInstructions.FlatAppearance.BorderSize = 0;
             this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInstructions.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnInstructions.ForeColor = System.Drawing.Color.Peru;
+            this.btnInstructions.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.btnInstructions.Location = new System.Drawing.Point(4, 112);
             this.btnInstructions.Name = "btnInstructions";
-            this.btnInstructions.Size = new System.Drawing.Size(59, 22);
+            this.btnInstructions.Size = new System.Drawing.Size(130, 22);
             this.btnInstructions.TabIndex = 60;
             this.btnInstructions.Text = "GUIDE";
             this.toolTip1.SetToolTip(this.btnInstructions, "Thats resets everything except gamesettings.");

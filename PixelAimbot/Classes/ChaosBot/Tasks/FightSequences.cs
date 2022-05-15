@@ -79,7 +79,6 @@ namespace PixelAimbot
                     _floorFight = true;
                     _revive = true;
                     _ultimate = true;
-                    _portaldetect2 = true;
 
                     _potions = true;
 
@@ -103,13 +102,7 @@ namespace PixelAimbot
                     {
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
                     }
-
-                    //if (_leavetimer == 1 && chBoxAwakening.Checked && chBoxLeavetimer.Checked)
-                    //{
-                    //    var t39 = Task.Run(() => Awakeningskill(token));
-                    //}
-                   
-                    if (_leavetimer == 1)
+                    if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
                        var t18 = Task.Run(() => Portaldetect2(token)); 
                     }
@@ -123,24 +116,13 @@ namespace PixelAimbot
 
                   
 
-                    //if (_fightSequence >= 8 && chBoxActivateF3.Checked && _floor3 == false)
-                    //{
-                    //    _fightSequence2 = 1;
-                    //    _portaldetect = true;
-                    //    _floorint2 = 2;
-                    //    _floorint3 = 2;
-                    //    var t18 = Task.Run(() => Portaldetect(token));
-                    //    await Task.WhenAny(t18);
-                    //}
-                    //else if (_fightSequence < 8 && _stopp == false)
-                    //{
                         _floorFight = false;
                         _potions = false;
                         _revive = false;
                         _searchboss = true;
                         var t13 = Task.Run(() => SEARCHBOSS(token));
                         await Task.WhenAny(t13);
-                    //}
+                  
 
                     await Task.WhenAny(t11, t12, t16, t20);
                 }
@@ -685,7 +667,6 @@ namespace PixelAimbot
                                 _revive = false;
                                 _ultimate = false;
                                 _portaldetect = false;
-                                _portaldetect2 = false;
                                 _potions = false;
                                 _floor1 = false;
                                 _floor2 = false;
