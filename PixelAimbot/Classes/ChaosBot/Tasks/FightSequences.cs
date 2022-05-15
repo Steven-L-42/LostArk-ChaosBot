@@ -104,10 +104,10 @@ namespace PixelAimbot
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
                     }
 
-                    if (_leavetimer == 1 && chBoxAwakening.Checked && chBoxLeavetimer.Checked)
-                    {
-                        var t39 = Task.Run(() => Awakeningskill(token));
-                    }
+                    //if (_leavetimer == 1 && chBoxAwakening.Checked && chBoxLeavetimer.Checked)
+                    //{
+                    //    var t39 = Task.Run(() => Awakeningskill(token));
+                    //}
                    
                     if (_leavetimer == 1)
                     {
@@ -633,6 +633,36 @@ namespace PixelAimbot
                             {
                                 lbStatus.Invoke(
                  (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
+                              
+                                while(starten == true && _stopp == false && chBoxAwakening.Checked && gefunden == false)
+                                {
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token); 
+                                    object Awakening = Pixel.PixelSearch(Recalc(1161), Recalc(66, false), Recalc(1187),
+                                        Recalc(83, false), 0x9C1B16, 20);
+                                    if (Awakening.ToString() == "0")
+                                    {
+                                        
+                                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        gefunden = true;
+
+
+
+                                    }
+                                    Random random2 = new Random();
+                                    var sleepTime2 = random2.Next(100, 150);
+                                    Thread.Sleep(sleepTime2);
+                                }
                                 gefunden = true;
 
                             }
