@@ -126,7 +126,11 @@ namespace PixelAimbot
         public Image<Bgr, Byte> Image_questmarker = byteArrayToImage(Images.questmarker);
         public Image<Bgr, Byte> Image_red_hp = byteArrayToImage(Images.red_hp);
         public Image<Bgr, Byte> Image_revive_new = byteArrayToImage(Images.revive_new);
-        
+
+        public Image<Bgr, Byte> Image_death = byteArrayToImage(Images.death);
+        public Image<Bgr, Byte> Image_deathEN = byteArrayToImage(Images.deathEN);
+
+
         public Image<Bgr, Byte> Image_revive1 = byteArrayToImage(Images.revive1);
         public Image<Bgr, Byte> Image_reviveEnglish = byteArrayToImage(Images.reviveEnglish);
         

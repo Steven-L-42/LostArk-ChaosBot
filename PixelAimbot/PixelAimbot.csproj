@@ -371,6 +371,7 @@
     <Compile Include="Classes\ChaosBot\Images\bosshp.cs" />
     <Compile Include="Classes\ChaosBot\Images\boss1.cs" />
     <Compile Include="Classes\ChaosBot\Images\bossmask1.cs" />
+    <Compile Include="Classes\ChaosBot\Images\deathEN.cs" />
     <Compile Include="Classes\ChaosBot\Images\enemy.cs" />
     <Compile Include="Classes\ChaosBot\Images\mask.cs" />
     <Compile Include="Classes\ChaosBot\Images\mob1.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Classes\ChaosBot\Images\red_hp.cs" />
     <Compile Include="Classes\ChaosBot\Images\revive1.cs" />
     <Compile Include="Classes\ChaosBot\Images\reviveEnglish.cs" />
+    <Compile Include="Classes\ChaosBot\Images\death.cs" />
     <Compile Include="Classes\ChaosBot\Images\revive_new.cs" />
     <Compile Include="Classes\ChaosBot\Imports.cs">
       <SubType>Form</SubType>

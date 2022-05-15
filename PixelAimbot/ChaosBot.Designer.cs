@@ -56,10 +56,11 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBoxMouse = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioEnglish = new System.Windows.Forms.RadioButton();
+            this.radioGerman = new System.Windows.Forms.RadioButton();
             this.labelheal = new System.Windows.Forms.Label();
             this.HealthSlider1 = new System.Windows.Forms.TrackBar();
-            this.txtRevive = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.txtDeath = new System.Windows.Forms.TextBox();
             this.chBoxRevive = new System.Windows.Forms.CheckBox();
             this.txtHeal10 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -670,10 +671,11 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.radioEnglish);
+            this.groupBox4.Controls.Add(this.radioGerman);
             this.groupBox4.Controls.Add(this.labelheal);
             this.groupBox4.Controls.Add(this.HealthSlider1);
-            this.groupBox4.Controls.Add(this.txtRevive);
-            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.txtDeath);
             this.groupBox4.Controls.Add(this.chBoxRevive);
             this.groupBox4.Controls.Add(this.txtHeal10);
             this.groupBox4.Controls.Add(this.label6);
@@ -686,6 +688,30 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Heal and Potion";
             this.toolTip1.SetToolTip(this.groupBox4, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            // 
+            // radioEnglish
+            // 
+            this.radioEnglish.AutoSize = true;
+            this.radioEnglish.Checked = true;
+            this.radioEnglish.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioEnglish.Location = new System.Drawing.Point(238, 104);
+            this.radioEnglish.Name = "radioEnglish";
+            this.radioEnglish.Size = new System.Drawing.Size(63, 19);
+            this.radioEnglish.TabIndex = 66;
+            this.radioEnglish.TabStop = true;
+            this.radioEnglish.Text = "English";
+            this.radioEnglish.UseVisualStyleBackColor = true;
+            // 
+            // radioGerman
+            // 
+            this.radioGerman.AutoSize = true;
+            this.radioGerman.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioGerman.Location = new System.Drawing.Point(313, 104);
+            this.radioGerman.Name = "radioGerman";
+            this.radioGerman.Size = new System.Drawing.Size(70, 19);
+            this.radioGerman.TabIndex = 65;
+            this.radioGerman.Text = "German";
+            this.radioGerman.UseVisualStyleBackColor = true;
             // 
             // labelheal
             // 
@@ -711,31 +737,20 @@
             this.HealthSlider1.Value = 644;
             this.HealthSlider1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
-            // txtRevive
+            // txtDeath
             // 
-            this.txtRevive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtRevive.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRevive.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRevive.Location = new System.Drawing.Point(177, 103);
-            this.txtRevive.Name = "txtRevive";
-            this.txtRevive.ReadOnly = true;
-            this.txtRevive.Size = new System.Drawing.Size(35, 18);
-            this.txtRevive.TabIndex = 60;
-            this.txtRevive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtRevive, "Type only numbers from 1-100!");
-            this.txtRevive.WordWrap = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.Orange;
-            this.label16.Location = new System.Drawing.Point(211, 105);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(155, 30);
-            this.label16.TabIndex = 60;
-            this.label16.Text = "<-- MOUSE: HOVER OVER \r\n       \"AUTO-REVIVE\" TEXT !";
+            this.txtDeath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtDeath.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDeath.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDeath.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtDeath.Location = new System.Drawing.Point(177, 103);
+            this.txtDeath.Name = "txtDeath";
+            this.txtDeath.ReadOnly = true;
+            this.txtDeath.Size = new System.Drawing.Size(35, 18);
+            this.txtDeath.TabIndex = 60;
+            this.txtDeath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtDeath, "Type only numbers from 1-100!");
+            this.txtDeath.WordWrap = false;
             // 
             // chBoxRevive
             // 
@@ -2984,7 +2999,6 @@
         private System.Windows.Forms.CheckBox chBoxGunlancer;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox chBoxRevive;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.CheckBox chBoxGunlancer2;
         private System.Windows.Forms.Label label35;
@@ -2993,7 +3007,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox chBoxAwakening;
-        private System.Windows.Forms.TextBox txtRevive;
+        private System.Windows.Forms.TextBox txtDeath;
         private System.Windows.Forms.CheckBox chBoxUnstuckF1;
         private System.Windows.Forms.TrackBar HealthSlider1;
         private System.Windows.Forms.Label labelheal;
@@ -3008,6 +3022,8 @@
         private System.Windows.Forms.ComboBox cmbMINUTE;
         private System.Windows.Forms.Button btnHidden;
         private System.Windows.Forms.CheckBox chBoxLeavetimer;
+        private System.Windows.Forms.RadioButton radioEnglish;
+        private System.Windows.Forms.RadioButton radioGerman;
     }
 }
 

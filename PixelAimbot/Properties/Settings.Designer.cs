@@ -889,13 +889,13 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("96")]
-        public string txtRevive {
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public string txtDeath {
             get {
-                return ((string)(this["txtRevive"]));
+                return ((string)(this["txtDeath"]));
             }
             set {
-                this["txtRevive"] = value;
+                this["txtDeath"] = value;
             }
         }
         
@@ -1004,6 +1004,30 @@ namespace PixelAimbot.Properties {
             }
             set {
                 this["chBoxLeavetimer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool radioGerman {
+            get {
+                return ((bool)(this["radioGerman"]));
+            }
+            set {
+                this["radioGerman"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool radioEnglish {
+            get {
+                return ((bool)(this["radioEnglish"]));
+            }
+            set {
+                this["radioEnglish"] = value;
             }
         }
     }

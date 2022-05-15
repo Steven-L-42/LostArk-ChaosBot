@@ -218,8 +218,8 @@
     <Setting Name="chBoxAwakening" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="txtRevive" Type="System.String" Scope="User">
-      <Value Profile="(Default)">96</Value>
+    <Setting Name="txtDeath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">70</Value>
     </Setting>
     <Setting Name="textBoxAutoAttack" Type="System.String" Scope="User">
       <Value Profile="(Default)">1500</Value>
@@ -247,6 +247,12 @@
     </Setting>
     <Setting Name="chBoxLeavetimer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="radioGerman" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="radioEnglish" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
