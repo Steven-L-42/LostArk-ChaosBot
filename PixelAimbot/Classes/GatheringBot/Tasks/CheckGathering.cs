@@ -13,7 +13,7 @@ namespace PixelAimbot
 {
     partial class GatheringBot
     {
-        private async Task CheckGathering(CancellationToken token)
+        private async Task CheckGathering(CancellationToken token, bool fishing = true)
         {
             try
             {
@@ -35,21 +35,30 @@ namespace PixelAimbot
                     }
                 }
 
-                if (chBoxAutoBuff.Checked && _buff == true)
+                if (fishing)
                 {
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
-                    VirtualMouse.MoveTo(_x + (_width / 2), _y + (_height / 2), 5);
+                    if (chBoxAutoBuff.Checked && _buff == true)
+                    {
+                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Use Buff..."));
+                        VirtualMouse.MoveTo(_x + (_width / 2), _y + (_height / 2), 5);
 
-                    await Task.Delay(1000, token);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
-                    await Task.Delay(3000, token);
-                    _buff = false;
-                    var bufftimer = Task.Run(() => BUFFTIMER(token));
+                        await Task.Delay(1000, token);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
+                        await Task.Delay(3000, token);
+                        _buff = false;
+                        var bufftimer = Task.Run(() => BUFFTIMER(token));
+                    }
+
+                    _checkEnergy = true;
+                    var t3 = Task.Run(() => ThrowFishingRod(token));
+                    await Task.WhenAny(new[] {t3});
                 }
-
-                _checkEnergy = true;
-                var t3 = Task.Run(() => ThrowFishingRod(token));
-                await Task.WhenAny(new[] {t3});
+                else
+                {
+                    _checkEnergy = true;
+                    var t3 = Task.Run(() => SearchNextPoint(token));
+                    await Task.WhenAny(new[] {t3});
+                }
             }
             catch(Exception ex)
             {

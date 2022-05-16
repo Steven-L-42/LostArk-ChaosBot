@@ -26,6 +26,7 @@ namespace PixelAimbot
         private bool _minigameFound = false;
         private int _x, _y, _width, _height;
         private int _rodCounter;
+        private int _gatheringCounter;
         private bool _telegramBotRunning;
         Random humanizer = new Random();
         PrintScreen _screenPrinter = new PrintScreen();

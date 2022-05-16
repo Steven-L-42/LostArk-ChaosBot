@@ -21,7 +21,11 @@ namespace PixelAimbot
         {
             InitializeComponent();
             _conf = Config.Load();
+            if (_conf.username != "Mentalill" && _conf.username != "Shiiikk")
+            {
+                tabControl1.TabPages.RemoveByKey("Gathering");
 
+            }
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(842, false));
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -81,7 +85,6 @@ namespace PixelAimbot
                 btnPause_Click(null, null);
                 _cts.Cancel();
             }
-            
         }
 
 
@@ -317,6 +320,51 @@ namespace PixelAimbot
             if (ChaosBot.screenWidth != 1920)
             {
                 Alert.Show("Only working on 1920x1080!", frmAlert.enmType.Error);
+            }
+        }
+
+        private async void buttonGatheringStart_Click(object sender, EventArgs e)
+        {
+            if (_start == false)
+            {
+                try
+                {
+                    FormMinimized.StartPosition = FormStartPosition.Manual;
+                    FormMinimized.updateLabel("Gatheringbot");
+                    FormMinimized.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(28, false));
+                    FormMinimized.timerRuntimer.Enabled = true;
+                    FormMinimized.sw.Reset();
+                    FormMinimized.sw.Start();
+                    FormMinimized.Show();
+                    FormMinimized.Location = new Point(ChaosBot.Recalc(0), ChaosBot.Recalc(28, false));
+                    FormMinimized.Size = new Size(594, 28);
+
+                    this.Hide();
+                    _checkEnergy = true;
+                    _minigameFound = false;
+                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
+                    _start = true;
+                    _stop = true;
+                    _cts = new CancellationTokenSource();
+                    var token = _cts.Token;
+
+                    var t1 = Task.Run(() => Start(token));
+                    if (chBoxLOGOUT.Checked == true && _start == true)
+                    {
+                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                    }
+                    else
+                    {
+                        _logout = false;
+                    }
+
+                    await Task.WhenAny(new[] {t1});
+                }
+                catch(Exception ex)
+                {
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                }
             }
         }
     }

@@ -74,6 +74,13 @@
             this.txPQ = new System.Windows.Forms.TextBox();
             this.txPE = new System.Windows.Forms.TextBox();
             this.txPR = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBoxAutoRepair = new System.Windows.Forms.CheckBox();
+            this.checkBoxForaging = new System.Windows.Forms.CheckBox();
+            this.checkBoxMining = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxLogging = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -81,6 +88,10 @@
             this.buttonSelectArea = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.Gathering = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buttonGatheringStop = new System.Windows.Forms.Button();
+            this.buttonGatheringStart = new System.Windows.Forms.Button();
             this.SETTINGS = new System.Windows.Forms.TabPage();
             this.groupBoxTelegram = new System.Windows.Forms.GroupBox();
             this.buttonConnectTelegram = new System.Windows.Forms.Button();
@@ -94,9 +105,12 @@
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.STARTEXIT.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.Gathering.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SETTINGS.SuspendLayout();
             this.groupBoxTelegram.SuspendLayout();
             this.SuspendLayout();
@@ -692,10 +706,120 @@
             this.txPR.WordWrap = false;
             this.txPR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckIsDigit);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.checkBoxAutoRepair);
+            this.groupBox4.Controls.Add(this.checkBoxForaging);
+            this.groupBox4.Controls.Add(this.checkBoxMining);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.checkBoxLogging);
+            this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle) ((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.groupBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox4.Location = new System.Drawing.Point(172, 5);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(240, 139);
+            this.groupBox4.TabIndex = 10;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Action";
+            this.toolTip1.SetToolTip(this.groupBox4, "To activate the functions, you have \r\nto Click on the Checkboxes!");
+            // 
+            // checkBoxAutoRepair
+            // 
+            this.checkBoxAutoRepair.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxAutoRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxAutoRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxAutoRepair.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxAutoRepair.FlatAppearance.BorderSize = 0;
+            this.checkBoxAutoRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxAutoRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxAutoRepair.Location = new System.Drawing.Point(4, 99);
+            this.checkBoxAutoRepair.Name = "checkBoxAutoRepair";
+            this.checkBoxAutoRepair.Size = new System.Drawing.Size(230, 24);
+            this.checkBoxAutoRepair.TabIndex = 51;
+            this.checkBoxAutoRepair.Text = "Auto-Repair";
+            this.toolTip1.SetToolTip(this.checkBoxAutoRepair, "Automaticly repair");
+            this.checkBoxAutoRepair.UseMnemonic = false;
+            this.checkBoxAutoRepair.UseVisualStyleBackColor = false;
+            // 
+            // checkBoxForaging
+            // 
+            this.checkBoxForaging.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxForaging.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxForaging.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxForaging.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxForaging.FlatAppearance.BorderSize = 0;
+            this.checkBoxForaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxForaging.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxForaging.Location = new System.Drawing.Point(4, 71);
+            this.checkBoxForaging.Name = "checkBoxForaging";
+            this.checkBoxForaging.Size = new System.Drawing.Size(230, 22);
+            this.checkBoxForaging.TabIndex = 50;
+            this.checkBoxForaging.Text = "Foraging?";
+            this.checkBoxForaging.UseMnemonic = false;
+            this.checkBoxForaging.UseVisualStyleBackColor = false;
+            // 
+            // checkBoxMining
+            // 
+            this.checkBoxMining.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxMining.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxMining.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxMining.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxMining.FlatAppearance.BorderSize = 0;
+            this.checkBoxMining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxMining.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxMining.Location = new System.Drawing.Point(4, 45);
+            this.checkBoxMining.Name = "checkBoxMining";
+            this.checkBoxMining.Size = new System.Drawing.Size(230, 22);
+            this.checkBoxMining.TabIndex = 49;
+            this.checkBoxMining.Text = "Mining?";
+            this.checkBoxMining.UseMnemonic = false;
+            this.checkBoxMining.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.ForeColor = System.Drawing.Color.Coral;
+            this.label1.Location = new System.Drawing.Point(68, -2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(171, 12);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "Hover over text for more information!";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label2.Location = new System.Drawing.Point(86, 96);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 12);
+            this.label2.TabIndex = 47;
+            this.label2.Visible = false;
+            // 
+            // checkBoxLogging
+            // 
+            this.checkBoxLogging.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.checkBoxLogging.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.checkBoxLogging.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxLogging.Cursor = System.Windows.Forms.Cursors.Help;
+            this.checkBoxLogging.FlatAppearance.BorderSize = 0;
+            this.checkBoxLogging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxLogging.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.checkBoxLogging.Location = new System.Drawing.Point(4, 20);
+            this.checkBoxLogging.Name = "checkBoxLogging";
+            this.checkBoxLogging.Size = new System.Drawing.Size(230, 22);
+            this.checkBoxLogging.TabIndex = 34;
+            this.checkBoxLogging.Text = "Logging?";
+            this.checkBoxLogging.UseMnemonic = false;
+            this.checkBoxLogging.UseVisualStyleBackColor = false;
+            // 
             // tabControl1
             // 
             this.tabControl1.AllowDrop = true;
             this.tabControl1.Controls.Add(this.STARTEXIT);
+            this.tabControl1.Controls.Add(this.Gathering);
             this.tabControl1.Controls.Add(this.SETTINGS);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabControl1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -795,6 +919,61 @@
             this.btnStart.Text = "START (F9)";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // Gathering
+            // 
+            this.Gathering.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (28)))), ((int) (((byte) (28)))), ((int) (((byte) (28)))));
+            this.Gathering.Controls.Add(this.groupBox4);
+            this.Gathering.Controls.Add(this.groupBox3);
+            this.Gathering.Location = new System.Drawing.Point(4, 20);
+            this.Gathering.Name = "Gathering";
+            this.Gathering.Padding = new System.Windows.Forms.Padding(3);
+            this.Gathering.Size = new System.Drawing.Size(418, 150);
+            this.Gathering.TabIndex = 5;
+            this.Gathering.Text = "Gathering";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.buttonGatheringStop);
+            this.groupBox3.Controls.Add(this.buttonGatheringStart);
+            this.groupBox3.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle) ((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox3.Location = new System.Drawing.Point(6, 5);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(160, 139);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Main";
+            // 
+            // buttonGatheringStop
+            // 
+            this.buttonGatheringStop.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
+            this.buttonGatheringStop.Enabled = false;
+            this.buttonGatheringStop.FlatAppearance.BorderSize = 0;
+            this.buttonGatheringStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGatheringStop.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.buttonGatheringStop.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonGatheringStop.Location = new System.Drawing.Point(83, 21);
+            this.buttonGatheringStop.Name = "buttonGatheringStop";
+            this.buttonGatheringStop.Size = new System.Drawing.Size(70, 30);
+            this.buttonGatheringStop.TabIndex = 10;
+            this.buttonGatheringStop.Text = "STOP (F10)";
+            this.buttonGatheringStop.UseVisualStyleBackColor = false;
+            // 
+            // buttonGatheringStart
+            // 
+            this.buttonGatheringStart.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (60)))), ((int) (((byte) (60)))), ((int) (((byte) (60)))));
+            this.buttonGatheringStart.Enabled = false;
+            this.buttonGatheringStart.FlatAppearance.BorderSize = 0;
+            this.buttonGatheringStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGatheringStart.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.buttonGatheringStart.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonGatheringStart.Location = new System.Drawing.Point(9, 21);
+            this.buttonGatheringStart.Name = "buttonGatheringStart";
+            this.buttonGatheringStart.Size = new System.Drawing.Size(70, 30);
+            this.buttonGatheringStart.TabIndex = 9;
+            this.buttonGatheringStart.Text = "START (F9)";
+            this.buttonGatheringStart.UseVisualStyleBackColor = false;
             // 
             // SETTINGS
             // 
@@ -947,9 +1126,13 @@
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.STARTEXIT.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.Gathering.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.SETTINGS.ResumeLayout(false);
             this.groupBoxTelegram.ResumeLayout(false);
             this.groupBoxTelegram.PerformLayout();
@@ -957,6 +1140,21 @@
             this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.CheckBox checkBoxAutoRepair;
+
+        private System.Windows.Forms.CheckBox checkBoxForaging;
+
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button buttonGatheringStop;
+        private System.Windows.Forms.Button buttonGatheringStart;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox checkBoxMining;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBoxLogging;
+
+        private System.Windows.Forms.TabPage Gathering;
 
         private System.Windows.Forms.CheckBox checkBoxMiniGame;
 

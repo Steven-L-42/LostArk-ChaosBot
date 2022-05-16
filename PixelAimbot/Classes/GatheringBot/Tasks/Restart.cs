@@ -9,7 +9,7 @@ namespace PixelAimbot
 {
     partial class GatheringBot
     {
-        private async Task Restart(CancellationToken token)
+        private async Task Restart(CancellationToken token, bool fishing = true)
         {
             _checkEnergy = false;
             try
@@ -71,7 +71,7 @@ namespace PixelAimbot
                 {
                     await Task.Delay(1000, token);
                     _minigameFound = false;
-                    var t1 = Task.Run(() => CheckGathering(token));
+                    var t1 = Task.Run(() => CheckGathering(token, fishing));
                     await Task.WhenAny(new[] {t1});
                 }
             }
