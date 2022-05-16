@@ -569,7 +569,6 @@ namespace PixelAimbot
             this.checkBox1.TabIndex = 42;
             this.checkBox1.Text = "SAVE/GET POS (F10)";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             this.checkBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checkBox1_KeyDown);
             // 
             // Debugging
@@ -604,9 +603,6 @@ namespace PixelAimbot
             this.Name = "Debugging";
             this.Text = "Debugging";
             this.Shown += new System.EventHandler(this.Debugging_Shown);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Debugging_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Debugging_KeyPress);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Debugging_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();

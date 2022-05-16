@@ -22,10 +22,14 @@ namespace PixelAimbot
                 Process[] process1Name = Process.GetProcessesByName("LostArk");
                 if (process1Name.Length == 0 && chBoxCrashDetection.Checked)
                 {
+                    
+                    _stop = true;
+
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                     await Task.Delay(5000);
                     DiscordSendMessage("Game Crashed - Bot Stopped!");
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
+                    
                 }
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -66,10 +70,14 @@ namespace PixelAimbot
                     Process[] process2Name = Process.GetProcessesByName("LostArk");
                     if (process2Name.Length == 0 && chBoxCrashDetection.Checked)
                     {
+                        
+                        _stop = true;
+
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                         await Task.Delay(5000);
                         DiscordSendMessage("Game Crashed - Bot Stopped!");
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
+                        
                     }
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -133,6 +141,9 @@ namespace PixelAimbot
                 //    Process[] process3Name = Process.GetProcessesByName("LostArk");
                 //    if (process3Name.Length == 0 && chBoxCrashDetection.Checked)
                 //    {
+                //             
+                //            _stop = true;
+                //
                 //        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
                 //        await Task.Delay(5000);
                 //        DiscordSendMessage("Game Crashed - Bot Stopped!");

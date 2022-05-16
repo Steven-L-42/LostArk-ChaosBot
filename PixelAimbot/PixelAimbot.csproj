@@ -370,6 +370,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChaosRunTimed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChaosRunTimed.Designer.cs">
+      <DependentUpon>ChaosRunTimed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\ChaosBot\Helpers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -591,6 +597,9 @@
     <Compile Include="Forms\frmStatistic.Designer.cs">
       <DependentUpon>frmStatistic.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChaosRunTimed.resx">
+      <DependentUpon>ChaosRunTimed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Debugging.resx">
       <DependentUpon>Debugging.cs</DependentUpon>
     </EmbeddedResource>

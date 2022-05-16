@@ -87,48 +87,51 @@ namespace PixelAimbot
                 {
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        cts.Cancel();
-                        _start = false;
-                        _stopp = false;
-                        _stop = false;
-                        _restart = false;
-                        _logout = false;
-
-
-                        _gunlancer = false;
-                        _shadowhunter = false;
-                        _berserker = false;
-                        _paladin = false;
-                        _deathblade = false;
-                        _sharpshooter = false;
-                        _bard = false;
-                        _sorcerer = false;
-                        _soulfist = false;
-
-                        _floor1 = false;
-                        _floor2 = false;
                         
-                        _floorFight = false;
-                        _searchboss = false;
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            cts.Cancel();
+                            _start = false;
+                            _stopp = false;
+                            _stop = false;
+                            _restart = false;
+                            _logout = false;
 
-                        _revive = false;
-                        _portaldetect = false;
-                        _ultimate = false;
-                        _potions = false;
 
-                        _Q = false;
-                        _W = false;
-                        _E = false;
-                        _R = false;
-                        _A = false;
-                        _S = false;
-                        _D = false;
-                        _F = false;
-                        await Task.Delay(humanizer.Next(10, 240) + 1000);
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
-                        _stop = true;
+                            _gunlancer = false;
+                            _shadowhunter = false;
+                            _berserker = false;
+                            _paladin = false;
+                            _deathblade = false;
+                            _sharpshooter = false;
+                            _bard = false;
+                            _sorcerer = false;
+                            _soulfist = false;
+
+                            _floor1 = false;
+                            _floor2 = false;
+
+                            _floorFight = false;
+                            _searchboss = false;
+
+                            _revive = false;
+                            _portaldetect = false;
+                            _ultimate = false;
+                            _potions = false;
+
+                            _Q = false;
+                            _W = false;
+                            _E = false;
+                            _R = false;
+                            _A = false;
+                            _S = false;
+                            _D = false;
+                            _F = false;
+                            await Task.Delay(humanizer.Next(10, 240) + 1000);
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
+                            _stop = true;
+                        
+                       
                     }
                     catch (AggregateException)
                     {

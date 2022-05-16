@@ -69,6 +69,7 @@ namespace PixelAimbot
         
         
         private Timer _timer;
+    
         private int _fightSequence;
         private int _fightSequence2;
         private int _searchSequence;
@@ -97,6 +98,7 @@ namespace PixelAimbot
         public static IronTesseract tess = new IronTesseract();
         
         private string comboattack = "";
+
         private Priorized_Skills _skills = new Priorized_Skills();
         
         private static readonly Random random = new Random();

@@ -695,15 +695,11 @@ namespace PixelAimbot
             TrackbartresholdValue = trackBarVariant.Value;
         }
 
-        private void Debugging_MouseMove(object sender, MouseEventArgs e)
-        {
-            
 
-        }
 
         private void Debugging_Shown(object sender, EventArgs e)
         {
-            Debugging.ActiveForm.Focus();
+            
             GetMousePosition();
             //SaveMousePosition();
         }
@@ -722,16 +718,7 @@ namespace PixelAimbot
             }
         }
 
-        private void Debugging_KeyPress(object sender, KeyPressEventArgs e)
-        {
-       
-           
-        }
-
-        private void Debugging_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
+      
         private int i = 0;
         private void checkBox1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -760,11 +747,7 @@ namespace PixelAimbot
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void lbXCoord_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Clipboard.SetText(lbXCoord.Text);
