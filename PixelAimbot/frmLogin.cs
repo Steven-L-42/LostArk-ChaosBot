@@ -164,7 +164,7 @@ namespace PixelAimbot
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://discord.gg/fVVES97Z7q");
+            System.Diagnostics.Process.Start("https://discordapp.com/users/717411999859867789");
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -292,7 +292,11 @@ namespace PixelAimbot
             CheckForUpdate(config.oldversion);
 
         }
-        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText("/purchase");
+        }
     }
 }
 

@@ -30,6 +30,7 @@ namespace PixelAimbot
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Debugging));
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
@@ -70,16 +71,16 @@ namespace PixelAimbot
             this.screenColorPicker1 = new Cyotek.Windows.Forms.ScreenColorPicker();
             this.labelColorARGB = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -349,7 +350,14 @@ namespace PixelAimbot
             // comboBoxMethod
             // 
             this.comboBoxMethod.FormattingEnabled = true;
-            this.comboBoxMethod.Items.AddRange(new object[] {"TemplateMatchingType.SqdiffNormed", "TemplateMatchingType.Sqdiff", "TemplateMatchingType.Ccoeff", "TemplateMatchingType.CcoeffNormed", "TemplateMatchingType.Ccorr", "TemplateMatchingType.CcorrNormed", "            "});
+            this.comboBoxMethod.Items.AddRange(new object[] {
+            "TemplateMatchingType.SqdiffNormed",
+            "TemplateMatchingType.Sqdiff",
+            "TemplateMatchingType.Ccoeff",
+            "TemplateMatchingType.CcoeffNormed",
+            "TemplateMatchingType.Ccorr",
+            "TemplateMatchingType.CcorrNormed",
+            "            "});
             this.comboBoxMethod.Location = new System.Drawing.Point(126, 5);
             this.comboBoxMethod.Name = "comboBoxMethod";
             this.comboBoxMethod.Size = new System.Drawing.Size(194, 21);
@@ -502,12 +510,13 @@ namespace PixelAimbot
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.textBoxX);
             this.Controls.Add(this.button2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Debugging";
             this.Text = "Debugging";
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -515,10 +524,11 @@ namespace PixelAimbot
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.TrackBar trackBarVariant;

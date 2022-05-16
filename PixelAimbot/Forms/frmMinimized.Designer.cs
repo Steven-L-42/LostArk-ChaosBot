@@ -38,7 +38,6 @@
             // 
             // labelMinimizedState
             // 
-            this.labelMinimizedState.AutoSize = false;
             this.labelMinimizedState.BackColor = System.Drawing.Color.Transparent;
             this.labelMinimizedState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.labelMinimizedState.Location = new System.Drawing.Point(191, 1);
@@ -49,7 +48,6 @@
             // 
             // labelRuntimer
             // 
-            this.labelRuntimer.AutoSize = false;
             this.labelRuntimer.BackColor = System.Drawing.Color.Transparent;
             this.labelRuntimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.labelRuntimer.Location = new System.Drawing.Point(464, 1);
@@ -60,7 +58,6 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.AutoSize = false;
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.Color.Orange;
@@ -87,16 +84,15 @@
             this.Controls.Add(this.labelMinimizedState);
             this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMinimized";
-            this.Size = new System.Drawing.Size(594, 28);
             this.Opacity = 0.8D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmMinimized";
             this.TopMost = true;
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

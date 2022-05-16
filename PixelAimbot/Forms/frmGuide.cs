@@ -77,6 +77,11 @@ namespace PixelAimbot
             Form.Show();
         }
 
-    
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+            frmStatistic Form = new frmStatistic();
+            Form.Show();
+        }
     }
 }

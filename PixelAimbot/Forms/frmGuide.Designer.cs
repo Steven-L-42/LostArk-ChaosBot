@@ -34,10 +34,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.imageBox5 = new Emgu.CV.UI.ImageBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.imageBox4 = new Emgu.CV.UI.ImageBox();
+            this.imageBox3 = new Emgu.CV.UI.ImageBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -46,9 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.imageBox5 = new Emgu.CV.UI.ImageBox();
-            this.imageBox4 = new Emgu.CV.UI.ImageBox();
-            this.imageBox3 = new Emgu.CV.UI.ImageBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox4)).BeginInit();
@@ -115,13 +116,24 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogin.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnLogin.Location = new System.Drawing.Point(505, 421);
+            this.btnLogin.Location = new System.Drawing.Point(505, 403);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(203, 31);
             this.btnLogin.TabIndex = 70;
             this.btnLogin.Text = "<CLICK FOR BOT SETTINGS>";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // imageBox5
+            // 
+            this.imageBox5.BackgroundImage = global::PixelAimbot.Properties.Resources.scale;
+            this.imageBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imageBox5.Location = new System.Drawing.Point(13, 69);
+            this.imageBox5.Name = "imageBox5";
+            this.imageBox5.Size = new System.Drawing.Size(710, 222);
+            this.imageBox5.TabIndex = 79;
+            this.imageBox5.TabStop = false;
+            this.imageBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
             // 
             // label15
             // 
@@ -174,6 +186,28 @@
             this.label14.Text = "4.";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
+            // 
+            // imageBox4
+            // 
+            this.imageBox4.BackgroundImage = global::PixelAimbot.Properties.Resources.hud;
+            this.imageBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imageBox4.Location = new System.Drawing.Point(10, 506);
+            this.imageBox4.Name = "imageBox4";
+            this.imageBox4.Size = new System.Drawing.Size(707, 46);
+            this.imageBox4.TabIndex = 74;
+            this.imageBox4.TabStop = false;
+            this.imageBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
+            // 
+            // imageBox3
+            // 
+            this.imageBox3.BackgroundImage = global::PixelAimbot.Properties.Resources.resoulution;
+            this.imageBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imageBox3.Location = new System.Drawing.Point(15, 338);
+            this.imageBox3.Name = "imageBox3";
+            this.imageBox3.Size = new System.Drawing.Size(468, 130);
+            this.imageBox3.TabIndex = 73;
+            this.imageBox3.TabStop = false;
+            this.imageBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
             // 
             // label7
             // 
@@ -278,38 +312,21 @@
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
             // 
-            // imageBox5
+            // button1
             // 
-            this.imageBox5.BackgroundImage = global::PixelAimbot.Properties.Resources.scale;
-            this.imageBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imageBox5.Location = new System.Drawing.Point(13, 69);
-            this.imageBox5.Name = "imageBox5";
-            this.imageBox5.Size = new System.Drawing.Size(710, 222);
-            this.imageBox5.TabIndex = 79;
-            this.imageBox5.TabStop = false;
-            this.imageBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
-            // 
-            // imageBox4
-            // 
-            this.imageBox4.BackgroundImage = global::PixelAimbot.Properties.Resources.hud;
-            this.imageBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imageBox4.Location = new System.Drawing.Point(10, 506);
-            this.imageBox4.Name = "imageBox4";
-            this.imageBox4.Size = new System.Drawing.Size(707, 46);
-            this.imageBox4.TabIndex = 74;
-            this.imageBox4.TabStop = false;
-            this.imageBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
-            // 
-            // imageBox3
-            // 
-            this.imageBox3.BackgroundImage = global::PixelAimbot.Properties.Resources.resoulution;
-            this.imageBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imageBox3.Location = new System.Drawing.Point(15, 338);
-            this.imageBox3.Name = "imageBox3";
-            this.imageBox3.Size = new System.Drawing.Size(468, 130);
-            this.imageBox3.TabIndex = 73;
-            this.imageBox3.TabStop = false;
-            this.imageBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmGuide_MouseDown);
+            this.button1.BackColor = System.Drawing.Color.Peru;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Location = new System.Drawing.Point(517, 480);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(203, 31);
+            this.button1.TabIndex = 80;
+            this.button1.Text = "<CLICK FOR STATISTIC>";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmGuide
             // 
@@ -317,6 +334,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.ClientSize = new System.Drawing.Size(754, 610);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -359,5 +377,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button button1;
     }
 }
