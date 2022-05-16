@@ -2634,6 +2634,7 @@
             this.label18.Size = new System.Drawing.Size(58, 17);
             this.label18.TabIndex = 14;
             this.label18.Text = "12:50:50";
+            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // timer1
             // 

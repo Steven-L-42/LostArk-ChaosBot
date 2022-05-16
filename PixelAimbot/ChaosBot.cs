@@ -176,8 +176,9 @@ namespace PixelAimbot
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
 
-
-
+                ChaosStop = DateTime.Now;
+                ChaosTime = ChaosStop - ChaosStart;
+            
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                 await Task.Delay(humanizer.Next(10, 240) + 100);
 
@@ -200,8 +201,8 @@ namespace PixelAimbot
                ChaosRunTimed form = new ChaosRunTimed();
                 form.Show();
 
-
-
+              
+               
 
                
 
@@ -217,20 +218,17 @@ namespace PixelAimbot
                 //sb.AppendLine();
                 //sb.AppendFormat("Compare 2 Images");
                 //MessageBox.Show(sb.ToString());
-                ChaosTime.Stop();
+           
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
             }
         }
-    
-        private Stopwatch ChaosTime;
-        private DateTime ChaosStart;
-        Bitmap startInv;
-        Bitmap stoppInv;
+        public static TimeSpan ChaosTime = new TimeSpan();
+        public static DateTime ChaosStart;
+        public static DateTime ChaosStop;
 
-     
         private async void btnStart_Click(object sender, EventArgs e)
         {
             if (_start == false)
@@ -272,8 +270,7 @@ namespace PixelAimbot
                         FormMinimized.Show();
                         FormMinimized.Size = new Size(594, 28);
                         this.Hide();
-                        ChaosTime = new Stopwatch();
-                        ChaosTime.Start();
+                    
                         ChaosStart = DateTime.Now;
 
                         token.ThrowIfCancellationRequested();
@@ -1113,6 +1110,11 @@ namespace PixelAimbot
         {
             frmStatistic Form = new frmStatistic();
             Form.Show();
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
