@@ -22,12 +22,6 @@ namespace PixelAimbot
             conf = Config.Load();
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Combine the base folder with your specific folder....
-            Process[] processName = Process.GetProcessesByName("LostArk");
-            if (processName.Length == 1)
-            {
-                handle = processName[0].MainWindowHandle;
-            }
-
             if (conf.username == "Mentalill" || conf.username == "ShiiikK" && Debugger.IsAttached)
             {
                 if (Application.OpenForms["Debugging"] == null) {
@@ -35,26 +29,30 @@ namespace PixelAimbot
                     btnHidden.Visible = true;
                 }
             }
-
-            Rectangle rect;
-            GetWindowRect(handle , out rect);
-            System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.PrimaryScreen;
-            
-            if (screen.Bounds.Width > 2000 && screen.Bounds.Height > 1200 && screen.Bounds.Width > (rect.Right - rect.Left) && screen.Bounds.Height > (rect.Bottom - rect.Top))
+            Process[] processName = Process.GetProcessesByName("LostArk");
+            if (processName.Length == 1)
             {
-                SetWindowPos(handle, HWND_BOTTOM, 0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top, 0);
+                handle = processName[0].MainWindowHandle;
+                Rectangle rect;
                 GetWindowRect(handle, out rect);
+                System.Windows.Forms.Screen screen = System.Windows.Forms.Screen.PrimaryScreen;
 
-                Task.Delay(5000);
-                isWindowed = true;
-                windowX = rect.X + 2;
-                windowY = rect.Y + 26;
-                windowWidth = 1920;
-                windowHeight = 1080;
-                screenWidth = 1920;
-                screenHeight = 1080;
+                if (screen.Bounds.Width > 2000 && screen.Bounds.Height > 1200 &&
+                    screen.Bounds.Width > (rect.Right - rect.Left) && screen.Bounds.Height > (rect.Bottom - rect.Top))
+                {
+                    SetWindowPos(handle, HWND_BOTTOM, 0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top, 0);
+                    GetWindowRect(handle, out rect);
+
+                    Task.Delay(5000);
+                    isWindowed = true;
+                    windowX = rect.X + 2;
+                    windowY = rect.Y + 26;
+                    windowWidth = 1920;
+                    windowHeight = 1080;
+                    screenWidth = 1920;
+                    screenHeight = 1080;
+                }
             }
-            
 
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));

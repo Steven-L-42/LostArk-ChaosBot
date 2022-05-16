@@ -31,6 +31,7 @@ namespace PixelAimbot
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Debugging));
+            this.components = new System.ComponentModel.Container();
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
@@ -71,16 +72,20 @@ namespace PixelAimbot
             this.screenColorPicker1 = new Cyotek.Windows.Forms.ScreenColorPicker();
             this.labelColorARGB = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.imageBoxMinimap = new Emgu.CV.UI.ImageBox();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -379,6 +384,7 @@ namespace PixelAimbot
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(11, 221);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -487,6 +493,25 @@ namespace PixelAimbot
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.imageBoxMinimap);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(329, 232);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Pathfinder";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // imageBoxMinimap
+            // 
+            this.imageBoxMinimap.Location = new System.Drawing.Point(0, 0);
+            this.imageBoxMinimap.Name = "imageBoxMinimap";
+            this.imageBoxMinimap.Size = new System.Drawing.Size(329, 232);
+            this.imageBoxMinimap.TabIndex = 2;
+            this.imageBoxMinimap.TabStop = false;
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,12 +549,18 @@ namespace PixelAimbot
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+        private Emgu.CV.UI.ImageBox imageBoxMinimap;
+
+        private System.Windows.Forms.TabPage tabPage4;
 
         private System.Windows.Forms.TrackBar trackBarVariant;
         private System.Windows.Forms.Label labelVariantShade;

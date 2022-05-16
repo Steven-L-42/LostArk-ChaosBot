@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Cache;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -13,6 +17,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using IronOcr;
+using Newtonsoft.Json.Linq;
 using PixelAimbot.Classes.Misc;
 
 namespace PixelAimbot
@@ -41,7 +46,8 @@ namespace PixelAimbot
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-        public static string ReadArea(Image<Bgr, byte> screenCapture, int x, int y, int width, int height, string whitelist = "")
+        public static string ReadArea(Image<Bgr, byte> screenCapture, int x, int y, int width, int height,
+            string whitelist = "")
         {
             tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
             tess.Language = OcrLanguage.EnglishBest;
@@ -54,21 +60,18 @@ namespace PixelAimbot
                 tess.Configuration.WhiteListCharacters = whitelist;
             }
 
-            
+
             string result = "";
             try
             {
-                
                 using (var input = new OcrInput())
                 {
-                    var contentArea = new Rectangle() { X = x, Y = y, Height = height, Width = width };
+                    var contentArea = new Rectangle() {X = x, Y = y, Height = height, Width = width};
                     input.AddImage(screenCapture.ToBitmap(), contentArea);
                     result = tess.Read(input).Text;
                     Debug.WriteLine(result);
                     return result;
                 }
-
-                
             }
             catch (Exception ex)
             {
@@ -78,6 +81,7 @@ namespace PixelAimbot
 
             return null;
         }
+
         private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
 
         public static int Between(int minimumValue, int maximumValue)
@@ -98,8 +102,9 @@ namespace PixelAimbot
 
             double randomValueInRange = Math.Floor(multiplier * range);
 
-            return (int)(minimumValue + randomValueInRange);
+            return (int) (minimumValue + randomValueInRange);
         }
+
         private string translateKey(int key)
         {
             string translate;
@@ -201,12 +206,54 @@ namespace PixelAimbot
 
             return cooldownDuration;
         }
-        
-        private (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
+
+        public static (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
         {
             int newX = (int) (x); // / screenResolution.X * 65535);
             int newY = (int) (y); // / screenResolution.Y * 65535);
             return (newX, newY);
+        }
+
+        public static (double, double) MinimapToDesktop(double x, double y)
+        {
+            double calculatedPercentX = x / 394 * 100;
+            double calculatedPercentY = y / 340 * 100;
+            double multiplierX = 1;
+            double multiplierY = 1;
+            int additionalPercent = 20;
+            if (calculatedPercentX > 50)
+            {
+                calculatedPercentX += additionalPercent;
+            }
+            else if (calculatedPercentX < 50)
+            {
+                calculatedPercentX -= additionalPercent;
+            }
+
+            if (calculatedPercentY > 50)
+            {
+                calculatedPercentY += additionalPercent;
+            }
+            else if (calculatedPercentY < 50)
+            {
+                calculatedPercentY -= additionalPercent;
+            }
+
+            double resultX;
+            double resultY;
+            if (isWindowed)
+            {
+                resultX = 1920 / 100 * (calculatedPercentX * multiplierX);
+                resultY = 1080 / 100 * (calculatedPercentY * multiplierY);
+            }
+            else
+            {
+                resultX = Screen.PrimaryScreen.Bounds.Width / 100 * (calculatedPercentX * multiplierX);
+                resultY = Screen.PrimaryScreen.Bounds.Height / 100 * (calculatedPercentY * multiplierY);
+            }
+
+
+            return (resultX, resultY);
         }
 
         private byte UltimateKey(string text)
@@ -225,6 +272,7 @@ namespace PixelAimbot
 
             return foundkey;
         }
+
         private byte MouseKey(string text)
         {
             byte foundkey = 0x0;
@@ -241,7 +289,7 @@ namespace PixelAimbot
 
             return foundkey;
         }
-        
+
         public static Image<Bgr, Byte> byteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
@@ -250,7 +298,7 @@ namespace PixelAimbot
             return returnImage.ToImage<Bgr, byte>();
         }
 
-        
+
         public static int Recalc(int value, bool horizontal = true, bool ignoreWindowed = false)
         {
             decimal oldResolution;
@@ -264,6 +312,7 @@ namespace PixelAimbot
                     {
                         return value;
                     }
+
                     return value + windowX;
                 }
                 else
@@ -272,25 +321,23 @@ namespace PixelAimbot
                     {
                         return value;
                     }
+
                     return value + windowY;
                 }
             }
             else
             {
-
                 if (horizontal)
                 {
                     oldResolution = 1920;
                     newResolution = screenWidth;
-
                 }
                 else
                 {
                     oldResolution = 1080;
                     newResolution = screenHeight;
-
                 }
-                
+
                 if (oldResolution != newResolution)
                 {
                     decimal normalized = (decimal) value * newResolution;
@@ -359,24 +406,24 @@ namespace PixelAimbot
                     {
                         case KeyboardWrapper.VK_A:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _A = false; };
-                            
+
                             break;
 
                         case KeyboardWrapper.VK_S:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _S = false; };
-                            
+
 
                             break;
 
                         case KeyboardWrapper.VK_D:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _D = false; };
-                            
+
 
                             break;
 
                         case KeyboardWrapper.VK_F:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _F = false; };
-                            
+
 
                             break;
 
@@ -386,13 +433,13 @@ namespace PixelAimbot
 
                         case KeyboardWrapper.VK_W:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _W = false; };
-                            
+
 
                             break;
 
                         case KeyboardWrapper.VK_E:
                             _timer.Elapsed += (object source, ElapsedEventArgs e) => { _E = false; };
-                           
+
 
                             break;
 
@@ -569,32 +616,31 @@ namespace PixelAimbot
 
         private void RefreshRotationCombox()
         {
-        /*    
-            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
-            var webclient = new WebClient();
-            var config = Config.Load();
-            webclient.CachePolicy = noCachePolicy;
-            var values = new NameValueCollection
-            {
-                ["user"] = config.username,
-            };
-            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
-            webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
-            webclient.UploadValuesCompleted += (s, e) =>
-            {
-                comboBoxRotations.Items.Clear();
-                foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
-                {
-                    comboBoxRotations.Items.Add(entries["name"]);
-                    //MessageBox.Show(entries.ToString());
-                }
-            };*/
-            
-            var files = Directory.GetFiles(ConfigPath);
             comboBoxRotations.Items.Clear();
+
+                HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+                var webclient = new WebClient();
+                var config = Config.Load();
+                webclient.CachePolicy = noCachePolicy;
+                var values = new NameValueCollection
+                {
+                    ["user"] = config.username,
+                };
+                webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+                webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
+                webclient.UploadValuesCompleted += (s, e) =>
+                {
+                    foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
+                    {
+                        comboBoxRotations.Items.Add(entries["name"]);
+                    }
+                };
+
+            var files = Directory.GetFiles(ConfigPath);
             foreach (var file in files)
                 if (Path.GetFileNameWithoutExtension(file) != "main")
-                    comboBoxRotations.Items.Add(Path.GetFileNameWithoutExtension(file));
+                    File.Delete(file);
+                    
         }
 
         private static string RandomString(int length)
