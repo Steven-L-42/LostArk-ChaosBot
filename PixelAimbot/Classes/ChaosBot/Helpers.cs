@@ -616,7 +616,8 @@ namespace PixelAimbot
 
         private void RefreshRotationCombox()
         {
-            
+            comboBoxRotations.Items.Clear();
+
                 HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
                 var webclient = new WebClient();
                 var config = Config.Load();
@@ -629,18 +630,17 @@ namespace PixelAimbot
                 webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
                 webclient.UploadValuesCompleted += (s, e) =>
                 {
-                    comboBoxRotations.Items.Clear();
                     foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
                     {
                         comboBoxRotations.Items.Add(entries["name"]);
                     }
                 };
-/*
+
             var files = Directory.GetFiles(ConfigPath);
-            comboBoxRotations.Items.Clear();
             foreach (var file in files)
                 if (Path.GetFileNameWithoutExtension(file) != "main")
-                    comboBoxRotations.Items.Add(Path.GetFileNameWithoutExtension(file));*/
+                    File.Delete(file);
+                    
         }
 
         private static string RandomString(int length)
