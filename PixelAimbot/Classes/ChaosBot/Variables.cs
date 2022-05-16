@@ -23,7 +23,6 @@ namespace PixelAimbot
 
         private bool _floor1;
         private bool _floor2;
-        private bool _floor3;
         private bool _floorFight;
         private bool _searchboss;
 
@@ -48,6 +47,8 @@ namespace PixelAimbot
         private bool _soulfist;
         private bool _doUltimateAttack;
         private bool _logout;
+
+        private bool _GuideLoaded;
 
         //SKILL AND COOLDOWN//
         private bool _Q;

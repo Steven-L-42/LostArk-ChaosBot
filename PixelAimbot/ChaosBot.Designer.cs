@@ -162,11 +162,12 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.Info = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.txtRestart = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.chBoxLeavetimer = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.chBoxUnstuckF1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtRestart = new System.Windows.Forms.TextBox();
             this.txLeaveTimerFloor2 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtDungeon2search = new System.Windows.Forms.TextBox();
@@ -197,7 +198,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -2197,6 +2197,35 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";
             // 
+            // txtRestart
+            // 
+            this.txtRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.txtRestart.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtRestart.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtRestart.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtRestart.Location = new System.Drawing.Point(362, 26);
+            this.txtRestart.Name = "txtRestart";
+            this.txtRestart.Size = new System.Drawing.Size(35, 16);
+            this.txtRestart.TabIndex = 62;
+            this.txtRestart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRestart.WordWrap = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Peru;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Location = new System.Drawing.Point(248, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(144, 20);
+            this.button1.TabIndex = 81;
+            this.button1.Text = "<CLICK FOR STATISTIC>";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // chBoxLeavetimer
             // 
             this.chBoxLeavetimer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -2256,19 +2285,6 @@
             this.label8.Size = new System.Drawing.Size(30, 17);
             this.label8.TabIndex = 75;
             this.label8.Text = "sec.";
-            // 
-            // txtRestart
-            // 
-            this.txtRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtRestart.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtRestart.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.txtRestart.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRestart.Location = new System.Drawing.Point(362, 26);
-            this.txtRestart.Name = "txtRestart";
-            this.txtRestart.Size = new System.Drawing.Size(35, 16);
-            this.txtRestart.TabIndex = 62;
-            this.txtRestart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtRestart.WordWrap = false;
             // 
             // txLeaveTimerFloor2
             // 
@@ -2636,22 +2652,6 @@
             this.label23.Size = new System.Drawing.Size(46, 17);
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Peru;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(248, 115);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 20);
-            this.button1.TabIndex = 81;
-            this.button1.Text = "<CLICK FOR STATISTIC>";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ChaosBot
             // 

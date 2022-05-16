@@ -30,8 +30,8 @@ namespace PixelAimbot
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Debugging));
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Debugging));
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.textBoxY = new System.Windows.Forms.TextBox();
@@ -74,18 +74,23 @@ namespace PixelAimbot
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.imageBoxMinimap = new Emgu.CV.UI.ImageBox();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarThreadSleep)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbYCoord = new System.Windows.Forms.Label();
+            this.lbXCoord = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThreadSleep)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxMinimap)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -512,11 +517,71 @@ namespace PixelAimbot
             this.imageBoxMinimap.TabIndex = 2;
             this.imageBoxMinimap.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "X:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(67, 155);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "Y:";
+            // 
+            // lbYCoord
+            // 
+            this.lbYCoord.AutoSize = true;
+            this.lbYCoord.Location = new System.Drawing.Point(80, 155);
+            this.lbYCoord.Name = "lbYCoord";
+            this.lbYCoord.Size = new System.Drawing.Size(31, 13);
+            this.lbYCoord.TabIndex = 39;
+            this.lbYCoord.Text = "0000";
+            this.lbYCoord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbYCoord_MouseDoubleClick);
+            this.lbYCoord.MouseLeave += new System.EventHandler(this.lbYCoord_MouseLeave);
+            this.lbYCoord.MouseHover += new System.EventHandler(this.lbYCoord_MouseHover);
+            // 
+            // lbXCoord
+            // 
+            this.lbXCoord.AutoSize = true;
+            this.lbXCoord.Location = new System.Drawing.Point(32, 155);
+            this.lbXCoord.Name = "lbXCoord";
+            this.lbXCoord.Size = new System.Drawing.Size(31, 13);
+            this.lbXCoord.TabIndex = 40;
+            this.lbXCoord.Text = "0000";
+            this.lbXCoord.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbXCoord_MouseDoubleClick);
+            this.lbXCoord.MouseLeave += new System.EventHandler(this.lbXCoord_MouseLeave);
+            this.lbXCoord.MouseHover += new System.EventHandler(this.lbXCoord_MouseHover);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(117, 154);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(130, 17);
+            this.checkBox1.TabIndex = 42;
+            this.checkBox1.Text = "SAVE/GET POS (F10)";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checkBox1_KeyDown);
+            // 
             // Debugging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(357, 550);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.lbXCoord);
+            this.Controls.Add(this.lbYCoord);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonRecalcToBotresolution);
@@ -538,6 +603,10 @@ namespace PixelAimbot
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Debugging";
             this.Text = "Debugging";
+            this.Shown += new System.EventHandler(this.Debugging_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Debugging_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Debugging_KeyPress);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Debugging_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPicture)).EndInit();
@@ -549,10 +618,10 @@ namespace PixelAimbot
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.trackBarVariant)).EndInit();
-            ((System.ComponentModel.ISupportInitialize) (this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVariant)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxMinimap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -613,5 +682,10 @@ namespace PixelAimbot
         private System.Windows.Forms.RadioButton radioButtonGetClosestBest;
         private System.Windows.Forms.Button buttonGenerateCode;
         private ScreenColorPicker screenColorPicker1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbYCoord;
+        private System.Windows.Forms.Label lbXCoord;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

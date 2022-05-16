@@ -36,7 +36,7 @@ namespace PixelAimbot
                     _potions = false;
                     _floor1 = false;
                     _floor2 = false;
-                    _floor3 = false;
+                    
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -80,7 +80,6 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                _floor3 = false;
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var t12 = Task.Run(() => Leavedungeon(token));
@@ -125,7 +124,6 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                _floor3 = false;
 
                 var t12 = Task.Run(() => Leavedungeon(token));
                 await Task.WhenAny(new[] { t12 });
@@ -163,7 +161,7 @@ namespace PixelAimbot
         //        _potions = false;
         //        _floor1 = false;
         //        _floor2 = false;
-        //        _floor3 = false;
+        //        
         //        var t12 = Task.Run(() => Leavedungeoncomplete(token));
         //        await Task.WhenAny(new[] {t12});
         //    }

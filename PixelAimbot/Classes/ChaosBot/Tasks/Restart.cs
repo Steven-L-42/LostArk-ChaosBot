@@ -28,7 +28,7 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                _floor3 = false;
+                
 
                 _restart = true;
                 if (chBoxChannelSwap.Checked)
@@ -109,7 +109,7 @@ namespace PixelAimbot
 
                         _floor1 = false;
                         _floor2 = false;
-                        _floor3 = false;
+                        
                         _floorFight = false;
                         _searchboss = false;
 

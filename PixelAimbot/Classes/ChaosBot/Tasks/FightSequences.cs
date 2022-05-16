@@ -18,7 +18,7 @@ namespace PixelAimbot
         private async Task Floortime(CancellationToken token)
         {
             try
-            {
+            { 
                 Process[] process1Name = Process.GetProcessesByName("LostArk");
                 if (process1Name.Length == 0 && chBoxCrashDetection.Checked)
                 {
@@ -449,7 +449,7 @@ namespace PixelAimbot
                     _potions = false;
                     _floor1 = false;
                     _floor2 = false;
-                    _floor3 = false;
+                    
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
                     var leave = Task.Run(() => Leavedungeon(token));
@@ -540,7 +540,7 @@ namespace PixelAimbot
                                 _potions = false;
                                 _floor1 = false;
                                 _floor2 = false;
-                                _floor3 = false;
+                                
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
                                 var leave = Task.Run(() => Leavedungeon(token));
@@ -670,7 +670,7 @@ namespace PixelAimbot
                                 _potions = false;
                                 _floor1 = false;
                                 _floor2 = false;
-                                _floor3 = false;
+                                
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
                                 var leave = Task.Run(() => Leavedungeon(token));
@@ -1134,7 +1134,7 @@ namespace PixelAimbot
                     {
                         _floor1 = false;
                         _floor2 = false;
-                        _floor3 = true;
+                        
                     }
 
                     _searchboss = false;

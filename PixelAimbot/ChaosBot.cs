@@ -144,7 +144,7 @@ namespace PixelAimbot
 
                 _floor1 = false;
                 _floor2 = false;
-                _floor3 = false;
+        
                 _floorFight = false;
                 _searchboss = false;
 
@@ -609,11 +609,19 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
-
+ 
         private void btnInstructions_Click(object sender, EventArgs e)
         {
-            frmGuide Form = new frmGuide();
-            Form.Show();
+
+            frmGuide Fm1 = new frmGuide();
+
+            if (!_GuideLoaded)
+            {
+               
+                Fm1.Show();
+                _GuideLoaded = true;
+            }
+            
         }
 
 

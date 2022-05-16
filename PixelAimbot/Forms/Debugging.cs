@@ -54,6 +54,8 @@ namespace PixelAimbot
             InitializeComponent();
             _Debugging = this;
             this.DoubleBuffered = true;
+
+           
         }
 
         public static Debugging _Debugging;
@@ -691,6 +693,118 @@ namespace PixelAimbot
         {
             labelVariantShade.Text = "Variant Shade (" + trackBarVariant.Value + ")";
             TrackbartresholdValue = trackBarVariant.Value;
+        }
+
+        private void Debugging_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+
+        }
+
+        private void Debugging_Shown(object sender, EventArgs e)
+        {
+            Debugging.ActiveForm.Focus();
+            GetMousePosition();
+            //SaveMousePosition();
+        }
+        private bool searchMouse = true;
+        private async void GetMousePosition()
+        {
+            while (searchMouse)
+            {
+                Cursor = new Cursor(Cursor.Current.Handle);
+                Point cursor = new Point(Cursor.Position.X, Cursor.Position.Y);
+
+                lbYCoord.Text = Convert.ToString(Cursor.Position.Y);
+                lbXCoord.Text = Convert.ToString(Cursor.Position.X);
+               
+                await Task.Delay(10);
+            }
+        }
+
+        private void Debugging_KeyPress(object sender, KeyPressEventArgs e)
+        {
+       
+           
+        }
+
+        private void Debugging_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
+        private int i = 0;
+        private void checkBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                
+
+                if (e.KeyCode == Keys.F10)
+                {   
+                    i++;
+                    searchMouse = false;
+                    checkBox1.Checked = true;
+                    string Position = Convert.ToString(lbXCoord.Text) + "\t" + Convert.ToString(lbYCoord.Text);
+                   
+                    textBoxX.Text = lbXCoord.Text;
+                    textBoxY.Text = lbYCoord.Text;
+                   if(i == 2)
+                    {
+                        i = 0;
+                        searchMouse = true;
+                        textBoxX.Text = string.Empty;
+                        textBoxY.Text = string.Empty;
+                        GetMousePosition();
+                    }
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbXCoord_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(lbXCoord.Text);
+        }
+
+        private void lbYCoord_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(lbYCoord.Text);
+
+        }
+
+        private void lbXCoord_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+            toolTip.Show("Double Click to Copy X Coord", lbXCoord);
+            toolTip.SetToolTip(lbXCoord, "Double Click to Copy X Coord");
+
+            lbXCoord.BackColor = Color.DarkGray;
+        }
+
+        private void lbYCoord_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+            toolTip.Show("Double Click to Copy Y Coord", lbYCoord);
+            toolTip.SetToolTip(lbYCoord, "Double Click to Copy Y Coord");
+            lbYCoord.BackColor = Color.DarkGray;
+
+        }
+
+        private void lbYCoord_MouseLeave(object sender, EventArgs e)
+        {
+            lbYCoord.BackColor = BackColor;
+        }
+
+        private void lbXCoord_MouseLeave(object sender, EventArgs e)
+        {
+            lbXCoord.BackColor = BackColor;
+
         }
     }
 }
