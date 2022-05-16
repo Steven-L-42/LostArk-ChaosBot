@@ -40,6 +40,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.picChaosStart = new System.Windows.Forms.PictureBox();
             this.picChaosEnd = new System.Windows.Forms.PictureBox();
+            this.label34 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +66,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.splitContainer1.Panel1.Controls.Add(this.label34);
             this.splitContainer1.Panel1.Controls.Add(this.btnSaveCompare);
             this.splitContainer1.Panel1.Controls.Add(this.lbChaosRounds);
             this.splitContainer1.Panel1.Controls.Add(this.lbChaosRunTime);
@@ -87,7 +89,7 @@
             this.btnSaveCompare.FlatAppearance.BorderSize = 0;
             this.btnSaveCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCompare.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveCompare.Location = new System.Drawing.Point(954, 97);
+            this.btnSaveCompare.Location = new System.Drawing.Point(950, 88);
             this.btnSaveCompare.Name = "btnSaveCompare";
             this.btnSaveCompare.Size = new System.Drawing.Size(119, 23);
             this.btnSaveCompare.TabIndex = 6;
@@ -217,6 +219,17 @@
             this.picChaosEnd.TabIndex = 1;
             this.picChaosEnd.TabStop = false;
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.Coral;
+            this.label34.Location = new System.Drawing.Point(940, 114);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(141, 13);
+            this.label34.TabIndex = 49;
+            this.label34.Text = "Image saves in .exe folder";
+            // 
             // ChaosRunTimed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -262,5 +275,6 @@
         public System.Windows.Forms.PictureBox picChaosEnd;
         public System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btnSaveCompare;
+        private System.Windows.Forms.Label label34;
     }
 }
