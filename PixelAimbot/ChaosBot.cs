@@ -14,6 +14,9 @@ using PixelAimbot.Classes.OpenCV;
 using System.Text;
 using System.Drawing.Imaging;
 
+using Point = System.Drawing.Point;
+using Rectangle = System.Drawing.Rectangle;
+
 namespace PixelAimbot
 {
     public partial class ChaosBot : Form
@@ -117,29 +120,9 @@ namespace PixelAimbot
             }
         }
 
-
-        private Bitmap TakeScreenshot()
-        {
-            //Create a new bitmap.
-            var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
-                                           Screen.PrimaryScreen.Bounds.Height,
-                                           System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            // Create a graphics object from the bitmap.
-            using (var gfxScreenshot = Graphics.FromImage(bmpScreenshot))
-            {
-                // Take the screenshot from the upper left corner to the right bottom corner.
-                gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
-                                        Screen.PrimaryScreen.Bounds.Y,
-                                        0,
-                                        0,
-                                        Screen.PrimaryScreen.Bounds.Size,
-                                        CopyPixelOperation.SourceCopy);
-            }
-
-            return bmpScreenshot;
-        }
-
+        
+        Point p1 = new Point(ChaosBot.Recalc(1326), ChaosBot.Recalc(220));
+        Point p2 = new Point(0, 0);
         private async void btnPause_Click(object sender, EventArgs e)
         {
             if (_stop == true)
@@ -192,19 +175,48 @@ namespace PixelAimbot
                 this.Show();
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
-                
 
-                TimeSpan appDurationViaStopwatch = ChaosTime.Elapsed;
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine();
-                sb.AppendFormat("ChaosBot Running:{0:F0}:{1:F0}:{2:F0} H:M:S",
-                    appDurationViaStopwatch.Hours, appDurationViaStopwatch.Minutes, 
-                    appDurationViaStopwatch.Seconds, Environment.NewLine);
 
-                sb.AppendLine();
-                sb.AppendFormat("Compare 2 Images");
-                MessageBox.Show(sb.ToString());
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                await Task.Delay(humanizer.Next(10, 240) + 100);
+
+
+                Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+
+                using (Bitmap bitmap = new Bitmap(543, 564))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(p1, p2, Inventory.Size);
+                    }
+                    bitmap.Save(Application.UserAppDataPath + "/ChaosEndInv.jpg", ImageFormat.Jpeg);
+                }
+
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+
+
+               
+               ChaosRunTimed form = new ChaosRunTimed();
+                form.Show();
+
+
+
+
+               
+
+
+                //TimeSpan appDurationViaStopwatch = ChaosTime.Elapsed;
+                //ChaosRunTimed.lbChaosRunTime.Text = appDurationViaStopwatch.ToString();
+                //StringBuilder sb = new StringBuilder();
+                //sb.AppendLine();
+                //sb.AppendFormat("ChaosBot Running:{0:F0}:{1:F0}:{2:F0} H:M:S",
+                //    appDurationViaStopwatch.Hours, appDurationViaStopwatch.Minutes, 
+                //    appDurationViaStopwatch.Seconds, Environment.NewLine);
+
+                //sb.AppendLine();
+                //sb.AppendFormat("Compare 2 Images");
+                //MessageBox.Show(sb.ToString());
                 ChaosTime.Stop();
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -215,12 +227,17 @@ namespace PixelAimbot
     
         private Stopwatch ChaosTime;
         private DateTime ChaosStart;
+        Bitmap startInv;
+        Bitmap stoppInv;
+
+     
         private async void btnStart_Click(object sender, EventArgs e)
         {
             if (_start == false)
             {
                 try
                 {
+                    
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
@@ -228,7 +245,23 @@ namespace PixelAimbot
                     var token = cts.Token;
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    Process[] processName = Process.GetProcessesByName("LostArk");
+                    if (processName.Length == 0 && chBoxCrashDetection.Checked)
+                    {
+
+                        _stop = true;
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
+                        await Task.Delay(5000);
+                        DiscordSendMessage("Game Crashed - Bot Stopped!");
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
+
+                    }
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
                     _formExists++;
+
                     if (_formExists == 1)
                     {
                         FormMinimized.StartPosition = FormStartPosition.Manual;
@@ -242,45 +275,34 @@ namespace PixelAimbot
                         ChaosTime = new Stopwatch();
                         ChaosTime.Start();
                         ChaosStart = DateTime.Now;
-                        
+
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        processName = Process.GetProcessesByName("LostArk");
+                        if (processName.Length == 1)
+                        {
+                            handle = processName[0].MainWindowHandle;
+                            SetForegroundWindow(handle);
+                        }
+
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        await Task.Delay(humanizer.Next(10, 240) + 100);
-                        var picture = new PrintScreen();
-                        var screen = picture.CaptureScreen();
+                        await Task.Delay(humanizer.Next(10, 240) + 1000);
 
-                        Stream stream =
-                            ToStream(
-                                CropImage(screen,
-                                    new Rectangle(ChaosBot.Recalc(1322), PixelAimbot.ChaosBot.Recalc(189, false),
-                                        ChaosBot.Recalc(544), ChaosBot.Recalc(640, false))), ImageFormat.Png);
-                        
+
+                        Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1322), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+
+                        using (Bitmap bitmap = new Bitmap(543,564))
+                        {
+                            using (Graphics g = Graphics.FromImage(bitmap))
+                            {
+                                g.CopyFromScreen(p1, p2, Inventory.Size);
+                            }
+                            bitmap.Save(Application.UserAppDataPath + "/ChaosStartInv.jpg", ImageFormat.Jpeg);
+                        }
+
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        
-
-                        Bitmap screenshot = TakeScreenshot();
-
-                        var chaosRunTimed = new ChaosRunTimed();
-                        chaosRunTimed.imgChaosStart.image = screenshot;
-
-
-
+                        await Task.Delay(humanizer.Next(10, 240) + 500);
                     }
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-                    Process[] processName = Process.GetProcessesByName("LostArk");
-                    if (processName.Length == 0 && chBoxCrashDetection.Checked)
-                    {
-                        
-                        _stop = true;
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
-                        await Task.Delay(5000);
-                        DiscordSendMessage("Game Crashed - Bot Stopped!");
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
-                        
-                    }
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-
 
                     var t1 = Task.Run(() => Start(token));
                     if (chBoxAutoRepair.Checked && _RepairReset == true)
