@@ -8,12 +8,18 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 using Emgu.CV.CvEnum;
+using Emgu.CV.Features2D;
+using Emgu.CV.Flann;
+using Emgu.CV.Ocl;
+using Emgu.CV.Util;
+using EpPathFinding.cs;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
@@ -91,7 +97,14 @@ namespace PixelAimbot
                 th.Abort();
             }
         }
+
         public int TrackbartresholdValue = 1;
+
+        private double Distance(Point enemy, Point _myPosition)
+        {
+            return Math.Sqrt((Math.Pow(enemy.X - _myPosition.X, 2) + Math.Pow(enemy.Y - _myPosition.Y, 2)));
+        }
+
         private void cap(byte[] buffer)
         {
             if (this.picturePath != "")
@@ -125,11 +138,12 @@ namespace PixelAimbot
             testform.Show();
             Application.EnableVisualStyles();
             int selectedIndex = 0;
-            
+
             tabControl1.Invoke((MethodInvoker) (() => { selectedIndex = tabControl1.SelectedIndex; }));
             trackBarVariant.Invoke((MethodInvoker) (() => { TrackbartresholdValue = trackBarVariant.Value; }));
             try
             {
+                var foundGathering = false;
                 while (true)
                 {
                     Thread.Sleep(threadSleep);
@@ -137,16 +151,139 @@ namespace PixelAimbot
                     var rawScreen = screenPrinter.CaptureScreen();
                     if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
                     {
-                        if (selectedIndex == 2)
+                        if (selectedIndex == 3)
                         {
-                            object result = Pixel.PixelSearch(x, y, width * -1, height * -1,
+                            enemyTemplate =
+                                new Image<Bgr, byte>(
+                                    @"G:\test\clone\PixelAimbot\Resources\wood_new2.png"); // icon of the enemy
+
+                            debugDetector._enemyTemplate = enemyTemplate;
+                            debugDetector._enemyMask = enemyTemplate;
+                            debugDetector._threshold = 0.80f;
+                            double distance;
+                            using (bitmapImage = new Bitmap(rawScreen))
+                            {
+                                rawScreen.Dispose();
+                                Point? enemy;
+
+                                using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                                {
+                                    enemy = null;
+                                    screenCapture.ROI = new Rectangle(x, y, width * -1, height * -1);
+                                    enemy = debugDetector.GetClosestEnemy(screenCapture, false, testform);
+
+                                    var scaledImage = screenCapture.Copy();
+                                    Image<Gray, Byte> image1 = scaledImage.Convert<Gray, Byte>();
+
+                                    image1._Dilate(2);
+                                    image1._Erode(2);
+                                    image1._ThresholdBinary(new Gray(100), new Gray(255));
+                                    //image1._ThresholdBinary(127, 255);
+                                    Image<Bgr, Byte> image2 = image1.Convert<Bgr, Byte>();
+
+                                    Pixel pix = new Pixel();
+                                    Bitmap imageBitmap = image2.ToBitmap();
+
+                                    BaseGrid grid = pix.PNGtoGrid(imageBitmap);
+                                    List<GridPos> path = pix.findPath(
+                                        grid,
+                                        DiagonalMovement.OnlyWhenNoObstacles,
+                                        new GridPos((image2.Width / 2), (image2.Height / 2)),
+                                        new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 10)
+                                    );
+                                    /*Show on Image */
+                                    image2 = pix.addPath(path, imageBitmap).ToImage<Bgr, Byte>();
+
+                                    /*Show on Image */
+                                    var i = 0;
+                                    if (path.Count - 1 >= 0 && path.Count - 1 < path.Count)
+                                    {
+                                        foreach (var item in path)
+                                        {
+                                            CvInvoke.Circle(image2, new Point(item.x, item.y), 1,
+                                                new MCvScalar(0, 200, 200), 2);
+                                        }
+                                    }
+
+                                    CvInvoke.Circle(image2, new Point(image2.Width / 2, image2.Height / 2), 1,
+                                        new MCvScalar(200, 0, 0), 2);
+                                    CvInvoke.Circle(image2, new Point(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 10), 1,
+                                        new MCvScalar(0, 200, 0), 2);
+
+
+                                    if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
+                                    {
+                                        int last_posx = 0;
+                                        int last_posy = 0;
+
+                                     
+                                            imageBoxMinimap.Image = image2;
+                                            
+                                            var result = ChaosBot.MinimapToDesktop(path[2].x, path[2].y);
+                                            VirtualMouse.MoveTo((int) result.Item1, (int) result.Item2);
+                                            last_posx = (int)result.Item1;
+                                            last_posy = (int)result.Item2;
+                  //                          VirtualMouse.LeftClick();
+                                           // VirtualMouse.LeftDown();
+                                          //  Task.Delay(1000).Wait();
+                                        
+
+
+                                        try
+                                        {
+                                            var template =
+                                                new Image<Bgr, byte>(
+                                                    @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+                                            var mask = new Image<Bgr, byte>(
+                                                @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+
+
+                                            var detector = new ScreenDetector(template, mask, 0.96f,
+                                                ChaosBot.Recalc(711),
+                                                ChaosBot.Recalc(119, false), ChaosBot.Recalc(1073),
+                                                ChaosBot.Recalc(956, false));
+                                            using (var sreenCapture =
+                                                   new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                                            {
+                                                var item = detector.GetBest(sreenCapture, true);
+                                                if (item.HasValue)
+                                                {
+                                                    // search for tree after walking path :);
+                                                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                    foundGathering = true;
+                                                    //     VirtualMouse.LeftUp();
+                                                    //     VirtualMouse.LeftUp();
+                                                    //    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                }
+                                                else
+                                                {
+                                                   
+                                                    // Not Found
+                                                }
+                                            }
+                                        }
+                                        catch
+                                        {
+                                        }
+                                    }
+
+                                    distance = Distance(new Point(enemy.Value.X, enemy.Value.Y),
+                                        new Point((image2.Width / 2), (image2.Height / 2)));
+                                    //    Debug.WriteLine(distance);
+                                }
+                            }
+                        }
+                        else if (selectedIndex == 2)
+                        {
+                            object result = Pixel.PixelSearch(x, y, (width * -1), (height * -1),
                                 screenColorPicker1.Color.ToArgb(), TrackbartresholdValue);
                             Debug.WriteLine(result);
                             if (result.ToString() != "0")
                             {
                                 object[] resultCoord = (object[]) result;
-                                screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                                screenDrawer.Draw(testform, (int) resultCoord[0] - x, (int) resultCoord[1] - y, 5, 5, new Pen(Color.Red, 3));
+                                screenDrawer.Draw(testform, 0, 0, (width * -1) - x, (height * -1) - y);
+                                screenDrawer.Draw(testform, (int) resultCoord[0] - x, (int) resultCoord[1] - y, 5, 5,
+                                    new Pen(Color.Red, 3));
                             }
                         }
                         else
@@ -208,6 +345,80 @@ namespace PixelAimbot
             }
 
             // throw new NotImplementedException();
+        }
+
+        private static VectorOfPoint ProcessImage(Image<Gray, byte> template, Image<Gray, byte> templateMask,
+            Image<Gray, byte> sceneImage)
+        {
+            try
+            {
+                // initializations done
+                VectorOfPoint finalPoints = null;
+                Mat homography = null;
+                VectorOfKeyPoint templateKeyPoints = new VectorOfKeyPoint();
+                VectorOfKeyPoint sceneKeyPoints = new VectorOfKeyPoint();
+                Mat tempalteDescriptor = new Mat();
+                Mat sceneDescriptor = new Mat();
+
+                Mat mask;
+                int k = 2;
+                double uniquenessthreshold = 0.80;
+                VectorOfVectorOfDMatch matches = new VectorOfVectorOfDMatch();
+
+                // feature detectino and description
+                KAZE featureDetector = new KAZE();
+                featureDetector.DetectAndCompute(template, templateMask, templateKeyPoints, tempalteDescriptor, false);
+                featureDetector.DetectAndCompute(sceneImage, null, sceneKeyPoints, sceneDescriptor, false);
+
+
+                // Matching
+
+                // KdTreeIndexParams ip = new KdTreeIndexParams();
+                //  var ip = new AutotunedIndexParams();
+                var ip = new LinearIndexParams();
+                SearchParams sp = new SearchParams();
+                FlannBasedMatcher matcher = new FlannBasedMatcher(ip, sp);
+
+
+                matcher.Add(tempalteDescriptor);
+                matcher.KnnMatch(sceneDescriptor, matches, k);
+
+                mask = new Mat(matches.Size, 1, Emgu.CV.CvEnum.DepthType.Cv8U, 1);
+                mask.SetTo(new MCvScalar(255));
+
+                Features2DToolbox.VoteForUniqueness(matches, uniquenessthreshold, mask);
+
+                int count = Features2DToolbox.VoteForSizeAndOrientation(templateKeyPoints, sceneKeyPoints, matches,
+                    mask, 1.5, 20);
+
+                if (count >= 2)
+                {
+                    homography = Features2DToolbox.GetHomographyMatrixFromMatchedFeatures(templateKeyPoints,
+                        sceneKeyPoints, matches, mask, 5);
+                }
+
+                if (homography != null)
+                {
+                    Rectangle rect = new Rectangle(Point.Empty, template.Size);
+                    PointF[] pts = new PointF[]
+                    {
+                        new PointF(rect.Left, rect.Bottom),
+                        new PointF(rect.Right, rect.Bottom),
+                        new PointF(rect.Right, rect.Top),
+                        new PointF(rect.Left, rect.Top)
+                    };
+
+                    pts = CvInvoke.PerspectiveTransform(pts, homography);
+                    Point[] points = Array.ConvertAll<PointF, Point>(pts, Point.Round);
+                    finalPoints = new VectorOfPoint(points);
+                }
+
+                return finalPoints;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void textBoxHeight_TextChanged(object sender, EventArgs e)

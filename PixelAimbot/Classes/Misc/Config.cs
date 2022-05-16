@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace PixelAimbot.Classes.Misc
@@ -160,10 +161,10 @@ namespace PixelAimbot.Classes.Misc
         public void Save(string filename)
         {
             string output = JsonConvert.SerializeObject(this);
-            using (StreamWriter writer = new StreamWriter(Path.Combine(ConfigPath, filename + ".ini")))
-            {
-                writer.Write(PixelAimbot.frmLogin.blow1.Encrypt_CTR(output));
-            }
+          //  using (StreamWriter writer = new StreamWriter(Path.Combine(ConfigPath, filename + ".ini")))
+          //  {
+          //      writer.Write(PixelAimbot.frmLogin.blow1.Encrypt_CTR(output));
+          //  }
 
             /* Save all Configurations additional within Database for future changes */
             var config = Config.Load();
@@ -184,7 +185,7 @@ namespace PixelAimbot.Classes.Misc
         {
 
             var config = Config.Load();
-            /*
+            
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
             var webclient = new WebClient();
             webclient.CachePolicy = noCachePolicy;
@@ -196,7 +197,8 @@ namespace PixelAimbot.Classes.Misc
             webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
             var result = webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/getRotation"), "POST", values);
             return JsonConvert.DeserializeObject<Rotations>(PixelAimbot.frmLogin.blow1.Decrypt_CTR(Encoding.Default.GetString(result)));
-            */
+            
+            /*
             if (File.Exists(Path.Combine(ConfigPath, filename)))
             {
                 using (StreamReader reader = new StreamReader(Path.Combine(ConfigPath, filename)))
@@ -209,7 +211,7 @@ namespace PixelAimbot.Classes.Misc
             {
                 Alert.Show("File \"" + filename + "\" not found", frmAlert.enmType.Error);
                 return null;
-            }
+            }*/
         }
 
     }

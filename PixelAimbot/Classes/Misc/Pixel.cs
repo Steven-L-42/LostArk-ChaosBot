@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using EpPathFinding.cs;
 
 namespace PixelAimbot.Classes.Misc
 {
@@ -73,6 +77,77 @@ namespace PixelAimbot.Classes.Misc
             }
             return result;
         }
-
+        public BaseGrid PNGtoGrid(Bitmap input, float threshold = 0.99f)
+        {
+            BaseGrid output = new StaticGrid(
+                input.Width, 
+                input.Height
+            );
+            for (int x = 0; x < input.Width; x++)
+            {
+                for (int y = 0; y < input.Height; y++)
+                {
+                    Color c = input.GetPixel(
+                        x, 
+                        y
+                    );
+                    if (c.GetBrightness() < threshold)
+                        output.SetWalkableAt(
+                            x, 
+                            y, 
+                            false
+                        );
+                    else
+                        output.SetWalkableAt(
+                            x, 
+                            y, 
+                            true
+                        );
+                }
+            }
+            return output;
+        }
+        public List<GridPos> findPath(BaseGrid grid, DiagonalMovement move, GridPos startPos, GridPos endPos){
+            JumpPointParam jpParam = new JumpPointParam(
+                grid, 
+                startPos, 
+                endPos, 
+                EndNodeUnWalkableTreatment.ALLOW,
+                move, 
+                HeuristicMode.EUCLIDEAN
+            );
+            List<GridPos> result = JumpPointFinder.FindPath(jpParam); 
+            return result;
+        }
+        public Bitmap addPath(List<GridPos> path, Bitmap image)
+        {
+            for (int i = 0; i < path.Count; i ++){
+                GridPos curr = path.ElementAt(i);
+                GridPos next;
+                if (i < path.Count()-1) 
+                    next = path.ElementAt(i + 1);
+                else 
+                    next = null;
+                if (next == null){
+                    image.SetPixel(curr.x,
+                        curr.y, 
+                        Color.Red
+                    );
+                    return image;
+                }
+                using (var graphics = Graphics.FromImage(image))
+                {
+                    Pen blackPen = new Pen(Color.Red, 2);
+                    graphics.DrawLine(blackPen, 
+                        curr.x, 
+                        curr.y, 
+                        next.x, 
+                        next.y
+                    );
+                }
+            }
+        
+            return image;
+        }
     }
 }
