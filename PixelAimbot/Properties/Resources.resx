@@ -163,6 +163,9 @@
   <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChaosRun1100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChaosRun1100.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="start21" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\start21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -174,9 +177,6 @@
   </data>
   <data name="windowssettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windowssettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TUT8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TUT8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="quest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>../Resources/quest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,11 +193,14 @@
   <data name="TUT2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TUT2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TUT7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TUT7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="start1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\start1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TUT7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TUT7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TUT8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TUT8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="start4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\start4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,7 +208,7 @@
   <data name="hud" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>../Resources/hud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ChaosRun1100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ChaosRun1100.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="highscale_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\highscale_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -729,6 +729,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\error.png" />
+    <None Include="Resources\highscale_logo.png" />
     <Content Include="Resources\hund.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

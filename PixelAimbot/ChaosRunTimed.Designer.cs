@@ -46,8 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.picChaosStart = new System.Windows.Forms.PictureBox();
-            this.picChaosEnd = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -61,6 +59,10 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picChaosStart = new System.Windows.Forms.PictureBox();
+            this.picChaosEnd = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,11 +71,12 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picChaosStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picChaosEnd)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChaosStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChaosEnd)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -89,13 +92,14 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label23);
             this.splitContainer1.Panel1.Controls.Add(this.label18);
             this.splitContainer1.Panel1.Controls.Add(this.label34);
             this.splitContainer1.Panel1.Controls.Add(this.btnSaveCompare);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // splitContainer1.Panel2
@@ -112,7 +116,7 @@
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.Peru;
-            this.label23.Location = new System.Drawing.Point(919, 8);
+            this.label23.Location = new System.Drawing.Point(920, 8);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(93, 17);
             this.label23.TabIndex = 55;
@@ -124,7 +128,7 @@
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label18.Location = new System.Drawing.Point(1011, 9);
+            this.label18.Location = new System.Drawing.Point(1012, 9);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(58, 17);
             this.label18.TabIndex = 54;
@@ -183,7 +187,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.Coral;
-            this.label34.Location = new System.Drawing.Point(940, 114);
+            this.label34.Location = new System.Drawing.Point(924, 114);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(141, 13);
             this.label34.TabIndex = 49;
@@ -195,7 +199,7 @@
             this.btnSaveCompare.FlatAppearance.BorderSize = 0;
             this.btnSaveCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveCompare.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveCompare.Location = new System.Drawing.Point(950, 88);
+            this.btnSaveCompare.Location = new System.Drawing.Point(934, 88);
             this.btnSaveCompare.Name = "btnSaveCompare";
             this.btnSaveCompare.Size = new System.Drawing.Size(119, 23);
             this.btnSaveCompare.TabIndex = 6;
@@ -299,32 +303,6 @@
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
             // 
-            // picChaosStart
-            // 
-            this.picChaosStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picChaosStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picChaosStart.Location = new System.Drawing.Point(0, 0);
-            this.picChaosStart.MaximumSize = new System.Drawing.Size(543, 564);
-            this.picChaosStart.MinimumSize = new System.Drawing.Size(543, 564);
-            this.picChaosStart.Name = "picChaosStart";
-            this.picChaosStart.Size = new System.Drawing.Size(543, 564);
-            this.picChaosStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picChaosStart.TabIndex = 0;
-            this.picChaosStart.TabStop = false;
-            // 
-            // picChaosEnd
-            // 
-            this.picChaosEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picChaosEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picChaosEnd.Location = new System.Drawing.Point(0, 0);
-            this.picChaosEnd.MaximumSize = new System.Drawing.Size(543, 564);
-            this.picChaosEnd.MinimumSize = new System.Drawing.Size(543, 564);
-            this.picChaosEnd.Name = "picChaosEnd";
-            this.picChaosEnd.Size = new System.Drawing.Size(543, 564);
-            this.picChaosEnd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picChaosEnd.TabIndex = 1;
-            this.picChaosEnd.TabStop = false;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -350,6 +328,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label2);
@@ -491,6 +470,60 @@
             this.label15.TabIndex = 59;
             this.label15.Text = "ONLY PLACEHOLDER";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label16.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Peru;
+            this.label16.Location = new System.Drawing.Point(69, 3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(137, 17);
+            this.label16.TabIndex = 60;
+            this.label16.Text = "ONLY PLACEHOLDER";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::PixelAimbot.Properties.Resources.highscale_logo;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(899, -1);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(188, 134);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 59;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picChaosStart
+            // 
+            this.picChaosStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picChaosStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picChaosStart.Location = new System.Drawing.Point(0, 0);
+            this.picChaosStart.Margin = new System.Windows.Forms.Padding(0);
+            this.picChaosStart.MaximumSize = new System.Drawing.Size(543, 564);
+            this.picChaosStart.MinimumSize = new System.Drawing.Size(543, 564);
+            this.picChaosStart.Name = "picChaosStart";
+            this.picChaosStart.Size = new System.Drawing.Size(543, 564);
+            this.picChaosStart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picChaosStart.TabIndex = 0;
+            this.picChaosStart.TabStop = false;
+            // 
+            // picChaosEnd
+            // 
+            this.picChaosEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picChaosEnd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picChaosEnd.Location = new System.Drawing.Point(0, 0);
+            this.picChaosEnd.Margin = new System.Windows.Forms.Padding(0);
+            this.picChaosEnd.MaximumSize = new System.Drawing.Size(543, 564);
+            this.picChaosEnd.MinimumSize = new System.Drawing.Size(543, 564);
+            this.picChaosEnd.Name = "picChaosEnd";
+            this.picChaosEnd.Size = new System.Drawing.Size(543, 564);
+            this.picChaosEnd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picChaosEnd.TabIndex = 1;
+            this.picChaosEnd.TabStop = false;
+            // 
             // ChaosRunTimed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -517,14 +550,15 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picChaosStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picChaosEnd)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChaosStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picChaosEnd)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -562,5 +596,7 @@
         public System.Windows.Forms.Label label8;
         public System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label16;
     }
 }
