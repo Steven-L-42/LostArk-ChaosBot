@@ -14,6 +14,7 @@ using System.Drawing.Imaging;
 
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
+using System.IO;
 
 namespace PixelAimbot
 {
@@ -119,7 +120,7 @@ namespace PixelAimbot
                 _stop = false;
                 _restart = false;
                 _logout = false;
-             
+
 
                 _gunlancer = false;
                 _shadowhunter = false;
@@ -133,7 +134,7 @@ namespace PixelAimbot
 
                 _floor1 = false;
                 _floor2 = false;
-        
+
                 _floorFight = false;
                 _searchboss = false;
 
@@ -145,8 +146,8 @@ namespace PixelAimbot
                 _potions = false;
                 _firstSetupTransparency = true;
 
-                
-                
+
+
                 _Q = true;
                 _W = true;
                 _E = true;
@@ -162,7 +163,7 @@ namespace PixelAimbot
 
                 ChaosStop = DateTime.Now;
                 ChaosTime = ChaosStop - ChaosStart;
-            
+
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                 await Task.Delay(humanizer.Next(10, 240) + 100);
 
@@ -171,20 +172,52 @@ namespace PixelAimbot
 
                 using (Bitmap bitmap = new Bitmap(543, 564))
                 {
+                    endinv = "EndInv.jpg";
                     using (Graphics g = Graphics.FromImage(bitmap))
                     {
                         g.CopyFromScreen(p1, p2, Inventory.Size);
                     }
-                    bitmap.Save(Application.UserAppDataPath + "/ChaosEndInv.jpg", ImageFormat.Jpeg);
+
+                    bitmap.Save(endinv, ImageFormat.Jpeg);
+
                 }
 
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
 
 
-               
-               ChaosRunTimed form = new ChaosRunTimed();
+                Bitmap start = new Bitmap(startinv);
+                StartInvColor = start;
+                StartInvGray = new Bitmap(start.Width, start.Height);
+
+                Bitmap end = new Bitmap(endinv);
+                EndInvColor = end;
+                EndInvGray = new Bitmap(end.Width, end.Height);
+
+                for (int i = 0; i < start.Width; i++)
+                {
+                    for (int x = 0; x < start.Height; x++)
+                    {
+                        Color oc = start.GetPixel(i, x);
+                        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                        StartInvGray.SetPixel(i, x, nc);
+                    }
+                }
+
+                for (int j = 0; j < end.Width; j++)
+                {
+                    for (int y = 0; y < end.Height; y++)
+                    {
+                        Color oc = end.GetPixel(j, y);
+                        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                        EndInvGray.SetPixel(j, y, nc);
+                    }
+                }
+
+                ChaosRunTimed form = new ChaosRunTimed();
                 form.Show();
-           
+
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
@@ -194,6 +227,15 @@ namespace PixelAimbot
         public static TimeSpan ChaosTime = new TimeSpan();
         public static DateTime ChaosStart;
         public static DateTime ChaosStop;
+
+        public static Bitmap StartInvColor;
+        public static string startinv;
+
+        public static Bitmap EndInvColor;
+        public static string endinv;
+
+        public static Bitmap StartInvGray;
+        public static Bitmap EndInvGray;
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
@@ -243,11 +285,13 @@ namespace PixelAimbot
 
                         using (Bitmap bitmap = new Bitmap(543,564))
                         {
+                            startinv = "StartInv.jpg";
                             using (Graphics g = Graphics.FromImage(bitmap))
                             {
                                 g.CopyFromScreen(p1, p2, Inventory.Size);
                             }
-                          bitmap.Save(Application.UserAppDataPath + "/ChaosStartInv.jpg", ImageFormat.Jpeg);
+
+                            bitmap.Save(startinv, ImageFormat.Jpeg);
                         }
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
@@ -1011,7 +1055,7 @@ namespace PixelAimbot
 
         }
         public bool teststart;
-        public bool awakening;
+        //public bool awakening;
         private async Task TEST(CancellationToken token)
         {
 
@@ -1052,7 +1096,7 @@ namespace PixelAimbot
                             lbStatus.Invoke(
              (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
 
-                            while (awakening)
+                            while (true)
                             {
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
@@ -1062,16 +1106,13 @@ namespace PixelAimbot
                                 {
 
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                    await Task.Delay(500, token);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                    await Task.Delay(500, token);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                    await Task.Delay(500, token);
+                                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
                                     awakening = false;
                                     gefunden = true;
 

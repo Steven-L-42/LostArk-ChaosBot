@@ -106,15 +106,20 @@ namespace PixelAimbot
 
                     if (_leavetimer == 1 && chBoxLeavetimer.Checked)
                     {
-                        var t36 = Task.Run(() => Leavetimerfloor2(token)); 
+                        var t36 = Task.Run(() => Leavetimerfloor2(token));
+                        await Task.WhenAny(t36);
+
                     }
                     if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
+                        await Task.WhenAny(t36);
+
                     }
                     if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
-                       var t18 = Task.Run(() => Portaldetect2(token)); 
+                       var t18 = Task.Run(() => Portaldetect2(token));
+                        await Task.WhenAny(t18);
                     }
 
                     var t11 = Task.Run(() => SearchNearEnemys(token));
@@ -595,6 +600,7 @@ namespace PixelAimbot
             }
         }
         public bool starten;
+        public bool awakening;
         public bool gefunden;
         private async Task Portaldetect2(CancellationToken token)
         {
@@ -606,7 +612,7 @@ namespace PixelAimbot
                     await Task.Delay(1, token);
                     starten = true;
 
-                    while (starten == true && _stopp == false)
+                    while (starten && !_stopp)
                     {
 
                         token.ThrowIfCancellationRequested();
@@ -630,10 +636,9 @@ namespace PixelAimbot
 
                             if (Boss.HasValue && _stopp == false)
                             {
-                                lbStatus.Invoke(
-                 (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
                               
-                                while(starten == true && _stopp == false && chBoxAwakening.Checked && gefunden == false)
+                                while(starten && !gefunden && !_stopp && chBoxAwakening.Checked)
                                 {
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token); 
@@ -641,22 +646,19 @@ namespace PixelAimbot
                                         Recalc(83, false), 0x9C1B16, 20);
                                     if (Awakening.ToString() == "0")
                                     {
-                                        
+
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                        await Task.Delay(500, token);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                        await Task.Delay(500, token);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
+                                        await Task.Delay(500, token);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
                                         gefunden = true;
-
-
-
                                     }
                                     Random random2 = new Random();
                                     var sleepTime2 = random2.Next(100, 150);
@@ -671,8 +673,7 @@ namespace PixelAimbot
                                 await Task.Delay(1, token);
                                 await Task.Delay(humanizer.Next(10, 240) + 3000, token);
 
-                                lbStatus.Invoke(
-                                (MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
                                 starten = false;
                                 gefunden = false;
                                 _stopp = true;

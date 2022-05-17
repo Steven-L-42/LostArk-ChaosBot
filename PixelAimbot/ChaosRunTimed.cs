@@ -5,21 +5,12 @@ using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PixelAimbot;
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using IronOcr;
-
-
-
 
 namespace PixelAimbot
 {
@@ -65,7 +56,7 @@ namespace PixelAimbot
                         {
                             lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosGuardian.Text = invGuardian));
 
-                            VirtualMouse.MoveTo(Stones.Value.X, Stones.Value.Y - 15);
+                            VirtualMouse.MoveTo(ChaosBot.Recalc(Stones.Value.X), ChaosBot.Recalc(Stones.Value.Y - 15,false));
 
                             
                             using (var screenCapture2 = new Bitmap(screenPrinter2.CaptureScreen()).ToImage<Bgr, byte>())
@@ -79,7 +70,7 @@ namespace PixelAimbot
                         if(Destructs.HasValue)
                         {
                             lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosDestruction.Text = invDestruct));
-                            VirtualMouse.MoveTo(Destructs.Value.X, Destructs.Value.Y - 15);
+                            VirtualMouse.MoveTo(ChaosBot.Recalc(Destructs.Value.X), ChaosBot.Recalc(Destructs.Value.Y - 15,false));
 
                             using (var screenCapture2 = new Bitmap(screenPrinter2.CaptureScreen()).ToImage<Bgr, byte>())
                             {
@@ -111,40 +102,12 @@ namespace PixelAimbot
             }
 
         }
-        Bitmap startInv;
-        Bitmap endInv;
+
         private async void ChaosRunTimed_Load(object sender, EventArgs e)
         {
-           
 
-            Bitmap start = new Bitmap(Application.UserAppDataPath + "/ChaosStartInv.jpg");
-            startInv = new Bitmap(start.Width, start.Height);
-            Bitmap end = new Bitmap(Application.UserAppDataPath + "/ChaosEndInv.jpg");
-            endInv = new Bitmap(end.Width, end.Height);
-
-            for (int i = 0; i < start.Width; i++)
-            {
-                for (int x = 0; x < start.Height; x++)
-                {
-                    Color oc = start.GetPixel(i, x);
-                    int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                    Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                    startInv.SetPixel(i, x, nc);
-                }
-            }
-         
-            for (int j = 0; j < end.Width; j++)
-            {
-                for (int y = 0; y < end.Height; y++)
-                {
-                    Color oc = end.GetPixel(j, y);
-                    int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                    Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                    endInv.SetPixel(j, y, nc);
-                }
-            }
-            picChaosStart.Image = startInv;
-            picChaosEnd.Image = endInv;
+            picChaosStart.Image = ChaosBot.StartInvColor;
+            picChaosEnd.Image = ChaosBot.EndInvColor;
 
             long Full = ChaosBot.ChaosTime.Ticks+10000000;
 
@@ -158,10 +121,6 @@ namespace PixelAimbot
             this.lbChaosPerfectRounds.Text = ChaosBot.ChaosPerfectRounds.ToString();
             this.lbChaosGameCrashed.Text = ChaosBot.ChaosGameCrashed.ToString();
 
-
-
-           
-
             ChaosBot.cts = new CancellationTokenSource();
             var token = ChaosBot.cts.Token;
             await Task.Delay(1, token);
@@ -169,20 +128,26 @@ namespace PixelAimbot
 
         }
 
-
         public static Rectangle bounds;
-       
-
         private void button1_Click_1(object sender, EventArgs e)
         {
+            SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
             
-            int Top = this.Bounds.Top;
-            int Left = this.Bounds.Left;
-            int Width = this.Bounds.Width;
-            int Height = this.Bounds.Height;
+            saveFileDialog1.InitialDirectory = @"C:\";
+            SaveFileDialog1.Title = "Symbiotic Comparison";
+            saveFileDialog1.CheckFileExists = true;
+            saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.DefaultExt = "jpg";
+            saveFileDialog1.Filter = "JPG files (*.jpg)|*.jpg";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                saveFileDialog1.FileName = "SymbioticInv_" + DateTime.Now.ToString("HH.mm-[dd.MM.yyyy]") + ".jpg";
+
+            }
 
             bounds = this.Bounds;
-            Top = this.Right;
             using (Bitmap bitmap = new Bitmap(bounds.Width-20, bounds.Height-50))
             {
                 using (Graphics g = Graphics.FromImage(bitmap))
@@ -193,13 +158,14 @@ namespace PixelAimbot
             }
         }
 
-      
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-
        
+        private void saveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+          
+        }
     }
 }

@@ -67,6 +67,7 @@
             this.picChaosStart = new System.Windows.Forms.PictureBox();
             this.picChaosEnd = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -548,6 +549,7 @@
             // 
             // picChaosStart
             // 
+            this.picChaosStart.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picChaosStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picChaosStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picChaosStart.Location = new System.Drawing.Point(0, 0);
@@ -562,6 +564,7 @@
             // 
             // picChaosEnd
             // 
+            this.picChaosEnd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picChaosEnd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picChaosEnd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picChaosEnd.Location = new System.Drawing.Point(0, 0);
@@ -580,6 +583,10 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
             // ChaosRunTimed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -595,6 +602,7 @@
             this.Name = "ChaosRunTimed";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChaosRunTimed";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ChaosRunTimed_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -657,5 +665,6 @@
         public System.Windows.Forms.Label lbChaosGuardian;
         public System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

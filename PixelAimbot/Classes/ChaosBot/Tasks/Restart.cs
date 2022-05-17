@@ -17,9 +17,12 @@ namespace PixelAimbot
                 await Task.Delay(1, token);
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
-
+                starten = false;
+                gefunden = false;
                 _stopp = true;
+                _portalIsDetected = false;
 
+                _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;
                 _revive = false;
@@ -28,9 +31,6 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                
-
-                _restart = true;
                 if (chBoxChannelSwap.Checked)
                 {
                     if (_swap == 3)
@@ -87,11 +87,13 @@ namespace PixelAimbot
                 {
                     try
                     {
-                        
-                            token.ThrowIfCancellationRequested();
+                     
+                        token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
                             ChaosAllRounds++;
                             cts.Cancel();
+                            starten = false;
+                            gefunden = false;
                             _start = false;
                             _stopp = false;
                             _stop = false;
@@ -142,11 +144,6 @@ namespace PixelAimbot
                     {
                         Debug.WriteLine("Bug");
                     }
-
-                    /*
-                    await Task.Delay(1000, token);
-                    var t1 = Task.Run(() => START(token));
-                    await Task.WhenAny(new[] { t1 });*/
                 }
             }
             catch (AggregateException)
