@@ -200,24 +200,6 @@ namespace PixelAimbot
                
                ChaosRunTimed form = new ChaosRunTimed();
                 form.Show();
-
-              
-               
-
-               
-
-
-                //TimeSpan appDurationViaStopwatch = ChaosTime.Elapsed;
-                //ChaosRunTimed.lbChaosRunTime.Text = appDurationViaStopwatch.ToString();
-                //StringBuilder sb = new StringBuilder();
-                //sb.AppendLine();
-                //sb.AppendFormat("ChaosBot Running:{0:F0}:{1:F0}:{2:F0} H:M:S",
-                //    appDurationViaStopwatch.Hours, appDurationViaStopwatch.Minutes, 
-                //    appDurationViaStopwatch.Seconds, Environment.NewLine);
-
-                //sb.AppendLine();
-                //sb.AppendFormat("Compare 2 Images");
-                //MessageBox.Show(sb.ToString());
            
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -235,7 +217,6 @@ namespace PixelAimbot
             {
                 try
                 {
-                    
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
@@ -243,23 +224,8 @@ namespace PixelAimbot
                     var token = cts.Token;
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
                     Process[] processName = Process.GetProcessesByName("LostArk");
-                    if (processName.Length == 0 && chBoxCrashDetection.Checked)
-                    {
-
-                        _stop = true;
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
-                        await Task.Delay(5000);
-                        DiscordSendMessage("Game Crashed - Bot Stopped!");
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
-
-                    }
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
                     _formExists++;
-
                     if (_formExists == 1)
                     {
                         FormMinimized.StartPosition = FormStartPosition.Manual;
@@ -270,7 +236,10 @@ namespace PixelAimbot
                         FormMinimized.Show();
                         FormMinimized.Size = new Size(594, 28);
                         this.Hide();
-                    
+                        ChaosAllRounds = 0;
+                        ChaosAllStucks = 0;
+                        ChaosGameCrashed = 0;
+
                         ChaosStart = DateTime.Now;
 
                         token.ThrowIfCancellationRequested();
@@ -300,7 +269,16 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(humanizer.Next(10, 240) + 500);
                     }
+                    if (processName.Length == 0 && chBoxCrashDetection.Checked)
+                    {
+                        ChaosGameCrashed++;
+                        _stop = true;
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
+                        await Task.Delay(5000);
+                        DiscordSendMessage("Game Crashed - Bot Stopped!");
+                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
 
+                    }
                     var t1 = Task.Run(() => Start(token));
                     if (chBoxAutoRepair.Checked && _RepairReset == true)
                     {

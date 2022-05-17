@@ -36,8 +36,8 @@ namespace PixelAimbot
                     _potions = false;
                     _floor1 = false;
                     _floor2 = false;
-                    
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
+                    ChaosAllStucks++;
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal..."));
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
                     var t12 = Task.Run(() => Leavedungeon(token));
@@ -83,7 +83,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var t12 = Task.Run(() => Leavedungeon(token));
-                await Task.WhenAny(new[] {t12});
+                await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
             {
@@ -111,22 +111,25 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                _stopp = true;
-                _portalIsDetected = false;
-                starten = false;
-                gefunden = false;
-                _portalIsNotDetected = false;
-                _floorFight = false;
-                _searchboss = false;
-                _revive = false;
-                _ultimate = false;
-                _portaldetect = false;
-                _potions = false;
-                _floor1 = false;
-                _floor2 = false;
-
-                var t12 = Task.Run(() => Leavedungeon(token));
-                await Task.WhenAny(new[] { t12 });
+                    _stopp = true;
+                    _portalIsDetected = false;
+                    starten = false;
+                    gefunden = false;
+                    _portalIsNotDetected = false;
+                    _floorFight = false;
+                    _searchboss = false;
+                    _revive = false;
+                    _ultimate = false;
+                    _portaldetect = false;
+                    _potions = false;
+                    _floor1 = false;
+                    _floor2 = false;
+                    ChaosAllStucks++;
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Detect Boss Kill..."));
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    var t12 = Task.Run(() => Leavedungeon(token));
+                    await Task.WhenAny(new[] { t12 });
                 }
             }
             catch (AggregateException)

@@ -66,8 +66,13 @@ namespace PixelAimbot
         private static int windowY = 0;
         private static int windowWidth = 0;
         private static int windowHeight = 0;
-        
-        
+
+        public static int ChaosAllRounds = 0;
+        public static int ChaosAllStucks = 0;
+        public static int ChaosPerfectRounds = ChaosAllRounds - ChaosAllStucks;
+        public static int ChaosGameCrashed = 0;
+
+
         private Timer _timer;
     
         private int _fightSequence;

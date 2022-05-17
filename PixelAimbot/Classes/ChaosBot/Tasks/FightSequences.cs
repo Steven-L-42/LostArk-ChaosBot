@@ -22,7 +22,8 @@ namespace PixelAimbot
                 Process[] process1Name = Process.GetProcessesByName("LostArk");
                 if (process1Name.Length == 0 && chBoxCrashDetection.Checked)
                 {
-                    
+                    ChaosGameCrashed++;
+
                     _stop = true;
 
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
@@ -70,7 +71,8 @@ namespace PixelAimbot
                     Process[] process2Name = Process.GetProcessesByName("LostArk");
                     if (process2Name.Length == 0 && chBoxCrashDetection.Checked)
                     {
-                        
+                        ChaosGameCrashed++;
+
                         _stop = true;
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);
@@ -141,7 +143,8 @@ namespace PixelAimbot
                 //    Process[] process3Name = Process.GetProcessesByName("LostArk");
                 //    if (process3Name.Length == 0 && chBoxCrashDetection.Checked)
                 //    {
-                //             
+                //                                     ChaosGameCrashed++;
+
                 //            _stop = true;
                 //
                 //        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F10);

@@ -164,6 +164,10 @@ namespace PixelAimbot
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            Clipboard.SetText("/purchase");
+            MessageBox.Show("Command '/purchase' copied to Clipboard\n\n" +
+                            "Paste this Command as the first Message\n" +
+                            "to Symbiotic-Bot. ");
             System.Diagnostics.Process.Start("https://discordapp.com/users/717411999859867789");
         }
 
@@ -293,10 +297,7 @@ namespace PixelAimbot
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText("/purchase");
-        }
+       
     }
 }
 

@@ -90,6 +90,7 @@ namespace PixelAimbot
                         
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
+                            ChaosAllRounds++;
                             cts.Cancel();
                             _start = false;
                             _stopp = false;

@@ -30,7 +30,11 @@ namespace PixelAimbot
             this.lbChaosRunStart.Text = ChaosBot.ChaosStart.ToString("HH:mm:ss");
             this.lbChaosRunStop.Text = ChaosBot.ChaosStop.ToString("HH:mm:ss");
             this.lbChaosRunTime.Text = ChaosTimePlus1.ToString("HH:mm:ss");
-            this.lbChaosRounds.Text = "54";
+            this.lbChaosAllRounds.Text = ChaosBot.ChaosAllRounds.ToString();
+            this.lbChaosAllStucks.Text = ChaosBot.ChaosAllStucks.ToString();
+            this.lbChaosPerfectRounds.Text = ChaosBot.ChaosPerfectRounds.ToString();
+            this.lbChaosGameCrashed.Text = ChaosBot.ChaosGameCrashed.ToString();
+
 
 
             picChaosStart.ImageLocation = Application.UserAppDataPath + "/ChaosStartInv.jpg";
@@ -58,5 +62,7 @@ namespace PixelAimbot
         {
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+
+        
     }
 }
