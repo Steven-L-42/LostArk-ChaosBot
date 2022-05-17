@@ -35,27 +35,14 @@ namespace PixelAimbot
             _GatheringBot = this;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = RandomString(15);
-            _telegramToken = new CancellationTokenSource();
             _discordToken = new CancellationTokenSource();
-            if (_conf.telegram != "" && !_telegramBotRunning)
-            {
-                textBoxTelegramAPI.Text = _conf.telegram;
-                try
-                {
-                    buttonTestTelegram_Click_1(null, null);
-                    TelegramTask = TelegramBotAsync(_conf.telegram, _telegramToken.Token);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
+
             try
             {
                 conf = Config.Load();
                 DiscordTask = DiscordBotAsync(conf.discorduser, _discordToken.Token);
             } catch {}
-            
+
             label15.Text = Config.version;
             int FirstHotkeyId = 1;
             int FirstHotKeyKey = (int) Keys.F9;

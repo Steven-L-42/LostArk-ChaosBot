@@ -248,15 +248,18 @@ namespace PixelAimbot
                                 var item = detector.GetClosest(screenCapture, false);
                                 if (item.HasValue)
                                 {
-                                    Point position = calculateFromCenter(item.Value.X, item.Value.Y);
-                                    // correct mouse down
-                                    int correction = 0;
-                                    if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                    if (item.Value.X > 0 && item.Value.Y > 0)
                                     {
-                                        correction = Recalc(80, false);
-                                    }
+                                        Point position = calculateFromCenter(item.Value.X, item.Value.Y);
+                                        // correct mouse down
+                                        int correction = 0;
+                                        if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                        {
+                                            correction = Recalc(80, false);
+                                        }
 
-                                    VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                        VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                    }
                                 }
                                 else
                                 {

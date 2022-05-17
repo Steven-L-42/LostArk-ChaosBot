@@ -88,6 +88,7 @@ namespace PixelAimbot.Classes.Misc
         public bool radioEnglish { get; set; } = true;
         public bool chBoxAwakening { get; set; } = false;
         public bool chBoxCrashDetection { get; set; } = true;
+        public bool checkBoxDiscordNotifications { get; set; } = true;
         public bool chBoxLeavetimer { get; set; } = false;
         public bool chBoxRevive { get; set; } = false;
 

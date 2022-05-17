@@ -35,7 +35,7 @@ namespace PixelAimbot
                             var item = detector.GetBest(_screenCapture, false);
                             if (item.HasValue)
                             {
-                                ChaosBot.DiscordSendMessage("No more Energy, Bot stopped!");
+                                DiscordSendMessage("No more Energy, Bot stopped!");
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
                                 Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
                                 

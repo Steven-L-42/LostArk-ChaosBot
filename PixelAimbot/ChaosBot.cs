@@ -5,13 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PixelAimbot.Classes.OpenCV;
-using System.Text;
 using System.Drawing.Imaging;
 
 using Point = System.Drawing.Point;
@@ -25,7 +23,6 @@ namespace PixelAimbot
         {
             InitializeComponent();
             conf = Config.Load();
-            string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Combine the base folder with your specific folder....
             if (conf.username == "Mentalill" || conf.username == "ShiiikK" && Debugger.IsAttached)
             {
@@ -86,21 +83,8 @@ namespace PixelAimbot
             int SecondHotKeyKey = (int)Keys.F10;
             UnregisterHotKey(this.Handle, SecondHotkeyId);
             Boolean F10Registered = RegisterHotKey(this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey);
-            telegramToken = new CancellationTokenSource();
             discordToken = new CancellationTokenSource();
-            if (conf.telegram != "" && !_telegramBotRunning)
-            {
-                textBoxTelegramAPI.Text = conf.telegram;
-                try
-                {
-                    buttonTestTelegram_Click_1(null, null);
-                    TelegramTask = TelegramBotAsync(conf.telegram, telegramToken.Token);
-                }
-                catch
-                {
-                }
-            }
-
+            
             try
             {
                 DiscordTask = DiscordBotAsync(conf.discorduser, discordToken.Token);
@@ -446,6 +430,7 @@ namespace PixelAimbot
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
             txtRestart.Text = Properties.Settings.Default.txtRestart;
             chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
+            checkBoxDiscordNotifications.Checked = Properties.Settings.Default.checkBoxDiscordNotifications;
             HealthSlider1.Value = Properties.Settings.Default.HealthSlider1;
             txPQ.Text = Properties.Settings.Default.txPQ;
             txPW.Text = Properties.Settings.Default.txPW;
@@ -551,6 +536,7 @@ namespace PixelAimbot
             try
             {
                 Properties.Settings.Default.chBoxCrashDetection = true;
+                Properties.Settings.Default.checkBoxDiscordNotifications = true;
                 Properties.Settings.Default.HealthSlider1 = 801;
                 Properties.Settings.Default.chBoxGunlancer = false;
                 Properties.Settings.Default.chBoxRevive = false;
@@ -639,6 +625,7 @@ namespace PixelAimbot
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
+                checkBoxDiscordNotifications.Checked = Properties.Settings.Default.checkBoxDiscordNotifications;
                 HealthSlider1.Value = Properties.Settings.Default.HealthSlider1;
                 chBoxGunlancer.Checked = Properties.Settings.Default.chBoxGunlancer;
                 txtRestart.Text = Properties.Settings.Default.txtRestart;
@@ -743,6 +730,7 @@ namespace PixelAimbot
                 if (comboBoxRotations.Text != "main")
                 {
                     rotation.chBoxCrashDetection = chBoxCrashDetection.Checked;
+                    rotation.checkBoxDiscordNotifications = checkBoxDiscordNotifications.Checked;
                     rotation.HealthSlider1 = HealthSlider1.Value;
                     rotation.chBoxGunlancer = (bool)chBoxGunlancer.Checked;
                     rotation.txtDeath = txtDeath.Text;
@@ -845,6 +833,7 @@ namespace PixelAimbot
                 }
                 */
                 chBoxCrashDetection.Checked = rotation.chBoxCrashDetection;
+                checkBoxDiscordNotifications.Checked = rotation.checkBoxDiscordNotifications;
                 HealthSlider1.Value = rotation.HealthSlider1;
                 txtDeath.Text = rotation.txtDeath;
                 chBoxRevive.Checked = rotation.chBoxRevive;
@@ -973,7 +962,7 @@ namespace PixelAimbot
         private void labelSwap_Click_1(object sender, EventArgs e)
         {
             cts.Cancel();
-            _botIsRun = false;
+            //_botIsRun = false;
             _discordBotIsRun = false;
             UnregisterHotKey(this.Handle, 1);
             UnregisterHotKey(this.Handle, 2);
@@ -1204,6 +1193,9 @@ namespace PixelAimbot
 
         }
 
-        
+        private void comboBoxRotations_MouseEnter(object sender, EventArgs e)
+        {
+            RefreshRotationCombox();
+        }
     }
 }

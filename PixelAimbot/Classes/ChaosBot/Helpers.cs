@@ -214,13 +214,12 @@ namespace PixelAimbot
             return (newX, newY);
         }
 
-        public static (double, double) MinimapToDesktop(double x, double y)
+        public static (double, double) MinimapToDesktop(double x, double y, int additionalPercent = 20)
         {
-            double calculatedPercentX = x / 394 * 100;
-            double calculatedPercentY = y / 340 * 100;
+            double calculatedPercentX = (x) / 394 * 100;
+            double calculatedPercentY = (y) / 340 * 100;
             double multiplierX = 1;
             double multiplierY = 1;
-            int additionalPercent = 20;
             if (calculatedPercentX > 50)
             {
                 calculatedPercentX += additionalPercent;
@@ -251,6 +250,9 @@ namespace PixelAimbot
                 resultX = Screen.PrimaryScreen.Bounds.Width / 100 * (calculatedPercentX * multiplierX);
                 resultY = Screen.PrimaryScreen.Bounds.Height / 100 * (calculatedPercentY * multiplierY);
             }
+            
+            
+          //  resultX = ((resultX - (Screen.PrimaryScreen.Bounds.Width / 2)) * 0.5) +  
             return (resultX, resultY);
         }
 
@@ -599,23 +601,23 @@ namespace PixelAimbot
         {
             comboBoxRotations.Items.Clear();
 
-                HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
-                var webclient = new WebClient();
-                var config = Config.Load();
-                webclient.CachePolicy = noCachePolicy;
-                var values = new NameValueCollection
+            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            var webclient = new WebClient();
+            var config = Config.Load();
+            webclient.CachePolicy = noCachePolicy;
+            var values = new NameValueCollection
+            {
+                ["user"] = config.username,
+            };
+            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+            webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
+            webclient.UploadValuesCompleted += (s, e) =>
+            {
+                foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
                 {
-                    ["user"] = config.username,
-                };
-                webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
-                webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
-                webclient.UploadValuesCompleted += (s, e) =>
-                {
-                    foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
-                    {
-                        comboBoxRotations.Items.Add(entries["name"]);
-                    }
-                };
+                    comboBoxRotations.Items.Add(entries["name"]);
+                }
+            };
 
             var files = Directory.GetFiles(ConfigPath);
             foreach (var file in files)
