@@ -251,8 +251,6 @@ namespace PixelAimbot
                 resultX = Screen.PrimaryScreen.Bounds.Width / 100 * (calculatedPercentX * multiplierX);
                 resultY = Screen.PrimaryScreen.Bounds.Height / 100 * (calculatedPercentY * multiplierY);
             }
-
-
             return (resultX, resultY);
         }
 
@@ -272,24 +270,7 @@ namespace PixelAimbot
 
             return foundkey;
         }
-
-        private byte MouseKey(string text)
-        {
-            byte foundkey = 0x0;
-            switch (text)
-            {
-                case "LEFT":
-                    foundkey = KeyboardWrapper.VK_LBUTTON;
-                    break;
-
-                case "RIGHT":
-                    foundkey = KeyboardWrapper.VK_RBUTTON;
-                    break;
-            }
-
-            return foundkey;
-        }
-
+     
         public static Image<Bgr, Byte> byteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);

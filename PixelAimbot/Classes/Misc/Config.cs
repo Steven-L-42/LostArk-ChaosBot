@@ -12,7 +12,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.8.6r";
+        public static string version { get; set; } = "2.8.7r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -151,6 +151,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxDoubleF { get; set; } = false;
 
         public int mouseButton { get; set; } = 0;
+        public int cmbHealKey { get; set; } = 0;
         public int comboBox1 { get; set; } = 0;
         public int cmbHOUR { get; set; } = DateTime.Now.Hour;
         public int cmbMINUTE { get; set; } = DateTime.Now.Minute;

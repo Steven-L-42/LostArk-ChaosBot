@@ -55,6 +55,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.comboBoxMouse = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cmbHealKey = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.radioEnglish = new System.Windows.Forms.RadioButton();
             this.radioGerman = new System.Windows.Forms.RadioButton();
@@ -62,7 +63,6 @@
             this.HealthSlider1 = new System.Windows.Forms.TrackBar();
             this.txtDeath = new System.Windows.Forms.TextBox();
             this.chBoxRevive = new System.Windows.Forms.CheckBox();
-            this.txtHeal10 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lbF = new System.Windows.Forms.Label();
@@ -651,6 +651,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cmbHealKey);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.radioEnglish);
             this.groupBox4.Controls.Add(this.radioGerman);
@@ -658,7 +659,6 @@
             this.groupBox4.Controls.Add(this.HealthSlider1);
             this.groupBox4.Controls.Add(this.txtDeath);
             this.groupBox4.Controls.Add(this.chBoxRevive);
-            this.groupBox4.Controls.Add(this.txtHeal10);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -669,6 +669,31 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Heal and Potion";
             this.toolTip1.SetToolTip(this.groupBox4, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
+            // 
+            // cmbHealKey
+            // 
+            this.cmbHealKey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmbHealKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHealKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbHealKey.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbHealKey.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cmbHealKey.FormattingEnabled = true;
+            this.cmbHealKey.Items.AddRange(new object[] {
+            "F1",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.cmbHealKey.Location = new System.Drawing.Point(177, 37);
+            this.cmbHealKey.Name = "cmbHealKey";
+            this.cmbHealKey.Size = new System.Drawing.Size(50, 23);
+            this.cmbHealKey.TabIndex = 68;
+            this.cmbHealKey.SelectedIndexChanged += new System.EventHandler(this.cmbHealKey_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -763,19 +788,6 @@
             this.chBoxRevive.UseMnemonic = false;
             this.chBoxRevive.UseVisualStyleBackColor = false;
             this.chBoxRevive.CheckedChanged += new System.EventHandler(this.chBoxRevive_CheckedChanged);
-            // 
-            // txtHeal10
-            // 
-            this.txtHeal10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.txtHeal10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHeal10.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeal10.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtHeal10.Location = new System.Drawing.Point(177, 37);
-            this.txtHeal10.Name = "txtHeal10";
-            this.txtHeal10.Size = new System.Drawing.Size(35, 18);
-            this.txtHeal10.TabIndex = 58;
-            this.txtHeal10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtHeal10.WordWrap = false;
             // 
             // label6
             // 
@@ -2847,7 +2859,6 @@
         private System.Windows.Forms.ComboBox comboBoxRotations;
         private System.Windows.Forms.Label labelComboxRotation;
         private System.Windows.Forms.CheckBox chBoxDeathblade;
-        private System.Windows.Forms.TextBox txtHeal10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chBoxSorcerer;
         private System.Windows.Forms.CheckBox chBoxSharpshooter;
@@ -2895,6 +2906,7 @@
         private System.Windows.Forms.RadioButton radioGerman;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbHealKey;
     }
 }
 

@@ -599,24 +599,31 @@
     </Compile>
     <EmbeddedResource Include="ChaosRunTimed.resx">
       <DependentUpon>ChaosRunTimed.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Debugging.resx">
       <DependentUpon>Debugging.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAlert.resx">
       <DependentUpon>frmAlert.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMinimized.resx">
       <DependentUpon>frmMinimized.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmStatistic.resx">
       <DependentUpon>frmStatistic.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GatheringBot.resx">
       <DependentUpon>GatheringBot.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ChaosBot.resx">
       <DependentUpon>ChaosBot.cs</DependentUpon>
@@ -627,9 +634,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmGuide.resx">
       <DependentUpon>frmGuide.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmGuideFishbot.resx">
       <DependentUpon>frmGuideFishbot.cs</DependentUpon>
@@ -670,17 +679,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="AutoItX3Lib">
-      <Guid>{F8937E53-D444-4E71-9275-35B64210CC3B}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="System.Management.Automation">

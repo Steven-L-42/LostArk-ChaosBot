@@ -1030,5 +1030,17 @@ namespace PixelAimbot.Properties {
                 this["radioEnglish"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmbHealKey {
+            get {
+                return ((int)(this["cmbHealKey"]));
+            }
+            set {
+                this["cmbHealKey"] = value;
+            }
+        }
     }
 }

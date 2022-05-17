@@ -343,11 +343,52 @@ namespace PixelAimbot
             {
                 currentMouseButton = KeyboardWrapper.VK_RBUTTON;
             }            
-            
-        //    txtMouse.Text = translateKey(comboBoxMouse.SelectedItem);
-            
-
         }
+
+        private void cmbHealKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbHealKey.SelectedIndex == 0)
+            {
+                currentHealKey = KeyboardWrapper.VK_F1;
+            }
+            else if (cmbHealKey.SelectedIndex == 1)
+            {
+                currentHealKey = KeyboardWrapper.VK_1;
+            }
+            else if (cmbHealKey.SelectedIndex == 2)
+            {
+                currentHealKey = KeyboardWrapper.VK_2;
+            }
+            else if (cmbHealKey.SelectedIndex == 3)
+            {
+                currentHealKey = KeyboardWrapper.VK_3;
+            }
+            else if (cmbHealKey.SelectedIndex == 4)
+            {
+                currentHealKey = KeyboardWrapper.VK_4;
+            }
+            else if (cmbHealKey.SelectedIndex == 5)
+            {
+                currentHealKey = KeyboardWrapper.VK_5;
+            }
+            else if (cmbHealKey.SelectedIndex == 6)
+            {
+                currentHealKey = KeyboardWrapper.VK_6;
+            }
+            else if (cmbHealKey.SelectedIndex == 7)
+            {
+                currentHealKey = KeyboardWrapper.VK_7;
+            }
+            else if (cmbHealKey.SelectedIndex == 8)
+            {
+                currentHealKey = KeyboardWrapper.VK_8;
+            }
+            else if (cmbHealKey.SelectedIndex == 9)
+            {
+                currentHealKey = KeyboardWrapper.VK_9;
+            }
+        }
+
 
         public void ChaosBot_Load(object sender, EventArgs e)
         {
@@ -449,14 +490,13 @@ namespace PixelAimbot
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
             txtDeath.Text = Properties.Settings.Default.txtDeath;
             chBoxRevive.Checked = Properties.Settings.Default.chBoxRevive;
-            txtHeal10.Text = Properties.Settings.Default.txtHeal10;
             comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
             cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
             cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
             chBoxLeavetimer.Checked = Properties.Settings.Default.chBoxLeavetimer;
             radioEnglish.Checked = Properties.Settings.Default.radioEnglish;
             radioGerman.Checked = Properties.Settings.Default.radioGerman;
-
+            cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -594,6 +634,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxLeavetimer = false;
                 Properties.Settings.Default.radioGerman = false;
                 Properties.Settings.Default.radioEnglish = true;
+                Properties.Settings.Default.cmbHealKey = 0;
 
 
                 Properties.Settings.Default.Save();
@@ -606,7 +647,6 @@ namespace PixelAimbot
                 chBoxAutoMovement.Checked = Properties.Settings.Default.chBoxAutoMovement;
                 txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
                 chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
-                txtHeal10.Text = Properties.Settings.Default.instant;
                 chBoxLOGOUT.Checked = Properties.Settings.Default.chBoxLOGOUT;
 
                 chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
@@ -664,13 +704,13 @@ namespace PixelAimbot
                 textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
 
                 chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
-                txtHeal10.Text = Properties.Settings.Default.txtHeal10;
                 comboBox1.SelectedIndex = Properties.Settings.Default.comboBox1;
                 cmbHOUR.SelectedIndex = Properties.Settings.Default.cmbHOUR;
                 cmbMINUTE.SelectedIndex = Properties.Settings.Default.cmbMINUTE;
                 chBoxLeavetimer.Checked = Properties.Settings.Default.chBoxLeavetimer;
                 radioEnglish.Checked = Properties.Settings.Default.radioEnglish;
                 radioGerman.Checked = Properties.Settings.Default.radioGerman;
+                cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
 
             }
             catch (Exception ex)
@@ -770,7 +810,6 @@ namespace PixelAimbot
                     rotation.chBoxDoubleF = chBoxDoubleF.Checked;
                     rotation.textBoxAutoAttack = textBoxAutoAttack.Text;
                     rotation.chBoxAwakening = chBoxAwakening.Checked;
-                    rotation.txtHeal10 = txtHeal10.Text;
                     rotation.mouseButton = comboBoxMouse.SelectedIndex;
                     rotation.comboBox1 = comboBox1.SelectedIndex;
                     rotation.cmbMINUTE = cmbMINUTE.SelectedIndex;
@@ -778,6 +817,7 @@ namespace PixelAimbot
                     rotation.chBoxLeavetimer = chBoxLeavetimer.Checked;
                     rotation.radioGerman = radioGerman.Checked;
                     rotation.radioEnglish = radioEnglish.Checked;
+                    rotation.cmbHealKey = cmbHealKey.SelectedIndex;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -811,7 +851,6 @@ namespace PixelAimbot
                 txtRestart.Text = rotation.txtRestart;
                 chBoxGunlancer.Checked = rotation.chBoxGunlancer;
                 chBoxUnstuckF1.Checked = rotation.chBoxUnstuckF1;
-                txtHeal10.Text = rotation.txtHeal10;
 
                 chBoxAutoRepair.Checked = rotation.chBoxAutoRepair;
                 txtRepair.Text = rotation.autorepair;
@@ -825,7 +864,6 @@ namespace PixelAimbot
                 chBoxSoulfist.Checked = rotation.chBoxSoulfist;
                 cmbHOUR.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
-                txtHeal10.Text = rotation.txtHeal10;
                 txLeaveTimerFloor2.Text = rotation.txLeaveTimerFloor2;
           
                 chBoxAutoMovement.Checked = rotation.chBoxAutoMovement;
@@ -876,6 +914,7 @@ namespace PixelAimbot
                 chBoxLeavetimer.Checked = rotation.chBoxLeavetimer;
                 radioEnglish.Checked = rotation.radioEnglish;
                 radioGerman.Checked = rotation.radioGerman;
+                cmbHealKey.SelectedIndex = rotation.cmbHealKey;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
@@ -951,7 +990,7 @@ namespace PixelAimbot
         {
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-
+        int test = 0;
         private async void button1_Click(object sender, EventArgs e)
         {
             cts = new CancellationTokenSource();
@@ -959,10 +998,25 @@ namespace PixelAimbot
 
             token.ThrowIfCancellationRequested();
             await Task.Delay(1, token);
+            Process[] processName = Process.GetProcessesByName("LostArk");
+            processName = Process.GetProcessesByName("LostArk");
+            if (processName.Length == 1)
+            {
+                handle = processName[0].MainWindowHandle;
+                SetForegroundWindow(handle);
+            }
+            test++;
+            if(test == 2)
+            {
+                test = 0;
+                cts.Cancel();
+            }
+            else
+            {
+                var leave = Task.Run(() => TEST(token));
 
+            }
 
-
-            //var leave = Task.Run(() => TEST(token));
 
         }
 
@@ -973,69 +1027,67 @@ namespace PixelAimbot
             //
             //
 
-
+            
             try
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-              
-                if(radioGerman.Checked)
-                {
-                    var template = Image_death;
-                    var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(77, false), ChaosBot.Recalc(366), ChaosBot.Recalc(587, false));
-                    var screenPrinter = new PrintScreen();
-                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
-                    {
-
-                        var item = detector.GetBest(screenCapture, true);
-                        if (item.HasValue && _floorFight)
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            _floorFight = false;
-
-                            _potions = false;
-                            DiscordSendMessage("Bot is reviving!");
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                            VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 7);
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            _floorFight = true;
-
-                            _potions = false;
-                        }
-                    }
-                }
-                else if(radioEnglish.Checked)
-                {
-                    var template = Image_deathEN;
-                    var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(75, false), ChaosBot.Recalc(364), ChaosBot.Recalc(549, false));
-                    var screenPrinter = new PrintScreen();
-                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
-                    {
-
-                        var item = detector.GetBest(screenCapture, true);
-                        if (item.HasValue && _floorFight)
-                        {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            _floorFight = false;
-
-                            _potions = false;
-                            DiscordSendMessage("Bot is reviving!");
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                            VirtualMouse.MoveTo(Recalc(1379), Recalc(429, false), 7);
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                            _floorFight = true;
-
-                            _potions = false;
-                        }
-                    }
-                }
                 
-                
+                while (true)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        object health10 = Pixel.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
+                            Recalc(968, false), 0x050405, 15);
+                        if (health10.ToString() != "0")
+                        {
+                            KeyboardWrapper.PressKey(currentHealKey);
+                            KeyboardWrapper.PressKey(currentHealKey);
+                            KeyboardWrapper.PressKey(currentHealKey);
+                            KeyboardWrapper.PressKey(currentHealKey);
+                            KeyboardWrapper.PressKey(currentHealKey);
 
+
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion..."));
+                        }
+
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+
+                    Random random = new Random();
+                    var sleepTime = random.Next(500, 570);
+                    await Task.Delay(sleepTime);
+
+
+                }
             }
-            catch { }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
         }
 
        
@@ -1094,5 +1146,7 @@ namespace PixelAimbot
         {
 
         }
+
+        
     }
 }

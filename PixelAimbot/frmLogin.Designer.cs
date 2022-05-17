@@ -243,8 +243,9 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(140, 183);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "~2.8.7r~\n+ Compare Screen\n    at End (F10)\n+ Fix Game Crash\n\n~2.8.6r~\n+ New Reviv" +
-    "e\n+ New Awakening\n+ Boss Kill Detection\n+ Auto Leave Floor 2\n+ minor fixes";
+            this.richTextBox1.Text = "~2.8.7r~\n+ Compare Screen\n    at End (F10)\n+ Modify Heal Function\n+ Fix Game Cras" +
+    "h\n\n~2.8.6r~\n+ New Revive\n+ New Awakening\n+ Boss Kill Detection\n+ Auto Leave Floo" +
+    "r 2\n+ minor fixes";
             // 
             // checkBoxOldVersion
             // 
