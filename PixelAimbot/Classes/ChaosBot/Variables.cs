@@ -117,7 +117,7 @@ namespace PixelAimbot
         private byte currentMouseButton;
         private byte currentHealKey;
 
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        public static CancellationTokenSource cts = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
 
@@ -142,6 +142,13 @@ namespace PixelAimbot
 
         public Image<Bgr, Byte> Image_revive1 = byteArrayToImage(Images.revive1);
         public Image<Bgr, Byte> Image_reviveEnglish = byteArrayToImage(Images.reviveEnglish);
+
+
         
+        public static Image<Bgr, Byte> Image_GuardianStone1 = byteArrayToImage(Images.GuardianStone1);
+        public static Image<Bgr, Byte> Image_GuardianStone1Mask = byteArrayToImage(Images.GuardianStone1Mask);
+        public static Image<Bgr, Byte> Image_DestructStone3 = byteArrayToImage(Images.DestructStone3);
+        public static Image<Bgr, Byte> Image_DestructStone3Mask = byteArrayToImage(Images.DestructStone3Mask);
+
     }
 }

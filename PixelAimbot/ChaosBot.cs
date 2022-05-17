@@ -263,7 +263,7 @@ namespace PixelAimbot
                             {
                                 g.CopyFromScreen(p1, p2, Inventory.Size);
                             }
-                            bitmap.Save(Application.UserAppDataPath + "/ChaosStartInv.jpg", ImageFormat.Jpeg);
+                          bitmap.Save(Application.UserAppDataPath + "/ChaosStartInv.jpg", ImageFormat.Jpeg);
                         }
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
@@ -1013,13 +1013,16 @@ namespace PixelAimbot
             }
             else
             {
+                teststart = true;
+                awakening = true;
                 var leave = Task.Run(() => TEST(token));
 
             }
 
 
         }
-
+        public bool teststart;
+        public bool awakening;
         private async Task TEST(CancellationToken token)
         {
 
@@ -1032,47 +1035,101 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                
-                while (true)
+
+                while (teststart)
                 {
-                    try
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                    float threshold = 0.8f;
+
+                    var BossTemplate = Image_bossHP;
+                    var BossMask = Image_bossHPmask;
+
+                    Point myPosition = new Point(Recalc(148), Recalc(127, false));
+                    Point screenResolution = new Point(screenWidth, screenHeight);
+
+                    var BossDetector = new BossDetector(BossTemplate, BossMask, threshold);
+                    var screenPrinter = new PrintScreen();
+
+                    var rawScreen = screenPrinter.CaptureScreen();
+                    Bitmap bitmapImage = new Bitmap(rawScreen);
+                    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        object health10 = Pixel.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
-                            Recalc(968, false), 0x050405, 15);
-                        if (health10.ToString() != "0")
+                        var Boss = BossDetector.GetClosestEnemy(screenCapture, false);
+
+                        if (Boss.HasValue)
                         {
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
+                            lbStatus.Invoke(
+             (MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
+
+                            while (awakening)
+                            {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                object Awakening = Pixel.PixelSearch(Recalc(1161), Recalc(66, false), Recalc(1187),
+                                    Recalc(83, false), 0x9C1B16, 50);
+                                if (Awakening.ToString() == "0")
+                                {
+
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    //KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
+                                    awakening = false;
+                                    gefunden = true;
 
 
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion..."));
+
+                                }
+                                Random random2 = new Random();
+                                var sleepTime2 = random2.Next(100, 150);
+                                Thread.Sleep(sleepTime2);
+                            }
+                            gefunden = true;
+
+                        }
+                        else if (!Boss.HasValue && gefunden == true)
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            await Task.Delay(humanizer.Next(10, 240) + 3000, token);
+
+                            lbStatus.Invoke(
+                            (MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
+                            starten = false;
+                            gefunden = false;
+                            _stopp = true;
+                            _portalIsDetected = false;
+
+                            _portalIsNotDetected = false;
+                            _floorFight = false;
+                            _searchboss = false;
+                            _revive = false;
+                            _ultimate = false;
+                            _portaldetect = false;
+                            _potions = false;
+                            _floor1 = false;
+                            _floor2 = false;
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            var leave = Task.Run(() => Leavedungeon(token));
+                            await Task.WhenAny(leave);
                         }
 
                     }
-                    catch (AggregateException)
-                    {
-                        Debug.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Debug.WriteLine("Bug");
-                    }
-                    catch (Exception ex)
-                    {
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
-                    }
 
                     Random random = new Random();
-                    var sleepTime = random.Next(500, 570);
-                    await Task.Delay(sleepTime);
-
-
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
                 }
             }
             catch (AggregateException)

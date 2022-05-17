@@ -97,7 +97,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>ChaosDungeon-Bot.ico</ApplicationIcon>
+    <ApplicationIcon>discord.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
@@ -384,13 +384,17 @@
     <Compile Include="Classes\ChaosBot\Images\boss1.cs" />
     <Compile Include="Classes\ChaosBot\Images\bossmask1.cs" />
     <Compile Include="Classes\ChaosBot\Images\deathEN.cs" />
+    <Compile Include="Classes\ChaosBot\Images\DestructStone3Mask.cs" />
     <Compile Include="Classes\ChaosBot\Images\enemy.cs" />
+    <Compile Include="Classes\ChaosBot\Images\DestructStone3.cs" />
+    <Compile Include="Classes\ChaosBot\Images\GuardianStone1Mask.cs" />
     <Compile Include="Classes\ChaosBot\Images\mask.cs" />
     <Compile Include="Classes\ChaosBot\Images\mob1.cs" />
     <Compile Include="Classes\ChaosBot\Images\mobmask1.cs" />
     <Compile Include="Classes\ChaosBot\Images\portalenter1.cs" />
     <Compile Include="Classes\ChaosBot\Images\portalentermask1.cs" />
     <Compile Include="Classes\ChaosBot\Images\questmarker.cs" />
+    <Compile Include="Classes\ChaosBot\Images\GuardianStone1.cs" />
     <Compile Include="Classes\ChaosBot\Images\red_hp.cs" />
     <Compile Include="Classes\ChaosBot\Images\revive1.cs" />
     <Compile Include="Classes\ChaosBot\Images\reviveEnglish.cs" />
@@ -510,6 +514,7 @@
     </Compile>
     <Compile Include="Classes\Misc\Alert.cs" />
     <Compile Include="Classes\Misc\Pixel.cs" />
+    <Compile Include="StoneDetector.cs" />
     <Compile Include="Classes\OpenCV\BossDetector.cs" />
     <Compile Include="Forms\Debugging.cs">
       <SubType>Form</SubType>
@@ -696,6 +701,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="discord.ico" />
     <Content Include="Resources\boss.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -708,7 +714,6 @@
     <Content Include="Resources\boss1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ChaosDungeon-Bot.ico" />
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

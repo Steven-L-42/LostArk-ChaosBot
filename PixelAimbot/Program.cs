@@ -19,6 +19,7 @@ namespace PixelAimbot
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmLogin());
             
+
         }
 
     }

@@ -36,6 +36,9 @@
             this.label34 = new System.Windows.Forms.Label();
             this.btnSaveCompare = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lbChaosGuardian = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lbChaosDestruction = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -64,9 +67,6 @@
             this.picChaosStart = new System.Windows.Forms.PictureBox();
             this.picChaosEnd = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbChaosGuardian = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -183,6 +183,42 @@
             this.groupBox3.TabIndex = 58;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Farmed Mat";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
+            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Peru;
+            this.label7.Location = new System.Drawing.Point(115, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(114, 17);
+            this.label7.TabIndex = 62;
+            this.label7.Text = "Work in Progress";
+            // 
+            // lbChaosGuardian
+            // 
+            this.lbChaosGuardian.AutoSize = true;
+            this.lbChaosGuardian.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChaosGuardian.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbChaosGuardian.Location = new System.Drawing.Point(139, 101);
+            this.lbChaosGuardian.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbChaosGuardian.Name = "lbChaosGuardian";
+            this.lbChaosGuardian.Size = new System.Drawing.Size(33, 20);
+            this.lbChaosGuardian.TabIndex = 61;
+            this.lbChaosGuardian.Text = "999";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label16.Location = new System.Drawing.Point(32, 98);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(84, 21);
+            this.label16.TabIndex = 60;
+            this.label16.Text = "Guardian:";
             // 
             // label15
             // 
@@ -544,42 +580,6 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lbChaosGuardian
-            // 
-            this.lbChaosGuardian.AutoSize = true;
-            this.lbChaosGuardian.Font = new System.Drawing.Font("Nirmala UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChaosGuardian.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbChaosGuardian.Location = new System.Drawing.Point(139, 101);
-            this.lbChaosGuardian.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbChaosGuardian.Name = "lbChaosGuardian";
-            this.lbChaosGuardian.Size = new System.Drawing.Size(33, 20);
-            this.lbChaosGuardian.TabIndex = 61;
-            this.lbChaosGuardian.Text = "999";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label16.Location = new System.Drawing.Point(32, 98);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(84, 21);
-            this.label16.TabIndex = 60;
-            this.label16.Text = "Guardian:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Peru;
-            this.label7.Location = new System.Drawing.Point(115, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(114, 17);
-            this.label7.TabIndex = 62;
-            this.label7.Text = "Work in Progress";
-            // 
             // ChaosRunTimed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -595,7 +595,6 @@
             this.Name = "ChaosRunTimed";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChaosRunTimed";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.ChaosRunTimed_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
