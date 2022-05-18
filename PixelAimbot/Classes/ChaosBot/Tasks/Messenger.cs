@@ -170,6 +170,7 @@ namespace PixelAimbot
                 }
                 catch (Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     Debug.WriteLine(ex.Message);
                 }
 

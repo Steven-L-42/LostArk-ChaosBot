@@ -167,7 +167,7 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
 
-                GetEndPic();
+                EndInventar = GetEndPic();
                 
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
 
@@ -213,29 +213,19 @@ namespace PixelAimbot
         }
         private Bitmap GetStartPic()
         {
-            Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
 
-            StartInventar = new Bitmap(543, 564, PixelFormat.Format32bppArgb);
+            return GetEndPic();
 
-            using (Graphics gfxScreenshot = Graphics.FromImage(StartInventar))
-            {
-                gfxScreenshot.CopyFromScreen(p1, p2, Inventory.Size);
-            }
-
-            return StartInventar;
         }
         private Bitmap GetEndPic()
         {
-            Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
-
-            EndInventar = new Bitmap(543, 564, PixelFormat.Format32bppArgb);
-
-            using (Graphics gfxScreenshot = Graphics.FromImage(EndInventar))
-            {
-                gfxScreenshot.CopyFromScreen(p1, p2, Inventory.Size);
-            }
-          
-            return EndInventar;
+            var picture = new PrintScreen();
+            var screen = picture.CaptureScreen();
+           
+            return CropImage(screen,
+                new Rectangle(ChaosBot.Recalc(1326), PixelAimbot.ChaosBot.Recalc(229, false),
+                    ChaosBot.Recalc(544), ChaosBot.Recalc(640, false)));
+            
         }
 
         public static TimeSpan ChaosTime = new TimeSpan();
@@ -265,6 +255,7 @@ namespace PixelAimbot
             {
                 try
                 {
+
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
@@ -303,7 +294,7 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(humanizer.Next(10, 240) + 1000,token);
 
-                        GetStartPic();
+                        StartInventar = GetStartPic();
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(humanizer.Next(10, 240) + 500, token);
@@ -351,8 +342,9 @@ namespace PixelAimbot
                 {
                     // Handle canceled
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     // Handle other exceptions
                 }
             }
@@ -757,6 +749,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

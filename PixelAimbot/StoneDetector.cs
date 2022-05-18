@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace PixelAimbot.Classes.OpenCV
 {
@@ -37,8 +38,10 @@ namespace PixelAimbot.Classes.OpenCV
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
             }
 
-            List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>(); 
-            screenCapture.ROI = new Rectangle(ChaosBot.Recalc(0), PixelAimbot.ChaosBot.Recalc(0, false), ChaosBot.Recalc(959), ChaosBot.Recalc(870, false));
+            List<(Point minPoint, double)> enemies = new List<(Point position, double matchValue)>();
+            var locationX = Application.OpenForms.OfType<ChaosRunTimed>().First().Location.X;
+            var locationY = Application.OpenForms.OfType<ChaosRunTimed>().First().Location.Y;
+            screenCapture.ROI = new Rectangle(locationX, locationY, ChaosBot.Recalc(546), ChaosBot.Recalc(725, false));
             var minimap = screenCapture.Copy();
             var res = new Mat();
             double minVal = 0, maxVal = 0;

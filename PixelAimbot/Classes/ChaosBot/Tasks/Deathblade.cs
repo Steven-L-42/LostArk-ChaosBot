@@ -31,6 +31,7 @@ namespace PixelAimbot
             {
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+                ExceptionHandler.SendException(ex);
             }
         }
 

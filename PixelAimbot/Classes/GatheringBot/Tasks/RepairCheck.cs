@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
@@ -37,6 +38,7 @@ namespace PixelAimbot
                 }
                 catch (Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }

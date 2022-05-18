@@ -46,7 +46,7 @@ namespace PixelAimbot
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-        public static string ReadArea(Image<Bgr, byte> screenCapture, int x, int y, int width, int height,
+        public static string ReadArea(Bitmap screenCapture, int x, int y, int width, int height,
             string whitelist = "")
         {
             tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
@@ -67,7 +67,8 @@ namespace PixelAimbot
                 using (var input = new OcrInput())
                 {
                     var contentArea = new Rectangle() {X = x, Y = y, Height = height, Width = width};
-                    input.AddImage(screenCapture.ToBitmap(), contentArea);
+                    
+                    input.AddImage(screenCapture, contentArea);
                     result = tess.Read(input).Text;
                     Debug.WriteLine(result);
                     return result;
@@ -75,13 +76,49 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
 
             return null;
         }
-
+        public  static Bitmap SetGrayscale(Bitmap img)
+        {
+    
+            Bitmap temp = (Bitmap)img;
+            Color c;
+            for (int i = 0; i < img.Width; i++)
+            {
+                for (int j = 0; j < img.Height; j++)
+                {
+                    c = img.GetPixel(i, j);
+                    byte gray = (byte)(.299 * c.R + .587 * c.G + .114 * c.B);
+    
+                    img.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
+                }
+            }
+            return (Bitmap)img;
+    
+        }
+        
+        public static Bitmap RemoveNoise(Bitmap bmap)
+        {
+    
+            for (var x = 0; x < bmap.Width; x++)
+            {
+                for (var y = 0; y < bmap.Height; y++)
+                {
+                    var pixel = bmap.GetPixel(x, y);
+                    if (pixel.R < 162 && pixel.G < 162 && pixel.B < 162)
+                        bmap.SetPixel(x, y, Color.Black);
+                    else if (pixel.R > 162 && pixel.G > 162 && pixel.B > 162)
+                        bmap.SetPixel(x, y, Color.White);
+                }
+            }
+    
+            return bmap;
+        }
         private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
 
         public static int Between(int minimumValue, int maximumValue)
@@ -445,6 +482,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
@@ -583,7 +621,7 @@ namespace PixelAimbot
             return checkboxState;
         }
 
-        private static Image CropImage(Image img, Rectangle cropArea)
+        private static Bitmap CropImage(Image img, Rectangle cropArea)
         {
             var bmpImage = new Bitmap(img);
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
