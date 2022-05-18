@@ -301,12 +301,12 @@ namespace PixelAimbot
                         }
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        await Task.Delay(humanizer.Next(10, 240) + 1000);
+                        await Task.Delay(humanizer.Next(10, 240) + 1000,token);
 
                         GetStartPic();
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        await Task.Delay(humanizer.Next(10, 240) + 500);
+                        await Task.Delay(humanizer.Next(10, 240) + 500, token);
                     }
                     if (processName.Length == 0 && chBoxCrashDetection.Checked)
                     {
@@ -1069,13 +1069,13 @@ namespace PixelAimbot
         //public bool awakening;
         private async Task TEST(CancellationToken token)
         {
-
+            await Task.Delay(1, token);
             // 'HIER WURDE DIE BOSS DETECTION GETESTET'
             //
             //
 
-            
-           
+
+
         }
 
        

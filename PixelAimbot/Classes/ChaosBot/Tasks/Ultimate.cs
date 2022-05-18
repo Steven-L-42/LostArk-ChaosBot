@@ -105,7 +105,7 @@ namespace PixelAimbot
 
                                 if (chBoxDeathblade2.Checked)
                                 {
-                                    await Task.Delay(humanizer.Next(10, 240) + 500);
+                                    await Task.Delay(humanizer.Next(10, 240) + 500, token);
                                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                 }

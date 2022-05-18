@@ -112,7 +112,7 @@ namespace PixelAimbot
                                 var t12 = Task.Run(() => Leavedungeon(cts.Token));
                                 await Task.WhenAny(new[] {t12});
 
-                                await Task.Delay(humanizer.Next(10, 240) + 5000);
+                                await Task.Delay(humanizer.Next(10, 240) + 5000, token);
 
                                 var picture = new PrintScreen();
                                 Stream stream = ToStream(picture.CaptureScreen(), ImageFormat.Png);
@@ -129,7 +129,7 @@ namespace PixelAimbot
                         if (text.Contains("inv"))
                         {
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                            await Task.Delay(humanizer.Next(10, 240) + 100);
+                            await Task.Delay(humanizer.Next(10, 240) + 100, token);
                             var picture = new PrintScreen();
                             var screen = picture.CaptureScreen();
                             

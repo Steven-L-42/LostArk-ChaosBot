@@ -19,7 +19,7 @@ namespace PixelAimbot
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Repair starts in " + int.Parse(txtRestart.Text) + " seconds..."));
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000), token);
 
                 // KLICK UNTEN RECHTS (RATGEBER)
                 token.ThrowIfCancellationRequested();

@@ -89,7 +89,6 @@ namespace PixelAimbot
                     _floorFight = true;
                     _revive = true;
                     _ultimate = true;
-
                     _potions = true;
 
                     // PORTAL DETECT BOOL is on a lower place
@@ -106,16 +105,14 @@ namespace PixelAimbot
 
                     if (_leavetimer == 1 && chBoxLeavetimer.Checked)
                     {
+                        _leavetimer++;
                         var t36 = Task.Run(() => Leavetimerfloor2(token));
-                        await Task.WhenAny(t36);
-
                     }
                     if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
+                        _leavetimer++;
                         starten = true; // Für BossKillDetection
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
-                        await Task.WhenAny(t36);
-
                     }
                    
                     var t18 = Task.Run(() => BossKillDetection(token));
@@ -124,7 +121,7 @@ namespace PixelAimbot
                     var t16 = Task.Run(() => Revive(token));
                     var t20 = Task.Run(() => Potions(token));
 
-                    await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtDungeon2.Text) * 1000);
+                    await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtDungeon2.Text) * 1000), token);
 
                   
 
@@ -520,7 +517,7 @@ namespace PixelAimbot
                                 _floor1 = false;
                                 _floorFight = false;
 
-                                _stopp = false;
+                          
                                 if (_floorint2 == 2)
                                 {
                                     _floor2 = false;
@@ -601,7 +598,7 @@ namespace PixelAimbot
         public bool gefunden;
         private async Task BossKillDetection(CancellationToken token)
         {
-            if (chBoxLeavetimer.Checked == false && _stopp == false)
+            if (!chBoxLeavetimer.Checked && !_stopp)
             {
                 try
                 {
@@ -636,12 +633,12 @@ namespace PixelAimbot
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
                                 gefunden = false;
 
-                                while (starten && !gefunden && !_stopp && chBoxAwakening.Checked)
+                                while (!_stopp && chBoxAwakening.Checked)
                                 {
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token); 
                                     object Awakening = Pixel.PixelSearch(Recalc(1161), Recalc(66, false), Recalc(1187),
-                                        Recalc(83, false), 0x9C1B16, 10);
+                                        Recalc(83, false), 0x9C1B16, 20);
                                     if (Awakening.ToString() == "0")
                                     {
 
@@ -674,7 +671,7 @@ namespace PixelAimbot
 
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
                                 starten = false;
-                                gefunden = true;
+                                gefunden = false;
                                 _stopp = true;
                                 _portalIsDetected = false;
 
@@ -883,7 +880,7 @@ namespace PixelAimbot
 
                 _searchSequence = 1;
 
-                await Task.Delay(humanizer.Next(10, 240) + 8000);
+                await Task.Delay(humanizer.Next(10, 240) + 8000, token);
                 _searchboss = true;
                 var t12 = Task.Run(() => SEARCHBOSS(token));
                 await Task.WhenAny(new[] {t12});
@@ -923,7 +920,7 @@ namespace PixelAimbot
 
                     if (_searchSequence == 1)
                     {
-                        await Task.Delay(humanizer.Next(10, 240) + 1500);
+                        await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                         VirtualMouse.MoveTo(Recalc(960), Recalc(529, false), 10);
                         KeyboardWrapper.PressKey(currentMouseButton);
 

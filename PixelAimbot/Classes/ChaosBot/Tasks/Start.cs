@@ -78,7 +78,7 @@ namespace PixelAimbot
 
                 /////////////// CLICK ON ACCEPT ///////////////
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 1000);
+                await Task.Delay(humanizer.Next(10, 240) + 1000, token);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                 token.ThrowIfCancellationRequested();
