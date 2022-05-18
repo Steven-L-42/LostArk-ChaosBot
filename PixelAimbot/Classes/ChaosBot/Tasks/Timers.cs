@@ -114,7 +114,7 @@ namespace PixelAimbot
                     _stopp = true;
                     _portalIsDetected = false;
                     starten = false;
-                    gefunden = false;
+                    gefunden = true;
                     _portalIsNotDetected = false;
                     _floorFight = false;
                     _searchboss = false;

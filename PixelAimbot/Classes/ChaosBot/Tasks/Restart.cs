@@ -18,7 +18,7 @@ namespace PixelAimbot
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
                 await Task.Delay(humanizer.Next(10, 240) + int.Parse(txtRestart.Text) * 1000);
                 starten = false;
-                gefunden = false;
+                gefunden = true;
                 _stopp = true;
                 _portalIsDetected = false;
 
@@ -110,10 +110,10 @@ namespace PixelAimbot
                      
                         token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            ChaosAllRounds++;
+                            
                             cts.Cancel();
                             starten = false;
-                            gefunden = false;
+                            gefunden = true;
                             _start = false;
                             _stopp = false;
                             _stop = false;

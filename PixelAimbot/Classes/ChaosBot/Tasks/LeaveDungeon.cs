@@ -13,7 +13,7 @@ namespace PixelAimbot
             try
             {
                 starten = false;
-                gefunden = false;
+                gefunden = true;
                 _stopp = true;
                 _portalIsDetected = false;
 
@@ -120,7 +120,7 @@ namespace PixelAimbot
 
 
                 starten = false;
-                gefunden = false;
+                gefunden = true;
                 _stopp = true;
                 _portalIsDetected = false;
 
@@ -153,7 +153,7 @@ namespace PixelAimbot
                 _S = true;
                 _D = true;
                 _F = true;
-
+                ChaosAllRounds++;
                 // KLICKT ENTER
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
