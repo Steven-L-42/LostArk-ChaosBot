@@ -105,14 +105,14 @@ namespace PixelAimbot
 
         private async void ChaosRunTimed_Load(object sender, EventArgs e)
         {
-
+          
             picChaosStart.Image = ChaosBot.StartInvColor;
             picChaosEnd.Image = ChaosBot.EndInvColor;
 
             long Full = ChaosBot.ChaosTime.Ticks+10000000;
 
             DateTime ChaosTimePlus1 = new DateTime(Full);
-           
+            ChaosBot.ChaosPerfectRounds = ChaosBot.ChaosAllRounds - ChaosBot.ChaosAllStucks;
             this.lbChaosRunStart.Text = ChaosBot.ChaosStart.ToString("HH:mm:ss");
             this.lbChaosRunStop.Text = ChaosBot.ChaosStop.ToString("HH:mm:ss");
             this.lbChaosRunTime.Text = ChaosTimePlus1.ToString("HH:mm:ss");

@@ -12,10 +12,10 @@ namespace PixelAimbot
         {
             try
             {
-                _stopp = true;
-                _portalIsDetected = false;
                 starten = false;
                 gefunden = false;
+                _stopp = true;
+                _portalIsDetected = false;
 
                 _portalIsNotDetected = false;
                 _floorFight = false;
@@ -26,7 +26,26 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                
+
+                _bard = false;
+                _gunlancer = false;
+                _shadowhunter = false;
+                _paladin = false;
+                _deathblade = false;
+                _sharpshooter = false;
+                _sorcerer = false;
+                _soulfist = false;
+                _sharpshooter = false;
+                _berserker = false;
+                _doUltimateAttack = true;
+                _Q = true;
+                _W = true;
+                _E = true;
+                _R = true;
+                _A = true;
+                _S = true;
+                _D = true;
+                _F = true;
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -98,11 +117,14 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-              
 
-                _stopp = true;
+
                 starten = false;
                 gefunden = false;
+                _stopp = true;
+                _portalIsDetected = false;
+
+                _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;
                 _revive = false;
@@ -111,17 +133,26 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-                
 
+                _bard = false;
                 _gunlancer = false;
                 _shadowhunter = false;
-                _berserker = false;
                 _paladin = false;
                 _deathblade = false;
                 _sharpshooter = false;
-                _bard = false;
                 _sorcerer = false;
                 _soulfist = false;
+                _sharpshooter = false;
+                _berserker = false;
+                _doUltimateAttack = true;
+                _Q = true;
+                _W = true;
+                _E = true;
+                _R = true;
+                _A = true;
+                _S = true;
+                _D = true;
+                _F = true;
 
                 // KLICKT ENTER
                 await Task.Delay(humanizer.Next(10, 240) + 1000);

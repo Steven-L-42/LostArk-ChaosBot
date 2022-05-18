@@ -31,7 +31,7 @@ namespace PixelAimbot
                 _S = false;
                 _D = false;
                 _F = false;
-
+               
 
 
                 token.ThrowIfCancellationRequested();

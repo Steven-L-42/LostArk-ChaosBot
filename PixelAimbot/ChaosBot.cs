@@ -264,6 +264,7 @@ namespace PixelAimbot
                         this.Hide();
                         ChaosAllRounds = 0;
                         ChaosAllStucks = 0;
+                        ChaosPerfectRounds = 0;
                         ChaosGameCrashed = 0;
 
                         ChaosStart = DateTime.Now;

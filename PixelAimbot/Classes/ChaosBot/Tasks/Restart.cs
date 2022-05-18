@@ -31,6 +31,26 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
+
+                _bard = false;
+                _gunlancer = false;
+                _shadowhunter = false;
+                _paladin = false;
+                _deathblade = false;
+                _sharpshooter = false;
+                _sorcerer = false;
+                _soulfist = false;
+                _sharpshooter = false;
+                _berserker = false;
+                _doUltimateAttack = true;
+                _Q = true;
+                _W = true;
+                _E = true;
+                _R = true;
+                _A = true;
+                _S = true;
+                _D = true;
+                _F = true;
                 if (chBoxChannelSwap.Checked)
                 {
                     if (_swap == 3)
