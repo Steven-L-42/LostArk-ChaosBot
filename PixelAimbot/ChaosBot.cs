@@ -237,6 +237,10 @@ namespace PixelAimbot
         public static Bitmap StartInvGray;
         public static Bitmap EndInvGray;
 
+        public static Bitmap SaveForUser;
+        public static string saveFor;
+
+
         private async void btnStart_Click(object sender, EventArgs e)
         {
             if (_start == false)
