@@ -644,16 +644,9 @@ namespace PixelAimbot
 
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
                                         await Task.Delay(500, token);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
                                         await Task.Delay(500, token);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
-                                        await Task.Delay(500, token);
-                                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_V, 2000);
                                         gefunden = true;
                                     }
                                     Random random2 = new Random();

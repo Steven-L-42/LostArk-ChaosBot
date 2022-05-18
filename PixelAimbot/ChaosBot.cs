@@ -101,7 +101,7 @@ namespace PixelAimbot
             if (!F10Registered)
             {
                 btnPause_Click(null, null);
-                cts.Cancel();
+
             }
         }
 
@@ -1035,48 +1035,48 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
         int test = 0;
-        private async void button1_Click(object sender, EventArgs e)
+        private /*async*/ void button1_Click(object sender, EventArgs e)
         {
-            cts = new CancellationTokenSource();
-            var token = cts.Token;
+            //cts = new CancellationTokenSource();
+            //var token = cts.Token;
 
-            token.ThrowIfCancellationRequested();
-            await Task.Delay(1, token);
-            Process[] processName = Process.GetProcessesByName("LostArk");
-            processName = Process.GetProcessesByName("LostArk");
-            if (processName.Length == 1)
-            {
-                handle = processName[0].MainWindowHandle;
-                SetForegroundWindow(handle);
-            }
-            test++;
-            if(test == 2)
-            {
-                test = 0;
-                cts.Cancel();
-            }
-            else
-            {
-                teststart = true;
-                awakening = true;
-                var leave = Task.Run(() => TEST(token));
+            //token.ThrowIfCancellationRequested();
+            //await Task.Delay(1, token);
+            //Process[] processName = Process.GetProcessesByName("LostArk");
+            //processName = Process.GetProcessesByName("LostArk");
+            //if (processName.Length == 1)
+            //{
+            //    handle = processName[0].MainWindowHandle;
+            //    SetForegroundWindow(handle);
+            //}
+            //test++;
+            //if(test == 2)
+            //{
+            //    test = 0;
+            //    cts.Cancel();
+            //}
+            //else
+            //{
+            //    teststart = true;
+            //    awakening = true;
+            //    var leave = Task.Run(() => TEST(token));
 
-            }
+            //}
 
 
         }
-        public bool teststart;
-        //public bool awakening;
-        private async Task TEST(CancellationToken token)
-        {
-            await Task.Delay(1, token);
-            // 'HIER WURDE DIE BOSS DETECTION GETESTET'
-            //
-            //
+        //public bool teststart;
+        ////public bool awakening;
+        //private async Task TEST(CancellationToken token)
+        //{
+        //    await Task.Delay(1, token);
+        //    // 'HIER WURDE DIE BOSS DETECTION GETESTET'
+        //    //
+        //    //
 
 
 
-        }
+        //}
 
        
 

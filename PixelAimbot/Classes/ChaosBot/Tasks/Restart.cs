@@ -16,7 +16,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000));
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000),token);
                 starten = false;
                 gefunden = false;
                 _restart = true;
@@ -109,54 +109,56 @@ namespace PixelAimbot
                 {
                     try
                     {
-                     
+
                         token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            
-                            cts.Cancel();
-                            starten = false;
-                             gefunden = false;
-                             _start = false;
-                            _stopp = true;
-                            _stop = false;
-                            _restart = false;
-                            _logout = false;
+                        await Task.Delay(1, token);
+                        cts.Cancel();
+
+                        starten = false;
+                        gefunden = false;
+                        _start = false;
+                        _stopp = true;
+                        _restart = false;
+                        _logout = false;
 
 
-                            _gunlancer = false;
-                            _shadowhunter = false;
-                            _berserker = false;
-                            _paladin = false;
-                            _deathblade = false;
-                            _sharpshooter = false;
-                            _bard = false;
-                            _sorcerer = false;
-                            _soulfist = false;
+                        _gunlancer = false;
+                        _shadowhunter = false;
+                        _berserker = false;
+                        _paladin = false;
+                        _deathblade = false;
+                        _sharpshooter = false;
+                        _bard = false;
+                        _sorcerer = false;
+                        _soulfist = false;
 
-                            _floor1 = false;
-                            _floor2 = false;
+                        _floor1 = false;
+                        _floor2 = false;
 
-                            _floorFight = false;
-                            _searchboss = false;
+                        _floorFight = false;
+                        _searchboss = false;
 
-                            _revive = false;
-                            _portaldetect = false;
-                            _ultimate = false;
-                            _potions = false;
+                        _revive = false;
+                        _portaldetect = false;
+                        _ultimate = false;
+                        _potions = false;
 
-                            _Q = false;
-                            _W = false;
-                            _E = false;
-                            _R = false;
-                            _A = false;
-                            _S = false;
-                            _D = false;
-                            _F = false;
-                            await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
-                            _stop = true;
-                        
-                       
+                        _Q = false;
+                        _W = false;
+                        _E = false;
+                        _R = false;
+                        _A = false;
+                        _S = false;
+                        _D = false;
+                        _F = false;
+
+                        await Task.Delay(humanizer.Next(10, 240) + 2000);
+                        _start = false;
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
+                        await Task.Delay(1000);
+                      
+
+
                     }
                     catch (AggregateException)
                     {
