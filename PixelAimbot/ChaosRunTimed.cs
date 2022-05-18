@@ -31,7 +31,7 @@ namespace PixelAimbot
                 while (iter <=5)
                 {
                     iter++;
-                    float threshold = 0.8f;
+                    float threshold = 1f; // should be disabled
                     var Guardian1 = ChaosBot.Image_GuardianStone1;
                     var Guardian1Mask = ChaosBot.Image_GuardianStone1Mask;
                     var Destruct3 = ChaosBot.Image_DestructStone3;
@@ -106,8 +106,8 @@ namespace PixelAimbot
         private async void ChaosRunTimed_Load(object sender, EventArgs e)
         {
             TopMost = true;
-            picChaosStart.Image = ChaosBot.StartInvColor;
-            picChaosEnd.Image = ChaosBot.EndInvColor;
+            picChaosStart.Image = ChaosBot.StartInventar;
+            picChaosEnd.Image = ChaosBot.EndInventar;
 
             long Full = ChaosBot.ChaosTime.Ticks+10000000;
 

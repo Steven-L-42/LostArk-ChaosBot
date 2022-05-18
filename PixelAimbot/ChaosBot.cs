@@ -165,55 +165,42 @@ namespace PixelAimbot
                 ChaosTime = ChaosStop - ChaosStart;
 
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                await Task.Delay(humanizer.Next(10, 240) + 100);
+                await Task.Delay(humanizer.Next(10, 240) + 1000);
 
-
-                Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
-
-                using (Bitmap bitmap = new Bitmap(543, 564))
-                {
-                    endinv = "EndInv.jpg";
-                    using (Graphics g = Graphics.FromImage(bitmap))
-                    {
-                        g.CopyFromScreen(p1, p2, Inventory.Size);
-                    }
-
-                    bitmap.Save(endinv, ImageFormat.Jpeg);
-
-                }
-
+                GetEndPic();
+                
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
 
 
-                Bitmap start = new Bitmap(startinv);
-                StartInvColor = start;
-                StartInvGray = new Bitmap(start.Width, start.Height);
+                //Bitmap start = new Bitmap(startinv);
+                //StartInvColor = start;
+                //StartInvGray = new Bitmap(start.Width, start.Height);
 
-                Bitmap end = new Bitmap(endinv);
-                EndInvColor = end;
-                EndInvGray = new Bitmap(end.Width, end.Height);
+                //Bitmap end = new Bitmap(endinv);
+                //EndInvColor = end;
+                //EndInvGray = new Bitmap(end.Width, end.Height);
 
-                for (int i = 0; i < start.Width; i++)
-                {
-                    for (int x = 0; x < start.Height; x++)
-                    {
-                        Color oc = start.GetPixel(i, x);
-                        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                        StartInvGray.SetPixel(i, x, nc);
-                    }
-                }
+                //for (int i = 0; i < start.Width; i++)
+                //{
+                //    for (int x = 0; x < start.Height; x++)
+                //    {
+                //        Color oc = start.GetPixel(i, x);
+                //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                //        StartInvGray.SetPixel(i, x, nc);
+                //    }
+                //}
 
-                for (int j = 0; j < end.Width; j++)
-                {
-                    for (int y = 0; y < end.Height; y++)
-                    {
-                        Color oc = end.GetPixel(j, y);
-                        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                        EndInvGray.SetPixel(j, y, nc);
-                    }
-                }
+                //for (int j = 0; j < end.Width; j++)
+                //{
+                //    for (int y = 0; y < end.Height; y++)
+                //    {
+                //        Color oc = end.GetPixel(j, y);
+                //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                //        EndInvGray.SetPixel(j, y, nc);
+                //    }
+                //}
 
                 ChaosRunTimed form = new ChaosRunTimed();
                 form.Show();
@@ -224,9 +211,39 @@ namespace PixelAimbot
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
             }
         }
+        private Bitmap GetStartPic()
+        {
+            Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+
+            StartInventar = new Bitmap(543, 564, PixelFormat.Format32bppArgb);
+
+            using (Graphics gfxScreenshot = Graphics.FromImage(StartInventar))
+            {
+                gfxScreenshot.CopyFromScreen(p1, p2, Inventory.Size);
+            }
+
+            return StartInventar;
+        }
+        private Bitmap GetEndPic()
+        {
+            Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1326), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+
+            EndInventar = new Bitmap(543, 564, PixelFormat.Format32bppArgb);
+
+            using (Graphics gfxScreenshot = Graphics.FromImage(EndInventar))
+            {
+                gfxScreenshot.CopyFromScreen(p1, p2, Inventory.Size);
+            }
+          
+            return EndInventar;
+        }
+
         public static TimeSpan ChaosTime = new TimeSpan();
         public static DateTime ChaosStart;
         public static DateTime ChaosStop;
+
+        public static Bitmap StartInventar;
+        public static Bitmap EndInventar;
 
         public static Bitmap StartInvColor;
         public static string startinv;
@@ -239,6 +256,7 @@ namespace PixelAimbot
 
         public static Bitmap SaveForUser;
         public static string saveFor;
+
 
 
         private async void btnStart_Click(object sender, EventArgs e)
@@ -285,19 +303,7 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(humanizer.Next(10, 240) + 1000);
 
-
-                        Rectangle Inventory = new Rectangle(ChaosBot.Recalc(1322), ChaosBot.Recalc(189, false), ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
-
-                        using (Bitmap bitmap = new Bitmap(543,564))
-                        {
-                            startinv = "StartInv.jpg";
-                            using (Graphics g = Graphics.FromImage(bitmap))
-                            {
-                                g.CopyFromScreen(p1, p2, Inventory.Size);
-                            }
-
-                            bitmap.Save(startinv, ImageFormat.Jpeg);
-                        }
+                        GetStartPic();
 
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         await Task.Delay(humanizer.Next(10, 240) + 500);
