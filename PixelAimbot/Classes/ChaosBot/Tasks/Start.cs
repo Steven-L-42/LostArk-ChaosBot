@@ -71,10 +71,15 @@ namespace PixelAimbot
                 await Task.Delay(1, token);
 
                 // Für VALTAN Update
-                // KeyboardWrapper.MultiplePressKey(KeyboardWrapper.VK_ALT, KeyboardWrapper.VK_Q);
-
-                // ALT
-                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                if(chBoxValtanAltQ.Checked)
+                {
+                    KeyboardWrapper.MultiplePressKey(KeyboardWrapper.VK_ALT, KeyboardWrapper.VK_Q);
+                }
+                else
+                {
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                }
+            
 
                 /////////////// CLICK ON ENTER /////////////////
                 token.ThrowIfCancellationRequested();

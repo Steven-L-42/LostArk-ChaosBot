@@ -529,6 +529,7 @@ namespace PixelAimbot
             radioEnglish.Checked = Properties.Settings.Default.radioEnglish;
             radioGerman.Checked = Properties.Settings.Default.radioGerman;
             cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
+            chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -668,6 +669,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.radioGerman = false;
                 Properties.Settings.Default.radioEnglish = true;
                 Properties.Settings.Default.cmbHealKey = 0;
+                Properties.Settings.Default.chBoxValtanAltQ = false;
 
 
                 Properties.Settings.Default.Save();
@@ -745,6 +747,7 @@ namespace PixelAimbot
                 radioEnglish.Checked = Properties.Settings.Default.radioEnglish;
                 radioGerman.Checked = Properties.Settings.Default.radioGerman;
                 cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
+                chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
 
             }
             catch (Exception ex)
@@ -854,6 +857,7 @@ namespace PixelAimbot
                     rotation.radioGerman = radioGerman.Checked;
                     rotation.radioEnglish = radioEnglish.Checked;
                     rotation.cmbHealKey = cmbHealKey.SelectedIndex;
+                    rotation.chBoxValtanAltQ = chBoxValtanAltQ.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -952,6 +956,7 @@ namespace PixelAimbot
                 radioEnglish.Checked = rotation.radioEnglish;
                 radioGerman.Checked = rotation.radioGerman;
                 cmbHealKey.SelectedIndex = rotation.cmbHealKey;
+                chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
