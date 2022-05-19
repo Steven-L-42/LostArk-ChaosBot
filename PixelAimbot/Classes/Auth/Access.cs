@@ -36,13 +36,14 @@ namespace PixelAimbot.Classes.Auth
                     }
                     catch (Exception ex)
                     {
-                        
+                        ExceptionHandler.SendException(ex);
                         Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
                     }
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
             }
         }
@@ -104,6 +105,7 @@ namespace PixelAimbot.Classes.Auth
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 Alert.Show(ex.Message, frmAlert.enmType.Error);
                 return false;
             }

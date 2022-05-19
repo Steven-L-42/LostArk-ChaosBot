@@ -443,7 +443,7 @@ namespace PixelAimbot
                                     if (selectedIndex == 1)
                                     {
                                         textBoxTextSearch.Invoke((MethodInvoker) (() =>
-                                            textBoxTextSearch.Text = ChaosBot.ReadArea(screenCapture, x, y, width * -1,
+                                            textBoxTextSearch.Text = ChaosBot.ReadArea(screenCapture.ToBitmap(), x, y, width * -1,
                                                 height * -1, "")));
                                     }
                                     else
@@ -659,6 +659,7 @@ namespace PixelAimbot
             SelectArea form1 = new SelectArea();
             form1.InstanceRef = this;
             form1.Show();
+            form1.TopMost = true;
         }
 
         private void trackBarThreadSleep_ValueChanged(object sender, EventArgs e)

@@ -31,7 +31,7 @@ namespace PixelAimbot
                 while (iter <=5)
                 {
                     iter++;
-                    float threshold = 1f; // should be disabled
+                    float threshold = 0.8f; // should be disabled
                     var Guardian1 = ChaosBot.Image_GuardianStone1;
                     var Guardian1Mask = ChaosBot.Image_GuardianStone1Mask;
                     var Destruct3 = ChaosBot.Image_DestructStone3;
@@ -56,12 +56,14 @@ namespace PixelAimbot
                         {
                             lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosGuardian.Text = invGuardian));
 
-                            VirtualMouse.MoveTo(ChaosBot.Recalc(Stones.Value.X), ChaosBot.Recalc(Stones.Value.Y - 15,false));
+                            VirtualMouse.MoveTo(this.Location.X + Stones.Value.X, this.Location.Y + Stones.Value.Y - ChaosBot.Recalc(25, false));
 
                             
-                            using (var screenCapture2 = new Bitmap(screenPrinter2.CaptureScreen()).ToImage<Bgr, byte>())
+                            using (screenCapture)
                             {
-                                var invStart = ChaosBot.ReadArea(screenCapture2, Stones.Value.X, Stones.Value.Y - 15, 46, 15, "");
+                                var invStart = ChaosBot.ReadArea(ChaosBot.RemoveNoise(ChaosBot.SetGrayscale(screenCapture.ToBitmap())), Stones.Value.X, Stones.Value.Y - 15, 46, 15, "");
+                                Debug.WriteLine((Location.X + Destructs.Value.X) + "-" + (Location.Y + Destructs.Value.Y - 15) + "-" + 46+ "-" + 15);
+
                                 invGuardian = invStart;
                                 lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosGuardian.Text = invGuardian));
                             }
@@ -70,11 +72,12 @@ namespace PixelAimbot
                         if(Destructs.HasValue)
                         {
                             lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosDestruction.Text = invDestruct));
-                            VirtualMouse.MoveTo(ChaosBot.Recalc(Destructs.Value.X), ChaosBot.Recalc(Destructs.Value.Y - 15,false));
+                            VirtualMouse.MoveTo(this.Location.X + Destructs.Value.X,this.Location.Y +  Destructs.Value.Y - ChaosBot.Recalc(25, false));
 
-                            using (var screenCapture2 = new Bitmap(screenPrinter2.CaptureScreen()).ToImage<Bgr, byte>())
+                            using (screenCapture)
                             {
-                                var invStart2 = ChaosBot.ReadArea(screenCapture2, Destructs.Value.X, Destructs.Value.Y - 15, 46, 15, "");
+                                var invStart2 = ChaosBot.ReadArea(ChaosBot.RemoveNoise(ChaosBot.SetGrayscale(screenCapture.ToBitmap())), Destructs.Value.X, Destructs.Value.Y - 15, 46, 15, "");
+                                Debug.WriteLine(Location.X + Destructs.Value.X + "-" + (Location.Y + Destructs.Value.Y - 15) + "-" + 46+ "-" + 15);
                                 invDestruct = invStart2;
                                 lbChaosGuardian.Invoke((MethodInvoker)(() => lbChaosDestruction.Text = invDestruct));
                             }
@@ -97,6 +100,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
@@ -106,6 +110,15 @@ namespace PixelAimbot
         private async void ChaosRunTimed_Load(object sender, EventArgs e)
         {
             TopMost = true;
+            this.Size = new Size(ChaosBot.Recalc(Size.Width), ChaosBot.Recalc(Size.Height, false));
+            
+            splitContainer2.Size = new Size(ChaosBot.Recalc(splitContainer2.Size.Width), ChaosBot.Recalc(splitContainer2.Size.Height, false));
+            splitContainer2.SplitterDistance = splitContainer2.Size.Width/2;
+            
+            picChaosStart.MaximumSize = picChaosStart.MinimumSize = picChaosStart.Size = new Size(ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+            
+            picChaosEnd.MaximumSize = picChaosEnd.MinimumSize = picChaosEnd.Size = new Size(ChaosBot.Recalc(544), ChaosBot.Recalc(640, false));
+            
             picChaosStart.Image = ChaosBot.StartInventar;
             picChaosEnd.Image = ChaosBot.EndInventar;
 
@@ -132,6 +145,7 @@ namespace PixelAimbot
         private void button1_Click_1(object sender, EventArgs e)
         {
             TopMost = false;
+            
             //SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
 
             //saveFileDialog1.InitialDirectory = @"C:\";
@@ -161,7 +175,7 @@ namespace PixelAimbot
                
             }
         }
-
+    
         private void timer1_Tick(object sender, EventArgs e)
         {
             label18.Text = DateTime.Now.ToString("HH:mm:ss");

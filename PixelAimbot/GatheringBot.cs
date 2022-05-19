@@ -145,6 +145,7 @@ namespace PixelAimbot
                 }
                 catch(Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }
@@ -349,6 +350,7 @@ namespace PixelAimbot
                 }
                 catch(Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }

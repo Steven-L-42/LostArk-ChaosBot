@@ -213,9 +213,9 @@ namespace PixelAimbot
                     {
                         File.Delete(file);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
+                        ExceptionHandler.SendException(ex);
                     }
                 }
 
@@ -246,8 +246,9 @@ namespace PixelAimbot
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 Alert.Show("Cannot check for Application Update. Please contact Developer", frmAlert.enmType.Error);
             }
         }
