@@ -1078,5 +1078,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxCompare"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxNPCRepair {
+            get {
+                return ((bool)(this["chBoxNPCRepair"]));
+            }
+            set {
+                this["chBoxNPCRepair"] = value;
+            }
+        }
     }
 }

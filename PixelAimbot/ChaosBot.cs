@@ -541,6 +541,7 @@ namespace PixelAimbot
             cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
             chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
             chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
+            chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -574,6 +575,7 @@ namespace PixelAimbot
             {
                 txtRepair.ReadOnly = false;
                 chBoxNPCRepair.Checked = false;
+                chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
             }
             else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
             {
@@ -587,6 +589,7 @@ namespace PixelAimbot
             {
                 txtRepair.ReadOnly = false;
                 chBoxAutoRepair.Checked = false;
+                chBoxValtanAltQ.Checked = true;
             }
             else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
             {
@@ -695,6 +698,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.cmbHealKey = 0;
                 Properties.Settings.Default.chBoxValtanAltQ = false;
                 Properties.Settings.Default.chBoxCompare = false;
+                Properties.Settings.Default.chBoxNPCRepair = false;
 
 
                 Properties.Settings.Default.Save();
@@ -774,6 +778,7 @@ namespace PixelAimbot
                 cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
                 chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
                 chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
+                chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
 
             }
             catch (Exception ex)
@@ -885,6 +890,7 @@ namespace PixelAimbot
                     rotation.cmbHealKey = cmbHealKey.SelectedIndex;
                     rotation.chBoxValtanAltQ = chBoxValtanAltQ.Checked;
                     rotation.chBoxCompare = chBoxCompare.Checked;
+                    rotation.chBoxNPCRepair = chBoxNPCRepair.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -985,6 +991,7 @@ namespace PixelAimbot
                 cmbHealKey.SelectedIndex = rotation.cmbHealKey;
                 chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
                 chBoxCompare.Checked = rotation.chBoxCompare;
+                chBoxNPCRepair.Checked = rotation.chBoxNPCRepair;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
