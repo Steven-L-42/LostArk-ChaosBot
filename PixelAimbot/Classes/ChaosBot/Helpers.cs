@@ -488,6 +488,502 @@ namespace PixelAimbot
             }
         }
 
+        /// ///////////////////     /// ///////////////////
+
+       
+        Bitmap skillQ;
+        Bitmap skillW;
+        Bitmap skillE;
+        Bitmap skillR;
+        Bitmap skillA;
+        Bitmap skillS;
+        Bitmap skillD;
+        Bitmap skillF;
+        public async Task SkillQ(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+
+                while (_Q)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token); 
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(686), ChaosBot.Recalc(984,false), ChaosBot.Recalc(698), ChaosBot.Recalc(991, false)))
+                        {
+                            _Q = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillW(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_W)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(735), ChaosBot.Recalc(984,false), ChaosBot.Recalc(744), ChaosBot.Recalc(991, false)))
+                        {
+                            _W = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillE(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_E)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(780), ChaosBot.Recalc(984,false), ChaosBot.Recalc(792), ChaosBot.Recalc(991, false)))
+                        {
+                            _E = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillR(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_R)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(828), ChaosBot.Recalc(984,false), ChaosBot.Recalc(838), ChaosBot.Recalc(991, false)))
+                        {
+                            _R = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillA(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_A)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token); 
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(710), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(720), ChaosBot.Recalc(1039, false)))
+                        {
+                            _A = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillS(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_S)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(755), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(768), ChaosBot.Recalc(1039, false)))
+                        {
+                            _S = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillD(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_D)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(802), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(812), ChaosBot.Recalc(1039, false)))
+                        {
+                            _D = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+        public async Task SkillF(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1000, token);
+                while (_F)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1, token);
+                        if (Pixel.isGrayScale(ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(863), ChaosBot.Recalc(1039, false)))
+                        {
+                            _F = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    Random random = new Random();
+                    var sleepTime = random.Next(100, 150);
+                    Thread.Sleep(sleepTime);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+
+
+        private void SetKeyCooldownGray(byte key)
+        {
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
+            switch (key)
+            {
+                case KeyboardWrapper.VK_A:
+                    _A = true;
+                    var t1 = Task.Run(() => SkillA(token));
+                    break;
+
+                case KeyboardWrapper.VK_S:
+                    _S = true;
+                    var t2 = Task.Run(() => SkillS(token));
+                    break;
+
+                case KeyboardWrapper.VK_D:
+                    _D = true;
+                    var t3 = Task.Run(() => SkillD(token));
+                    break;
+
+                case KeyboardWrapper.VK_F:
+                    _F = true;
+                    var t4 = Task.Run(() => SkillF(token));
+                    break;
+
+                case KeyboardWrapper.VK_Q:
+                    _Q = true;
+                    var t5 = Task.Run(() => SkillQ(token));
+                    break;
+
+                case KeyboardWrapper.VK_W:
+                    _W = true;
+                    var t6 = Task.Run(() => SkillW(token));
+                    break;
+
+                case KeyboardWrapper.VK_E:
+                    _E = true;
+                    var t7 = Task.Run(() => SkillE(token));
+                    break;
+
+                case KeyboardWrapper.VK_R:
+                    _R = true;
+                    var t8 = Task.Run(() => SkillR(token));
+                    break;
+            }
+        }
+        private bool isKeyOnCooldownGray(byte key)
+        {
+            var returnBoolean = false;
+            switch (key)
+            {
+                case KeyboardWrapper.VK_A:
+                    returnBoolean = _A;
+                    break;
+
+                case KeyboardWrapper.VK_S:
+                    returnBoolean = _S;
+                    break;
+
+                case KeyboardWrapper.VK_D:
+                    returnBoolean = _D;
+                    break;
+
+                case KeyboardWrapper.VK_F:
+                    returnBoolean = _F;
+                    break;
+
+                case KeyboardWrapper.VK_Q:
+                    returnBoolean = _Q;
+                    break;
+
+                case KeyboardWrapper.VK_W:
+                    returnBoolean = _W;
+                    break;
+
+                case KeyboardWrapper.VK_E:
+                    returnBoolean = _E;
+                    break;
+
+                case KeyboardWrapper.VK_R:
+                    returnBoolean = _R;
+                    break;
+            }
+
+            return returnBoolean;
+        }
+
+        /// ///////////////////     /// ///////////////////
+
         private bool isKeyOnCooldown(byte key)
         {
             var returnBoolean = false;

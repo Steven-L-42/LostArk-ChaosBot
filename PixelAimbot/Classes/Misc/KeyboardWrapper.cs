@@ -19,6 +19,8 @@ namespace PixelAimbot.Classes.Misc
         public const int MOUSEEVENTF_WHEEL = 2048;
         public const byte VK_LBUTTON = 0x01;
         public const byte VK_ALT = 0xA4;
+        public const byte VK_TAB = 0x09;
+            
         public const byte VK_RBUTTON = 0x02;
         public const byte VK_SPACE = 0x20;
         public const byte VK_ESCAPE = 0x1B;
@@ -70,6 +72,9 @@ namespace PixelAimbot.Classes.Misc
         /// Keyboard.KeyUp((byte)Keys.F24,5000);
         /// </code>
         /// </example>
+        /// 
+       
+
         public static void HoldKey(byte key, int duration)
         {
             var totalDuration = 0;
@@ -123,6 +128,14 @@ namespace PixelAimbot.Classes.Misc
         /// Keyboard.PressKey((byte)Keys.F24);
         /// </code>
         /// </example>
+        /// 
+        public static void MultiplePressKey(byte key1,byte key2)
+        {
+                keybd_event(key1, 0, KEY_DOWN_EVENT, 0);
+                keybd_event(key2, 0, KEY_DOWN_EVENT, 0);
+                keybd_event(key2, 0, KEY_UP_EVENT, 0);
+                keybd_event(key1, 0, KEY_UP_EVENT, 0);
+        }
         public static void PressKey(byte key)
         {
             if (key == KeyboardWrapper.VK_LBUTTON)

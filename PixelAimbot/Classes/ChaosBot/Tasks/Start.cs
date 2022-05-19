@@ -64,10 +64,16 @@ namespace PixelAimbot
                 //}
 
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
+               
 
                 /////////////// PRESS G TO ENTER ///////////////
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
+
+                // Für VALTAN Update
+                // KeyboardWrapper.MultiplePressKey(KeyboardWrapper.VK_ALT, KeyboardWrapper.VK_Q);
+
+                // ALT
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
                 /////////////// CLICK ON ENTER /////////////////

@@ -113,7 +113,7 @@ namespace PixelAimbot
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
                         cts.Cancel();
-
+                   
                         starten = false;
                         gefunden = false;
                         _start = false;
@@ -154,7 +154,7 @@ namespace PixelAimbot
 
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
                         _start = false;
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
+                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_F9,5000);
                         await Task.Delay(1000);
                       
 

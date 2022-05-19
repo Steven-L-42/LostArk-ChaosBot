@@ -342,9 +342,9 @@ namespace PixelAimbot
                         }
 
                     }
-                   
-                   
 
+
+                
                     await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
@@ -1062,7 +1062,6 @@ namespace PixelAimbot
             //    var leave = Task.Run(() => TEST(token));
 
             //}
-
 
         }
         //public bool teststart;
