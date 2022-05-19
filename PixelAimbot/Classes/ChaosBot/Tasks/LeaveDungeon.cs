@@ -161,12 +161,21 @@ namespace PixelAimbot
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                
-                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked)
+                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
-                    var t7 = Task.Run(() => Repair(token));
-                    await Task.WhenAny(t7);
+                    if(chBoxAutoRepair.Checked)
+                    {
+                        var t7 = Task.Run(() => Repair(token));
+                        await Task.WhenAny(t7);
+                    }
+                    else
+                    {
+                        var t7 = Task.Run(() => NPCRepair(token));
+                        await Task.WhenAny(t7);
+                    }
+                 
                 }
                 else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked)
                 {

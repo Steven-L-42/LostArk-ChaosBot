@@ -111,6 +111,7 @@ namespace PixelAimbot
                     if (_leavetimer == 1 && !chBoxLeavetimer.Checked)
                     {
                         _leavetimer++;
+                        _bossKillDetection = true; // Für BossKillDetection
                         starten = true; // Für BossKillDetection
                         var t36 = Task.Run(() => GlobalLeavetimerfloor2(token));
                     }
@@ -604,10 +605,12 @@ namespace PixelAimbot
         public bool starten;
         public bool awakening;
         public bool gefunden;
+        public bool _bossKillDetection;
         private async Task BossKillDetection(CancellationToken token)
         {
-            if (!chBoxLeavetimer.Checked && !_stopp)
+            if (!chBoxLeavetimer.Checked && !_stopp && _bossKillDetection)
             {
+                _bossKillDetection = false;
                 try
                 {
                     token.ThrowIfCancellationRequested();
@@ -641,7 +644,7 @@ namespace PixelAimbot
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "BOSS FIGHT!"));
                                 gefunden = false;
 
-                                while (!_stopp && chBoxAwakening.Checked)
+                                while (!gefunden && !_stopp && chBoxAwakening.Checked)
                                 {
                                     token.ThrowIfCancellationRequested();
                                     await Task.Delay(1, token); 
@@ -649,12 +652,13 @@ namespace PixelAimbot
                                         Recalc(83, false), 0x9C1B16, 20);
                                     if (Awakening.ToString() == "0")
                                     {
-
+                                        _doUltimateAttack = true;
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
                                         await Task.Delay(500, token);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
                                         await Task.Delay(500, token);
+                                        _doUltimateAttack = false;
                                         gefunden = true;
                                     }
                                     Random random2 = new Random();

@@ -88,5 +88,70 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
+
+        private async Task NPCRepair(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                DiscordSendMessage("Bot Repairs now!");
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Repair starts in " + int.Parse(txtRestart.Text) + " seconds..."));
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000), token);
+
+                // Klickt auf NPC
+                //
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                await Task.Delay(humanizer.Next(10, 240) + 2000, token);
+
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+
+                // KLICK AUF REPARIEREN
+                //
+                await Task.Delay(humanizer.Next(10, 240) + 1500, token);
+                VirtualMouse.MoveTo(Recalc(1085), Recalc(429, false), 5);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                VirtualMouse.MoveTo(Recalc(1085), Recalc(429, false), 5);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
+
+                // 2x ESCAPE REPARATUR UND BEGLEITER FENSTER SCHLIEßEN
+                await Task.Delay(humanizer.Next(10, 240) + 1500, token);
+                KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
+               
+
+
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Repair done!"));
+
+
+                await Task.Delay(humanizer.Next(10, 240) + 2000, token);
+
+                _RepairReset = true;
+
+                var t10 = Task.Run(() => Restart(token));
+                await Task.WhenAny(new[] { t10 });
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.SendException(ex);
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
     }
 }

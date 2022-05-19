@@ -573,14 +573,27 @@ namespace PixelAimbot
             if (chBoxAutoRepair.Checked)
             {
                 txtRepair.ReadOnly = false;
+                chBoxNPCRepair.Checked = false;
             }
-            else if (!chBoxAutoRepair.Checked)
+            else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
             {
                 txtRepair.ReadOnly = true;
                 
             }
         }
+        private void chBoxNPCRepair_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxNPCRepair.Checked)
+            {
+                txtRepair.ReadOnly = false;
+                chBoxAutoRepair.Checked = false;
+            }
+            else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
+            {
+                txtRepair.ReadOnly = true;
 
+            }
+        }
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)
         {
             
@@ -1048,7 +1061,7 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
         int test = 0;
-        private /*async*/ void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             //cts = new CancellationTokenSource();
             //var token = cts.Token;
@@ -1063,34 +1076,27 @@ namespace PixelAimbot
             //    SetForegroundWindow(handle);
             //}
             //test++;
-            //if(test == 2)
+            //if (test == 2)
             //{
             //    test = 0;
             //    cts.Cancel();
             //}
             //else
             //{
-            //    teststart = true;
-            //    awakening = true;
+               
             //    var leave = Task.Run(() => TEST(token));
 
             //}
 
         }
-        //public bool teststart;
-        ////public bool awakening;
-        //private async Task TEST(CancellationToken token)
-        //{
-        //    await Task.Delay(1, token);
-        //    // 'HIER WURDE DIE BOSS DETECTION GETESTET'
-        //    //
-        //    //
+     
+        private async Task TEST(CancellationToken token)
+        {
+            await Task.Delay(1, token);
+  
+        }
 
 
-
-        //}
-
-       
 
         private void chBoxLeavetimer_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1151,5 +1157,7 @@ namespace PixelAimbot
         {
             RefreshRotationCombox();
         }
+
+       
     }
 }

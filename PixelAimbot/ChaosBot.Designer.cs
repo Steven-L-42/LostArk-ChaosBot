@@ -154,6 +154,8 @@
             this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
             this.checkBoxDiscordNotifications = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chBoxCompare = new System.Windows.Forms.CheckBox();
             this.chBoxValtanAltQ = new System.Windows.Forms.CheckBox();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -196,8 +198,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
-            this.chBoxCompare = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.chBoxNPCRepair = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -267,6 +268,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chBoxNPCRepair);
             this.groupBox1.Controls.Add(this.cmbMINUTE);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbHOUR);
@@ -368,7 +370,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(204, 42);
+            this.label1.Location = new System.Drawing.Point(199, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 62;
@@ -519,7 +521,7 @@
             this.txtRepair.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtRepair.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRepair.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtRepair.Location = new System.Drawing.Point(166, 39);
+            this.txtRepair.Location = new System.Drawing.Point(161, 39);
             this.txtRepair.Name = "txtRepair";
             this.txtRepair.ReadOnly = true;
             this.txtRepair.Size = new System.Drawing.Size(35, 22);
@@ -539,11 +541,10 @@
             this.chBoxAutoRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxAutoRepair.Location = new System.Drawing.Point(4, 40);
             this.chBoxAutoRepair.Name = "chBoxAutoRepair";
-            this.chBoxAutoRepair.Size = new System.Drawing.Size(154, 24);
+            this.chBoxAutoRepair.Size = new System.Drawing.Size(54, 24);
             this.chBoxAutoRepair.TabIndex = 36;
-            this.chBoxAutoRepair.Text = "Auto-Repair";
-            this.toolTip1.SetToolTip(this.chBoxAutoRepair, "adjust your time from when to activate Auto-Repair, \r\nspecify in minutes. Do not " +
-        "enter the same time as for Auto-Logout!");
+            this.chBoxAutoRepair.Text = "Aura";
+            this.toolTip1.SetToolTip(this.chBoxAutoRepair, "YOU NEED ACTIVE CRYSTALLINE AURA!\r\n");
             this.chBoxAutoRepair.UseMnemonic = false;
             this.chBoxAutoRepair.UseVisualStyleBackColor = false;
             this.chBoxAutoRepair.CheckedChanged += new System.EventHandler(this.chBoxAutoRepair_CheckedChanged);
@@ -2082,6 +2083,36 @@
             this.groupBox11.Text = "Valtan Update";
             this.toolTip1.SetToolTip(this.groupBox11, "Only change if your ingame settings \r\nare different than those given here!");
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.Location = new System.Drawing.Point(121, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(129, 12);
+            this.label5.TabIndex = 79;
+            this.label5.Text = "DISABLE IF BOT DONT RESTART";
+            // 
+            // chBoxCompare
+            // 
+            this.chBoxCompare.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxCompare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxCompare.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxCompare.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxCompare.FlatAppearance.BorderSize = 0;
+            this.chBoxCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxCompare.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxCompare.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxCompare.Location = new System.Drawing.Point(1, 35);
+            this.chBoxCompare.Name = "chBoxCompare";
+            this.chBoxCompare.Size = new System.Drawing.Size(272, 24);
+            this.chBoxCompare.TabIndex = 80;
+            this.chBoxCompare.Text = "Comparison Statistic";
+            this.toolTip1.SetToolTip(this.chBoxCompare, "START DUNGEON WHEREVER YOU ARE");
+            this.chBoxCompare.UseMnemonic = false;
+            this.chBoxCompare.UseVisualStyleBackColor = false;
+            // 
             // chBoxValtanAltQ
             // 
             this.chBoxValtanAltQ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
@@ -2655,35 +2686,24 @@
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
             // 
-            // chBoxCompare
+            // chBoxNPCRepair
             // 
-            this.chBoxCompare.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxCompare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxCompare.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxCompare.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxCompare.FlatAppearance.BorderSize = 0;
-            this.chBoxCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxCompare.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxCompare.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.chBoxCompare.Location = new System.Drawing.Point(1, 35);
-            this.chBoxCompare.Name = "chBoxCompare";
-            this.chBoxCompare.Size = new System.Drawing.Size(272, 24);
-            this.chBoxCompare.TabIndex = 80;
-            this.chBoxCompare.Text = "Comparison Statistic";
-            this.toolTip1.SetToolTip(this.chBoxCompare, "START DUNGEON WHEREVER YOU ARE");
-            this.chBoxCompare.UseMnemonic = false;
-            this.chBoxCompare.UseVisualStyleBackColor = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
-            this.label5.Location = new System.Drawing.Point(121, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 12);
-            this.label5.TabIndex = 79;
-            this.label5.Text = "DISABLE IF BOT DONT RESTART";
+            this.chBoxNPCRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxNPCRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxNPCRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxNPCRepair.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxNPCRepair.FlatAppearance.BorderSize = 0;
+            this.chBoxNPCRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxNPCRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxNPCRepair.Location = new System.Drawing.Point(59, 40);
+            this.chBoxNPCRepair.Name = "chBoxNPCRepair";
+            this.chBoxNPCRepair.Size = new System.Drawing.Size(99, 24);
+            this.chBoxNPCRepair.TabIndex = 65;
+            this.chBoxNPCRepair.Text = "NPC-Repair";
+            this.toolTip1.SetToolTip(this.chBoxNPCRepair, "YOU HAVE TO STAND NEAR THE REPAIR NPC!");
+            this.chBoxNPCRepair.UseMnemonic = false;
+            this.chBoxNPCRepair.UseVisualStyleBackColor = false;
+            this.chBoxNPCRepair.CheckedChanged += new System.EventHandler(this.chBoxNPCRepair_CheckedChanged);
             // 
             // ChaosBot
             // 
@@ -2925,6 +2945,7 @@
         private System.Windows.Forms.CheckBox chBoxValtanAltQ;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chBoxCompare;
+        private System.Windows.Forms.CheckBox chBoxNPCRepair;
     }
 }
 
