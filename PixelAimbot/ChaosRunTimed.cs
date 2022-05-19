@@ -145,22 +145,6 @@ namespace PixelAimbot
         private void button1_Click_1(object sender, EventArgs e)
         {
             TopMost = false;
-            
-            //SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
-
-            //saveFileDialog1.InitialDirectory = @"C:\";
-            //SaveFileDialog1.Title = "Symbiotic Comparison";
-            //saveFileDialog1.CheckFileExists = true;
-            //saveFileDialog1.CheckPathExists = true;
-            //saveFileDialog1.DefaultExt = "jpg";
-            //saveFileDialog1.Filter = "JPG files (*.jpg)|*.jpg";
-            //saveFileDialog1.FilterIndex = 2;
-            //saveFileDialog1.RestoreDirectory = true;
-            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    saveFileDialog1.FileName = "SymbioticInv_" + DateTime.Now.ToString("HH.mm-[dd.MM.yyyy]") + ".jpg";
-
-            //}
 
             bounds = this.Bounds;
             using (Bitmap bitmap = new Bitmap(bounds.Width-20, bounds.Height-50))
@@ -181,9 +165,6 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
        
-        private void saveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-          
-        }
+     
     }
 }

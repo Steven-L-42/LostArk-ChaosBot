@@ -46,8 +46,7 @@ namespace PixelAimbot
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
-        public static string ReadArea(Bitmap screenCapture, int x, int y, int width, int height,
-            string whitelist = "")
+        public static string ReadArea(Bitmap screenCapture, int x, int y, int width, int height, string whitelist = "")
         {
             tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
             tess.Language = OcrLanguage.EnglishBest;
@@ -83,6 +82,7 @@ namespace PixelAimbot
 
             return null;
         }
+       
         public  static Bitmap SetGrayscale(Bitmap img)
         {
     
@@ -528,7 +528,6 @@ namespace PixelAimbot
 
         /// ///////////////////     /// ///////////////////
 
-       
         Bitmap skillQ;
         Bitmap skillW;
         Bitmap skillE;

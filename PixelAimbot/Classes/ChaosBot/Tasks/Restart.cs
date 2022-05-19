@@ -154,11 +154,8 @@ namespace PixelAimbot
 
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
                         _start = false;
-                        KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_F9,5000);
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
                         await Task.Delay(1000);
-                      
-
-
                     }
                     catch (AggregateException)
                     {

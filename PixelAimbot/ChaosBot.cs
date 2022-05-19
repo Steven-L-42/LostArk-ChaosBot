@@ -160,50 +160,56 @@ namespace PixelAimbot
                 this.Show();
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
+                if(chBoxCompare.Checked)
+                {
+                    ChaosStop = DateTime.Now;
+                    ChaosTime = ChaosStop - ChaosStart;
 
-                ChaosStop = DateTime.Now;
-                ChaosTime = ChaosStop - ChaosStart;
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                    await Task.Delay(humanizer.Next(10, 240) + 1000);
 
-                KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                await Task.Delay(humanizer.Next(10, 240) + 1000);
+                    EndInventar = GetEndPic();
 
-                EndInventar = GetEndPic();
-                
-                KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
 
 
-                //Bitmap start = new Bitmap(startinv);
-                //StartInvColor = start;
-                //StartInvGray = new Bitmap(start.Width, start.Height);
+                    //Bitmap start = new Bitmap(startinv);
+                    //StartInvColor = start;
+                    //StartInvGray = new Bitmap(start.Width, start.Height);
 
-                //Bitmap end = new Bitmap(endinv);
-                //EndInvColor = end;
-                //EndInvGray = new Bitmap(end.Width, end.Height);
+                    //Bitmap end = new Bitmap(endinv);
+                    //EndInvColor = end;
+                    //EndInvGray = new Bitmap(end.Width, end.Height);
 
-                //for (int i = 0; i < start.Width; i++)
-                //{
-                //    for (int x = 0; x < start.Height; x++)
-                //    {
-                //        Color oc = start.GetPixel(i, x);
-                //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                //        StartInvGray.SetPixel(i, x, nc);
-                //    }
-                //}
+                    //for (int i = 0; i < start.Width; i++)
+                    //{
+                    //    for (int x = 0; x < start.Height; x++)
+                    //    {
+                    //        Color oc = start.GetPixel(i, x);
+                    //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                    //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                    //        StartInvGray.SetPixel(i, x, nc);
+                    //    }
+                    //}
 
-                //for (int j = 0; j < end.Width; j++)
-                //{
-                //    for (int y = 0; y < end.Height; y++)
-                //    {
-                //        Color oc = end.GetPixel(j, y);
-                //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
-                //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
-                //        EndInvGray.SetPixel(j, y, nc);
-                //    }
-                //}
+                    //for (int j = 0; j < end.Width; j++)
+                    //{
+                    //    for (int y = 0; y < end.Height; y++)
+                    //    {
+                    //        Color oc = end.GetPixel(j, y);
+                    //        int grayScale = (int)((oc.R * 0.3) + (oc.G * 0.59) + (oc.B * 0.11));
+                    //        Color nc = Color.FromArgb(oc.A, grayScale, grayScale, grayScale);
+                    //        EndInvGray.SetPixel(j, y, nc);
+                    //    }
+                    //}
 
-                ChaosRunTimed form = new ChaosRunTimed();
-                form.Show();
+                    ChaosRunTimed form = new ChaosRunTimed();
+                    form.Show();
+                }
+
+
+
+
 
 
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
@@ -275,29 +281,33 @@ namespace PixelAimbot
                         FormMinimized.Show();
                         FormMinimized.Size = new Size(594, 28);
                         this.Hide();
-                        ChaosAllRounds = 0;
-                        ChaosAllStucks = 0;
-                        ChaosPerfectRounds = 0;
-                        ChaosGameCrashed = 0;
 
-                        ChaosStart = DateTime.Now;
-
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        processName = Process.GetProcessesByName("LostArk");
-                        if (processName.Length == 1)
+                        if (chBoxCompare.Checked)
                         {
-                            handle = processName[0].MainWindowHandle;
-                            SetForegroundWindow(handle);
+                            ChaosAllRounds = 0;
+                            ChaosAllStucks = 0;
+                            ChaosPerfectRounds = 0;
+                            ChaosGameCrashed = 0;
+
+                            ChaosStart = DateTime.Now;
+
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            processName = Process.GetProcessesByName("LostArk");
+                            if (processName.Length == 1)
+                            {
+                                handle = processName[0].MainWindowHandle;
+                                SetForegroundWindow(handle);
+                            }
+
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                            await Task.Delay(humanizer.Next(10, 240) + 1000, token);
+
+                            StartInventar = GetStartPic();
+
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
+                            await Task.Delay(humanizer.Next(10, 240) + 500, token);
                         }
-
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        await Task.Delay(humanizer.Next(10, 240) + 1000,token);
-
-                        StartInventar = GetStartPic();
-
-                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                        await Task.Delay(humanizer.Next(10, 240) + 500, token);
                     }
                     if (processName.Length == 0 && chBoxCrashDetection.Checked)
                     {
@@ -530,6 +540,7 @@ namespace PixelAimbot
             radioGerman.Checked = Properties.Settings.Default.radioGerman;
             cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
             chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
+            chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -670,6 +681,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.radioEnglish = true;
                 Properties.Settings.Default.cmbHealKey = 0;
                 Properties.Settings.Default.chBoxValtanAltQ = false;
+                Properties.Settings.Default.chBoxCompare = false;
 
 
                 Properties.Settings.Default.Save();
@@ -748,6 +760,7 @@ namespace PixelAimbot
                 radioGerman.Checked = Properties.Settings.Default.radioGerman;
                 cmbHealKey.SelectedIndex = Properties.Settings.Default.cmbHealKey;
                 chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
+                chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
 
             }
             catch (Exception ex)
@@ -858,6 +871,7 @@ namespace PixelAimbot
                     rotation.radioEnglish = radioEnglish.Checked;
                     rotation.cmbHealKey = cmbHealKey.SelectedIndex;
                     rotation.chBoxValtanAltQ = chBoxValtanAltQ.Checked;
+                    rotation.chBoxCompare = chBoxCompare.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -957,6 +971,7 @@ namespace PixelAimbot
                 radioGerman.Checked = rotation.radioGerman;
                 cmbHealKey.SelectedIndex = rotation.cmbHealKey;
                 chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
+                chBoxCompare.Checked = rotation.chBoxCompare;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {

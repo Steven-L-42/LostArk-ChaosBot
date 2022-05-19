@@ -43,7 +43,7 @@ namespace PixelAimbot
                     SetForegroundWindow(handle);
                 }
 
-              //  KeyboardWrapper.PressKey(MouseKey(txtMouse.Text));
+           
 
                 ///////////////// ANTI KICK ///////////////////
                 //token.ThrowIfCancellationRequested();

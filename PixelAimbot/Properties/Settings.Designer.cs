@@ -1066,5 +1066,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxValtanAltQ"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxCompare {
+            get {
+                return ((bool)(this["chBoxCompare"]));
+            }
+            set {
+                this["chBoxCompare"] = value;
+            }
+        }
     }
 }

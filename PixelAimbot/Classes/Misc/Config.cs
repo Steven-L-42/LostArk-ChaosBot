@@ -92,7 +92,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxLeavetimer { get; set; } = false;
         public bool chBoxRevive { get; set; } = false;
         public bool chBoxValtanAltQ { get; set; } = false;
-
+        public bool chBoxCompare { get; set; } = false;
         public bool chBoxAutoMovement { get; set; } = false;
 
         public int HealthSlider1 { get; set; } = 801;
