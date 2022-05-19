@@ -74,6 +74,10 @@ namespace PixelAimbot
                 if(chBoxValtanAltQ.Checked)
                 {
                     KeyboardWrapper.MultiplePressKey(KeyboardWrapper.VK_ALT, KeyboardWrapper.VK_Q);
+                    await Task.Delay(1000, token);
+                    VirtualMouse.MoveTo(Recalc(866), Recalc(284, false), 10);
+                    await Task.Delay(1000, token);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 }
                 else
                 {
