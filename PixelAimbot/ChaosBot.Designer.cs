@@ -1101,7 +1101,7 @@
             this.groupBox8.Controls.Add(this.txCoolR);
             this.groupBox8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox8.Location = new System.Drawing.Point(136, 213);
+            this.groupBox8.Location = new System.Drawing.Point(137, 3);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(270, 119);
             this.groupBox8.TabIndex = 45;
@@ -2662,6 +2662,7 @@
             this.Cooldown.Controls.Add(this.cmBoxEsoterik2);
             this.Cooldown.Controls.Add(this.cmBoxEsoterik3);
             this.Cooldown.Controls.Add(this.cmBoxEsoterik4);
+            this.Cooldown.Controls.Add(this.groupBox8);
             this.Cooldown.Controls.Add(this.chBoxEsoterik3);
             this.Cooldown.Controls.Add(this.chBoxEsoterik4);
             this.Cooldown.Controls.Add(this.chBoxEsoterik1);
@@ -2687,6 +2688,7 @@
             this.cmBoxEsoterik1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cmBoxEsoterik1.FormattingEnabled = true;
             this.cmBoxEsoterik1.Items.AddRange(new object[] {
+            "OFF",
             "Q",
             "W",
             "E",
@@ -2709,6 +2711,7 @@
             this.cmBoxEsoterik2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cmBoxEsoterik2.FormattingEnabled = true;
             this.cmBoxEsoterik2.Items.AddRange(new object[] {
+            "OFF",
             "Q",
             "W",
             "E",
@@ -2731,6 +2734,7 @@
             this.cmBoxEsoterik3.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cmBoxEsoterik3.FormattingEnabled = true;
             this.cmBoxEsoterik3.Items.AddRange(new object[] {
+            "OFF",
             "Q",
             "W",
             "E",
@@ -2753,6 +2757,7 @@
             this.cmBoxEsoterik4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.cmBoxEsoterik4.FormattingEnabled = true;
             this.cmBoxEsoterik4.Items.AddRange(new object[] {
+            "OFF",
             "Q",
             "W",
             "E",
@@ -2775,6 +2780,7 @@
             this.chBoxEsoterik3.Size = new System.Drawing.Size(13, 12);
             this.chBoxEsoterik3.TabIndex = 62;
             this.chBoxEsoterik3.UseVisualStyleBackColor = true;
+            this.chBoxEsoterik3.Visible = false;
             // 
             // chBoxEsoterik4
             // 
@@ -2785,6 +2791,7 @@
             this.chBoxEsoterik4.Size = new System.Drawing.Size(13, 12);
             this.chBoxEsoterik4.TabIndex = 61;
             this.chBoxEsoterik4.UseVisualStyleBackColor = true;
+            this.chBoxEsoterik4.Visible = false;
             // 
             // chBoxEsoterik1
             // 
@@ -2795,6 +2802,7 @@
             this.chBoxEsoterik1.Size = new System.Drawing.Size(13, 12);
             this.chBoxEsoterik1.TabIndex = 56;
             this.chBoxEsoterik1.UseVisualStyleBackColor = true;
+            this.chBoxEsoterik1.Visible = false;
             // 
             // chBoxEsoterik2
             // 
@@ -2805,6 +2813,7 @@
             this.chBoxEsoterik2.Size = new System.Drawing.Size(13, 12);
             this.chBoxEsoterik2.TabIndex = 55;
             this.chBoxEsoterik2.UseVisualStyleBackColor = true;
+            this.chBoxEsoterik2.Visible = false;
             // 
             // label5
             // 
@@ -2946,7 +2955,6 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.labelSwap);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.lbClose);
             this.Controls.Add(this.tabControl1);
