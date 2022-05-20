@@ -71,7 +71,9 @@ namespace PixelAimbot
                 _RepairReset = true;
 
                 var t10 = Task.Run(() => Restart(token));
-            
+                await Task.WhenAny(t10);
+
+
             }
             catch (AggregateException)
             {
@@ -136,7 +138,9 @@ namespace PixelAimbot
                 _RepairReset = true;
                 token.ThrowIfCancellationRequested();
                 var t10 = Task.Run(() => Restart(token));
-         
+                await Task.WhenAny(t10);
+
+
             }
             catch (AggregateException)
             {

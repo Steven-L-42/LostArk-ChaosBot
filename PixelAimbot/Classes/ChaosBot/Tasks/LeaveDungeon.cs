@@ -191,7 +191,7 @@ namespace PixelAimbot
 
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t9 = Task.Run(() => Restart(token));
-                  
+                    await Task.WhenAny(t9);
                 }
             }
             catch (AggregateException)

@@ -317,34 +317,66 @@ namespace PixelAimbot
                                 await Task.Delay(1, token);
                                 if (_floorFight && !_stopp && !token.IsCancellationRequested)
                                 {
-                                    
-                                    if (!isKeyOnCooldownGray(skill.Key))
+                                    if (chBoxCooldownDetection.Checked)
                                     {
-                                        lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
-                                        KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
-
-                                        if (IsDoubleKey(skill.Key))
+                                        if (!isKeyOnCooldownGray(skill.Key))
                                         {
-                                            KeyboardWrapper.PressKey(skill.Key);
-                                        }
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                            KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
 
-                                        SetKeyCooldownGray(skill.Key); // Set Cooldown
-                                       // var td = Task.Run(() => SkillCooldown(token, skill.Key));
-                                        await Task.Delay(humanizer.Next(10, 40), token);
-                                        _walktopUTurn++;
+                                            if (IsDoubleKey(skill.Key))
+                                            {
+                                                KeyboardWrapper.PressKey(skill.Key);
+                                            }
+
+                                            SetKeyCooldownGray(skill.Key); // Set Cooldown
+                                                                          
+                                            await Task.Delay(humanizer.Next(10, 40), token);
+                                            _walktopUTurn++;
+                                        }
+                                        else
+                                        {
+                                            if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A && _S && _D && _F)
+                                            {
+                                                lbStatus.Invoke(
+                                                    (MethodInvoker)(() => lbStatus.Text = "Bot is autoattacking..."));
+                                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
+                                                    int.Parse(textBoxAutoAttack.Text));
+                                                _walktopUTurn++;
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A && _S && _D && _F )
-                                        { 
-                                            lbStatus.Invoke(
-                                                (MethodInvoker) (() => lbStatus.Text = "Bot is autoattacking..."));
-                                            KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
-                                                int.Parse(textBoxAutoAttack.Text));
+                                        if (!isKeyOnCooldown(skill.Key))
+                                        {
+                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is fighting..."));
+                                            KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
+
+                                            if (IsDoubleKey(skill.Key))
+                                            {
+                                                KeyboardWrapper.PressKey(skill.Key);
+                                            }
+
+                                            SetKeyCooldown(skill.Key); // Set Cooldown
+                                            var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                            await Task.Delay(humanizer.Next(10, 40), token);
                                             _walktopUTurn++;
+                                        }
+                                        else
+                                        {
+                                            if (int.Parse(textBoxAutoAttack.Text) >= 1 && _Q && _W && _E && _R && _A && _S && _D && _F)
+                                            {
+                                                lbStatus.Invoke(
+                                                    (MethodInvoker)(() => lbStatus.Text = "Bot is autoattacking..."));
+                                                KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,
+                                                    int.Parse(textBoxAutoAttack.Text));
+                                                _walktopUTurn++;
+                                            }
                                         }
                                     }
                                 }
+                                    
 
 
                                 if (_walktopUTurn == 4 && chBoxAutoMovement.Checked && _floor1 && _stopp == false)

@@ -14,15 +14,6 @@ namespace PixelAimbot.Classes.OpenCV
         public Image<Bgr, byte> _enemyTemplate;
         public Image<Bgr, byte> _enemyMask;
         public float _threshold { get; set; } = 0.7f;
-        public Bitmap _enemyMaskB { get; }
-        public Bitmap _enemyTemplateB { get; }
-        public object P { get; }
-        public float V1 { get; }
-        public int V2 { get; }
-        public int V3 { get; }
-        public int V4 { get; }
-        public int V5 { get; }
-
         private Point _myPosition = new Point(ChaosBot.Recalc(150), ChaosBot.Recalc(128, false));
         private DrawScreen _screenDrawer;
         public int rectangleX = 0;
@@ -31,7 +22,7 @@ namespace PixelAimbot.Classes.OpenCV
         public int rectangleHeight = 0;
         public TemplateMatchingType method = TemplateMatchingType.SqdiffNormed;
 
-       
+
         public ScreenDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
         {
             this._enemyMask = enemyMask;
@@ -44,19 +35,6 @@ namespace PixelAimbot.Classes.OpenCV
             this.rectangleY = rectangleY;
 
         }
-
-        public ScreenDetector(Bitmap _enemyTemplateB, Bitmap _enemyMaskB, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
-        {
-            this._enemyMaskB = _enemyMaskB;
-            this._enemyTemplateB = _enemyTemplateB;
-            this._threshold = threshold;
-            this._screenDrawer = new DrawScreen();
-            this.rectangleHeight = rectangleHeight;
-            this.rectangleWidth = rectangleWidth;
-            this.rectangleX = rectangleX;
-            this.rectangleY = rectangleY;
-        }
-
         public void setMyPosition(Point point)
         {
             this._myPosition = point;
@@ -66,10 +44,9 @@ namespace PixelAimbot.Classes.OpenCV
         {
             this.method = type;
         }
-
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture, bool rescaleImage = true)
         {
-            if (rescaleImage && ChaosBot.isWindowed)
+            if (rescaleImage && !ChaosBot.isWindowed)
             {
                 this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
@@ -87,13 +64,8 @@ namespace PixelAimbot.Classes.OpenCV
             double minVal = 0, maxVal = 0;
             Point minPoint = new Point();
             Point maxPoint = new Point();
-           
-            
-           CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, method, this._enemyMask);
-         
-            
-      
-        
+            CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, method, this._enemyMask);
+
             int h = this._enemyTemplate.Size.Height;
             int w = this._enemyTemplate.Size.Width;
 

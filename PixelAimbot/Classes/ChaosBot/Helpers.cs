@@ -530,165 +530,185 @@ namespace PixelAimbot
         /// ///////////////////     /// ///////////////////
 
         // MAKE SCREENSHOT FROM ABILITYS
-        //
-        public Bitmap skillQ;
-        public Bitmap skillW;
-        public Bitmap skillE;
-        public Bitmap skillR;
-        public Bitmap skillA;
-        public Bitmap skillS;
-        public Bitmap skillD;
-        public Bitmap skillF;
+        // 
+        public Image<Bgr, byte> skillQ;
+        public Image<Bgr, byte> skillW;
+        public Image<Bgr, byte> skillE;
+        public Image<Bgr, byte> skillR;
+        public Image<Bgr, byte> skillA;
+        public Image<Bgr, byte> skillS;
+        public Image<Bgr, byte> skillD;
+        public Image<Bgr, byte> skillF;
+       
+
+
+        //public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>(skillQ).ToImage;
+        //Mat mat2 = FromBitmap.Mat;
 
 
 
-        public static Image<Bgr, byte> FromFile = new Image<Bgr, byte>("MyImage.jpg");
-        Mat mat = FromFile.Mat;
+        //public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>().ToImage;
 
-
-
-        public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>(skillQ).ToImage; 
-        Mat mat2 = FromBitmap.Mat;
-
-
-
-        public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>().ToImage;
-
-        private Bitmap GetSkillQ()
+        private void GetSkillQ()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false));
+                skillQ = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillQ.jpg");
 
-                return CropImage(screen,
-                    new Rectangle(ChaosBot.Recalc(689), PixelAimbot.ChaosBot.Recalc(985, false),
-                        ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false)));
-               
+
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //    new Rectangle(ChaosBot.Recalc(689), PixelAimbot.ChaosBot.Recalc(984, false),
+                //        ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false)));
+
             }
-            catch (Exception ex)
+        catch (Exception ex)
             {
                 Console.WriteLine("Skill Q Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillW()
+        private void GetSkillW()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
 
-                return CropImage(screen,
-                   new Rectangle(ChaosBot.Recalc(733), PixelAimbot.ChaosBot.Recalc(985, false),
-                       ChaosBot.Recalc(768), ChaosBot.Recalc(1008, false)));
+                AbilityScreen(Application.UserAppDataPath + "/SkillW.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(733), ChaosBot.Recalc(984, false));
+                skillW = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillW.jpg");
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //   new Rectangle(ChaosBot.Recalc(733), PixelAimbot.ChaosBot.Recalc(985, false),
+                //       ChaosBot.Recalc(768), ChaosBot.Recalc(1008, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill W Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillE()
+        private void GetSkillE()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillE.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(781), ChaosBot.Recalc(984, false));
+                skillE = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillE.jpg");
 
-                return CropImage(screen,
-                    new Rectangle(ChaosBot.Recalc(781), PixelAimbot.ChaosBot.Recalc(985, false),
-                        ChaosBot.Recalc(815), ChaosBot.Recalc(1008, false)));
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //    new Rectangle(ChaosBot.Recalc(781), PixelAimbot.ChaosBot.Recalc(985, false),
+                //        ChaosBot.Recalc(815), ChaosBot.Recalc(1008, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill E Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillR()
+        private void GetSkillR()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillR.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(827), ChaosBot.Recalc(984, false));
+                skillR = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillR.jpg");
 
-                return CropImage(screen,
-                    new Rectangle(ChaosBot.Recalc(827), PixelAimbot.ChaosBot.Recalc(985, false),
-                        ChaosBot.Recalc(860), ChaosBot.Recalc(1008, false)));
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //    new Rectangle(ChaosBot.Recalc(827), PixelAimbot.ChaosBot.Recalc(985, false),
+                //        ChaosBot.Recalc(860), ChaosBot.Recalc(1008, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill R Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillA()
+        private void GetSkillA()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillA.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(709), ChaosBot.Recalc(1031, false));
+                skillA = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillA.jpg");
 
-                return CropImage(screen, 
-                     new Rectangle(ChaosBot.Recalc(709), PixelAimbot.ChaosBot.Recalc(1031, false),
-                         ChaosBot.Recalc(743), ChaosBot.Recalc(1055, false))); 
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen, 
+                //     new Rectangle(ChaosBot.Recalc(709), PixelAimbot.ChaosBot.Recalc(1031, false),
+                //         ChaosBot.Recalc(743), ChaosBot.Recalc(1055, false))); 
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill A Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillS()
+        private void GetSkillS()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillS.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(757), ChaosBot.Recalc(1031, false));
+                skillS = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillS.jpg");
 
-                return CropImage(screen,
-                    new Rectangle(ChaosBot.Recalc(757), PixelAimbot.ChaosBot.Recalc(1031, false),
-                        ChaosBot.Recalc(790), ChaosBot.Recalc(1055, false)));
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //    new Rectangle(ChaosBot.Recalc(757), PixelAimbot.ChaosBot.Recalc(1031, false),
+                //        ChaosBot.Recalc(790), ChaosBot.Recalc(1055, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill S Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillD()
+        private void GetSkillD()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillD.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(805), ChaosBot.Recalc(1031, false));
+                skillD = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillD.jpg");
 
-                return CropImage(screen,
-                   new Rectangle(ChaosBot.Recalc(805), PixelAimbot.ChaosBot.Recalc(1031, false),
-                       ChaosBot.Recalc(837), ChaosBot.Recalc(1055, false)));
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //   new Rectangle(ChaosBot.Recalc(805), PixelAimbot.ChaosBot.Recalc(1031, false),
+                //       ChaosBot.Recalc(837), ChaosBot.Recalc(1055, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill D Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
-        private Bitmap GetSkillF()
+        private void GetSkillF()
         {
             try
             {
-                var picture = new PrintScreen();
-                var screen = picture.CaptureScreen();
+                AbilityScreen(Application.UserAppDataPath + "/SkillF.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false));
+                skillF = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillF.jpg");
 
-                return CropImage(screen,
-                   new Rectangle(ChaosBot.Recalc(850), PixelAimbot.ChaosBot.Recalc(1031, false),
-                       ChaosBot.Recalc(882), ChaosBot.Recalc(1055, false)));
+                //var picture = new PrintScreen();
+                //var screen = picture.CaptureScreen();
+
+                //return CropImage(screen,
+                //   new Rectangle(ChaosBot.Recalc(850), PixelAimbot.ChaosBot.Recalc(1031, false),
+                //       ChaosBot.Recalc(882), ChaosBot.Recalc(1055, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill F Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                return null;
+                //return null;
             }
         }
 
@@ -700,10 +720,11 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 var template = skillQ;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(689),
-                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(721, true, true), ChaosBot.Recalc(1008, false, true));
+              
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(689),
+                    ChaosBot.Recalc(984, false), ChaosBot.Recalc(721, true, true), ChaosBot.Recalc(1008, false, true));
 
-               // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+               detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                var screenPrinter = new PrintScreen();
 
                 while (_Q && !token.IsCancellationRequested)
@@ -760,10 +781,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillW;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(733),
-                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(768, true, true), ChaosBot.Recalc(1008, false, true));
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(733),
+                    ChaosBot.Recalc(984, false), ChaosBot.Recalc(768, true, true), ChaosBot.Recalc(1008, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_W && !token.IsCancellationRequested)
                 {
@@ -821,10 +842,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillE;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(781),
-                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(815, true, true), ChaosBot.Recalc(1008, false, true));
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(781),
+                    ChaosBot.Recalc(984, false), ChaosBot.Recalc(815, true, true), ChaosBot.Recalc(1008, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_E && !token.IsCancellationRequested)
                 {
@@ -882,10 +903,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillR;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(827),
-                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(860, true, true), ChaosBot.Recalc(1008, false, true));
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(827),
+                    ChaosBot.Recalc(984, false), ChaosBot.Recalc(860, true, true), ChaosBot.Recalc(1008, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_R && !token.IsCancellationRequested)
                 {
@@ -943,10 +964,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillA;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(709),
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(709),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(743, true, true), ChaosBot.Recalc(1008, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_A && !token.IsCancellationRequested)
                 {
@@ -1004,10 +1025,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillS;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(757),
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(757),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(790, true, true), ChaosBot.Recalc(1055, false, true));
-
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_S && !token.IsCancellationRequested)
                 {
@@ -1065,10 +1086,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillD;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(805),
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(805),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(837, true, true), ChaosBot.Recalc(1055, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_D && !token.IsCancellationRequested)
                 {
@@ -1126,10 +1147,10 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 var template = skillF;
-                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(850),
+                var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(850),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(882, true, true), ChaosBot.Recalc(1055, false, true));
 
-                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
                 while (_F && !token.IsCancellationRequested)
                 {
@@ -1415,24 +1436,17 @@ namespace PixelAimbot
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        // Ausrangiert //
-        //
-        public void Screenshot(string filename, ImageFormat imageFormat, int sourceX, int sourceY, int destX, int destY)
+       
+        public void AbilityScreen(string filename, ImageFormat imageFormat, int sourceX, int sourceY)
         {
-
-
-            //Screenshot(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(985, false),
-            //          ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false));
-
-            using (var bm = new Bitmap(36, 29))
+            using (Bitmap printscreen = new Bitmap(36, 28))
             {
-                using (Graphics gr = Graphics.FromImage(bm))
+                using (Graphics graphics = Graphics.FromImage(printscreen as Image))
                 {
-                    gr.CopyFromScreen(sourceX, sourceY, destX, destY, bm.Size);
+                    graphics.CopyFromScreen(sourceX, sourceY, 0, 0, printscreen.Size);
                 }
-                bm.Save(filename, imageFormat);
+                printscreen.Save(filename, imageFormat);
             }
-
         }
     }
 }

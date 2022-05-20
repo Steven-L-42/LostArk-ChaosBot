@@ -12,7 +12,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "3.0.3r";
+        public static string version { get; set; } = "3.0.4r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -95,6 +95,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxNPCRepair { get; set; } = false;
         public bool chBoxCompare { get; set; } = false;
         public bool chBoxAutoMovement { get; set; } = false;
+        public bool chBoxCooldownDetection { get; set; } = true;   
 
         public int HealthSlider1 { get; set; } = 801;
         public bool chboxdungeontimer { get; set; } = false;

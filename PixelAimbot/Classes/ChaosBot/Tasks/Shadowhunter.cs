@@ -13,7 +13,7 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(26000, token);
+                await Task.Delay(28000, token);
                 _Q = false;
                 _W = false;
                 _E = false;
@@ -22,6 +22,12 @@ namespace PixelAimbot
                 _S = false;
                 _D = false;
                 _F = false;
+                GetSkillQ();
+                GetSkillW();
+                GetSkillE();
+                GetSkillR();
+                GetSkillA();
+                GetSkillS();
             }
             catch (AggregateException)
             {

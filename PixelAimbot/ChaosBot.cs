@@ -546,6 +546,7 @@ namespace PixelAimbot
             chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
             chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
             chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
+            chBoxCooldownDetection.Checked = Properties.Settings.Default.chBoxCooldownDetection;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -705,6 +706,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxCompare = false;
                 Properties.Settings.Default.chBoxNPCRepair = false;
                 Properties.Settings.Default.chBoxGlavier = false;
+                Properties.Settings.Default.chBoxCooldownDetection = true;
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
@@ -785,6 +787,7 @@ namespace PixelAimbot
                 chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
                 chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
                 chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
+                chBoxCooldownDetection.Checked = Properties.Settings.Default.chBoxCooldownDetection;
 
             }
             catch (Exception ex)
@@ -898,6 +901,7 @@ namespace PixelAimbot
                     rotation.chBoxCompare = chBoxCompare.Checked;
                     rotation.chBoxNPCRepair = chBoxNPCRepair.Checked;
                     rotation.chBoxGlavier = chBoxGlavier.Checked;
+                    rotation.chBoxCooldownDetection = chBoxCooldownDetection.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -1000,6 +1004,7 @@ namespace PixelAimbot
                 chBoxCompare.Checked = rotation.chBoxCompare;
                 chBoxNPCRepair.Checked = rotation.chBoxNPCRepair;
                 chBoxGlavier.Checked = rotation.chBoxGlavier;
+                chBoxCooldownDetection.Checked = rotation.chBoxCooldownDetection;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
@@ -1079,11 +1084,9 @@ namespace PixelAimbot
         private async void button1_Click(object sender, EventArgs e)
         {
             await Task.Delay(1);
-           
-
-
+          //  Screenshot(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false));
         }
-      
+
         private async Task TEST(CancellationToken token)
         {
             await Task.Delay(1, token);
@@ -1142,16 +1145,26 @@ namespace PixelAimbot
             Form.Show();
         }
 
-        private void label18_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void comboBoxRotations_MouseEnter(object sender, EventArgs e)
         {
             RefreshRotationCombox();
         }
 
-       
+        private void chBoxCooldownDetection_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chBoxCooldownDetection.Checked)
+            {
+                groupBox8.Visible = false;
+                lbAutoDetectHint.Visible = true;
+            }
+            else
+            {
+                groupBox8.Visible = true;
+                lbAutoDetectHint.Visible = false;
+
+            }
+        }
     }
 }

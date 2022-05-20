@@ -83,6 +83,7 @@
             this.txE = new System.Windows.Forms.TextBox();
             this.txR = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.lbAutoDetectHint = new System.Windows.Forms.Label();
             this.lb2F = new System.Windows.Forms.Label();
             this.lb2D = new System.Windows.Forms.Label();
             this.lb2S = new System.Windows.Forms.Label();
@@ -100,6 +101,7 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chBoxGlavier = new System.Windows.Forms.CheckBox();
             this.chBoxAwakening = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
@@ -192,6 +194,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.Cooldown = new System.Windows.Forms.TabPage();
+            this.chBoxCooldownDetection = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.Ultimate = new System.Windows.Forms.TabPage();
@@ -199,7 +202,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
-            this.chBoxGlavier = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -301,7 +303,7 @@
             this.chBoxNPCRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxNPCRepair.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxNPCRepair.FlatAppearance.BorderSize = 0;
-            this.chBoxNPCRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxNPCRepair.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxNPCRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxNPCRepair.Location = new System.Drawing.Point(59, 40);
             this.chBoxNPCRepair.Name = "chBoxNPCRepair";
@@ -440,7 +442,7 @@
             this.chBoxChannelSwap.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxChannelSwap.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxChannelSwap.FlatAppearance.BorderSize = 0;
-            this.chBoxChannelSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxChannelSwap.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxChannelSwap.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxChannelSwap.Location = new System.Drawing.Point(4, 89);
             this.chBoxChannelSwap.Name = "chBoxChannelSwap";
@@ -513,7 +515,7 @@
             this.chBoxLOGOUT.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxLOGOUT.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxLOGOUT.FlatAppearance.BorderSize = 0;
-            this.chBoxLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxLOGOUT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxLOGOUT.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxLOGOUT.Location = new System.Drawing.Point(4, 65);
             this.chBoxLOGOUT.Name = "chBoxLOGOUT";
@@ -557,7 +559,7 @@
             this.chBoxAutoRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxAutoRepair.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxAutoRepair.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoRepair.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxAutoRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxAutoRepair.Location = new System.Drawing.Point(4, 40);
             this.chBoxAutoRepair.Name = "chBoxAutoRepair";
@@ -587,7 +589,7 @@
             this.chBoxAutoMovement.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxAutoMovement.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxAutoMovement.FlatAppearance.BorderSize = 0;
-            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAutoMovement.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxAutoMovement.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxAutoMovement.Location = new System.Drawing.Point(4, 17);
             this.chBoxAutoMovement.Name = "chBoxAutoMovement";
@@ -732,10 +734,11 @@
             // 
             this.radioEnglish.AutoSize = true;
             this.radioEnglish.Checked = true;
+            this.radioEnglish.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.radioEnglish.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioEnglish.Location = new System.Drawing.Point(238, 104);
+            this.radioEnglish.Location = new System.Drawing.Point(238, 102);
             this.radioEnglish.Name = "radioEnglish";
-            this.radioEnglish.Size = new System.Drawing.Size(63, 19);
+            this.radioEnglish.Size = new System.Drawing.Size(62, 19);
             this.radioEnglish.TabIndex = 66;
             this.radioEnglish.TabStop = true;
             this.radioEnglish.Text = "English";
@@ -744,10 +747,11 @@
             // radioGerman
             // 
             this.radioGerman.AutoSize = true;
+            this.radioGerman.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.radioGerman.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioGerman.Location = new System.Drawing.Point(313, 104);
+            this.radioGerman.Location = new System.Drawing.Point(313, 102);
             this.radioGerman.Name = "radioGerman";
-            this.radioGerman.Size = new System.Drawing.Size(70, 19);
+            this.radioGerman.Size = new System.Drawing.Size(69, 19);
             this.radioGerman.TabIndex = 65;
             this.radioGerman.Text = "German";
             this.radioGerman.UseVisualStyleBackColor = true;
@@ -798,7 +802,7 @@
             this.chBoxRevive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxRevive.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxRevive.FlatAppearance.BorderSize = 0;
-            this.chBoxRevive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxRevive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxRevive.Location = new System.Drawing.Point(1, 97);
             this.chBoxRevive.Name = "chBoxRevive";
@@ -1087,13 +1091,27 @@
             this.groupBox8.Controls.Add(this.txCoolR);
             this.groupBox8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox8.Location = new System.Drawing.Point(137, 1);
+            this.groupBox8.Location = new System.Drawing.Point(137, 4);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(270, 119);
             this.groupBox8.TabIndex = 45;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Cooldown-Time";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
+            // 
+            // lbAutoDetectHint
+            // 
+            this.lbAutoDetectHint.AutoSize = true;
+            this.lbAutoDetectHint.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAutoDetectHint.ForeColor = System.Drawing.Color.Orange;
+            this.lbAutoDetectHint.Location = new System.Drawing.Point(161, 9);
+            this.lbAutoDetectHint.Name = "lbAutoDetectHint";
+            this.lbAutoDetectHint.Size = new System.Drawing.Size(225, 105);
+            this.lbAutoDetectHint.TabIndex = 50;
+            this.lbAutoDetectHint.Text = "Bot auto detect now the Cooldown Time.\r\nYou dont need to do anything.\r\n\r\nIf this " +
+    "feature make problems, disable it!\r\n\r\nLet uns know how it perfoms, \r\nuse Report " +
+    "Bug on Discord.";
+            this.lbAutoDetectHint.Visible = false;
             // 
             // lb2F
             // 
@@ -1345,17 +1363,32 @@
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
             // 
+            // chBoxGlavier
+            // 
+            this.chBoxGlavier.AutoSize = true;
+            this.chBoxGlavier.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGlavier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxGlavier.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxGlavier.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGlavier.Location = new System.Drawing.Point(126, 60);
+            this.chBoxGlavier.Name = "chBoxGlavier";
+            this.chBoxGlavier.Size = new System.Drawing.Size(67, 19);
+            this.chBoxGlavier.TabIndex = 79;
+            this.chBoxGlavier.Text = "Glavier:";
+            this.chBoxGlavier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxGlavier.UseVisualStyleBackColor = true;
+            // 
             // chBoxAwakening
             // 
             this.chBoxAwakening.AutoSize = true;
             this.chBoxAwakening.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxAwakening.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxAwakening.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxAwakening.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxAwakening.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxAwakening.ForeColor = System.Drawing.Color.Orange;
             this.chBoxAwakening.Location = new System.Drawing.Point(79, 97);
             this.chBoxAwakening.Name = "chBoxAwakening";
-            this.chBoxAwakening.Size = new System.Drawing.Size(99, 19);
+            this.chBoxAwakening.Size = new System.Drawing.Size(100, 19);
             this.chBoxAwakening.TabIndex = 78;
             this.chBoxAwakening.Text = "AWAKENING:";
             this.chBoxAwakening.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1393,11 +1426,11 @@
             this.chBoxGunlancer2.AutoSize = true;
             this.chBoxGunlancer2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxGunlancer2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxGunlancer2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGunlancer2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxGunlancer2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxGunlancer2.Location = new System.Drawing.Point(205, 78);
             this.chBoxGunlancer2.Name = "chBoxGunlancer2";
-            this.chBoxGunlancer2.Size = new System.Drawing.Size(83, 19);
+            this.chBoxGunlancer2.Size = new System.Drawing.Size(84, 19);
             this.chBoxGunlancer2.TabIndex = 74;
             this.chBoxGunlancer2.Text = "Gunlancer:";
             this.chBoxGunlancer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1430,11 +1463,11 @@
             this.chBoxDeathblade2.AutoSize = true;
             this.chBoxDeathblade2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxDeathblade2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxDeathblade2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxDeathblade2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDeathblade2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxDeathblade2.Location = new System.Drawing.Point(198, 42);
             this.chBoxDeathblade2.Name = "chBoxDeathblade2";
-            this.chBoxDeathblade2.Size = new System.Drawing.Size(90, 19);
+            this.chBoxDeathblade2.Size = new System.Drawing.Size(91, 19);
             this.chBoxDeathblade2.TabIndex = 71;
             this.chBoxDeathblade2.Text = "Deathblade:";
             this.chBoxDeathblade2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1456,11 +1489,11 @@
             this.chBoxGunlancer.AutoSize = true;
             this.chBoxGunlancer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxGunlancer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxGunlancer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGunlancer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxGunlancer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxGunlancer.Location = new System.Drawing.Point(205, 60);
             this.chBoxGunlancer.Name = "chBoxGunlancer";
-            this.chBoxGunlancer.Size = new System.Drawing.Size(83, 19);
+            this.chBoxGunlancer.Size = new System.Drawing.Size(84, 19);
             this.chBoxGunlancer.TabIndex = 69;
             this.chBoxGunlancer.Text = "Gunlancer:";
             this.chBoxGunlancer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1482,11 +1515,11 @@
             this.chBoxBard.AutoSize = true;
             this.chBoxBard.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxBard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxBard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxBard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxBard.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxBard.Location = new System.Drawing.Point(140, 78);
             this.chBoxBard.Name = "chBoxBard";
-            this.chBoxBard.Size = new System.Drawing.Size(52, 19);
+            this.chBoxBard.Size = new System.Drawing.Size(53, 19);
             this.chBoxBard.TabIndex = 67;
             this.chBoxBard.Text = "Bard:";
             this.chBoxBard.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1513,11 +1546,11 @@
             this.chBoxSoulfist.AutoSize = true;
             this.chBoxSoulfist.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSoulfist.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxSoulfist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSoulfist.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxSoulfist.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxSoulfist.Location = new System.Drawing.Point(124, 42);
             this.chBoxSoulfist.Name = "chBoxSoulfist";
-            this.chBoxSoulfist.Size = new System.Drawing.Size(68, 19);
+            this.chBoxSoulfist.Size = new System.Drawing.Size(69, 19);
             this.chBoxSoulfist.TabIndex = 65;
             this.chBoxSoulfist.Text = "Soulfist:";
             this.chBoxSoulfist.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1528,11 +1561,11 @@
             this.chBoxSorcerer.AutoSize = true;
             this.chBoxSorcerer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSorcerer.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSorcerer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxSorcerer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxSorcerer.Location = new System.Drawing.Point(36, 78);
             this.chBoxSorcerer.Name = "chBoxSorcerer";
-            this.chBoxSorcerer.Size = new System.Drawing.Size(75, 19);
+            this.chBoxSorcerer.Size = new System.Drawing.Size(76, 19);
             this.chBoxSorcerer.TabIndex = 63;
             this.chBoxSorcerer.Text = "Sorcerer:";
             this.chBoxSorcerer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1543,11 +1576,11 @@
             this.chBoxSharpshooter.AutoSize = true;
             this.chBoxSharpshooter.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxSharpshooter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxSharpshooter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxSharpshooter.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxSharpshooter.Location = new System.Drawing.Point(10, 42);
             this.chBoxSharpshooter.Name = "chBoxSharpshooter";
-            this.chBoxSharpshooter.Size = new System.Drawing.Size(101, 19);
+            this.chBoxSharpshooter.Size = new System.Drawing.Size(102, 19);
             this.chBoxSharpshooter.TabIndex = 61;
             this.chBoxSharpshooter.Text = "Sharpshooter:";
             this.chBoxSharpshooter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1558,11 +1591,11 @@
             this.chBoxDeathblade.AutoSize = true;
             this.chBoxDeathblade.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxDeathblade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxDeathblade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxDeathblade.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDeathblade.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxDeathblade.Location = new System.Drawing.Point(198, 24);
             this.chBoxDeathblade.Name = "chBoxDeathblade";
-            this.chBoxDeathblade.Size = new System.Drawing.Size(90, 19);
+            this.chBoxDeathblade.Size = new System.Drawing.Size(91, 19);
             this.chBoxDeathblade.TabIndex = 58;
             this.chBoxDeathblade.Text = "Deathblade:";
             this.chBoxDeathblade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1584,11 +1617,11 @@
             this.chBoxPaladin.AutoSize = true;
             this.chBoxPaladin.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxPaladin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxPaladin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxPaladin.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxPaladin.Location = new System.Drawing.Point(127, 24);
             this.chBoxPaladin.Name = "chBoxPaladin";
-            this.chBoxPaladin.Size = new System.Drawing.Size(65, 19);
+            this.chBoxPaladin.Size = new System.Drawing.Size(66, 19);
             this.chBoxPaladin.TabIndex = 50;
             this.chBoxPaladin.Text = "Paladin:";
             this.chBoxPaladin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1599,11 +1632,11 @@
             this.chBoxY.AutoSize = true;
             this.chBoxY.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxY.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxY.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxY.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxY.Location = new System.Drawing.Point(3, 24);
             this.chBoxY.Name = "chBoxY";
-            this.chBoxY.Size = new System.Drawing.Size(108, 19);
+            this.chBoxY.Size = new System.Drawing.Size(109, 19);
             this.chBoxY.TabIndex = 46;
             this.chBoxY.Text = "Shadowhunter:";
             this.chBoxY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1614,11 +1647,11 @@
             this.chBoxBerserker.AutoSize = true;
             this.chBoxBerserker.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxBerserker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxBerserker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxBerserker.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxBerserker.Location = new System.Drawing.Point(29, 60);
             this.chBoxBerserker.Name = "chBoxBerserker";
-            this.chBoxBerserker.Size = new System.Drawing.Size(82, 19);
+            this.chBoxBerserker.Size = new System.Drawing.Size(83, 19);
             this.chBoxBerserker.TabIndex = 44;
             this.chBoxBerserker.Text = "Berserker:";
             this.chBoxBerserker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1676,72 +1709,80 @@
             // chBoxDoubleF
             // 
             this.chBoxDoubleF.AutoSize = true;
+            this.chBoxDoubleF.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleF.Location = new System.Drawing.Point(209, 86);
             this.chBoxDoubleF.Name = "chBoxDoubleF";
-            this.chBoxDoubleF.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleF.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleF.TabIndex = 47;
             this.chBoxDoubleF.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleD
             // 
             this.chBoxDoubleD.AutoSize = true;
+            this.chBoxDoubleD.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleD.Location = new System.Drawing.Point(147, 86);
             this.chBoxDoubleD.Name = "chBoxDoubleD";
-            this.chBoxDoubleD.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleD.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleD.TabIndex = 46;
             this.chBoxDoubleD.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleS
             // 
             this.chBoxDoubleS.AutoSize = true;
+            this.chBoxDoubleS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleS.Location = new System.Drawing.Point(85, 86);
             this.chBoxDoubleS.Name = "chBoxDoubleS";
-            this.chBoxDoubleS.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleS.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleS.TabIndex = 45;
             this.chBoxDoubleS.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleA
             // 
             this.chBoxDoubleA.AutoSize = true;
+            this.chBoxDoubleA.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleA.Location = new System.Drawing.Point(23, 86);
             this.chBoxDoubleA.Name = "chBoxDoubleA";
-            this.chBoxDoubleA.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleA.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleA.TabIndex = 44;
             this.chBoxDoubleA.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleR
             // 
             this.chBoxDoubleR.AutoSize = true;
+            this.chBoxDoubleR.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleR.Location = new System.Drawing.Point(209, 41);
             this.chBoxDoubleR.Name = "chBoxDoubleR";
-            this.chBoxDoubleR.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleR.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleR.TabIndex = 43;
             this.chBoxDoubleR.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleE
             // 
             this.chBoxDoubleE.AutoSize = true;
+            this.chBoxDoubleE.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleE.Location = new System.Drawing.Point(147, 41);
             this.chBoxDoubleE.Name = "chBoxDoubleE";
-            this.chBoxDoubleE.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleE.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleE.TabIndex = 42;
             this.chBoxDoubleE.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleW
             // 
             this.chBoxDoubleW.AutoSize = true;
+            this.chBoxDoubleW.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleW.Location = new System.Drawing.Point(84, 42);
             this.chBoxDoubleW.Name = "chBoxDoubleW";
-            this.chBoxDoubleW.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleW.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleW.TabIndex = 41;
             this.chBoxDoubleW.UseVisualStyleBackColor = true;
             // 
             // chBoxDoubleQ
             // 
             this.chBoxDoubleQ.AutoSize = true;
+            this.chBoxDoubleQ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxDoubleQ.Location = new System.Drawing.Point(23, 42);
             this.chBoxDoubleQ.Name = "chBoxDoubleQ";
-            this.chBoxDoubleQ.Size = new System.Drawing.Size(15, 14);
+            this.chBoxDoubleQ.Size = new System.Drawing.Size(13, 12);
             this.chBoxDoubleQ.TabIndex = 40;
             this.chBoxDoubleQ.UseVisualStyleBackColor = true;
             // 
@@ -2058,7 +2099,7 @@
             this.chBoxCrashDetection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxCrashDetection.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxCrashDetection.FlatAppearance.BorderSize = 0;
-            this.chBoxCrashDetection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxCrashDetection.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxCrashDetection.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxCrashDetection.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxCrashDetection.Location = new System.Drawing.Point(3, 122);
@@ -2078,7 +2119,7 @@
             this.checkBoxDiscordNotifications.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxDiscordNotifications.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBoxDiscordNotifications.FlatAppearance.BorderSize = 0;
-            this.checkBoxDiscordNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxDiscordNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.checkBoxDiscordNotifications.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxDiscordNotifications.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.checkBoxDiscordNotifications.Location = new System.Drawing.Point(3, 17);
@@ -2122,7 +2163,7 @@
             this.chBoxCompare.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxCompare.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxCompare.FlatAppearance.BorderSize = 0;
-            this.chBoxCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxCompare.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxCompare.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxCompare.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxCompare.Location = new System.Drawing.Point(1, 35);
@@ -2141,7 +2182,7 @@
             this.chBoxValtanAltQ.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxValtanAltQ.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxValtanAltQ.FlatAppearance.BorderSize = 0;
-            this.chBoxValtanAltQ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxValtanAltQ.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxValtanAltQ.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chBoxValtanAltQ.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxValtanAltQ.Location = new System.Drawing.Point(1, 15);
@@ -2160,7 +2201,7 @@
             this.chBoxActivateF2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxActivateF2.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxActivateF2.FlatAppearance.BorderSize = 0;
-            this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxActivateF2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.chBoxActivateF2.ForeColor = System.Drawing.Color.Coral;
             this.chBoxActivateF2.Location = new System.Drawing.Point(9, 40);
@@ -2350,7 +2391,7 @@
             this.chBoxLeavetimer.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxLeavetimer.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxLeavetimer.FlatAppearance.BorderSize = 0;
-            this.chBoxLeavetimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxLeavetimer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxLeavetimer.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.chBoxLeavetimer.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxLeavetimer.Location = new System.Drawing.Point(5, 99);
@@ -2382,7 +2423,7 @@
             this.chBoxUnstuckF1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chBoxUnstuckF1.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxUnstuckF1.FlatAppearance.BorderSize = 0;
-            this.chBoxUnstuckF1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxUnstuckF1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxUnstuckF1.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
             this.chBoxUnstuckF1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxUnstuckF1.Location = new System.Drawing.Point(6, 20);
@@ -2619,6 +2660,8 @@
             // Cooldown
             // 
             this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Cooldown.Controls.Add(this.lbAutoDetectHint);
+            this.Cooldown.Controls.Add(this.chBoxCooldownDetection);
             this.Cooldown.Controls.Add(this.label13);
             this.Cooldown.Controls.Add(this.label47);
             this.Cooldown.Controls.Add(this.groupBox8);
@@ -2629,12 +2672,26 @@
             this.Cooldown.TabIndex = 2;
             this.Cooldown.Text = "Cooldown";
             // 
+            // chBoxCooldownDetection
+            // 
+            this.chBoxCooldownDetection.AutoSize = true;
+            this.chBoxCooldownDetection.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxCooldownDetection.Location = new System.Drawing.Point(9, 33);
+            this.chBoxCooldownDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.chBoxCooldownDetection.Name = "chBoxCooldownDetection";
+            this.chBoxCooldownDetection.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chBoxCooldownDetection.Size = new System.Drawing.Size(120, 17);
+            this.chBoxCooldownDetection.TabIndex = 49;
+            this.chBoxCooldownDetection.Text = ":.Cooldown Detect";
+            this.chBoxCooldownDetection.UseVisualStyleBackColor = true;
+            this.chBoxCooldownDetection.CheckedChanged += new System.EventHandler(this.chBoxCooldownDetection_CheckedChanged);
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Orange;
-            this.label13.Location = new System.Drawing.Point(5, 46);
+            this.label13.Location = new System.Drawing.Point(5, 55);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(114, 60);
             this.label13.TabIndex = 48;
@@ -2644,7 +2701,7 @@
             // 
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.Location = new System.Drawing.Point(10, 16);
+            this.label47.Location = new System.Drawing.Point(10, 9);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(121, 17);
             this.label47.TabIndex = 47;
@@ -2687,7 +2744,6 @@
             this.label18.Size = new System.Drawing.Size(58, 17);
             this.label18.TabIndex = 14;
             this.label18.Text = "12:50:50";
-            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // timer1
             // 
@@ -2706,21 +2762,6 @@
             this.label23.Size = new System.Drawing.Size(46, 17);
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
-            // 
-            // chBoxGlavier
-            // 
-            this.chBoxGlavier.AutoSize = true;
-            this.chBoxGlavier.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxGlavier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxGlavier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxGlavier.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxGlavier.Location = new System.Drawing.Point(126, 60);
-            this.chBoxGlavier.Name = "chBoxGlavier";
-            this.chBoxGlavier.Size = new System.Drawing.Size(66, 19);
-            this.chBoxGlavier.TabIndex = 79;
-            this.chBoxGlavier.Text = "Glavier:";
-            this.chBoxGlavier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chBoxGlavier.UseVisualStyleBackColor = true;
             // 
             // ChaosBot
             // 
@@ -2964,6 +3005,8 @@
         private System.Windows.Forms.CheckBox chBoxCompare;
         private System.Windows.Forms.CheckBox chBoxNPCRepair;
         private System.Windows.Forms.CheckBox chBoxGlavier;
+        private System.Windows.Forms.CheckBox chBoxCooldownDetection;
+        private System.Windows.Forms.Label lbAutoDetectHint;
     }
 }
 

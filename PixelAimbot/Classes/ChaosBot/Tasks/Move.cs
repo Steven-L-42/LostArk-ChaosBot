@@ -65,15 +65,14 @@ namespace PixelAimbot
                     ExceptionHandler.SendException(ex);
                 }
 
-                //skillQ = GetSkillQ();
-                //skillW = GetSkillW();
-                //skillE = GetSkillE();
-                //skillR = GetSkillR();
-
-                //skillA = GetSkillA();
-                //skillS = GetSkillS();
-                //skillD = GetSkillD();
-                //skillF = GetSkillF();
+                GetSkillQ();
+                GetSkillW();
+                GetSkillE();
+                GetSkillR();
+                GetSkillA();
+                GetSkillS();
+                GetSkillD();
+                GetSkillF();
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
