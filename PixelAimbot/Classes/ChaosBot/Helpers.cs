@@ -1313,8 +1313,10 @@ namespace PixelAimbot
 
         private static Bitmap CropImage(Image img, Rectangle cropArea)
         {
-            var bmpImage = new Bitmap(img);
-            return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            using (var bmpImage = new Bitmap(img))
+            {
+                return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            }
         }
 
         private Stream ToStream(Image image, ImageFormat format)
