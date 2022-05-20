@@ -9,14 +9,14 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private async Task Restart(CancellationToken token)
+        private void Restart(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+                 Task.Delay(1, token);
                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000),token);
+                 Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000),token);
                 starten = false;
                 gefunden = false;
                 _restart = true;
@@ -31,8 +31,6 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
-
-              
 
                 _bard = false;
                 _gunlancer = false;
@@ -62,47 +60,46 @@ namespace PixelAimbot
 
                         token.ThrowIfCancellationRequested();
                         Random random = new Random();
-                        await Task.Delay(1, token);
+                        Task.Delay(1, token);
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(humanizer.Next(10, 240) + 1000, token);
+                        Task.Delay(humanizer.Next(10, 240) + 1000, token);
                         VirtualMouse.MoveTo(Recalc(1844), Recalc(44, false), 10);
 
                         for (int i = 0; i < random.Next(2, 10); i++)
                         {
                             VirtualMouse.Scroll(-120);
-                            await Task.Delay(100);
+                            Task.Delay(100);
                         }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap++;
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(humanizer.Next(10, 240) + 2000, token);
+                        Task.Delay(humanizer.Next(10, 240) + 2000, token);
                         var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
+                      
                     }
                     else if (_swap == 7)
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                        Task.Delay(1, token);
                         Random random = new Random();
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                        await Task.Delay(humanizer.Next(10, 240) + 1000, token);
+                        Task.Delay(humanizer.Next(10, 240) + 1000, token);
                         VirtualMouse.MoveTo(Recalc(1844), Recalc(64, false), 10);
 
                         for (int i = 0; i < random.Next(2, 10); i++)
                         {
                             VirtualMouse.Scroll(-120);
-                            await Task.Delay(100);
+                            Task.Delay(100);
                         }
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         _swap = 0;
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
-                        await Task.Delay(humanizer.Next(10, 240) + 2000, token);
+                        Task.Delay(humanizer.Next(10, 240) + 2000, token);
                         var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
                     }
                 }
 
@@ -112,7 +109,7 @@ namespace PixelAimbot
                     {
 
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                        Task.Delay(1, token);
                         cts.Cancel();
                    
                         starten = false;
@@ -154,10 +151,11 @@ namespace PixelAimbot
                         _D = false;
                         _F = false;
 
-                        await Task.Delay(humanizer.Next(10, 240) + 2000);
+                        Task.Delay(humanizer.Next(10, 240) + 2000);
                         _start = false;
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_F9);
-                        await Task.Delay(1000);
+                        Task.Delay(1000);
+                        token.ThrowIfCancellationRequested(); // TEST
                     }
                     catch (AggregateException)
                     {

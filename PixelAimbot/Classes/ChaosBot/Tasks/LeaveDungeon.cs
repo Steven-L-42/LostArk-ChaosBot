@@ -163,7 +163,7 @@ namespace PixelAimbot
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                
-                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked)
+                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked && !token.IsCancellationRequested || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked && !token.IsCancellationRequested)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
@@ -179,19 +179,19 @@ namespace PixelAimbot
                     }
                  
                 }
-                else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked)
+                else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked && !token.IsCancellationRequested)
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t11 = Task.Run(() => Logout(token));
                     await Task.WhenAny(t11);
                 }
-                else if (_logout == false && _repairTimer <= DateTime.Now == false)
+                else if (_logout == false && _repairTimer <= DateTime.Now == false && !token.IsCancellationRequested)
                 {
                     _swap++;
 
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     var t9 = Task.Run(() => Restart(token));
-                    await Task.WhenAny(t9);
+                  
                 }
             }
             catch (AggregateException)

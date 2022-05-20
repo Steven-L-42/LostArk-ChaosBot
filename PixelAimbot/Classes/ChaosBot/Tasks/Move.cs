@@ -19,7 +19,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                if (_firstSetupTransparency)
+                if (_firstSetupTransparency && !token.IsCancellationRequested)
                 {
                     _firstSetupTransparency = false;
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Set Transparency and Scale..."));
@@ -90,7 +90,8 @@ namespace PixelAimbot
                 _floor1 = true;
                 _stopp = false;
                 _portalIsNotDetected = true;
-                await Task.Delay(3200);
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(3200,token);
                 var t16 = Task.Run(() => Floor1Detectiontimer(token));
                 var t12 = Task.Run(() => Floortime(token));
                 await Task.WhenAny(new[] {t12, t16});

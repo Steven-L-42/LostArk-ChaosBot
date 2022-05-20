@@ -268,8 +268,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                
                     Process[] processName = Process.GetProcessesByName("LostArk");
                     _formExists++;
                     if (_formExists == 1)
@@ -292,8 +291,7 @@ namespace PixelAimbot
 
                             ChaosStart = DateTime.Now;
 
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
+                           
                             processName = Process.GetProcessesByName("LostArk");
                             if (processName.Length == 1)
                             {
@@ -302,12 +300,12 @@ namespace PixelAimbot
                             }
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                            await Task.Delay(humanizer.Next(10, 240) + 1000, token);
+                            await Task.Delay(humanizer.Next(10, 240) + 1000);
 
                             StartInventar = GetStartPic();
 
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
-                            await Task.Delay(humanizer.Next(10, 240) + 500, token);
+                            await Task.Delay(humanizer.Next(10, 240) + 500);
                         }
                     }
                     if (processName.Length == 0 && chBoxCrashDetection.Checked)
@@ -347,7 +345,7 @@ namespace PixelAimbot
 
 
                 
-                    await Task.WhenAny(new[] { t1 });
+                await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
                 {
@@ -543,6 +541,7 @@ namespace PixelAimbot
             chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
             chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
             chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
+            chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
@@ -700,7 +699,7 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxValtanAltQ = false;
                 Properties.Settings.Default.chBoxCompare = false;
                 Properties.Settings.Default.chBoxNPCRepair = false;
-
+                Properties.Settings.Default.chBoxGlavier = false;
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
@@ -780,6 +779,7 @@ namespace PixelAimbot
                 chBoxValtanAltQ.Checked = Properties.Settings.Default.chBoxValtanAltQ;
                 chBoxCompare.Checked = Properties.Settings.Default.chBoxCompare;
                 chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
+                chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
 
             }
             catch (Exception ex)
@@ -892,6 +892,7 @@ namespace PixelAimbot
                     rotation.chBoxValtanAltQ = chBoxValtanAltQ.Checked;
                     rotation.chBoxCompare = chBoxCompare.Checked;
                     rotation.chBoxNPCRepair = chBoxNPCRepair.Checked;
+                    rotation.chBoxGlavier = chBoxGlavier.Checked;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -993,6 +994,7 @@ namespace PixelAimbot
                 chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
                 chBoxCompare.Checked = rotation.chBoxCompare;
                 chBoxNPCRepair.Checked = rotation.chBoxNPCRepair;
+                chBoxGlavier.Checked = rotation.chBoxGlavier;
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {

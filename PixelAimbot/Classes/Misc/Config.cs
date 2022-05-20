@@ -105,6 +105,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxBard { get; set; } = false;
+        public bool chBoxGlavier { get; set; } = false;
         public bool chBoxGunlancer2 { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
         public string txLeaveTimerFloor3 { get; set; } = "180";

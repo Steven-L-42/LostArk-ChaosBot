@@ -1090,5 +1090,17 @@ namespace PixelAimbot.Properties {
                 this["chBoxNPCRepair"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxGlavier {
+            get {
+                return ((bool)(this["chBoxGlavier"]));
+            }
+            set {
+                this["chBoxGlavier"] = value;
+            }
+        }
     }
 }

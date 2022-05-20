@@ -21,7 +21,7 @@ namespace PixelAimbot
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    while (_revive && _floorFight  && _stopp == false)
+                    while (_revive && _floorFight  && _stopp == false && !token.IsCancellationRequested)
                     {
                         try
                         {

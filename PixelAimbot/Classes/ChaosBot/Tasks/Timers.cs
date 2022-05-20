@@ -23,7 +23,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(humanizer.Next(10, 240) + 25000, token);
-                if (_portalIsDetected == true)
+                if (_portalIsDetected == true && !token.IsCancellationRequested)
                 {
 
                     _stopp = true;
@@ -67,7 +67,8 @@ namespace PixelAimbot
         {
             try
             {
-                if(chBoxLeavetimer.Checked)
+                token.ThrowIfCancellationRequested();
+                if (chBoxLeavetimer.Checked && !token.IsCancellationRequested)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txLeaveTimerFloor2.Text) * 1000), token);
@@ -110,7 +111,8 @@ namespace PixelAimbot
         {
             try
             {
-                if(!chBoxLeavetimer.Checked)
+                token.ThrowIfCancellationRequested();
+                if (!chBoxLeavetimer.Checked && !token.IsCancellationRequested)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(humanizer.Next(10, 240) + 240 * 1000, token);
@@ -159,40 +161,6 @@ namespace PixelAimbot
             }
         }
 
-        //public async void Leavetimerfloor3(CancellationToken token)
-        //{
-        //    try
-        //    {
-        //        token.ThrowIfCancellationRequested();
-        //        await Task.Delay(humanizer.Next(10, 240) + int.Parse(txLeaveTimerFloor3.Text) * 1000, token);
-        //        _stopp = true;
-        //        _portalIsNotDetected = false;
-        //        _floorFight = false;
-        //        _searchboss = false;
-        //        _revive = false;
-        //        _ultimate = false;
-        //        _portaldetect = false;
-        //        _portaldetect2 = false;
-        //        _potions = false;
-        //        _floor1 = false;
-        //        _floor2 = false;
-        //        
-        //        var t12 = Task.Run(() => Leavedungeoncomplete(token));
-        //        await Task.WhenAny(new[] {t12});
-        //    }
-        //    catch (AggregateException)
-        //    {
-        //        Debug.WriteLine("Expected");
-        //    }
-        //    catch (ObjectDisposedException)
-        //    {
-        //        Debug.WriteLine("Bug");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-        //        Debug.WriteLine("[" + line + "]" + ex.Message);
-        //    }
-        //}
+      
     }
 }
