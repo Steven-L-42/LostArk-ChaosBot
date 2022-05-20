@@ -53,6 +53,7 @@ namespace PixelAimbot
                     _berserker = true;
                     _paladin = true;
                     _deathblade = true;
+                    _Glavier = true;
                     _sharpshooter = true;
                     _sorcerer = true;
                     _soulfist = true;
@@ -694,6 +695,7 @@ namespace PixelAimbot
                                 _gunlancer = false;
                                 _shadowhunter = false;
                                 _paladin = false;
+                                _Glavier = false;
                                 _deathblade = false;
                                 _sharpshooter = false;
                                 _sorcerer = false;

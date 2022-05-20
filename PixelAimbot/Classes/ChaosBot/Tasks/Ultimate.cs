@@ -88,6 +88,23 @@ namespace PixelAimbot
                             }
                         }
 
+                        if (chBoxGlavier.Checked && _Glavier)
+                        {
+                            _doUltimateAttack = true;
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            await Task.Delay(1000);
+                            object d = Pixel.PixelSearch(Recalc(993), Recalc(971, false), Recalc(1005),
+                                Recalc(981, false), 0xF2F2F2, 10);
+                            if (d.ToString() != "0")
+                            {
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                _Glavier = false;
+
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Glavier Ultimate"));
+                            }
+                        }
+
                         if (chBoxDeathblade.Checked && _deathblade ||
                             chBoxDeathblade2.Checked && _deathblade)
                         {

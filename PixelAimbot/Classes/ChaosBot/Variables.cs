@@ -41,6 +41,7 @@ namespace PixelAimbot
         private bool _berserker;
         private bool _paladin;
         private bool _deathblade;
+        private bool _Glavier;
         private bool _sharpshooter;
         private bool _bard;
         private bool _sorcerer;

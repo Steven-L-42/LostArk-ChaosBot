@@ -35,6 +35,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chBoxNPCRepair = new System.Windows.Forms.CheckBox();
             this.cmbMINUTE = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbHOUR = new System.Windows.Forms.ComboBox();
@@ -198,7 +199,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
-            this.chBoxNPCRepair = new System.Windows.Forms.CheckBox();
+            this.chBoxGlavier = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -292,6 +293,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Action";
             this.toolTip1.SetToolTip(this.groupBox1, "To activate the functions, you have \r\nto Click on the Checkboxes!");
+            // 
+            // chBoxNPCRepair
+            // 
+            this.chBoxNPCRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.chBoxNPCRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.chBoxNPCRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxNPCRepair.Cursor = System.Windows.Forms.Cursors.Help;
+            this.chBoxNPCRepair.FlatAppearance.BorderSize = 0;
+            this.chBoxNPCRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxNPCRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxNPCRepair.Location = new System.Drawing.Point(59, 40);
+            this.chBoxNPCRepair.Name = "chBoxNPCRepair";
+            this.chBoxNPCRepair.Size = new System.Drawing.Size(99, 24);
+            this.chBoxNPCRepair.TabIndex = 65;
+            this.chBoxNPCRepair.Text = "NPC-Repair";
+            this.toolTip1.SetToolTip(this.chBoxNPCRepair, "YOU HAVE TO STAND NEAR THE REPAIR NPC!");
+            this.chBoxNPCRepair.UseMnemonic = false;
+            this.chBoxNPCRepair.UseVisualStyleBackColor = false;
+            this.chBoxNPCRepair.CheckedChanged += new System.EventHandler(this.chBoxNPCRepair_CheckedChanged);
             // 
             // cmbMINUTE
             // 
@@ -1293,6 +1313,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chBoxGlavier);
             this.groupBox3.Controls.Add(this.chBoxAwakening);
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.label36);
@@ -1463,7 +1484,7 @@
             this.chBoxBard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxBard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chBoxBard.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxBard.Location = new System.Drawing.Point(140, 60);
+            this.chBoxBard.Location = new System.Drawing.Point(140, 78);
             this.chBoxBard.Name = "chBoxBard";
             this.chBoxBard.Size = new System.Drawing.Size(52, 19);
             this.chBoxBard.TabIndex = 67;
@@ -2686,24 +2707,20 @@
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
             // 
-            // chBoxNPCRepair
+            // chBoxGlavier
             // 
-            this.chBoxNPCRepair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.chBoxNPCRepair.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.chBoxNPCRepair.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chBoxNPCRepair.Cursor = System.Windows.Forms.Cursors.Help;
-            this.chBoxNPCRepair.FlatAppearance.BorderSize = 0;
-            this.chBoxNPCRepair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chBoxNPCRepair.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxNPCRepair.Location = new System.Drawing.Point(59, 40);
-            this.chBoxNPCRepair.Name = "chBoxNPCRepair";
-            this.chBoxNPCRepair.Size = new System.Drawing.Size(99, 24);
-            this.chBoxNPCRepair.TabIndex = 65;
-            this.chBoxNPCRepair.Text = "NPC-Repair";
-            this.toolTip1.SetToolTip(this.chBoxNPCRepair, "YOU HAVE TO STAND NEAR THE REPAIR NPC!");
-            this.chBoxNPCRepair.UseMnemonic = false;
-            this.chBoxNPCRepair.UseVisualStyleBackColor = false;
-            this.chBoxNPCRepair.CheckedChanged += new System.EventHandler(this.chBoxNPCRepair_CheckedChanged);
+            this.chBoxGlavier.AutoSize = true;
+            this.chBoxGlavier.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chBoxGlavier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxGlavier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chBoxGlavier.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxGlavier.Location = new System.Drawing.Point(126, 60);
+            this.chBoxGlavier.Name = "chBoxGlavier";
+            this.chBoxGlavier.Size = new System.Drawing.Size(66, 19);
+            this.chBoxGlavier.TabIndex = 79;
+            this.chBoxGlavier.Text = "Glavier:";
+            this.chBoxGlavier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chBoxGlavier.UseVisualStyleBackColor = true;
             // 
             // ChaosBot
             // 
@@ -2946,6 +2963,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chBoxCompare;
         private System.Windows.Forms.CheckBox chBoxNPCRepair;
+        private System.Windows.Forms.CheckBox chBoxGlavier;
     }
 }
 

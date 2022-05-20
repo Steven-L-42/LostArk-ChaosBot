@@ -127,6 +127,7 @@ namespace PixelAimbot
                 _berserker = false;
                 _paladin = false;
                 _deathblade = false;
+                _Glavier = false;
                 _sharpshooter = false;
                 _bard = false;
                 _sorcerer = false;

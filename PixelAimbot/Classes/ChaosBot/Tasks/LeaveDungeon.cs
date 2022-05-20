@@ -32,6 +32,7 @@ namespace PixelAimbot
                 _shadowhunter = false;
                 _paladin = false;
                 _deathblade = false;
+                _Glavier = false;
                 _sharpshooter = false;
                 _sorcerer = false;
                 _soulfist = false;
@@ -139,6 +140,7 @@ namespace PixelAimbot
                 _gunlancer = false;
                 _shadowhunter = false;
                 _paladin = false;
+                _Glavier = false;
                 _deathblade = false;
                 _sharpshooter = false;
                 _sorcerer = false;
