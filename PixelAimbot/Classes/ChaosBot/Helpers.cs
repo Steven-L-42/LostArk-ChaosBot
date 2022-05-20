@@ -540,15 +540,6 @@ namespace PixelAimbot
         public Image<Bgr, byte> skillD;
         public Image<Bgr, byte> skillF;
        
-
-
-        //public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>(skillQ).ToImage;
-        //Mat mat2 = FromBitmap.Mat;
-
-
-
-        //public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>().ToImage;
-
         private void GetSkillQ()
         {
             try

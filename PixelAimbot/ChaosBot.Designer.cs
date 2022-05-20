@@ -193,6 +193,15 @@
             this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.Cooldown = new System.Windows.Forms.TabPage();
+            this.cmBoxEsoterik1 = new System.Windows.Forms.ComboBox();
+            this.cmBoxEsoterik2 = new System.Windows.Forms.ComboBox();
+            this.cmBoxEsoterik3 = new System.Windows.Forms.ComboBox();
+            this.cmBoxEsoterik4 = new System.Windows.Forms.ComboBox();
+            this.chBoxEsoterik3 = new System.Windows.Forms.CheckBox();
+            this.chBoxEsoterik4 = new System.Windows.Forms.CheckBox();
+            this.chBoxEsoterik1 = new System.Windows.Forms.CheckBox();
+            this.chBoxEsoterik2 = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.chBoxCooldownDetection = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
@@ -201,6 +210,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -723,7 +734,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Orange;
-            this.label4.Location = new System.Drawing.Point(231, 120);
+            this.label4.Location = new System.Drawing.Point(231, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(160, 15);
             this.label4.TabIndex = 67;
@@ -735,7 +746,7 @@
             this.radioEnglish.Checked = true;
             this.radioEnglish.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.radioEnglish.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioEnglish.Location = new System.Drawing.Point(238, 102);
+            this.radioEnglish.Location = new System.Drawing.Point(238, 101);
             this.radioEnglish.Name = "radioEnglish";
             this.radioEnglish.Size = new System.Drawing.Size(62, 19);
             this.radioEnglish.TabIndex = 66;
@@ -748,7 +759,7 @@
             this.radioGerman.AutoSize = true;
             this.radioGerman.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.radioGerman.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioGerman.Location = new System.Drawing.Point(313, 102);
+            this.radioGerman.Location = new System.Drawing.Point(313, 101);
             this.radioGerman.Name = "radioGerman";
             this.radioGerman.Size = new System.Drawing.Size(69, 19);
             this.radioGerman.TabIndex = 65;
@@ -802,10 +813,10 @@
             this.chBoxRevive.Cursor = System.Windows.Forms.Cursors.Help;
             this.chBoxRevive.FlatAppearance.BorderSize = 0;
             this.chBoxRevive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxRevive.Location = new System.Drawing.Point(1, 97);
+            this.chBoxRevive.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chBoxRevive.Location = new System.Drawing.Point(2, 100);
             this.chBoxRevive.Name = "chBoxRevive";
-            this.chBoxRevive.Size = new System.Drawing.Size(172, 31);
+            this.chBoxRevive.Size = new System.Drawing.Size(172, 26);
             this.chBoxRevive.TabIndex = 59;
             this.chBoxRevive.Text = "AUTO-REVIVE (ON/OFF)";
             this.toolTip1.SetToolTip(this.chBoxRevive, "Detectionrate:\r\n\r\nRecommend = 95\r\n\r\nHigh Value(100) = less likely\r\nLess Value(1) " +
@@ -1090,7 +1101,7 @@
             this.groupBox8.Controls.Add(this.txCoolR);
             this.groupBox8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox8.Location = new System.Drawing.Point(137, 4);
+            this.groupBox8.Location = new System.Drawing.Point(136, 213);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(270, 119);
             this.groupBox8.TabIndex = 45;
@@ -1316,6 +1327,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.chBoxGlavier);
             this.groupBox3.Controls.Add(this.chBoxAwakening);
             this.groupBox3.Controls.Add(this.textBox1);
@@ -1370,12 +1382,11 @@
             this.chBoxAwakening.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxAwakening.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxAwakening.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBoxAwakening.ForeColor = System.Drawing.Color.Orange;
-            this.chBoxAwakening.Location = new System.Drawing.Point(79, 97);
+            this.chBoxAwakening.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.chBoxAwakening.Location = new System.Drawing.Point(168, 100);
             this.chBoxAwakening.Name = "chBoxAwakening";
-            this.chBoxAwakening.Size = new System.Drawing.Size(100, 19);
+            this.chBoxAwakening.Size = new System.Drawing.Size(13, 12);
             this.chBoxAwakening.TabIndex = 78;
-            this.chBoxAwakening.Text = "AWAKENING:";
             this.chBoxAwakening.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chBoxAwakening.UseVisualStyleBackColor = true;
             // 
@@ -2172,13 +2183,13 @@
             this.lbAutoDetectHint.AutoSize = true;
             this.lbAutoDetectHint.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAutoDetectHint.ForeColor = System.Drawing.Color.Orange;
-            this.lbAutoDetectHint.Location = new System.Drawing.Point(161, 9);
+            this.lbAutoDetectHint.Location = new System.Drawing.Point(132, 6);
             this.lbAutoDetectHint.Name = "lbAutoDetectHint";
-            this.lbAutoDetectHint.Size = new System.Drawing.Size(225, 105);
+            this.lbAutoDetectHint.Size = new System.Drawing.Size(279, 60);
             this.lbAutoDetectHint.TabIndex = 50;
-            this.lbAutoDetectHint.Text = "Bot auto detect now the Cooldown Time.\r\nYou dont need to do anything.\r\n\r\nIf this " +
-    "feature make problems, disable it!\r\n\r\nLet uns know how it perfoms, \r\nuse Report " +
-    "Bug on Discord.";
+            this.lbAutoDetectHint.Text = "Bot auto detect now the Cooldown Time. You dont \r\nneed to do anything. If this fe" +
+    "ature make problems,\r\ndisable it! Let uns know how it perfoms,\r\nuse Report Bug o" +
+    "n Discord.";
             this.lbAutoDetectHint.Visible = false;
             // 
             // chBoxActivateF2
@@ -2190,12 +2201,11 @@
             this.chBoxActivateF2.FlatAppearance.BorderSize = 0;
             this.chBoxActivateF2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chBoxActivateF2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.chBoxActivateF2.ForeColor = System.Drawing.Color.Coral;
+            this.chBoxActivateF2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.chBoxActivateF2.Location = new System.Drawing.Point(9, 40);
             this.chBoxActivateF2.Name = "chBoxActivateF2";
             this.chBoxActivateF2.Size = new System.Drawing.Size(183, 24);
             this.chBoxActivateF2.TabIndex = 65;
-            this.chBoxActivateF2.Text = "ACTIVATE FLOOR 2 --->";
             this.chBoxActivateF2.UseMnemonic = false;
             this.chBoxActivateF2.UseVisualStyleBackColor = false;
             this.chBoxActivateF2.CheckedChanged += new System.EventHandler(this.chBoxActivateF2_CheckedChanged);
@@ -2318,6 +2328,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.txtRestart);
             this.groupBox5.Controls.Add(this.button1);
@@ -2647,17 +2658,165 @@
             // Cooldown
             // 
             this.Cooldown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.Cooldown.Controls.Add(this.cmBoxEsoterik1);
+            this.Cooldown.Controls.Add(this.cmBoxEsoterik2);
+            this.Cooldown.Controls.Add(this.cmBoxEsoterik3);
+            this.Cooldown.Controls.Add(this.cmBoxEsoterik4);
+            this.Cooldown.Controls.Add(this.chBoxEsoterik3);
+            this.Cooldown.Controls.Add(this.chBoxEsoterik4);
+            this.Cooldown.Controls.Add(this.chBoxEsoterik1);
+            this.Cooldown.Controls.Add(this.chBoxEsoterik2);
+            this.Cooldown.Controls.Add(this.label5);
             this.Cooldown.Controls.Add(this.lbAutoDetectHint);
             this.Cooldown.Controls.Add(this.chBoxCooldownDetection);
             this.Cooldown.Controls.Add(this.label13);
             this.Cooldown.Controls.Add(this.label47);
-            this.Cooldown.Controls.Add(this.groupBox8);
             this.Cooldown.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.Cooldown.Location = new System.Drawing.Point(4, 20);
             this.Cooldown.Name = "Cooldown";
             this.Cooldown.Size = new System.Drawing.Size(410, 126);
             this.Cooldown.TabIndex = 2;
             this.Cooldown.Text = "Cooldown";
+            // 
+            // cmBoxEsoterik1
+            // 
+            this.cmBoxEsoterik1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmBoxEsoterik1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmBoxEsoterik1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmBoxEsoterik1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBoxEsoterik1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cmBoxEsoterik1.FormattingEnabled = true;
+            this.cmBoxEsoterik1.Items.AddRange(new object[] {
+            "Q",
+            "W",
+            "E",
+            "R",
+            "A",
+            "S",
+            "D",
+            "F"});
+            this.cmBoxEsoterik1.Location = new System.Drawing.Point(353, 92);
+            this.cmBoxEsoterik1.Name = "cmBoxEsoterik1";
+            this.cmBoxEsoterik1.Size = new System.Drawing.Size(47, 23);
+            this.cmBoxEsoterik1.TabIndex = 66;
+            // 
+            // cmBoxEsoterik2
+            // 
+            this.cmBoxEsoterik2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmBoxEsoterik2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmBoxEsoterik2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmBoxEsoterik2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBoxEsoterik2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cmBoxEsoterik2.FormattingEnabled = true;
+            this.cmBoxEsoterik2.Items.AddRange(new object[] {
+            "Q",
+            "W",
+            "E",
+            "R",
+            "A",
+            "S",
+            "D",
+            "F"});
+            this.cmBoxEsoterik2.Location = new System.Drawing.Point(286, 92);
+            this.cmBoxEsoterik2.Name = "cmBoxEsoterik2";
+            this.cmBoxEsoterik2.Size = new System.Drawing.Size(47, 23);
+            this.cmBoxEsoterik2.TabIndex = 65;
+            // 
+            // cmBoxEsoterik3
+            // 
+            this.cmBoxEsoterik3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmBoxEsoterik3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmBoxEsoterik3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmBoxEsoterik3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBoxEsoterik3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cmBoxEsoterik3.FormattingEnabled = true;
+            this.cmBoxEsoterik3.Items.AddRange(new object[] {
+            "Q",
+            "W",
+            "E",
+            "R",
+            "A",
+            "S",
+            "D",
+            "F"});
+            this.cmBoxEsoterik3.Location = new System.Drawing.Point(219, 92);
+            this.cmBoxEsoterik3.Name = "cmBoxEsoterik3";
+            this.cmBoxEsoterik3.Size = new System.Drawing.Size(47, 23);
+            this.cmBoxEsoterik3.TabIndex = 64;
+            // 
+            // cmBoxEsoterik4
+            // 
+            this.cmBoxEsoterik4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.cmBoxEsoterik4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmBoxEsoterik4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmBoxEsoterik4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBoxEsoterik4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.cmBoxEsoterik4.FormattingEnabled = true;
+            this.cmBoxEsoterik4.Items.AddRange(new object[] {
+            "Q",
+            "W",
+            "E",
+            "R",
+            "A",
+            "S",
+            "D",
+            "F"});
+            this.cmBoxEsoterik4.Location = new System.Drawing.Point(153, 92);
+            this.cmBoxEsoterik4.Name = "cmBoxEsoterik4";
+            this.cmBoxEsoterik4.Size = new System.Drawing.Size(47, 23);
+            this.cmBoxEsoterik4.TabIndex = 63;
+            // 
+            // chBoxEsoterik3
+            // 
+            this.chBoxEsoterik3.AutoSize = true;
+            this.chBoxEsoterik3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxEsoterik3.Location = new System.Drawing.Point(206, 98);
+            this.chBoxEsoterik3.Name = "chBoxEsoterik3";
+            this.chBoxEsoterik3.Size = new System.Drawing.Size(13, 12);
+            this.chBoxEsoterik3.TabIndex = 62;
+            this.chBoxEsoterik3.UseVisualStyleBackColor = true;
+            // 
+            // chBoxEsoterik4
+            // 
+            this.chBoxEsoterik4.AutoSize = true;
+            this.chBoxEsoterik4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxEsoterik4.Location = new System.Drawing.Point(139, 98);
+            this.chBoxEsoterik4.Name = "chBoxEsoterik4";
+            this.chBoxEsoterik4.Size = new System.Drawing.Size(13, 12);
+            this.chBoxEsoterik4.TabIndex = 61;
+            this.chBoxEsoterik4.UseVisualStyleBackColor = true;
+            // 
+            // chBoxEsoterik1
+            // 
+            this.chBoxEsoterik1.AutoSize = true;
+            this.chBoxEsoterik1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxEsoterik1.Location = new System.Drawing.Point(340, 98);
+            this.chBoxEsoterik1.Name = "chBoxEsoterik1";
+            this.chBoxEsoterik1.Size = new System.Drawing.Size(13, 12);
+            this.chBoxEsoterik1.TabIndex = 56;
+            this.chBoxEsoterik1.UseVisualStyleBackColor = true;
+            // 
+            // chBoxEsoterik2
+            // 
+            this.chBoxEsoterik2.AutoSize = true;
+            this.chBoxEsoterik2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chBoxEsoterik2.Location = new System.Drawing.Point(273, 98);
+            this.chBoxEsoterik2.Name = "chBoxEsoterik2";
+            this.chBoxEsoterik2.Size = new System.Drawing.Size(13, 12);
+            this.chBoxEsoterik2.TabIndex = 55;
+            this.chBoxEsoterik2.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Orange;
+            this.label5.Location = new System.Drawing.Point(159, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(225, 17);
+            this.label5.TabIndex = 54;
+            this.label5.Text = "Esoterik Skills? Activate && Select It!";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chBoxCooldownDetection
             // 
@@ -2750,6 +2909,31 @@
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.Orange;
+            this.label7.Location = new System.Drawing.Point(84, 99);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 15);
+            this.label7.TabIndex = 80;
+            this.label7.Text = "AWAKENING:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.Coral;
+            this.label9.Location = new System.Drawing.Point(7, 44);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 15);
+            this.label9.TabIndex = 82;
+            this.label9.Text = "ACTIVATE FLOOR 2 --->";
+            this.toolTip1.SetToolTip(this.label9, "We recommend to set this not lower then 10 seconds!");
+            // 
             // ChaosBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2762,6 +2946,7 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.labelSwap);
             this.Controls.Add(this.label15);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.lbClose);
             this.Controls.Add(this.tabControl1);
@@ -2992,6 +3177,17 @@
         private System.Windows.Forms.CheckBox chBoxGlavier;
         private System.Windows.Forms.CheckBox chBoxCooldownDetection;
         private System.Windows.Forms.Label lbAutoDetectHint;
+        private System.Windows.Forms.ComboBox cmBoxEsoterik1;
+        private System.Windows.Forms.ComboBox cmBoxEsoterik2;
+        private System.Windows.Forms.ComboBox cmBoxEsoterik3;
+        private System.Windows.Forms.ComboBox cmBoxEsoterik4;
+        private System.Windows.Forms.CheckBox chBoxEsoterik3;
+        private System.Windows.Forms.CheckBox chBoxEsoterik4;
+        private System.Windows.Forms.CheckBox chBoxEsoterik1;
+        private System.Windows.Forms.CheckBox chBoxEsoterik2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
     }
 }
 

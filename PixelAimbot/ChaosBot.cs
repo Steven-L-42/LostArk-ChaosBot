@@ -1159,16 +1159,20 @@ namespace PixelAimbot
                 groupBox8.Visible = false;
                 label13.Visible = false;
                 lbAutoDetectHint.Visible = true;
-
+                cmBoxEsoterik1.Visible = cmBoxEsoterik2.Visible = cmBoxEsoterik3.Visible = cmBoxEsoterik4.Visible = true;
+    
             }
             else
             {
                 groupBox8.Visible = true;
                 label13.Visible = true;
-
                 lbAutoDetectHint.Visible = false;
+                cmBoxEsoterik1.Visible = cmBoxEsoterik2.Visible = cmBoxEsoterik3.Visible = cmBoxEsoterik4.Visible = false;
+
 
             }
         }
+
+     
     }
 }
