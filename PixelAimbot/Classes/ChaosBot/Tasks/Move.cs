@@ -65,15 +65,15 @@ namespace PixelAimbot
                     ExceptionHandler.SendException(ex);
                 }
 
-                skillQ = GetSkillQ();
-                skillW = GetSkillW();
-                skillE = GetSkillE();
-                skillR = GetSkillR();
+                //skillQ = GetSkillQ();
+                //skillW = GetSkillW();
+                //skillE = GetSkillE();
+                //skillR = GetSkillR();
 
-                skillA = GetSkillA();
-                skillS = GetSkillS();
-                skillD = GetSkillD();
-                skillF = GetSkillF();
+                //skillA = GetSkillA();
+                //skillS = GetSkillS();
+                //skillD = GetSkillD();
+                //skillF = GetSkillF();
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -102,7 +102,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(3200,token);
                 var t16 = Task.Run(() => Floor1Detectiontimer(token));
-                dddddddddddffvar t12 = Task.Run(() => Floortime(token));
+                var t12 = Task.Run(() => Floortime(token));
                 await Task.WhenAny(new[] {t12, t16});
             }
             catch (AggregateException)

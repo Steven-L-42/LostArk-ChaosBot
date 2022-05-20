@@ -110,7 +110,7 @@ namespace PixelAimbot
 
                         token.ThrowIfCancellationRequested();
                         Task.Delay(1, token);
-                       // cts.Cancel();
+                        cts.Cancel();
                    
                         starten = false;
                         gefunden = false;

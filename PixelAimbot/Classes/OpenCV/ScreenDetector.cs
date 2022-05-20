@@ -66,6 +66,7 @@ namespace PixelAimbot.Classes.OpenCV
         {
             this.method = type;
         }
+
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture, bool rescaleImage = true)
         {
             if (rescaleImage && ChaosBot.isWindowed)

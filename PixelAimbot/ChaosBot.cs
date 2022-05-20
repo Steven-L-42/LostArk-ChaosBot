@@ -1078,33 +1078,12 @@ namespace PixelAimbot
         int test = 0;
         private async void button1_Click(object sender, EventArgs e)
         {
-            //cts = new CancellationTokenSource();
-            //var token = cts.Token;
+            await Task.Delay(1);
+           
 
-            //token.ThrowIfCancellationRequested();
-            //await Task.Delay(1, token);
-            //Process[] processName = Process.GetProcessesByName("LostArk");
-            //processName = Process.GetProcessesByName("LostArk");
-            //if (processName.Length == 1)
-            //{
-            //    handle = processName[0].MainWindowHandle;
-            //    SetForegroundWindow(handle);
-            //}
-            //test++;
-            //if (test == 2)
-            //{
-            //    test = 0;
-            //    cts.Cancel();
-            //}
-            //else
-            //{
-               
-            //    var leave = Task.Run(() => TEST(token));
-
-            //}
 
         }
-     
+      
         private async Task TEST(CancellationToken token)
         {
             await Task.Delay(1, token);

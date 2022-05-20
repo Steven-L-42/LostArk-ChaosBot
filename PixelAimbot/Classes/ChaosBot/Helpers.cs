@@ -539,6 +539,21 @@ namespace PixelAimbot
         public Bitmap skillS;
         public Bitmap skillD;
         public Bitmap skillF;
+
+
+
+        public static Image<Bgr, byte> FromFile = new Image<Bgr, byte>("MyImage.jpg");
+        Mat mat = FromFile.Mat;
+
+
+
+        public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>(skillQ).ToImage; 
+        Mat mat2 = FromBitmap.Mat;
+
+
+
+        public static Image<Bgr, byte> FromBitmap = new Image<Bgr, byte>().ToImage;
+
         private Bitmap GetSkillQ()
         {
             try
@@ -549,6 +564,7 @@ namespace PixelAimbot
                 return CropImage(screen,
                     new Rectangle(ChaosBot.Recalc(689), PixelAimbot.ChaosBot.Recalc(985, false),
                         ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false)));
+               
             }
             catch (Exception ex)
             {
@@ -1397,6 +1413,26 @@ namespace PixelAimbot
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        // Ausrangiert //
+        //
+        public void Screenshot(string filename, ImageFormat imageFormat, int sourceX, int sourceY, int destX, int destY)
+        {
+
+
+            //Screenshot(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(985, false),
+            //          ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false));
+
+            using (var bm = new Bitmap(36, 29))
+            {
+                using (Graphics gr = Graphics.FromImage(bm))
+                {
+                    gr.CopyFromScreen(sourceX, sourceY, destX, destY, bm.Size);
+                }
+                bm.Save(filename, imageFormat);
+            }
+
         }
     }
 }
