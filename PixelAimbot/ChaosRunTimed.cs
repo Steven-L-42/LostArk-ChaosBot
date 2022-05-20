@@ -31,7 +31,7 @@ namespace PixelAimbot
                 while (iter <=5)
                 {
                     iter++;
-                    float threshold = 0.8f; // should be disabled
+                    float threshold = 1f; // should be disabled
                     var Guardian1 = ChaosBot.Image_GuardianStone1;
                     var Guardian1Mask = ChaosBot.Image_GuardianStone1Mask;
                     var Destruct3 = ChaosBot.Image_DestructStone3;
@@ -137,7 +137,7 @@ namespace PixelAimbot
             ChaosBot.cts = new CancellationTokenSource();
             var token = ChaosBot.cts.Token;
             await Task.Delay(1, token);
-            var leave = Task.Run(() => Test());
+           // var leave = Task.Run(() => Test());
 
         }
 
