@@ -317,7 +317,8 @@ namespace PixelAimbot
                                 await Task.Delay(1, token);
                                 if (_floorFight && !_stopp && !token.IsCancellationRequested)
                                 {
-                                    if (!isKeyOnCooldown(skill.Key))
+                                    
+                                    if (!isKeyOnCooldownGray(skill.Key))
                                     {
                                         lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is fighting..."));
                                         KeyboardWrapper.AlternateHoldKey(skill.Key, CasttimeByKey(skill.Key));
@@ -327,8 +328,8 @@ namespace PixelAimbot
                                             KeyboardWrapper.PressKey(skill.Key);
                                         }
 
-                                        SetKeyCooldown(skill.Key); // Set Cooldown
-                                        var td = Task.Run(() => SkillCooldown(token, skill.Key));
+                                        SetKeyCooldownGray(skill.Key); // Set Cooldown
+                                      //  var td = Task.Run(() => SkillCooldown(token, skill.Key));
                                         await Task.Delay(humanizer.Next(10, 40), token);
                                         _walktopUTurn++;
                                     }

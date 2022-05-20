@@ -19,6 +19,7 @@ using Emgu.CV.Structure;
 using IronOcr;
 using Newtonsoft.Json.Linq;
 using PixelAimbot.Classes.Misc;
+using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
 {
@@ -528,30 +529,180 @@ namespace PixelAimbot
 
         /// ///////////////////     /// ///////////////////
 
-        Bitmap skillQ;
-        Bitmap skillW;
-        Bitmap skillE;
-        Bitmap skillR;
-        Bitmap skillA;
-        Bitmap skillS;
-        Bitmap skillD;
-        Bitmap skillF;
+        // MAKE SCREENSHOT FROM ABILITYS
+        //
+        public Bitmap skillQ;
+        public Bitmap skillW;
+        public Bitmap skillE;
+        public Bitmap skillR;
+        public Bitmap skillA;
+        public Bitmap skillS;
+        public Bitmap skillD;
+        public Bitmap skillF;
+        private Bitmap GetSkillQ()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                    new Rectangle(ChaosBot.Recalc(689), PixelAimbot.ChaosBot.Recalc(985, false),
+                        ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill Q Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillW()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                   new Rectangle(ChaosBot.Recalc(733), PixelAimbot.ChaosBot.Recalc(985, false),
+                       ChaosBot.Recalc(768), ChaosBot.Recalc(1008, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill W Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillE()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                    new Rectangle(ChaosBot.Recalc(781), PixelAimbot.ChaosBot.Recalc(985, false),
+                        ChaosBot.Recalc(815), ChaosBot.Recalc(1008, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill E Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillR()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                    new Rectangle(ChaosBot.Recalc(827), PixelAimbot.ChaosBot.Recalc(985, false),
+                        ChaosBot.Recalc(860), ChaosBot.Recalc(1008, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill R Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillA()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen, 
+                     new Rectangle(ChaosBot.Recalc(709), PixelAimbot.ChaosBot.Recalc(1031, false),
+                         ChaosBot.Recalc(743), ChaosBot.Recalc(1055, false))); 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill A Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillS()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                    new Rectangle(ChaosBot.Recalc(757), PixelAimbot.ChaosBot.Recalc(1031, false),
+                        ChaosBot.Recalc(790), ChaosBot.Recalc(1055, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill S Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillD()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                   new Rectangle(ChaosBot.Recalc(805), PixelAimbot.ChaosBot.Recalc(1031, false),
+                       ChaosBot.Recalc(837), ChaosBot.Recalc(1055, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill D Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+        private Bitmap GetSkillF()
+        {
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                   new Rectangle(ChaosBot.Recalc(850), PixelAimbot.ChaosBot.Recalc(1031, false),
+                       ChaosBot.Recalc(882), ChaosBot.Recalc(1055, false)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Skill F Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+        }
+
+        // COMPARE SCREENSHOTS WITH OPENCV
+        //
         public async Task SkillQ(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
+                var template = skillQ;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(689),
+                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(721, true, true), ChaosBot.Recalc(1008, false, true));
 
-                while (_Q)
+               // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+               var screenPrinter = new PrintScreen();
+
+                while (_Q && !token.IsCancellationRequested)
                 {
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token); 
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(686), ChaosBot.Recalc(984,false), ChaosBot.Recalc(698), ChaosBot.Recalc(991, false)))
+                        await Task.Delay(1, token);
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _Q = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _Q = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -564,12 +715,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -582,6 +732,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
@@ -591,16 +742,27 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_W)
+                await Task.Delay(1, token);
+                var template = skillW;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(733),
+                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(768, true, true), ChaosBot.Recalc(1008, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_W && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(735), ChaosBot.Recalc(984,false), ChaosBot.Recalc(744), ChaosBot.Recalc(991, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _W = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _W = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -613,12 +775,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -631,25 +792,38 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillE(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_E)
+                await Task.Delay(1, token);
+                var template = skillE;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(781),
+                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(815, true, true), ChaosBot.Recalc(1008, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_E && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(780), ChaosBot.Recalc(984,false), ChaosBot.Recalc(792), ChaosBot.Recalc(991, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _E = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _E = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -662,12 +836,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -680,25 +853,38 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillR(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_R)
+                await Task.Delay(1, token);
+                var template = skillR;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(827),
+                    ChaosBot.Recalc(985, false), ChaosBot.Recalc(860, true, true), ChaosBot.Recalc(1008, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_R && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(828), ChaosBot.Recalc(984,false), ChaosBot.Recalc(838), ChaosBot.Recalc(991, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _R = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _R = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -711,12 +897,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -729,25 +914,38 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillA(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_A)
+                await Task.Delay(1, token);
+                var template = skillA;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(709),
+                    ChaosBot.Recalc(1031, false), ChaosBot.Recalc(743, true, true), ChaosBot.Recalc(1008, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_A && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token); 
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(710), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(720), ChaosBot.Recalc(1039, false)))
+                        await Task.Delay(1, token);
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _A = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _A = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -760,12 +958,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -778,25 +975,38 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillS(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_S)
+                await Task.Delay(1, token);
+                var template = skillS;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(757),
+                    ChaosBot.Recalc(1031, false), ChaosBot.Recalc(790, true, true), ChaosBot.Recalc(1055, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_S && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(755), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(768), ChaosBot.Recalc(1039, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _S = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _S = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -809,12 +1019,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -827,25 +1036,38 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillD(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_D)
+                await Task.Delay(1, token);
+                var template = skillD;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(805),
+                    ChaosBot.Recalc(1031, false), ChaosBot.Recalc(837, true, true), ChaosBot.Recalc(1055, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_D && !token.IsCancellationRequested)
                 {
+
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(802), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(812), ChaosBot.Recalc(1039, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _D = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _D = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -858,12 +1080,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -876,25 +1097,37 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
+
         }
         public async Task SkillF(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1000, token);
-                while (_F)
+                await Task.Delay(1, token);
+                var template = skillF;
+                var detector = new ScreenDetector(template, null, 0.8f, ChaosBot.Recalc(850),
+                    ChaosBot.Recalc(1031, false), ChaosBot.Recalc(882, true, true), ChaosBot.Recalc(1055, false, true));
+
+                // detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+                while (_F && !token.IsCancellationRequested)
                 {
                     try
                     {
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if (Pixel.isGrayScale(ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false), ChaosBot.Recalc(863), ChaosBot.Recalc(1039, false)))
+                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
-                            _F = false;
+                            var item = detector.GetBest(screenCapture, false);
+                            if (item.HasValue)
+                            {
+                                _F = false;
+                            }
                         }
                     }
                     catch (AggregateException)
@@ -907,12 +1140,11 @@ namespace PixelAimbot
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
-                    Random random = new Random();
-                    var sleepTime = random.Next(100, 150);
-                    Thread.Sleep(sleepTime);
+                    await Task.Delay(100);
                 }
             }
             catch (AggregateException)
@@ -925,11 +1157,12 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
-        }
 
+        }
 
         private void SetKeyCooldownGray(byte key)
         {
