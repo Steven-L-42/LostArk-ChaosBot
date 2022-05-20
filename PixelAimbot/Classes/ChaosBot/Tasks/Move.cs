@@ -64,7 +64,8 @@ namespace PixelAimbot
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                     ExceptionHandler.SendException(ex);
                 }
-
+                var t12 = Task.Run(() => Invoker(token));
+             
                 GetSkillQ();
                 GetSkillW();
                 GetSkillE();

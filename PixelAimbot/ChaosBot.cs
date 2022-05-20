@@ -20,9 +20,12 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
+
         public ChaosBot()
         {
             InitializeComponent();
+
+
             conf = Config.Load();
             // Combine the base folder with your specific folder....
             if (conf.username == "Mentalill" || conf.username == "ShiiikK" && Debugger.IsAttached)
@@ -60,9 +63,9 @@ namespace PixelAimbot
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Recalc(0), Recalc(842, false));
             this.TopMost = true;
-            
-        
-            
+
+
+
             this.FormBorderStyle = FormBorderStyle.None;
             RefreshRotationCombox();
             this.Text = RandomString(15);
@@ -85,7 +88,7 @@ namespace PixelAimbot
             UnregisterHotKey(this.Handle, SecondHotkeyId);
             Boolean F10Registered = RegisterHotKey(this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey);
             discordToken = new CancellationTokenSource();
-            
+
             try
             {
                 DiscordTask = DiscordBotAsync(conf.discorduser, discordToken.Token);
@@ -105,7 +108,8 @@ namespace PixelAimbot
             }
         }
 
-        
+
+
         Point p1 = new Point(ChaosBot.Recalc(1326), ChaosBot.Recalc(220));
         Point p2 = new Point(0, 0);
         private async void btnPause_Click(object sender, EventArgs e)
@@ -161,7 +165,7 @@ namespace PixelAimbot
                 this.Show();
                 FormMinimized.Hide();
                 FormMinimized.sw.Reset();
-                if(chBoxCompare.Checked)
+                if (chBoxCompare.Checked)
                 {
                     ChaosStop = DateTime.Now;
                     ChaosTime = ChaosStop - ChaosStart;
@@ -229,14 +233,14 @@ namespace PixelAimbot
                 return CropImage(screen,
                     new Rectangle(ChaosBot.Recalc(1326), PixelAimbot.ChaosBot.Recalc(229, false),
                         ChaosBot.Recalc(544), ChaosBot.Recalc(640, false)));
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
-                
+
                 Console.WriteLine("BITMAP Screenshot {0} {1}", ex.GetType().Name, ex.Message);
                 return null;
             }
-          
-            
+
+
         }
 
         public static TimeSpan ChaosTime = new TimeSpan();
@@ -272,7 +276,7 @@ namespace PixelAimbot
                     _stop = true;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
-                
+
                     Process[] processName = Process.GetProcessesByName("LostArk");
                     _formExists++;
                     if (_formExists == 1)
@@ -295,7 +299,7 @@ namespace PixelAimbot
 
                             ChaosStart = DateTime.Now;
 
-                           
+
                             processName = Process.GetProcessesByName("LostArk");
                             if (processName.Length == 1)
                             {
@@ -322,6 +326,7 @@ namespace PixelAimbot
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
 
                     }
+                    token.ThrowIfCancellationRequested();
                     var t1 = Task.Run(() => Start(token));
                     if (chBoxAutoRepair.Checked && _RepairReset == true)
                     {
@@ -329,14 +334,14 @@ namespace PixelAimbot
                         _RepairReset = false;
                         _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     }
-                   
+
                     if (chBoxLOGOUT.Checked)
                     {
-                        
+
                         var dateNow = DateTime.Now;
-                        if(cmbHOUR.SelectedIndex < dateNow.Hour)
+                        if (cmbHOUR.SelectedIndex < dateNow.Hour)
                         {
-                            _Logout = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day+1, cmbHOUR.SelectedIndex, cmbMINUTE.SelectedIndex, 00);
+                            _Logout = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + 1, cmbHOUR.SelectedIndex, cmbMINUTE.SelectedIndex, 00);
 
                         }
                         else
@@ -348,8 +353,8 @@ namespace PixelAimbot
                     }
 
 
-                
-                await Task.WhenAny(new[] { t1 });
+
+                    await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
                 {
@@ -386,7 +391,7 @@ namespace PixelAimbot
             else
             {
                 currentMouseButton = KeyboardWrapper.VK_RBUTTON;
-            }            
+            }
         }
 
         private void cmbHealKey_SelectedIndexChanged(object sender, EventArgs e)
@@ -484,7 +489,7 @@ namespace PixelAimbot
             comboBox1.DataSource = LAYOUT;
             comboBox1.DisplayMember = "LAYOUTS";
             comboBoxMouse.SelectedIndex = 0;
-            
+
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
 
             chBoxUnstuckF1.Checked = Properties.Settings.Default.chBoxUnstuckF1;
@@ -529,7 +534,7 @@ namespace PixelAimbot
             chBoxActivateF2.Checked = Properties.Settings.Default.chBoxActivateF2;
             txtDungeon2search.Text = Properties.Settings.Default.txtDungeon2search;
             txtDungeon2.Text = Properties.Settings.Default.txtDungeon2;
-            
+
             txLeaveTimerFloor2.Text = Properties.Settings.Default.txLeaveTimerFloor2;
             textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
             chBoxAwakening.Checked = Properties.Settings.Default.chBoxAwakening;
@@ -554,7 +559,7 @@ namespace PixelAimbot
             double sliderPercent = 100 * (distanceFromMin / sliderRange);
             labelheal.Text = "Heal at: " + Convert.ToInt32(sliderPercent) + "% Life";
 
-          
+
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -585,7 +590,7 @@ namespace PixelAimbot
             else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
             {
                 txtRepair.ReadOnly = true;
-                
+
             }
         }
         private void chBoxNPCRepair_CheckedChanged(object sender, EventArgs e)
@@ -605,8 +610,8 @@ namespace PixelAimbot
         }
         private void chBoxLOGOUT_CheckedChanged(object sender, EventArgs e)
         {
-            
-           if (!chBoxLOGOUT.Checked)
+
+            if (!chBoxLOGOUT.Checked)
             {
                 _logout = false;
             }
@@ -770,7 +775,7 @@ namespace PixelAimbot
                 chBoxDoubleS.Checked = Properties.Settings.Default.chBoxDoubleS;
                 chBoxDoubleD.Checked = Properties.Settings.Default.chBoxDoubleD;
                 chBoxDoubleF.Checked = Properties.Settings.Default.chBoxDoubleF;
-               
+
                 chBoxBard.Checked = Properties.Settings.Default.chBoxBard;
                 chBoxGunlancer2.Checked = Properties.Settings.Default.chBoxGunlancer2;
                 textBoxAutoAttack.Text = Properties.Settings.Default.textBoxAutoAttack;
@@ -797,7 +802,7 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
- 
+
         private void btnInstructions_Click(object sender, EventArgs e)
         {
 
@@ -805,15 +810,15 @@ namespace PixelAimbot
 
             if (!_GuideLoaded)
             {
-               
+
                 Fm1.Show();
                 _GuideLoaded = true;
             }
-            
+
         }
 
 
-       
+
         private void buttonSaveRotation_Click(object sender, EventArgs e)
         {
             if (comboBoxRotations.Text != "")
@@ -827,7 +832,7 @@ namespace PixelAimbot
                     rotation.txtDeath = txtDeath.Text;
                     rotation.chBoxRevive = (bool)chBoxRevive.Checked;
                     rotation.txLeaveTimerFloor2 = txLeaveTimerFloor2.Text;
-              
+
                     rotation.txtRestart = txtRestart.Text;
                     rotation.chBoxUnstuckF1 = chBoxUnstuckF1.Checked;
 
@@ -851,7 +856,7 @@ namespace PixelAimbot
                     rotation.chBoxChannelSwap = (bool)chBoxChannelSwap.Checked;
                     rotation.chBoxSaveAll = chBoxAutoMovement.Checked;
                     rotation.chBoxActivateF2 = chBoxActivateF2.Checked;
-                
+
 
                     rotation.txtDungeon2search = txtDungeon2search.Text;
                     rotation.txtDungeon2 = txtDungeon2.Text;
@@ -950,9 +955,9 @@ namespace PixelAimbot
                 cmbHOUR.Text = rotation.autologout;
                 chBoxLOGOUT.Checked = rotation.chBoxautologout;
                 txLeaveTimerFloor2.Text = rotation.txLeaveTimerFloor2;
-          
+
                 chBoxAutoMovement.Checked = rotation.chBoxAutoMovement;
-               
+
                 textBoxAutoAttack.Text = rotation.textBoxAutoAttack;
                 chBoxAwakening.Checked = rotation.chBoxAwakening;
                 chBoxSorcerer.Checked = rotation.chBoxSorcerer;
@@ -1013,7 +1018,7 @@ namespace PixelAimbot
                 else
                 {
                     currentMouseButton = KeyboardWrapper.VK_RBUTTON;
-                }        
+                }
                 Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" loaded");
             }
         }
@@ -1036,11 +1041,11 @@ namespace PixelAimbot
                 txtDungeon2search.ReadOnly = true;
                 txtDungeon2.ReadOnly = true;
                 txLeaveTimerFloor2.ReadOnly = true;
-               
+
             }
         }
 
-        
+
 
         private void chBoxRevive_CheckedChanged(object sender, EventArgs e)
         {
@@ -1081,16 +1086,19 @@ namespace PixelAimbot
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
         int test = 0;
+        private int maxAmount;
+        private object BackgroundWorker_progressBar;
+
         private async void button1_Click(object sender, EventArgs e)
         {
             await Task.Delay(1);
-          //  Screenshot(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false));
+            //  Screenshot(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false));
         }
 
         private async Task TEST(CancellationToken token)
         {
             await Task.Delay(1, token);
-  
+
         }
 
 
@@ -1145,7 +1153,7 @@ namespace PixelAimbot
             Form.Show();
         }
 
-       
+
 
         private void comboBoxRotations_MouseEnter(object sender, EventArgs e)
         {
@@ -1154,13 +1162,13 @@ namespace PixelAimbot
 
         private void chBoxCooldownDetection_CheckedChanged(object sender, EventArgs e)
         {
-            if(chBoxCooldownDetection.Checked)
+            if (chBoxCooldownDetection.Checked)
             {
                 groupBox8.Visible = false;
                 label13.Visible = false;
                 lbAutoDetectHint.Visible = true;
                 cmBoxEsoterik1.Visible = cmBoxEsoterik2.Visible = cmBoxEsoterik3.Visible = cmBoxEsoterik4.Visible = true;
-    
+
             }
             else
             {
@@ -1173,6 +1181,73 @@ namespace PixelAimbot
             }
         }
 
-     
+        private async void Invoker(CancellationToken token)
+        {
+
+            try {
+                token.ThrowIfCancellationRequested();
+                while (chBoxCooldownDetection.Checked)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        if (this.cmBoxEsoterik1.InvokeRequired
+                            || this.cmBoxEsoterik2.InvokeRequired
+                            || this.cmBoxEsoterik3.InvokeRequired
+                            || this.cmBoxEsoterik4.InvokeRequired)
+                        {
+                            MethodInvoker UpdateComboBox = delegate
+                            {
+
+                                cmBoxEsoterik1.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
+                                cmBoxEsoterik2.SelectedIndex = cmBoxEsoterik2.SelectedIndex;
+                                cmBoxEsoterik3.SelectedIndex = cmBoxEsoterik3.SelectedIndex;
+                                cmBoxEsoterik4.SelectedIndex = cmBoxEsoterik4.SelectedIndex;
+                            };
+                            Invoke(UpdateComboBox);
+                        }
+                        else
+                        {
+
+                            this.cmBoxEsoterik1.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
+                            this.cmBoxEsoterik2.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
+                            this.cmBoxEsoterik3.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
+                            this.cmBoxEsoterik4.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
+
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Debug.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Debug.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionHandler.SendException(ex);
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+
+                    await Task.Delay(100, token);
+                }
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.SendException(ex);
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
     }
 }

@@ -100,6 +100,7 @@
             this.txCoolE = new System.Windows.Forms.TextBox();
             this.txCoolR = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.chBoxGlavier = new System.Windows.Forms.CheckBox();
             this.chBoxAwakening = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -158,6 +159,7 @@
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.chBoxCompare = new System.Windows.Forms.CheckBox();
             this.chBoxValtanAltQ = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.lbAutoDetectHint = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -210,8 +212,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label23 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1360,6 +1361,17 @@
             this.groupBox3.Text = "Ultimate";
             this.toolTip1.SetToolTip(this.groupBox3, "To activate the functions, you have \r\nto Click on the Checkboxes!\r\n");
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.Orange;
+            this.label7.Location = new System.Drawing.Point(84, 99);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 15);
+            this.label7.TabIndex = 80;
+            this.label7.Text = "AWAKENING:";
+            // 
             // chBoxGlavier
             // 
             this.chBoxGlavier.AutoSize = true;
@@ -2178,6 +2190,20 @@
             this.chBoxValtanAltQ.UseMnemonic = false;
             this.chBoxValtanAltQ.UseVisualStyleBackColor = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.Coral;
+            this.label9.Location = new System.Drawing.Point(7, 44);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 15);
+            this.label9.TabIndex = 82;
+            this.label9.Text = "ACTIVATE FLOOR 2 --->";
+            this.toolTip1.SetToolTip(this.label9, "We recommend to set this not lower then 10 seconds!");
+            // 
             // lbAutoDetectHint
             // 
             this.lbAutoDetectHint.AutoSize = true;
@@ -2701,6 +2727,7 @@
             this.cmBoxEsoterik1.Name = "cmBoxEsoterik1";
             this.cmBoxEsoterik1.Size = new System.Drawing.Size(47, 23);
             this.cmBoxEsoterik1.TabIndex = 66;
+            this.cmBoxEsoterik1.Visible = false;
             // 
             // cmBoxEsoterik2
             // 
@@ -2724,6 +2751,7 @@
             this.cmBoxEsoterik2.Name = "cmBoxEsoterik2";
             this.cmBoxEsoterik2.Size = new System.Drawing.Size(47, 23);
             this.cmBoxEsoterik2.TabIndex = 65;
+            this.cmBoxEsoterik2.Visible = false;
             // 
             // cmBoxEsoterik3
             // 
@@ -2747,6 +2775,7 @@
             this.cmBoxEsoterik3.Name = "cmBoxEsoterik3";
             this.cmBoxEsoterik3.Size = new System.Drawing.Size(47, 23);
             this.cmBoxEsoterik3.TabIndex = 64;
+            this.cmBoxEsoterik3.Visible = false;
             // 
             // cmBoxEsoterik4
             // 
@@ -2770,6 +2799,7 @@
             this.cmBoxEsoterik4.Name = "cmBoxEsoterik4";
             this.cmBoxEsoterik4.Size = new System.Drawing.Size(47, 23);
             this.cmBoxEsoterik4.TabIndex = 63;
+            this.cmBoxEsoterik4.Visible = false;
             // 
             // chBoxEsoterik3
             // 
@@ -2918,30 +2948,11 @@
             this.label23.TabIndex = 15;
             this.label23.Text = "Clock:";
             // 
-            // label7
+            // backgroundWorker
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label7.ForeColor = System.Drawing.Color.Orange;
-            this.label7.Location = new System.Drawing.Point(84, 99);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 15);
-            this.label7.TabIndex = 80;
-            this.label7.Text = "AWAKENING:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.Coral;
-            this.label9.Location = new System.Drawing.Point(7, 44);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(137, 15);
-            this.label9.TabIndex = 82;
-            this.label9.Text = "ACTIVATE FLOOR 2 --->";
-            this.toolTip1.SetToolTip(this.label9, "We recommend to set this not lower then 10 seconds!");
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             // 
             // ChaosBot
             // 
@@ -3196,6 +3207,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 
