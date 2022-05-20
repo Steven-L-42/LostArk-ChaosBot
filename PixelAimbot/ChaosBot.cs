@@ -1157,11 +1157,15 @@ namespace PixelAimbot
             if(chBoxCooldownDetection.Checked)
             {
                 groupBox8.Visible = false;
+                label13.Visible = false;
                 lbAutoDetectHint.Visible = true;
+
             }
             else
             {
                 groupBox8.Visible = true;
+                label13.Visible = true;
+
                 lbAutoDetectHint.Visible = false;
 
             }

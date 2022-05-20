@@ -83,7 +83,6 @@
             this.txE = new System.Windows.Forms.TextBox();
             this.txR = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.lbAutoDetectHint = new System.Windows.Forms.Label();
             this.lb2F = new System.Windows.Forms.Label();
             this.lb2D = new System.Windows.Forms.Label();
             this.lb2S = new System.Windows.Forms.Label();
@@ -157,9 +156,9 @@
             this.chBoxCrashDetection = new System.Windows.Forms.CheckBox();
             this.checkBoxDiscordNotifications = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.chBoxCompare = new System.Windows.Forms.CheckBox();
             this.chBoxValtanAltQ = new System.Windows.Forms.CheckBox();
+            this.lbAutoDetectHint = new System.Windows.Forms.Label();
             this.chBoxActivateF2 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.STARTEXIT = new System.Windows.Forms.TabPage();
@@ -1098,20 +1097,6 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Cooldown-Time";
             this.toolTip1.SetToolTip(this.groupBox8, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // lbAutoDetectHint
-            // 
-            this.lbAutoDetectHint.AutoSize = true;
-            this.lbAutoDetectHint.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAutoDetectHint.ForeColor = System.Drawing.Color.Orange;
-            this.lbAutoDetectHint.Location = new System.Drawing.Point(161, 9);
-            this.lbAutoDetectHint.Name = "lbAutoDetectHint";
-            this.lbAutoDetectHint.Size = new System.Drawing.Size(225, 105);
-            this.lbAutoDetectHint.TabIndex = 50;
-            this.lbAutoDetectHint.Text = "Bot auto detect now the Cooldown Time.\r\nYou dont need to do anything.\r\n\r\nIf this " +
-    "feature make problems, disable it!\r\n\r\nLet uns know how it perfoms, \r\nuse Report " +
-    "Bug on Discord.";
-            this.lbAutoDetectHint.Visible = false;
             // 
             // lb2F
             // 
@@ -2133,7 +2118,6 @@
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.label5);
             this.groupBox11.Controls.Add(this.chBoxCompare);
             this.groupBox11.Controls.Add(this.chBoxValtanAltQ);
             this.groupBox11.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -2144,17 +2128,6 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Valtan Update";
             this.toolTip1.SetToolTip(this.groupBox11, "Only change if your ingame settings \r\nare different than those given here!");
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Orange;
-            this.label5.Location = new System.Drawing.Point(121, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 12);
-            this.label5.TabIndex = 79;
-            this.label5.Text = "DISABLE IF BOT DONT RESTART";
             // 
             // chBoxCompare
             // 
@@ -2193,6 +2166,20 @@
             this.toolTip1.SetToolTip(this.chBoxValtanAltQ, "START DUNGEON WHEREVER YOU ARE");
             this.chBoxValtanAltQ.UseMnemonic = false;
             this.chBoxValtanAltQ.UseVisualStyleBackColor = false;
+            // 
+            // lbAutoDetectHint
+            // 
+            this.lbAutoDetectHint.AutoSize = true;
+            this.lbAutoDetectHint.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAutoDetectHint.ForeColor = System.Drawing.Color.Orange;
+            this.lbAutoDetectHint.Location = new System.Drawing.Point(161, 9);
+            this.lbAutoDetectHint.Name = "lbAutoDetectHint";
+            this.lbAutoDetectHint.Size = new System.Drawing.Size(225, 105);
+            this.lbAutoDetectHint.TabIndex = 50;
+            this.lbAutoDetectHint.Text = "Bot auto detect now the Cooldown Time.\r\nYou dont need to do anything.\r\n\r\nIf this " +
+    "feature make problems, disable it!\r\n\r\nLet uns know how it perfoms, \r\nuse Report " +
+    "Bug on Discord.";
+            this.lbAutoDetectHint.Visible = false;
             // 
             // chBoxActivateF2
             // 
@@ -2803,7 +2790,6 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.STARTEXIT.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -3001,7 +2987,6 @@
         private System.Windows.Forms.ComboBox cmbHealKey;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.CheckBox chBoxValtanAltQ;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox chBoxCompare;
         private System.Windows.Forms.CheckBox chBoxNPCRepair;
         private System.Windows.Forms.CheckBox chBoxGlavier;
