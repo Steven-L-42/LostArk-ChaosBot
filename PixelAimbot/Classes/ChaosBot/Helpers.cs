@@ -544,37 +544,18 @@ namespace PixelAimbot
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillQ.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false));
-                skillQ = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillQ.jpg");
-
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //    new Rectangle(ChaosBot.Recalc(689), PixelAimbot.ChaosBot.Recalc(984, false),
-                //        ChaosBot.Recalc(721), ChaosBot.Recalc(1008, false)));
-
+                skillQ = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
             }
         catch (Exception ex)
             {
                 Console.WriteLine("Skill Q Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                //return null;
             }
         }
         private void GetSkillW()
         {
             try
             {
-
-                AbilityScreen(Application.UserAppDataPath + "/SkillW.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(733), ChaosBot.Recalc(984, false));
-                skillW = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillW.jpg");
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //   new Rectangle(ChaosBot.Recalc(733), PixelAimbot.ChaosBot.Recalc(985, false),
-                //       ChaosBot.Recalc(768), ChaosBot.Recalc(1008, false)));
+                skillW = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(733), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
@@ -586,75 +567,42 @@ namespace PixelAimbot
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillE.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(781), ChaosBot.Recalc(984, false));
-                skillE = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillE.jpg");
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //    new Rectangle(ChaosBot.Recalc(781), PixelAimbot.ChaosBot.Recalc(985, false),
-                //        ChaosBot.Recalc(815), ChaosBot.Recalc(1008, false)));
+                skillE = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(781), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill E Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                //return null;
             }
         }
         private void GetSkillR()
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillR.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(827), ChaosBot.Recalc(984, false));
-                skillR = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillR.jpg");
+                
+                skillR = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(827), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
 
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //    new Rectangle(ChaosBot.Recalc(827), PixelAimbot.ChaosBot.Recalc(985, false),
-                //        ChaosBot.Recalc(860), ChaosBot.Recalc(1008, false)));
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill R Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                //return null;
             }
         }
         private void GetSkillA()
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillA.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(709), ChaosBot.Recalc(1031, false));
-                skillA = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillA.jpg");
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen, 
-                //     new Rectangle(ChaosBot.Recalc(709), PixelAimbot.ChaosBot.Recalc(1031, false),
-                //         ChaosBot.Recalc(743), ChaosBot.Recalc(1055, false))); 
+                skillA = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(709), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Skill A Screenshot {0} {1}", ex.GetType().Name, ex.Message);
-                //return null;
             }
         }
         private void GetSkillS()
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillS.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(757), ChaosBot.Recalc(1031, false));
-                skillS = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillS.jpg");
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //    new Rectangle(ChaosBot.Recalc(757), PixelAimbot.ChaosBot.Recalc(1031, false),
-                //        ChaosBot.Recalc(790), ChaosBot.Recalc(1055, false)));
+                skillS = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(757), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
@@ -666,15 +614,7 @@ namespace PixelAimbot
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillD.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(805), ChaosBot.Recalc(1031, false));
-                skillD = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillD.jpg");
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //   new Rectangle(ChaosBot.Recalc(805), PixelAimbot.ChaosBot.Recalc(1031, false),
-                //       ChaosBot.Recalc(837), ChaosBot.Recalc(1055, false)));
+                skillD = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(805), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
@@ -686,15 +626,7 @@ namespace PixelAimbot
         {
             try
             {
-                AbilityScreen(Application.UserAppDataPath + "/SkillF.jpg", ImageFormat.Jpeg, ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false));
-                skillF = new Image<Bgr, byte>(Application.UserAppDataPath + "/SkillF.jpg");
-
-                //var picture = new PrintScreen();
-                //var screen = picture.CaptureScreen();
-
-                //return CropImage(screen,
-                //   new Rectangle(ChaosBot.Recalc(850), PixelAimbot.ChaosBot.Recalc(1031, false),
-                //       ChaosBot.Recalc(882), ChaosBot.Recalc(1055, false)));
+                skillF = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
             }
             catch (Exception ex)
             {
@@ -1428,7 +1360,7 @@ namespace PixelAimbot
         }
 
        
-        public void AbilityScreen(string filename, ImageFormat imageFormat, int sourceX, int sourceY)
+        public Bitmap AbilityScreen(ImageFormat imageFormat, int sourceX, int sourceY)
         {
             using (Bitmap printscreen = new Bitmap(36, 28))
             {
@@ -1436,7 +1368,8 @@ namespace PixelAimbot
                 {
                     graphics.CopyFromScreen(sourceX, sourceY, 0, 0, printscreen.Size);
                 }
-                printscreen.Save(filename, imageFormat);
+
+                return printscreen;
             }
         }
     }
