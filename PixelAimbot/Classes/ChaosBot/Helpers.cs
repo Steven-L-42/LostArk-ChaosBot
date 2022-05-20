@@ -25,6 +25,8 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
+        
+        private PrintScreen printScreenPicture = new PrintScreen();
         private void ChangeSkillSet(object sender, EventArgs e)
         {
             if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" &&
@@ -1362,15 +1364,10 @@ namespace PixelAimbot
        
         public Bitmap AbilityScreen(ImageFormat imageFormat, int sourceX, int sourceY)
         {
-            using (Bitmap printscreen = new Bitmap(36, 28))
-            {
-                using (Graphics graphics = Graphics.FromImage(printscreen as Image))
-                {
-                    graphics.CopyFromScreen(sourceX, sourceY, 0, 0, printscreen.Size);
-                }
-
-                return printscreen;
-            }
+            var screen = printScreenPicture.CaptureScreen();
+            return CropImage(screen,
+                new Rectangle(sourceX, sourceY,
+                    36, 28));
         }
     }
 }
