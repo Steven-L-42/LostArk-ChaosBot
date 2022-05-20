@@ -208,11 +208,6 @@ namespace PixelAimbot
                     form.Show();
                 }
 
-
-
-
-
-
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
                 await Task.Delay(humanizer.Next(10, 240) + 1000);
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
@@ -226,12 +221,21 @@ namespace PixelAimbot
         }
         private Bitmap GetEndPic()
         {
-            var picture = new PrintScreen();
-            var screen = picture.CaptureScreen();
-           
-            return CropImage(screen,
-                new Rectangle(ChaosBot.Recalc(1326), PixelAimbot.ChaosBot.Recalc(229, false),
-                    ChaosBot.Recalc(544), ChaosBot.Recalc(640, false)));
+            try
+            {
+                var picture = new PrintScreen();
+                var screen = picture.CaptureScreen();
+
+                return CropImage(screen,
+                    new Rectangle(ChaosBot.Recalc(1326), PixelAimbot.ChaosBot.Recalc(229, false),
+                        ChaosBot.Recalc(544), ChaosBot.Recalc(640, false)));
+            }catch (Exception ex)
+            {
+                
+                Console.WriteLine("BITMAP Screenshot {0} {1}", ex.GetType().Name, ex.Message);
+                return null;
+            }
+          
             
         }
 
@@ -593,6 +597,7 @@ namespace PixelAimbot
             }
             else if (!chBoxAutoRepair.Checked && !chBoxNPCRepair.Checked)
             {
+                chBoxValtanAltQ.Checked = rotation.chBoxValtanAltQ;
                 txtRepair.ReadOnly = true;
 
             }

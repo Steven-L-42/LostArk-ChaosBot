@@ -102,15 +102,15 @@ namespace PixelAimbot
                         var t9 = Task.Run(() => Restart(token));
                     }
                 }
-
-                if (_restart)
+                token.ThrowIfCancellationRequested();
+                if (_restart && !token.IsCancellationRequested)
                 {
                     try
                     {
 
                         token.ThrowIfCancellationRequested();
                         Task.Delay(1, token);
-                        cts.Cancel();
+                       // cts.Cancel();
                    
                         starten = false;
                         gefunden = false;
