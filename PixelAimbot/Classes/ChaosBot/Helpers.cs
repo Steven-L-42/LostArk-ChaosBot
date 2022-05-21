@@ -771,20 +771,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikW == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 2 && EsoterikW == 0)
                                         {
                                             _W = true;
                                             return;
                                         }
                                         _W = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikW == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikW == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 2 && EsoterikW == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 2 && EsoterikW == 0)
                                     {
                                         GetSkillW();
                                         EsoterikW = 1;
@@ -860,20 +860,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikE == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 3 && EsoterikE == 0)
                                         {
                                             _E = true;
                                             return;
-                                        }
+                                       }
                                         _E = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikE == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikE == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 3 && EsoterikE == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 3 && EsoterikE == 0)
                                     {
                                         GetSkillE();
                                         EsoterikE = 1;
@@ -949,20 +949,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikR == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 4  && EsoterikR == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 4  && EsoterikR == 0)
                                         {
                                             _R = true;
                                             return;
                                         }
                                         _R = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikR == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikR == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 4  && EsoterikR == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 4 && EsoterikR == 0)
                                     {
                                         GetSkillR();
                                         EsoterikR = 1;
@@ -1038,20 +1038,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikA == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 5 && EsoterikA == 0)
                                         {
                                             _A = true;
                                             return;
                                         }
                                         _A = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikA == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikA == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 5 && EsoterikA == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 5 && EsoterikA == 0)
                                     {
                                         GetSkillA();
                                         EsoterikA = 1;
@@ -1127,20 +1127,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikS == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 6 && EsoterikS == 0)
                                         {
                                             _S = true;
                                             return;
                                         }
                                         _S = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikS == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikS == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 6 && EsoterikS == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 6 && EsoterikS == 0)
                                     {
                                         GetSkillS();
                                         EsoterikS = 1;
@@ -1216,20 +1216,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikD == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 7 && EsoterikD == 0)
                                         {
                                             _D = true;
                                             return;
                                         }
                                         _D = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikD == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikD == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 7 && EsoterikD == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 7 && EsoterikD == 0)
                                     {
                                         GetSkillD();
                                         EsoterikD = 1;
@@ -1304,20 +1304,20 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikF == 0)
+                                        if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 8 && EsoterikF == 0)
                                         {
                                             _F = true;
                                             return;
                                         }
                                         _F = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikF == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikF == 0)
+                                    else if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 8 && EsoterikF == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 8 && EsoterikF == 0)
                                     {
                                         GetSkillF();
                                         EsoterikF = 1;
