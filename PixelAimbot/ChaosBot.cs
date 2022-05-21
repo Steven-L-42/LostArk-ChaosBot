@@ -125,6 +125,10 @@ namespace PixelAimbot
                 _stop = false;
                 _restart = false;
                 _logout = false;
+                _Leavetimerfloor1 = 0;
+                _Leavetimerfloor2 = 0;
+                _GlobalLeavetimerfloor2 = 0;
+                _Floor1Detectiontimer = 0;
 
 
                 _gunlancer = false;
@@ -275,6 +279,10 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "READY!"));
                     _start = true;
                     _stop = true;
+                    _Leavetimerfloor1 = 0;
+                    _Leavetimerfloor2 = 0;
+                    _GlobalLeavetimerfloor2 = 0;
+                    _Floor1Detectiontimer = 0;
                     cts = new CancellationTokenSource();
                     var token = cts.Token;
 
