@@ -64,7 +64,7 @@ namespace PixelAimbot
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                     ExceptionHandler.SendException(ex);
                 }
-                var t12 = Task.Run(() => Invoker(token));
+        
              
                 GetSkillQ();
                 GetSkillW();
@@ -101,9 +101,12 @@ namespace PixelAimbot
                 _portalIsNotDetected = true;
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(3200,token);
-                var t16 = Task.Run(() => Floor1Detectiontimer(token));
-                var t12 = Task.Run(() => Floortime(token));
-                await Task.WhenAny(new[] {t12, t16});
+                if (!token.IsCancellationRequested)
+                {
+                    var t16 = Task.Run(() => Floor1Detectiontimer(token));
+                    var t12 = Task.Run(() => Floortime(token));
+                    await Task.WhenAny(new[] { t12, t16 });
+                }
             }
             catch (AggregateException)
             {

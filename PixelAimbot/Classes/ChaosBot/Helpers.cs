@@ -655,13 +655,13 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 var template = skillQ;
-              
+
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(689),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(721, true, true), ChaosBot.Recalc(1008, false, true));
 
-               detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-               var screenPrinter = new PrintScreen();
-               
+                detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
+                var screenPrinter = new PrintScreen();
+
                 while (_Q && !token.IsCancellationRequested)
                 {
                     try
@@ -671,25 +671,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0 
-                                    || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0 
-                                    || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0 
-                                    || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _Q = true;
-                                    return;
-                                }
-                                _Q = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
-                            {
-                                GetSkillQ();
-                                EsoterikQ = 1;
+                                     if (item.HasValue)
+                                     {
+
+
+
+                                         if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
+                                         {
+                                             _Q = true;
+                                             return;
+                                         }
+                                         _Q = false;
+                                     }
+                                     else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
+                                              || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
+                                     {
+                                         GetSkillQ();
+                                         EsoterikQ = 1;
+                                     }
+                                }))))))));
                             }
                         }
                     }
@@ -747,25 +759,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 2 && EsoterikW == 0 
-                                    || cmBoxEsoterik2.SelectedIndex == 2 && EsoterikW == 0 
-                                    || cmBoxEsoterik3.SelectedIndex == 2 && EsoterikW == 0 
-                                    || cmBoxEsoterik4.SelectedIndex == 2 && EsoterikW == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _W = true;
-                                    return;
-                                }
-                                _W = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 2 && EsoterikW == 0
-                                   || cmBoxEsoterik2.SelectedIndex == 2 && EsoterikW == 0
-                                   || cmBoxEsoterik3.SelectedIndex == 2 && EsoterikW == 0
-                                   || cmBoxEsoterik4.SelectedIndex == 2 && EsoterikW == 0)
-                            {
-                                GetSkillW();
-                                EsoterikW = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikW == 0)
+                                        {
+                                            _W = true;
+                                            return;
+                                        }
+                                        _W = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikW == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikW == 0)
+                                    {
+                                        GetSkillW();
+                                        EsoterikW = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -824,25 +848,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 3 && EsoterikE == 0
-                                   || cmBoxEsoterik2.SelectedIndex == 3 && EsoterikE == 0
-                                   || cmBoxEsoterik3.SelectedIndex == 3 && EsoterikE == 0
-                                   || cmBoxEsoterik4.SelectedIndex == 3 && EsoterikE == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _E = true;
-                                    return;
-                                }
-                                _E = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 3 && EsoterikE == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 3 && EsoterikE == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 3 && EsoterikE == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 3 && EsoterikE == 0)
-                            {
-                                GetSkillE();
-                                EsoterikE = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikE == 0)
+                                        {
+                                            _E = true;
+                                            return;
+                                        }
+                                        _E = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikE == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikE == 0)
+                                    {
+                                        GetSkillE();
+                                        EsoterikE = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -901,25 +937,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 4 && EsoterikR == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _R = true;
-                                    return;
-                                }
-                                _R = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 4 && EsoterikR == 0)
-                            {
-                                GetSkillR();
-                                EsoterikR = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikR == 0)
+                                        {
+                                            _R = true;
+                                            return;
+                                        }
+                                        _R = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikR == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikR == 0)
+                                    {
+                                        GetSkillR();
+                                        EsoterikR = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -978,25 +1026,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 5 && EsoterikA == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _A = true;
-                                    return;
-                                }
-                                _A = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 5 && EsoterikA == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 5 && EsoterikA == 0)
-                            {
-                                GetSkillA();
-                                EsoterikA = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikA == 0)
+                                        {
+                                            _A = true;
+                                            return;
+                                        }
+                                        _A = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikA == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikA == 0)
+                                    {
+                                        GetSkillA();
+                                        EsoterikA = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -1055,25 +1115,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 6 && EsoterikS == 0
-                                     || cmBoxEsoterik2.SelectedIndex == 6 && EsoterikS == 0
-                                     || cmBoxEsoterik3.SelectedIndex == 6 && EsoterikS == 0
-                                     || cmBoxEsoterik4.SelectedIndex == 6 && EsoterikS == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _S = true;
-                                    return;
-                                }
-                                _S = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 6 && EsoterikS == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 6 && EsoterikS == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 6 && EsoterikS == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 6 && EsoterikS == 0)
-                            {
-                                GetSkillS();
-                                EsoterikS = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikS == 0)
+                                        {
+                                            _S = true;
+                                            return;
+                                        }
+                                        _S = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikS == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikS == 0)
+                                    {
+                                        GetSkillS();
+                                        EsoterikS = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -1132,25 +1204,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 7 && EsoterikD == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _D = true;
-                                    return;
-                                }
-                                _D = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 7 && EsoterikD == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 7 && EsoterikD == 0)
-                            {
-                                GetSkillD();
-                                EsoterikD = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikD == 0)
+                                        {
+                                            _D = true;
+                                            return;
+                                        }
+                                        _D = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikD == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikD == 0)
+                                    {
+                                        GetSkillD();
+                                        EsoterikD = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }
@@ -1208,25 +1292,37 @@ namespace PixelAimbot
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
-                            if (item.HasValue)
+                            if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
-                                if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
-                                   || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
-                                   || cmBoxEsoterik3.SelectedIndex == 8 && EsoterikF == 0
-                                   || cmBoxEsoterik4.SelectedIndex == 8 && EsoterikF == 0)
+                                cmBoxEsoterik1.Invoke(new Action(() =>
+                                cmBoxEsoterik2.Invoke(new Action(() =>
+                                cmBoxEsoterik3.Invoke(new Action(() =>
+                                cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                    _F = true;
-                                    return;
-                                }
-                                _F = false;
-                            }
-                            else if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
-                                    || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
-                                    || cmBoxEsoterik3.SelectedIndex == 8 && EsoterikF == 0
-                                    || cmBoxEsoterik4.SelectedIndex == 8 && EsoterikF == 0)
-                            {
-                                GetSkillF();
-                                EsoterikF = 1;
+                                    if (item.HasValue)
+                                    {
+
+
+
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikF == 0)
+                                        {
+                                            _F = true;
+                                            return;
+                                        }
+                                        _F = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikF == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikF == 0)
+                                    {
+                                        GetSkillF();
+                                        EsoterikF = 1;
+                                    }
+                                }))))))));
                             }
                         }
                     }

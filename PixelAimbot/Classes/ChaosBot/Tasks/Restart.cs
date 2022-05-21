@@ -31,6 +31,10 @@ namespace PixelAimbot
                 _potions = false;
                 _floor1 = false;
                 _floor2 = false;
+                _Leavetimerfloor1 = 0;
+                _Leavetimerfloor2 = 0;
+                _GlobalLeavetimerfloor2 = 0;
+                _Floor1Detectiontimer = 0;
 
                 _bard = false;
                 _gunlancer = false;
@@ -76,8 +80,11 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                        var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
+                        if (!token.IsCancellationRequested)
+                        {
+                            var t9 = Task.Run(() => Restart(token));
+                            await Task.WhenAny(t9);
+                        }
 
 
                     }
@@ -101,8 +108,11 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                        var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
+                        if (!token.IsCancellationRequested)
+                        {
+                            var t9 = Task.Run(() => Restart(token));
+                            await Task.WhenAny(t9);
+                        }
 
                     }
                 }
@@ -122,6 +132,10 @@ namespace PixelAimbot
                         _stopp = true;
                         _restart = false;
                         _logout = false;
+                        _Leavetimerfloor1 = 0;
+                        _Leavetimerfloor2 = 0;
+                        _GlobalLeavetimerfloor2 = 0;
+                        _Floor1Detectiontimer = 0;
 
 
                         _gunlancer = false;

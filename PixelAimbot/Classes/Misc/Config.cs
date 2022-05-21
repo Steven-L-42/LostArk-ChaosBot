@@ -96,6 +96,11 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxCompare { get; set; } = false;
         public bool chBoxAutoMovement { get; set; } = false;
         public bool chBoxCooldownDetection { get; set; } = true;   
+        public int cmBoxEsoterik1 { get; set; } = 0;
+        public int cmBoxEsoterik2 { get; set; } = 0;
+        public int cmBoxEsoterik3 { get; set; } = 0;
+        public int cmBoxEsoterik4 { get; set; } = 0;
+
 
         public int HealthSlider1 { get; set; } = 801;
         public bool chboxdungeontimer { get; set; } = false;

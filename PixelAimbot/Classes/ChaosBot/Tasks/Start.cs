@@ -66,28 +66,29 @@ namespace PixelAimbot
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
                
 
-                /////////////// PRESS G TO ENTER ///////////////
+              
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
                 // Für VALTAN Update
                 if(chBoxValtanAltQ.Checked)
                 {
+                    await Task.Delay(2000, token);
                     KeyboardWrapper.MultiplePressKey(KeyboardWrapper.VK_ALT, KeyboardWrapper.VK_Q);
-                    await Task.Delay(1000, token);
+                    await Task.Delay(1500, token);
                     VirtualMouse.MoveTo(Recalc(866), Recalc(284, false), 10);
-                    await Task.Delay(1000, token);
+                    await Task.Delay(1500, token);
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 }
                 else
-                {
+                {  /////////////// PRESS G TO ENTER ///////////////
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                 }
             
 
                 /////////////// CLICK ON ENTER /////////////////
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 1000, token);
+                await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                 VirtualMouse.MoveTo(Recalc(1467), Recalc(858, false), 10);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
 
@@ -98,8 +99,11 @@ namespace PixelAimbot
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(humanizer.Next(10, 240) + 9000, token);
-                var t3 = Task.Run(() => StartMove(token));
-                await Task.WhenAny(new[] {t3});
+                if (!token.IsCancellationRequested)
+                {
+                    var t3 = Task.Run(() => StartMove(token));
+                    await Task.WhenAny(new[] { t3 });
+                }
             }
             catch (AggregateException)
             {

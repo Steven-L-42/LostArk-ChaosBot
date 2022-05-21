@@ -1105,13 +1105,61 @@ namespace PixelAimbot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool chBoxCooldownDetection {
             get {
                 return ((bool)(this["chBoxCooldownDetection"]));
             }
             set {
                 this["chBoxCooldownDetection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik1 {
+            get {
+                return ((int)(this["cmBoxEsoterik1"]));
+            }
+            set {
+                this["cmBoxEsoterik1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik2 {
+            get {
+                return ((int)(this["cmBoxEsoterik2"]));
+            }
+            set {
+                this["cmBoxEsoterik2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik3 {
+            get {
+                return ((int)(this["cmBoxEsoterik3"]));
+            }
+            set {
+                this["cmBoxEsoterik3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik4 {
+            get {
+                return ((int)(this["cmBoxEsoterik4"]));
+            }
+            set {
+                this["cmBoxEsoterik4"] = value;
             }
         }
     }

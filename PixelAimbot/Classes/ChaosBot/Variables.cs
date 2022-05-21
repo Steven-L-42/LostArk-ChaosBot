@@ -75,7 +75,12 @@ namespace PixelAimbot
 
 
         private Timer _timer;
-    
+
+
+        private int _Leavetimerfloor1 = 0;
+        private int _Leavetimerfloor2 = 0;
+        private int _GlobalLeavetimerfloor2 = 0;
+        private int _Floor1Detectiontimer = 0;
         private int _fightSequence;
         private int _fightSequence2;
         private int _searchSequence;

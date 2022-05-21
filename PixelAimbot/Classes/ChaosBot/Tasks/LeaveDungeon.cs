@@ -16,7 +16,10 @@ namespace PixelAimbot
                 gefunden = false;
                 _stopp = true;
                 _portalIsDetected = false;
-
+                _Leavetimerfloor1 = 0;
+                _Leavetimerfloor2 = 0;
+                _GlobalLeavetimerfloor2 = 0;
+                _Floor1Detectiontimer = 0;
                 _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;
@@ -58,9 +61,11 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 VirtualMouse.MoveTo(Recalc(158), Recalc(285, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-
-                var t6 = Task.Run(() => Leaveaccept(token));
-                await Task.WhenAny(new[] {t6});
+                if (!token.IsCancellationRequested)
+                {
+                    var t6 = Task.Run(() => Leaveaccept(token));
+                    await Task.WhenAny(new[] { t6 });
+                }
             }
             catch (AggregateException)
             {
@@ -125,7 +130,10 @@ namespace PixelAimbot
                 gefunden = false;
                 _stopp = true;
                 _portalIsDetected = false;
-
+                _Leavetimerfloor1 = 0;
+                _Leavetimerfloor2 = 0;
+                _GlobalLeavetimerfloor2 = 0;
+                _Floor1Detectiontimer = 0;
                 _portalIsNotDetected = false;
                 _floorFight = false;
                 _searchboss = false;
@@ -158,40 +166,57 @@ namespace PixelAimbot
                 _F = true;
                 ChaosAllRounds++;
                 // KLICKT ENTER
+                token.ThrowIfCancellationRequested();
                 await Task.Delay(humanizer.Next(10, 240) + 1000, token);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-               
+                token.ThrowIfCancellationRequested();
                 if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked && !token.IsCancellationRequested || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked && !token.IsCancellationRequested)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     if(chBoxAutoRepair.Checked)
                     {
-                        var t7 = Task.Run(() => Repair(token));
-                        await Task.WhenAny(t7);
+                        token.ThrowIfCancellationRequested();
+                        if (!token.IsCancellationRequested)
+                        {
+                            var t7 = Task.Run(() => Repair(token));
+                            await Task.WhenAny(t7);
+                        }
                     }
                     else
                     {
-                        var t7 = Task.Run(() => NPCRepair(token));
-                        await Task.WhenAny(t7);
+                        token.ThrowIfCancellationRequested();
+                        if (!token.IsCancellationRequested)
+                        {
+                            var t7 = Task.Run(() => NPCRepair(token));
+                            await Task.WhenAny(t7);
+                        }
                     }
                  
                 }
                 else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked && !token.IsCancellationRequested)
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
-                    var t11 = Task.Run(() => Logout(token));
-                    await Task.WhenAny(t11);
+                    token.ThrowIfCancellationRequested();
+                    if (!token.IsCancellationRequested)
+                    {
+                        var t11 = Task.Run(() => Logout(token));
+                        await Task.WhenAny(t11);
+                    }
                 }
                 else if (_logout == false && _repairTimer <= DateTime.Now == false && !token.IsCancellationRequested)
                 {
                     _swap++;
 
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
-                    var t9 = Task.Run(() => Restart(token));
-                    await Task.WhenAny(t9);
+                    token.ThrowIfCancellationRequested();
+                    if (!token.IsCancellationRequested)
+                    {
+                        var t9 = Task.Run(() => Restart(token));
+                        await Task.WhenAny(t9);
+                    }
                 }
             }
             catch (AggregateException)

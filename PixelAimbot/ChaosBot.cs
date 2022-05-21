@@ -20,11 +20,12 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
-
+        
         public ChaosBot()
         {
             InitializeComponent();
 
+            
 
             conf = Config.Load();
             // Combine the base folder with your specific folder....
@@ -552,14 +553,16 @@ namespace PixelAimbot
             chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
             chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
             chBoxCooldownDetection.Checked = Properties.Settings.Default.chBoxCooldownDetection;
+            cmBoxEsoterik1.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik1;
+            cmBoxEsoterik2.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik2;
+            cmBoxEsoterik3.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik3;
+            cmBoxEsoterik4.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik4;
 
             healthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
             double sliderRange = (HealthSlider1.Maximum - HealthSlider1.Minimum);
             double sliderPercent = 100 * (distanceFromMin / sliderRange);
             labelheal.Text = "Heal at: " + Convert.ToInt32(sliderPercent) + "% Life";
-
-
         }
 
         private void lbClose_Click(object sender, EventArgs e)
@@ -712,6 +715,10 @@ namespace PixelAimbot
                 Properties.Settings.Default.chBoxNPCRepair = false;
                 Properties.Settings.Default.chBoxGlavier = false;
                 Properties.Settings.Default.chBoxCooldownDetection = true;
+                Properties.Settings.Default.cmBoxEsoterik1 = 0;
+                Properties.Settings.Default.cmBoxEsoterik2 = 0;
+                Properties.Settings.Default.cmBoxEsoterik3 = 0;
+                Properties.Settings.Default.cmBoxEsoterik4 = 0;
 
                 Properties.Settings.Default.Save();
                 chBoxCrashDetection.Checked = Properties.Settings.Default.chBoxCrashDetection;
@@ -793,6 +800,11 @@ namespace PixelAimbot
                 chBoxNPCRepair.Checked = Properties.Settings.Default.chBoxNPCRepair;
                 chBoxGlavier.Checked = Properties.Settings.Default.chBoxGlavier;
                 chBoxCooldownDetection.Checked = Properties.Settings.Default.chBoxCooldownDetection;
+                cmBoxEsoterik1.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik1;
+                cmBoxEsoterik2.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik2;
+                cmBoxEsoterik3.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik3;
+                cmBoxEsoterik4.SelectedIndex = Properties.Settings.Default.cmBoxEsoterik4;
+
 
             }
             catch (Exception ex)
@@ -907,6 +919,10 @@ namespace PixelAimbot
                     rotation.chBoxNPCRepair = chBoxNPCRepair.Checked;
                     rotation.chBoxGlavier = chBoxGlavier.Checked;
                     rotation.chBoxCooldownDetection = chBoxCooldownDetection.Checked;
+                    rotation.cmBoxEsoterik1 = cmBoxEsoterik1.SelectedIndex;
+                    rotation.cmBoxEsoterik2 = cmBoxEsoterik2.SelectedIndex;
+                    rotation.cmBoxEsoterik3 = cmBoxEsoterik3.SelectedIndex;
+                    rotation.cmBoxEsoterik4 = cmBoxEsoterik4.SelectedIndex;
 
                     rotation.Save(comboBoxRotations.Text);
                     Alert.Show("Rotation \"" + comboBoxRotations.Text + "\" saved");
@@ -1010,6 +1026,11 @@ namespace PixelAimbot
                 chBoxNPCRepair.Checked = rotation.chBoxNPCRepair;
                 chBoxGlavier.Checked = rotation.chBoxGlavier;
                 chBoxCooldownDetection.Checked = rotation.chBoxCooldownDetection;
+                cmBoxEsoterik1.SelectedIndex = rotation.cmBoxEsoterik1;
+                cmBoxEsoterik2.SelectedIndex = rotation.cmBoxEsoterik2;
+                cmBoxEsoterik3.SelectedIndex = rotation.cmBoxEsoterik3;
+                cmBoxEsoterik4.SelectedIndex = rotation.cmBoxEsoterik4;
+
 
                 if (comboBoxMouse.SelectedIndex == 0)
                 {
@@ -1085,10 +1106,7 @@ namespace PixelAimbot
         {
             label18.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-        int test = 0;
-        private int maxAmount;
-        private object BackgroundWorker_progressBar;
-
+       
         private async void button1_Click(object sender, EventArgs e)
         {
             await Task.Delay(1);
@@ -1162,92 +1180,50 @@ namespace PixelAimbot
 
         private void chBoxCooldownDetection_CheckedChanged(object sender, EventArgs e)
         {
+
+
             if (chBoxCooldownDetection.Checked)
             {
-                groupBox8.Visible = false;
-                label13.Visible = false;
-                lbAutoDetectHint.Visible = true;
-                cmBoxEsoterik1.Visible = cmBoxEsoterik2.Visible = cmBoxEsoterik3.Visible = cmBoxEsoterik4.Visible = true;
+                groupBox8.Visible = 
+                    label13.Visible = false;
+
+                lbAutoDetectHint.Visible =
+                    cmBoxEsoterik4.Visible =
+                    cmBoxEsoterik1.Visible =
+                    cmBoxEsoterik2.Visible =
+                    cmBoxEsoterik3.Visible =
+                    lbSpecialSkills.Visible =
+                    btnSpecialSkillsInfo.Visible = true;
+                cmBoxEsoterik1.SelectedIndex = rotation.cmBoxEsoterik1;
+                cmBoxEsoterik2.SelectedIndex = rotation.cmBoxEsoterik2;
+                cmBoxEsoterik3.SelectedIndex = rotation.cmBoxEsoterik3;
+                cmBoxEsoterik4.SelectedIndex = rotation.cmBoxEsoterik4;
+
+
 
             }
             else
             {
-                groupBox8.Visible = true;
-                label13.Visible = true;
-                lbAutoDetectHint.Visible = false;
-                cmBoxEsoterik1.Visible = cmBoxEsoterik2.Visible = cmBoxEsoterik3.Visible = cmBoxEsoterik4.Visible = false;
+                groupBox8.Visible = label13.Visible = true;
+
+                lbAutoDetectHint.Visible = 
+                    cmBoxEsoterik1.Visible = 
+                    cmBoxEsoterik2.Visible = 
+                    cmBoxEsoterik3.Visible = 
+                    cmBoxEsoterik4.Visible =
+                    lbSpecialSkills.Visible =
+                    btnSpecialSkillsInfo.Visible = false;
+
+                cmBoxEsoterik1.SelectedIndex = 
+                    cmBoxEsoterik2.SelectedIndex = 
+                    cmBoxEsoterik3.SelectedIndex = 
+                    cmBoxEsoterik4.SelectedIndex = 0;
 
 
             }
+            
         }
 
-        private async void Invoker(CancellationToken token)
-        {
-
-            try {
-                token.ThrowIfCancellationRequested();
-                while (chBoxCooldownDetection.Checked)
-                {
-                    try
-                    {
-                        token.ThrowIfCancellationRequested();
-                        if (this.cmBoxEsoterik1.InvokeRequired
-                            || this.cmBoxEsoterik2.InvokeRequired
-                            || this.cmBoxEsoterik3.InvokeRequired
-                            || this.cmBoxEsoterik4.InvokeRequired)
-                        {
-                            MethodInvoker UpdateComboBox = delegate
-                            {
-
-                                cmBoxEsoterik1.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
-                                cmBoxEsoterik2.SelectedIndex = cmBoxEsoterik2.SelectedIndex;
-                                cmBoxEsoterik3.SelectedIndex = cmBoxEsoterik3.SelectedIndex;
-                                cmBoxEsoterik4.SelectedIndex = cmBoxEsoterik4.SelectedIndex;
-                            };
-                            Invoke(UpdateComboBox);
-                        }
-                        else
-                        {
-
-                            this.cmBoxEsoterik1.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
-                            this.cmBoxEsoterik2.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
-                            this.cmBoxEsoterik3.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
-                            this.cmBoxEsoterik4.SelectedIndex = cmBoxEsoterik1.SelectedIndex;
-
-                        }
-                    }
-                    catch (AggregateException)
-                    {
-                        Debug.WriteLine("Expected");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Debug.WriteLine("Bug");
-                    }
-                    catch (Exception ex)
-                    {
-                        ExceptionHandler.SendException(ex);
-                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                        Debug.WriteLine("[" + line + "]" + ex.Message);
-                    }
-
-                    await Task.Delay(100, token);
-                }
-            }
-            catch (AggregateException)
-            {
-                Debug.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Debug.WriteLine("Bug");
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.SendException(ex);
-                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
-        }
+      
     }
 }
