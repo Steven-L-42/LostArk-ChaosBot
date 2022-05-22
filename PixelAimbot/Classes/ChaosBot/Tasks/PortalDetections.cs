@@ -53,14 +53,10 @@ namespace PixelAimbot
                                 _leavetimer1++;
                                 if (_leavetimer1 == 1 && chBoxUnstuckF1.Checked)
                                 {
-                                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                                    ctsBossUndTimer.Cancel();
-                                    ctsBossUndTimer.Dispose();
-                                    ctsBossUndTimer = new CancellationTokenSource();
-                                    tokenBossUndTimer = ctsBossUndTimer.Token;
-                                    Task t6 = Task.Run(() => Leavetimerfloor1(tokenBossUndTimer), tokenBossUndTimer);
-                                }
 
+                                    Task t6 = Task.Run(() => Leavetimerfloor1(), token);
+                                }
+                               
                                 _portalIsDetected = true;
                                 _portalIsNotDetected = false;
                                 token.ThrowIfCancellationRequested();
@@ -68,11 +64,6 @@ namespace PixelAimbot
                                 cts.Dispose();
                                 cts = new CancellationTokenSource();
                                 token = cts.Token;
-                                tokenDetections.ThrowIfCancellationRequested();
-                                ctsDetections.Cancel();
-                                ctsDetections.Dispose();
-                                ctsDetections = new CancellationTokenSource();
-                                tokenDetections = ctsDetections.Token;
                                 Task t5 = Task.Run(() => PORTALISDETECTED(tokenDetections), tokenDetections);
                                 Task t7 = Task.Run(() => SEARCHPORTAL(tokenDetections), tokenDetections);
 
@@ -100,11 +91,8 @@ namespace PixelAimbot
 
                                 token.ThrowIfCancellationRequested();
                                 await Task.Delay(1, token);
-                                cts.Cancel();
-                                cts.Dispose();
                                 cts = new CancellationTokenSource();
                                 token = cts.Token;
-
                                 var leave = Task.Run(() => Leavedungeon(token), token);
                             }
                         }
@@ -145,11 +133,9 @@ namespace PixelAimbot
         {
             try
             {
-               
-                _portalIsDetected = true;
-
+                _portaldetect = false;
                 tokenDetections.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+                await Task.Delay(1, tokenDetections);
                 while (_portalIsDetected == true)
                 {
                     try
@@ -161,9 +147,18 @@ namespace PixelAimbot
                         {
                             _portalIsDetected = false;
                             lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Portalsearch done!"));
+                            await Task.Delay(humanizer.Next(10, 240) + 8000, tokenDetections);
+                            _searchSequence = 1;
+                            _searchboss = true;
+                            var t12 = Task.Run(() => SEARCHBOSS(tokenSearchBoss), tokenSearchBoss);
+                            tokenDetections.ThrowIfCancellationRequested();
+                            ctsDetections.Cancel();
+                            ctsDetections.Dispose();
+                            ctsDetections = new CancellationTokenSource();
+                            tokenDetections = ctsDetections.Token;
                         }
 
-                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        await Task.Delay(humanizer.Next(10, 240) + 100, tokenDetections);
                     }
                     catch (AggregateException)
                     {

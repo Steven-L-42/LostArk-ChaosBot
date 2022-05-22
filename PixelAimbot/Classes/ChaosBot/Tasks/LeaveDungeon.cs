@@ -12,6 +12,26 @@ namespace PixelAimbot
         {
             try
             {
+                ctsSearchBoss.Cancel();
+                ctsSearchBoss.Dispose();
+                ctsSearchBoss = new CancellationTokenSource();
+                tokenSearchBoss = ctsSearchBoss.Token;
+
+                ctsSkills.Cancel();
+                ctsSkills.Dispose();
+                ctsSkills = new CancellationTokenSource();
+                tokenSkills = ctsSkills.Token;
+
+                ctsDetections.Cancel();
+                ctsDetections.Dispose();
+                ctsDetections = new CancellationTokenSource();
+                tokenDetections = ctsDetections.Token;
+
+                ctsBossUndTimer.Cancel();
+                ctsBossUndTimer.Dispose();
+                ctsBossUndTimer = new CancellationTokenSource();
+                tokenBossUndTimer = ctsBossUndTimer.Token;
+
                 starten = false;
                 gefunden = false;
                 _stopp = true;
@@ -52,7 +72,6 @@ namespace PixelAimbot
                 _F = true;
 
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
                 // KLICKT AUF LEAVE BUTTON
                 VirtualMouse.MoveTo(Recalc(158), Recalc(285, false), 5);
@@ -61,12 +80,9 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 VirtualMouse.MoveTo(Recalc(158), Recalc(285, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                cts.Cancel();
-                cts.Dispose();
-                cts = new CancellationTokenSource();
-                token = cts.Token;
+             
 
-                var t6 = Task.Run(() => Leaveaccept(token),token);
+                var t6 = Task.Run(() => Leaveaccept(token));
             }
             catch (AggregateException)
             {
@@ -84,87 +100,12 @@ namespace PixelAimbot
             }
         }
 
-        // ITS A DIFFERENT CLICK LOCATION BECAUSE OF SMALLER LEAVE BUTTON FOR FLOOR 3
-        //private async Task Leavedungeoncomplete(CancellationToken token)
-        //{
-        //    try
-        //    {
-        //        token.ThrowIfCancellationRequested();
-        //        await Task.Delay(1, token);
-        //        object walk = Pixel.PixelSearch(Recalc(141), Recalc(274, false), Recalc(245), Recalc(294, false),
-        //            0x29343F, 10);
-
-        //        if (walk.ToString() != "0")
-        //        {
-        //            object[] walkCoord = (object[]) walk;
-        //            VirtualMouse.MoveTo((int) walkCoord[0], (int) walkCoord[1], 5);
-        //            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-        //        }
-
-        //        var t6 = Task.Run(() => Leaveaccept(token),token);
-        //        await Task.WhenAny(new[] {t6});
-        //    }
-        //    catch (AggregateException)
-        //    {
-        //        Console.WriteLine("Expected");
-        //    }
-        //    catch (ObjectDisposedException)
-        //    {
-        //        Console.WriteLine("Bug");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-        //        Debug.WriteLine("[" + line + "]" + ex.Message);
-        //    }
-        //}
-
         private async Task Leaveaccept(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
 
-
-                starten = false;
-                gefunden = false;
-                _stopp = true;
-                _portalIsDetected = false;
-                _Leavetimerfloor1 = 0;
-                _Leavetimerfloor2 = 0;
-                _GlobalLeavetimerfloor2 = 0;
-                _Floor1Detectiontimer = 0;
-                _portalIsNotDetected = false;
-                _floorFight = false;
-                _searchboss = false;
-                _revive = false;
-                _ultimate = false;
-                _portaldetect = false;
-                _potions = false;
-                _floor1 = false;
-                _floor2 = false;
-
-                _bard = false;
-                _gunlancer = false;
-                _shadowhunter = false;
-                _paladin = false;
-                _Glavier = false;
-                _deathblade = false;
-                _sharpshooter = false;
-                _sorcerer = false;
-                _soulfist = false;
-                _sharpshooter = false;
-                _berserker = false;
-                _doUltimateAttack = true;
-                _Q = true;
-                _W = true;
-                _E = true;
-                _R = true;
-                _A = true;
-                _S = true;
-                _D = true;
-                _F = true;
                 ChaosAllRounds++;
                 // KLICKT ENTER
                 token.ThrowIfCancellationRequested();
@@ -185,7 +126,8 @@ namespace PixelAimbot
                         cts = new CancellationTokenSource();
                         token = cts.Token;
 
-                        var t7 = Task.Run(() => Repair(token),token);
+                        var t7 = Task.Run(() => Repair(token));
+                        
                     }
                     else
                     {

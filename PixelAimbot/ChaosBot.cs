@@ -24,6 +24,7 @@ namespace PixelAimbot
         CancellationToken tokenSkills = CancellationToken.None;
         CancellationToken tokenBossUndTimer = CancellationToken.None;
         CancellationToken tokenDetections = CancellationToken.None;
+        CancellationToken tokenSearchBoss = CancellationToken.None;
         public ChaosBot()
         {
             InitializeComponent();
@@ -31,8 +32,7 @@ namespace PixelAimbot
             tokenSkills = ctsSkills.Token;
             tokenBossUndTimer = ctsBossUndTimer.Token;
             tokenDetections = ctsDetections.Token;
-
-
+            tokenSearchBoss = ctsSearchBoss.Token;
 
             conf = Config.Load();
             // Combine the base folder with your specific folder....
@@ -124,10 +124,26 @@ namespace PixelAimbot
         {
             if (_stop == true)
             {
+                ctsSearchBoss.Cancel();
+                ctsSearchBoss.Dispose();
+                ctsSearchBoss = new CancellationTokenSource();
+                tokenSearchBoss = ctsSearchBoss.Token;
+
+                ctsSkills.Cancel();
+                ctsSkills.Dispose();
+                ctsSkills = new CancellationTokenSource();
+                tokenSkills = ctsSkills.Token;
+
+                ctsDetections.Cancel();
+                ctsDetections.Dispose();
+                ctsDetections = new CancellationTokenSource();
+                tokenDetections = ctsDetections.Token;
+
                 ctsBossUndTimer.Cancel();
                 ctsBossUndTimer.Dispose();
                 ctsBossUndTimer = new CancellationTokenSource();
                 tokenBossUndTimer = ctsBossUndTimer.Token;
+
                 cts.Cancel();
                 cts.Dispose();
                 cts = new CancellationTokenSource();
@@ -140,6 +156,7 @@ namespace PixelAimbot
                 _stop = false;
                 _restart = false;
                 _logout = false;
+                _Restart = 0;
                 _Leavetimerfloor1 = 0;
                 _Leavetimerfloor2 = 0;
                 _GlobalLeavetimerfloor2 = 0;
@@ -1258,5 +1275,6 @@ namespace PixelAimbot
                             "You can deposit up to 4 such abilities.\n\n" +
                             "If you don't want to use any, then set all boxes to 'OFF'","Special Abilitys like Esoterik etc.");
         }
+
     }
 }

@@ -13,14 +13,14 @@ namespace PixelAimbot
         {
             try
             {
+               
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000), token);
                 starten = false;
                 gefunden = false;
                 _stop = true;
                 _stopp = true;
+                _restart = true;
+               
                 _portalIsDetected = false;
                 _portalIsNotDetected = false;
                 _floorFight = false;
@@ -56,15 +56,16 @@ namespace PixelAimbot
                 _S = true;
                 _D = true;
                 _F = true;
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000), token);
+                
                 if (chBoxChannelSwap.Checked)
                 {
                     if (_swap == 4)
                     {
 
-
                         token.ThrowIfCancellationRequested();
                         Random random = new Random();
-                        await Task.Delay(1, token);
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                         await Task.Delay(humanizer.Next(10, 240) + 1000, token);
@@ -85,12 +86,14 @@ namespace PixelAimbot
                         cts.Dispose();
                         cts = new CancellationTokenSource();
                         token = cts.Token;
+                 
                         var t9 = Task.Run(() => Restart(token), token);
+                        await Task.WhenAll(t9);
+
                     }
                     else if (_swap == 7)
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
                         Random random = new Random();
                         VirtualMouse.MoveTo(Recalc(1875), Recalc(16, false), 10);
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
@@ -112,18 +115,26 @@ namespace PixelAimbot
                         cts.Dispose();
                         cts = new CancellationTokenSource();
                         token = cts.Token;
+                      
                         var t10 = Task.Run(() => Restart(token), token);
+                        await Task.WhenAll(t10);
                     }
                 }
 
+                _Restart++;
+                if (_restart && _Restart == 1)
+                {
+                    
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+                    var t11 = Task.Run(() => EndlessStart(token), token);
+                }
+                else
+                {
+                    //cts.Cancel();
+                    //cts.Dispose();
+                }
 
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
-                cts.Cancel();
-                cts.Dispose();
-                cts = new CancellationTokenSource();
-                token = cts.Token;
-                var t11 = Task.Run(() => EndlessStart(token), token);
 
             }
             catch (AggregateException)
@@ -147,8 +158,8 @@ namespace PixelAimbot
 
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 2000);
+              
+                await Task.Delay(humanizer.Next(10, 240) + 2000,token);
                 Process[] processName = Process.GetProcessesByName("LostArk");
                 if (processName.Length == 0 && chBoxCrashDetection.Checked)
                 {
@@ -194,10 +205,10 @@ namespace PixelAimbot
 
                 }
                 token.ThrowIfCancellationRequested();
-                cts.Cancel();
-                cts.Dispose();
-                cts = new CancellationTokenSource();
-                token = cts.Token;
+                //cts.Cancel();
+                //cts.Dispose();
+                //cts = new CancellationTokenSource();
+                //token = cts.Token;
 
                 var t1 = Task.Run(() => Start(token), token);
 

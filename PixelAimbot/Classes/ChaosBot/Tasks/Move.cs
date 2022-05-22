@@ -98,7 +98,7 @@ namespace PixelAimbot
                     await Task.Delay(humanizer.Next(10, 240) + 1000, token);
                     var Bersi = Task.Run(() => BerserkerSecond(token),token);
                 }
-
+                _Restart = 0;
                 _floor1 = true;
                 _stopp = false;
                 _portalIsNotDetected = true;
@@ -109,7 +109,7 @@ namespace PixelAimbot
                 cts = new CancellationTokenSource();
                 token = cts.Token;
 
-                var t16 = Task.Run(() => Floor1Detectiontimer(token), token);
+                var t16 = Task.Run(() => Floor1Detectiontimer(), token);
                 var t12 = Task.Run(() => Floortime(token), token);
                 await Task.WhenAny(new[] { t12, t16 });
 

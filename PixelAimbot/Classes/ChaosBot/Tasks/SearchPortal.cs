@@ -97,34 +97,11 @@ namespace PixelAimbot
                         }
                     }
 
-                    tokenDetections.ThrowIfCancellationRequested();
                     KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                     Random random = new Random();
                     var sleepTime = random.Next(500, 570);
                     await Task.Delay(sleepTime);
                 }
-
-                _searchSequence = 1;
-
-                await Task.Delay(humanizer.Next(10, 240) + 8000, tokenDetections);
-                _searchboss = true;
-
-                tokenDetections.ThrowIfCancellationRequested();
-                token.ThrowIfCancellationRequested();
-                cts.Cancel();
-                cts.Dispose();
-                cts = new CancellationTokenSource();
-                token = cts.Token;
-
-                tokenDetections.ThrowIfCancellationRequested();
-                ctsDetections.Cancel();
-                ctsDetections.Dispose();
-                ctsDetections = new CancellationTokenSource();
-                tokenDetections = ctsDetections.Token;
-
-                var t12 = Task.Run(() => SEARCHBOSS(token), token);
-                await Task.WhenAny(new[] { t12 });
-
             }
             catch (AggregateException)
             {

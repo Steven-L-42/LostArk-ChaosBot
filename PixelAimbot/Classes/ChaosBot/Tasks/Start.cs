@@ -76,13 +76,47 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 9000, token);
+                await Task.Delay(humanizer.Next(10, 240) + 2500, token);
 
-                cts.Cancel();
-                cts.Dispose();
-                cts = new CancellationTokenSource();
-                token = cts.Token;
+                //cts.Cancel();
+                //cts.Dispose();
+                //cts = new CancellationTokenSource();
+                //token = cts.Token;
 
+
+
+              bool _ChaosStartDetect = true;
+               
+                while (_ChaosStartDetect == true)
+                {
+                    try
+                    {
+                        object StartDetect = Pixel.PixelSearch(Recalc(1898), Recalc(10, false), Recalc(1911),
+                            Recalc(22, false), 0x000000, 15);
+
+                        if (StartDetect.ToString() == "0")
+                        {
+                            _ChaosStartDetect = false;
+                        }
+                    }
+                    catch (AggregateException)
+                    {
+                        Console.WriteLine("Expected");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("Bug");
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionHandler.SendException(ex);
+                        int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                        Debug.WriteLine("[" + line + "]" + ex.Message);
+                    }
+                    await Task.Delay(100,token);
+                }
+
+                await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                 var t3 = Task.Run(() => StartMove(token), token);
                 await Task.WhenAny(new[] { t3 });
 

@@ -69,7 +69,7 @@ namespace PixelAimbot
                     var t14 = Task.Run(() => UltimateAttack(token), token);
                     var t11 = Task.Run(() => SearchNearEnemys(token), token);
                     var t12 = Task.Run(() => Floorfight(token), token);
-                    var t16 = Task.Run(() => Revive(token), token);
+                    var t16 = Task.Run(() => Revive());
                     var t18 = Task.Run(() => Portaldetect(token), token);
                     var t20 = Task.Run(() => Potions(token), token);
                     await Task.WhenAny(t11, t12, t14, t16, t18, t20);
@@ -95,7 +95,7 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
                     _fightSequence++;
-                    _leavetimer++;
+                    //_leavetimer++;
                     // START TASK BOOLS //
                     _floorFight = true;
                     _revive = true;
@@ -113,22 +113,15 @@ namespace PixelAimbot
                     _sorcerer = true;
                     _soulfist = true;
 
-                    if(_leavetimer == 1)
-                    {
-                        starten = true;
-                        _bossKillDetection = true;
-                        Task t36 = Task.Run(() => Leavetimerfloor2(tokenBossUndTimer), tokenBossUndTimer);
-                        Task t18 = Task.Run(() => BossKillDetection(tokenBossUndTimer), tokenBossUndTimer);
-                    }
-
-                 
+                   
+                
                     Task t11 = Task.Run(() => SearchNearEnemys(token), token);
                     Task t12 = Task.Run(() => Floorfight(token), token);
-                    Task t16 = Task.Run(() => Revive(token), token);
+                    Task t16 = Task.Run(() => Revive());
                     Task t20 = Task.Run(() => Potions(token), token);
 
-                    await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtDungeon2.Text) * 1000), token);
-
+                    await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtDungeon2.Text) * 1000));
+                    token.ThrowIfCancellationRequested();
                     _floorFight = false;
                     _potions = false;
                     _revive = false;
@@ -136,13 +129,9 @@ namespace PixelAimbot
 
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    cts.Cancel();
-                    cts.Dispose();
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
-                    var t13 = Task.Run(() => SEARCHBOSS(token), token);
+                    
+                    var t13 = Task.Run(() => SEARCHBOSS(tokenSearchBoss), tokenSearchBoss);
                     await Task.WhenAny(t13);
-
 
                     await Task.WhenAny(t11, t12, t16, t20);
                 }
@@ -433,15 +422,19 @@ namespace PixelAimbot
 
      
 
-        private async Task SEARCHBOSS(CancellationToken token)
+        private async Task SEARCHBOSS(CancellationToken tokenSearchBoss)
         {
             try
             {
-              
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
                 if (_searchboss == true && _floorFight == false && _stopp == false )
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                    tokenSearchBoss.ThrowIfCancellationRequested();
+                    await Task.Delay(1, tokenSearchBoss);
                     if (_floorint2 == 1)
                     {
                         lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 2: search enemy..."));
@@ -454,7 +447,7 @@ namespace PixelAimbot
 
                     if (_searchSequence == 1)
                     {
-                        await Task.Delay(humanizer.Next(10, 240) + 1500, token);
+                        await Task.Delay(humanizer.Next(10, 240) + 1500, tokenSearchBoss);
                         VirtualMouse.MoveTo(Recalc(960), Recalc(529, false), 10);
                         KeyboardWrapper.PressKey(currentMouseButton);
                         if (chBoxCooldownDetection.Checked && chBoxY.Checked)
@@ -473,8 +466,8 @@ namespace PixelAimbot
 
                     if (chBoxGunlancer.Checked == true && _gunlancer == false && _searchboss == true)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                        tokenSearchBoss.ThrowIfCancellationRequested();
+                        await Task.Delay(1, tokenSearchBoss);
 
                         KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 1000);
                         _gunlancer = true;
@@ -484,8 +477,8 @@ namespace PixelAimbot
 
                     for (int i = 0; i < int.Parse(txtDungeon2search.Text) ; i++)
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        tokenSearchBoss.ThrowIfCancellationRequested();
+                        await Task.Delay(humanizer.Next(10, 240) + 100, tokenSearchBoss);
                         float threshold = 0.705f;
 
                         var enemyTemplate = Image_enemy;
@@ -517,7 +510,7 @@ namespace PixelAimbot
 
                             if (Boss.HasValue && _searchboss == true)
                             {
-                                token.ThrowIfCancellationRequested();
+                                tokenSearchBoss.ThrowIfCancellationRequested();
                                 CvInvoke.Rectangle(screenCapture,
                                     new Rectangle(new Point(Boss.Value.X, Boss.Value.Y), BossTemplate.Size),
                                     new MCvScalar(255));
@@ -568,7 +561,7 @@ namespace PixelAimbot
                                 {
                                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Floor 3: Big-Boss found!"));
                                 }
-                                token.ThrowIfCancellationRequested();
+                                tokenSearchBoss.ThrowIfCancellationRequested();
                                 VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
                                 KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
@@ -577,7 +570,7 @@ namespace PixelAimbot
                             {
                                 if (enemy.HasValue && _searchboss == true)
                                 {
-                                    token.ThrowIfCancellationRequested();
+                                    tokenSearchBoss.ThrowIfCancellationRequested();
                                     CvInvoke.Rectangle(screenCapture,
                                         new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                         new MCvScalar(255));
@@ -629,7 +622,7 @@ namespace PixelAimbot
                                         lbStatus.Invoke((MethodInvoker) (() =>
                                             lbStatus.Text = "Floor 3: Mid-Boss found!"));
                                     }
-                                    token.ThrowIfCancellationRequested();
+                                    tokenSearchBoss.ThrowIfCancellationRequested();
                                     VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
                                     KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
@@ -638,7 +631,7 @@ namespace PixelAimbot
                                 {
                                     if (mob.HasValue && _searchboss == true)
                                     {
-                                        token.ThrowIfCancellationRequested();
+                                        tokenSearchBoss.ThrowIfCancellationRequested();
                                         CvInvoke.Rectangle(screenCapture,
                                             new Rectangle(new Point(mob.Value.X, mob.Value.Y), mobTemplate.Size),
                                             new MCvScalar(255));
@@ -692,7 +685,7 @@ namespace PixelAimbot
                                             lbStatus.Invoke(
                                                 (MethodInvoker) (() => lbStatus.Text = "Floor 3: Mob found!"));
                                         }
-                                        token.ThrowIfCancellationRequested();
+                                        tokenSearchBoss.ThrowIfCancellationRequested();
                                         VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
 
                                         KeyboardWrapper.AlternateHoldKey(currentMouseButton, 1000);
@@ -700,17 +693,22 @@ namespace PixelAimbot
                                 }
                             }
                         }
-                        token.ThrowIfCancellationRequested();
+                        tokenSearchBoss.ThrowIfCancellationRequested();
                         Random random = new Random();
                         var sleepTime = random.Next(100, 150);
-                        await Task.Delay(sleepTime);
+                        await Task.Delay(sleepTime, tokenSearchBoss);
                     }
-                    token.ThrowIfCancellationRequested();
+                    tokenSearchBoss.ThrowIfCancellationRequested();
 
                     if (_floorint2 == 1)
                     {
                         _floor1 = false;
                         _floor2 = true;
+                        starten = true;
+                        _bossKillDetection = true;
+                      
+                        var t36 = Task.Run(() => Leavetimerfloor2());
+                        var t18 = Task.Run(() => BossKillDetection());
                     }
 
                     if (_floorint3 == 2)
@@ -731,16 +729,13 @@ namespace PixelAimbot
                     _soulfist = true;
                     _ultimate = true;
                     _floorFight = true;
-                    token.ThrowIfCancellationRequested();
 
-                    cts.Cancel();
-                    cts.Dispose();
+
                     cts = new CancellationTokenSource();
                     token = cts.Token;
                     var t14 = Task.Run(() => UltimateAttack(token),token);
-                        var t12 = Task.Run(() => Floortime(token),token);
-                        await Task.WhenAny(new[] { t12, t14 });
-                    
+                    var t12 = Task.Run(() => Floortime(token),token);
+                   
                 }
             }
             catch (AggregateException)

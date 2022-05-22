@@ -15,7 +15,7 @@ namespace PixelAimbot
     {
 
 
-        private async Task Floor1Detectiontimer(CancellationToken token)
+        private async Task Floor1Detectiontimer()
         {
             try
             {
@@ -47,11 +47,8 @@ namespace PixelAimbot
 
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    cts.Cancel();
-                    cts.Dispose();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-
                     var leave = Task.Run(() => Leavedungeon(token), token);
                 }
             }
@@ -71,7 +68,7 @@ namespace PixelAimbot
             }
         }
 
-        public async void Leavetimerfloor1(CancellationToken tokenBossUndTimer)
+        public async void Leavetimerfloor1()
         {
 
 
@@ -98,17 +95,10 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal..."));
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, tokenBossUndTimer);
-
-                    cts.Cancel();
-                    cts.Dispose();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    ctsBossUndTimer.Cancel();
-                    ctsBossUndTimer.Dispose();
-                    ctsBossUndTimer = new CancellationTokenSource();
-                    tokenBossUndTimer = ctsBossUndTimer.Token;
-
                     var t12 = Task.Run(() => Leavedungeon(token), token);
+                  
                 }
             }
             catch (AggregateException)
@@ -127,16 +117,13 @@ namespace PixelAimbot
             }
         }
 
-        public async void Leavetimerfloor2(CancellationToken tokenBossUndTimer)
+        public async void Leavetimerfloor2()
         {
 
             try
             {
-                tokenBossUndTimer.ThrowIfCancellationRequested();
-
-                if (chBoxLeavetimer.Checked)
+                if (chBoxLeavetimer.Checked && _stopp == false)
                 {
-
                     tokenBossUndTimer.ThrowIfCancellationRequested();
                     await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txLeaveTimerFloor2.Text) * 1000), tokenBossUndTimer);
 
@@ -153,34 +140,18 @@ namespace PixelAimbot
                     _floor1 = false;
                     _floor2 = false;
                     tokenBossUndTimer.ThrowIfCancellationRequested();
-                    await Task.Delay(1, tokenBossUndTimer);
-
-                    cts.Cancel();
-                    cts.Dispose();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    ctsBossUndTimer.Cancel();
-                    ctsBossUndTimer.Dispose();
-                    ctsBossUndTimer = new CancellationTokenSource();
-                    tokenBossUndTimer = ctsBossUndTimer.Token;
-
                     var t12 = Task.Run(() => Leavedungeon(token), token);
-
                 }
                 else
-                if (!chBoxLeavetimer.Checked)
                 {
                     tokenBossUndTimer.ThrowIfCancellationRequested();
-
-
-
                     await Task.Delay(humanizer.Next(10, 240) + 240 * 1000, tokenBossUndTimer);
-                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                    await Task.Delay(1, tokenBossUndTimer);
+
                     if (_stopp == false)
                     {
-                        tokenBossUndTimer.ThrowIfCancellationRequested();
-                        await Task.Delay(1, tokenBossUndTimer);
+   
                         _stopp = true;
                         _portalIsDetected = false;
                         starten = false;
@@ -195,21 +166,14 @@ namespace PixelAimbot
                         _floor1 = false;
                         _floor2 = false;
                         ChaosAllStucks++;
+
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Detect Boss Kill..."));
                         tokenBossUndTimer.ThrowIfCancellationRequested();
                         await Task.Delay(1, tokenBossUndTimer);
-
-                        cts.Cancel();
-                        cts.Dispose();
                         cts = new CancellationTokenSource();
                         token = cts.Token;
-                        ctsBossUndTimer.Cancel();
-                        ctsBossUndTimer.Dispose();
-                        ctsBossUndTimer = new CancellationTokenSource();
-                        tokenBossUndTimer = ctsBossUndTimer.Token;
+
                         var t12 = Task.Run(() => Leavedungeon(token), token);
-
-
                     }
                 }
 

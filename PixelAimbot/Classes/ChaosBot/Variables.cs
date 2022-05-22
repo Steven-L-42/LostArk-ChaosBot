@@ -76,7 +76,7 @@ namespace PixelAimbot
 
         private Timer _timer;
 
-
+        private int _Restart = 0;
         private int _Leavetimerfloor1 = 0;
         private int _Leavetimerfloor2 = 0;
         private int _GlobalLeavetimerfloor2 = 0;
@@ -126,6 +126,7 @@ namespace PixelAimbot
         public static CancellationTokenSource ctsSkills = new CancellationTokenSource();
         public static CancellationTokenSource ctsBossUndTimer = new CancellationTokenSource();
         public static CancellationTokenSource ctsDetections = new CancellationTokenSource();
+        public static CancellationTokenSource ctsSearchBoss = new CancellationTokenSource();
 
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
