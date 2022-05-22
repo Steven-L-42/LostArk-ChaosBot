@@ -15,7 +15,61 @@ namespace PixelAimbot
     {
 
 
+        private async Task Floor1Detectiontimer(CancellationToken token)
+        {
+            try
+            {
+                token.ThrowIfCancellationRequested();
+                _Floor1Detectiontimer++;
+                await Task.Delay(humanizer.Next(10, 240) + 180000, token);
 
+
+                if (_portalIsNotDetected && _Floor1Detectiontimer == 1)
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    _portalIsNotDetected = false;
+
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
+
+                    _stopp = true;
+                    _portalIsDetected = false;
+
+                    _portalIsNotDetected = false;
+                    _floorFight = false;
+                    _searchboss = false;
+                    _revive = false;
+                    _ultimate = false;
+                    _portaldetect = false;
+                    _potions = false;
+                    _floor1 = false;
+                    _floor2 = false;
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+
+                    var leave = Task.Run(() => Leavedungeon(token), token);
+                }
+            }
+            catch (AggregateException)
+            {
+                Console.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.SendException(ex);
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
 
         public async void Leavetimerfloor1(CancellationToken tokenBossUndTimer)
         {
