@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
@@ -29,19 +30,21 @@ namespace PixelAimbot
                         var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(683),
                             ChaosBot.Recalc(979, false), ChaosBot.Recalc(45, true, true), ChaosBot.Recalc(33, false, true));
 
-
-                        using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                        using (var screencap = _screenPrinter.CaptureScreen())
                         {
-                            var item = detector.GetBest(_screenCapture, false);
-                            if (item.HasValue)
+                            using (_screenCapture = new Bitmap(screencap).ToImage<Bgr, byte>())
                             {
-                                ChaosBot.DiscordSendMessage("No more Energy, Bot stopped!");
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
-                                Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
-                                
-                                _cts.Cancel();
-                                haveEnergy = false;
+                                var item = detector.GetBest(_screenCapture, false);
+                                if (item.HasValue)
+                                {
+                                    DiscordSendMessage("No more Energy, Bot stopped!");
+                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
+                                    Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
 
+                                    _cts.Cancel();
+                                    haveEnergy = false;
+
+                                }
                             }
                         }
                     }
@@ -49,6 +52,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

@@ -39,7 +39,7 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
-                        var t9 = Task.Run(() => Restart(token));
+                        var t9 = Task.Run(() => Restart(token),token);
                         await Task.WhenAny(t9);
                     }
                     else if (_swap == 30)
@@ -62,7 +62,7 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000);
-                        var t9 = Task.Run(() => Restart(token));
+                        var t9 = Task.Run(() => Restart(token),token);
                         await Task.WhenAny(t9);
                     }
                 }
@@ -77,6 +77,7 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
