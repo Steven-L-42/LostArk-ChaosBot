@@ -1030,5 +1030,137 @@ namespace PixelAimbot.Properties {
                 this["radioEnglish"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmbHealKey {
+            get {
+                return ((int)(this["cmbHealKey"]));
+            }
+            set {
+                this["cmbHealKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool checkBoxDiscordNotifications {
+            get {
+                return ((bool)(this["checkBoxDiscordNotifications"]));
+            }
+            set {
+                this["checkBoxDiscordNotifications"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxValtanAltQ {
+            get {
+                return ((bool)(this["chBoxValtanAltQ"]));
+            }
+            set {
+                this["chBoxValtanAltQ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxCompare {
+            get {
+                return ((bool)(this["chBoxCompare"]));
+            }
+            set {
+                this["chBoxCompare"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxNPCRepair {
+            get {
+                return ((bool)(this["chBoxNPCRepair"]));
+            }
+            set {
+                this["chBoxNPCRepair"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chBoxGlavier {
+            get {
+                return ((bool)(this["chBoxGlavier"]));
+            }
+            set {
+                this["chBoxGlavier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool chBoxCooldownDetection {
+            get {
+                return ((bool)(this["chBoxCooldownDetection"]));
+            }
+            set {
+                this["chBoxCooldownDetection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik1 {
+            get {
+                return ((int)(this["cmBoxEsoterik1"]));
+            }
+            set {
+                this["cmBoxEsoterik1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik2 {
+            get {
+                return ((int)(this["cmBoxEsoterik2"]));
+            }
+            set {
+                this["cmBoxEsoterik2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik3 {
+            get {
+                return ((int)(this["cmBoxEsoterik3"]));
+            }
+            set {
+                this["cmBoxEsoterik3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cmBoxEsoterik4 {
+            get {
+                return ((int)(this["cmBoxEsoterik4"]));
+            }
+            set {
+                this["cmBoxEsoterik4"] = value;
+            }
+        }
     }
 }

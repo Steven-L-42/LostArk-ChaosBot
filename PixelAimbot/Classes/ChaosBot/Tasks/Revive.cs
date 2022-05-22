@@ -13,24 +13,23 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private async Task Revive(CancellationToken token)
+        private async Task Revive()
         {
             try
             {
                 if (chBoxRevive.Checked)
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
-                    while (_revive && _floorFight  && _stopp == false)
+                   
+                    while (_revive && _floorFight  && _stopp == false )
                     {
                         try
                         {
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
+                          
+                       
                             try
                             {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
+                              
+                            
 
                                 if (radioGerman.Checked)
                                 {
@@ -43,8 +42,7 @@ namespace PixelAimbot
                                         var item = detector.GetBest(screenCapture, true);
                                         if (item.HasValue && _floorFight)
                                         {
-                                            token.ThrowIfCancellationRequested();
-                                            await Task.Delay(1, token);
+                                        
                                             _floorFight = false;
 
                                             _potions = false;
@@ -69,8 +67,7 @@ namespace PixelAimbot
                                         var item = detector.GetBest(screenCapture, true);
                                         if (item.HasValue && _floorFight)
                                         {
-                                            token.ThrowIfCancellationRequested();
-                                            await Task.Delay(1, token);
+                                           
                                             _floorFight = false;
 
                                             _potions = false;
@@ -90,15 +87,15 @@ namespace PixelAimbot
                             
                           
                             var sleepTime = new Random().Next(450, 555);
-                            Thread.Sleep(sleepTime);
+                            await Task.Delay(sleepTime);
                         }
                         catch (AggregateException)
                         {
-                            Debug.WriteLine("Expected");
+                            Console.WriteLine("Expected");
                         }
                         catch (ObjectDisposedException)
                         {
-                            Debug.WriteLine("Bug");
+                            Console.WriteLine("Bug");
                         }
                         catch
                         {
@@ -108,14 +105,15 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

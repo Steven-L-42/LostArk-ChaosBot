@@ -15,7 +15,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                while (_ultimate && _floorFight && _stopp == false)
+                while (_ultimate && _floorFight && _stopp == false )
                 {
                     try
                     {
@@ -64,7 +64,13 @@ namespace PixelAimbot
                                 _S = false;
                                 _D = false;
                                 _F = false;
-                                var Deathblade = Task.Run(() => ShadowhunterSecond(token));
+                                GetSkillQ();
+                                GetSkillW();
+                                GetSkillE();
+                                GetSkillR();
+                                GetSkillA();
+                                GetSkillS();
+                                Task Deathblade = Task.Run(() => ShadowhunterSecond(tokenBossUndTimer), tokenBossUndTimer);
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
                                
@@ -88,6 +94,23 @@ namespace PixelAimbot
                             }
                         }
 
+                        if (chBoxGlavier.Checked && _Glavier)
+                        {
+                            _doUltimateAttack = true;
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            await Task.Delay(1000);
+                            object d = Pixel.PixelSearch(Recalc(993), Recalc(971, false), Recalc(1005),
+                                Recalc(981, false), 0xF2F2F2, 10);
+                            if (d.ToString() != "0")
+                            {
+                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                _Glavier = false;
+
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Glavier Ultimate"));
+                            }
+                        }
+
                         if (chBoxDeathblade.Checked && _deathblade ||
                             chBoxDeathblade2.Checked && _deathblade)
                         {
@@ -105,12 +128,12 @@ namespace PixelAimbot
 
                                 if (chBoxDeathblade2.Checked)
                                 {
-                                    await Task.Delay(humanizer.Next(10, 240) + 500);
+                                    await Task.Delay(humanizer.Next(10, 240) + 500, token);
                                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                 }
 
-                                var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
+                                var Deathblade = Task.Run(() => DeathbladeSecondPress(token),token);
                                 lbStatus.Invoke((MethodInvoker) (() =>
                                     lbStatus.Text = "Activate: Deathblade Ultimate"));
                             }
@@ -129,7 +152,7 @@ namespace PixelAimbot
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sharpshooter = false;
 
-                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token),token);
 
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
@@ -168,14 +191,15 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
+                        ExceptionHandler.SendException(ex);
                         int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                         Debug.WriteLine("[" + line + "]" + ex.Message);
                     }
@@ -183,14 +207,15 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
+                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

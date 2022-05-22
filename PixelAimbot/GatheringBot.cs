@@ -35,27 +35,14 @@ namespace PixelAimbot
             _GatheringBot = this;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Text = RandomString(15);
-            _telegramToken = new CancellationTokenSource();
             _discordToken = new CancellationTokenSource();
-            if (_conf.telegram != "" && !_telegramBotRunning)
-            {
-                textBoxTelegramAPI.Text = _conf.telegram;
-                try
-                {
-                    buttonTestTelegram_Click_1(null, null);
-                    TelegramTask = TelegramBotAsync(_conf.telegram, _telegramToken.Token);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
+
             try
             {
                 conf = Config.Load();
                 DiscordTask = DiscordBotAsync(conf.discorduser, _discordToken.Token);
             } catch {}
-            
+
             label15.Text = Config.version;
             int FirstHotkeyId = 1;
             int FirstHotKeyKey = (int) Keys.F9;
@@ -135,7 +122,7 @@ namespace PixelAimbot
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token));
+                    var t1 = Task.Run(() => Start(token),token);
                     if (chBoxAutoBuff.Checked == true)
                     {
                         _buff = true;
@@ -147,7 +134,7 @@ namespace PixelAimbot
 
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
                     }
                     else
                     {
@@ -158,6 +145,7 @@ namespace PixelAimbot
                 }
                 catch(Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }
@@ -348,10 +336,10 @@ namespace PixelAimbot
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token));
+                    var t1 = Task.Run(() => Start(token),token);
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
                     }
                     else
                     {
@@ -362,6 +350,7 @@ namespace PixelAimbot
                 }
                 catch(Exception ex)
                 {
+                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }

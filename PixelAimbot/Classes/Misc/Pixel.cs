@@ -49,12 +49,12 @@ namespace PixelAimbot.Classes.Misc
                     }
                 }
             }
-
+           
             RegionIn_Bitmap.Dispose();
             return 0;
         }
         
-        public static Boolean isGrayScale(int nLeft, int nTop, int nRight, int nBottom, Bitmap img)
+        public static Boolean isGrayScale(int nLeft, int nTop, int nRight, int nBottom /*Bitmap img*/)
         {
             Rectangle rect = new Rectangle(nLeft, nTop, nRight, nBottom);
             Bitmap RegionIn_Bitmap = new Bitmap(rect.Width, rect.Height, PixelFormat.Format24bppRgb);

@@ -8,12 +8,12 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        public async void ShadowhunterSecond(CancellationToken token)
+        public async void ShadowhunterSecond(CancellationToken tokenBossUndTimer)
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(26000, token);
+                tokenBossUndTimer.ThrowIfCancellationRequested();
+                await Task.Delay(30000, tokenBossUndTimer);
                 _Q = false;
                 _W = false;
                 _E = false;
@@ -22,19 +22,26 @@ namespace PixelAimbot
                 _S = false;
                 _D = false;
                 _F = false;
+                GetSkillQ();
+                GetSkillW();
+                GetSkillE();
+                GetSkillR();
+                GetSkillA();
+                GetSkillS();
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
+                ExceptionHandler.SendException(ex);
             }
         }
 

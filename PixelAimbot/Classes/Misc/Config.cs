@@ -12,7 +12,7 @@ namespace PixelAimbot.Classes.Misc
     
     public class Config
     {
-        public static string version { get; set; } = "2.8.6r";
+        public static string version { get; set; } = "3.4.0r";
         public string username { get; set; } = "";
         public string password { get; set; } = "";
         public string discorduser { get; set; } = "";
@@ -88,10 +88,19 @@ namespace PixelAimbot.Classes.Misc
         public bool radioEnglish { get; set; } = true;
         public bool chBoxAwakening { get; set; } = false;
         public bool chBoxCrashDetection { get; set; } = true;
+        public bool checkBoxDiscordNotifications { get; set; } = true;
         public bool chBoxLeavetimer { get; set; } = false;
         public bool chBoxRevive { get; set; } = false;
-
+        public bool chBoxValtanAltQ { get; set; } = false;
+        public bool chBoxNPCRepair { get; set; } = false;
+        public bool chBoxCompare { get; set; } = false;
         public bool chBoxAutoMovement { get; set; } = false;
+        public bool chBoxCooldownDetection { get; set; } = true;   
+        public int cmBoxEsoterik1 { get; set; } = 0;
+        public int cmBoxEsoterik2 { get; set; } = 0;
+        public int cmBoxEsoterik3 { get; set; } = 0;
+        public int cmBoxEsoterik4 { get; set; } = 0;
+
 
         public int HealthSlider1 { get; set; } = 801;
         public bool chboxdungeontimer { get; set; } = false;
@@ -102,6 +111,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chboxPaladin { get; set; } = false;
         public bool chBoxShadowhunter { get; set; } = false;
         public bool chBoxBard { get; set; } = false;
+        public bool chBoxGlavier { get; set; } = false;
         public bool chBoxGunlancer2 { get; set; } = false;
         public bool chBoxSoulfist { get; set; } = false;
         public string txLeaveTimerFloor3 { get; set; } = "180";
@@ -151,6 +161,7 @@ namespace PixelAimbot.Classes.Misc
         public bool chBoxDoubleF { get; set; } = false;
 
         public int mouseButton { get; set; } = 0;
+        public int cmbHealKey { get; set; } = 0;
         public int comboBox1 { get; set; } = 0;
         public int cmbHOUR { get; set; } = DateTime.Now.Hour;
         public int cmbMINUTE { get; set; } = DateTime.Now.Minute;

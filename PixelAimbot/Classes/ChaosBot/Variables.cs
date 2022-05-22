@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using IronOcr;
+
 using PixelAimbot.Classes.Misc;
 using Timer = System.Timers.Timer;
 
@@ -23,7 +23,6 @@ namespace PixelAimbot
 
         private bool _floor1;
         private bool _floor2;
-        private bool _floor3;
         private bool _floorFight;
         private bool _searchboss;
 
@@ -42,12 +41,15 @@ namespace PixelAimbot
         private bool _berserker;
         private bool _paladin;
         private bool _deathblade;
+        private bool _Glavier;
         private bool _sharpshooter;
         private bool _bard;
         private bool _sorcerer;
         private bool _soulfist;
         private bool _doUltimateAttack;
         private bool _logout;
+
+        private bool _GuideLoaded;
 
         //SKILL AND COOLDOWN//
         private bool _Q;
@@ -65,9 +67,20 @@ namespace PixelAimbot
         private static int windowY = 0;
         private static int windowWidth = 0;
         private static int windowHeight = 0;
-        
-        
+
+        public static int ChaosAllRounds;
+        public static int ChaosAllStucks;
+        public static int ChaosPerfectRounds;
+        public static int ChaosGameCrashed;
+
+
         private Timer _timer;
+
+        private int _Restart = 0;
+        private int _Leavetimerfloor1 = 0;
+        private int _Leavetimerfloor2 = 0;
+        private int _GlobalLeavetimerfloor2 = 0;
+        private int _Floor1Detectiontimer = 0;
         private int _fightSequence;
         private int _fightSequence2;
         private int _searchSequence;
@@ -93,9 +106,9 @@ namespace PixelAimbot
 
         public Task TelegramTask;
         public Task DiscordTask;
-        public static IronTesseract tess = new IronTesseract();
         
         private string comboattack = "";
+
         private Priorized_Skills _skills = new Priorized_Skills();
         
         private static readonly Random random = new Random();
@@ -107,7 +120,14 @@ namespace PixelAimbot
         private static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
         private Layout_Keyboard _currentLayout;
         private byte currentMouseButton;
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        private byte currentHealKey;
+
+        public static CancellationTokenSource cts = new CancellationTokenSource();
+        public static CancellationTokenSource ctsSkills = new CancellationTokenSource();
+        public static CancellationTokenSource ctsBossUndTimer = new CancellationTokenSource();
+        public static CancellationTokenSource ctsDetections = new CancellationTokenSource();
+        public static CancellationTokenSource ctsSearchBoss = new CancellationTokenSource();
+
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
 
@@ -132,6 +152,13 @@ namespace PixelAimbot
 
         public Image<Bgr, Byte> Image_revive1 = byteArrayToImage(Images.revive1);
         public Image<Bgr, Byte> Image_reviveEnglish = byteArrayToImage(Images.reviveEnglish);
+
+
         
+        public static Image<Bgr, Byte> Image_GuardianStone1 = byteArrayToImage(Images.GuardianStone1);
+        public static Image<Bgr, Byte> Image_GuardianStone1Mask = byteArrayToImage(Images.GuardianStone1Mask);
+        public static Image<Bgr, Byte> Image_DestructStone3 = byteArrayToImage(Images.DestructStone3);
+        public static Image<Bgr, Byte> Image_DestructStone3Mask = byteArrayToImage(Images.DestructStone3Mask);
+
     }
 }

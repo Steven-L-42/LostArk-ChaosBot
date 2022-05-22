@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AutoItX3Lib;
+
 
 namespace PixelAimbot
 {
@@ -50,7 +50,7 @@ namespace PixelAimbot
 
         private IntPtr handle;
 
-        private AutoItX3 au3 = new AutoItX3();
+      
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
