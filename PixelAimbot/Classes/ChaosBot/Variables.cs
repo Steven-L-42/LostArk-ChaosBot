@@ -124,6 +124,8 @@ namespace PixelAimbot
         private byte currentHealKey;
 
         public static CancellationTokenSource cts = new CancellationTokenSource();
+        public static CancellationTokenSource ctsSkills = new CancellationTokenSource();
+        public static CancellationTokenSource ctsBossUndTimer = new CancellationTokenSource();
         private CancellationTokenSource telegramToken = new CancellationTokenSource();
         private CancellationTokenSource discordToken = new CancellationTokenSource();
 

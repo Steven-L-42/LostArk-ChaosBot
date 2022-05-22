@@ -8,12 +8,12 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        public async void ShadowhunterSecond(CancellationToken token)
+        public async void ShadowhunterSecond(CancellationToken tokenBossUndTimer)
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(28000, token);
+                tokenBossUndTimer.ThrowIfCancellationRequested();
+                await Task.Delay(30000, tokenBossUndTimer);
                 _Q = false;
                 _W = false;
                 _E = false;

@@ -70,7 +70,7 @@ namespace PixelAimbot
                                 GetSkillR();
                                 GetSkillA();
                                 GetSkillS();
-                                var Deathblade = Task.Run(() => ShadowhunterSecond(token),token);
+                                Task Deathblade = Task.Run(() => ShadowhunterSecond(tokenBossUndTimer), tokenBossUndTimer);
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
                                

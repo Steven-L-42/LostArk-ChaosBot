@@ -32,10 +32,11 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
                     
                 }
+          
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
                 #region Floor1
-                if (_floor1 && _stopp == false )
+                if (_floor1 && _stopp == false)
                 {
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -57,20 +58,25 @@ namespace PixelAimbot
                     _sharpshooter = true;
                     _sorcerer = true;
                     _soulfist = true;
-                    
-                    
-                        var t14 = Task.Run(() => UltimateAttack(token),token);
-                        var t11 = Task.Run(() => SearchNearEnemys(token),token);
-                        var t12 = Task.Run(() => Floorfight(token),token);
-                        var t16 = Task.Run(() => Revive(token),token);
-                        var t18 = Task.Run(() => Portaldetect(token),token);
-                        var t20 = Task.Run(() => Potions(token),token);
-                        await Task.WhenAny(t11, t12, t14, t16, t18, t20);
-                    
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+                    var t14 = Task.Run(() => UltimateAttack(token), token);
+                    var t11 = Task.Run(() => SearchNearEnemys(token), token);
+                    var t12 = Task.Run(() => Floorfight(token), token);
+                    var t16 = Task.Run(() => Revive(token), token);
+                    var t18 = Task.Run(() => Portaldetect(token), token);
+                    var t20 = Task.Run(() => Potions(token), token);
+                    await Task.WhenAny(t11, t12, t14, t16, t18, t20);
+
                 }
                 #endregion
                 #region Floor2
-                if (_floor2 && _stopp == false )
+                if (_floor2 && _stopp == false)
                 {
                     Process[] process2Name = Process.GetProcessesByName("LostArk");
                     if (process2Name.Length == 0 && chBoxCrashDetection.Checked)
@@ -83,7 +89,7 @@ namespace PixelAimbot
                         await Task.Delay(5000);
                         DiscordSendMessage("Game Crashed - Bot Stopped!");
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "GAME CRASHED - BOT STOPPED!"));
-                        
+
                     }
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -95,7 +101,7 @@ namespace PixelAimbot
                     _ultimate = true;
                     _potions = true;
 
-                   
+
                     // CLASSES //
                     _gunlancer = true;
                     _shadowhunter = true;
@@ -106,28 +112,39 @@ namespace PixelAimbot
                     _sorcerer = true;
                     _soulfist = true;
 
-
-                        var t36 = Task.Run(() => Leavetimerfloor2(token), token);
-                        var t18 = Task.Run(() => BossKillDetection(token),token);
-                        var t11 = Task.Run(() => SearchNearEnemys(token),token);
-                        var t12 = Task.Run(() => Floorfight(token),token);
-                        var t16 = Task.Run(() => Revive(token),token);
-                        var t20 = Task.Run(() => Potions(token),token);
-
-                        await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtDungeon2.Text) * 1000), token);
-
-
-
-                        _floorFight = false;
-                        _potions = false;
-                        _revive = false;
-                        _searchboss = true;
-                        var t13 = Task.Run(() => SEARCHBOSS(token),token);
-                        await Task.WhenAny(t13);
-
-
-                        await Task.WhenAny(t11, t12, t16, t18, t20,t36);
+                    if(_leavetimer == 1)
+                    {
+                        starten = true;
+                        _bossKillDetection = true;
+                        Task t36 = Task.Run(() => Leavetimerfloor2(tokenBossUndTimer), tokenBossUndTimer);
+                        Task t18 = Task.Run(() => BossKillDetection(tokenBossUndTimer), tokenBossUndTimer);
                     }
+
+                 
+                    Task t11 = Task.Run(() => SearchNearEnemys(token), token);
+                    Task t12 = Task.Run(() => Floorfight(token), token);
+                    Task t16 = Task.Run(() => Revive(token), token);
+                    Task t20 = Task.Run(() => Potions(token), token);
+
+                    await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtDungeon2.Text) * 1000), token);
+
+                    _floorFight = false;
+                    _potions = false;
+                    _revive = false;
+                    _searchboss = true;
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+                    var t13 = Task.Run(() => SEARCHBOSS(token), token);
+                    await Task.WhenAny(t13);
+
+
+                    await Task.WhenAny(t11, t12, t16, t20);
+                }
                 
                 #endregion
              
@@ -412,7 +429,7 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                _Floor1Detectiontimer = 1;
+                _Floor1Detectiontimer++;
                 await Task.Delay(humanizer.Next(10, 240) + 180000, token);
 
 
@@ -470,7 +487,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                while (_portaldetect && _stopp == false )
+                while (_portaldetect && _stopp == false)
                 {
                     try
                     {
@@ -502,10 +519,12 @@ namespace PixelAimbot
                                 _leavetimer1++;
                                 if (_leavetimer1 == 1 && chBoxUnstuckF1.Checked)
                                 {
-                                    
-                                        var t6 = Task.Run(() => Leavetimerfloor1(token),token);
-                                        await Task.WhenAny(t6);
-                                    
+                                  
+                                    ctsBossUndTimer.Cancel();
+                                    ctsBossUndTimer.Dispose();
+                                    ctsBossUndTimer = new CancellationTokenSource();
+                                    tokenBossUndTimer = ctsBossUndTimer.Token;
+                                    Task t6 = Task.Run(() => Leavetimerfloor1(tokenBossUndTimer), tokenBossUndTimer);
                                 }
 
                                 _portalIsDetected = true;
@@ -514,9 +533,8 @@ namespace PixelAimbot
                                 cts.Dispose();
                                 cts = new CancellationTokenSource();
                                 token = cts.Token;
-                                var t5 = Task.Run(() => PORTALISDETECTED(token),token);
-                                    var t7 = Task.Run(() => SEARCHPORTAL(token),token);
-                                    await Task.WhenAny(t5, t7);
+                                Task t5 = Task.Run(() => PORTALISDETECTED(token),token);
+                                Task t7 = Task.Run(() => SEARCHPORTAL(token),token);
                                 
                             }
                             else if (!chBoxActivateF2.Checked && _stopp == false)
@@ -586,22 +604,25 @@ namespace PixelAimbot
         public bool awakening;
         public bool gefunden;
         public bool _bossKillDetection;
-        private async Task BossKillDetection(CancellationToken token)
+        private async Task BossKillDetection(CancellationToken tokenBossUndTimer)
         {
-            if (!chBoxLeavetimer.Checked && !_stopp && _bossKillDetection && _leavetimer == 1)
+            
+           
+            if (!chBoxLeavetimer.Checked && !_stopp && _bossKillDetection)
             {
                 _bossKillDetection = false;
+             
                 try
                 {
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                    tokenBossUndTimer.ThrowIfCancellationRequested();
+                    await Task.Delay(1, tokenBossUndTimer);
 
 
                     while (starten && !_stopp)
                     {
 
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(humanizer.Next(10, 240) + 100, token);
+                        tokenBossUndTimer.ThrowIfCancellationRequested();
+                        await Task.Delay(humanizer.Next(10, 240) + 100, tokenBossUndTimer);
                         float threshold = 0.8f;
 
                         var BossTemplate = Image_bossHP;
@@ -626,8 +647,8 @@ namespace PixelAimbot
 
                                 while (!gefunden && !_stopp && chBoxAwakening.Checked)
                                 {
-                                    token.ThrowIfCancellationRequested();
-                                    await Task.Delay(1, token);
+                                    tokenBossUndTimer.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, tokenBossUndTimer);
                                     object Awakening = Pixel.PixelSearch(Recalc(1161), Recalc(66, false), Recalc(1187),
                                         Recalc(83, false), 0x9C1B16, 20);
                                     if (Awakening.ToString() == "0")
@@ -635,9 +656,9 @@ namespace PixelAimbot
                                         _doUltimateAttack = true;
                                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "AWAKENING..."));
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        await Task.Delay(500, token);
+                                        await Task.Delay(500, tokenBossUndTimer);
                                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_V);
-                                        await Task.Delay(500, token);
+                                        await Task.Delay(500, tokenBossUndTimer);
                                         _doUltimateAttack = false;
                                         gefunden = true;
                                     }
@@ -650,9 +671,9 @@ namespace PixelAimbot
                             }
                             else if (!Boss.HasValue && gefunden == true && _stopp == false)
                             {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                await Task.Delay(humanizer.Next(10, 240) + 3000, token);
+                                tokenBossUndTimer.ThrowIfCancellationRequested();
+                                await Task.Delay(1, tokenBossUndTimer);
+                                await Task.Delay(humanizer.Next(10, 240) + 3000, tokenBossUndTimer);
 
                                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
                                 starten = false;
@@ -692,14 +713,18 @@ namespace PixelAimbot
                                 _D = true;
                                 _F = true;
 
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
+                                tokenBossUndTimer.ThrowIfCancellationRequested();
+                                await Task.Delay(1, tokenBossUndTimer);
 
+                                
+                                ctsBossUndTimer.Cancel();
+                                ctsBossUndTimer.Dispose();
+                                ctsBossUndTimer = new CancellationTokenSource();
+                                tokenBossUndTimer = ctsBossUndTimer.Token;
                                 cts.Cancel();
                                 cts.Dispose();
                                 cts = new CancellationTokenSource();
                                 token = cts.Token;
-
                                 var leave = Task.Run(() => Leavedungeon(token),token);
                             }
 
@@ -925,7 +950,17 @@ namespace PixelAimbot
                         await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                         VirtualMouse.MoveTo(Recalc(960), Recalc(529, false), 10);
                         KeyboardWrapper.PressKey(currentMouseButton);
-
+                        if (chBoxCooldownDetection.Checked && chBoxY.Checked)
+                        {
+                            GetSkillQ();
+                            GetSkillW();
+                            GetSkillE();
+                            GetSkillR();
+                            GetSkillA();
+                            GetSkillS();
+                            GetSkillD();
+                            GetSkillF();
+                        }
                         _searchSequence = 2;
                     }
 

@@ -649,7 +649,7 @@ namespace PixelAimbot
         public int EsoterikD = 0;
         public int EsoterikF = 0;
 
-        public async Task SkillQ()
+        public async Task SkillQ(CancellationToken tokenSkills)
         {
             try
             {
@@ -661,7 +661,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_Q )
                 {
                     try
@@ -736,7 +736,7 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
-        public async Task SkillW()
+        public async Task SkillW(CancellationToken tokenSkills)
         {
             try
             {
@@ -748,6 +748,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_W )
                 {
 
@@ -825,7 +826,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillE()
+        public async Task SkillE(CancellationToken tokenSkills)
         {
             try
             {
@@ -836,6 +837,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_E )
                 {
 
@@ -913,7 +915,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillR()
+        public async Task SkillR(CancellationToken tokenSkills)
         {
             try
             {
@@ -924,6 +926,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_R )
                 {
 
@@ -1001,7 +1004,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillA()
+        public async Task SkillA(CancellationToken tokenSkills)
         {
             try
             {
@@ -1012,6 +1015,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_A )
                 {
 
@@ -1089,7 +1093,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillS()
+        public async Task SkillS(CancellationToken tokenSkills)
         {
             try
             {
@@ -1100,6 +1104,7 @@ namespace PixelAimbot
                 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_S )
                 {
 
@@ -1177,7 +1182,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillD()
+        public async Task SkillD(CancellationToken tokenSkills)
         {
             try
             {
@@ -1188,6 +1193,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_D )
                 {
 
@@ -1265,7 +1271,7 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillF()
+        public async Task SkillF(CancellationToken tokenSkills)
         {
             try
             {
@@ -1276,6 +1282,7 @@ namespace PixelAimbot
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
+                tokenSkills.ThrowIfCancellationRequested();
                 while (_F )
                 {
                     try
@@ -1353,47 +1360,79 @@ namespace PixelAimbot
 
         private void SetKeyCooldownGray(byte key)
         {
-          
+           
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
                     _A = true;
-                    var t1 = Task.Run(() => SkillA());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t1 = Task.Run(() => SkillA(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_S:
                     _S = true;
-                    var t2 = Task.Run(() => SkillS());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t2 = Task.Run(() => SkillS(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_D:
                     _D = true;
-                    var t3 = Task.Run(() => SkillD());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t3 = Task.Run(() => SkillD(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_F:
                     _F = true;
-                    var t4 = Task.Run(() => SkillF());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t4 = Task.Run(() => SkillF(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_Q:
                     _Q = true;
-                    var t5 = Task.Run(() => SkillQ());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t5 = Task.Run(() => SkillQ(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_W:
                     _W = true;
-                    var t6 = Task.Run(() => SkillW());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t6 = Task.Run(() => SkillW(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_E:
                     _E = true;
-                    var t7 = Task.Run(() => SkillE());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t7 = Task.Run(() => SkillE(tokenSkills), tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_R:
                     _R = true;
-                    var t8 = Task.Run(() => SkillR());
+                    ctsSkills.Cancel();
+                    ctsSkills.Dispose();
+                    ctsSkills = new CancellationTokenSource();
+                    tokenSkills = ctsSkills.Token;
+                    var t8 = Task.Run(() => SkillR(tokenSkills), tokenSkills);
                     break;
             }
         }

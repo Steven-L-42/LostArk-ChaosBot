@@ -21,10 +21,14 @@ namespace PixelAimbot
     public partial class ChaosBot : Form
     {
         CancellationToken token = CancellationToken.None;
+        CancellationToken tokenSkills = CancellationToken.None;
+        CancellationToken tokenBossUndTimer = CancellationToken.None;
         public ChaosBot()
         {
             InitializeComponent();
             token = cts.Token;
+            tokenSkills = ctsSkills.Token;
+            tokenBossUndTimer = ctsBossUndTimer.Token;
 
 
 
@@ -118,10 +122,15 @@ namespace PixelAimbot
         {
             if (_stop == true)
             {
+                ctsBossUndTimer.Cancel();
+                ctsBossUndTimer.Dispose();
+                ctsBossUndTimer = new CancellationTokenSource();
+                tokenBossUndTimer = ctsBossUndTimer.Token;
                 cts.Cancel();
                 cts.Dispose();
                 cts = new CancellationTokenSource();
                 token = cts.Token;
+
                 _formExists = 0;
                 _RepairReset = true;
                 _start = false;
