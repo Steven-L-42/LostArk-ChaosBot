@@ -23,12 +23,14 @@ namespace PixelAimbot
         CancellationToken token = CancellationToken.None;
         CancellationToken tokenSkills = CancellationToken.None;
         CancellationToken tokenBossUndTimer = CancellationToken.None;
+        CancellationToken tokenDetections = CancellationToken.None;
         public ChaosBot()
         {
             InitializeComponent();
             token = cts.Token;
             tokenSkills = ctsSkills.Token;
             tokenBossUndTimer = ctsBossUndTimer.Token;
+            tokenDetections = ctsDetections.Token;
 
 
 
