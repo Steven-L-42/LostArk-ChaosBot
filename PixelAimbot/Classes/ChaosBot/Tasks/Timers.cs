@@ -21,12 +21,12 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 _Floor1Detectiontimer++;
-                await Task.Delay(humanizer.Next(10, 240) + 180000, token);
+                await Task.Delay(humanizer.Next(10, 240) + 180000, tokenBossUndTimer);
 
-
+                
                 if (_portalIsNotDetected && _Floor1Detectiontimer == 1)
                 {
-                    token.ThrowIfCancellationRequested();
+                   
                     await Task.Delay(1, token);
                     _portalIsNotDetected = false;
 
@@ -45,11 +45,10 @@ namespace PixelAimbot
                     _floor1 = false;
                     _floor2 = false;
 
-                    token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token);
+                    tokenBossUndTimer.ThrowIfCancellationRequested();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    var leave = Task.Run(() => Leavedungeon(token), token);
+                    var leave = Task.Run(() => Leavedungeon());
                 }
             }
             catch (AggregateException)
@@ -97,7 +96,7 @@ namespace PixelAimbot
                     await Task.Delay(1, tokenBossUndTimer);
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    var t12 = Task.Run(() => Leavedungeon(token), token);
+                    var t12 = Task.Run(() => Leavedungeon());
                   
                 }
             }
@@ -142,7 +141,7 @@ namespace PixelAimbot
                     tokenBossUndTimer.ThrowIfCancellationRequested();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    var t12 = Task.Run(() => Leavedungeon(token), token);
+                    var t12 = Task.Run(() => Leavedungeon());
                 }
                 else
                 {
@@ -173,7 +172,7 @@ namespace PixelAimbot
                         cts = new CancellationTokenSource();
                         token = cts.Token;
 
-                        var t12 = Task.Run(() => Leavedungeon(token), token);
+                        var t12 = Task.Run(() => Leavedungeon());
                     }
                 }
 

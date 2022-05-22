@@ -54,7 +54,7 @@ namespace PixelAimbot
                                 if (_leavetimer1 == 1 && chBoxUnstuckF1.Checked)
                                 {
 
-                                    Task t6 = Task.Run(() => Leavetimerfloor1(), token);
+                                    Task t6 = Task.Run(() => Leavetimerfloor1());
                                 }
                                
                                 _portalIsDetected = true;
@@ -70,30 +70,11 @@ namespace PixelAimbot
                             }
                             else if (!chBoxActivateF2.Checked)
                             {
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-
+                              
                                 lbStatus.Invoke(
                                     (MethodInvoker)(() => lbStatus.Text = "Floor 1 Complete..."));
 
-                                _stopp = true;
-                                _portalIsDetected = false;
-
-                                _portalIsNotDetected = false;
-                                _floorFight = false;
-                                _searchboss = false;
-                                _revive = false;
-                                _ultimate = false;
-                                _portaldetect = false;
-                                _potions = false;
-                                _floor1 = false;
-                                _floor2 = false;
-
-                                token.ThrowIfCancellationRequested();
-                                await Task.Delay(1, token);
-                                cts = new CancellationTokenSource();
-                                token = cts.Token;
-                                var leave = Task.Run(() => Leavedungeon(token), token);
+                                var leave = Task.Run(() => Leavedungeon());
                             }
                         }
                     }

@@ -56,7 +56,7 @@ namespace PixelAimbot
                                         try
                                         {
                                             object Awakening = Pixel.PixelSearch(ChaosBot.Recalc(1161), ChaosBot.Recalc(66, false), ChaosBot.Recalc(1187),
-                                            ChaosBot.Recalc(83, false), 0x9C1B16, 20);
+                                            ChaosBot.Recalc(83, false), 0x9C1B16, 40);
                                             if (Awakening.ToString() == "0")
                                             {
                                                 _doUltimateAttack = true;
@@ -67,6 +67,7 @@ namespace PixelAimbot
                                                 await Task.Delay(500, tokenBossUndTimer);
                                                 _doUltimateAttack = false;
                                                 gefunden = true;
+                                                
                                             }
                                            
                                         }
@@ -96,12 +97,12 @@ namespace PixelAimbot
                                 else if (!Boss.HasValue && gefunden == true)
                                 {
 
-                                    await Task.Delay(1);
+                                    gefunden = false;
                                     await Task.Delay(humanizer.Next(10, 240) + 3000);
 
                                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor2 Complete..."));
                                     starten = false;
-                                    gefunden = false;
+                                   
                                     _stopp = true;
                                     _portalIsDetected = false;
 
@@ -137,10 +138,10 @@ namespace PixelAimbot
                                     _D = true;
                                     _F = true;
 
-
+                                
                                     cts = new CancellationTokenSource();
                                     token = cts.Token;
-                                    var leave = Task.Run(() => Leavedungeon(token), token);
+                                    var leave = Task.Run(() => Leavedungeon());
                                 }
 
                                

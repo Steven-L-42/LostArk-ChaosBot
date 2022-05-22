@@ -8,7 +8,7 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private async Task Leavedungeon(CancellationToken token)
+        private async Task Leavedungeon()
         {
             try
             {
@@ -80,9 +80,10 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 VirtualMouse.MoveTo(Recalc(158), Recalc(285, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+        
              
 
-                var t6 = Task.Run(() => Leaveaccept(token));
+                var t6 = Task.Run(() => Leaveaccept());
             }
             catch (AggregateException)
             {
@@ -100,7 +101,7 @@ namespace PixelAimbot
             }
         }
 
-        private async Task Leaveaccept(CancellationToken token)
+        private async Task Leaveaccept()
         {
             try
             {
@@ -108,7 +109,7 @@ namespace PixelAimbot
 
                 ChaosAllRounds++;
                 // KLICKT ENTER
-                token.ThrowIfCancellationRequested();
+  
                 await Task.Delay(humanizer.Next(10, 240) + 1000, token);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_RETURN);
 
@@ -120,51 +121,40 @@ namespace PixelAimbot
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     if(chBoxAutoRepair.Checked)
                     {
-                        token.ThrowIfCancellationRequested();
-                        cts.Cancel();
-                        cts.Dispose();
-                        cts = new CancellationTokenSource();
-                        token = cts.Token;
+                     
 
                         var t7 = Task.Run(() => Repair(token));
+                       
                         
                     }
                     else
                     {
 
-                        token.ThrowIfCancellationRequested();
-                        cts.Cancel();
-                        cts.Dispose();
-                        cts = new CancellationTokenSource();
-                        token = cts.Token;
+                    
 
-                        var t7 = Task.Run(() => NPCRepair(token),token);
+                        var t7 = Task.Run(() => NPCRepair(token));
+                     
                     }
                  
                 }
                 else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked )
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
-                    token.ThrowIfCancellationRequested();
-                    cts.Cancel();
-                    cts.Dispose();
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
+                  
+                  
 
-                    var t11 = Task.Run(() => Logout(token),token); 
+                    var t11 = Task.Run(() => Logout(token),token);
+                  
                 }
                 else
                 {
                     _swap++;
 
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
-                    token.ThrowIfCancellationRequested();
-                    cts.Cancel();
-                    cts.Dispose();
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
+                
 
-                    var t9 = Task.Run(() => Restart(token),token); 
+                    var t9 = Task.Run(() => Restart(token));
+                  
                 }
             }
             catch (AggregateException)

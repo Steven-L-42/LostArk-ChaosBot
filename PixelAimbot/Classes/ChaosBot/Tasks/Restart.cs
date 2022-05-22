@@ -19,7 +19,7 @@ namespace PixelAimbot
                 gefunden = false;
                 _stop = true;
                 _stopp = true;
-                _restart = true;
+     
                
                 _portalIsDetected = false;
                 _portalIsNotDetected = false;
@@ -57,7 +57,7 @@ namespace PixelAimbot
                 _D = true;
                 _F = true;
                 lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Restart in " + int.Parse(txtRestart.Text) + " seconds."));
-                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000), token);
+                await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txtRestart.Text) * 1000));
                 
                 if (chBoxChannelSwap.Checked)
                 {
@@ -81,7 +81,7 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                        token.ThrowIfCancellationRequested();
+                      
                         cts.Cancel();
                         cts.Dispose();
                         cts = new CancellationTokenSource();
@@ -110,7 +110,7 @@ namespace PixelAimbot
                         _restart = false;
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Channel-Swap activated..."));
                         await Task.Delay(humanizer.Next(10, 240) + 2000, token);
-                        token.ThrowIfCancellationRequested();
+                      
                         cts.Cancel();
                         cts.Dispose();
                         cts = new CancellationTokenSource();
@@ -120,20 +120,18 @@ namespace PixelAimbot
                         await Task.WhenAll(t10);
                     }
                 }
-
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "RESTART..."));
                 _Restart++;
-                if (_restart && _Restart == 1)
+                if (_Restart == 1)
                 {
-                    
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Endless Start..."));
+                    cts.Cancel();
+                    cts.Dispose();
                     cts = new CancellationTokenSource();
                     token = cts.Token;
-                    var t11 = Task.Run(() => EndlessStart(token), token);
+                    var t11 = Task.Run(() => EndlessStart(token));
                 }
-                else
-                {
-                    //cts.Cancel();
-                    //cts.Dispose();
-                }
+               
 
 
             }

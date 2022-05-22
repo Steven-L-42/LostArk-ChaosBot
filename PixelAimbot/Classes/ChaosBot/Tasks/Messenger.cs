@@ -109,7 +109,7 @@ namespace PixelAimbot
                             if (_stop)
                             {
                                 cts.Cancel();
-                                var t12 = Task.Run(() => Leavedungeon(cts.Token));
+                                var t12 = Task.Run(() => Leavedungeon());
                                 await Task.WhenAny(new[] {t12});
 
                                 await Task.Delay(humanizer.Next(10, 240) + 5000, token);
