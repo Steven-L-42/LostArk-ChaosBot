@@ -122,7 +122,7 @@ namespace PixelAimbot
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token));
+                    var t1 = Task.Run(() => Start(token),token);
                     if (chBoxAutoBuff.Checked == true)
                     {
                         _buff = true;
@@ -134,7 +134,7 @@ namespace PixelAimbot
 
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
                     }
                     else
                     {
@@ -336,10 +336,10 @@ namespace PixelAimbot
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token));
+                    var t1 = Task.Run(() => Start(token),token);
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token));
+                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
                     }
                     else
                     {

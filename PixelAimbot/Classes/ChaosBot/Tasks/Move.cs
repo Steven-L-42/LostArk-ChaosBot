@@ -19,7 +19,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                if (_firstSetupTransparency && !token.IsCancellationRequested)
+                if (_firstSetupTransparency )
                 {
                     _firstSetupTransparency = false;
                     lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Set Transparency and Scale..."));
@@ -64,16 +64,19 @@ namespace PixelAimbot
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                     ExceptionHandler.SendException(ex);
                 }
-        
+
+                if (chBoxCooldownDetection.Checked)
+                {
+                    GetSkillQ();
+                    GetSkillW();
+                    GetSkillE();
+                    GetSkillR();
+                    GetSkillA();
+                    GetSkillS();
+                    GetSkillD();
+                    GetSkillF();
+                }
              
-                GetSkillQ();
-                GetSkillW();
-                GetSkillE();
-                GetSkillR();
-                GetSkillA();
-                GetSkillS();
-                GetSkillD();
-                GetSkillF();
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
@@ -93,7 +96,7 @@ namespace PixelAimbot
                   
                     _berserker = false;
                     await Task.Delay(humanizer.Next(10, 240) + 1000, token);
-                    var Bersi = Task.Run(() => BerserkerSecond(token));
+                    var Bersi = Task.Run(() => BerserkerSecond(token),token);
                 }
 
                 _floor1 = true;
@@ -101,25 +104,28 @@ namespace PixelAimbot
                 _portalIsNotDetected = true;
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(3200,token);
-                if (!token.IsCancellationRequested)
-                {
-                    var t16 = Task.Run(() => Floor1Detectiontimer(token));
-                    var t12 = Task.Run(() => Floortime(token));
-                    await Task.WhenAny(new[] { t12, t16 });
-                }
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
+                var t16 = Task.Run(() => Floor1Detectiontimer(token), token);
+                var t12 = Task.Run(() => Floortime(token), token);
+                await Task.WhenAny(new[] { t12, t16 });
+
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                Debug.WriteLine("[" + line + "]" + ex.Message);
+                Console.WriteLine("[" + line + "]" + ex.Message);
             }
         }
     }

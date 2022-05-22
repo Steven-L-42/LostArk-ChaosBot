@@ -20,12 +20,13 @@ namespace PixelAimbot
 {
     public partial class ChaosBot : Form
     {
-        
+        CancellationToken token = CancellationToken.None;
         public ChaosBot()
         {
             InitializeComponent();
+            token = cts.Token;
 
-            
+
 
             conf = Config.Load();
             // Combine the base folder with your specific folder....
@@ -118,6 +119,9 @@ namespace PixelAimbot
             if (_stop == true)
             {
                 cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
                 _formExists = 0;
                 _RepairReset = true;
                 _start = false;
@@ -155,8 +159,6 @@ namespace PixelAimbot
                 _doUltimateAttack = false;
                 _potions = false;
                 _firstSetupTransparency = true;
-
-
 
                 _Q = true;
                 _W = true;
@@ -283,8 +285,9 @@ namespace PixelAimbot
                     _Leavetimerfloor2 = 0;
                     _GlobalLeavetimerfloor2 = 0;
                     _Floor1Detectiontimer = 0;
-                    cts = new CancellationTokenSource();
-                    var token = cts.Token;
+            
+                 
+
 
                     Process[] processName = Process.GetProcessesByName("LostArk");
                     _formExists++;
@@ -336,7 +339,12 @@ namespace PixelAimbot
 
                     }
                     token.ThrowIfCancellationRequested();
-                    var t1 = Task.Run(() => Start(token));
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+                    var t1 = Task.Run(() => Start(token), token);
+                 
                     if (chBoxAutoRepair.Checked && _RepairReset == true)
                     {
 
@@ -360,10 +368,6 @@ namespace PixelAimbot
                         }
 
                     }
-
-
-
-                    await Task.WhenAny(new[] { t1 });
                 }
                 catch (OperationCanceledException)
                 {
@@ -374,6 +378,7 @@ namespace PixelAimbot
                     ExceptionHandler.SendException(ex);
                     // Handle other exceptions
                 }
+              
             }
         }
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1232,6 +1237,15 @@ namespace PixelAimbot
             
         }
 
-      
+        private void btnSpecialSkillsInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Different classes have special abilities such as Wardancer esotericism.\n" +
+                            "These abilities are grayscaled at the start of the dungeon and only\n" +
+                            "become usable after a certain moment.\n\n" +
+                            "If you use such abilities then select the appropriate\n" +
+                            "key on which the ability sits.The bot does the rest on its own.\n\n" +
+                            "You can deposit up to 4 such abilities.\n\n" +
+                            "If you don't want to use any, then set all boxes to 'OFF'","Special Abilitys like Esoterik etc.");
+        }
     }
 }

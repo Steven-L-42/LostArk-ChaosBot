@@ -9,6 +9,7 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
+      
         private async Task Start(CancellationToken token)
         {
             try
@@ -43,30 +44,7 @@ namespace PixelAimbot
                     SetForegroundWindow(handle);
                 }
 
-           
-
-                ///////////////// ANTI KICK ///////////////////
-                //token.ThrowIfCancellationRequested();
-                //await Task.Delay(humanizer.Next(10, 240) + 1500, token);
-                //if (ChaosBot.isWindowed)
-                //{
-                //    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 + 3), ((screenHeight + windowY) / 2 - 11), 10);
-                //    KeyboardWrapper.PressKey(currentMouseButton);
-                //    VirtualMouse.MoveTo(((screenWidth + windowX) / 2 - 1), ((screenHeight + windowY) / 2 - 8), 10);
-                //    KeyboardWrapper.PressKey(currentMouseButton);
-                //}
-                //else
-                //{
-                //    VirtualMouse.MoveTo((screenWidth / 2 + 3), (screenHeight / 2 - 11), 10);
-                //    KeyboardWrapper.PressKey(currentMouseButton);
-                //    VirtualMouse.MoveTo((screenWidth / 2 - 1), (screenHeight / 2 - 8), 10);
-                //    KeyboardWrapper.PressKey(currentMouseButton);
-                //}
-
                 await Task.Delay(humanizer.Next(10, 240) + 500, token);
-               
-
-              
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
@@ -99,19 +77,23 @@ namespace PixelAimbot
 
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(humanizer.Next(10, 240) + 9000, token);
-                if (!token.IsCancellationRequested)
-                {
-                    var t3 = Task.Run(() => StartMove(token));
-                    await Task.WhenAny(new[] { t3 });
-                }
+
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
+                var t3 = Task.Run(() => StartMove(token), token);
+                await Task.WhenAny(new[] { t3 });
+
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {

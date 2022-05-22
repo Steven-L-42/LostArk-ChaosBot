@@ -46,17 +46,17 @@ namespace PixelAimbot
                         KeyboardWrapper.PressKey(KeyboardWrapper.VK_W);
                         await Task.Delay(3000, token);
                         _buff = false;
-                        var bufftimer = Task.Run(() => BUFFTIMER(token));
+                        var bufftimer = Task.Run(() => BUFFTIMER(token),token);
                     }
 
                     _checkEnergy = true;
-                    var t3 = Task.Run(() => ThrowFishingRod(token));
+                    var t3 = Task.Run(() => ThrowFishingRod(token),token);
                     await Task.WhenAny(new[] {t3});
                 }
                 else
                 {
                     _checkEnergy = true;
-                    var t3 = Task.Run(() => SearchNextPoint(token));
+                    var t3 = Task.Run(() => SearchNextPoint(token),token);
                     await Task.WhenAny(new[] {t3});
                 }
             }

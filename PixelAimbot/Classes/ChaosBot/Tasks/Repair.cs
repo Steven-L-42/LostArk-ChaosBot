@@ -70,18 +70,23 @@ namespace PixelAimbot
                 
                 _RepairReset = true;
                 token.ThrowIfCancellationRequested();
-                var t10 = Task.Run(() => Restart(token));
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
+                var t10 = Task.Run(() => Restart(token),token);
                 await Task.WhenAny(t10);
 
 
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -124,7 +129,7 @@ namespace PixelAimbot
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
 
-                // 2x ESCAPE REPARATUR UND BEGLEITER FENSTER SCHLIEßEN
+                // ESCAPE REPARATUR FENSTER SCHLIEßEN
                 await Task.Delay(humanizer.Next(10, 240) + 1500, token);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
                
@@ -137,18 +142,23 @@ namespace PixelAimbot
 
                 _RepairReset = true;
                 token.ThrowIfCancellationRequested();
-                var t10 = Task.Run(() => Restart(token));
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
+                var t10 = Task.Run(() => Restart(token),token);
                 await Task.WhenAny(t10);
 
 
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {

@@ -1098,7 +1098,7 @@
             this.groupBox8.Controls.Add(this.txCoolR);
             this.groupBox8.Font = new System.Drawing.Font("Nirmala UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox8.Location = new System.Drawing.Point(137, 4);
+            this.groupBox8.Location = new System.Drawing.Point(137, 1);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(270, 119);
             this.groupBox8.TabIndex = 45;
@@ -2163,7 +2163,8 @@
             this.chBoxCompare.Size = new System.Drawing.Size(272, 24);
             this.chBoxCompare.TabIndex = 80;
             this.chBoxCompare.Text = "Comparison Statistic";
-            this.toolTip1.SetToolTip(this.chBoxCompare, "START DUNGEON WHEREVER YOU ARE");
+            this.toolTip1.SetToolTip(this.chBoxCompare, "Compare function..\r\nBot Screenshot at Start and End the Inventory to compare them" +
+        ".\r\nAlso it shows you the Statistic - Time, Rounds, Shards...");
             this.chBoxCompare.UseMnemonic = false;
             this.chBoxCompare.UseVisualStyleBackColor = false;
             // 
@@ -2212,9 +2213,10 @@
             this.btnSpecialSkillsInfo.Size = new System.Drawing.Size(50, 23);
             this.btnSpecialSkillsInfo.TabIndex = 68;
             this.btnSpecialSkillsInfo.Text = "INFO";
-            this.toolTip1.SetToolTip(this.btnSpecialSkillsInfo, "Thats resets everything except gamesettings.");
+            this.toolTip1.SetToolTip(this.btnSpecialSkillsInfo, "PLEASE READ ME!");
             this.btnSpecialSkillsInfo.UseVisualStyleBackColor = false;
             this.btnSpecialSkillsInfo.Visible = false;
+            this.btnSpecialSkillsInfo.Click += new System.EventHandler(this.btnSpecialSkillsInfo_Click);
             // 
             // lbAutoDetectHint
             // 
@@ -2384,9 +2386,9 @@
             this.groupBox5.Controls.Add(this.txtDungeon2);
             this.groupBox5.Font = new System.Drawing.Font("Nirmala UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox5.Location = new System.Drawing.Point(7, 5);
+            this.groupBox5.Location = new System.Drawing.Point(6, 5);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(405, 139);
+            this.groupBox5.Size = new System.Drawing.Size(406, 139);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stages";

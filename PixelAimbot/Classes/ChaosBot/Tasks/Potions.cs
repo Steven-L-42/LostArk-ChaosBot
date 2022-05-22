@@ -32,7 +32,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                while (_potions && _floorFight && _stopp == false && !token.IsCancellationRequested)
+                while (_potions && _floorFight && _stopp == false )
                 {
                     try
                     {
@@ -55,11 +55,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -77,11 +77,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {

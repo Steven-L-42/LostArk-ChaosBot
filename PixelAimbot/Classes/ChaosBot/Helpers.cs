@@ -477,11 +477,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -649,11 +649,11 @@ namespace PixelAimbot
         public int EsoterikD = 0;
         public int EsoterikF = 0;
 
-        public async Task SkillQ(CancellationToken token)
+        public async Task SkillQ()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
+             
                 var template = skillQ;
 
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(689),
@@ -662,12 +662,11 @@ namespace PixelAimbot
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
 
-                while (_Q && !token.IsCancellationRequested)
+                while (_Q )
                 {
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                   
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -707,11 +706,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -724,11 +723,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -737,25 +736,25 @@ namespace PixelAimbot
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
-        public async Task SkillW(CancellationToken token)
+        public async Task SkillW()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
+        
                 var template = skillW;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(733),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(768, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_W && !token.IsCancellationRequested)
+                while (_W )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -795,11 +794,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -812,11 +811,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -826,25 +825,24 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillE(CancellationToken token)
+        public async Task SkillE()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillE;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(781),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(815, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_E && !token.IsCancellationRequested)
+                while (_E )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -884,11 +882,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -901,11 +899,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -915,25 +913,24 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillR(CancellationToken token)
+        public async Task SkillR()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillR;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(827),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(860, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_R && !token.IsCancellationRequested)
+                while (_R )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -973,11 +970,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -990,11 +987,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -1004,25 +1001,24 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillA(CancellationToken token)
+        public async Task SkillA()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillA;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(709),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(743, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_A && !token.IsCancellationRequested)
+                while (_A )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -1062,11 +1058,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -1079,11 +1075,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -1093,25 +1089,24 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillS(CancellationToken token)
+        public async Task SkillS()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillS;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(757),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(790, true, true), ChaosBot.Recalc(1055, false, true));
                 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_S && !token.IsCancellationRequested)
+                while (_S )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -1151,11 +1146,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -1168,11 +1163,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -1182,25 +1177,24 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillD(CancellationToken token)
+        public async Task SkillD()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillD;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(805),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(837, true, true), ChaosBot.Recalc(1055, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_D && !token.IsCancellationRequested)
+                while (_D )
                 {
 
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -1240,11 +1234,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -1257,11 +1251,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -1271,24 +1265,23 @@ namespace PixelAimbot
             }
 
         }
-        public async Task SkillF(CancellationToken token)
+        public async Task SkillF()
         {
             try
             {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(1, token);
+             
                 var template = skillF;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(850),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(882, true, true), ChaosBot.Recalc(1055, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
                 var screenPrinter = new PrintScreen();
-                while (_F && !token.IsCancellationRequested)
+                while (_F )
                 {
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
+                     
+                      
                         using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                         {
                             var item = detector.GetBest(screenCapture, false);
@@ -1301,8 +1294,6 @@ namespace PixelAimbot
                                 {
                                     if (item.HasValue)
                                     {
-
-
 
                                         if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
                                              || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
@@ -1328,11 +1319,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -1345,11 +1336,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -1362,48 +1353,47 @@ namespace PixelAimbot
 
         private void SetKeyCooldownGray(byte key)
         {
-            cts = new CancellationTokenSource();
-            var token = cts.Token;
+          
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
                     _A = true;
-                    var t1 = Task.Run(() => SkillA(token));
+                    var t1 = Task.Run(() => SkillA());
                     break;
 
                 case KeyboardWrapper.VK_S:
                     _S = true;
-                    var t2 = Task.Run(() => SkillS(token));
+                    var t2 = Task.Run(() => SkillS());
                     break;
 
                 case KeyboardWrapper.VK_D:
                     _D = true;
-                    var t3 = Task.Run(() => SkillD(token));
+                    var t3 = Task.Run(() => SkillD());
                     break;
 
                 case KeyboardWrapper.VK_F:
                     _F = true;
-                    var t4 = Task.Run(() => SkillF(token));
+                    var t4 = Task.Run(() => SkillF());
                     break;
 
                 case KeyboardWrapper.VK_Q:
                     _Q = true;
-                    var t5 = Task.Run(() => SkillQ(token));
+                    var t5 = Task.Run(() => SkillQ());
                     break;
 
                 case KeyboardWrapper.VK_W:
                     _W = true;
-                    var t6 = Task.Run(() => SkillW(token));
+                    var t6 = Task.Run(() => SkillW());
                     break;
 
                 case KeyboardWrapper.VK_E:
                     _E = true;
-                    var t7 = Task.Run(() => SkillE(token));
+                    var t7 = Task.Run(() => SkillE());
                     break;
 
                 case KeyboardWrapper.VK_R:
                     _R = true;
-                    var t8 = Task.Run(() => SkillR(token));
+                    var t8 = Task.Run(() => SkillR());
                     break;
             }
         }

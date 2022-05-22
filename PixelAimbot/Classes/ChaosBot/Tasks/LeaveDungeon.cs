@@ -61,19 +61,20 @@ namespace PixelAimbot
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
                 VirtualMouse.MoveTo(Recalc(158), Recalc(285, false), 5);
                 KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                if (!token.IsCancellationRequested)
-                {
-                    var t6 = Task.Run(() => Leaveaccept(token));
-                    await Task.WhenAny(new[] { t6 });
-                }
+                cts.Cancel();
+                cts.Dispose();
+                cts = new CancellationTokenSource();
+                token = cts.Token;
+
+                var t6 = Task.Run(() => Leaveaccept(token),token);
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -100,16 +101,16 @@ namespace PixelAimbot
         //            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
         //        }
 
-        //        var t6 = Task.Run(() => Leaveaccept(token));
+        //        var t6 = Task.Run(() => Leaveaccept(token),token);
         //        await Task.WhenAny(new[] {t6});
         //    }
         //    catch (AggregateException)
         //    {
-        //        Debug.WriteLine("Expected");
+        //        Console.WriteLine("Expected");
         //    }
         //    catch (ObjectDisposedException)
         //    {
-        //        Debug.WriteLine("Bug");
+        //        Console.WriteLine("Bug");
         //    }
         //    catch (Exception ex)
         //    {
@@ -172,60 +173,65 @@ namespace PixelAimbot
 
                 await Task.Delay(humanizer.Next(10, 240) + 2000, token);
                 token.ThrowIfCancellationRequested();
-                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked && !token.IsCancellationRequested || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked && !token.IsCancellationRequested)
+                if (_repairTimer <= DateTime.Now && chBoxAutoRepair.Checked || _repairTimer <= DateTime.Now && chBoxNPCRepair.Checked)
                 {
                     _repairTimer = DateTime.Now.AddMinutes(Convert.ToDouble(txtRepair.Text));
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     if(chBoxAutoRepair.Checked)
                     {
                         token.ThrowIfCancellationRequested();
-                        if (!token.IsCancellationRequested)
-                        {
-                            var t7 = Task.Run(() => Repair(token));
-                            await Task.WhenAny(t7);
-                        }
+                        cts.Cancel();
+                        cts.Dispose();
+                        cts = new CancellationTokenSource();
+                        token = cts.Token;
+
+                        var t7 = Task.Run(() => Repair(token),token);
                     }
                     else
                     {
+
                         token.ThrowIfCancellationRequested();
-                        if (!token.IsCancellationRequested)
-                        {
-                            var t7 = Task.Run(() => NPCRepair(token));
-                            await Task.WhenAny(t7);
-                        }
+                        cts.Cancel();
+                        cts.Dispose();
+                        cts = new CancellationTokenSource();
+                        token = cts.Token;
+
+                        var t7 = Task.Run(() => NPCRepair(token),token);
                     }
                  
                 }
-                else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked && !token.IsCancellationRequested)
+                else if (_Logout <= DateTime.Now && chBoxLOGOUT.Checked )
                 {
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     token.ThrowIfCancellationRequested();
-                    if (!token.IsCancellationRequested)
-                    {
-                        var t11 = Task.Run(() => Logout(token));
-                        await Task.WhenAny(t11);
-                    }
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+
+                    var t11 = Task.Run(() => Logout(token),token); 
                 }
-                else if (_logout == false && _repairTimer <= DateTime.Now == false && !token.IsCancellationRequested)
+                else
                 {
                     _swap++;
 
                     await Task.Delay(humanizer.Next(10, 240) + 7000, token);
                     token.ThrowIfCancellationRequested();
-                    if (!token.IsCancellationRequested)
-                    {
-                        var t9 = Task.Run(() => Restart(token));
-                        await Task.WhenAny(t9);
-                    }
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
+
+                    var t9 = Task.Run(() => Restart(token),token); 
                 }
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {

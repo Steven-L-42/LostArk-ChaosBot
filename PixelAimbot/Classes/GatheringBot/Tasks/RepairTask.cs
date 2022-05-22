@@ -53,7 +53,7 @@ namespace PixelAimbot
 
 
             
-            var t3 = Task.Run(() => ThrowFishingRod(token));
+            var t3 = Task.Run(() => ThrowFishingRod(token),token);
             _canrepair = false;
             await Task.WhenAny(new[] {t3});
         }

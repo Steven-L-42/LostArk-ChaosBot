@@ -15,7 +15,7 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                while (_ultimate && _floorFight && _stopp == false && !token.IsCancellationRequested)
+                while (_ultimate && _floorFight && _stopp == false )
                 {
                     try
                     {
@@ -70,7 +70,7 @@ namespace PixelAimbot
                                 GetSkillR();
                                 GetSkillA();
                                 GetSkillS();
-                                var Deathblade = Task.Run(() => ShadowhunterSecond(token));
+                                var Deathblade = Task.Run(() => ShadowhunterSecond(token),token);
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
                                
@@ -133,7 +133,7 @@ namespace PixelAimbot
                                     KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                                 }
 
-                                var Deathblade = Task.Run(() => DeathbladeSecondPress(token));
+                                var Deathblade = Task.Run(() => DeathbladeSecondPress(token),token);
                                 lbStatus.Invoke((MethodInvoker) (() =>
                                     lbStatus.Text = "Activate: Deathblade Ultimate"));
                             }
@@ -152,7 +152,7 @@ namespace PixelAimbot
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sharpshooter = false;
 
-                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token));
+                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token),token);
 
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
@@ -191,11 +191,11 @@ namespace PixelAimbot
                     }
                     catch (AggregateException)
                     {
-                        Debug.WriteLine("Expected");
+                        Console.WriteLine("Expected");
                     }
                     catch (ObjectDisposedException)
                     {
-                        Debug.WriteLine("Bug");
+                        Console.WriteLine("Bug");
                     }
                     catch (Exception ex)
                     {
@@ -207,11 +207,11 @@ namespace PixelAimbot
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {

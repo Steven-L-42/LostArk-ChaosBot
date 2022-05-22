@@ -24,11 +24,10 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                _Leavetimerfloor1 = 1;
+                _Leavetimerfloor1++;
                 await Task.Delay(humanizer.Next(10, 240) + 25000, token);
-                if (_portalIsDetected == true && !token.IsCancellationRequested)
+                if (_portalIsDetected == true && _Leavetimerfloor1 == 1)
                 {
-                   
 
                     _stopp = true;
                     _portalIsDetected = false;
@@ -45,22 +44,21 @@ namespace PixelAimbot
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal..."));
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    if (!token.IsCancellationRequested && _Leavetimerfloor1 == 1)
-                    {
-                        var t12 = Task.Run(() => Leavedungeon(token));
-                        await Task.WhenAny(new[] { t12 });
-                    }
+                    cts.Cancel();
+                    cts.Dispose();
+                    cts = new CancellationTokenSource();
+                    token = cts.Token;
 
-
+                    var t12 = Task.Run(() => Leavedungeon(token),token);
                 }
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -72,11 +70,12 @@ namespace PixelAimbot
         
         public async void Leavetimerfloor2(CancellationToken token)
         {
-           
+
             try
             {
                 token.ThrowIfCancellationRequested();
-                if (chBoxLeavetimer.Checked && !token.IsCancellationRequested)
+            
+                if (chBoxLeavetimer.Checked && _leavetimer == 1)
                 {
                     _Leavetimerfloor2 = 1;
                     token.ThrowIfCancellationRequested();
@@ -97,38 +96,24 @@ namespace PixelAimbot
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
 
-                    if (!token.IsCancellationRequested && _Leavetimerfloor2 == 1)
+                    if (_Leavetimerfloor2 == 1)
                     {
-                        var t12 = Task.Run(() => Leavedungeon(token));
-                        await Task.WhenAny(new[] { t12 });
+                        cts.Cancel();
+                        cts.Dispose();
+                        cts = new CancellationTokenSource();
+                        token = cts.Token;
+
+                        var t12 = Task.Run(() => Leavedungeon(token),token);
                     }
                 }
-                
-            }
-            catch (AggregateException)
-            {
-                Debug.WriteLine("Expected");
-            }
-            catch (ObjectDisposedException)
-            {
-                Debug.WriteLine("Bug");
-            }
-            catch (Exception ex)
-            {
-                ExceptionHandler.SendException(ex);
-                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
-                Debug.WriteLine("[" + line + "]" + ex.Message);
-            }
-        }
-        public async void GlobalLeavetimerfloor2(CancellationToken token)
-        {
-            try
-            {
-                token.ThrowIfCancellationRequested();
-                if (!chBoxLeavetimer.Checked && !token.IsCancellationRequested)
+                else 
+                if (!chBoxLeavetimer.Checked && _leavetimer == 1)
                 {
-                    _GlobalLeavetimerfloor2 = 1;
                     token.ThrowIfCancellationRequested();
+                    _bossKillDetection = true;  // Für BossKillDctionetection
+                    starten = true;             // Für BossKillDctionetection
+                    _Leavetimerfloor2 = 1;
+
                     await Task.Delay(humanizer.Next(10, 240) + 240 * 1000, token);
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
@@ -153,23 +138,27 @@ namespace PixelAimbot
                         lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Detect Boss Kill..."));
                         token.ThrowIfCancellationRequested();
                         await Task.Delay(1, token);
-                        if(!token.IsCancellationRequested && _GlobalLeavetimerfloor2 == 1)
+                        if (_Leavetimerfloor2 == 1)
                         {
-                            var t12 = Task.Run(() => Leavedungeon(token));
-                            await Task.WhenAny(new[] { t12 });
+                            cts.Cancel();
+                            cts.Dispose();
+                            cts = new CancellationTokenSource();
+                            token = cts.Token;
+
+                            var t12 = Task.Run(() => Leavedungeon(token), token);
                         }
-                       
+
                     }
                 }
                 
             }
             catch (AggregateException)
             {
-                Debug.WriteLine("Expected");
+                Console.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Debug.WriteLine("Bug");
+                Console.WriteLine("Bug");
             }
             catch (Exception ex)
             {
@@ -179,6 +168,5 @@ namespace PixelAimbot
             }
         }
 
-      
     }
 }
