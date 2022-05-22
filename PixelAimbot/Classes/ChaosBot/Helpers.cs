@@ -16,7 +16,6 @@ using System.Timers;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using IronOcr;
 using Newtonsoft.Json.Linq;
 using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
@@ -51,7 +50,7 @@ namespace PixelAimbot
 
         public static string ReadArea(Bitmap screenCapture, int x, int y, int width, int height, string whitelist = "")
         {
-            tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
+            /*tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
             tess.Language = OcrLanguage.EnglishBest;
             tess.MultiThreaded = true;
             tess.Configuration.ReadBarCodes = false;
@@ -82,7 +81,7 @@ namespace PixelAimbot
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
-
+*/
             return null;
         }
        

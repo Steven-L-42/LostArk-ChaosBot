@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using IronOcr;
+
 using PixelAimbot.Classes.Misc;
 using Timer = System.Timers.Timer;
 
@@ -106,7 +106,6 @@ namespace PixelAimbot
 
         public Task TelegramTask;
         public Task DiscordTask;
-        public static IronTesseract tess = new IronTesseract();
         
         private string comboattack = "";
 

@@ -161,7 +161,7 @@ namespace PixelAimbot
                 {
                     Thread.Sleep(threadSleep);
                     testform.Refresh();
-                    var rawScreen = screenPrinter.CaptureScreen();
+                    using(var rawScreen = screenPrinter.CaptureScreen()) {
                     Image<Rgb, Byte> image2;
                     if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
                     {
@@ -316,9 +316,9 @@ namespace PixelAimbot
                                         {
                                             List<GridPos> path = pix.findPath(
                                                 grid,
-                                                DiagonalMovement.OnlyWhenNoObstacles,
+                                                DiagonalMovement.IfAtLeastOneWalkable,
                                                 new GridPos((scaledImage.Width / 2), (scaledImage.Height / 2)),
-                                                new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y)
+                                                new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 15)
                                             );
                                             //    CvInvoke.BitwiseNot(image1, image1);
 
@@ -344,32 +344,41 @@ namespace PixelAimbot
                                                 new MCvScalar(200, 0, 0), 2);
                                             CvInvoke.Circle(image2,
                                                 new Point(enemy.Value.X + (enemyTemplate.Width / 2),
-                                                    enemy.Value.Y + 10), 1,
+                                                    enemy.Value.Y + 15), 1,
                                                 new MCvScalar(0, 200, 0), 2);
 
                                             imageBoxMinimap.Image = image2;
                                             if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
                                             {
-                                                int last_posx = 0;
-                                                int last_posy = 0;
-
-                                                distance = Distance(new Point(path[path.Count-1].x, path[path.Count-1].y),
-                                                                  new Point((image2.Width / 2), (image2.Height / 2)));
-                                                Debug.WriteLine(distance);
-                                                var additionalPercent = 2;
-                                                if (distance < 30)
+                                                foreach (var item in path)
                                                 {
-                                                    additionalPercent = 2;
+                                                    int last_posx = 0;
+                                                    int last_posy = 0;
+
+                                                    distance = Distance(
+                                                        new Point(item.x, item.y),
+                                                        new Point((image2.Width / 2), (image2.Height / 2)));
+                                                    Debug.WriteLine(distance);
+                                                    var additionalPercent = 2;
+                                                    if (distance < 30)
+                                                    {
+                                                        additionalPercent = 3;
+                                                    }
+
+                                                    var result = ChaosBot.MinimapToDesktop(item.x, item.y,
+                                                        additionalPercent);
+                                                    VirtualMouse.MoveTo((int) result.Item1, (int) result.Item2);
+                                                    last_posx = (int) result.Item1;
+                                                    last_posy = (int) result.Item2;
+                                                    VirtualMouse.LeftClick();
+                                                    Task.Delay(1000).Wait();
                                                 }
-                                                var result = ChaosBot.MinimapToDesktop(path[2].x, path[2].y, additionalPercent);
-                                                VirtualMouse.MoveTo((int) result.Item1, (int) result.Item2);
-                                                last_posx = (int) result.Item1;
-                                                last_posy = (int) result.Item2;
-                                              //  VirtualMouse.LeftClick();
-                                                 VirtualMouse.LeftDown();
-                                                //Task.Delay(100).Wait();
 
+                                                return;
+                                                //  VirtualMouse.LeftDown();
+                                                //
 
+/*
                                                 try
                                                 {
                                                     var template =
@@ -391,12 +400,12 @@ namespace PixelAimbot
                                                         if (item.HasValue)
                                                         {
                                                             // search for tree after walking path :);
-                                                              KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                      //                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                                                             //  foundGathering = true;
-                                                                 VirtualMouse.LeftUp();
+                                      //                           VirtualMouse.LeftUp();
                                                             //     VirtualMouse.LeftUp();
                                                             //    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                                                            Task.Delay(15000).Wait();
+                                    //                        Task.Delay(15000).Wait();
                                                         }
                                                         else
                                                         {
@@ -406,7 +415,8 @@ namespace PixelAimbot
                                                 }
                                                 catch
                                                 {
-                                                }
+                                                }*/
+
                                             }
                                         }
                                     }
@@ -479,6 +489,7 @@ namespace PixelAimbot
                                 }
                             }
                         }
+                    }
                     }
                 }
             }

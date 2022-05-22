@@ -113,7 +113,6 @@ namespace PixelAimbot.Classes.Misc
                 startPos, 
                 endPos, 
                 EndNodeUnWalkableTreatment.ALLOW,
-                //EndNodeUnWalkableTreatment.ALLOW,
                 move, 
                 HeuristicMode.EUCLIDEAN
             );
