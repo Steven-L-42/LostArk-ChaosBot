@@ -175,29 +175,32 @@ namespace PixelAimbot
                         {
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                            using (var screencap = screenPrinter.CaptureScreen())
                             {
-                                var item = detector.GetClosest(screenCapture, false);
-                                if (item.HasValue)
+                                using (var screenCapture = new Bitmap(screencap).ToImage<Bgr, byte>())
                                 {
-                                    if (item.Value.X > 0 && item.Value.Y > 0)
+                                    var item = detector.GetClosest(screenCapture, false);
+                                    if (item.HasValue)
                                     {
-                                        Point position = calculateFromCenter(item.Value.X, item.Value.Y);
-                                        // correct mouse down
-                                        int correction = 0;
-                                        if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                        if (item.Value.X > 0 && item.Value.Y > 0)
                                         {
-                                            correction = Recalc(80, false);
-                                        }
+                                            Point position = calculateFromCenter(item.Value.X, item.Value.Y);
+                                            // correct mouse down
+                                            int correction = 0;
+                                            if (item.Value.Y > Recalc(383, false) && item.Value.Y < Recalc(435, false))
+                                            {
+                                                correction = Recalc(80, false);
+                                            }
 
-                                        VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                            VirtualMouse.MoveTo(position.X, position.Y + correction, 10);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    // Not found Swirl around with Mouse
-                                    VirtualMouse.MoveTo(Between(Recalc(460), Recalc(1000)),
-                                        Between(Recalc(120, false), Recalc(780, false)), 10);
+                                    else
+                                    {
+                                        // Not found Swirl around with Mouse
+                                        VirtualMouse.MoveTo(Between(Recalc(460), Recalc(1000)),
+                                            Between(Recalc(120, false), Recalc(780, false)), 10);
+                                    }
                                 }
                             }
                         }

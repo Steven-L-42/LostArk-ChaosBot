@@ -132,9 +132,6 @@
     <Reference Include="EpPathFinding.cs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EpPathFinding.cs.1.4.2\lib\EpPathFinding.cs.dll</HintPath>
     </Reference>
-    <Reference Include="IronOcr, Version=2022.3.0.0, Culture=neutral, PublicKeyToken=c2cbcea5ea3f6d8d, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronOcr.2022.3.0\lib\net40\IronOcr.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Build.Framework, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Build.Framework.17.1.0\lib\net472\Microsoft.Build.Framework.dll</HintPath>
     </Reference>
