@@ -89,6 +89,14 @@ namespace PixelAimbot
             this.lbYCoord = new System.Windows.Forms.Label();
             this.lbXCoord = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.imageBox1 = new Emgu.CV.UI.ImageBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.pictureBoxPicture)).BeginInit();
@@ -106,6 +114,11 @@ namespace PixelAimbot
             ((System.ComponentModel.ISupportInitialize) (this.trackBarDilade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshBinary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.imageBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar3)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -398,6 +411,7 @@ namespace PixelAimbot
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(11, 221);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -672,11 +686,88 @@ namespace PixelAimbot
             this.checkBox1.Font = new System.Drawing.Font("Nirmala UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.checkBox1.Location = new System.Drawing.Point(117, 154);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(130, 17);
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
             this.checkBox1.TabIndex = 42;
-            this.checkBox1.Text = "SAVE/GET POS (F10)";
+            this.checkBox1.Text = "SAVE/GET POS (F8)";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.checkBox1_KeyDown);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.label12);
+            this.tabPage5.Controls.Add(this.label13);
+            this.tabPage5.Controls.Add(this.trackBar2);
+            this.tabPage5.Controls.Add(this.trackBar3);
+            this.tabPage5.Controls.Add(this.label11);
+            this.tabPage5.Controls.Add(this.trackBar1);
+            this.tabPage5.Controls.Add(this.imageBox1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(550, 303);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Lopang";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // imageBox1
+            // 
+            this.imageBox1.Location = new System.Drawing.Point(3, 3);
+            this.imageBox1.Name = "imageBox1";
+            this.imageBox1.Size = new System.Drawing.Size(329, 232);
+            this.imageBox1.TabIndex = 3;
+            this.imageBox1.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.Location = new System.Drawing.Point(338, 10);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 23);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Treshold Binarie";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(338, 31);
+            this.trackBar1.Maximum = 255;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(205, 45);
+            this.trackBar1.TabIndex = 26;
+            this.trackBar1.Value = 1;
+            // 
+            // label12
+            // 
+            this.label12.Location = new System.Drawing.Point(338, 159);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 23);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Erode";
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(338, 79);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(100, 23);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Dilade";
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(338, 185);
+            this.trackBar2.Maximum = 15;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(205, 45);
+            this.trackBar2.TabIndex = 29;
+            this.trackBar2.Value = 1;
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.Location = new System.Drawing.Point(338, 105);
+            this.trackBar3.Maximum = 15;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(205, 45);
+            this.trackBar3.TabIndex = 28;
+            this.trackBar3.Value = 1;
             // 
             // Debugging
             // 
@@ -731,9 +822,25 @@ namespace PixelAimbot
             ((System.ComponentModel.ISupportInitialize) (this.trackBarDilade)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.trackBarTreshBinary)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.imageBoxMinimap)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.imageBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.trackBar3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private Emgu.CV.UI.ImageBox imageBox1;
+
+        private System.Windows.Forms.TabPage tabPage5;
 
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TrackBar trackBarCannyFirst;

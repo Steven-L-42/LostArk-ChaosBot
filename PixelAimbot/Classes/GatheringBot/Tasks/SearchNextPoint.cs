@@ -25,7 +25,7 @@ namespace PixelAimbot
                 await Task.Delay(1, token);
                 if (_logout)
                 {
-                    var t3 = Task.Run(() => Logout(token),token);
+                    var t3 = Task.Run(() => Logout(token));
                     await Task.WhenAny(new[] {t3});
                 }
 
@@ -75,7 +75,6 @@ namespace PixelAimbot
                         pix.addPath(path, imageBitmap);
 
                         /*Show on Image */
-                        var i = 0;
 
                         if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
                         {
@@ -142,7 +141,7 @@ namespace PixelAimbot
                 await Task.Delay((5500 + rnd.Next(10, 200)), token);
                 if (_canrepair)
                 {
-                    var t3 = Task.Run(() => RepairTask(token),token);
+                    var t3 = Task.Run(() => RepairTask(token));
                     _canrepair = false;
                     await Task.WhenAny(new[] {t3});
                 }
@@ -154,7 +153,6 @@ namespace PixelAimbot
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

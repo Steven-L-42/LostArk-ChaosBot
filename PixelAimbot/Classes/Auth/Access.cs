@@ -22,9 +22,9 @@ namespace PixelAimbot.Classes.Auth
 
                 var values = new NameValueCollection
                 {
-                    ["username"] = PixelAimbot.frmLogin.username,
-                    ["password"] = PixelAimbot.frmLogin.password,
-                    ["hwid"] = PixelAimbot.frmLogin.hwid
+                    ["username"] = FrmLogin.Username,
+                    ["password"] = FrmLogin.Password,
+                    ["hwid"] = FrmLogin.Hwid
                 };
 
                 webClient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/checkUser"), values);
@@ -37,14 +37,14 @@ namespace PixelAimbot.Classes.Auth
                     catch (Exception ex)
                     {
                         ExceptionHandler.SendException(ex);
-                        Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
+                        Alert.Show("Webserver currently not Available! Try Again later.", FrmAlert.EnmType.Error);
                     }
                 };
             }
             catch (Exception ex)
             {
                 ExceptionHandler.SendException(ex);
-                Alert.Show("Webserver currently not Available! Try Again later.", frmAlert.enmType.Error);
+                Alert.Show("Webserver currently not Available! Try Again later.", FrmAlert.EnmType.Error);
             }
         }
 
@@ -52,61 +52,54 @@ namespace PixelAimbot.Classes.Auth
         {
             try
             {
-                var values = new NameValueCollection();
-                values["username"] = PixelAimbot.frmLogin.username;
-                values["password"] = PixelAimbot.frmLogin.password;
-                values["hwid"] = Misc.HWID.Get();
-                //   Misc.Config config = new Misc.Config();
-                //   config.username = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.username);
-                //   config.password = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.password);
-                //   config.hwid = PixelAimbot.frmLogin.blow1.Encrypt_CTR(PixelAimbot.frmLogin.hwid);
-
-                //                config.Save();
-
                 var responseString = Encoding.Default.GetString(response);
-                
-                PixelAimbot.frmLogin.LicenceInformations = JObject.Parse(responseString);
-                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "false")
+
+                FrmLogin.LicenceInformations = JObject.Parse(responseString);
+                if (FrmLogin.LicenceInformations["message"]?.ToString() == "false")
                 {
-                    Alert.Show("Licence is not active. Please contact an Administrator.", frmAlert.enmType.Error);
-                    return false;
-                }
-                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "wrong_login")
-                {
-                    Alert.Show("Username or Password not known. Please contact an Administrator.", frmAlert.enmType.Error);
-                    return false;
-                }
-                if (PixelAimbot.frmLogin.LicenceInformations["message"].ToString() == "hwid")
-                {
-                    Alert.Show("Your HWID seems changed, please reset it or contact an Administrator.", frmAlert.enmType.Error);
+                    Alert.Show("Licence is not active. Please contact an Administrator.", FrmAlert.EnmType.Error);
                     return false;
                 }
 
-                if (Application.OpenForms.OfType<PixelAimbot.ChaosBot>().Count() == 1)
-                    Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
-
-                ChaosBot Form = new ChaosBot();
-                
-                if (PixelAimbot.frmLogin.LicenceInformations["discorduser"].ToString() != "")
+                if (FrmLogin.LicenceInformations["message"]?.ToString() == "wrong_login")
                 {
-                    Form.conf.discorduser = PixelAimbot.frmLogin.LicenceInformations["discorduser"].ToString();
-                    Form.conf.Save();
+                    Alert.Show("Username or Password not known. Please contact an Administrator.",
+                        FrmAlert.EnmType.Error);
+                    return false;
                 }
 
-                Form.Show();
-                Application.OpenForms.OfType<PixelAimbot.frmLogin>().First().Hide();
+                if (FrmLogin.LicenceInformations["message"]?.ToString() == "hwid")
+                {
+                    Alert.Show("Your HWID seems changed, please reset it or contact an Administrator.",
+                        FrmAlert.EnmType.Error);
+                    return false;
+                }
+
+                if (Application.OpenForms.OfType<ChaosBot>().Count() == 1)
+                    Application.OpenForms.OfType<ChaosBot>().First().Close();
+
+                ChaosBot form = new ChaosBot();
+
+                if (FrmLogin.LicenceInformations["discorduser"]?.ToString() != "")
+                {
+                    form.Conf.discorduser = FrmLogin.LicenceInformations["discorduser"]?.ToString();
+                    form.Conf.Save();
+                }
+
+                form.Show();
+                Application.OpenForms.OfType<FrmLogin>().First().Hide();
 
                 return true;
             }
             catch (WebException)
             {
-                Alert.Show("Server is not reachable, please try again later.", frmAlert.enmType.Error);
+                Alert.Show("Server is not reachable, please try again later.", FrmAlert.EnmType.Error);
                 return false;
             }
             catch (Exception ex)
             {
                 ExceptionHandler.SendException(ex);
-                Alert.Show(ex.Message, frmAlert.enmType.Error);
+                Alert.Show(ex.Message, FrmAlert.EnmType.Error);
                 return false;
             }
         }

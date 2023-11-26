@@ -13,30 +13,28 @@ namespace PixelAimbot
             try
             {
                 token.ThrowIfCancellationRequested();
-                await Task.Delay(humanizer.Next(10, 240) + 10000, token);
+                await Task.Delay(_humanizer.Next(10, 240) + 10000, token);
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                await Task.Delay(humanizer.Next(10, 240) + 10000, token);
+                await Task.Delay(_humanizer.Next(10, 240) + 10000, token);
                 KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
                 _deathblade = true;
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
-                ExceptionHandler.SendException(ex);
             }
         }
 
-
-        
+       
 
     }
 }

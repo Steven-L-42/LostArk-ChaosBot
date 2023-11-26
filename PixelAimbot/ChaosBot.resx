@@ -120,13 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="chBoxLOGOUT.ToolTip" xml:space="preserve">
-    <value>adjust your time from when to activate Auto-Close Game, 
-specify in a valid Time. Do not enter the same time as for Auto-Repair!
-Close Game means = Game will be fully closed and Bot shutsdown.
-
-Realtime Clock.!</value>
-  </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>

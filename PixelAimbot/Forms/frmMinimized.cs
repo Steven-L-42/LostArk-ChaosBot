@@ -18,7 +18,7 @@ namespace PixelAimbot
         public frmMinimized()
         {
             InitializeComponent();
-            this.Text = frmLogin.RandomString(15);
+            this.Text = FrmLogin.RandomString(15);
             this.Size = new Size(594, 28);
             this.labelTitle.Text = title;
         }

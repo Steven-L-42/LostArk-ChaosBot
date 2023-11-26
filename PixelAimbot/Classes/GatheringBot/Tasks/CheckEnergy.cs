@@ -26,7 +26,7 @@ namespace PixelAimbot
                         await Task.Delay(1, token);
 
                         var template = Image_energy_fish;
-                        
+
                         var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(683),
                             ChaosBot.Recalc(979, false), ChaosBot.Recalc(45, true, true), ChaosBot.Recalc(33, false, true));
 
@@ -34,12 +34,12 @@ namespace PixelAimbot
                         {
                             using (_screenCapture = new Bitmap(screencap).ToImage<Bgr, byte>())
                             {
-                                var item = detector.GetBest(_screenCapture, false);
+                                var item = detector.GetBest(_screenCapture);
                                 if (item.HasValue)
                                 {
                                     DiscordSendMessage("No more Energy, Bot stopped!");
-                                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "No more Energy, Stopping"));
-                                    Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "No more Energy, Stopping"));
+                                    Invoke((MethodInvoker)(() => btnPause_Click(null, null)));
 
                                     _cts.Cancel();
                                     haveEnergy = false;

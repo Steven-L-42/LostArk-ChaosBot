@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,15 @@ namespace PixelAimbot
 {
     public partial class Debugging : Form
     {
+        
+        
+        // 2. Import the RegisterHotKey Method
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        
         private int screenWidth = Screen.PrimaryScreen.Bounds.Width;
         private int screenHeight = Screen.PrimaryScreen.Bounds.Height;
         private DrawScreenWin screenDrawer = new DrawScreenWin();
@@ -46,14 +56,44 @@ namespace PixelAimbot
         private DebugDetector debugDetector = new DebugDetector(null, null, 0.7f, 0, 0, 0, 0);
         Image<Bgr, byte> enemyTemplate = null;
         Image<Bgr, byte> enemyMask = null;
+        
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                int id = m.WParam.ToInt32();
+
+                switch (id)
+                {
+                    case 1:
+                        checkBox1_KeyDown(null, null);
+
+                        break;
+                }
+            }
+
+            base.WndProc(ref m);
+        }
 
         public Debugging()
         {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             InitializeComponent();
+            
+            
+            int HotkeyId = 1;
+            int HotKeyKey = (int)Keys.F8;
+            UnregisterHotKey(this.Handle, HotkeyId);
+
+            RegisterHotKey(
+                this.Handle, HotkeyId, 0x0000, HotKeyKey
+            );
+
             _Debugging = this;
             this.DoubleBuffered = true;
+           // var Chbot = new ChaosBot();
+       //     imageBox1.Image = ChaosBot.byteArrayToImage(Images.bosshpmask);
         }
 
         public static Debugging _Debugging;
@@ -113,7 +153,6 @@ namespace PixelAimbot
             return master.Convert<Rgb, Byte>().InRange(new Rgb(r - t, g - t, b - t), new Rgb(r + t, g + t, b + t))
                 .Convert<Rgb, byte>();
         }
-
         private void cap(byte[] buffer)
         {
             if (this.picturePath != "")
@@ -161,335 +200,598 @@ namespace PixelAimbot
                 {
                     Thread.Sleep(threadSleep);
                     testform.Refresh();
-                    using(var rawScreen = screenPrinter.CaptureScreen()) {
-                    Image<Rgb, Byte> image2;
-                    if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
+                    using (var rawScreen = screenPrinter.CaptureScreen())
                     {
-                        if (selectedIndex == 3)
-                        {
-                            enemyTemplate =
-                                new Image<Bgr, byte>(
-                                    @"G:\test\clone\PixelAimbot\Resources\wood.png"); // icon of the enemy
-
-                            debugDetector._enemyTemplate = enemyTemplate;
-                            debugDetector._enemyMask = enemyTemplate;
-                            debugDetector._threshold = 0.77f;
-                            double distance;
-                            using (bitmapImage = new Bitmap(rawScreen))
+                        Image<Rgb, Byte> image2;
+              //          if (rawScreen.Height >= 1 && rawScreen.Width >= 1)
+                        {if (selectedIndex == 4)
                             {
-                                rawScreen.Dispose();
-                                Point? enemy;
-                                using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                                enemyTemplate =
+                                    new Image<Bgr, byte>(
+                                        @"G:\test\clone\PixelAimbot\Resources\lopang.png"); // icon of the
+                                enemyMask =
+                                    new Image<Bgr, byte>(
+                                        @"G:\test\clone\PixelAimbot\Resources\lopang_mask.png"); // icon of the enemy
+
+                                debugDetector._enemyTemplate = enemyTemplate;
+                                debugDetector._enemyMask = enemyMask;
+                                debugDetector._threshold = 0.77f;
+                                
+                                double distance;
+                                using (bitmapImage = new Bitmap(rawScreen))
                                 {
-                                    screenCapture.ROI = new Rectangle(x, y, width * -1, height * -1);
+                                    rawScreen.Dispose();
+                                    Point? enemy;
+                                    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                                    {
+                                        screenCapture.ROI = new Rectangle(x, y, width * -1, height * -1);
 
-                                    enemy = debugDetector.GetClosestEnemy(screenCapture, false, testform);
-                                    screenCapture.Draw(new CircleF(new Point(394 / 2 + 2, 340 / 2 - 2), 18),
-                                        new Bgr(142, 157, 162), -1);
-                                    var scaledImage = screenCapture.Convert<Rgb, Byte>();
+                                        enemy = debugDetector.GetClosestEnemy(screenCapture, false, testform);
+                                        screenCapture.Draw(new CircleF(new Point(394 / 2 + 2, 340 / 2 - 2), 18),
+                                            new Bgr(142, 157, 162), -1);
+                                        var scaledImage = screenCapture.Convert<Rgb, Byte>();
 
-                                    var t = 10;
-                                    var color1 = inRange(screenCapture, 162, 157, 142, t);
-                                    var color2 = inRange(screenCapture, 142, 137, 121, t);
-                                    var color3 = color1; //inRange(screenCapture, 218, 197, 110, t);
-                                    //   var color4 = inRange(screenCapture, 70,184,195,t);
-                                    var colorMeIcon = color1;/*inRange(screenCapture, 88, 239, 107, t) +
+                                        var t = 10;
+                                        var color1 = inRange(screenCapture, 162, 157, 142, t);
+                                        var color2 = inRange(screenCapture, 142, 137, 121, t);
+                                        var color3 = color1; //inRange(screenCapture, 218, 197, 110, t);
+                                                             //   var color4 = inRange(screenCapture, 70,184,195,t);
+                                        var colorMeIcon = color1;/*inRange(screenCapture, 88, 239, 107, t) +
                                                       inRange(screenCapture, 0, 0, 0, t);*/
-                                    var colorMeIcon2 = inRange(screenCapture, 35, 56, 46, t);
-                                    var colorMeCircle = inRange(screenCapture, 71, 205, 214, t)
-                                                        + inRange(screenCapture, 102, 144, 143, t)
-                                                        + inRange(screenCapture, 112, 130, 130, t)
-                                                        + inRange(screenCapture, 122, 146, 143, t)
-                                                        + inRange(screenCapture, 132, 152, 143, t)
-                                                        + inRange(screenCapture, 142, 156, 142, t)
-                                                        + inRange(screenCapture, 151, 156, 142, t)
-                                                        + inRange(screenCapture, 139, 155, 142, t)
-                                                        + inRange(screenCapture, 127, 153, 142, t)
-                                                        + inRange(screenCapture, 109, 142, 145, t)
-                                                        + inRange(screenCapture, 98, 139, 145, t)
-                                                        + inRange(screenCapture, 82, 132, 147, t)
-                                                        + inRange(screenCapture, 77, 163, 174, t)
-                                                        + inRange(screenCapture, 79, 185, 195, t)
-                                                        + inRange(screenCapture, 77, 164, 177, t)
-                                                        + inRange(screenCapture, 83, 158, 165, t)
-                                                        + inRange(screenCapture, 90, 138, 145, t)
-                                                        + inRange(screenCapture, 103, 143, 144, t)
-                                                        + inRange(screenCapture, 117, 139, 126, t)
-                                                        + inRange(screenCapture, 109, 139, 128, t)
-                                                        + inRange(screenCapture, 111, 140, 127, t)
-                                                        + inRange(screenCapture, 103, 136, 130, t)
-                                                        + inRange(screenCapture, 88, 131, 136, t)
-                                                        + inRange(screenCapture, 92, 134, 133, t)
-                                                        + inRange(screenCapture, 80, 135, 147, t)
-                                                        + inRange(screenCapture, 84, 127, 138, t)
-                                                        + inRange(screenCapture, 74, 183, 191, t)
-                                                        + inRange(screenCapture, 76, 149, 162, t)
-                                                        + inRange(screenCapture, 73, 156, 167, t)
-                                                        + inRange(screenCapture, 73, 211, 214, t)
-                                                        + inRange(screenCapture, 82, 126, 138, t)
-                                                        + inRange(screenCapture, 77, 126, 140, t)
-                                                        + inRange(screenCapture, 91, 130, 134, t)
-                                                        + inRange(screenCapture, 87, 129, 136, t)
-                                                        + inRange(screenCapture, 102, 135, 130, t)
-                                                        + inRange(screenCapture, 96, 134, 132, t)
-                                                        + inRange(screenCapture, 111, 135, 128, t)
-                                                        + inRange(screenCapture, 106, 135, 130, t)
-                                                        + inRange(screenCapture, 120, 137, 125, t)
-                                                        + inRange(screenCapture, 116, 137, 127, t)
-                                                        + inRange(screenCapture, 127, 137, 124, t)
-                                                        + inRange(screenCapture, 124, 137, 124, t)
-                                                        + inRange(screenCapture, 131, 137, 122, t)
-                                                        + inRange(screenCapture, 129, 137, 123, t)
-                                                        + inRange(screenCapture, 135, 136, 122, t)
-                                                        + inRange(screenCapture, 134, 137, 122, t)
-                                                        + inRange(screenCapture, 129, 155, 141, t)
-                                                        + inRange(screenCapture, 155, 156, 141, t)
-                                                        + inRange(screenCapture, 157, 156, 142, t)
-                                                        + inRange(screenCapture, 164, 173, 120, t)
-                                                        + inRange(screenCapture, 79, 163, 173, t)
-                                                        + inRange(screenCapture, 79, 209, 211, t)
-                                                        + inRange(screenCapture, 75, 188, 192, t)
-                                                        + inRange(screenCapture, 85, 135, 146, t)
-                                                        + inRange(screenCapture, 95, 138, 144, t)
-                                                        + inRange(screenCapture, 133, 151, 143, t)
-                                                        + inRange(screenCapture, 132, 150, 144, t)
-                                                        + inRange(screenCapture, 123, 157, 155, t)
-                                                        + inRange(screenCapture, 122, 164, 160, t)
-                                                        + inRange(screenCapture, 122, 169, 164, t)
-                                                        + inRange(screenCapture, 123, 176, 171, t)
-                                                        + inRange(screenCapture, 121, 180, 174, t)
-                                                        + inRange(screenCapture, 122, 176, 171, t)
-                                                        + inRange(screenCapture, 122, 167, 163, t)
-                                                        + inRange(screenCapture, 122, 163, 159, t)
-                                                        + inRange(screenCapture, 125, 145, 144, t)
-                                                        + inRange(screenCapture, 126, 146, 144, t)
-                                                        + inRange(screenCapture, 131, 148, 143, t)
-                                                        + inRange(screenCapture, 131, 149, 143, t)
-                                                        + inRange(screenCapture, 122, 149, 143, t)
-                                                        + inRange(screenCapture, 128, 152, 143, t)
-                                                        + inRange(screenCapture, 132, 153, 143, t)
-                                                        + inRange(screenCapture, 118, 148, 144, t)
-                                                        + inRange(screenCapture, 124, 150, 143, t)
-                                                        + inRange(screenCapture, 128, 151, 143, t)
-                                                        + inRange(screenCapture, 113, 149, 146, t)
-                                                        + inRange(screenCapture, 119, 149, 143, t)
-                                                        + inRange(screenCapture, 123, 150, 143, t)
-                                                        + inRange(screenCapture, 108, 168, 168, t)
-                                                        + inRange(screenCapture, 114, 150, 146, t)
-                                                        + inRange(screenCapture, 119, 148, 143, t)
-                                                        + inRange(screenCapture, 105, 165, 166, t)
-                                                        + inRange(screenCapture, 108, 174, 174, t)
-                                                        + inRange(screenCapture, 111, 146, 149, t)
-                                                        + inRange(screenCapture, 102, 133, 136, t)
-                                                        + inRange(screenCapture, 103, 162, 163, t)
-                                                        + inRange(screenCapture, 106, 176, 175, t)
-                                                        + inRange(screenCapture, 106, 133, 132, t)
-                                                        + inRange(screenCapture, 102, 132, 135, t)
-                                                        + inRange(screenCapture, 103, 157, 158, t)
-                                                        + inRange(screenCapture, 110, 134, 130, t)
-                                                        + inRange(screenCapture, 105, 132, 132, t)
-                                                        + inRange(screenCapture, 103, 130, 134, t)
-                                                        + inRange(screenCapture, 113, 135, 129, t)
-                                                        + inRange(screenCapture, 110, 133, 130, t)
-                                                        + inRange(screenCapture, 106, 130, 132, t)
-                                                        + inRange(screenCapture, 118, 136, 127, t)
-                                                        + inRange(screenCapture, 115, 135, 128, t)
-                                                        + inRange(screenCapture, 112, 133, 129, t)
-                                        ;
+                                        var colorMeIcon2 = inRange(screenCapture, 35, 56, 46, t);
+                                        var colorMeCircle = inRange(screenCapture, 71, 205, 214, t)
+                                                            + inRange(screenCapture, 102, 144, 143, t)
+                                                            + inRange(screenCapture, 112, 130, 130, t)
+                                                            + inRange(screenCapture, 122, 146, 143, t)
+                                                            + inRange(screenCapture, 132, 152, 143, t)
+                                                            + inRange(screenCapture, 142, 156, 142, t)
+                                                            + inRange(screenCapture, 151, 156, 142, t)
+                                                            + inRange(screenCapture, 139, 155, 142, t)
+                                                            + inRange(screenCapture, 127, 153, 142, t)
+                                                            + inRange(screenCapture, 109, 142, 145, t)
+                                                            + inRange(screenCapture, 98, 139, 145, t)
+                                                            + inRange(screenCapture, 82, 132, 147, t)
+                                                            + inRange(screenCapture, 77, 163, 174, t)
+                                                            + inRange(screenCapture, 79, 185, 195, t)
+                                                            + inRange(screenCapture, 77, 164, 177, t)
+                                                            + inRange(screenCapture, 83, 158, 165, t)
+                                                            + inRange(screenCapture, 90, 138, 145, t)
+                                                            + inRange(screenCapture, 103, 143, 144, t)
+                                                            + inRange(screenCapture, 117, 139, 126, t)
+                                                            + inRange(screenCapture, 109, 139, 128, t)
+                                                            + inRange(screenCapture, 111, 140, 127, t)
+                                                            + inRange(screenCapture, 103, 136, 130, t)
+                                                            + inRange(screenCapture, 88, 131, 136, t)
+                                                            + inRange(screenCapture, 92, 134, 133, t)
+                                                            + inRange(screenCapture, 80, 135, 147, t)
+                                                            + inRange(screenCapture, 84, 127, 138, t)
+                                                            + inRange(screenCapture, 74, 183, 191, t)
+                                                            + inRange(screenCapture, 76, 149, 162, t)
+                                                            + inRange(screenCapture, 73, 156, 167, t)
+                                                            + inRange(screenCapture, 73, 211, 214, t)
+                                                            + inRange(screenCapture, 82, 126, 138, t)
+                                                            + inRange(screenCapture, 77, 126, 140, t)
+                                                            + inRange(screenCapture, 91, 130, 134, t)
+                                                            + inRange(screenCapture, 87, 129, 136, t)
+                                                            + inRange(screenCapture, 102, 135, 130, t)
+                                                            + inRange(screenCapture, 96, 134, 132, t)
+                                                            + inRange(screenCapture, 111, 135, 128, t)
+                                                            + inRange(screenCapture, 106, 135, 130, t)
+                                                            + inRange(screenCapture, 120, 137, 125, t)
+                                                            + inRange(screenCapture, 116, 137, 127, t)
+                                                            + inRange(screenCapture, 127, 137, 124, t)
+                                                            + inRange(screenCapture, 124, 137, 124, t)
+                                                            + inRange(screenCapture, 131, 137, 122, t)
+                                                            + inRange(screenCapture, 129, 137, 123, t)
+                                                            + inRange(screenCapture, 135, 136, 122, t)
+                                                            + inRange(screenCapture, 134, 137, 122, t)
+                                                            + inRange(screenCapture, 129, 155, 141, t)
+                                                            + inRange(screenCapture, 155, 156, 141, t)
+                                                            + inRange(screenCapture, 157, 156, 142, t)
+                                                            + inRange(screenCapture, 164, 173, 120, t)
+                                                            + inRange(screenCapture, 79, 163, 173, t)
+                                                            + inRange(screenCapture, 79, 209, 211, t)
+                                                            + inRange(screenCapture, 75, 188, 192, t)
+                                                            + inRange(screenCapture, 85, 135, 146, t)
+                                                            + inRange(screenCapture, 95, 138, 144, t)
+                                                            + inRange(screenCapture, 133, 151, 143, t)
+                                                            + inRange(screenCapture, 132, 150, 144, t)
+                                                            + inRange(screenCapture, 123, 157, 155, t)
+                                                            + inRange(screenCapture, 122, 164, 160, t)
+                                                            + inRange(screenCapture, 122, 169, 164, t)
+                                                            + inRange(screenCapture, 123, 176, 171, t)
+                                                            + inRange(screenCapture, 121, 180, 174, t)
+                                                            + inRange(screenCapture, 122, 176, 171, t)
+                                                            + inRange(screenCapture, 122, 167, 163, t)
+                                                            + inRange(screenCapture, 122, 163, 159, t)
+                                                            + inRange(screenCapture, 125, 145, 144, t)
+                                                            + inRange(screenCapture, 126, 146, 144, t)
+                                                            + inRange(screenCapture, 131, 148, 143, t)
+                                                            + inRange(screenCapture, 131, 149, 143, t)
+                                                            + inRange(screenCapture, 122, 149, 143, t)
+                                                            + inRange(screenCapture, 128, 152, 143, t)
+                                                            + inRange(screenCapture, 132, 153, 143, t)
+                                                            + inRange(screenCapture, 118, 148, 144, t)
+                                                            + inRange(screenCapture, 124, 150, 143, t)
+                                                            + inRange(screenCapture, 128, 151, 143, t)
+                                                            + inRange(screenCapture, 113, 149, 146, t)
+                                                            + inRange(screenCapture, 119, 149, 143, t)
+                                                            + inRange(screenCapture, 123, 150, 143, t)
+                                                            + inRange(screenCapture, 108, 168, 168, t)
+                                                            + inRange(screenCapture, 114, 150, 146, t)
+                                                            + inRange(screenCapture, 119, 148, 143, t)
+                                                            + inRange(screenCapture, 105, 165, 166, t)
+                                                            + inRange(screenCapture, 108, 174, 174, t)
+                                                            + inRange(screenCapture, 111, 146, 149, t)
+                                                            + inRange(screenCapture, 102, 133, 136, t)
+                                                            + inRange(screenCapture, 103, 162, 163, t)
+                                                            + inRange(screenCapture, 106, 176, 175, t)
+                                                            + inRange(screenCapture, 106, 133, 132, t)
+                                                            + inRange(screenCapture, 102, 132, 135, t)
+                                                            + inRange(screenCapture, 103, 157, 158, t)
+                                                            + inRange(screenCapture, 110, 134, 130, t)
+                                                            + inRange(screenCapture, 105, 132, 132, t)
+                                                            + inRange(screenCapture, 103, 130, 134, t)
+                                                            + inRange(screenCapture, 113, 135, 129, t)
+                                                            + inRange(screenCapture, 110, 133, 130, t)
+                                                            + inRange(screenCapture, 106, 130, 132, t)
+                                                            + inRange(screenCapture, 118, 136, 127, t)
+                                                            + inRange(screenCapture, 115, 135, 128, t)
+                                                            + inRange(screenCapture, 112, 133, 129, t)
+                                            ;
 
 
-                                    scaledImage = color1 + color2 + color3 + colorMeIcon + colorMeIcon2 + colorMeCircle;
+                                        scaledImage = color1 + color2 + color3 + colorMeIcon + colorMeIcon2 + colorMeCircle;
 
 
-                                    //    scaledImage._Dilate(trackBarDiladeValue); // 1
-                                    //    scaledImage._Erode(trackBarErodeValue); // 1
-                                    /// scaledImage._ThresholdBinary(new Gray(trackBarTreshBinaryValue), new Gray(255)); // 174
-                                    //        image1 = image1.Canny(CannyFirstValue, CannySecondValue); 
+                                            scaledImage._Dilate(trackBarDiladeValue); // 1
+                                            scaledImage._Erode(trackBarErodeValue); // 1
+                                     //    scaledImage._ThresholdBinary(new Gray(trackBarTreshBinaryValue), new Gray(255)); // 174
+                                        //        image1 = image1.Canny(CannyFirstValue, CannySecondValue); 
 
-                                    //   CvInvoke.BitwiseNot(image1, image1);
-                                    Pixel pix = new Pixel();
-                                    using (Bitmap imageBitmap = scaledImage.ToBitmap())
-                                    {
-                                        BaseGrid grid = pix.PNGtoGrid(imageBitmap);
-
-                                        if (enemy != null)
+                                        //   CvInvoke.BitwiseNot(image1, image1);
+                                        Pixel pix = new Pixel();
+                                        using (Bitmap imageBitmap = scaledImage.ToBitmap())
                                         {
-                                            List<GridPos> path = pix.findPath(
-                                                grid,
-                                                DiagonalMovement.IfAtLeastOneWalkable,
-                                                new GridPos((scaledImage.Width / 2), (scaledImage.Height / 2)),
-                                                new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 15)
-                                            );
-                                            //    CvInvoke.BitwiseNot(image1, image1);
+                                            BaseGrid grid = pix.PNGtoGrid(imageBitmap);
 
-
-                                            scaledImage = pix.addPath(path, imageBitmap).ToImage<Rgb, Byte>();
-                                            image2 = scaledImage;
-                                            //     CvInvoke.BitwiseNot(image2, image2);
-
-                                            var i = 0;
-
-
-                                            if (path.Count - 1 >= 0 && path.Count - 1 < path.Count)
+                                            if (enemy != null)
                                             {
-                                                foreach (var item in path)
+                                                List<GridPos> path = pix.findPath(
+                                                    grid,
+                                                    DiagonalMovement.Always,
+                                                    new GridPos((scaledImage.Width / 2), (scaledImage.Height / 2)),
+                                                    new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 15)
+                                                );
+                                                //    CvInvoke.BitwiseNot(image1, image1);
+
+
+                                                scaledImage = pix.addPath(path, imageBitmap).ToImage<Rgb, Byte>();
+                                                image2 = scaledImage;
+                                                //     CvInvoke.BitwiseNot(image2, image2);
+
+
+                                                if (path.Count - 1 >= 0 && path.Count - 1 < path.Count)
                                                 {
-                                                    CvInvoke.Circle(image2, new Point(item.x, item.y), 1,
-                                                        new MCvScalar(0, 200, 200), 2);
-                                                }
-                                            }
-
-                                            CvInvoke.Circle(image2,
-                                                new Point(scaledImage.Width / 2, scaledImage.Height / 2), 1,
-                                                new MCvScalar(200, 0, 0), 2);
-                                            CvInvoke.Circle(image2,
-                                                new Point(enemy.Value.X + (enemyTemplate.Width / 2),
-                                                    enemy.Value.Y + 15), 1,
-                                                new MCvScalar(0, 200, 0), 2);
-
-                                            imageBoxMinimap.Image = image2;
-                                            if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
-                                            {
-                                                foreach (var item in path)
-                                                {
-                                                    int last_posx = 0;
-                                                    int last_posy = 0;
-
-                                                    distance = Distance(
-                                                        new Point(item.x, item.y),
-                                                        new Point((image2.Width / 2), (image2.Height / 2)));
-                                                    Debug.WriteLine(distance);
-                                                    var additionalPercent = 2;
-                                                    if (distance < 30)
+                                                    foreach (var item in path)
                                                     {
-                                                        additionalPercent = 3;
-                                                    }
-
-                                                    var result = ChaosBot.MinimapToDesktop(item.x, item.y,
-                                                        additionalPercent);
-                                                    VirtualMouse.MoveTo((int) result.Item1, (int) result.Item2);
-                                                    last_posx = (int) result.Item1;
-                                                    last_posy = (int) result.Item2;
-                                                    VirtualMouse.LeftClick();
-                                                    Task.Delay(1000).Wait();
-                                                }
-
-                                                return;
-                                                //  VirtualMouse.LeftDown();
-                                                //
-
-/*
-                                                try
-                                                {
-                                                    var template =
-                                                        new Image<Bgr, byte>(
-                                                            @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
-                                                    var mask = new Image<Bgr, byte>(
-                                                        @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
-
-
-                                                    var detector = new ScreenDetector(template, mask, 0.96f,
-                                                        ChaosBot.Recalc(711),
-                                                        ChaosBot.Recalc(119, false), ChaosBot.Recalc(1073),
-                                                        ChaosBot.Recalc(956, false));
-                                                    using (var sreenCapture =
-                                                           new Bitmap(screenPrinter.CaptureScreen())
-                                                               .ToImage<Bgr, byte>())
-                                                    {
-                                                        var item = detector.GetBest(sreenCapture, true);
-                                                        if (item.HasValue)
-                                                        {
-                                                            // search for tree after walking path :);
-                                      //                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                                                            //  foundGathering = true;
-                                      //                           VirtualMouse.LeftUp();
-                                                            //     VirtualMouse.LeftUp();
-                                                            //    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
-                                    //                        Task.Delay(15000).Wait();
-                                                        }
-                                                        else
-                                                        {
-                                                            // Not Found
-                                                        }
+                                                        CvInvoke.Circle(image2, new Point(item.x, item.y), 1,
+                                                            new MCvScalar(0, 200, 200), 2);
                                                     }
                                                 }
-                                                catch
-                                                {
-                                                }*/
 
+                                                CvInvoke.Circle(image2,
+                                                    new Point(scaledImage.Width / 2, scaledImage.Height / 2), 1,
+                                                    new MCvScalar(200, 0, 0), 2);
+                                                CvInvoke.Circle(image2,
+                                                    new Point(enemy.Value.X + (enemyTemplate.Width / 2),
+                                                        enemy.Value.Y + 15), 1,
+                                                    new MCvScalar(0, 200, 0), 2);
+
+                                                imageBox1.Image = image2;
+                                                if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
+                                                {
+                                                    foreach (var item in path)
+                                                    {
+                                                        int last_posx = 0;
+                                                        int last_posy = 0;
+
+                                                        distance = Distance(
+                                                            new Point(item.x, item.y),
+                                                            new Point((image2.Width / 2), (image2.Height / 2)));
+                                                        Debug.WriteLine(distance);
+                                                    var additionalPercent = 5;
+                                                        if (distance < 30)
+                                                        {
+                                                            additionalPercent = 3;
+                                                        }
+
+                                                        var result = ChaosBot.MinimapToDesktop(item.x, item.y,
+                                                            additionalPercent);
+                                                        VirtualMouse.MoveTo((int)result.Item1 - last_posx, (int)result.Item2- last_posy);
+                                                        last_posx = (int)result.Item1;
+                                                        last_posy = (int)result.Item2;
+                                                   //     VirtualMouse.LeftClick();
+                                                        Task.Delay(1000).Wait();
+                                                    }
+
+                                                    return;
+                                                    //  VirtualMouse.LeftDown();
+                                                    //
+
+                                                    /*
+                                                                                                    try
+                                                                                                    {
+                                                                                                        var template =
+                                                                                                            new Image<Bgr, byte>(
+                                                                                                                @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+                                                                                                        var mask = new Image<Bgr, byte>(
+                                                                                                            @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+
+
+                                                                                                        var detector = new ScreenDetector(template, mask, 0.96f,
+                                                                                                            ChaosBot.Recalc(711),
+                                                                                                            ChaosBot.Recalc(119, false), ChaosBot.Recalc(1073),
+                                                                                                            ChaosBot.Recalc(956, false));
+                                                                                                        using (var sreenCapture =
+                                                                                                               new Bitmap(screenPrinter.CaptureScreen())
+                                                                                                                   .ToImage<Bgr, byte>())
+                                                                                                        {
+                                                                                                            var item = detector.GetBest(sreenCapture, true);
+                                                                                                            if (item.HasValue)
+                                                                                                            {
+                                                                                                                // search for tree after walking path :);
+                                                                                          //                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                                                                                //  foundGathering = true;
+                                                                                          //                           VirtualMouse.LeftUp();
+                                                                                                                //     VirtualMouse.LeftUp();
+                                                                                                                //    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                                                        //                        Task.Delay(15000).Wait();
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                // Not Found
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    catch
+                                                                                                    {
+                                                                                                    }*/
+
+                                                }
                                             }
                                         }
-                                    }
 
-                                    //       distance = Distance(new Point(enemy.Value.X, enemy.Value.Y),
-                                    //              new Point((image1.Width / 2), (image1.Height / 2)));
-                                    //    Debug.WriteLine(distance);
+                                        //       distance = Distance(new Point(enemy.Value.X, enemy.Value.Y),
+                                        //              new Point((image1.Width / 2), (image1.Height / 2)));
+                                        //    Debug.WriteLine(distance);
+                                    }
                                 }
                             }
-                        }
-                        else if (selectedIndex == 2)
-                        {
-                            object result = Pixel.PixelSearch(x, y, (width * -1), (height * -1),
-                                screenColorPicker1.Color.ToArgb(), TrackbartresholdValue);
-                            Debug.WriteLine(result);
-                            if (result.ToString() != "0")
+                            else if (selectedIndex == 3)
                             {
-                                object[] resultCoord = (object[]) result;
-                                screenDrawer.Draw(testform, 0, 0, (width * -1) - x, (height * -1) - y);
-                                screenDrawer.Draw(testform, (int) resultCoord[0] - x, (int) resultCoord[1] - y, 5, 5,
-                                    new Pen(Color.Red, 3));
-                            }
-                        }
-                        else
-                        {
-                            using (bitmapImage = new Bitmap(rawScreen))
-                            {
-                                rawScreen.Dispose();
-                                Point? enemy;
-                                using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
+                                enemyTemplate =
+                                    new Image<Bgr, byte>(
+                                        @"G:\test\clone\PixelAimbot\Resources\wood.png"); // icon of the enemy
+
+                                debugDetector._enemyTemplate = enemyTemplate;
+                                debugDetector._enemyMask = enemyTemplate;
+                                debugDetector._threshold = 0.77f;
+                                double distance;
+                                using (bitmapImage = new Bitmap(rawScreen))
                                 {
-                                    enemy = null;
-                                    screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
-                                    if (selectedIndex == 1)
+                                    rawScreen.Dispose();
+                                    Point? enemy;
+                                    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                                     {
-                                        textBoxTextSearch.Invoke((MethodInvoker) (() =>
-                                            textBoxTextSearch.Text = ChaosBot.ReadArea(screenCapture.ToBitmap(), x, y, width * -1,
-                                                height * -1, "")));
+                                        screenCapture.ROI = new Rectangle(x, y, width * -1, height * -1);
+
+                                        enemy = debugDetector.GetClosestEnemy(screenCapture, false, testform);
+                                        screenCapture.Draw(new CircleF(new Point(394 / 2 + 2, 340 / 2 - 2), 18),
+                                            new Bgr(142, 157, 162), -1);
+                                        var scaledImage = screenCapture.Convert<Rgb, Byte>();
+
+                                        var t = 10;
+                                        var color1 = inRange(screenCapture, 162, 157, 142, t);
+                                        var color2 = inRange(screenCapture, 142, 137, 121, t);
+                                        var color3 = color1; //inRange(screenCapture, 218, 197, 110, t);
+                                                             //   var color4 = inRange(screenCapture, 70,184,195,t);
+                                        var colorMeIcon = color1;/*inRange(screenCapture, 88, 239, 107, t) +
+                                                      inRange(screenCapture, 0, 0, 0, t);*/
+                                        var colorMeIcon2 = inRange(screenCapture, 35, 56, 46, t);
+                                        var colorMeCircle = inRange(screenCapture, 71, 205, 214, t)
+                                                            + inRange(screenCapture, 102, 144, 143, t)
+                                                            + inRange(screenCapture, 112, 130, 130, t)
+                                                            + inRange(screenCapture, 122, 146, 143, t)
+                                                            + inRange(screenCapture, 132, 152, 143, t)
+                                                            + inRange(screenCapture, 142, 156, 142, t)
+                                                            + inRange(screenCapture, 151, 156, 142, t)
+                                                            + inRange(screenCapture, 139, 155, 142, t)
+                                                            + inRange(screenCapture, 127, 153, 142, t)
+                                                            + inRange(screenCapture, 109, 142, 145, t)
+                                                            + inRange(screenCapture, 98, 139, 145, t)
+                                                            + inRange(screenCapture, 82, 132, 147, t)
+                                                            + inRange(screenCapture, 77, 163, 174, t)
+                                                            + inRange(screenCapture, 79, 185, 195, t)
+                                                            + inRange(screenCapture, 77, 164, 177, t)
+                                                            + inRange(screenCapture, 83, 158, 165, t)
+                                                            + inRange(screenCapture, 90, 138, 145, t)
+                                                            + inRange(screenCapture, 103, 143, 144, t)
+                                                            + inRange(screenCapture, 117, 139, 126, t)
+                                                            + inRange(screenCapture, 109, 139, 128, t)
+                                                            + inRange(screenCapture, 111, 140, 127, t)
+                                                            + inRange(screenCapture, 103, 136, 130, t)
+                                                            + inRange(screenCapture, 88, 131, 136, t)
+                                                            + inRange(screenCapture, 92, 134, 133, t)
+                                                            + inRange(screenCapture, 80, 135, 147, t)
+                                                            + inRange(screenCapture, 84, 127, 138, t)
+                                                            + inRange(screenCapture, 74, 183, 191, t)
+                                                            + inRange(screenCapture, 76, 149, 162, t)
+                                                            + inRange(screenCapture, 73, 156, 167, t)
+                                                            + inRange(screenCapture, 73, 211, 214, t)
+                                                            + inRange(screenCapture, 82, 126, 138, t)
+                                                            + inRange(screenCapture, 77, 126, 140, t)
+                                                            + inRange(screenCapture, 91, 130, 134, t)
+                                                            + inRange(screenCapture, 87, 129, 136, t)
+                                                            + inRange(screenCapture, 102, 135, 130, t)
+                                                            + inRange(screenCapture, 96, 134, 132, t)
+                                                            + inRange(screenCapture, 111, 135, 128, t)
+                                                            + inRange(screenCapture, 106, 135, 130, t)
+                                                            + inRange(screenCapture, 120, 137, 125, t)
+                                                            + inRange(screenCapture, 116, 137, 127, t)
+                                                            + inRange(screenCapture, 127, 137, 124, t)
+                                                            + inRange(screenCapture, 124, 137, 124, t)
+                                                            + inRange(screenCapture, 131, 137, 122, t)
+                                                            + inRange(screenCapture, 129, 137, 123, t)
+                                                            + inRange(screenCapture, 135, 136, 122, t)
+                                                            + inRange(screenCapture, 134, 137, 122, t)
+                                                            + inRange(screenCapture, 129, 155, 141, t)
+                                                            + inRange(screenCapture, 155, 156, 141, t)
+                                                            + inRange(screenCapture, 157, 156, 142, t)
+                                                            + inRange(screenCapture, 164, 173, 120, t)
+                                                            + inRange(screenCapture, 79, 163, 173, t)
+                                                            + inRange(screenCapture, 79, 209, 211, t)
+                                                            + inRange(screenCapture, 75, 188, 192, t)
+                                                            + inRange(screenCapture, 85, 135, 146, t)
+                                                            + inRange(screenCapture, 95, 138, 144, t)
+                                                            + inRange(screenCapture, 133, 151, 143, t)
+                                                            + inRange(screenCapture, 132, 150, 144, t)
+                                                            + inRange(screenCapture, 123, 157, 155, t)
+                                                            + inRange(screenCapture, 122, 164, 160, t)
+                                                            + inRange(screenCapture, 122, 169, 164, t)
+                                                            + inRange(screenCapture, 123, 176, 171, t)
+                                                            + inRange(screenCapture, 121, 180, 174, t)
+                                                            + inRange(screenCapture, 122, 176, 171, t)
+                                                            + inRange(screenCapture, 122, 167, 163, t)
+                                                            + inRange(screenCapture, 122, 163, 159, t)
+                                                            + inRange(screenCapture, 125, 145, 144, t)
+                                                            + inRange(screenCapture, 126, 146, 144, t)
+                                                            + inRange(screenCapture, 131, 148, 143, t)
+                                                            + inRange(screenCapture, 131, 149, 143, t)
+                                                            + inRange(screenCapture, 122, 149, 143, t)
+                                                            + inRange(screenCapture, 128, 152, 143, t)
+                                                            + inRange(screenCapture, 132, 153, 143, t)
+                                                            + inRange(screenCapture, 118, 148, 144, t)
+                                                            + inRange(screenCapture, 124, 150, 143, t)
+                                                            + inRange(screenCapture, 128, 151, 143, t)
+                                                            + inRange(screenCapture, 113, 149, 146, t)
+                                                            + inRange(screenCapture, 119, 149, 143, t)
+                                                            + inRange(screenCapture, 123, 150, 143, t)
+                                                            + inRange(screenCapture, 108, 168, 168, t)
+                                                            + inRange(screenCapture, 114, 150, 146, t)
+                                                            + inRange(screenCapture, 119, 148, 143, t)
+                                                            + inRange(screenCapture, 105, 165, 166, t)
+                                                            + inRange(screenCapture, 108, 174, 174, t)
+                                                            + inRange(screenCapture, 111, 146, 149, t)
+                                                            + inRange(screenCapture, 102, 133, 136, t)
+                                                            + inRange(screenCapture, 103, 162, 163, t)
+                                                            + inRange(screenCapture, 106, 176, 175, t)
+                                                            + inRange(screenCapture, 106, 133, 132, t)
+                                                            + inRange(screenCapture, 102, 132, 135, t)
+                                                            + inRange(screenCapture, 103, 157, 158, t)
+                                                            + inRange(screenCapture, 110, 134, 130, t)
+                                                            + inRange(screenCapture, 105, 132, 132, t)
+                                                            + inRange(screenCapture, 103, 130, 134, t)
+                                                            + inRange(screenCapture, 113, 135, 129, t)
+                                                            + inRange(screenCapture, 110, 133, 130, t)
+                                                            + inRange(screenCapture, 106, 130, 132, t)
+                                                            + inRange(screenCapture, 118, 136, 127, t)
+                                                            + inRange(screenCapture, 115, 135, 128, t)
+                                                            + inRange(screenCapture, 112, 133, 129, t)
+                                            ;
+
+
+                                        scaledImage = color1 + color2 + color3 + colorMeIcon + colorMeIcon2 + colorMeCircle;
+
+
+                                        //    scaledImage._Dilate(trackBarDiladeValue); // 1
+                                        //    scaledImage._Erode(trackBarErodeValue); // 1
+                                        /// scaledImage._ThresholdBinary(new Gray(trackBarTreshBinaryValue), new Gray(255)); // 174
+                                        //        image1 = image1.Canny(CannyFirstValue, CannySecondValue); 
+
+                                        //   CvInvoke.BitwiseNot(image1, image1);
+                                        Pixel pix = new Pixel();
+                                        using (Bitmap imageBitmap = scaledImage.ToBitmap())
+                                        {
+                                            BaseGrid grid = pix.PNGtoGrid(imageBitmap);
+
+                                            if (enemy != null)
+                                            {
+                                                List<GridPos> path = pix.findPath(
+                                                    grid,
+                                                    DiagonalMovement.IfAtLeastOneWalkable,
+                                                    new GridPos((scaledImage.Width / 2), (scaledImage.Height / 2)),
+                                                    new GridPos(enemy.Value.X + (enemyTemplate.Width / 2), enemy.Value.Y + 15)
+                                                );
+                                                //    CvInvoke.BitwiseNot(image1, image1);
+
+
+                                                scaledImage = pix.addPath(path, imageBitmap).ToImage<Rgb, Byte>();
+                                                image2 = scaledImage;
+                                                //     CvInvoke.BitwiseNot(image2, image2);
+
+
+
+                                                if (path.Count - 1 >= 0 && path.Count - 1 < path.Count)
+                                                {
+                                                    foreach (var item in path)
+                                                    {
+                                                        CvInvoke.Circle(image2, new Point(item.x, item.y), 1,
+                                                            new MCvScalar(0, 200, 200), 2);
+                                                    }
+                                                }
+
+                                                CvInvoke.Circle(image2,
+                                                    new Point(scaledImage.Width / 2, scaledImage.Height / 2), 1,
+                                                    new MCvScalar(200, 0, 0), 2);
+                                                CvInvoke.Circle(image2,
+                                                    new Point(enemy.Value.X + (enemyTemplate.Width / 2),
+                                                        enemy.Value.Y + 15), 1,
+                                                    new MCvScalar(0, 200, 0), 2);
+
+                                                imageBoxMinimap.Image = image2;
+                                                if (path.Count - 1 >= 2 && path.Count - 1 < path.Count)
+                                                {
+                                                    foreach (var item in path)
+                                                    {
+                                                        int last_posx = 0;
+                                                        int last_posy = 0;
+
+                                                        distance = Distance(
+                                                            new Point(item.x, item.y),
+                                                            new Point((image2.Width / 2), (image2.Height / 2)));
+                                                        Debug.WriteLine(distance);
+                                                    var additionalPercent = 5;
+                                                        if (distance < 30)
+                                                        {
+                                                            additionalPercent = 3;
+                                                        }
+
+                                                        var result = ChaosBot.MinimapToDesktop(item.x, item.y,
+                                                            additionalPercent);
+                                                        VirtualMouse.MoveTo((int)result.Item1 - last_posx, (int)result.Item2- last_posy);
+                                                        last_posx = (int)result.Item1;
+                                                        last_posy = (int)result.Item2;
+                                                   //     VirtualMouse.LeftClick();
+                                                        Task.Delay(1000).Wait();
+                                                    }
+
+                                                    return;
+                                                    //  VirtualMouse.LeftDown();
+                                                    //
+
+                                                    /*
+                                                                                                    try
+                                                                                                    {
+                                                                                                        var template =
+                                                                                                            new Image<Bgr, byte>(
+                                                                                                                @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+                                                                                                        var mask = new Image<Bgr, byte>(
+                                                                                                            @"G:\test\clone\PixelAimbot\Resources\g.png"); // icon of the enemy
+
+
+                                                                                                        var detector = new ScreenDetector(template, mask, 0.96f,
+                                                                                                            ChaosBot.Recalc(711),
+                                                                                                            ChaosBot.Recalc(119, false), ChaosBot.Recalc(1073),
+                                                                                                            ChaosBot.Recalc(956, false));
+                                                                                                        using (var sreenCapture =
+                                                                                                               new Bitmap(screenPrinter.CaptureScreen())
+                                                                                                                   .ToImage<Bgr, byte>())
+                                                                                                        {
+                                                                                                            var item = detector.GetBest(sreenCapture, true);
+                                                                                                            if (item.HasValue)
+                                                                                                            {
+                                                                                                                // search for tree after walking path :);
+                                                                                          //                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                                                                                //  foundGathering = true;
+                                                                                          //                           VirtualMouse.LeftUp();
+                                                                                                                //     VirtualMouse.LeftUp();
+                                                                                                                //    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                                                                                        //                        Task.Delay(15000).Wait();
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                // Not Found
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    catch
+                                                                                                    {
+                                                                                                    }*/
+
+                                                }
+                                            }
+                                        }
+
+                                        //       distance = Distance(new Point(enemy.Value.X, enemy.Value.Y),
+                                        //              new Point((image1.Width / 2), (image1.Height / 2)));
+                                        //    Debug.WriteLine(distance);
                                     }
-                                    else
+                                }
+                            }
+                            else if (selectedIndex == 2)
+                            {
+                                object result = Pixel.PixelSearch(x, y, (width * -1), (height * -1),
+                                    screenColorPicker1.Color.ToArgb(), TrackbartresholdValue);
+                                Debug.WriteLine(result);
+                                if (result.ToString() != "0")
+                                {
+                                    object[] resultCoord = (object[])result;
+                                    screenDrawer.Draw(testform, 0, 0, (width * -1) - x, (height * -1) - y);
+                                    screenDrawer.Draw(testform, (int)resultCoord[0] - x, (int)resultCoord[1] - y, 5, 5,
+                                        new Pen(Color.Red, 3));
+                                }
+                            }
+                            else
+                            {
+                                using (bitmapImage = new Bitmap(rawScreen))
+                                {
+                                    rawScreen.Dispose();
+                                    Point? enemy;
+                                    using (var screenCapture = bitmapImage.ToImage<Bgr, byte>())
                                     {
-                                        if (radioButtonGetBest.Checked)
+                                        enemy = null;
+                                        screenDrawer.Draw(testform, 0, 0, (width * -1), (height * -1));
+                                        if (selectedIndex == 1)
                                         {
-                                            enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked,
-                                                testform);
+                                            textBoxTextSearch.Invoke((MethodInvoker)(() =>
+                                               textBoxTextSearch.Text = ChaosBot.ReadArea(screenCapture.ToBitmap(), x, y, width * -1,
+                                                   height * -1, "")));
                                         }
-
-                                        if (radioButtonGetClosest.Checked)
+                                        else
                                         {
-                                            enemy = debugDetector.GetClosestEnemy(screenCapture,
-                                                !checkBoxShowAll.Checked,
-                                                testform);
-                                        }
+                                            if (radioButtonGetBest.Checked)
+                                            {
+                                                enemy = debugDetector.GetBestEnemy(screenCapture, !checkBoxShowAll.Checked,
+                                                    testform);
+                                            }
 
-                                        if (radioButtonGetClosestBest.Checked)
-                                        {
-                                            enemy = debugDetector.GetClosestBest(screenCapture,
-                                                !checkBoxShowAll.Checked,
-                                                testform);
-                                        }
+                                            if (radioButtonGetClosest.Checked)
+                                            {
+                                                enemy = debugDetector.GetClosestEnemy(screenCapture,
+                                                    !checkBoxShowAll.Checked,
+                                                    testform);
+                                            }
 
-                                        if (enemy.HasValue)
-                                        {
-                                            screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
-                                                enemyTemplate.Size.Width,
-                                                enemyTemplate.Size.Height,
-                                                new Pen(Color.Blue, 3));
+                                            if (radioButtonGetClosestBest.Checked)
+                                            {
+                                                enemy = debugDetector.GetClosestBest(screenCapture,
+                                                    !checkBoxShowAll.Checked,
+                                                    testform);
+                                            }
+
+                                            if (enemy.HasValue)
+                                            {
+                                                screenDrawer.Draw(testform, enemy.Value.X, enemy.Value.Y,
+                                                    enemyTemplate.Size.Width,
+                                                    enemyTemplate.Size.Height,
+                                                    new Pen(Color.Blue, 3));
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
                     }
                 }
             }
@@ -578,7 +880,9 @@ namespace PixelAimbot
 
         private void textBoxHeight_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxHeight.Text != "")
+            int numericValue;
+            bool isNumber = int.TryParse(textBoxHeight.Text, out numericValue);
+            if (textBoxHeight.Text != "" && isNumber)
             {
                 height = int.Parse(textBoxHeight.Text) * -1;
             }
@@ -586,7 +890,9 @@ namespace PixelAimbot
 
         private void textBoxWidth_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxWidth.Text != "")
+            int numericValue;
+            bool isNumber = int.TryParse(textBoxWidth.Text, out numericValue);
+            if (textBoxWidth.Text != "" && isNumber)
             {
                 width = int.Parse(textBoxWidth.Text) * -1;
             }
@@ -594,7 +900,9 @@ namespace PixelAimbot
 
         private void textBoxY_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxY.Text != "")
+            int numericValue;
+            bool isNumber = int.TryParse(textBoxY.Text, out numericValue);
+            if (textBoxY.Text != "" && isNumber)
             {
                 y = int.Parse(textBoxY.Text);
             }
@@ -602,7 +910,9 @@ namespace PixelAimbot
 
         private void textBoxX_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxX.Text != "")
+            int numericValue;
+            bool isNumber = int.TryParse(textBoxX.Text, out numericValue);
+            if (textBoxX.Text != "" && isNumber)
             {
                 x = int.Parse(textBoxX.Text);
             }
@@ -772,10 +1082,31 @@ namespace PixelAimbot
 
         private void buttonRecalcToBotresolution_Click(object sender, EventArgs e)
         {
-            textBoxX.Text = recalcToBotResolution(int.Parse(textBoxX.Text)).ToString();
-            textBoxY.Text = recalcToBotResolution(int.Parse(textBoxY.Text), true).ToString();
-            textBoxWidth.Text = recalcToBotResolution(int.Parse(textBoxWidth.Text)).ToString();
-            textBoxHeight.Text = recalcToBotResolution(int.Parse(textBoxHeight.Text), true).ToString();
+            int numericValue;
+            bool isNumberX = int.TryParse(textBoxX.Text, out numericValue);
+            bool isNumberY = int.TryParse(textBoxY.Text, out numericValue);
+            bool isNumberWidth = int.TryParse(textBoxWidth.Text, out numericValue);
+            bool isNumberHeight = int.TryParse(textBoxHeight.Text, out numericValue);
+
+            if (textBoxX.Text != "" && isNumberX)
+            {
+                textBoxX.Text = recalcToBotResolution(int.Parse(textBoxX.Text)).ToString();
+            }
+
+            if (textBoxY.Text != "" && isNumberY)
+            {
+                textBoxY.Text = recalcToBotResolution(int.Parse(textBoxY.Text), true).ToString();
+            }
+
+            if (textBoxWidth.Text != "" && isNumberWidth)
+            {
+                textBoxWidth.Text = recalcToBotResolution(int.Parse(textBoxWidth.Text)).ToString();
+            }
+
+            if (textBoxHeight.Text != "" && isNumberHeight)
+            {
+                textBoxHeight.Text = recalcToBotResolution(int.Parse(textBoxHeight.Text), true).ToString();
+            }
         }
 
         private void comboBoxMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -880,24 +1211,16 @@ namespace PixelAimbot
         {
             if (checkBox1.Checked)
             {
-                if (e.KeyCode == Keys.F10)
-                {
-                    i++;
-                    searchMouse = false;
-                    checkBox1.Checked = true;
-                    string Position = Convert.ToString(lbXCoord.Text) + "\t" + Convert.ToString(lbYCoord.Text);
 
-                    textBoxX.Text = lbXCoord.Text;
-                    textBoxY.Text = lbYCoord.Text;
-                    if (i == 2)
-                    {
-                        i = 0;
-                        searchMouse = true;
-                        textBoxX.Text = string.Empty;
-                        textBoxY.Text = string.Empty;
-                        GetMousePosition();
-                    }
-                }
+                i++;
+                checkBox1.Checked = true;
+                string Position = Convert.ToString(lbXCoord.Text) + "\t" + Convert.ToString(lbYCoord.Text);
+
+                textBoxX.Text = lbXCoord.Text;
+                textBoxY.Text = lbYCoord.Text;
+                buttonRecalcToBotresolution_Click(null, null);
+                Clipboard.SetText("VirtualMouse.MoveTo(ChaosBot.Recalc(" + textBoxX.Text + "), ChaosBot.Recalc(" + textBoxY.Text + ", false), 10);");
+
             }
         }
 

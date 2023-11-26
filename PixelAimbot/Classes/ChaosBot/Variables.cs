@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
-
 using PixelAimbot.Classes.Misc;
 using Timer = System.Timers.Timer;
 
@@ -13,152 +12,143 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private bool _start;
-        private bool _RepairReset = true;
-        private bool _botIsRun = true;
-        private bool _discordBotIsRun = true;
-        private bool _stopp;
-        private bool _stop;
-        private bool _restart;
-
-        private bool _floor1;
-        private bool _floor2;
-        private bool _floorFight;
-        private bool _searchboss;
-
-        private bool _portalIsDetected;
-        private bool _portalIsNotDetected;
-
-        private bool _revive;
-        private bool _portaldetect;
-
-        private bool _ultimate;
-        private bool _potions;
-
-        private bool _repair;
-        private bool _gunlancer;
-        private bool _shadowhunter;
-        private bool _berserker;
-        private bool _paladin;
-        private bool _deathblade;
-        private bool _Glavier;
-        private bool _sharpshooter;
-        private bool _bard;
-        private bool _sorcerer;
-        private bool _soulfist;
-        private bool _doUltimateAttack;
-        private bool _logout;
-
-        private bool _GuideLoaded;
-
-        //SKILL AND COOLDOWN//
-        private bool _Q;
-        private bool _W;
-        private bool _E;
-        private bool _R;
-        private bool _A;
-        private bool _S;
-        private bool _D;
-        private bool _F;
-
-
-        public static bool isWindowed = false;
-        private static int windowX = 0;
-        private static int windowY = 0;
-        private static int windowWidth = 0;
-        private static int windowHeight = 0;
+        public static bool IsWindowed;
+        private static int _windowX;
+        private static int _windowY;
+        private static int _windowWidth;
+        private static int _windowHeight;
 
         public static int ChaosAllRounds;
         public static int ChaosAllStucks;
-        public static int ChaosPerfectRounds;
+        public static int ChaosRedStages;
         public static int ChaosGameCrashed;
+
+        public static int HealthPercent = 70;
+
+        private static readonly Random Random = new Random();
+
+        public static int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+        public static int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+        public static CancellationTokenSource Cts = new CancellationTokenSource();
+        public static CancellationTokenSource CtsSkills = new CancellationTokenSource();
+        public static CancellationTokenSource CtsBoss = new CancellationTokenSource();
+
+        private readonly Priorized_Skills _skills = new Priorized_Skills();
+
+        private readonly CancellationTokenSource _discordToken = new CancellationTokenSource();
+
+        private readonly PrintScreen _globalScreenPrinter = new PrintScreen();
+        private readonly Random _humanizer = new Random();
+
+
+        private string steampath = @"C:\Program Files(x86)\Steam\steam.exe";
+
+        private bool _a;
+        private bool _bard;
+        private bool _berserker;
+        private bool _botIsRun = true;
+        private bool _canSearchEnemys = true;
+        private bool _d;
+        private bool _deathblade;
+        private bool _destroyer;
+        private int _destroyerCounter;
+        private bool _discordBotIsRun = true;
+        private bool _doUltimateAttack;
+        private bool _e;
+        private bool _f;
+        private int _fightSequence;
+        private int _fightSequence2;
+        private bool _firstSetupTransparency = true;
+
+        private bool _floor1;
+        private int _floor1Detectiontimer = 0;
+        private bool _floor2;
+        private bool _floor3;
+        private bool _floorFight;
+        private int _floorint2 = 1;
+        private int _formExists;
+        private bool _glavier;
+        private int _globalLeavetimerfloor2 = 0;
+        private bool _gunlancer;
+        private int _leavetimer;
+        private int _leavetimer1;
+        private int _leavetimer2;
+        private int _leavetimerfloor1 = 0;
+        private int _leavetimerfloor2 = 0;
+        private bool _logout;
+        private DateTime _Logout;
+        private bool _paladin;
+        private bool _portaldetect;
+
+        private bool _portalIsDetected;
+        private bool _portalIsNotDetected;
+        private bool _potions;
+
+
+        //SKILL AND COOLDOWN//
+        private bool _q;
+        private bool _r;
+
+        private bool _repair;
+        private bool _repairReset = true;
+        private DateTime _repairTimer;
+        private bool _restart;
+        private int _restartInt = 0;
+
+        private bool _revive;
+        private bool _s;
+        private bool _searchboss;
+        private int _searchSequence;
+        private bool _shadowhunter;
+        private bool _sharpshooter;
+        private bool _sorcerer;
+        private bool _soulfist;
+        private bool _start;
+        private bool _stop;
+        private bool _stopp;
+        private int _swap;
 
 
         private Timer _timer;
-
-        private int _Restart = 0;
-        private int _Leavetimerfloor1 = 0;
-        private int _Leavetimerfloor2 = 0;
-        private int _GlobalLeavetimerfloor2 = 0;
-        private int _Floor1Detectiontimer = 0;
-        private int _fightSequence;
-        private int _fightSequence2;
-        private int _searchSequence;
+        private bool _ultimate;
+        private bool _w;
         private int _walktopUTurn = 1;
-        private int _leavetimer;
-        private int _leavetimer2;
-        private int _leavetimer1;
-        private int _floorint2 = 1;
-        private int _floorint3 = 1;
-        private int _swap;
-        private int _formExists;
-        private bool _canSearchEnemys = true;
-        private bool _firstSetupTransparency = true;
-        private DateTime _repairTimer;
-        private DateTime _Logout;
-        
-        public static int healthPercent = 70;
-    
-        public frmMinimized FormMinimized = new frmMinimized();
-        public Config conf = new Config();
-        private bool _telegramBotRunning;
-        Random humanizer = new Random();
 
-        public Task TelegramTask;
+        private string _comboattack = "";
+        public Config Conf = new Config();
+        private byte _currentHealKey;
+        private byte _currentMouseButton;
         public Task DiscordTask;
-        
-        private string comboattack = "";
 
-        private Priorized_Skills _skills = new Priorized_Skills();
-        
-        private static readonly Random random = new Random();
+        public frmMinimized FormMinimized = new frmMinimized();
+
+        public Image<Bgr, byte> ImageBoss1 = ByteArrayToImage(Images.boss1);
+
+        public Image<Bgr, byte> ImageBossHp = ByteArrayToImage(Images.bosshp);
+        public Image<Bgr, byte> ImageBossHPmask = ByteArrayToImage(Images.bosshpmask);
+        public Image<Bgr, byte> ImageBossmask1 = ByteArrayToImage(Images.bossmask1);
+
+        public Image<Bgr, byte> ImageDeath = ByteArrayToImage(Images.death);
+        public Image<Bgr, byte> ImageDeathEn = ByteArrayToImage(Images.deathEN);
+        public Image<Bgr, byte> ImageEnemy = ByteArrayToImage(Images.enemy);
+        public Image<Bgr, byte> ImageMask = ByteArrayToImage(Images.mask);
+        public Image<Bgr, byte> ImageMob1 = ByteArrayToImage(Images.mob1);
+        public Image<Bgr, byte> ImageMobmask1 = ByteArrayToImage(Images.mobmask1);
+        public Image<Bgr, byte> ImagePortalenter1 = ByteArrayToImage(Images.portalenter1);
+        public Image<Bgr, byte> ImagePortalentermask1 = ByteArrayToImage(Images.portalentermask1);
+        public Image<Bgr, byte> ImageQuestmarker = ByteArrayToImage(Images.questmarker);
+        public Image<Bgr, byte> ImageRedHp = ByteArrayToImage(Images.red_hp);
+        public Image<Bgr, byte> ImageReviveNew = ByteArrayToImage(Images.revive_new);
+        public Image<Bgr, byte> GameRestartSMG = ByteArrayToImage(Images.game_restart_smg);
+
+        public Image<Bgr, byte> ImageRevive1 = ByteArrayToImage(Images.revive1);
+        public Image<Bgr, byte> ImageReviveEnglish = ByteArrayToImage(Images.reviveEnglish);
+        private bool _leave;
+        private int _redStage;
         public Rotations rotation = new Rotations();
-        
+
+
         public static string ConfigPath { get; set; } = Directory.GetCurrentDirectory() + @"\" + HWID.GetAsMD5();
-
-        public static int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-        private static int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-        private Layout_Keyboard _currentLayout;
-        private byte currentMouseButton;
-        private byte currentHealKey;
-
-        public static CancellationTokenSource cts = new CancellationTokenSource();
-        public static CancellationTokenSource ctsSkills = new CancellationTokenSource();
-        public static CancellationTokenSource ctsBossUndTimer = new CancellationTokenSource();
-        public static CancellationTokenSource ctsDetections = new CancellationTokenSource();
-        public static CancellationTokenSource ctsSearchBoss = new CancellationTokenSource();
-
-        private CancellationTokenSource telegramToken = new CancellationTokenSource();
-        private CancellationTokenSource discordToken = new CancellationTokenSource();
-
-        public Image<Bgr, Byte> Image_bossHP = byteArrayToImage(Images.bosshp);
-        public Image<Bgr, Byte> Image_bossHPmask = byteArrayToImage(Images.bosshpmask);
-
-        public Image<Bgr, Byte> Image_boss1 = byteArrayToImage(Images.boss1);
-        public Image<Bgr, Byte> Image_bossmask1 = byteArrayToImage(Images.bossmask1);
-        public Image<Bgr, Byte> Image_enemy = byteArrayToImage(Images.enemy);
-        public Image<Bgr, Byte> Image_mask = byteArrayToImage(Images.mask);
-        public Image<Bgr, Byte> Image_mob1 = byteArrayToImage(Images.mob1);
-        public Image<Bgr, Byte> Image_mobmask1 = byteArrayToImage(Images.mobmask1);
-        public Image<Bgr, Byte> Image_portalenter1 = byteArrayToImage(Images.portalenter1);
-        public Image<Bgr, Byte> Image_portalentermask1 = byteArrayToImage(Images.portalentermask1);
-        public Image<Bgr, Byte> Image_questmarker = byteArrayToImage(Images.questmarker);
-        public Image<Bgr, Byte> Image_red_hp = byteArrayToImage(Images.red_hp);
-        public Image<Bgr, Byte> Image_revive_new = byteArrayToImage(Images.revive_new);
-
-        public Image<Bgr, Byte> Image_death = byteArrayToImage(Images.death);
-        public Image<Bgr, Byte> Image_deathEN = byteArrayToImage(Images.deathEN);
-
-
-        public Image<Bgr, Byte> Image_revive1 = byteArrayToImage(Images.revive1);
-        public Image<Bgr, Byte> Image_reviveEnglish = byteArrayToImage(Images.reviveEnglish);
-
-
-        
-        public static Image<Bgr, Byte> Image_GuardianStone1 = byteArrayToImage(Images.GuardianStone1);
-        public static Image<Bgr, Byte> Image_GuardianStone1Mask = byteArrayToImage(Images.GuardianStone1Mask);
-        public static Image<Bgr, Byte> Image_DestructStone3 = byteArrayToImage(Images.DestructStone3);
-        public static Image<Bgr, Byte> Image_DestructStone3Mask = byteArrayToImage(Images.DestructStone3Mask);
-
     }
 }

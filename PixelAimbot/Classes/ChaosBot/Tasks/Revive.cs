@@ -13,107 +13,117 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private async Task Revive()
+        private async Task Revive(CancellationToken token)
         {
             try
             {
                 if (chBoxRevive.Checked)
                 {
-                   
-                    while (_revive && _floorFight  && _stopp == false )
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    while (_floorFight && _stopp == false)
                     {
+
                         try
                         {
-                          
-                       
-                            try
+                            if (_revive)
                             {
-                              
-                            
-
-                                if (radioGerman.Checked)
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                try
                                 {
-                                    var template = Image_death;
-                                    var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(77, false), ChaosBot.Recalc(366), ChaosBot.Recalc(587, false));
-                                    var screenPrinter = new PrintScreen();
-                                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                                    token.ThrowIfCancellationRequested();
+                                    await Task.Delay(1, token);
+
+                                    if (radioGerman.Checked)
                                     {
-
-                                        var item = detector.GetBest(screenCapture, true);
-                                        if (item.HasValue && _floorFight)
+                                        var template = ImageDeath;
+                                        var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(77, false), ChaosBot.Recalc(366), ChaosBot.Recalc(587, false));
+                                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                                         {
-                                        
-                                            _floorFight = false;
 
-                                            _potions = false;
-                                            DiscordSendMessage("Bot is reviving!");
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                                            VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 7);
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                            _floorFight = true;
+                                            var item = detector.GetBest(screenCapture, true);
+                                            screenCapture.Dispose();
+                                            if (item.HasValue && _floorFight)
+                                            {
+                                                token.ThrowIfCancellationRequested();
+                                                await Task.Delay(1, token);
 
-                                            _potions = false;
+                                                _doUltimateAttack = true;
+                                                _potions = false;
+
+                                                DiscordSendMessage("Bot is reviving!");
+                                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                                VirtualMouse.MoveTo(Recalc(1374), Recalc(467, false), 7);
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                                _doUltimateAttack = false;
+                                                _potions = true;
+                                            }
                                         }
                                     }
-                                }
-                                else if (radioEnglish.Checked)
-                                {
-                                    var template = Image_deathEN;
-                                    var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(75, false), ChaosBot.Recalc(364), ChaosBot.Recalc(549, false));
-                                    var screenPrinter = new PrintScreen();
-                                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                                    else if (radioEnglish.Checked)
                                     {
-
-                                        var item = detector.GetBest(screenCapture, true);
-                                        if (item.HasValue && _floorFight)
+                                        var template = ImageDeathEn;
+                                        var detector = new ScreenDetector(template, null, float.Parse(txtDeath.Text) * 0.01f, ChaosBot.Recalc(1196), ChaosBot.Recalc(75, false), ChaosBot.Recalc(364), ChaosBot.Recalc(549, false));
+                                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                                         {
-                                           
-                                            _floorFight = false;
 
-                                            _potions = false;
-                                            DiscordSendMessage("Bot is reviving!");
-                                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
-                                            VirtualMouse.MoveTo(Recalc(1379), Recalc(429, false), 7);
-                                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
-                                            _floorFight = true;
+                                            var item = detector.GetBest(screenCapture, true);
+                                            screenCapture.Dispose();
+                                            if (item.HasValue && _floorFight)
+                                            {
+                                                token.ThrowIfCancellationRequested();
+                                                await Task.Delay(1, token);
 
-                                            _potions = false;
+                                                _doUltimateAttack = true;
+                                                _potions = false;
+
+                                                DiscordSendMessage("Bot is reviving!");
+                                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "REVIVE!"));
+                                                VirtualMouse.MoveTo(Recalc(1379), Recalc(429, false), 7);
+                                                KeyboardWrapper.PressKey(KeyboardWrapper.VK_LBUTTON);
+
+                                                _doUltimateAttack = false;
+                                                _potions = true;
+                                            }
                                         }
                                     }
-                                }
 
+                                }
+                                catch (AggregateException)
+                                {
+                                    Debug.WriteLine("Expected");
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    Debug.WriteLine("Bug");
+                                }
                             }
-                            catch { }
-                            
-                          
-                            var sleepTime = new Random().Next(450, 555);
-                            await Task.Delay(sleepTime);
                         }
                         catch (AggregateException)
                         {
-                            Console.WriteLine("Expected");
+                            Debug.WriteLine("Expected");
                         }
                         catch (ObjectDisposedException)
                         {
-                            Console.WriteLine("Bug");
+                            Debug.WriteLine("Bug");
                         }
-                        catch
-                        {
-                        }
+                        var sleepTime = new Random().Next(450, 555);
+                        await Task.Delay(sleepTime);
                     }
                 }
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

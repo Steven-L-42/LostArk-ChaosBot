@@ -1,14 +1,14 @@
-﻿using System;
+﻿using DeviceId;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Management;
 using System.Security.Cryptography;
 using System.Text;
 
-
 namespace PixelAimbot.Classes.Misc
 {
-    class HWID
+    internal class HWID
     {
         private static string GetHash(string value)
         {
@@ -40,26 +40,14 @@ namespace PixelAimbot.Classes.Misc
 
         public static string Get()
         {
-            var mbs = new ManagementObjectSearcher("Select ProcessorId From Win32_processor");
-            ManagementObjectCollection mbsList = mbs.Get();
-            string id = "";
-            foreach (ManagementObject mo in mbsList)
-            {
-                id = mo["ProcessorId"].ToString();
-                break;
-            }
 
-            ManagementObjectSearcher moSearcher = new
-            ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            string volumeSerial = "";
-            foreach (ManagementObject wmi_HD in moSearcher.Get())
-            {
-                volumeSerial = wmi_HD["SerialNumber"].ToString();
-                break;
-            }
-            return GetHash(id + volumeSerial);
-
+             var id = new DeviceIdBuilder()
+                    .AddMachineName()
+                    .AddOsVersion()
+                    .AddMacAddress().ToString();
+            return GetHash(id);
         }
+
         public static string GetAsMD5()
         {
             return HWID.CreateMD5(HWID.Get());

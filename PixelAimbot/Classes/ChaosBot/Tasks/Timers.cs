@@ -15,20 +15,19 @@ namespace PixelAimbot
     {
 
 
-        private async Task Floor1Detectiontimer()
+        private async Task Floor1Detectiontimer(CancellationToken token)
         {
             try
             {
                 token.ThrowIfCancellationRequested();
-                _Floor1Detectiontimer++;
-                await Task.Delay(humanizer.Next(10, 240) + 180000, tokenBossUndTimer);
+                await Task.Delay(_humanizer.Next(10, 240) + 180000, token);
 
-                
-                if (_portalIsNotDetected && _Floor1Detectiontimer == 1)
+
+                if (_portalIsNotDetected)
                 {
-                   
+                    token.ThrowIfCancellationRequested();
                     await Task.Delay(1, token);
-                    _portalIsNotDetected = false;
+
 
                     lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "ChaosDungeon Floor 1 Abort!"));
 
@@ -44,39 +43,36 @@ namespace PixelAimbot
                     _potions = false;
                     _floor1 = false;
                     _floor2 = false;
+                    _floor3 = false;
 
-                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
-                    var leave = Task.Run(() => Leavedungeon());
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
+                    var leave = Task.Run(() => Leavedungeon(token));
+                    await Task.WhenAny(leave);
                 }
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
-        public async void Leavetimerfloor1()
+        public async void Leavetimerfloor1(CancellationToken token)
         {
-
-
             try
             {
                 token.ThrowIfCancellationRequested();
-                _Leavetimerfloor1++;
-                await Task.Delay(humanizer.Next(10, 240) + 25000, tokenBossUndTimer);
-                if (_portalIsDetected == true && _Leavetimerfloor1 == 1)
+                await Task.Delay(_humanizer.Next(10, 240) + 25000, token);
+                if (_portalIsDetected == true)
                 {
 
                     _stopp = true;
@@ -90,71 +86,53 @@ namespace PixelAimbot
                     _potions = false;
                     _floor1 = false;
                     _floor2 = false;
+                    _floor3 = false;
                     ChaosAllStucks++;
-                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal..."));
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Enter Portal!"));
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, tokenBossUndTimer);
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
-                    var t12 = Task.Run(() => Leavedungeon());
-                  
+                    await Task.Delay(1, token);
+                    var t12 = Task.Run(() => Leavedungeon(token));
+                    await Task.WhenAny(new[] { t12 });
+
+
                 }
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
-
-        public async void Leavetimerfloor2()
+        
+        public async void Leavetimerfloor2(CancellationToken token)
         {
-
             try
             {
-                if (chBoxLeavetimer.Checked && _stopp == false)
+              
+                if (_stopp == false)
                 {
-                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                    await Task.Delay(humanizer.Next(10, 240) + (int.Parse(txLeaveTimerFloor2.Text) * 1000), tokenBossUndTimer);
+                    _bossKill.ThrowIfCancellationRequested();
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(_humanizer.Next(10, 240) + 240 * 1000, token);
 
-                    _stopp = true;
-                    _portalIsDetected = false;
+                   
+                    _bossKill.ThrowIfCancellationRequested();
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(1, token);
 
-                    _portalIsNotDetected = false;
-                    _floorFight = false;
-                    _searchboss = false;
-                    _revive = false;
-                    _ultimate = false;
-                    _portaldetect = false;
-                    _potions = false;
-                    _floor1 = false;
-                    _floor2 = false;
-                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                    cts = new CancellationTokenSource();
-                    token = cts.Token;
-                    var t12 = Task.Run(() => Leavedungeon());
-                }
-                else
-                {
-                    tokenBossUndTimer.ThrowIfCancellationRequested();
-                    await Task.Delay(humanizer.Next(10, 240) + 240 * 1000, tokenBossUndTimer);
-
-                    if (_stopp == false)
+                    if(_floor3 == false)
                     {
-   
                         _stopp = true;
                         _portalIsDetected = false;
-                        starten = false;
-                        gefunden = false;
+
                         _portalIsNotDetected = false;
                         _floorFight = false;
                         _searchboss = false;
@@ -164,34 +142,144 @@ namespace PixelAimbot
                         _potions = false;
                         _floor1 = false;
                         _floor2 = false;
+                        _floor3 = false;
                         ChaosAllStucks++;
 
-                        lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Failed to Detect Boss Kill..."));
-                        tokenBossUndTimer.ThrowIfCancellationRequested();
-                        await Task.Delay(1, tokenBossUndTimer);
-                        cts = new CancellationTokenSource();
-                        token = cts.Token;
-
-                        var t12 = Task.Run(() => Leavedungeon());
+                        _bossKill.ThrowIfCancellationRequested();
+                        token.ThrowIfCancellationRequested();
+                        var t12 = Task.Run(() => Leavedungeon(token));
+                        await Task.WhenAny(new[] { t12 });
                     }
-                }
+                    else
+                    {
+                        _bossKill.ThrowIfCancellationRequested();
+                        token.ThrowIfCancellationRequested();
 
+                        _stopp = true;
+                        _portalIsDetected = false;
+
+                        _portalIsNotDetected = false;
+                        _floorFight = false;
+                        _searchboss = false;
+                        _revive = false;
+                        _ultimate = false;
+                        _portaldetect = false;
+                        _potions = false;
+                        _floor1 = false;
+                        _floor2 = false;
+                        _floor3 = false;
+                        ChaosAllStucks++;
+
+                        await Task.Delay(_humanizer.Next(10, 240) + 180 * 1000, token);
+                        _bossKill.ThrowIfCancellationRequested();
+                        token.ThrowIfCancellationRequested();
+                        var t12 = Task.Run(() => Leavedungeon(token));
+                        await Task.WhenAny(new[] { t12 });
+                    }
+                   
+                }
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }
         }
 
+
+        public async void DestroyerTimer(CancellationToken token)
+        {
+            try
+            {
+                if (cmbDestroyer.SelectedIndex == 1)
+                {
+                    var Destroyer = Task.Run(() => DestroyerAutoAttack(token), token);
+                }
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(_humanizer.Next(10, 240) + 30000, token);
+               
+                _destroyer = true;
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+
+
+        public async void Floor3BossTimer(CancellationToken BossKill)
+        {
+            try
+            {
+
+                BossKill.ThrowIfCancellationRequested();
+                await Task.Delay(_humanizer.Next(10, 240) + 5000, BossKill);
+                if (Floor3BossGesichtet == false)
+                {
+                    BossKill.ThrowIfCancellationRequested();
+                    gefunden = true;
+                }
+               
+              
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
+
+        public async void DestroyerAutoAttack(CancellationToken token)
+        {
+            try
+            {
+                await Task.Delay(_humanizer.Next(10, 240) + 1, token);
+              
+                lbStatus.Invoke(
+                        (MethodInvoker)(() => lbStatus.Text = "Bot is autoattacking..."));
+                    KeyboardWrapper.AlternateHoldKey(KeyboardWrapper.VK_C,10000);
+                await Task.Delay(_humanizer.Next(10, 240) + 1, token);
+                _doUltimateAttack = false;
+
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Expected");
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.WriteLine("Bug");
+            }
+            catch (Exception ex)
+            {
+                int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                Debug.WriteLine("[" + line + "]" + ex.Message);
+            }
+        }
     }
 }

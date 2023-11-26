@@ -24,7 +24,7 @@ namespace PixelAimbot.Classes.OpenCV
         }
         private List<(Point position, double matchValue)> DetectPortal(Image<Bgr, byte> screenCapture)
         {
-            if (!ChaosBot.isWindowed)
+            if (!ChaosBot.IsWindowed)
             {
                 this._PortalTemplate.Resize(ChaosBot.Recalc(this._PortalTemplate.Size.Width),
                     ChaosBot.Recalc(this._PortalTemplate.Size.Height), Inter.Linear);

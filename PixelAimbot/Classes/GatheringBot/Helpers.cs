@@ -15,28 +15,18 @@ namespace PixelAimbot
             return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
         }
 
-        public Stream ToStream(Image image, ImageFormat format)
-        {
-            var stream = new System.IO.MemoryStream();
-            image.Save(stream, format);
-            stream.Position = 0;
-            return stream;
-        }
-
-
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-        
-        
 
         private void CheckIsDigit(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+
         public void UpdateArea(int x, int y, int width, int height)
         {
             this._x = x;
@@ -46,6 +36,5 @@ namespace PixelAimbot
             btnStart.Enabled = true;
             btnPause.Enabled = true;
         }
-
     }
 }

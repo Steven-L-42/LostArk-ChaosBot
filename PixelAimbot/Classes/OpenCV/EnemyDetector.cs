@@ -29,7 +29,7 @@ namespace PixelAimbot.Classes.OpenCV
 
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
-            if (!ChaosBot.isWindowed)
+            if (!ChaosBot.IsWindowed)
             {
                 this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);

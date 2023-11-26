@@ -1,14 +1,12 @@
-﻿using Emgu.CV.Stitching;
-
-namespace PixelAimbot.Classes.Misc
+﻿namespace PixelAimbot.Classes.Misc
 {
-    public class Alert
+    public static class Alert
     {
-        public static void Show(string msg, frmAlert.enmType type = frmAlert.enmType.Success)
+        public static void Show(string msg, FrmAlert.EnmType type = FrmAlert.EnmType.Success)
         {
-            frmAlert frm = new frmAlert();
+            var frm = new FrmAlert();
             frm.TopMost = true;
-            frm.showAlert(msg,type);
+            frm.ShowAlert(msg,type);
         }
     }
 }

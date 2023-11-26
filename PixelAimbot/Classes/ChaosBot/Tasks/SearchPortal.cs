@@ -13,107 +13,157 @@ namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        private async Task SEARCHPORTAL(CancellationToken tokenDetections)
+        
+        private async Task SEARCHPORTAL(CancellationToken token)
         {
-            try 
+            try
             {
-                tokenDetections.ThrowIfCancellationRequested();
-                await Task.Delay(1, tokenDetections);
+                token.ThrowIfCancellationRequested();
+                await Task.Delay(1, token);
 
                 _portaldetect = false;
 
-                while (_portalIsDetected == true)
-                {
-                    tokenDetections.ThrowIfCancellationRequested();
-                    await Task.Delay(humanizer.Next(10, 240) + 100, tokenDetections);
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                while (_portalIsDetected)
 
-                    var enemyTemplate = Image_portalenter1;
-                    var enemyMask = Image_portalentermask1;
-                    Point screenResolution = new Point(screenWidth, screenHeight);
+                {
+
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(_humanizer.Next(10, 240) + 100, token);
+                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                  
+                    var enemyTemplate = ImagePortalenter1;
+                    var enemyMask = ImagePortalentermask1;
+                    Point screenResolution = new Point(ScreenWidth, ScreenHeight);
 
                     // Main program loop
                     var enemyDetector = new EnemyDetector(enemyTemplate, enemyMask, 0.7f);
-                    var screenPrinter = new PrintScreen();
 
-                    using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                    using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                     {
-                        var enemy = enemyDetector.GetClosestEnemy(screenCapture, false);
+                        var enemy = enemyDetector.GetClosestEnemy(screenCapture);
                         if (enemy.HasValue)
                         {
-                            tokenDetections.ThrowIfCancellationRequested();
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal found..."));
+                            token.ThrowIfCancellationRequested();
+                            if (_redStage >= 1)
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Portal found..."));
+                            }
+                            else
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Portal found..."));
+                            }
+
 
                             CvInvoke.Rectangle(screenCapture,
                                 new Rectangle(new Point(enemy.Value.X, enemy.Value.Y), enemyTemplate.Size),
                                 new MCvScalar(255));
 
-                            double distance_x = (screenWidth - Recalc(296)) / 2;
-                            double distance_y = (screenHeight - Recalc(255, false)) / 2;
+                            double distanceX = (ScreenWidth - Recalc(296)) / 2.0;
+                            double distanceY = (ScreenHeight - Recalc(255, false)) / 2.0;
 
-                            var friend_position = ((enemy.Value.X + distance_x), (enemy.Value.Y + distance_y));
+                            var friendPosition = ((enemy.Value.X + distanceX), (enemy.Value.Y + distanceY));
                             double multiplier = 1;
-                            var friend_position_on_minimap = ((enemy.Value.X), (enemy.Value.Y));
-                            var my_position_on_minimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
+                            var friendPositionOnMinimap = ((enemy.Value.X), (enemy.Value.Y));
+                            var myPositionOnMinimap = ((Recalc(296) / 2), (Recalc(255, false) / 2));
                             var dist = Math.Sqrt(
-                                Math.Pow((my_position_on_minimap.Item1 - friend_position_on_minimap.Item1), 2) +
-                                Math.Pow((my_position_on_minimap.Item2 - friend_position_on_minimap.Item2), 2));
+                                Math.Pow((myPositionOnMinimap.Item1 - friendPositionOnMinimap.Item1), 2) +
+                                Math.Pow((myPositionOnMinimap.Item2 - friendPositionOnMinimap.Item2), 2));
 
                             if (dist < 180)
                             {
-                                multiplier = 1.2;
+                                multiplier = 1.4;
                             }
 
                             double posx;
                             double posy;
-                            if (friend_position.Item1 < (screenWidth / 2))
+                            if (friendPosition.Item1 < (ScreenWidth / 2.0))
                             {
-                                posx = friend_position.Item1 * (2 - multiplier);
+                                posx = friendPosition.Item1 * (2 - multiplier);
                             }
                             else
                             {
-                                posx = friend_position.Item1 * multiplier;
+                                posx = friendPosition.Item1 * multiplier;
                             }
 
-                            if (friend_position.Item2 < (screenHeight / 2))
+                            if (friendPosition.Item2 < (ScreenHeight / 2.0))
                             {
-                                posy = friend_position.Item2 * (2 - multiplier);
+                                posy = friendPosition.Item2 * (2 - multiplier);
                             }
                             else
                             {
-                                posy = friend_position.Item2 * multiplier;
+                                posy = friendPosition.Item2 * multiplier;
                             }
 
                             var absolutePositions = PixelToAbsolute(posx, posy, screenResolution);
-                            tokenDetections.ThrowIfCancellationRequested();
-                            VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
 
+                            //VirtualMouse.MoveTo(Between(absolutePositions.Item1, absolutePositions.Item1),
+                            //          Between(absolutePositions.Item2, absolutePositions.Item2), 10);
+
+                           VirtualMouse.MoveTo(absolutePositions.Item1, absolutePositions.Item2);
+                            if (_redStage >= 1)
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 2: Enter Portal..."));
+                            }
+                            else
+                            {
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Floor 1: Enter Portal..."));
+                            }
+
+
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(_currentMouseButton);
+                            token.ThrowIfCancellationRequested();
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
 
-                            KeyboardWrapper.PressKey(currentMouseButton);
 
-                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
                         }
-                    }
+                        else
+                        {
+                            token.ThrowIfCancellationRequested();
+                            VirtualMouse.MoveTo(((ScreenWidth + _windowX) / 2 + 50), ((ScreenHeight + _windowY) / 2 + 50), 10);
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(_currentMouseButton);
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            token.ThrowIfCancellationRequested();
+                            VirtualMouse.MoveTo(((ScreenWidth + _windowX) / 2 + 50), ((ScreenHeight + _windowY) / 2 + 50), 10);
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(_currentMouseButton);
+                            token.ThrowIfCancellationRequested();
+                            KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                            //VirtualMouse.MoveTo(((screenWidth + windowX) / 2 + 3), ((screenHeight + windowY) / 2 - 11), 10);
 
-                    KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                        }
+
+                        token.ThrowIfCancellationRequested();
+                        KeyboardWrapper.PressKey(KeyboardWrapper.VK_G);
+                        
+                    }
                     Random random = new Random();
                     var sleepTime = random.Next(500, 570);
                     await Task.Delay(sleepTime);
                 }
+
+                _searchSequence = 1;
+
+                await Task.Delay(_humanizer.Next(10, 240) + 8000);
+                _searchboss = true;
+                token.ThrowIfCancellationRequested();
+                var t12 = Task.Run(() => SEARCHBOSS(token));
+                await Task.WhenAny(new[] { t12 });
             }
             catch (AggregateException)
             {
-                Console.WriteLine("Expected");
+                Debug.WriteLine("Expected");
             }
             catch (ObjectDisposedException)
             {
-                Console.WriteLine("Bug");
+                Debug.WriteLine("Bug");
             }
             catch (Exception ex)
             {
-                ExceptionHandler.SendException(ex);
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 Debug.WriteLine("[" + line + "]" + ex.Message);
             }

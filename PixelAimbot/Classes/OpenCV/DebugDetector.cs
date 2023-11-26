@@ -15,7 +15,7 @@ namespace PixelAimbot.Classes.OpenCV
         public Image<Bgr, byte> _enemyTemplate;
         public Image<Bgr, byte> _enemyMask;
         public float _threshold { get; set; } = 0.7f;
-        private readonly Point _myPosition = new Point(ChaosBot.Recalc(150), ChaosBot.Recalc(128, false));
+        private Point _myPosition = new Point(ChaosBot.Recalc(150), ChaosBot.Recalc(128, false));
         private DrawScreenWin _screenDrawer;
         public int rectangleX = 0;
         public int rectangleY = 0;
@@ -40,9 +40,14 @@ namespace PixelAimbot.Classes.OpenCV
         {
             this.method = type;
         }
+
+        public void setMyPosition(Point position)
+        {
+            _myPosition = position;
+        }
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture)
         {
-            if (!ChaosBot.isWindowed)
+            if (!ChaosBot.IsWindowed)
             {
                 this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
                     ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);

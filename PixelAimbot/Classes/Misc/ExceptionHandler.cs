@@ -12,6 +12,7 @@ namespace PixelAimbot.Classes.Misc
         {
             try
             {
+                Debug.WriteLine(ex.ToString());
                 int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                 string filename = (new StackTrace(ex, true)).GetFrame(0).GetMethod().Name;
                 string stacktrace = (new StackTrace(ex, true)).GetFrames().ToString();
@@ -20,7 +21,7 @@ namespace PixelAimbot.Classes.Misc
                 var values = new NameValueCollection
                 {
                     ["username"] = Config.Load().username,
-                    ["filename"] = Methodname ?? GetCallForExceptionThisMethod(MethodBase.GetCurrentMethod(), ex),
+                    ["filename"] = Config.version,
                     ["line"] = line.ToString(),
                     ["message"] = message,
                     ["stacktrace"] = ex.ToString()
@@ -36,7 +37,7 @@ namespace PixelAimbot.Classes.Misc
                 Debug.WriteLine(e.Message);
             }
         }
-        
+
         private static string GetCallForExceptionThisMethod(MethodBase methodBase, Exception e)
         {
             StackTrace trace = new StackTrace(e);

@@ -20,26 +20,33 @@ namespace PixelAimbot.Classes.Misc
         public const byte VK_LBUTTON = 0x01;
         public const byte VK_ALT = 0xA4;
         public const byte VK_TAB = 0x09;
-            
+
         public const byte VK_RBUTTON = 0x02;
         public const byte VK_SPACE = 0x20;
         public const byte VK_ESCAPE = 0x1B;
         public const byte VK_RETURN = 0x0D;
-        public const byte VK_C = 0x43;
-        public const byte VK_B = 0x42;
-        public const byte VK_P = 0x50;
+        public const byte VK_BACK = 0x08;
 
-        public const byte VK_G = 0x47;
-        public const byte VK_L = 0x4C;
-        public const byte VK_Q = 0x51;
-        public const byte VK_W = 0x57;
-        public const byte VK_E = 0x45;
-        public const byte VK_R = 0x52;
         public const byte VK_A = 0x41;
-        public const byte VK_S = 0x53;
+        public const byte VK_B = 0x42;
+        public const byte VK_C = 0x43;
         public const byte VK_D = 0x44;
+        public const byte VK_E = 0x45;
         public const byte VK_F = 0x46;
+        public const byte VK_G = 0x47;
+        public const byte VK_H = 0x48;
+        public const byte VK_I = 0x49;
+        public const byte VK_J = 0x4A;
+        public const byte VK_K = 0x4B;
+        public const byte VK_L = 0x4C;
+        public const byte VK_P = 0x50;
+        public const byte VK_O = 0x4F;
+        public const byte VK_N = 0x4E;
+        public const byte VK_Q = 0x51;
+        public const byte VK_R = 0x52;
+        public const byte VK_S = 0x53;
         public const byte VK_V = 0x56;
+        public const byte VK_W = 0x57;
         public const byte VK_Y = 0x59;
         public const byte VK_Z = 0x5A;
 
@@ -56,7 +63,6 @@ namespace PixelAimbot.Classes.Misc
         public const byte VK_8 = 0x38;
         public const byte VK_9 = 0x39;
 
-        public const byte VK_I = 0x49;
         public string LAYOUTS { get; set; }
 
         [DllImport("user32.dll", SetLastError = true)]
@@ -73,7 +79,7 @@ namespace PixelAimbot.Classes.Misc
         /// </code>
         /// </example>
         /// 
-       
+
 
         public static void HoldKey(byte key, int duration)
         {
@@ -96,7 +102,8 @@ namespace PixelAimbot.Classes.Misc
                 if (key == KeyboardWrapper.VK_LBUTTON)
                 {
                     VirtualMouse.LeftDown();
-                } else if (key == KeyboardWrapper.VK_RBUTTON)
+                }
+                else if (key == KeyboardWrapper.VK_RBUTTON)
                 {
                     VirtualMouse.RightDown();
                 }
@@ -129,12 +136,12 @@ namespace PixelAimbot.Classes.Misc
         /// </code>
         /// </example>
         /// 
-        public static void MultiplePressKey(byte key1,byte key2)
+        public static void MultiplePressKey(byte key1, byte key2)
         {
-                keybd_event(key1, 0, KEY_DOWN_EVENT, 0);
-                keybd_event(key2, 0, KEY_DOWN_EVENT, 0);
-                keybd_event(key2, 0, KEY_UP_EVENT, 0);
-                keybd_event(key1, 0, KEY_UP_EVENT, 0);
+            keybd_event(key1, 0, KEY_DOWN_EVENT, 0);
+            keybd_event(key2, 0, KEY_DOWN_EVENT, 0);
+            keybd_event(key2, 0, KEY_UP_EVENT, 0);
+            keybd_event(key1, 0, KEY_UP_EVENT, 0);
         }
         public static void PressKey(byte key)
         {

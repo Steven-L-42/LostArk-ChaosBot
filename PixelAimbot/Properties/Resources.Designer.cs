@@ -93,16 +93,6 @@ namespace PixelAimbot.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap highscale_logo {
-            get {
-                object obj = ResourceManager.GetObject("highscale_logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap hud {
             get {
                 object obj = ResourceManager.GetObject("hud", resourceCulture);

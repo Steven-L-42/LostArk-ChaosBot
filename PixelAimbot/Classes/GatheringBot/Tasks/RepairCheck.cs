@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
 
 namespace PixelAimbot
@@ -24,7 +23,7 @@ namespace PixelAimbot
                     var template = Image_gatheringRepair;
 
 
-                    var detector = new ScreenDetector(template, null, 0.85f, ChaosBot.Recalc(1456),
+                    var detector = new ScreenDetector(template, null, 0.81f, ChaosBot.Recalc(1456),
                         ChaosBot.Recalc(65, false), ChaosBot.Recalc(13, true, true ), ChaosBot.Recalc(11, false, true));
                     using (_screenCapture = new Bitmap(_screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
                     {
@@ -38,7 +37,6 @@ namespace PixelAimbot
                 }
                 catch (Exception ex)
                 {
-                    ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }

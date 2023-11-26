@@ -5,43 +5,43 @@ using PixelAimbot.Properties;
 
 namespace PixelAimbot
 {
-    public partial class frmAlert : Form
+    public partial class FrmAlert : Form
     {
-        public frmAlert()
+        public FrmAlert()
         {
             InitializeComponent();
         }
         
-        public enum enmAction
+        public enum EnmAction
         {
-            wait,
-            start,
-            close
+            Wait,
+            Start,
+            Close
         }
 
-        public enum enmType
+        public enum EnmType
         {
             Success,
             Warning,
             Error,
             Info
         }
-        private frmAlert.enmAction action;
+        private EnmAction _action;
 
-        private int x, y;
+        private int _x, _y;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            switch(this.action)
+            switch(this._action)
             {
-                case enmAction.wait:
+                case EnmAction.Wait:
                     timer1.Interval = 5000;
-                    action = enmAction.close;
+                    _action = EnmAction.Close;
                     break;
-                case frmAlert.enmAction.start:
+                case EnmAction.Start:
                     this.timer1.Interval = 1;
                     this.Opacity += 0.1;
-                    if (this.x < this.Location.X)
+                    if (this._x < this.Location.X)
                     {
                         this.Left--;
                     }
@@ -49,18 +49,18 @@ namespace PixelAimbot
                     {
                         if (this.Opacity == 1.0)
                         {
-                            action = frmAlert.enmAction.wait;
+                            _action = EnmAction.Wait;
                         }
                     }
                     break;
-                case enmAction.close:
+                case EnmAction.Close:
                     timer1.Interval = 1;
                     this.Opacity -= 0.1;
 
                     this.Left -= 3;
-                    if (base.Opacity == 0.0)
+                    if (Opacity == 0.0)
                     {
-                        base.Close();
+                        Close();
                     }
                     break;
             }
@@ -69,10 +69,10 @@ namespace PixelAimbot
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             timer1.Interval = 1;
-            action = enmAction.close;
+            _action = EnmAction.Close;
         }
 
-        public void showAlert(string msg, enmType type)
+        public void ShowAlert(string msg, EnmType type)
         {
             this.Opacity = 0.0;
             this.StartPosition = FormStartPosition.Manual;
@@ -81,36 +81,36 @@ namespace PixelAimbot
             for (int i = 1; i < 10; i++)
             {
                 fname = "alert" + i.ToString();
-                frmAlert frm = (frmAlert)Application.OpenForms[fname];
+                FrmAlert frm = (FrmAlert)Application.OpenForms[fname];
 
                 if (frm == null)
                 {
                     this.Name = fname;
-                    this.x = Screen.PrimaryScreen.WorkingArea.Width - this.Width + 15;
-                    this.y = this.Height * i + 5 * i;
-                    this.Location = new Point(this.x, this.y);
+                    this._x = Screen.PrimaryScreen.WorkingArea.Width - this.Width + 15;
+                    this._y = this.Height * i + 5 * i;
+                    this.Location = new Point(this._x, this._y);
                     break;
 
                 }
 
             }
-            this.x = Screen.PrimaryScreen.WorkingArea.Width - base.Width - 5;
+            this._x = Screen.PrimaryScreen.WorkingArea.Width - Width - 5;
 
             switch(type)
             {
-                case enmType.Success:
+                case EnmType.Success:
                     this.pictureBox1.Image = Resources.success;
                     this.BackColor = Color.SeaGreen;
                     break;
-                case enmType.Error:
+                case EnmType.Error:
                     this.pictureBox1.Image = Resources.error;
                     this.BackColor = Color.DarkRed;
                     break;
-                case enmType.Info:
+                case EnmType.Info:
                     this.pictureBox1.Image = Resources.info;
                     this.BackColor = Color.RoyalBlue;
                     break;
-                case enmType.Warning:
+                case EnmType.Warning:
                     this.pictureBox1.Image = Resources.warning;
                     this.BackColor = Color.DarkOrange;
                     break;
@@ -120,7 +120,7 @@ namespace PixelAimbot
             this.lblMsg.Text = msg;
 
             this.Show();
-            this.action = enmAction.start;
+            this._action = EnmAction.Start;
             this.timer1.Interval = 1;
             this.timer1.Start();
         }

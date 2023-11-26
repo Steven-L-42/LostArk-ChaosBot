@@ -22,7 +22,7 @@ namespace PixelAimbot.Classes.OpenCV
         public int rectangleHeight = 0;
         public TemplateMatchingType method = TemplateMatchingType.SqdiffNormed;
 
-
+       
         public ScreenDetector(Image<Bgr, byte> enemyTemplate, Image<Bgr, byte> enemyMask, float threshold, int rectangleX, int rectangleY, int rectangleWidth, int rectangleHeight)
         {
             this._enemyMask = enemyMask;
@@ -46,14 +46,14 @@ namespace PixelAimbot.Classes.OpenCV
         }
         private List<(Point position, double matchValue)> DetectEnemies(Image<Bgr, byte> screenCapture, bool rescaleImage = true)
         {
-            if (rescaleImage && !ChaosBot.isWindowed)
+            if (rescaleImage && !ChaosBot.IsWindowed)
             {
                 this._enemyTemplate.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
-                    ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                    ChaosBot.Recalc(this._enemyTemplate.Size.Height, false), Inter.Linear);
                 if (this._enemyMask != null)
                 {
                     this._enemyMask.Resize(ChaosBot.Recalc(this._enemyTemplate.Size.Width),
-                        ChaosBot.Recalc(this._enemyTemplate.Size.Height), Inter.Linear);
+                        ChaosBot.Recalc(this._enemyTemplate.Size.Height, false), Inter.Linear);
                 }
             }
 
@@ -65,7 +65,6 @@ namespace PixelAimbot.Classes.OpenCV
             Point minPoint = new Point();
             Point maxPoint = new Point();
             CvInvoke.MatchTemplate(minimap, this._enemyTemplate, res, method, this._enemyMask);
-
             int h = this._enemyTemplate.Size.Height;
             int w = this._enemyTemplate.Size.Width;
 
@@ -91,6 +90,8 @@ namespace PixelAimbot.Classes.OpenCV
                     enemies.Add((minPoint, 1 - minVal));
                 }
             }
+            minimap.Dispose();
+            screenCapture.Dispose();
 
             return enemies;
         }

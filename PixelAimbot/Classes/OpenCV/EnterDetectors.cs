@@ -25,7 +25,7 @@ namespace PixelAimbot.Classes.OpenCV
         
         private List<(Point position, double matchValue)> DetectEnter(Image<Bgr, byte> screenCapture)
         {
-            if (!ChaosBot.isWindowed)
+            if (!ChaosBot.IsWindowed)
             {
                 this._EnterTemplate.Resize(ChaosBot.Recalc(this._EnterTemplate.Size.Width),
                     ChaosBot.Recalc(this._EnterTemplate.Size.Height), Inter.Linear);

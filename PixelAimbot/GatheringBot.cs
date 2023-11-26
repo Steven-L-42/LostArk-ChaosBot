@@ -16,7 +16,7 @@ namespace PixelAimbot
 {
     public partial class GatheringBot : Form
     {
-    
+
         public GatheringBot()
         {
             InitializeComponent();
@@ -41,26 +41,30 @@ namespace PixelAimbot
             {
                 conf = Config.Load();
                 DiscordTask = DiscordBotAsync(conf.discorduser, _discordToken.Token);
-            } catch {}
+            }
+            catch { }
 
             label15.Text = Config.version;
             int FirstHotkeyId = 1;
-            int FirstHotKeyKey = (int) Keys.F9;
+            int FirstHotKeyKey = (int)Keys.F9;
             // Register the "F9" hotkey
             UnregisterHotKey(this.Handle, FirstHotkeyId);
-            
+
             Boolean F9Registered = RegisterHotKey(
                 this.Handle, FirstHotkeyId, 0x0000, FirstHotKeyKey
             );
 
             // Repeat the same process but with F10
             int SecondHotkeyId = 2;
-            int SecondHotKeyKey = (int) Keys.F10;
-            UnregisterHotKey( this.Handle, SecondHotKeyKey);
+            int SecondHotKeyKey = (int)Keys.F10;
+            UnregisterHotKey(this.Handle, SecondHotKeyKey);
 
             Boolean F10Registered = RegisterHotKey(
                 this.Handle, SecondHotkeyId, 0x0000, SecondHotKeyKey
             );
+            
+            
+            
             // 4. Verify if both hotkeys were succesfully registered, if not, show message in the console
             if (!F9Registered)
             {
@@ -73,11 +77,6 @@ namespace PixelAimbot
                 _cts.Cancel();
             }
         }
-
-
-
-      
-
         private void btnPause_Click(object sender, EventArgs e)
 
         {
@@ -93,7 +92,7 @@ namespace PixelAimbot
                 FormMinimized.sw.Reset();
                 this.Show();
                 this.TopMost = true;
-                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "STOPPED!"));
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
             }
         }
 
@@ -116,13 +115,13 @@ namespace PixelAimbot
                     this.Hide();
                     _checkEnergy = true;
                     _minigameFound = false;
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token),token);
+                    var t1 = Task.Run(() => Start(token), token);
                     if (chBoxAutoBuff.Checked == true)
                     {
                         _buff = true;
@@ -134,16 +133,16 @@ namespace PixelAimbot
 
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
+                        var logout = Task.Run(() => LOGOUTTIMER(token), token);
                     }
                     else
                     {
                         _logout = false;
                     }
 
-                    await Task.WhenAny(new[] {t1});
+                    await Task.WhenAny(new[] { t1 });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
@@ -152,7 +151,7 @@ namespace PixelAimbot
             }
         }
 
-        
+
 
         private void lbClose_Click(object sender, EventArgs e)
         {
@@ -163,22 +162,6 @@ namespace PixelAimbot
         public void FishBot_Load(object sender, EventArgs e)
         {
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
-
-
-            txPQ.Text = Properties.Settings.Default.txPQ;
-            txPW.Text = Properties.Settings.Default.txPW;
-            txPE.Text = Properties.Settings.Default.txPE;
-            txPR.Text = Properties.Settings.Default.txPR;
-            txPA.Text = Properties.Settings.Default.txPA;
-            txPS.Text = Properties.Settings.Default.txPS;
-            txPD.Text = Properties.Settings.Default.txPD;
-            txPF.Text = Properties.Settings.Default.txPF;
-
-
-            chBoxAutoRepair.Checked = Properties.Settings.Default.chBoxAutoRepair;
-
-            chBoxChannelSwap.Checked = Properties.Settings.Default.chBoxChannelSwap;
-            chBoxAutoBuff.Checked = Properties.Settings.Default.chBoxSaveAll;
         }
 
         private void FishBot_MouseDown(object sender, MouseEventArgs e)
@@ -216,12 +199,12 @@ namespace PixelAimbot
             FormMinimized.labelMinimizedState.Text = lbStatus.Text;
         }
 
-        
+
 
         private void buttonSelectArea_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Alert.Show("Submit with Enter or Doubleclick\r\nto selected area", frmAlert.enmType.Info);
+            Alert.Show("Submit with Enter or Doubleclick\r\nto selected area", FrmAlert.EnmType.Info);
             SelectArea form1 = new SelectArea(false);
             form1.InstanceRef = this;
             form1.Show();
@@ -235,7 +218,7 @@ namespace PixelAimbot
             _discordBotIsRun = false;
             UnregisterHotKey(this.Handle, 1);
             UnregisterHotKey(this.Handle, 2);
-            
+
             if (Application.OpenForms.OfType<PixelAimbot.ChaosBot>().Count() == 1)
                 Application.OpenForms.OfType<PixelAimbot.ChaosBot>().First().Close();
 
@@ -247,7 +230,7 @@ namespace PixelAimbot
 
         private void buttonSetup_Click(object sender, EventArgs e)
         {
-            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Bot"));
+            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Setup Bot"));
 
             var processName = Process.GetProcessesByName("LostArk");
             if (processName.Length == 1)
@@ -257,8 +240,8 @@ namespace PixelAimbot
             }
 
             Thread.Sleep(500);
-            var template = ChaosBot.byteArrayToImage(PixelAimbot.Images.gathering);
-            var mask = ChaosBot.byteArrayToImage(PixelAimbot.Images.gathering);
+            var template = ChaosBot.ByteArrayToImage(PixelAimbot.Images.gathering);
+            var mask = ChaosBot.ByteArrayToImage(PixelAimbot.Images.gathering);
 
 
             var detector = new ScreenDetector(template, mask, 0.75f, ChaosBot.Recalc(550),
@@ -290,7 +273,7 @@ namespace PixelAimbot
             VirtualMouse.MoveTo(ChaosBot.Recalc(799), ChaosBot.Recalc(998, false), 5);
             KeyboardWrapper.KeyUp(KeyboardWrapper.VK_LBUTTON);
             KeyboardWrapper.PressKey(KeyboardWrapper.VK_ESCAPE);
-            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Setup Done"));
+            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Setup Done"));
 
 
             handle = Process.GetCurrentProcess().MainWindowHandle;
@@ -305,9 +288,9 @@ namespace PixelAimbot
 
         private void checkBoxMiniGame_CheckedChanged(object sender, EventArgs e)
         {
-            if (ChaosBot.screenWidth != 1920)
+            if (ChaosBot.ScreenWidth != 1920)
             {
-                Alert.Show("Only working on 1920x1080!", frmAlert.enmType.Error);
+                Alert.Show("Only working on 1920x1080!", FrmAlert.EnmType.Error);
             }
         }
 
@@ -330,31 +313,85 @@ namespace PixelAimbot
                     this.Hide();
                     _checkEnergy = true;
                     _minigameFound = false;
-                    lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Bot is starting..."));
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
                     _start = true;
                     _stop = true;
                     _cts = new CancellationTokenSource();
                     var token = _cts.Token;
 
-                    var t1 = Task.Run(() => Start(token),token);
+                    var t1 = Task.Run(() => Start(token), token);
                     if (chBoxLOGOUT.Checked == true && _start == true)
                     {
-                        var logout = Task.Run(() => LOGOUTTIMER(token),token);
+                        var logout = Task.Run(() => LOGOUTTIMER(token), token);
                     }
                     else
                     {
                         _logout = false;
                     }
 
-                    await Task.WhenAny(new[] {t1});
+                    await Task.WhenAny(new[] { t1 });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ExceptionHandler.SendException(ex);
                     int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
                     Debug.WriteLine("[" + line + "]" + ex.Message);
                 }
             }
+        }
+
+        private async void buttonStartLopang_Click(object sender, EventArgs e)
+        {
+            if (_startLopang == false)
+            { 
+                try
+                {
+                    lopangCharacters.Clear();
+                    lopangCharacters.Add(new Character() { characterPlace = 1, activated = chbCharacter1.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 2, activated = chbCharacter2.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 3, activated = chbCharacter3.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 4, activated = chbCharacter4.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 5, activated = chbCharacter5.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 6, activated = chbCharacter6.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 7, activated = chbCharacter7.Checked});
+                    lopangCharacters.Add(new Character() { characterPlace = 8, activated = chbCharacter8.Checked});
+                    
+                    
+                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Bot is starting..."));
+                    _startLopang = true;
+                    _stopLopang = true;
+                    _cts = new CancellationTokenSource();
+                    var token = _cts.Token;
+
+                    var t1 = Task.Run(() => StartLopang(token), token);
+                
+                    await Task.WhenAny(new[] { t1 });
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler.SendException(ex);
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                }
+            } 
+        }
+
+        private void buttonStopLopang_Click(object sender, EventArgs e)
+        {
+            if (_stopLopang == true)
+            {
+                _cts.Cancel();
+                
+                _startLopang = false;
+                _stopLopang = false;
+                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "STOPPED!"));
+            }
+        }
+
+        private void buttonLopangGuide_Click(object sender, EventArgs e)
+        {
+            frmGuideLopang lopangGuide = new frmGuideLopang();
+            lopangGuide.Show();
         }
     }
 }

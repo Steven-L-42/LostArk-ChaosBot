@@ -15,10 +15,10 @@ using PixelAimbot.Classes.Misc;
 namespace PixelAimbot
 {
     partial class GatheringBot
-    { 
+    {
         public async Task DiscordBotAsync(string discordUsername, CancellationToken token)
         {
-            
+
             HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
             var webclient = new WebClient();
             webclient.CachePolicy = noCachePolicy;
@@ -32,15 +32,15 @@ namespace PixelAimbot
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    await Task.Delay(1, token); 
+                    await Task.Delay(1, token);
                     using (webclient)
                     {
                         var text = await webclient.UploadStringTaskAsync("https://admin.symbiotic.link/api/getMessages", discordUsername);
-                        
+
                         values["response"] = "";
                         if (text.Contains("message"))
                         {
-                            Alert.Show(text.Split(':')[1], frmAlert.enmType.Info);
+                            Alert.Show(text.Split(':')[1], FrmAlert.EnmType.Info);
                         }
                         if (text.Contains("start"))
                         {
@@ -48,7 +48,7 @@ namespace PixelAimbot
                             {
                                 btnStart_Click(null, null);
                                 values["response"] = "Bot started";
-                                
+
                             }
                             else
                             {
@@ -60,7 +60,7 @@ namespace PixelAimbot
                         {
                             if (_stop)
                             {
-                                Invoke((MethodInvoker) (() => btnPause_Click(null, null)));
+                                Invoke((MethodInvoker)(() => btnPause_Click(null, null)));
                                 _cts.Cancel();
                                 values["response"] = "Bot stopped!";
                             }
@@ -79,7 +79,7 @@ namespace PixelAimbot
                                             FormMinimized.sw.Elapsed.Seconds.ToString("D2"));
                             values["response"] = sb.ToString();
                         }
-                        
+
 
                         if (text.Contains("inv"))
                         {
@@ -87,8 +87,8 @@ namespace PixelAimbot
                             await Task.Delay(humanizer.Next(10, 240) + 100);
                             var picture = new PrintScreen();
                             var screen = picture.CaptureScreen();
-                            
-                                
+
+
                             using (MemoryStream m = new MemoryStream())
                             {
                                 CropImage(screen,
@@ -97,7 +97,7 @@ namespace PixelAimbot
                                 byte[] imageBytes = m.ToArray();
 
                                 // Convert byte[] to Base64 String
-                                values["response"] =   Convert.ToBase64String(imageBytes);
+                                values["response"] = Convert.ToBase64String(imageBytes);
                             }
                             KeyboardWrapper.PressKey(KeyboardWrapper.VK_I);
                         }
@@ -105,21 +105,21 @@ namespace PixelAimbot
                         if (text.Contains("screen"))
                         {
                             var picture = new PrintScreen();
-                                
+
                             using (MemoryStream m = new MemoryStream())
                             {
                                 picture.CaptureScreen().Save(m, System.Drawing.Imaging.ImageFormat.Jpeg);
                                 byte[] imageBytes = m.ToArray();
 
-                                values["response"] =   Convert.ToBase64String(imageBytes);
+                                values["response"] = Convert.ToBase64String(imageBytes);
                             }
                         }
 
                         if (values["response"] != "")
                         {
-                            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
+                            webclient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
                             webclient.UploadValues(new Uri("https://admin.symbiotic.link/api/respondMessage"), "POST", values);
-                            
+
                         }
                     }
                 }

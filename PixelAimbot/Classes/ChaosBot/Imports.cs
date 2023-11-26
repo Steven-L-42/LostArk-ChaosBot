@@ -36,7 +36,10 @@ namespace PixelAimbot
                         break;
 
                     case 2:
-                        btnPause_Click(null, null);
+                        for (var i = 0; i < 10; i++)
+                        {
+                            btnPause_Click(null, null);
+                        }
 
                         break;
                 }
@@ -50,14 +53,14 @@ namespace PixelAimbot
 
         private IntPtr handle;
 
-      
+  
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd,
-            int Msg, int wParam, int lParam);
+            int msg, int wParam, int lParam);
 
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();

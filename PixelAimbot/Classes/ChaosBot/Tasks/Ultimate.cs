@@ -15,65 +15,96 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                while (_ultimate && _floorFight && _stopp == false )
+                while (_ultimate && _floorFight && _stopp == false)
                 {
                     try
                     {
-                        if (chBoxBard.Checked && _bard)
-                        {
-                            _doUltimateAttack = true;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            await Task.Delay(1000);
-                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
 
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+
+                        if (cmbBard.InvokeRequired)
+                        {
+                            cmbBard.Invoke(new Action(() =>
+                            {
+                                if (cmbBard.SelectedIndex == 1 && _bard ||
+                                    cmbBard.SelectedIndex == 2 && _bard)
+                                {
+                                    _doUltimateAttack = true;
+                                    token.ThrowIfCancellationRequested();
+                             
+                                    if (cmbBard.SelectedIndex == 1 || cmbBard.SelectedIndex == 2)
+                                    {
+                                       
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                    }
+
+                                    if (cmbBard.SelectedIndex == 2)
+                                    {
+                                        Task.Delay(_humanizer.Next(10, 240) + 1000, token).Wait();
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                    }
+
+                                    lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Bard try to heal..."));
+
+                                }
+                            }));
                         }
 
-                        if (chBoxGunlancer.Checked && _gunlancer ||
-                            chBoxGunlancer2.Checked && _gunlancer)
+                        if (cmbGunlancer.InvokeRequired)
                         {
-                            _doUltimateAttack = true;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            await Task.Delay(1000);
-                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
-                            _gunlancer = false;
+                            cmbGunlancer.Invoke(new Action(() =>
+                            {
+                                if (cmbGunlancer.SelectedIndex == 1 && _gunlancer ||
+                                    cmbGunlancer.SelectedIndex == 2 && _gunlancer)
+                                {
+                                    _doUltimateAttack = true;
 
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Gunlancer Ultimate"));
+                                    Task.Delay(1000, token).Wait();
+                                    KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                    _gunlancer = false;
+
+                                    lbStatus.Invoke((MethodInvoker) (() =>
+                                        lbStatus.Text = "Activate: Gunlancer Ultimate"));
+                                }
+                            }));
                         }
+
+
 
                         if (chBoxY.Checked && _shadowhunter)
                         {
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000); 
-                            object d = Pixel.PixelSearch(Recalc(982), Recalc(1014, false), Recalc(1000), Recalc(1029, false),
+                            await Task.Delay(1000, token);
+                            object d = Pixel.PixelSearch(Recalc(982), Recalc(1014, false), Recalc(1000),
+                                Recalc(1029, false),
                                 0xFFA0FF, 20);
 
                             if (d.ToString() != "0")
                             {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _shadowhunter = false;
-                                _Q = false;
-                                _W = false;
-                                _E = false;
-                                _R = false;
-                                _A = false;
-                                _S = false;
-                                _D = false;
-                                _F = false;
+                                _q = false;
+                                _w = false;
+                                _e = false;
+                                _r = false;
+                                _a = false;
+                                _s = false;
+                                _d = false;
+                                _f = false;
                                 GetSkillQ();
                                 GetSkillW();
                                 GetSkillE();
                                 GetSkillR();
                                 GetSkillA();
                                 GetSkillS();
-                                Task Deathblade = Task.Run(() => ShadowhunterSecond(tokenBossUndTimer), tokenBossUndTimer);
+                                Task Deathblade = Task.Run(() => ShadowhunterSecond(token), token);
                                 lbStatus.Invoke(
                                     (MethodInvoker) (() => lbStatus.Text = "Activate: Shadowhunter Ultimate"));
-                               
+
                             }
                         }
 
@@ -82,80 +113,167 @@ namespace PixelAimbot
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
+                            await Task.Delay(1000, token);
                             object d = Pixel.PixelSearch(Recalc(892), Recalc(1027, false), Recalc(934),
                                 Recalc(1060, false), 0x75D6FF, 10);
                             if (d.ToString() != "0")
                             {
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _paladin = false;
-
+                                Task Deathblade = Task.Run(() => PaladinTimer(token), token);
                                 lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Paladin Ultimate"));
                             }
                         }
 
-                        if (chBoxGlavier.Checked && _Glavier)
+                        if (chBoxGlavier.Checked && _glavier)
                         {
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
+                            await Task.Delay(1000, token);
                             object d = Pixel.PixelSearch(Recalc(993), Recalc(971, false), Recalc(1005),
                                 Recalc(981, false), 0xF2F2F2, 10);
                             if (d.ToString() != "0")
                             {
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
-                                _Glavier = false;
+                                _glavier = false;
 
-                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Glavier Ultimate"));
+                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Glavier Ultimate"));
                             }
                         }
 
-                        if (chBoxDeathblade.Checked && _deathblade ||
-                            chBoxDeathblade2.Checked && _deathblade)
+                        if (cmbDeathblade.InvokeRequired)
                         {
-                            _doUltimateAttack = true;
-                            token.ThrowIfCancellationRequested();
-                            await Task.Delay(1, token);
-                            await Task.Delay(1000);
-                            object d = Pixel.PixelSearch(Recalc(986), Recalc(1029, false), Recalc(1017),
-                                Recalc(1035, false), 0xDAE7F3, 10);
-                            if (d.ToString() != "0")
+                            cmbDeathblade.Invoke(new Action(() =>
                             {
-
-                                KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
-                                _deathblade = false;
-
-                                if (chBoxDeathblade2.Checked)
+                                if (cmbDeathblade.SelectedIndex == 1 && _deathblade ||
+                                    cmbDeathblade.SelectedIndex == 2 && _deathblade ||
+                                    cmbDeathblade.SelectedIndex == 3 && _deathblade)
                                 {
-                                    await Task.Delay(humanizer.Next(10, 240) + 500, token);
-                                    KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                                    KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
-                                }
+                                    _doUltimateAttack = true;
+                                    token.ThrowIfCancellationRequested();
+                                    Task.Delay(1, token).Wait();
+                                    Task.Delay(1000, token).Wait();
+                                    object d = Pixel.PixelSearch(Recalc(986), Recalc(1029, false), Recalc(1017),
+                                        Recalc(1035, false), 0xDAE7F3, 10);
+                                    if (d.ToString() != "0")
+                                    {
 
-                                var Deathblade = Task.Run(() => DeathbladeSecondPress(token),token);
-                                lbStatus.Invoke((MethodInvoker) (() =>
-                                    lbStatus.Text = "Activate: Deathblade Ultimate"));
-                            }
+                                        KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                        _deathblade = false;
+                                        token.ThrowIfCancellationRequested();
+                                        //    await Task.Delay(1, token);
+                                        if (cmbDeathblade.SelectedIndex == 2 || cmbDeathblade.SelectedIndex == 3)
+                                        {
+                                            Task.Delay(_humanizer.Next(10, 240) + 500, token).Wait();
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                        }
+
+                                        if (cmbDeathblade.SelectedIndex == 1 || cmbDeathblade.SelectedIndex == 3)
+                                        {
+                                            var Deathblade = Task.Run(() => DeathbladeSecondPress(token), token);
+                                        }
+
+                                        lbStatus.Invoke((MethodInvoker) (() =>
+                                            lbStatus.Text = "Activate: Deathblade Ultimate"));
+                                    }
+                                }
+                            }));
                         }
+                        
+                        if (cmbDestroyer.InvokeRequired)
+                        {
+                            cmbDestroyer.Invoke(new Action(() =>
+                            {
+                                if (cmbDestroyer.SelectedIndex == 1 && _destroyer ||
+                                    cmbDestroyer.SelectedIndex == 2 && _destroyer)
+                                {
+
+                                    token.ThrowIfCancellationRequested();
+                                    Task.Delay(1, token).Wait();
+                                    Task.Delay(1000, token).Wait();
+                                    object d = Pixel.PixelSearch(Recalc(947), Recalc(970, false), Recalc(979),
+                                        Recalc(999, false), 0x54C8CD, 10);
+
+                                    //bool DestroyerCounted = false;
+
+                                    if (d.ToString() != "0")
+                                    {
+                                        _destroyer = false;
+                                        for (int i = 0; i <= 5; i++)
+                                        {
+                                            if (d.ToString() != "0")
+                                            {
+                                                _destroyerCounter++;
+                                                //DestroyerCounted = true;
+                                            }
+
+                                            Task.Delay(1000, token).Wait();
+                                        }
+
+                                        if (_destroyerCounter >= 6)
+                                        {
+                                            _doUltimateAttack = true;
+
+                                            _destroyer = false;
+                                            token.ThrowIfCancellationRequested();
+                                            Task.Delay(1, token).Wait(token);
+                                            Task.Delay(1000, token).Wait(token);
+                                            KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+
+
+                                            token.ThrowIfCancellationRequested();
+                                            Task.Delay(1, token).Wait(token);
+                                            if (cmbDestroyer.SelectedIndex == 2)
+                                            {
+                                                Task.Delay(_humanizer.Next(10, 240) + 1000, token).Wait(token);
+                                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                                KeyboardWrapper.PressKey(UltimateKey(txBoxUltimateKey.Text));
+                                            }
+
+                                            if (cmbDestroyer.SelectedIndex == 1 || cmbDestroyer.SelectedIndex == 2)
+                                            {
+                                                var Destroyer = Task.Run(() => DestroyerTimer(token), token);
+                                            }
+
+                                            lbStatus.Invoke((MethodInvoker) (() =>
+                                                lbStatus.Text = "Activate: Destroyer Ultimate"));
+                                        }
+                                        else if (_destroyerCounter < 6)
+                                        {
+                                            _destroyerCounter = 0;
+                                            _destroyer = true;
+                                        }
+
+                                    }
+                                }
+                            }));
+                        }
+
 
                         if (chBoxSharpshooter.Checked && _sharpshooter)
                         {
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
+                            await Task.Delay(1000, token);
                             object d = Pixel.PixelSearch(Recalc(1006), Recalc(1049, false), Recalc(1019),
                                 Recalc(1068, false), 0x09B4EB, 10);
                             if (d.ToString() != "0")
                             {
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sharpshooter = false;
-
-                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token),token);
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
+                                var Sharpshooter = Task.Run(() => SharpshooterSecondPress(token), token);
 
                                 lbStatus.Invoke(
-                                    (MethodInvoker) (() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
+                                    (MethodInvoker)(() => lbStatus.Text = "Activate: Sharpshooter Ultimate"));
                             }
                         }
 
@@ -164,15 +282,17 @@ namespace PixelAimbot
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
+                            await Task.Delay(1000, token);
                             object d = Pixel.PixelSearch(Recalc(1006), Recalc(1038, false), Recalc(1010),
                                 Recalc(1042, false), 0x8993FF, 10);
                             if (d.ToString() != "0")
                             {
+                                token.ThrowIfCancellationRequested();
+                                await Task.Delay(1, token);
                                 KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                                 _sorcerer = false;
 
-                                lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Sorcerer Ultimate"));
                             }
                         }
 
@@ -181,13 +301,23 @@ namespace PixelAimbot
                             _doUltimateAttack = true;
                             token.ThrowIfCancellationRequested();
                             await Task.Delay(1, token);
-                            await Task.Delay(1000);
+                            await Task.Delay(1000, token);
                             KeyboardWrapper.AlternateHoldKey(UltimateKey(txBoxUltimateKey.Text), 2000);
                             _soulfist = false;
 
-                            lbStatus.Invoke((MethodInvoker) (() => lbStatus.Text = "Activate: Soulfist Ultimate"));
+                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Soulfist Ultimate"));
                         }
-                        _doUltimateAttack = false;
+
+                        if (cmbDestroyer.InvokeRequired)
+                        {
+                            cmbDestroyer.Invoke(new Action(() =>
+                            {
+                                if (cmbDestroyer.SelectedIndex != 1 || cmbDestroyer.SelectedIndex != 2)
+                                {
+                                    _doUltimateAttack = false;
+                                }
+                            }));
+                        }
                     }
                     catch (AggregateException)
                     {

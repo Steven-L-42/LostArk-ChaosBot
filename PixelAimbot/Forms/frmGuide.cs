@@ -2,8 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-
-
 namespace PixelAimbot
 {
     public partial class frmGuide : Form
@@ -55,7 +53,6 @@ namespace PixelAimbot
 
         private void lbClose_Click(object sender, EventArgs e)
         {
-           
             this.Hide();
         }
 

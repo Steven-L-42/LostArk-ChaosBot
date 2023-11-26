@@ -18,7 +18,7 @@ namespace PixelAimbot
     {
         public void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            healthPercent = HealthSlider1.Value;
+            HealthPercent = HealthSlider1.Value;
             double distanceFromMin = (HealthSlider1.Value - HealthSlider1.Minimum);
             double sliderRange = (HealthSlider1.Maximum - HealthSlider1.Minimum);
             double sliderPercent = 100 * (distanceFromMin / sliderRange);
@@ -32,26 +32,28 @@ namespace PixelAimbot
             {
                 token.ThrowIfCancellationRequested();
                 await Task.Delay(1, token);
-                while (_potions && _floorFight && _stopp == false )
+                while (_floorFight && _stopp == false)
                 {
                     try
                     {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1, token);
-                        object health10 = Pixel.PixelSearch(Recalc(ChaosBot.healthPercent - 10), Recalc(962, false), Recalc(ChaosBot.healthPercent),
-                            Recalc(968, false), 0x050405, 15); 
-                        if (health10.ToString() != "0")
+                        if (_potions)
                         {
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
-                            KeyboardWrapper.PressKey(currentHealKey);
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                            object health10 = Pixel.PixelSearch(Recalc(ChaosBot.HealthPercent - 10), Recalc(962, false), Recalc(ChaosBot.HealthPercent),
+                                Recalc(968, false), 0x050405, 15);
+                            if (health10.ToString() != "0")
+                            {
+                                KeyboardWrapper.PressKey(_currentHealKey);
+                                KeyboardWrapper.PressKey(_currentHealKey);
+                                KeyboardWrapper.PressKey(_currentHealKey);
+                                KeyboardWrapper.PressKey(_currentHealKey);
+                                KeyboardWrapper.PressKey(_currentHealKey);
 
 
-                            lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion..."));
+                                lbStatus.Invoke((MethodInvoker)(() => lbStatus.Text = "Activate: Heal-Potion..."));
+                            }
                         }
-
                     }
                     catch (AggregateException)
                     {
@@ -71,8 +73,6 @@ namespace PixelAimbot
                     Random random = new Random();
                     var sleepTime = random.Next(500, 570);
                     await Task.Delay(sleepTime);
-                   
-
                 }
             }
             catch (AggregateException)

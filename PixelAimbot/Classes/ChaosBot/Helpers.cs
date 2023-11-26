@@ -12,25 +12,43 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Newtonsoft.Json.Linq;
 using PixelAimbot.Classes.Misc;
 using PixelAimbot.Classes.OpenCV;
+using Timer = System.Timers.Timer;
 
 namespace PixelAimbot
 {
     partial class ChaosBot
     {
-        
+
         private PrintScreen printScreenPicture = new PrintScreen();
         private void ChangeSkillSet(object sender, EventArgs e)
         {
-            if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" &&
+            if(comboBox1.SelectedIndex == 2) // AZERTY
+            {
+                if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" &&
                 txPW.Text != "" && txPE.Text != "" && txPR.Text != "")
-                _skills.skillset = new Dictionary<byte, int>
+                    _skills.skillset = new Dictionary<byte, int>
+                {
+                    {KeyboardWrapper.VK_A, int.Parse(txPA.Text)},
+                    {KeyboardWrapper.VK_S, int.Parse(txPS.Text)},
+                    {KeyboardWrapper.VK_D, int.Parse(txPD.Text)},
+                    {KeyboardWrapper.VK_F, int.Parse(txPF.Text)},
+                    {KeyboardWrapper.VK_Q, int.Parse(txPQ.Text)},
+                    {KeyboardWrapper.VK_Z, int.Parse(txPW.Text)}, // AZERTY HAT Z MIT DRIN
+                    {KeyboardWrapper.VK_E, int.Parse(txPE.Text)},
+                    {KeyboardWrapper.VK_R, int.Parse(txPR.Text)}
+                }.ToList();
+            }
+            else // NORMAL
+            {
+                if (txPA.Text != "" && txPS.Text != "" && txPD.Text != "" && txPF.Text != "" && txPQ.Text != "" &&
+               txPW.Text != "" && txPE.Text != "" && txPR.Text != "")
+                    _skills.skillset = new Dictionary<byte, int>
                 {
                     {KeyboardWrapper.VK_A, int.Parse(txPA.Text)},
                     {KeyboardWrapper.VK_S, int.Parse(txPS.Text)},
@@ -41,13 +59,15 @@ namespace PixelAimbot
                     {KeyboardWrapper.VK_E, int.Parse(txPE.Text)},
                     {KeyboardWrapper.VK_R, int.Parse(txPR.Text)}
                 }.ToList();
+            }
+            
         }
 
         private void CheckIsDigit(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-
+       
         public static string ReadArea(Bitmap screenCapture, int x, int y, int width, int height, string whitelist = "")
         {
             /*tess.Configuration.EngineMode = TesseractEngineMode.TesseractAndLstm;
@@ -84,29 +104,26 @@ namespace PixelAimbot
 */
             return null;
         }
-       
-        public  static Bitmap SetGrayscale(Bitmap img)
+
+        public static Bitmap SetGrayscale(Bitmap img)
         {
-    
-            Bitmap temp = (Bitmap)img;
-            Color c;
             for (int i = 0; i < img.Width; i++)
             {
                 for (int j = 0; j < img.Height; j++)
                 {
-                    c = img.GetPixel(i, j);
+                    var c = img.GetPixel(i, j);
                     byte gray = (byte)(.299 * c.R + .587 * c.G + .114 * c.B);
-    
+
                     img.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
                 }
             }
-            return (Bitmap)img;
-    
+            return img;
+
         }
-        
+
         public static Bitmap RemoveNoise(Bitmap bmap)
         {
-    
+
             for (var x = 0; x < bmap.Width; x++)
             {
                 for (var y = 0; y < bmap.Height; y++)
@@ -118,16 +135,16 @@ namespace PixelAimbot
                         bmap.SetPixel(x, y, Color.White);
                 }
             }
-    
+
             return bmap;
         }
-        private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider Generator = new RNGCryptoServiceProvider();
 
         public static int Between(int minimumValue, int maximumValue)
         {
             byte[] randomNumber = new byte[1];
 
-            _generator.GetBytes(randomNumber);
+            Generator.GetBytes(randomNumber);
 
             double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
 
@@ -141,7 +158,7 @@ namespace PixelAimbot
 
             double randomValueInRange = Math.Floor(multiplier * range);
 
-            return (int) (minimumValue + randomValueInRange);
+            return (int)(minimumValue + randomValueInRange);
         }
 
         private string translateKey(int key)
@@ -241,6 +258,7 @@ namespace PixelAimbot
                 case KeyboardWrapper.VK_R:
                     cooldownDuration = int.Parse(txR.Text);
                     break;
+
             }
 
             return cooldownDuration;
@@ -248,8 +266,8 @@ namespace PixelAimbot
 
         public static (int, int) PixelToAbsolute(double x, double y, Point screenResolution)
         {
-            int newX = (int) (x); // / screenResolution.X * 65535);
-            int newY = (int) (y); // / screenResolution.Y * 65535);
+            int newX = (int)(x); // / screenResolution.X * 65535);
+            int newY = (int)(y); // / screenResolution.Y * 65535);
             return (newX, newY);
         }
 
@@ -279,7 +297,7 @@ namespace PixelAimbot
 
             double resultX;
             double resultY;
-            if (isWindowed)
+            if (IsWindowed)
             {
                 resultX = 1920 / 100 * (calculatedPercentX * multiplierX);
                 resultY = 1080 / 100 * (calculatedPercentY * multiplierY);
@@ -289,9 +307,9 @@ namespace PixelAimbot
                 resultX = Screen.PrimaryScreen.Bounds.Width / 100 * (calculatedPercentX * multiplierX);
                 resultY = Screen.PrimaryScreen.Bounds.Height / 100 * (calculatedPercentY * multiplierY);
             }
-            
-            
-          //  resultX = ((resultX - (Screen.PrimaryScreen.Bounds.Width / 2)) * 0.5) +  
+
+
+            //  resultX = ((resultX - (Screen.PrimaryScreen.Bounds.Width / 2)) * 0.5) +  
             return (resultX, resultY);
         }
 
@@ -311,11 +329,11 @@ namespace PixelAimbot
 
             return foundkey;
         }
-     
-        public static Image<Bgr, Byte> byteArrayToImage(byte[] byteArrayIn)
+
+        public static Image<Bgr, Byte> ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
-            Bitmap returnImage = (Bitmap) Image.FromStream(ms);
+            Bitmap returnImage = (Bitmap)Image.FromStream(ms);
 
             return returnImage.ToImage<Bgr, byte>();
         }
@@ -323,10 +341,8 @@ namespace PixelAimbot
 
         public static int Recalc(int value, bool horizontal = true, bool ignoreWindowed = false)
         {
-            decimal oldResolution;
-            decimal newResolution;
             int returnValue = value;
-            if (isWindowed)
+            if (IsWindowed)
             {
                 if (horizontal)
                 {
@@ -335,7 +351,7 @@ namespace PixelAimbot
                         return value;
                     }
 
-                    return value + windowX;
+                    return value + _windowX;
                 }
                 else
                 {
@@ -344,26 +360,28 @@ namespace PixelAimbot
                         return value;
                     }
 
-                    return value + windowY;
+                    return value + _windowY;
                 }
             }
             else
             {
+                decimal oldResolution;
+                decimal newResolution;
                 if (horizontal)
                 {
                     oldResolution = 1920;
-                    newResolution = screenWidth;
+                    newResolution = ScreenWidth;
                 }
                 else
                 {
                     oldResolution = 1080;
-                    newResolution = screenHeight;
+                    newResolution = ScreenHeight;
                 }
 
                 if (oldResolution != newResolution)
                 {
-                    decimal normalized = (decimal) value * newResolution;
-                    decimal rescaledPosition = (decimal) normalized / oldResolution;
+                    decimal normalized = value * newResolution;
+                    decimal rescaledPosition = normalized / oldResolution;
 
                     returnValue = Decimal.ToInt32(rescaledPosition);
                 }
@@ -423,50 +441,32 @@ namespace PixelAimbot
                             break;
                     }
 
-                    _timer = new System.Timers.Timer(cooldownDuration);
+                    _timer = new Timer(cooldownDuration);
                     switch (key)
                     {
                         case KeyboardWrapper.VK_A:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _A = false; };
-
+                            _timer.Elapsed += (source, e) => { _a = false; };
                             break;
-
                         case KeyboardWrapper.VK_S:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _S = false; };
-
-
+                            _timer.Elapsed += (source, e) => { _s = false; };
                             break;
-
                         case KeyboardWrapper.VK_D:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _D = false; };
-
-
+                            _timer.Elapsed += (source, e) => { _d = false; };
                             break;
-
                         case KeyboardWrapper.VK_F:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _F = false; };
-
-
+                            _timer.Elapsed += (source, e) => { _f = false; };
                             break;
-
                         case KeyboardWrapper.VK_Q:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _Q = false; };
+                            _timer.Elapsed += (source, e) => { _q = false; };
                             break;
-
                         case KeyboardWrapper.VK_W:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _W = false; };
-
-
+                            _timer.Elapsed += (source, e) => { _w = false; };
                             break;
-
                         case KeyboardWrapper.VK_E:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _E = false; };
-
-
+                            _timer.Elapsed += (source, e) => { _e = false; };
                             break;
-
                         case KeyboardWrapper.VK_R:
-                            _timer.Elapsed += (object source, ElapsedEventArgs e) => { _R = false; };
+                            _timer.Elapsed += (source, e) => { _r = false; };
                             break;
                     }
 
@@ -495,35 +495,35 @@ namespace PixelAimbot
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
-                    _A = true;
+                    _a = true;
                     break;
 
                 case KeyboardWrapper.VK_S:
-                    _S = true;
+                    _s = true;
                     break;
 
                 case KeyboardWrapper.VK_D:
-                    _D = true;
+                    _d = true;
                     break;
 
                 case KeyboardWrapper.VK_F:
-                    _F = true;
+                    _f = true;
                     break;
 
                 case KeyboardWrapper.VK_Q:
-                    _Q = true;
+                    _q = true;
                     break;
 
                 case KeyboardWrapper.VK_W:
-                    _W = true;
+                    _w = true;
                     break;
 
                 case KeyboardWrapper.VK_E:
-                    _E = true;
+                    _e = true;
                     break;
 
                 case KeyboardWrapper.VK_R:
-                    _R = true;
+                    _r = true;
                     break;
             }
         }
@@ -540,15 +540,15 @@ namespace PixelAimbot
         public Image<Bgr, byte> skillS;
         public Image<Bgr, byte> skillD;
         public Image<Bgr, byte> skillF;
-       
+
         private void GetSkillQ()
         {
             try
             {
-                skillQ = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
-               
+                skillQ = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(689), ChaosBot.Recalc(984, false)).ToImage<Bgr, Byte>();
+
             }
-        catch (Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Skill Q Screenshot {0} {1}", ex.GetType().Name, ex.Message);
             }
@@ -557,7 +557,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillW = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(733), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
+                skillW = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(733), ChaosBot.Recalc(984, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -569,7 +569,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillE = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(781), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
+                skillE = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(781), ChaosBot.Recalc(984, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -580,8 +580,8 @@ namespace PixelAimbot
         {
             try
             {
-                
-                skillR = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(827), ChaosBot.Recalc(984, false)).ToImage<Bgr,Byte>();
+
+                skillR = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(827), ChaosBot.Recalc(984, false)).ToImage<Bgr, Byte>();
 
             }
             catch (Exception ex)
@@ -593,7 +593,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillA = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(709), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
+                skillA = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(709), ChaosBot.Recalc(1031, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -604,7 +604,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillS = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(757), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
+                skillS = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(757), ChaosBot.Recalc(1031, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -616,7 +616,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillD = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(805), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
+                skillD = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(805), ChaosBot.Recalc(1031, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -628,7 +628,7 @@ namespace PixelAimbot
         {
             try
             {
-                skillF = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false)).ToImage<Bgr,Byte>();
+                skillF = AbilityScreen(ImageFormat.Jpeg, ChaosBot.Recalc(850), ChaosBot.Recalc(1031, false)).ToImage<Bgr, Byte>();
             }
             catch (Exception ex)
             {
@@ -639,36 +639,36 @@ namespace PixelAimbot
 
         // COMPARE SCREENSHOTS WITH OPENCV
         //
-        public int EsoterikQ = 0;
-        public int EsoterikW = 0;
-        public int EsoterikE = 0;
-        public int EsoterikR = 0;
-        public int EsoterikA = 0;
-        public int EsoterikS = 0;
-        public int EsoterikD = 0;
-        public int EsoterikF = 0;
+        public int EsoterikQ;
+        public int EsoterikW;
+        public int EsoterikE;
+        public int EsoterikR;
+        public int EsoterikA;
+        public int EsoterikS;
+        public int EsoterikD;
+        public int EsoterikF;
 
         public async Task SkillQ(CancellationToken tokenSkills)
         {
             try
             {
-             
+
                 var template = skillQ;
 
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(689),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(721, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_Q )
+                while (_q)
                 {
                     try
                     {
-                   
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -676,29 +676,29 @@ namespace PixelAimbot
                                 cmBoxEsoterik3.Invoke(new Action(() =>
                                 cmBoxEsoterik4.Invoke(new Action(() =>
                                 {
-                                     if (item.HasValue)
-                                     {
+                                    if (item.HasValue)
+                                    {
 
 
 
-                                         if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
-                                         {
-                                             _Q = true;
-                                             return;
-                                         }
-                                         _Q = false;
-                                     }
-                                     else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
-                                              || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
-                                     {
-                                         GetSkillQ();
-                                         EsoterikQ = 1;
-                                     }
+                                        if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
+                                        {
+                                            _q = true;
+                                            return;
+                                        }
+                                        _q = false;
+                                    }
+                                    else if (cmBoxEsoterik1.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik2.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik3.SelectedIndex == 1 && EsoterikQ == 0
+                                             || cmBoxEsoterik4.SelectedIndex == 1 && EsoterikQ == 0)
+                                    {
+                                        GetSkillQ();
+                                        EsoterikQ = 1;
+                                    }
                                 }))))))));
                             }
                         }
@@ -739,25 +739,20 @@ namespace PixelAimbot
         {
             try
             {
-             
-        
                 var template = skillW;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(733),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(768, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_W )
+                while (_w)
                 {
-
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -775,10 +770,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 2 && EsoterikW == 0
                                              || cmBoxEsoterik4.SelectedIndex == 2 && EsoterikW == 0)
                                         {
-                                            _W = true;
+                                            _w = true;
                                             return;
                                         }
-                                        _W = false;
+                                        _w = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 2 && EsoterikW == 0
                                              || cmBoxEsoterik2.SelectedIndex == 2 && EsoterikW == 0
@@ -829,24 +824,24 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillE;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(781),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(815, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_E )
+                while (_e)
                 {
 
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+
+
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -864,10 +859,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 3 && EsoterikE == 0
                                              || cmBoxEsoterik4.SelectedIndex == 3 && EsoterikE == 0)
                                         {
-                                            _E = true;
+                                            _e = true;
                                             return;
-                                       }
-                                        _E = false;
+                                        }
+                                        _e = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 3 && EsoterikE == 0
                                              || cmBoxEsoterik2.SelectedIndex == 3 && EsoterikE == 0
@@ -918,24 +913,22 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillR;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(827),
                     ChaosBot.Recalc(984, false), ChaosBot.Recalc(860, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_R )
+                while (_r)
                 {
 
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -948,17 +941,17 @@ namespace PixelAimbot
 
 
 
-                                        if (cmBoxEsoterik1.SelectedIndex == 4  && EsoterikR == 0
+                                        if (cmBoxEsoterik1.SelectedIndex == 4 && EsoterikR == 0
                                              || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
                                              || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
-                                             || cmBoxEsoterik4.SelectedIndex == 4  && EsoterikR == 0)
+                                             || cmBoxEsoterik4.SelectedIndex == 4 && EsoterikR == 0)
                                         {
-                                            _R = true;
+                                            _r = true;
                                             return;
                                         }
-                                        _R = false;
+                                        _r = false;
                                     }
-                                    else if (cmBoxEsoterik1.SelectedIndex == 4  && EsoterikR == 0
+                                    else if (cmBoxEsoterik1.SelectedIndex == 4 && EsoterikR == 0
                                              || cmBoxEsoterik2.SelectedIndex == 4 && EsoterikR == 0
                                              || cmBoxEsoterik3.SelectedIndex == 4 && EsoterikR == 0
                                              || cmBoxEsoterik4.SelectedIndex == 4 && EsoterikR == 0)
@@ -1007,24 +1000,25 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillA;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(709),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(743, true, true), ChaosBot.Recalc(1008, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_A )
+                while (_a)
                 {
 
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+
+
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
+
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -1042,10 +1036,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 5 && EsoterikA == 0
                                              || cmBoxEsoterik4.SelectedIndex == 5 && EsoterikA == 0)
                                         {
-                                            _A = true;
+                                            _a = true;
                                             return;
                                         }
-                                        _A = false;
+                                        _a = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 5 && EsoterikA == 0
                                              || cmBoxEsoterik2.SelectedIndex == 5 && EsoterikA == 0
@@ -1096,24 +1090,25 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillS;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(757),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(790, true, true), ChaosBot.Recalc(1055, false, true));
-                
+
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_S )
+                while (_s)
                 {
 
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+
+
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
+
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -1131,10 +1126,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 6 && EsoterikS == 0
                                              || cmBoxEsoterik4.SelectedIndex == 6 && EsoterikS == 0)
                                         {
-                                            _S = true;
+                                            _s = true;
                                             return;
                                         }
-                                        _S = false;
+                                        _s = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 6 && EsoterikS == 0
                                              || cmBoxEsoterik2.SelectedIndex == 6 && EsoterikS == 0
@@ -1185,24 +1180,22 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillD;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(805),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(837, true, true), ChaosBot.Recalc(1055, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_D )
+                while (_d)
                 {
-
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
+
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -1220,10 +1213,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 7 && EsoterikD == 0
                                              || cmBoxEsoterik4.SelectedIndex == 7 && EsoterikD == 0)
                                         {
-                                            _D = true;
+                                            _d = true;
                                             return;
                                         }
-                                        _D = false;
+                                        _d = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 7 && EsoterikD == 0
                                              || cmBoxEsoterik2.SelectedIndex == 7 && EsoterikD == 0
@@ -1274,23 +1267,24 @@ namespace PixelAimbot
         {
             try
             {
-             
+
                 var template = skillF;
                 var detector = new ScreenDetector(template, null, 0.9f, ChaosBot.Recalc(850),
                     ChaosBot.Recalc(1031, false), ChaosBot.Recalc(882, true, true), ChaosBot.Recalc(1055, false, true));
 
                 detector.setMyPosition(new Point(ChaosBot.Recalc(500), ChaosBot.Recalc(390, false)));
-                var screenPrinter = new PrintScreen();
                 tokenSkills.ThrowIfCancellationRequested();
-                while (_F )
+                while (_f)
                 {
                     try
                     {
-                     
-                      
-                        using (var screenCapture = new Bitmap(screenPrinter.CaptureScreen()).ToImage<Bgr, byte>())
+
+
+                        using (var screenCapture = _globalScreenPrinter.CaptureScreenImage())
                         {
-                            var item = detector.GetBest(screenCapture, false);
+                            var item = detector.GetBest(screenCapture);
+                            screenCapture.Dispose();
+
                             if (cmBoxEsoterik1.InvokeRequired || cmBoxEsoterik2.InvokeRequired || cmBoxEsoterik3.InvokeRequired || cmBoxEsoterik4.InvokeRequired)
                             {
                                 cmBoxEsoterik1.Invoke(new Action(() =>
@@ -1306,10 +1300,10 @@ namespace PixelAimbot
                                              || cmBoxEsoterik3.SelectedIndex == 8 && EsoterikF == 0
                                              || cmBoxEsoterik4.SelectedIndex == 8 && EsoterikF == 0)
                                         {
-                                            _F = true;
+                                            _f = true;
                                             return;
                                         }
-                                        _F = false;
+                                        _f = false;
                                     }
                                     else if (cmBoxEsoterik1.SelectedIndex == 8 && EsoterikF == 0
                                              || cmBoxEsoterik2.SelectedIndex == 8 && EsoterikF == 0
@@ -1359,79 +1353,50 @@ namespace PixelAimbot
 
         private void SetKeyCooldownGray(byte key)
         {
-           
+            CtsSkills.Cancel();
+            CtsSkills.Dispose();
+            CtsSkills = new CancellationTokenSource();
+            _tokenSkills = CtsSkills.Token;
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
-                    _A = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t1 = Task.Run(() => SkillA(tokenSkills), tokenSkills);
+                    _a = true;
+                    Task.Run(() => SkillA(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_S:
-                    _S = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t2 = Task.Run(() => SkillS(tokenSkills), tokenSkills);
+                    _s = true;
+                    Task.Run(() => SkillS(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_D:
-                    _D = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t3 = Task.Run(() => SkillD(tokenSkills), tokenSkills);
+                    _d = true;
+                    Task.Run(() => SkillD(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_F:
-                    _F = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t4 = Task.Run(() => SkillF(tokenSkills), tokenSkills);
+                    _f = true;
+                    Task.Run(() => SkillF(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_Q:
-                    _Q = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t5 = Task.Run(() => SkillQ(tokenSkills), tokenSkills);
+                    _q = true;
+                    Task.Run(() => SkillQ(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_W:
-                    _W = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t6 = Task.Run(() => SkillW(tokenSkills), tokenSkills);
+                    _w = true;
+                    Task.Run(() => SkillW(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_E:
-                    _E = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t7 = Task.Run(() => SkillE(tokenSkills), tokenSkills);
+                    _e = true;
+                    Task.Run(() => SkillE(_tokenSkills), _tokenSkills);
                     break;
 
                 case KeyboardWrapper.VK_R:
-                    _R = true;
-                    ctsSkills.Cancel();
-                    ctsSkills.Dispose();
-                    ctsSkills = new CancellationTokenSource();
-                    tokenSkills = ctsSkills.Token;
-                    var t8 = Task.Run(() => SkillR(tokenSkills), tokenSkills);
+                    _r = true;
+                    Task.Run(() => SkillR(_tokenSkills), _tokenSkills);
                     break;
             }
         }
@@ -1441,35 +1406,35 @@ namespace PixelAimbot
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
-                    returnBoolean = _A;
+                    returnBoolean = _a;
                     break;
 
                 case KeyboardWrapper.VK_S:
-                    returnBoolean = _S;
+                    returnBoolean = _s;
                     break;
 
                 case KeyboardWrapper.VK_D:
-                    returnBoolean = _D;
+                    returnBoolean = _d;
                     break;
 
                 case KeyboardWrapper.VK_F:
-                    returnBoolean = _F;
+                    returnBoolean = _f;
                     break;
 
                 case KeyboardWrapper.VK_Q:
-                    returnBoolean = _Q;
+                    returnBoolean = _q;
                     break;
 
                 case KeyboardWrapper.VK_W:
-                    returnBoolean = _W;
+                    returnBoolean = _w;
                     break;
 
                 case KeyboardWrapper.VK_E:
-                    returnBoolean = _E;
+                    returnBoolean = _e;
                     break;
 
                 case KeyboardWrapper.VK_R:
-                    returnBoolean = _R;
+                    returnBoolean = _r;
                     break;
             }
 
@@ -1484,35 +1449,35 @@ namespace PixelAimbot
             switch (key)
             {
                 case KeyboardWrapper.VK_A:
-                    returnBoolean = _A;
+                    returnBoolean = _a;
                     break;
 
                 case KeyboardWrapper.VK_S:
-                    returnBoolean = _S;
+                    returnBoolean = _s;
                     break;
 
                 case KeyboardWrapper.VK_D:
-                    returnBoolean = _D;
+                    returnBoolean = _d;
                     break;
 
                 case KeyboardWrapper.VK_F:
-                    returnBoolean = _F;
+                    returnBoolean = _f;
                     break;
 
                 case KeyboardWrapper.VK_Q:
-                    returnBoolean = _Q;
+                    returnBoolean = _q;
                     break;
 
                 case KeyboardWrapper.VK_W:
-                    returnBoolean = _W;
+                    returnBoolean = _w;
                     break;
 
                 case KeyboardWrapper.VK_E:
-                    returnBoolean = _E;
+                    returnBoolean = _e;
                     break;
 
                 case KeyboardWrapper.VK_R:
-                    returnBoolean = _R;
+                    returnBoolean = _r;
                     break;
             }
 
@@ -1521,13 +1486,11 @@ namespace PixelAimbot
 
         private Point calculateFromCenter(int x, int y)
         {
-            var centerX = screenWidth / 2;
-            var centerY = screenHeight / 2;
-            int resultX;
-            int resultY;
+            var centerX = ScreenWidth / 2;
+            var centerY = ScreenHeight / 2;
 
-            resultX = centerX - Recalc(500) + x;
-            resultY = centerY - Recalc(390, false) + y;
+            var resultX = centerX - Recalc(500) + x;
+            var resultY = centerY - Recalc(390, false) + y;
 
             return new Point(resultX, resultY);
         }
@@ -1580,58 +1543,86 @@ namespace PixelAimbot
                 return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
             }
         }
-
-        private Stream ToStream(Image image, ImageFormat format)
-        {
-            var stream = new MemoryStream();
-            image.Save(stream, format);
-            stream.Position = 0;
-            return stream;
-        }
+        
 
         private void RefreshRotationCombox()
         {
             comboBoxRotations.Items.Clear();
 
-            HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
-            var webclient = new WebClient();
-            var config = Config.Load();
-            webclient.CachePolicy = noCachePolicy;
-            var values = new NameValueCollection
-            {
-                ["user"] = config.username,
-            };
-            webclient.Headers.Add("Content-Type","application/x-www-form-urlencoded");
-            webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
-            webclient.UploadValuesCompleted += (s, e) =>
-            {
-                foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
-                {
-                    comboBoxRotations.Items.Add(entries["name"]);
-                }
-            };
+            //HttpRequestCachePolicy noCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            //var webclient = new WebClient();
+            //var config = Config.Load();
+            //webclient.CachePolicy = noCachePolicy;
+            //var values = new NameValueCollection
+            //{
+            //    ["user"] = Conf.username,
+            //};
+
+            //webclient.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+            //webclient.UploadValuesAsync(new Uri("https://admin.symbiotic.link/api/getRotations"), "POST", values);
+            //webclient.UploadValuesCompleted += (s, e) =>
+            //{
+            //    foreach (var entries in JArray.Parse(Encoding.Default.GetString(e.Result)))
+            //    {
+            //        comboBoxRotations.Items.Add(entries["name"] ?? "Unknown Name");
+            //    }
+            //};
 
             var files = Directory.GetFiles(ConfigPath);
             foreach (var file in files)
                 if (Path.GetFileNameWithoutExtension(file) != "main")
-                    File.Delete(file);
-                    
+                    comboBoxRotations.Items.Add(Path.GetFileNameWithoutExtension(file));
+
         }
 
         private static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
+                .Select(s => s[Random.Next(s.Length)]).ToArray());
         }
 
-       
+
         public Bitmap AbilityScreen(ImageFormat imageFormat, int sourceX, int sourceY)
         {
             var screen = printScreenPicture.CaptureScreen();
             return CropImage(screen,
                 new Rectangle(sourceX, sourceY,
                     36, 28));
+        }
+
+        private static void CheckIfLoadScreen()
+        {
+            bool _ChaosStartDetect = true;
+
+            while (_ChaosStartDetect == true)
+            {
+                try
+                {
+                    object StartDetect = Pixel.PixelSearch(Recalc(1898), Recalc(10, false), Recalc(1911),
+                        Recalc(22, false), 0x000000, 15);
+
+                    if (StartDetect.ToString() == "0")
+                    {
+                        _ChaosStartDetect = false;
+                    }
+                }
+                catch (AggregateException)
+                {
+                    Console.WriteLine("Expected");
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Bug");
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler.SendException(ex);
+                    int line = (new StackTrace(ex, true)).GetFrame(0).GetFileLineNumber();
+                    Debug.WriteLine("[" + line + "]" + ex.Message);
+                }
+
+            }
         }
     }
 }
