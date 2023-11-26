@@ -2,7 +2,7 @@
 
 ## 🏆 1500+ Users | CHAOS-BOT + GATHERING-BOT | IN ONE 🏆💎✩ShiiikK#1048✩💎🏆
 
-🔥 **45,000 Views | 569 Posts | 1500 Discord Users** 🔥
+🔥 **45,000 Views | 569 Posts | 1500 Users** 🔥
 [Explore the ElitePVPers Thread](https://www.elitepvpers.com/forum/lost-ark-trading/5009273-15-lifetime-1500-users-chaos-bot-gathering-bot-one-shiiikk-1048-a.html)
 
 ### 💎 NOW FREE FOR EVERYONE TO USE 💎
