@@ -15,6 +15,6 @@
 ### Discord Server:
 🔥 [Join the Discord Server](https://discord.gg/MG937dTPAv)
 
-![Chaos Bot](https://about-steven.de/Download/ChaosBot.gif)
-![Chaos Bot Login](https://about-steven.de/Download/ChaosBotLogin.png)
-![Features](https://about-steven.de/Download/features.png)
+![Chaos Bot](https://steven-lippert.me/Download/ChaosBot.gif)
+![Chaos Bot Login](https://steven-lippert.me/Download/ChaosBotLogin.png)
+![Features](https://steven-lippert.me/Download/features.png)
